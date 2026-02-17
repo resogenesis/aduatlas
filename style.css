@@ -142,6 +142,18 @@ body {
   background: var(--forest-dark);
 }
 
+.btn-outline {
+  background: transparent;
+  color: var(--forest);
+  padding: 12px 24px;
+  border: 2px solid var(--forest);
+}
+
+.btn-outline:hover {
+  background: var(--forest);
+  color: var(--white);
+}
+
 .btn-full {
   width: 100%;
   text-align: center;
@@ -151,9 +163,9 @@ body {
 
 .hero {
   position: relative;
-  min-height: 580px;
+  min-height: 480px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   overflow: hidden;
 }
@@ -161,20 +173,20 @@ body {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1920&q=80') center/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&q=80') center/cover no-repeat;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.52);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 80px 24px;
+  padding: 40px 24px 56px;
   max-width: 720px;
 }
 
@@ -377,23 +389,24 @@ body {
 
 .step-num {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--forest);
+  margin-bottom: 8px;
+}
+
+.step-img {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
   margin-bottom: 16px;
 }
 
-.step-icon {
-  width: 64px;
-  height: 64px;
-  margin-bottom: 20px;
-}
-
-.step-icon svg {
+.step-img img {
   width: 100%;
-  height: 100%;
-  color: var(--forest-light);
-  opacity: 0.7;
+  height: 140px;
+  object-fit: cover;
+  display: block;
 }
 
 .step-card h4 {
