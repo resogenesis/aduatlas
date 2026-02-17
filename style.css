@@ -56,8 +56,14 @@ body {
 }
 
 .nav-logo img {
-  height: 40px;
+  height: 48px;
   width: auto;
+}
+
+@media (max-width: 768px) {
+  .nav-logo img {
+    height: 36px;
+  }
 }
 
 .nav-links {
@@ -155,7 +161,7 @@ body {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1920&q=80') center/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1920&q=80') center/cover no-repeat;
 }
 
 .hero-overlay {
