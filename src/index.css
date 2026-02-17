@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #3B5741;
+  --color-forest-dark: #2D4433;
+  --color-forest-light: #4A6741;
+  --color-navy: #1B2A4A;
+  --color-warm-gray: #F7F5F2;
+  --color-light-border: #E5E2DD;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
