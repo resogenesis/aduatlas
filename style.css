@@ -168,7 +168,7 @@ body {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&q=80') center/cover no-repeat;
+  background: url('assets/hero.png') center/cover no-repeat;
 }
 
 .hero-overlay {
