@@ -217,21 +217,22 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
-  align-items: center;
-  margin-bottom: 56px;
+  align-items: flex-start;
+  margin-bottom: 32px;
 }
 
-.why-text h2 {
+.why-heading {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
-.why-text p {
+.why-body {
   color: var(--text-mid);
-  font-size: 1rem;
-  line-height: 1.8;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
 }
 
 .why-images {
@@ -278,16 +279,15 @@ body {
 .features-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-bottom: 40px;
-  max-width: 700px;
+  gap: 14px;
+  margin-bottom: 28px;
 }
 
 .feature-card {
   background: var(--warm-gray);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 24px 20px;
+  padding: 20px 16px;
   text-align: center;
 }
 
