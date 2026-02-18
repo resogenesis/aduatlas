@@ -115,7 +115,6 @@ body {
   text-decoration: none;
   font-weight: 600;
   font-size: 15px;
-  border-radius: 50px;
   cursor: pointer;
   transition: background 0.2s, transform 0.1s, color 0.2s;
   border: none;
@@ -123,12 +122,17 @@ body {
 
 .btn:active { transform: scale(0.98); }
 
-.btn-sm { padding: 10px 20px; font-size: 14px; }
+.btn-sm {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 50px;
+}
 
 .btn-primary {
   background: var(--forest);
   color: var(--white);
-  padding: 14px 28px;
+  padding: 12px 24px;
+  border-radius: 8px;
 }
 
 .btn-primary:hover { background: var(--forest-dark); }
@@ -136,7 +140,8 @@ body {
 .btn-white {
   background: var(--white);
   color: var(--text);
-  padding: 14px 28px;
+  padding: 12px 24px;
+  border-radius: 8px;
 }
 
 .btn-white:hover { background: #f3f3f3; }
@@ -144,8 +149,9 @@ body {
 .btn-outline-white {
   background: transparent;
   color: var(--white);
-  padding: 12px 28px;
+  padding: 10px 24px;
   border: 2px solid var(--white);
+  border-radius: 8px;
 }
 
 .btn-outline-white:hover {
@@ -174,7 +180,7 @@ body {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);
+  background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 100%);
 }
 
 .hero-content {
@@ -193,14 +199,14 @@ body {
   color: var(--white);
   line-height: 1.15;
   margin-bottom: 16px;
-  max-width: 560px;
+  max-width: 520px;
 }
 
 .hero-content p {
   color: rgba(255,255,255,0.85);
   font-size: 1.05rem;
   line-height: 1.7;
-  max-width: 480px;
+  max-width: 440px;
   margin-bottom: 28px;
 }
 
@@ -209,7 +215,7 @@ body {
    ===================== */
 
 .why-section {
-  padding: 80px 24px;
+  padding: 80px 0;
   background: var(--white);
 }
 
@@ -218,7 +224,6 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: flex-start;
-  margin-bottom: 32px;
 }
 
 .why-heading {
@@ -230,9 +235,10 @@ body {
 
 .why-body {
   color: var(--text-mid);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   line-height: 1.7;
   margin-bottom: 28px;
+  max-width: 480px;
 }
 
 .why-images {
@@ -240,13 +246,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 340px;
+  min-height: 360px;
+  padding-top: 20px;
 }
 
 .why-img {
   overflow: hidden;
   box-shadow: 0 6px 24px rgba(0,0,0,0.15);
-  border: 4px solid var(--white);
+  border: 4px solid var(--forest);
   border-radius: 50%;
 }
 
@@ -260,14 +267,39 @@ body {
 .why-img-1 {
   width: 240px;
   height: 240px;
+  position: relative;
+  z-index: 1;
 }
 
 .why-img-2 {
-  width: 180px;
-  height: 180px;
+  width: 190px;
+  height: 190px;
   position: absolute;
-  bottom: 0;
-  right: 5%;
+  bottom: 10px;
+  right: 10%;
+  z-index: 2;
+}
+
+.why-seal {
+  position: absolute;
+  z-index: 3;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--warm-gray);
+  border: 3px solid var(--forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.why-seal svg {
+  width: 70px;
+  height: 70px;
 }
 
 /* Feature Cards */
@@ -284,37 +316,37 @@ body {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px 16px;
-  text-align: center;
+  text-align: left;
 }
 
 .feature-icon {
-  width: 52px;
-  height: 52px;
-  background: var(--forest);
-  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: var(--white);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
+  margin-bottom: 12px;
 }
 
 .feature-icon svg {
-  width: 24px;
-  height: 24px;
-  color: var(--white);
-  stroke: var(--white);
+  width: 20px;
+  height: 20px;
+  color: var(--forest);
+  stroke: var(--forest);
 }
 
 .feature-card h4 {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .feature-card p {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-mid);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* =====================
@@ -322,13 +354,13 @@ body {
    ===================== */
 
 .trust-bar {
-  background: var(--forest);
+  background: var(--forest-dark);
   background-image: repeating-linear-gradient(
     90deg,
     transparent,
-    transparent 49px,
-    rgba(255,255,255,0.04) 49px,
-    rgba(255,255,255,0.04) 50px
+    transparent 39px,
+    rgba(255,255,255,0.06) 39px,
+    rgba(255,255,255,0.06) 40px
   );
   padding: 48px 24px;
 }
@@ -336,11 +368,19 @@ body {
 .trust-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  gap: 0;
   text-align: center;
 }
 
-.trust-item { color: var(--white); }
+.trust-item {
+  color: var(--white);
+  padding: 0 24px;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+
+.trust-item:last-child {
+  border-right: none;
+}
 
 .trust-icon {
   width: 48px;
@@ -405,14 +445,14 @@ body {
 .how-steps {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .step-card-v2 {
   background: var(--forest);
   color: var(--white);
   border-radius: 14px;
-  padding: 20px 24px;
+  padding: 18px 22px;
   display: flex;
   align-items: flex-start;
   gap: 16px;
@@ -439,7 +479,7 @@ body {
 }
 
 .step-card-v2 p {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   opacity: 0.85;
   line-height: 1.5;
 }
@@ -524,9 +564,16 @@ body {
    ===================== */
 
 .footer {
-  background: #0f172a;
-  color: #9ca3af;
-  padding: 36px 24px 20px;
+  background: var(--forest-dark);
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 39px,
+    rgba(255,255,255,0.04) 39px,
+    rgba(255,255,255,0.04) 40px
+  );
+  color: rgba(255,255,255,0.7);
+  padding: 48px 24px 24px;
 }
 
 .footer-grid {
@@ -550,7 +597,7 @@ body {
 .footer-social-label {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #d1d5db;
+  color: rgba(255,255,255,0.85);
   margin-bottom: 10px;
 }
 
@@ -562,20 +609,20 @@ body {
 .social-icons a {
   width: 32px;
   height: 32px;
-  background: #1e293b;
+  background: rgba(255,255,255,0.1);
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background 0.2s;
-  color: #9ca3af;
+  color: rgba(255,255,255,0.7);
 }
 
-.social-icons a:hover { background: #334155; }
+.social-icons a:hover { background: rgba(255,255,255,0.2); }
 .social-icons svg { width: 16px; height: 16px; }
 
 .footer-col h4 {
-  color: #e5e7eb;
+  color: var(--white);
   font-size: 0.85rem;
   font-weight: 700;
   margin-bottom: 10px;
@@ -588,7 +635,7 @@ body {
 }
 
 .footer-col a {
-  color: #9ca3af;
+  color: rgba(255,255,255,0.6);
   text-decoration: none;
   font-size: 0.85rem;
   transition: color 0.2s;
@@ -597,7 +644,7 @@ body {
 .footer-col a:hover { color: var(--white); }
 
 .footer-bottom {
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid rgba(255,255,255,0.1);
   padding-top: 16px;
   text-align: center;
   font-size: 0.8rem;
@@ -641,6 +688,12 @@ body {
   .trust-grid {
     grid-template-columns: 1fr 1fr;
     gap: 24px;
+  }
+
+  .trust-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 20px;
   }
 
   .how-image img { min-height: 280px; }
