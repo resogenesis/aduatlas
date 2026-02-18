@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ADUAtlas - Every ADU Rule. Every ZIP Code.</title>
+  <title>ADUAtlas - U.S. ADU Listing and Zoning Guide</title>
   <meta name="description" content="Find statewide and local ADU guidance, then get matched with builders who already know your zoning.">
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,10 +21,15 @@
       </a>
       <div class="nav-links" id="navLinks">
         <a href="#">Home</a>
-        <a href="#builders">Builders</a>
-        <a href="#suppliers">Suppliers</a>
-        <a href="#faq">FAQ</a>
-        <a href="#signup" class="btn btn-primary">Get Started</a>
+        <a href="#how-it-works">How to ADU</a>
+        <a href="#state">State</a>
+        <a href="#adu-types">ADU Types</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#builders">For Professional</a>
+        <div class="nav-auth">
+          <a href="#" class="nav-login">Login</a>
+          <a href="#signup" class="btn btn-primary btn-sm">Sign Up</a>
+        </div>
       </div>
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -37,93 +42,169 @@
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1>ADUAtlas is launching soon.</h1>
-      <h2>Every ADU rule. Every ZIP code.</h2>
-      <p>Find statewide and local ADU guidance&mdash;then get matched with builders who already know your zoning.</p>
+      <h1>U.S. ADU Listing and Zoning Guide</h1>
+      <p>Local Rules, structures, builders and suppliers. National builders and suppliers who know local rules.</p>
+      <a href="#how-it-works" class="btn btn-white">How to ADU</a>
     </div>
   </section>
 
-  <!-- Sign Up + Builder CTA -->
-  <section id="signup" class="signup-section">
-    <div class="container grid-2">
-
-      <!-- Email Form -->
-      <div class="card">
-        <h3>Get notified when we launch in your area</h3>
-        <form id="signupForm">
-          <select name="state">
-            <option value="">State or Region</option>
-            <option value="TX">Texas</option>
-            <option value="CA">California</option>
-            <option value="FL">Florida</option>
-            <option value="NY">New York</option>
-            <option value="WA">Washington</option>
-            <option value="OR">Oregon</option>
-            <option value="CO">Colorado</option>
-            <option value="other">Other</option>
-          </select>
-          <div class="form-row">
-            <input type="email" name="email" placeholder="Email (required)" required>
-            <input type="text" name="zip" placeholder="ZIP Code (optional)">
+  <!-- Why Choose ADUAtlas -->
+  <section class="why-section">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-text">
+          <h2>Why Choose ADUAtlas</h2>
+          <p>ADUAtlas is a national marketplace helping homeowners understand local ADU rules and available options. We connect you with companies, review state and local requirements, help establish budgets, identify structures, and guide you through the planning process.</p>
+        </div>
+        <div class="why-images">
+          <div class="why-img why-img-1">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80" alt="Modern ADU">
           </div>
-          <button type="submit" class="btn btn-primary btn-full">Notify Me</button>
-          <p class="form-note">We'll only email you once we launch in your area.</p>
-          <p class="form-note">Launching first in Texas + California. Expanding nationwide.</p>
-        </form>
-        <div id="successMsg" class="success-msg hidden">
-          <div class="success-icon">&#10003;</div>
-          <p class="success-title">You're on the list!</p>
-          <p class="success-sub">We'll email you once we launch in your area.</p>
+          <div class="why-img why-img-2">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&q=80" alt="Container ADU">
+          </div>
         </div>
       </div>
 
-      <!-- Builder CTA -->
-      <div id="builders" class="card card-builder">
-        <h3>Builders &amp; Suppliers&mdash;<br>Want to Get Listed?</h3>
-        <ul class="check-list">
-          <li><span class="check">&#10003;</span> State + ZIP coverage</li>
-          <li><span class="check">&#10003;</span> Featured placement options</li>
-          <li><span class="check">&#10003;</span> Leads from homeowners ready to build.</li>
-        </ul>
-        <a href="#" class="btn btn-outline btn-full">Join the Directory</a>
+      <!-- Feature Cards -->
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <h4>Comprehensive Rules Database</h4>
+          <p>Access all-in-one ADU regulations by state, city, and ZIP code.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h4>ADU Type Education</h4>
+          <p>Learn about detached, attached, garage conversions, and more.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h4>Planning Tools</h4>
+          <p>Worksheets and calculators to plan your ADU project.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h4>Connect with Pros</h4>
+          <p>Match with qualified builders and suppliers in your area.</p>
+        </div>
       </div>
 
+      <div class="text-center">
+        <a href="#" class="btn btn-primary">About Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="trust-bar">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h4>Verified Data</h4>
+          <p>From trusted sources</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <h4>Transparent Pricing</h4>
+          <p>No hidden fees</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <h4>Secure Payments</h4>
+          <p>Your data is safe</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
+          <h4>Educational-first</h4>
+          <p>Learn before you commit</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- How It Works -->
-  <section class="how-section">
+  <section id="how-it-works" class="how-section">
     <div class="container">
-      <h2 class="section-title">Here's How It Works</h2>
-      <div class="grid-3">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-sub">ADUAtlas simplifies your ADU journey from research to construction, guiding you every step of the way.</p>
 
-        <div class="step-card">
-          <span class="step-num">1.</span>
-          <h4>Select your state</h4>
-          <div class="step-img">
-            <img src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?w=400&q=80" alt="US Map - Select state">
+      <div class="how-grid">
+        <div class="how-steps">
+          <div class="step-card-v2">
+            <span class="step-badge">01</span>
+            <div>
+              <h4>Select your state</h4>
+              <p>Using the dropdown to review statewide ADU guidelines and info you need to know your local zoning regulations.</p>
+            </div>
           </div>
-          <p class="step-note">Preview coming soon</p>
-        </div>
-
-        <div class="step-card">
-          <span class="step-num">2.</span>
-          <h4>Review statewide &amp; local ADU rules</h4>
-          <div class="step-img">
-            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80" alt="Review ADU rules and documents">
+          <div class="step-card-v2">
+            <span class="step-badge">02</span>
+            <div>
+              <h4>ADU Types</h4>
+              <p>Compare different types of ADUs, review the key features and see the differences.</p>
+            </div>
           </div>
-          <p class="step-note">Preview coming soon</p>
-        </div>
-
-        <div class="step-card">
-          <span class="step-num">3.</span>
-          <h4>Get matched with builders</h4>
-          <div class="step-img">
-            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=80" alt="Construction builders at work">
+          <div class="step-card-v2">
+            <span class="step-badge">03</span>
+            <div>
+              <h4>Enter your ZIP code</h4>
+              <p>To access local zoning and permitting regulations.</p>
+            </div>
           </div>
-          <p class="step-note">Preview coming soon</p>
+          <div class="step-card-v2">
+            <span class="step-badge">04</span>
+            <div>
+              <h4>Choose your build</h4>
+              <p>Select with a prefab or find local builders and suppliers familiar with your area.</p>
+            </div>
+          </div>
+          <div class="step-card-v2">
+            <span class="step-badge">05</span>
+            <div>
+              <h4>Prepare before you build</h4>
+              <p>Use ADUAtlas pre-filled checklists and builder worksheet tools to keep your budget on track. Get matched with ADU builders and suppliers.</p>
+            </div>
+          </div>
         </div>
+        <div class="how-image">
+          <img src="https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?w=600&q=80" alt="Modern wooden ADU">
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- CTA Banner -->
+  <section class="cta-banner">
+    <div class="cta-overlay"></div>
+    <div class="container cta-grid">
+      <div class="cta-text">
+        <h2>Ready to Start Your ADU Journey?</h2>
+        <p>Join thousands of homeowners, builders, and suppliers on ADU Platform.</p>
+        <div class="cta-buttons">
+          <a href="#how-it-works" class="btn btn-white">How to ADU</a>
+          <a href="#" class="btn btn-outline-white">Contact Us</a>
+        </div>
+      </div>
+      <div class="cta-image">
+        <img src="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=600&q=80" alt="ADU delivery">
       </div>
     </div>
   </section>
@@ -131,14 +212,13 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-top">
-        <a href="#" class="footer-logo">
-          <img src="assets/logo.png" alt="ADUAtlas">
-        </a>
-        <a href="mailto:info@aduatlas.com" class="footer-email">info@aduatlas.com</a>
-        <div class="footer-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms</a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#">
+            <img src="assets/logo.png" alt="ADUAtlas" class="footer-logo-img">
+          </a>
+          <p>Simplifying ADU planning and connecting homeowners with trusted professionals nationwide.</p>
+          <div class="footer-social-label">Follow Us</div>
           <div class="social-icons">
             <a href="#" aria-label="Facebook">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -146,11 +226,37 @@
             <a href="#" aria-label="X">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
           </div>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#adu-types">ADU Types</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#">Learning Hub</a>
+          <a href="#">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#builders">For Builders</a>
+          <a href="#">For Suppliers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 ADUAtlas.com. All rights reserved.</p>
+        <p>&copy; 2026 ADUAtlas. All rights reserved.</p>
       </div>
     </div>
   </footer>
