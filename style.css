@@ -261,7 +261,7 @@ body {
   height: 160px;
   border-radius: 20px;
   position: absolute;
-  right: 10%;
+  right: 15%;
   bottom: 10%;
   z-index: 3;
 }
@@ -278,14 +278,16 @@ body {
 .features-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 16px;
   margin-bottom: 40px;
+  max-width: 700px;
 }
 
 .feature-card {
   background: var(--warm-gray);
-  border-radius: 16px;
-  padding: 28px 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 20px;
   text-align: center;
 }
 
