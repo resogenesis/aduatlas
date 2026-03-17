@@ -126,6 +126,11 @@ const ChooseAtlas = () => {
                                 START YOUR ADU JOURNEY HERE &#x2022; START YOUR ADU JOURNEY HERE &#x2022;
                             </textPath>
                         </text>
+                        {/* Center arrow — diagonal upper-right like original */}
+                        <g transform="translate(100,100)">
+                            <line x1="-12" y1="12" x2="12" y2="-12" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+                            <polyline points="2,-12 12,-12 12,-2" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </g>
                     </svg>
                 </div>
 
