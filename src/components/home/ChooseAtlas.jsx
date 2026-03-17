@@ -123,11 +123,9 @@ const ChooseAtlas = () => {
                         </defs>
                         <text fill="white" fontSize="16" fontFamily="'Poppins', 'Quicksand', sans-serif" fontWeight="400" letterSpacing="4">
                             <textPath href="#circlePath" startOffset="0%">
-                                start your ADU journey here &#x2022; start your ADU journey here &#x2022;
+                                START YOUR ADU JOURNEY HERE &#x2022; START YOUR ADU JOURNEY HERE &#x2022;
                             </textPath>
                         </text>
-                        {/* Center arrow icon */}
-                        <path d="M88 120L88 85L80 85L100 65L120 85L112 85L112 120Z" fill="none" stroke="white" strokeWidth="2.5" strokeLinejoin="round" />
                     </svg>
                 </div>
 
