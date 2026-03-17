@@ -114,8 +114,8 @@ const ChooseAtlas = () => {
 
                 </div>
 
-                {/* CENTER BADGE */}
-                <div className="absolute size-47.5 rounded-full bg-[#2F5D50] flex items-center justify-center shadow-lg">
+                {/* CENTER BADGE — spinning */}
+                <div className="absolute size-47.5 rounded-full bg-[#2F5D50] flex items-center justify-center shadow-lg animate-[spin_30s_linear_infinite]">
                     <p className="text-white text-center text-sm font-semibold leading-snug px-4">
                         Start your<br />ADU Journey<br />Here
                     </p>
