@@ -8,9 +8,11 @@ const FooterLogoSVG = ({ className = "" }) => (
     {/* Circle with house icon */}
     <g transform="translate(4, 4)">
       <circle cx="32" cy="32" r="30" stroke="#8FBFB0" strokeWidth="2.2" fill="none" />
-      <path d="M8 36L28 16L44 32" stroke="#8FBFB0" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M14 36V50H42V32" stroke="#8FBFB0" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <rect x="34" y="40" width="6" height="10" stroke="#8FBFB0" strokeWidth="1.8" fill="none" />
+      <path d="M12 38L30 18L46 38" stroke="#8FBFB0" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M22 38V52H46V38" stroke="#8FBFB0" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 38V48" stroke="#8FBFB0" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+      <path d="M12 48H22" stroke="#8FBFB0" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+      <path d="M26 52V42H32V52" stroke="#8FBFB0" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
     </g>
 
     <text x="82" y="38" fontFamily="Georgia, 'Times New Roman', serif" fontSize="28" fontWeight="500" fill="white">

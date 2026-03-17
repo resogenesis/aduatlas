@@ -9,15 +9,24 @@ const LogoSVG = ({ className = "" }) => (
     <g transform="translate(4, 4)">
       {/* Outer circle */}
       <circle cx="32" cy="32" r="30" stroke="#1B3A4B" strokeWidth="2.2" fill="none" />
-      {/* House roof — left slope extends to circle edge */}
-      <path d="M8 36L28 16L44 32" stroke="#1B3A4B" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      {/* House body — left wall taller, right wall shorter */}
-      <path d="M14 36V50H42V32" stroke="#1B3A4B" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      {/* Door (right side) */}
-      <rect x="34" y="40" width="6" height="10" stroke="#1B3A4B" strokeWidth="1.8" fill="none" />
+
+      {/* Roof — asymmetric, left overhang extends past house body */}
+      <path d="M12 38L30 18L46 38" stroke="#1B3A4B" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+
+      {/* House body — right-aligned under roof, not centered */}
+      <path d="M22 38V52H46V38" stroke="#1B3A4B" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+
+      {/* Left porch support post — vertical line from left roof edge down */}
+      <path d="M12 38V48" stroke="#1B3A4B" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+
+      {/* Porch floor connecting post to house */}
+      <path d="M12 48H22" stroke="#1B3A4B" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+
+      {/* Door — tall narrow opening on left side of house body */}
+      <path d="M26 52V42H32V52" stroke="#1B3A4B" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
     </g>
 
-    {/* Main title: ADUAtlas.com — serif, regular/medium weight */}
+    {/* Main title: ADUAtlas.com — serif, medium weight */}
     <text
       x="82"
       y="38"
@@ -29,7 +38,7 @@ const LogoSVG = ({ className = "" }) => (
       ADUAtlas.com
     </text>
 
-    {/* Subtitle line 1 — sans-serif, uppercase, wide tracking, centered */}
+    {/* Subtitle line 1 — sans-serif, uppercase, wide tracking, centered under title */}
     <text
       x="150"
       y="52"
@@ -43,7 +52,7 @@ const LogoSVG = ({ className = "" }) => (
       US ADU LISTINGS
     </text>
 
-    {/* Subtitle line 2 — sans-serif, uppercase, wide tracking, centered */}
+    {/* Subtitle line 2 */}
     <text
       x="150"
       y="63"
