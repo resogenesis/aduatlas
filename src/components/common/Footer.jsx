@@ -7,15 +7,6 @@ import FooterLogoSVG from "./FooterLogoSVG"
 // Note: dummy data
 const footerLinks = [
     {
-        title: "Pages",
-        links: [
-            { name: "Resources", path: "#" },
-            { name: "Paid Access", path: "#" },
-            { name: "Video Library", path: "#" },
-            { name: "ADU Comparison", path: "#" },
-        ],
-    },
-    {
         title: "Resources",
         links: [
             { name: "City & State Regulations", path: "#" },
