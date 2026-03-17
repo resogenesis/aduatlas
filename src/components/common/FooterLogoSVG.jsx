@@ -1,26 +1,25 @@
 const FooterLogoSVG = ({ className = "" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 340 70"
+    viewBox="0 0 360 72"
     fill="none"
     className={className}
   >
     {/* Circle with house icon */}
     <g transform="translate(4, 4)">
-      <circle cx="31" cy="31" r="29" stroke="#8FBFB0" strokeWidth="2" fill="none" />
-      <path d="M14 34L29 19L44 34" stroke="#8FBFB0" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <rect x="17" y="34" width="24" height="15" stroke="#8FBFB0" strokeWidth="2" fill="none" />
-      <path d="M33 49V39.5C33 38 34.5 36.5 36 36.5C37.5 36.5 39 38 39 39.5V49" stroke="#8FBFB0" strokeWidth="1.8" fill="none" />
-      <rect x="21" y="37" width="7" height="5.5" stroke="#8FBFB0" strokeWidth="1.5" fill="none" />
+      <circle cx="32" cy="32" r="30" stroke="#8FBFB0" strokeWidth="2.2" fill="none" />
+      <path d="M8 36L28 16L44 32" stroke="#8FBFB0" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M14 36V50H42V32" stroke="#8FBFB0" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="34" y="40" width="6" height="10" stroke="#8FBFB0" strokeWidth="1.8" fill="none" />
     </g>
 
-    <text x="78" y="36" fontFamily="Georgia, 'Times New Roman', serif" fontSize="26" fontWeight="700" fill="white">
+    <text x="82" y="38" fontFamily="Georgia, 'Times New Roman', serif" fontSize="28" fontWeight="500" fill="white">
       ADUAtlas.com
     </text>
-    <text x="78" y="50" fontFamily="Georgia, 'Times New Roman', serif" fontSize="7.5" fontWeight="400" letterSpacing="3" fill="#B8D4CB">
+    <text x="150" y="52" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="7" fontWeight="400" letterSpacing="3.5" fill="#B8D4CB" textAnchor="middle">
       US ADU LISTINGS
     </text>
-    <text x="78" y="61" fontFamily="Georgia, 'Times New Roman', serif" fontSize="7.5" fontWeight="400" letterSpacing="3" fill="#B8D4CB">
+    <text x="150" y="63" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="7" fontWeight="400" letterSpacing="3.5" fill="#B8D4CB" textAnchor="middle">
       ZONING &amp; GUIDELINES
     </text>
   </svg>
