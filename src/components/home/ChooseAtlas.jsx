@@ -114,11 +114,21 @@ const ChooseAtlas = () => {
 
                 </div>
 
-                {/* CENTER BADGE — spinning */}
-                <div className="absolute size-47.5 rounded-full bg-[#2F5D50] flex items-center justify-center shadow-lg animate-[spin_30s_linear_infinite]">
-                    <p className="text-white text-center text-sm font-semibold leading-snug px-4">
-                        Start your<br />ADU Journey<br />Here
-                    </p>
+                {/* CENTER BADGE — spinning circular text */}
+                <div className="absolute size-47.5 animate-[spin_30s_linear_infinite]">
+                    <svg viewBox="0 0 200 200" className="w-full h-full">
+                        <circle cx="100" cy="100" r="100" fill="#2F5D50" />
+                        <defs>
+                            <path id="circlePath" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0" />
+                        </defs>
+                        <text fill="white" fontSize="16" fontFamily="'Poppins', 'Quicksand', sans-serif" fontWeight="400" letterSpacing="4">
+                            <textPath href="#circlePath" startOffset="0%">
+                                start your ADU journey here &#x2022; start your ADU journey here &#x2022;
+                            </textPath>
+                        </text>
+                        {/* Center arrow icon */}
+                        <path d="M88 120L88 85L80 85L100 65L120 85L112 85L112 120Z" fill="none" stroke="white" strokeWidth="2.5" strokeLinejoin="round" />
+                    </svg>
                 </div>
 
             </div>
