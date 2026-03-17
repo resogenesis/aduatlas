@@ -4,7 +4,6 @@ import { RiVerifiedBadgeLine } from "react-icons/ri";
 
 // Note: Local import
 import CommonSectionTitle from "../common/CommonSectionTitle";
-import spin_imag from "../../assets/home/spin.png"
 import aduImage1 from "../../assets/home/choose_img1.png"
 import aduImage2 from "../../assets/home/choose_img2.png"
 import aduImage3 from "../../assets/home/choose_img3.png"
@@ -120,8 +119,10 @@ const ChooseAtlas = () => {
                 </div>
 
                 {/* CENTER BADGE */}
-                <div className="absolute size-47.5 rounded-full animate-[spin_30s_linear_infinite]">
-                    <img src={spin_imag} alt="spin logo" className="w-full h-full rounded-full object-cover" />
+                <div className="absolute size-47.5 rounded-full bg-[#2F5D50] flex items-center justify-center shadow-lg">
+                    <p className="text-white text-center text-sm font-semibold leading-snug px-4">
+                        Start your<br />ADU Journey<br />Here
+                    </p>
                 </div>
 
             </div>
