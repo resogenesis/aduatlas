@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --font-primary: "Inter", sans-serif;
+  --color-primary: #1e1e1e;
+  --color-secondary: #5f6f6a;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+}
+
+@utility container {
+  margin-inline: auto;
+}
+
+/* Note: Modal animation css */
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* close animation */
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+}
