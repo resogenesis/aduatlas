@@ -42,10 +42,6 @@ const ChooseAtlas = () => {
                 <div className="space-y-4">
                     <CommonSectionTitle text="Why Choose ADUAtlas" />
 
-                    <p className="text-[#2F5D50] font-semibold text-xl mb-2">
-                        Start your ADU Journey Here
-                    </p>
-
                     <p className="text-secondary text-lg">
                         ADUAtlas is a national platform that helps homeowners navigate every
                         step of building an ADU. Our step-by-step guide provides clarity on
