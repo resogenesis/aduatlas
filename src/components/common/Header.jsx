@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
-import logo from "../../assets/logo.svg";
 
 const navLinks = [
   { name: "Home", path: "#" },
@@ -20,7 +19,7 @@ const Header = () => {
     <header className="w-full sticky top-0 bg-white z-50 shadow-md">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-2 lg:py-4">
         {/* Logo */}
-        <Logo src={logo} />
+        <Logo />
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-6">

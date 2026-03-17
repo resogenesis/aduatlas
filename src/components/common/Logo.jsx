@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+import LogoSVG from "./LogoSVG";
 
-const Logo = ({ className = "", src = "" }) => {
+const Logo = ({ className = "" }) => {
   return (
     <Link
       to="/"
@@ -10,11 +11,7 @@ const Logo = ({ className = "", src = "" }) => {
         className
       )}
     >
-      <img
-        src={src}
-        alt="logo"
-        className="w-full h-full object-contain"
-      />
+      <LogoSVG className="w-full h-full" />
     </Link>
   );
 };

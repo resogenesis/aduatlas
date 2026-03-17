@@ -1,45 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" fill="none">
-  <!-- Map Pin with House -->
-  <g transform="translate(2, 2)">
-    <!-- Pin outer shape -->
-    <path d="M30 0C17.85 0 8 9.85 8 22C8 38.5 30 60 30 60C30 60 52 38.5 52 22C52 9.85 42.15 0 30 0Z" fill="#2F5D50"/>
-    <!-- Pin inner circle highlight -->
-    <circle cx="30" cy="20" r="16" fill="#3D7A6A" opacity="0.3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="none">
+  <!-- Circle with house icon -->
+  <g transform="translate(8, 8)">
+    <!-- Outer circle -->
+    <circle cx="32" cy="32" r="30" stroke="#1e3a5f" stroke-width="2" fill="none"/>
+    <!-- House roof (pitched) -->
+    <path d="M15 35L30 20L45 35" stroke="#1e3a5f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     <!-- House body -->
-    <rect x="21" y="22" width="18" height="12" rx="1" fill="white"/>
-    <!-- House roof -->
-    <path d="M18 23L30 13L42 23H18Z" fill="white"/>
-    <!-- Door -->
-    <rect x="27" y="27" width="6" height="7" rx="0.5" fill="#2F5D50"/>
-    <!-- Window left -->
-    <rect x="22.5" y="24.5" width="4" height="3.5" rx="0.5" fill="#2F5D50" opacity="0.6"/>
-    <!-- Window right -->
-    <rect x="33.5" y="24.5" width="4" height="3.5" rx="0.5" fill="#2F5D50" opacity="0.6"/>
-    <!-- Chimney -->
-    <rect x="36" y="14" width="3.5" height="7" rx="0.5" fill="white"/>
+    <rect x="18" y="35" width="24" height="16" stroke="#1e3a5f" stroke-width="2" fill="none"/>
+    <!-- Door (right side archway) -->
+    <path d="M34 51V40C34 38.5 35.5 37 37 37C38.5 37 40 38.5 40 40V51" stroke="#1e3a5f" stroke-width="2" fill="none"/>
+    <!-- Window (left side) -->
+    <rect x="22" y="38" width="7" height="6" stroke="#1e3a5f" stroke-width="1.5" fill="none"/>
   </g>
-  
-  <!-- "ADU" text as paths - bold -->
-  <g fill="#2F5D50" transform="translate(62, 12)">
+
+  <!-- ADUAtlas.com text - paths for crisp rendering at all sizes -->
+  <!-- Using a clean serif-style approach via path outlines -->
+  <g fill="#1e3a5f">
+    <!-- "ADUAtlas.com" main title -->
     <!-- A -->
-    <path d="M0 28h5.2l1.8-5.4h10l1.8 5.4H24L14.4 0h-5.2L0 28zm8.6-10.2l3.4-10.2 3.4 10.2H8.6z"/>
+    <path d="M88 18h1.2l8.4 22h-3.8l-1.8-5H84l-1.8 5h-3.6l8.4-22h1zm-3 14h7.6l-3.8-10.6L85 32z" transform="translate(0,0)"/>
     <!-- D -->
-    <path d="M28 0h8.4c8 0 13.2 5.4 13.2 14s-5.2 14-13.2 14H28V0zm5 4.6v18.8h3.4c5.2 0 8.2-3.8 8.2-9.4s-3-9.4-8.2-9.4H33z"/>
+    <path d="M100 18h6.4c6.8 0 11 4.6 11 11s-4.2 11-11 11H100V18zm3.4 3.2v15.6h3c4.8 0 7.4-3.4 7.4-7.8s-2.6-7.8-7.4-7.8h-3z"/>
     <!-- U -->
-    <path d="M54 0h5v18c0 4.2 2.4 6.8 6 6.8s6-2.6 6-6.8V0h5v18.4c0 6.8-4.4 10.6-11 10.6S54 25.2 54 18.4V0z"/>
-  </g>
-  
-  <!-- "Atlas" text as paths - medium weight -->
-  <g fill="#1E1E1E" transform="translate(62, 42)">
+    <path d="M120 18h3.4v14.2c0 3.6 2 5.6 5 5.6s5-2 5-5.6V18h3.4v14.6c0 5.6-3.6 8.4-8.4 8.4s-8.4-2.8-8.4-8.4V18z"/>
     <!-- A -->
-    <path d="M0 26h4.6l1.6-4.8h9l1.6 4.8h4.6L13 0H8.2L0 26zm7.6-9l3-9 3 9H7.6z"/>
+    <path d="M142 18h1.2l8.4 22h-3.8l-1.8-5h-8.4l-1.8 5h-3.6l8.4-22h1.4zm-3 14h7.6l-3.8-10.6L139 32z"/>
     <!-- t -->
-    <path d="M24 6h-3V2h4v4h4.5v3.6H25v10c0 1.8.7 2.6 2.2 2.6.8 0 1.6-.2 2.3-.5v3.6c-1 .4-2.1.7-3.4.7-3.4 0-5.1-2-5.1-5.6V9.6H24V6z"/>
+    <path d="M153 25.5h-2.4V23h2.4v-4h3.2v4h3.6v2.5h-3.6v9.2c0 1.4.5 2 1.8 2 .6 0 1.2-.1 1.8-.4v2.8c-.8.3-1.7.5-2.8.5-2.8 0-4-1.6-4-4.4V25.5z"/>
     <!-- l -->
-    <path d="M33 0h4v26h-4V0z"/>
+    <path d="M162 17h3.2v23h-3.2V17z"/>
     <!-- a -->
-    <path d="M41 17.4c0-5.6 3.8-8.2 9.2-8.6l4-.3V7.8c0-2.4-1.4-3.8-4-3.8-2.4 0-3.8 1.2-4.2 3.2h-4.2C42.2 3.4 45.4.8 50.2.8c4.8 0 8 2.8 8 7.4V26h-4l-.4-2.8C52.4 25 50.4 26.6 47.6 26.6 44 26.6 41 24.6 41 17.4zm13.2-2.2l-3.4.3c-3.4.3-5.4 1.4-5.4 4 0 2 1.4 3.4 3.6 3.4 3 0 5.2-2 5.2-5.6v-2.1z"/>
+    <path d="M168.5 33.6c0-4.6 3.2-6.8 7.6-7.2l3.2-.2v-.6c0-2-1.2-3.2-3.4-3.2-2 0-3.2 1-3.4 2.6h-3.2c.3-3.2 3-5.4 6.8-5.4 4 0 6.4 2.4 6.4 6.2V40h-3.2l-.3-2.4c-1.2 1.6-3 2.8-5.2 2.8-2.8 0-5.3-1.6-5.3-6.8zm10.8-1.8l-2.8.2c-2.8.2-4.4 1.2-4.4 3.4 0 1.6 1.2 2.8 3 2.8 2.4 0 4.2-1.6 4.2-4.6v-1.8z"/>
     <!-- s -->
-    <path d="M62 20.6h4.2c.4 1.8 1.8 3 4.2 3 2.2 0 3.4-1 3.4-2.4 0-1.6-1.4-2.2-4.4-2.8-4-1-7-2.2-7-6.2 0-3.8 3.2-6.2 7.4-6.2 4.4 0 7.2 2.4 7.6 6h-4.2c-.4-1.6-1.6-2.6-3.6-2.6-2 0-3.2.8-3.2 2.2 0 1.6 1.4 2 4.2 2.6 4 1 7.2 2.2 7.2 6.4 0 4-3.4 6.4-7.8 6.4-4.6 0-7.6-2.6-8-6.4z"/>
+    <path d="M186 36.6h3.4c.3 1.4 1.4 2.4 3.4 2.4 1.8 0 2.8-.8 2.8-2s-1.2-1.8-3.6-2.2c-3.2-.8-5.6-1.8-5.6-5 0-3.2 2.6-5 6-5 3.6 0 5.8 2 6.2 4.8h-3.4c-.3-1.2-1.2-2-2.8-2-1.6 0-2.6.6-2.6 1.8 0 1.3 1.1 1.6 3.4 2.2 3.2.8 5.8 1.8 5.8 5.2 0 3.2-2.8 5.2-6.4 5.2-3.6 0-6.2-2.2-6.6-5.4z"/>
+    <!-- . -->
+    <path d="M201 36.5h3.8V40H201v-3.5z"/>
+    <!-- c -->
+    <path d="M207 31c0-5.4 3.4-8.6 7.4-8.6 3.2 0 5.4 1.8 6.2 4.6h-3.4c-.5-1.2-1.5-2-3-2-2.4 0-4 2-4 6s1.6 6 4 6c1.5 0 2.5-.8 3-2h3.4c-.8 2.8-3 4.6-6.2 4.6-4 0-7.4-3.2-7.4-8.6z"/>
+    <!-- o -->
+    <path d="M222.5 31c0-5.4 3.4-8.6 7.5-8.6s7.5 3.2 7.5 8.6-3.4 8.6-7.5 8.6-7.5-3.2-7.5-8.6zm11.6 0c0-4-1.6-6-4.1-6s-4.1 2-4.1 6 1.6 6 4.1 6 4.1-2 4.1-6z"/>
+    <!-- m -->
+    <path d="M240 23h3l.2 2.4c.8-1.6 2.4-2.8 4.4-2.8 2.2 0 3.6 1.2 4.2 3 1-1.8 2.6-3 4.8-3 3 0 4.8 2.2 4.8 5.6V40h-3.2v-11c0-2.2-.8-3.4-2.6-3.4-2 0-3.2 1.6-3.2 4V40h-3.2v-11c0-2.2-.8-3.4-2.6-3.4-2 0-3.2 1.6-3.2 4V40H240V23z"/>
+  </g>
+
+  <!-- Tagline: US ADU LISTINGS -->
+  <g fill="#1e3a5f">
+    <text x="82" y="54" font-family="'Georgia','Times New Roman',serif" font-size="7.5" font-weight="400" letter-spacing="3.5" fill="#1e3a5f">US ADU LISTINGS</text>
+    <text x="82" y="64" font-family="'Georgia','Times New Roman',serif" font-size="7.5" font-weight="400" letter-spacing="3.5" fill="#1e3a5f">ZONING &amp; GUIDELINES</text>
   </g>
 </svg>

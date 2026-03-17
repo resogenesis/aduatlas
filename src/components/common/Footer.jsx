@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
 
 // Note: local import
-import footer_logo from "../../assets/footer_logo.svg"
+import FooterLogoSVG from "./FooterLogoSVG"
 
 // Note: dummy data
 const footerLinks = [
@@ -54,10 +54,7 @@ const Footer = () => {
                     <div>
 
                         <div className="mb-4 w-57">
-                            <img src={footer_logo}
-                                alt="Footer logo"
-                                className="w-full h-full object-contain"
-                            />
+                            <FooterLogoSVG className="w-full h-full" />
                         </div>
 
                         <p className="text-sm leading-relaxed mb-6 text-white">
