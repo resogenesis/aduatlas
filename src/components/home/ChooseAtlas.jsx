@@ -121,9 +121,9 @@ const ChooseAtlas = () => {
                         <defs>
                             <path id="circlePath" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0" />
                         </defs>
-                        <text fill="white" fontSize="16" fontFamily="'Poppins', 'Quicksand', sans-serif" fontWeight="400" letterSpacing="4">
+                        <text fill="white" fontSize="14" fontFamily="'Poppins', 'Quicksand', sans-serif" fontWeight="400" letterSpacing="6">
                             <textPath href="#circlePath" startOffset="0%">
-                                START YOUR ADU JOURNEY HERE &#x2022; START YOUR ADU JOURNEY HERE &#x2022;
+                                START YOUR ADU JOURNEY HERE &#x2022;
                             </textPath>
                         </text>
                         {/* Center arrow — diagonal upper-right like original */}
