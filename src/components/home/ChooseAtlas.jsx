@@ -41,18 +41,19 @@ const ChooseAtlas = () => {
             <div className="w-full flex flex-col gap-12">
                 {/* top content */}
                 <div className="space-y-4">
-                    <CommonSectionTitle text="Choose ADUAtlas Matters" />
+                    <CommonSectionTitle text="Why Choose ADUAtlas" />
 
                     <p className="text-[#2F5D50] font-semibold text-xl mb-2">
                         Start your ADU Journey Here
                     </p>
 
                     <p className="text-secondary text-lg">
-                        ADUAtlas is a national marketplace that helps homeowners understand
-                        local ADU rules and matches them with builders and suppliers.
-                        Whether you're just starting or ready to build, ADUAtlas walks you
-                        through every step of the ADU process designed for homeowners,
-                        first-time builders, and professionals.
+                        ADUAtlas is a national platform that helps homeowners navigate every
+                        step of building an ADU. Our step-by-step guide provides clarity on
+                        what can be legally built, along with timelines, cost estimates, ADU
+                        types, and key FAQs. We also match homeowners by ZIP code with both
+                        local and national builders and suppliers. Whether you are just
+                        starting or ready to build, ADUAtlas guides you through the process.
                     </p>
                 </div>
 
