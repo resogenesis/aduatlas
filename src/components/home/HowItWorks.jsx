@@ -39,8 +39,7 @@ const HowItWorks = () => {
                 <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
                     <CommonSectionTitle text="How It Works" />
                     <p className="text-secondary text-lg">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                        Be prepared to provide your city with your property planning basics
                     </p>
                 </div>
 

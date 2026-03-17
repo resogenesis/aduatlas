@@ -18,13 +18,12 @@ const Hero = () => {
                     <h1
                         className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl max-w-275 lg:leading-20 xl:leading-23"
                     >
-                        Coming Soon Under Construction: U.S. ADU Listing and Zoning Guide
+                        ADU Atlas
                     </h1>
 
                     {/* Paragraph */}
                     <p className="text-bas sm:text-lg md:text-xl lg:text-2xl max-w-2xl text-white/90" >
-                        Match with National and Local builders and suppliers familiar with
-                        your zoning regulations.
+                        A smarter way to plan your ADU. Understand the process, explore a real ADU project, use our readiness tool before talking with your city or builder. Review local rules and connect with professionals.
                     </p>
 
                     {/* Button */}
@@ -32,7 +31,7 @@ const Hero = () => {
                         onClick={() => setOpen(true)}
                         className="cursor-pointer w-fit bg-white text-[#2F5D50] font-bold text-sm sm:text-base md:text-lg py-3 px-6 md:px-8 rounded-xl border border-[#2F5D50] hover:bg-[#ffffffd7] hover:shadow-md transition-all duration-300 "
                     >
-                        Join the directory
+                        Start Your Journey
                     </button>
 
                 </div>

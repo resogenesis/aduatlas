@@ -12,24 +12,24 @@ import aduImage3 from "../../assets/home/choose_img3.png"
 // Note: dummy data
 const features = [
     {
+        icon: RiVerifiedBadgeLine,
+        title: "Planning Tools",
+        desc: "Use our pre-populated pre-site estimate worksheets and feasibility study",
+    },
+    {
         icon: FiSearch,
-        title: "Comprehensive Rules Database",
-        desc: "Access up-to-date ADU regulations by state, city, and ZIP code.",
+        title: "City and State Regulations",
+        desc: "State equals Structure. City mandates everything else.",
     },
     {
         icon: IoDocumentTextOutline,
         title: "ADU Type Education",
-        desc: "Explore more ADU's types here.",
-    },
-    {
-        icon: RiVerifiedBadgeLine,
-        title: "Planning Tools",
-        desc: "Use our pre-populated pre-site estimate worksheets.",
+        desc: "Explore over 20 different ADU types here",
     },
     {
         icon: IoTrendingUp,
         title: "Match with Pros",
-        desc: "Get matched with qualified professionals familiar with your city zoning.",
+        desc: "Get matched with qualified professionals familiar with your city zoning",
     },
 ];
 
@@ -42,6 +42,10 @@ const ChooseAtlas = () => {
                 {/* top content */}
                 <div className="space-y-4">
                     <CommonSectionTitle text="Choose ADUAtlas Matters" />
+
+                    <p className="text-[#2F5D50] font-semibold text-xl mb-2">
+                        Start your ADU Journey Here
+                    </p>
 
                     <p className="text-secondary text-lg">
                         ADUAtlas is a national marketplace that helps homeowners understand

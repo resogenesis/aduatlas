@@ -6,7 +6,7 @@ const Logo = ({ className = "", src = "" }) => {
     <Link
       to="/"
       className={cn(
-        "w-32 sm:w-36 md:w-40 lg:w-44 h-12 flex items-center",
+        "w-40 sm:w-48 md:w-56 lg:w-64 h-14 sm:h-16 flex items-center",
         className
       )}
     >

@@ -7,30 +7,38 @@ import footer_logo from "../../assets/footer_logo.svg"
 // Note: dummy data
 const footerLinks = [
     {
-        title: "Product",
+        title: "Pages",
         links: [
-            { name: "How It Works", path: "/how-it-works" },
-            { name: "Pricing", path: "/pricing" },
-            { name: "ADU Rule", path: "/adu-rule" },
-            { name: "ADU Types", path: "/adu-types" },
+            { name: "Resources", path: "#" },
+            { name: "Paid Access", path: "#" },
+            { name: "Video Library", path: "#" },
+            { name: "ADU Comparison", path: "#" },
         ],
     },
     {
         title: "Resources",
         links: [
-            { name: "Learning Hub", path: "/learning-hub" },
-            { name: "About Us", path: "/about" },
-            { name: "Contact", path: "/contact" },
-            { name: "For Builders", path: "/builders" },
-            { name: "For Supplier", path: "/suppliers" },
+            { name: "City & State Regulations", path: "#" },
+            { name: "Feasibility Study", path: "#" },
+            { name: "Pre-site Estimate Worksheet", path: "#" },
+        ],
+    },
+    {
+        title: "Associations",
+        links: [
+            { name: "ADUCali", path: "#" },
+            { name: "ADUTexas", path: "#" },
+            { name: "ADUMissouri", path: "#" },
+            { name: "ADUDoval", path: "#" },
+            { name: "Click for more", path: "#" },
         ],
     },
     {
         title: "Legal",
         links: [
-            { name: "Privacy Policy", path: "/privacy-policy" },
-            { name: "Terms of Service", path: "/terms" },
-            { name: "Cookie Policy", path: "/cookie-policy" },
+            { name: "Privacy Policy", path: "#" },
+            { name: "Terms of Service", path: "#" },
+            { name: "Cookie Policy", path: "#" },
         ],
     },
 ];
@@ -40,7 +48,7 @@ const Footer = () => {
         <footer className="bg-[#171B26] text-gray-300 pt-16 pb-6">
             <div className="container mx-auto px-6">
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
 
                     {/* logo section */}
                     <div>

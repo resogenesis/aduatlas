@@ -10,23 +10,23 @@ import bg_pic from "../../assets/home/why_choose_us.png"
 const features = [
     {
         icon: BiBookOpen,
-        title: "Educational-first",
+        title: "Education First",
         desc: "Learn before you commit",
     },
     {
         icon: HiOutlineCurrencyDollar,
-        title: "Transparent Pricing",
-        desc: "No hidden fees",
+        title: "Accurate Estimating Tools",
+        desc: "Feasibility study for a fraction of the cost",
     },
     {
         icon: HiOutlineShieldCheck,
-        title: "Secure Payments",
-        desc: "Your data is safe",
+        title: "National and Local Suppliers",
+        desc: "Professionals familiar with your zoning",
     },
     {
         icon: RiVerifiedBadgeLine,
-        title: "Verified Data",
-        desc: "From trusted sources",
+        title: "Video Library",
+        desc: "Watch and Explore ADU Construction Videos",
     },
 ];
 
