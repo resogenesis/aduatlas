@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CommonModal from "./CommonModal";
+import ComingSoonContent from "./ComingSoonContent";
 
 const AuthButtons = () => {
     const [open, setOpen] = useState(false);
@@ -25,10 +26,7 @@ const AuthButtons = () => {
             </div>
 
             <CommonModal isOpen={open} onClose={() => setOpen(false)}>
-                <div className="text-center">
-                    <h2 className="text-3xl font-semibold mb-2">Coming Soon</h2>
-                    <p className="text-gray-500">This feature is under development.</p>
-                </div>
+                <ComingSoonContent />
             </CommonModal>
         </>
 

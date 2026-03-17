@@ -1,5 +1,6 @@
 import heroImage from "../../assets/home/hero_image.png";
 import CommonModal from "../common/CommonModal";
+import ComingSoonContent from "../common/ComingSoonContent";
 import { useState } from "react";
 
 const Hero = () => {
@@ -39,10 +40,7 @@ const Hero = () => {
             </section>
 
             <CommonModal isOpen={open} onClose={() => setOpen(false)}>
-                <div className="text-center">
-                    <h2 className="text-3xl font-semibold mb-2">Coming Soon</h2>
-                    <p className="text-gray-500">This feature is under development.</p>
-                </div>
+                <ComingSoonContent />
             </CommonModal>
         </>
     );
