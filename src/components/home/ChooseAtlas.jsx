@@ -34,15 +34,15 @@ const features = [
 
 const ChooseAtlas = () => {
     return (
-        <section className="container mx-auto grid lg:grid-cols-2 gap-10 items-center py-25">
+        <section className="container mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center py-12 sm:py-16 lg:py-25">
 
             {/* LEFT SIDE */}
-            <div className="w-full flex flex-col gap-12">
+            <div className="w-full flex flex-col gap-8 sm:gap-12">
                 {/* top content */}
                 <div className="space-y-4">
                     <CommonSectionTitle text="Why Choose ADUAtlas" />
 
-                    <p className="text-secondary text-lg">
+                    <p className="text-secondary text-base sm:text-lg">
                         ADUAtlas is a national platform that helps homeowners navigate every
                         step of building an ADU. Our step-by-step guide provides clarity on
                         what can be legally built, along with timelines, cost estimates, ADU
@@ -80,10 +80,10 @@ const ChooseAtlas = () => {
             {/* RIGHT SIDE IMAGE COLLAGE */}
             <div className="relative flex items-center justify-center">
 
-                <div className="flex gap-6 items-center">
+                <div className="flex gap-3 sm:gap-4 md:gap-6 items-center w-full max-w-lg lg:max-w-none mx-auto">
 
                     {/* LEFT LARGE IMAGE */}
-                    <div className="w-78 h-115 overflow-hidden rounded-tr-[80px] rounded-bl-[80px] bg-gray-300">
+                    <div className="w-1/2 aspect-[2/3] overflow-hidden rounded-tr-[40px] rounded-bl-[40px] sm:rounded-tr-[60px] sm:rounded-bl-[60px] lg:rounded-tr-[80px] lg:rounded-bl-[80px] bg-gray-300">
                         <img
                             src={aduImage1}
                             alt=""
@@ -92,9 +92,9 @@ const ChooseAtlas = () => {
                     </div>
 
                     {/* RIGHT STACKED IMAGES */}
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-3 sm:gap-4 md:gap-6 w-1/2">
 
-                        <div className="w-78 h-81 overflow-hidden rounded-tl-[80px] rounded-br-[80px] bg-gray-300">
+                        <div className="w-full aspect-square overflow-hidden rounded-tl-[40px] rounded-br-[40px] sm:rounded-tl-[60px] sm:rounded-br-[60px] lg:rounded-tl-[80px] lg:rounded-br-[80px] bg-gray-300">
                             <img
                                 src={aduImage2}
                                 alt=""
@@ -102,7 +102,7 @@ const ChooseAtlas = () => {
                             />
                         </div>
 
-                        <div className="w-78 h-81 overflow-hidden rounded-tr-[80px] rounded-bl-[80px] bg-gray-300">
+                        <div className="w-full aspect-square overflow-hidden rounded-tr-[40px] rounded-bl-[40px] sm:rounded-tr-[60px] sm:rounded-bl-[60px] lg:rounded-tr-[80px] lg:rounded-bl-[80px] bg-gray-300">
                             <img
                                 src={aduImage3}
                                 alt=""
@@ -115,7 +115,7 @@ const ChooseAtlas = () => {
                 </div>
 
                 {/* CENTER BADGE — spinning circular text */}
-                <div className="absolute size-47.5 animate-[spin_30s_linear_infinite]">
+                <div className="absolute w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:size-47.5 animate-[spin_30s_linear_infinite]">
                     <svg viewBox="0 0 200 200" className="w-full h-full">
                         <circle cx="100" cy="100" r="100" fill="#2F5D50" />
                         <defs>

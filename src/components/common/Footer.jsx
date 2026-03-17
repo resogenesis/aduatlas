@@ -36,15 +36,15 @@ const footerLinks = [
 
 const Footer = () => {
     return (
-        <footer className="bg-[#171B26] text-gray-300 pt-16 pb-6">
-            <div className="container mx-auto px-6">
+        <footer className="bg-[#171B26] text-gray-300 pt-10 sm:pt-16 pb-6">
+            <div className="container mx-auto px-4 sm:px-6">
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12">
 
                     {/* logo section */}
-                    <div>
+                    <div className="col-span-2 md:col-span-2 lg:col-span-2">
 
-                        <div className="mb-4 w-57">
+                        <div className="mb-4 w-40 sm:w-57">
                             <img src={footer_logo} alt="ADUAtlas.com" className="w-full h-full object-contain" />
                         </div>
 
@@ -53,7 +53,7 @@ const Footer = () => {
                             with trusted professionals.
                         </p>
 
-                        <h4 className="text-white font-medium mb-3 text-2xl">
+                        <h4 className="text-white font-medium mb-3 text-lg sm:text-2xl">
                             Follow Us
                         </h4>
 
@@ -75,11 +75,11 @@ const Footer = () => {
                     {/* dynamic footer columns */}
                     {footerLinks?.map((section, i) => (
                         <div key={i}>
-                            <h3 className="text-white text-2xl font-semibold mb-4">
+                            <h3 className="text-white text-lg sm:text-xl lg:text-2xl font-semibold mb-3 sm:mb-4">
                                 {section?.title || "N/F"}
                             </h3>
 
-                            <ul className="space-y-3 text-sm text-white">
+                            <ul className="space-y-2 sm:space-y-3 text-sm text-white">
                                 {section?.links?.map((link, index) => (
                                     <li key={index}>
                                         <Link

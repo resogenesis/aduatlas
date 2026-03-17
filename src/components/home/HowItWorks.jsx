@@ -32,40 +32,40 @@ const steps = [
 
 const HowItWorks = () => {
     return (
-        <section className="w-full bg-[#F4F7F6] py-25">
-            <div className="container mx-auto px-6">
+        <section className="w-full bg-[#F4F7F6] py-12 sm:py-16 lg:py-25">
+            <div className="container mx-auto px-4 sm:px-6">
 
                 {/* header */}
-                <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 lg:mb-16 space-y-3">
                     <CommonSectionTitle text="How It Works" />
-                    <p className="text-secondary text-lg">
+                    <p className="text-secondary text-base sm:text-lg">
                         Be prepared to provide your city with your property planning basics
                     </p>
                 </div>
 
                 {/* main content */}
-                <div className="grid lg:grid-cols-2 gap-16">
+                <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
 
                     {/* left side */}
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-4 sm:gap-6">
 
                         {steps?.map((step, idx) => (
                             <div
                                 key={idx}
-                                className="flex gap-4 bg-[#E1E8E6] px-8 py-6 rounded-2xl"
+                                className="flex gap-3 sm:gap-4 bg-[#E1E8E6] px-4 py-4 sm:px-8 sm:py-6 rounded-2xl"
                             >
                                 {/* number circle */}
-                                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#2F5D50] text-white font-semibold shrink-0">
+                                <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-[#2F5D50] text-white font-semibold shrink-0 text-sm sm:text-base">
                                     {step?.number || "N/F"}
                                 </div>
 
                                 {/* text */}
-                                <div className="space-y-3">
-                                    <h4 className="font-semibold text-primary text-2xl">
+                                <div className="space-y-1 sm:space-y-3">
+                                    <h4 className="font-semibold text-primary text-lg sm:text-xl lg:text-2xl">
                                         {step?.title || "N/F"}
                                     </h4>
 
-                                    <p className="text-secondary text-md">
+                                    <p className="text-secondary text-sm sm:text-base">
                                         {step?.desc || "N/F"}
                                     </p>
                                 </div>
@@ -75,7 +75,7 @@ const HowItWorks = () => {
                     </div>
 
                     {/* right side image */}
-                    <div className="w-full h-252 rounded-2xl">
+                    <div className="w-full h-64 sm:h-96 lg:h-auto rounded-2xl">
                         <img
                             src={howItworksImage}
                             alt="ADU House"
