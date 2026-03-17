@@ -18,12 +18,12 @@ const Hero = () => {
                     <h1
                         className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl max-w-275 lg:leading-20 xl:leading-23"
                     >
-                        ADU Atlas
+                        ADUAtlas: A Smarter Way to Plan Your ADU
                     </h1>
 
                     {/* Paragraph */}
                     <p className="text-bas sm:text-lg md:text-xl lg:text-2xl max-w-2xl text-white/90" >
-                        A smarter way to plan your ADU. Understand the process, explore a real ADU project, use our readiness tool before talking with your city or builder. Review local rules and connect with professionals.
+                        Understand the process, explore real ADU projects, then use our readiness tools to prepare before talking with your city or builder. Review local rules and connect with both National and local ADU professionals.
                     </p>
 
                     {/* Button */}
