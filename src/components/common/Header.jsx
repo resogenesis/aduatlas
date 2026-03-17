@@ -111,4 +111,22 @@ const Header = () => {
   );
 };
 
-export default Header;
+const ComingSoonBanner = () => (
+  <div className="w-full bg-[#2F5D50]/10 backdrop-blur-sm border-b border-[#2F5D50]/20">
+    <div className="container mx-auto px-4 py-2 text-center">
+      <span className="text-sm font-semibold text-[#2F5D50] tracking-wide">
+        Coming Soon
+      </span>
+    </div>
+  </div>
+);
+
+const HeaderWithBanner = () => (
+  <>
+    <Header />
+    <ComingSoonBanner />
+  </>
+);
+
+export { Header, ComingSoonBanner };
+export default HeaderWithBanner;
