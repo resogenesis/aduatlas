@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
-import LogoSVG from "./LogoSVG";
+import logo from "../../assets/logo.svg";
 
 const Logo = ({ className = "" }) => {
   return (
@@ -11,7 +11,7 @@ const Logo = ({ className = "" }) => {
         className
       )}
     >
-      <LogoSVG className="w-full h-full" />
+      <img src={logo} alt="ADUAtlas.com" className="w-full h-full object-contain" />
     </Link>
   );
 };

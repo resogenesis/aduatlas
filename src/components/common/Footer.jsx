@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
 
 // Note: local import
-import FooterLogoSVG from "./FooterLogoSVG"
+import footer_logo from "../../assets/footer_logo.svg"
 
 // Note: dummy data
 const footerLinks = [
@@ -45,7 +45,7 @@ const Footer = () => {
                     <div>
 
                         <div className="mb-4 w-57">
-                            <FooterLogoSVG className="w-full h-full" />
+                            <img src={footer_logo} alt="ADUAtlas.com" className="w-full h-full object-contain" />
                         </div>
 
                         <p className="text-sm leading-relaxed mb-6 text-white">
