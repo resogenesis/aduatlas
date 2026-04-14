@@ -5,7 +5,7 @@ import Logo from "./Logo";
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
-  { name: "How To", path: "/how-to-adu" },
+  { name: "How to ADU", path: "/how-to-adu" },
   { name: "ADU FAQ", path: "/faq" },
   { name: "ADU Types", path: "/adu-types" },
   { name: "Video", path: "/videos" },
