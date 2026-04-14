@@ -34,7 +34,7 @@ const Signup = () => {
       </div>
 
       <form onSubmit={(e) => e.preventDefault()}>
-        <FormField label={isPro ? "Username" : "User Name"} placeholder="name" required />
+        <FormField label="User Name" placeholder="name" required />
         <FormField label="Email Address" type="email" placeholder="you@example.com" required />
         <FormField label="Password" type="password" placeholder="••••••••••••" required />
         <PrimaryButton type="submit">
