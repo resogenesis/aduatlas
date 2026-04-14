@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
 const navLinks = [
-  { name: "Home", path: "#" },
-  { name: "About", path: "#" },
-  { name: "How To", path: "#" },
-  { name: "ADU FAQ", path: "#" },
-  { name: "ADU Types", path: "#" },
-  { name: "Video", path: "#" },
-  { name: "Choose Your State", path: "#" },
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "How To", path: "/how-to-adu" },
+  { name: "ADU FAQ", path: "/faq" },
+  { name: "ADU Types", path: "/adu-types" },
+  { name: "Video", path: "/videos" },
+  { name: "Choose Your State", path: "/choose-your-state" },
 ];
 
 const Header = () => {
@@ -37,16 +37,16 @@ const Header = () => {
         {/* Desktop Auth Buttons */}
         <div className="hidden lg:flex items-center gap-3">
           <Link
-            to="#"
+            to="/login"
             className="px-5 py-2 rounded-md border border-[#2F5D50] text-[#2F5D50] font-semibold text-sm hover:bg-[#2F5D50] hover:text-white transition"
           >
-            Sign Up
+            Log In
           </Link>
           <Link
-            to="#"
+            to="/signup"
             className="px-5 py-2 rounded-md bg-[#2F5D50] text-white font-semibold text-sm hover:bg-[#244A40] transition"
           >
-            Log In
+            Sign Up
           </Link>
         </div>
 
@@ -90,18 +90,18 @@ const Header = () => {
             ))}
             <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-gray-100">
               <Link
-                to="#"
+                to="/login"
                 className="px-5 py-2.5 rounded-md border border-[#2F5D50] text-[#2F5D50] font-semibold text-sm text-center hover:bg-[#2F5D50] hover:text-white transition"
                 onClick={() => setMobileOpen(false)}
               >
-                Sign Up
+                Log In
               </Link>
               <Link
-                to="#"
+                to="/signup"
                 className="px-5 py-2.5 rounded-md bg-[#2F5D50] text-white font-semibold text-sm text-center hover:bg-[#244A40] transition"
                 onClick={() => setMobileOpen(false)}
               >
-                Log In
+                Sign Up
               </Link>
             </div>
           </nav>
