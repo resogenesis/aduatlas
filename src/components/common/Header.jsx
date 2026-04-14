@@ -4,12 +4,12 @@ import Logo from "./Logo";
 
 const navLinks = [
   { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
   { name: "How to ADU", path: "/how-to-adu" },
-  { name: "ADU FAQ", path: "/faq" },
   { name: "ADU Types", path: "/adu-types" },
-  { name: "Video", path: "/videos" },
+  { name: "FAQ", path: "/faq" },
+  { name: "Video Library", path: "/videos" },
   { name: "Choose Your State", path: "/choose-your-state" },
+  { name: "About Us", path: "/about" },
 ];
 
 const Header = () => {
