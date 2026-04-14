@@ -7,12 +7,12 @@ import img3 from "../assets/home/choose_img3.png";
 import img4 from "../assets/home/how_it_works.png";
 
 const steps = [
-  { n: "01", title: "Start with your property basics", desc: "Gather address, lot size, setbacks, and HOA info before anything else.", img: img1 },
-  { n: "02", title: "Understand state vs. city rules", desc: "State defines the structure; your city governs setbacks, height, and parking.", img: img2 },
-  { n: "03", title: "Choose the ADU type that fits", desc: "Detached, attached, or conversion — each has cost and permitting tradeoffs.", img: img3 },
-  { n: "04", title: "Run a feasibility + cost check", desc: "Use our Site Ready Score and Utility Cost Estimator to pressure-test the project.", img: img4 },
-  { n: "05", title: "Get matched with local pros", desc: "We connect you with vetted builders and suppliers who work in your ZIP.", img: img1 },
-  { n: "06", title: "Prepare before you hire", desc: "Walk into every conversation with a worksheet, scope, and expectations locked.", img: img2 },
+  { n: "1", title: "Start with your property basics", desc: "Gather address, lot size, setbacks, and HOA info before anything else.", img: img1 },
+  { n: "2", title: "Understand state vs. city rules", desc: "State defines the structure; your city governs setbacks, height, and parking.", img: img2 },
+  { n: "3", title: "Choose the ADU type that fits", desc: "Detached, attached, or conversion — each has cost and permitting tradeoffs.", img: img3 },
+  { n: "4", title: "Run a feasibility + cost check", desc: "Use our Site Ready Score and Utility Cost Estimator to pressure-test the project.", img: img4 },
+  { n: "5", title: "Get matched with local pros", desc: "We connect you with vetted builders and suppliers who work in your ZIP.", img: img1 },
+  { n: "6", title: "Prepare before you hire", desc: "Walk into every conversation with a worksheet, scope, and expectations locked.", img: img2 },
 ];
 
 const HowToAdu = () => {
