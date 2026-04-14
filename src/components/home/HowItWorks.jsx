@@ -4,27 +4,27 @@ import CommonSectionTitle from "../common/CommonSectionTitle";
 // Note: dummy data
 const steps = [
     {
-        number: "01",
+        number: "1",
         title: "Select your state",
         desc: "using the dropdown to review statewide ADU guidelines, and why you need to know your local zoning regulations. ",
     },
     {
-        number: "02",
+        number: "2",
         title: "ADU Types",
         desc: `Compare different types of ADU, review the 25+ options and see the difference.`,
     },
     {
-        number: "03",
+        number: "3",
         title: "Enter your ZIP code",
         desc: "to access local zoning and permitting regulations.",
     },
     {
-        number: "04",
+        number: "4",
         title: "Choose your build",
         desc: `options and find national and local builders and suppliers familiar with your area.`,
     },
     {
-        number: "05",
+        number: "5",
         title: "Prepare before you",
         desc: `hire using ADUAtlas’s pre-filled site prep checklist and builder estimate tools to keep your budget on track.Get matched with ADU Builders and suppliers. `,
     },
