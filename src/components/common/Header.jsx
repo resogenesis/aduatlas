@@ -8,8 +8,7 @@ const navLinks = [
   { name: "ADU Types", path: "/adu-types" },
   { name: "FAQ", path: "/faq" },
   { name: "Video Library", path: "/videos" },
-  { name: "Choose Your State", path: "/choose-your-state" },
-  { name: "About Us", path: "/about" },
+  { name: "Choose City/State", path: "/choose-your-state" },
 ];
 
 const Header = () => {
