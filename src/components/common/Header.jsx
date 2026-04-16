@@ -9,6 +9,7 @@ const navLinks = [
   { name: "FAQ", path: "/faq" },
   { name: "Video Library", path: "/videos" },
   { name: "Choose City/State", path: "/choose-your-state" },
+  { name: "About Us", path: "/about" },
 ];
 
 const Header = () => {
