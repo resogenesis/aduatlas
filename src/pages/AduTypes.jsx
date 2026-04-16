@@ -45,8 +45,8 @@ const AduTypes = () => {
   return (
     <div>
       <PageHeader
-        title="ADU Types and Types of ADUs"
-        subtitle={<>Understand the different ADU options available<br />and find the best fit for your property and needs.</>}
+        title="ADU Types"
+        subtitle={<>Understand the different ADU options available and<br />find the best fit for your property and needs.</>}
         bg={heroImg}
       />
 
