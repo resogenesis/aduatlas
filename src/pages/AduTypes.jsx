@@ -51,6 +51,18 @@ const AduTypes = () => {
       />
 
       <section className="container mx-auto px-4 sm:px-6 py-10 sm:py-14">
+        <div className="max-w-3xl mx-auto mb-10 space-y-4 text-secondary text-sm sm:text-base leading-relaxed">
+          <p>
+            The range of ADU types and tiny homes has expanded rapidly with growing demand for flexible, affordable housing. Homeowners can now choose from prefab ADUs, modular homes, kit homes, and custom-built backyard homes, available in a wide range of sizes, designs, and price points.
+          </p>
+          <p>
+            ADUs are typically priced based on size, design complexity, materials, and construction method. Options range from fully finished, move-in-ready units delivered to your property to DIY kits assembled on-site. Understanding these differences helps homeowners select the right structure for their budget, timeline, and local zoning requirements.
+          </p>
+          <p className="font-semibold text-primary">Explore the most common ADU and tiny home types below:</p>
+        </div>
+      </section>
+
+      <section className="container mx-auto px-4 sm:px-6 pb-10 sm:pb-14">
         <div className="relative inline-block mb-8">
           <button
             onClick={() => setDropOpen((v) => !v)}

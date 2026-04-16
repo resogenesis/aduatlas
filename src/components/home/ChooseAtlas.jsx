@@ -12,23 +12,23 @@ import aduImage3 from "../../assets/home/choose_img3.png"
 const features = [
     {
         icon: RiVerifiedBadgeLine,
-        title: "Planning Tools",
-        desc: "Use our pre-populated pre-site estimate worksheets and feasibility study",
+        title: "Comprehensive Rules Database",
+        desc: "Access up-to-date ADU regulations by state, city, and ZIP code.",
     },
     {
         icon: FiSearch,
-        title: "City and State Regulations",
-        desc: "State equals Structure. City mandates everything else.",
+        title: "ADU Type Education",
+        desc: "Explore 25+ ADU types and structures.",
     },
     {
         icon: IoDocumentTextOutline,
-        title: "ADU Type Education",
-        desc: "Explore over 20 different ADU types here",
+        title: "Planning Tools",
+        desc: "Use our pre-populated pre-site estimate worksheets and feasibility study.",
     },
     {
         icon: IoTrendingUp,
         title: "Match with Pros",
-        desc: "Get matched with qualified professionals familiar with your city zoning",
+        desc: "Get matched with qualified professionals familiar with your city zoning.",
     },
 ];
 
@@ -40,15 +40,10 @@ const ChooseAtlas = () => {
             <div className="w-full flex flex-col gap-8 sm:gap-12">
                 {/* top content */}
                 <div className="space-y-4">
-                    <CommonSectionTitle text="Why Choose ADUAtlas" />
+                    <CommonSectionTitle text="Choose ADUAtlas Matters" />
 
                     <p className="text-secondary text-base sm:text-lg">
-                        ADUAtlas is a national platform that helps homeowners navigate every
-                        step of building an ADU. Our step-by-step guide provides clarity on
-                        what can be legally built, along with timelines, cost estimates, ADU
-                        types, and key FAQs. We also match homeowners by ZIP code with both
-                        local and national builders and suppliers. Whether you are just
-                        starting or ready to build, ADUAtlas guides you through the process.
+                        ADUAtlas is a national marketplace that helps homeowners understand local ADU rules and matches them with builders and suppliers. Whether you're just starting or ready to build, ADUAtlas walks you through every step of the ADU process designed for homeowners. Real-time access to local ADU regulations, over 25 ADU types and structures, and our ADU Readiness score. If you are buying, selling, or building an ADU.
                     </p>
                 </div>
 
