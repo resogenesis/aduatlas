@@ -102,7 +102,7 @@ const Pricing = () => {
   return (
     <div>
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <h1 className="text-center text-3xl sm:text-4xl font-bold text-primary">Builder & Supplier Listing</h1>
+        <h1 className="text-center text-3xl sm:text-4xl font-bold text-primary">Pricing</h1>
         <p className="text-center text-gray-500 mt-1">Beta Pricing · 7 Days Lock-In</p>
 
         <div className="flex justify-center my-6">
