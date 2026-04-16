@@ -1,27 +1,26 @@
 import { Link } from "react-router-dom";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
 
-// Note: local import
 import footer_logo from "../../assets/footer_logo.svg"
 
-// Note: dummy data
 const footerLinks = [
     {
-        title: "Resources",
+        title: "Product",
         links: [
-            { name: "City & State Regulations", path: "#" },
-            { name: "Feasibility Study", path: "#" },
-            { name: "Pre-site Estimate Worksheet", path: "#" },
+            { name: "How It Works", path: "/how-to-adu" },
+            { name: "Pricing", path: "/pricing" },
+            { name: "ADU Rule", path: "/choose-your-state" },
+            { name: "ADU Types", path: "/adu-types" },
         ],
     },
     {
-        title: "Associations",
+        title: "Resources",
         links: [
-            { name: "ADUCali", path: "#" },
-            { name: "ADUTexas", path: "#" },
-            { name: "ADUMissouri", path: "#" },
-            { name: "ADUDoval", path: "#" },
-            { name: "Click for more", path: "#" },
+            { name: "Learning Hub", path: "/how-to-adu" },
+            { name: "About Us", path: "/about" },
+            { name: "Contact", path: "/dashboard/help" },
+            { name: "For Builders", path: "/pricing" },
+            { name: "For Supplier", path: "/pricing" },
         ],
     },
     {
@@ -41,7 +40,6 @@ const Footer = () => {
 
                 <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12">
 
-                    {/* logo section */}
                     <div className="col-span-2 md:col-span-2 lg:col-span-2">
 
                         <div className="mb-4 w-40 sm:w-57">
@@ -57,7 +55,6 @@ const Footer = () => {
                             Follow Us
                         </h4>
 
-                        {/* icons */}
                         <div className="flex gap-3">
                             {[FaFacebookF, FaTwitter, FaLinkedinIn, FaPinterestP].map(
                                 (Icon, idx) => (
@@ -72,7 +69,6 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* dynamic footer columns */}
                     {footerLinks?.map((section, i) => (
                         <div key={i}>
                             <h3 className="text-white text-lg sm:text-xl lg:text-2xl font-semibold mb-3 sm:mb-4">
@@ -96,7 +92,6 @@ const Footer = () => {
 
                 </div>
 
-                {/* divider */}
                 <div className="border-t border-gray-600 mt-12 pt-6 text-center text-sm text-gray-400">
                     © 2026 ADUAtlas. All rights reserved.
                 </div>
