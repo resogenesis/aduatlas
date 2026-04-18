@@ -5,9 +5,9 @@ const AduCTA = () => {
     return (
         <section className="w-full py-12 sm:py-16 lg:py-25">
             <div className="container mx-auto px-4 sm:px-6">
-                <div className="flex flex-col lg:flex-row items-center justify-between bg-linear-to-r from-[#0F3D33] to-[#1F6F57] rounded-2xl overflow-hidden">
+                <div className="flex flex-col lg:flex-row lg:items-stretch justify-between bg-linear-to-r from-[#0F3D33] to-[#1F6F57] rounded-2xl overflow-hidden">
 
-                    <div className="text-white px-6 py-10 sm:px-10 sm:py-12 lg:pl-18 lg:py-0 lg:max-w-[55%]">
+                    <div className="text-white px-6 py-10 sm:px-10 sm:py-12 lg:pl-18 lg:pr-6 lg:py-12 lg:max-w-[55%]">
 
                         <h2 className="text-2xl sm:text-3xl font-semibold leading-snug mb-4 sm:mb-5">
                             Whether you are ready to build or starting out, ADUAtlas walks you through the process.
@@ -38,7 +38,7 @@ const AduCTA = () => {
                         </div>
                     </div>
 
-                    <div className="w-full lg:w-[45%] lg:mt-10">
+                    <div className="w-full lg:w-[45%] lg:self-stretch">
                         <img
                             src={aduCta}
                             alt="ADU build"
