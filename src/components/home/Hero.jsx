@@ -20,7 +20,7 @@ const Hero = () => {
                         ADUAtlas is a national marketplace and educational platform that helps homeowners understand how to build an ADU (Accessory Dwelling Unit or Tiny Home). Access local zoning regulations by city, navigate the building process with step-by-step tools, explore a wide range of ADU options, and connect with local and national ADU builders and suppliers.
                     </p>
                     <p>
-                        Explore 25+ ADU types, learn what you can legally build on your property, and prepare with the tools needed to move forward with confidence.
+                        Explore <span className="font-bold text-white">25+ ADU types</span>, learn what you can legally build on your property, and prepare with the tools needed to move forward with confidence.
                     </p>
                     <p>
                         Learn before you build to avoid costly mistakes — start your ADU journey here.
