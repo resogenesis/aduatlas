@@ -1,44 +1,317 @@
 import Accordion from "../components/common/Accordion";
 
 const faqs = [
-  { q: "What is an ADU?", a: "An Accessory Dwelling Unit (ADU) is a secondary residential unit located on a residential property. ADUs can be attached or detached and typically include a kitchen, bathroom, and living area. ADUs are often referred to by other names such as tiny house, casita, backyard cottage, granny flat, or backyard home, depending on region and design." },
-  { q: "Why do zoning laws vary by state and city?", a: "Each state sets broad structural standards (IRC), but cities layer their own zoning rules on top — setbacks, height limits, lot coverage, parking, and occupancy requirements all vary by municipality." },
-  { q: "Why do rules vary by state and city?", a: "States define the structural code (IRC), while cities control land use through zoning — setbacks, density, parking, and permitted uses differ from one jurisdiction to the next." },
-  { q: "Can I buy a cheap ADU online?", a: "You can find low-cost units on Amazon or from importers, but they often don't meet local building codes, IRC standards, or zoning requirements. Always verify compliance before purchasing." },
-  { q: "Do ADUAtlas builders know my local zoning?", a: "Builders on ADUAtlas are matched by ZIP code and are familiar with local zoning and permitting requirements in your area." },
-  { q: "How much does an ADU cost?", a: "Costs range widely by region and type, but most projects fall between $150K and $450K all-in, depending on size, site conditions, and local labor rates." },
-  { q: "What costs are not included in advertised ADU prices?", a: "Site prep, utility connections, permits, engineering, surveys, landscaping, and contingency are commonly excluded from advertised unit prices." },
-  { q: "Do I need a survey?", a: "In most cases, yes — a survey confirms lot boundaries, setbacks, and easements. Some cities require a formal survey before issuing permits." },
-  { q: "What is the biggest mistake homeowners make?", a: "Starting without understanding local zoning, skipping the feasibility step, or hiring a builder who isn't familiar with your city's ADU regulations." },
-  { q: "Will my property taxes increase?", a: "Generally yes, based on added assessed value, not the full cost of construction." },
-  { q: "Are grants available?", a: "Some states and cities offer grants, fee waivers, or expedited permitting for ADU construction. Check your local housing department for current programs." },
-  { q: "How accurate is zoning information on ADUAtlas?", a: "We compile data from official state and municipal sources and update regularly, but always confirm with your local building department before making decisions." },
-  { q: "What does \"IRC-compliant\" mean?", a: "IRC stands for International Residential Code — the baseline building standard adopted (with amendments) by most U.S. states for residential construction including ADUs." },
-  { q: "How does ADUAtlas match me with builders?", a: "We match you by ZIP code with verified local and national builders and suppliers who understand your city's zoning and permitting requirements." },
-  { q: "What do I get with paid access?", a: "Paid access unlocks the full feasibility toolkit: site-ready score, utility cost estimator, downloadable worksheets, and priority builder matching." },
-  { q: "One-day vs. annual access?", a: "One-day access is ideal for a quick feasibility check. Annual access is best if you're actively planning — you get unlimited tools, priority support, and builder introductions." },
-  { q: "Does ADUAtlas guarantee approvals or pricing?", a: "No. ADUAtlas provides educational tools and connects you with professionals, but permit approvals and final pricing depend on your local jurisdiction and builder." },
-  { q: "What does ADUAtlas not do?", a: "ADUAtlas does not design, build, or permit ADUs. We educate homeowners, provide planning tools, and connect you with qualified professionals." },
-  { q: "When should I talk to a builder?", a: "After you've reviewed your state and city rules, completed a pre-site feasibility check, and have a clear understanding of your budget and timeline." },
-  { q: "What will builders ask first?", a: "Property address, lot size, desired ADU type, budget range, timeline, and whether you've reviewed local zoning requirements." },
-  { q: "How does ADUAtlas help prevent buying the wrong ADU?", a: "By educating you on local zoning, IRC compliance, and site feasibility before you commit to a design or builder — so you avoid costly mistakes." },
-  { q: "Is building an ADU the same everywhere?", a: "No. Every state, city, and even neighborhood can have different rules. That's why confirming local regulations and site conditions is critical before you start." },
-  { q: "Can I buy an ADU built outside the United States?", a: "You can, but imported units must still meet local building codes, IRC standards, and zoning requirements. Compliance is your responsibility." },
-  { q: "Why choose annual access instead of one-day access?", a: "Annual access gives you unlimited use of all tools, priority builder introductions, and ongoing support throughout your planning and build process." },
-  { q: "What does \"IRC-compliant\" actually mean?", a: "It means the structure meets the International Residential Code — the baseline building standard for residential construction adopted by most U.S. states." },
-  { q: "Why won't builders give accurate quotes without site details?", a: "Every site is different — slope, soil, utilities, access, and local code requirements all affect cost. Without site-specific information, any quote is a guess." },
-  { q: "What costs are not included in the advertised ADU prices?", a: "Site prep, utility connections, permits, engineering, surveys, landscaping, and contingency are commonly excluded from advertised unit prices." },
-  { q: "Does ADUAtlas guarantee anything?", a: "We guarantee access to accurate, up-to-date educational content and tools — but not permit approvals, construction outcomes, or final pricing." },
-  { q: "What information will builders ask me for first?", a: "Property address, lot dimensions, desired ADU type, budget range, project timeline, and whether you've checked local zoning." },
-  { q: "How does ADUAtlas help me avoid buying the wrong ADU?", a: "By walking you through zoning, feasibility, and compliance checks before you commit — so you don't end up with a unit that can't be permitted or placed on your lot." },
-  { q: "How much value can an ADU add to my property?", a: "ADUs can add significant value — typically 20–30% of the primary home's value — depending on location, size, and quality of construction." },
-  { q: "Are grants or incentives available to build an ADU?", a: "Some states and cities offer grants, fee waivers, or expedited permitting. Check your local housing department for current programs." },
-  { q: "Where can I find the deed to my property?", a: "Your county recorder's office or assessor's website typically has deed records. Your title company from the home purchase can also provide a copy." },
-  { q: "What is the biggest mistake people make when building an ADU?", a: "Starting without understanding local zoning, skipping feasibility, or hiring a builder unfamiliar with your city's ADU regulations." },
-  { q: "How much does it cost to build an ADU?", a: "Most ADU projects cost between $150K and $450K all-in, depending on type, size, site conditions, and local labor rates." },
-  { q: "How does ADUAtlas match me with builders and suppliers?", a: "We match by ZIP code with verified professionals who understand your local zoning, permitting, and construction requirements." },
-  { q: "How accurate are zoning regulations on ADUAtlas?", a: "We compile from official state and municipal sources and update regularly — but always confirm with your local building department." },
-  { q: "Do I need a survey to build an ADU?", a: "In most jurisdictions, yes. A survey confirms boundaries, setbacks, and easements — and many cities require one before issuing permits." },
+  {
+    q: "Is building an ADU the same everywhere?",
+    a: (
+      <>
+        <p>No. ADU rules and costs vary by state, city, and even ZIP code. What is allowed, affordable, and practical depends on:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>State building code</li>
+          <li>City zoning rules</li>
+          <li>Property conditions</li>
+          <li>Utilities and access</li>
+          <li>Budget and goals</li>
+        </ul>
+        <p className="mt-2">Confirm local regulations and site conditions early.</p>
+      </>
+    ),
+  },
+  {
+    q: "What is an ADU / JADU?",
+    a: (
+      <>
+        <p>An Accessory Dwelling Unit (ADU) is a secondary residential unit on a residential property. It can be attached or detached and typically includes a kitchen, bathroom, and living space. ADUAtlas focuses on detached ADUs.</p>
+        <p className="mt-2">A JADU has a max size of 500 sq ft, is located within an existing structure, shares utilities, includes a kitchenette, and has a separate exterior entrance.</p>
+        <p className="mt-2">Also called: tiny home, casita, granny flat, backyard cottage — usually a reference for any type of ADU. These names are typically localized.</p>
+      </>
+    ),
+  },
+  {
+    q: "Why do rules vary by state and city?",
+    a: (
+      <>
+        <p>States typically mandate the structure using the International Residential Code (IRC), which governs structural elements and safety. Ask your builder how they meet or exceed the IRC.</p>
+        <p className="mt-2">Cities and counties control zoning: height, setbacks, placement, parking, design, and utility connections. Understanding who regulates what reduces project risk.</p>
+        <p className="mt-2">State regulations vary — some states like Texas prohibit cities from prohibiting ADUs, and a few have no regulations. Some cities have defined ADU regulations and some have none; however, most will have some kind of building code for any structure. Be sure to check both your state and city building codes before you begin your plan.</p>
+      </>
+    ),
+  },
+  {
+    q: "Key aspects and usage examples of the IRC building code",
+    a: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li><strong>Structural requirements:</strong> Defines standards for foundations (shallow and deep), wall framing (wood, steel, concrete), and roof construction.</li>
+        <li><strong>Means of egress:</strong> Regulations for safe exit routes, including stairway width, headroom, and exterior door requirements.</li>
+        <li><strong>Safety features:</strong> Provisions for fire resistance (smoke alarms), sanitation (plumbing), and safety lighting.</li>
+        <li><strong>Energy conservation:</strong> Insulation and energy efficiency standards.</li>
+        <li><strong>Permitting:</strong> Rules for new construction, renovations, repairs, and structural demolition.</li>
+      </ul>
+    ),
+  },
+  {
+    q: "Can I buy a cheap ADU online?",
+    a: (
+      <>
+        <p>Yes, but caution is required. Many low-cost or imported units:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Do not meet IRC standards</li>
+          <li>May not be certified for state or local permitting</li>
+          <li>May fall under different federal housing codes</li>
+        </ul>
+        <p className="mt-2">Always verify compliance with a licensed architect or engineer before purchasing. Some deceptive ads show a finished ADU but are only selling the frame. There are very reliable online ADU sellers — they will have a website and a contact to verify the structural elements. If the ad seems too good to be true, it probably is.</p>
+      </>
+    ),
+  },
+  {
+    q: "Do ADUAtlas builders know my local zoning?",
+    a: (
+      <>
+        <p>Builders list the cities and ZIP codes they serve. Many are familiar with local rules, but regulations can change, so verify both your state and local building codes. ADUAtlas updates regulations regularly, but you still need to confirm in case the city has made any updates.</p>
+        <p className="mt-2">You should:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Review zoning first</li>
+          <li>Ask about their experience in your city</li>
+          <li>Confirm IRC and permitting knowledge</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    q: "How much does an ADU cost?",
+    a: (
+      <>
+        <p>There is no set price. On the low side, expect around $10K for site prep (connecting utilities and a foundation) and $60K for the ADU — a minimum of about $70K total. A modular home on wheels may be the least expensive option but is prohibited in many areas. Verify with your local ADU zoning regulations.</p>
+        <p className="mt-2">Costs depend on:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Size, layout, materials, finishes</li>
+          <li>Finish level — builder grade vs. luxury</li>
+          <li>Site prep and utilities</li>
+          <li>Access and delivery</li>
+          <li>Location</li>
+        </ul>
+        <p className="mt-2">General ranges:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Structure only: ~$25,000 and up</li>
+          <li>Site prep / utilities: $10,000–$100,000+</li>
+        </ul>
+        <p className="mt-2">Site work is often the largest surprise expense. ADUAtlas solves that with a Paid Access package for $79.99 that includes a GIS look at your property with dimensions, a pre-filled pre-site estimate worksheet, a National Property ADU Ready Score, and a utility contact who visits your home and marks utility access points (water, gas, and sewer are usually underground).</p>
+      </>
+    ),
+  },
+  {
+    q: "What costs are not included in advertised ADU prices?",
+    a: (
+      <>
+        <p>Usually excluded:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Utility connections — gas, sewer, water, and electric</li>
+          <li>Trenching and excavation for utilities</li>
+          <li>Foundations</li>
+          <li>Grading and drainage</li>
+          <li>Engineering and surveys</li>
+          <li>Permits and fees</li>
+          <li>Crane or access costs</li>
+        </ul>
+        <p className="mt-2">Some ADUs are sold with a finished interior including appliances and some are not. Be sure to ask — builders differ on interior and exterior options (roof type, siding, insulation, windows). An advertised low price may include the basics only.</p>
+        <p className="mt-2">Some builders can do everything; some cannot. ADUAtlas helps you understand what "everything" means so when you get a price estimate you will understand the cost. A builder that does everything will cost more, and if they cannot complete something they may suggest a subcontractor. Find an experienced builder you like — typically they will be upfront about total costs.</p>
+        <p className="mt-2">Cities and contractors treat payment differently, but most ask for 1/3 up front, 1/3 at midpoint, and 1/3 upon completion. Some cities mandate construction payment timelines and some do not. Be sure to ask.</p>
+      </>
+    ),
+  },
+  {
+    q: "Do I need a survey?",
+    a: (
+      <>
+        <p>Usually yes, but it depends on the city.</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Typical cost: $500–$2,000</li>
+          <li>Timeframe: 2–3 weeks</li>
+        </ul>
+        <p className="mt-2">ADUAtlas provides a GIS survey that includes your property dimensions with our $79.99 access package, plus three pre-filled estimating tools that can save you a lot of money. Most cities require a certified survey for permitting and to create a site plan.</p>
+      </>
+    ),
+  },
+  {
+    q: "What are common mistakes homeowners make building an ADU / tiny house?",
+    a: (
+      <>
+        <p>Buying or designing before confirming:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Skipping zoning limits — setbacks, size, height, parking, placement. Errors here can cost money, cause delays, trigger fines, or result in permit rejection.</li>
+          <li>Underestimating utility connection costs, permits, city inspection costs, and timelines</li>
+          <li>Not identifying site constraints</li>
+        </ul>
+        <p className="mt-2">Early planning prevents redesigns and delays. The carpenter's rule: measure twice, cut once.</p>
+        <p className="mt-2">ADUAtlas Paid Access for $79.99 is an inexpensive tool to help you identify common — and not-so-common — potential errors, with realistic approximate estimates and a clear understanding of what to expect. For example, in areas that freeze, water and sewer lines are typically 3–4 ft underground. If your water line is 20 ft from your ADU, connecting it could cost ~$100 per linear foot to excavate (~$2,000 total), plus ~$1,000 for a plumber to install.</p>
+        <p className="mt-2">Paid Access also prepares you before you speak with a builder and the city. They will ask about ADU size, budget, timeline, ADU type, and a few other details. ADUAtlas guides you through the process.</p>
+      </>
+    ),
+  },
+  {
+    q: "Will my property taxes increase?",
+    a: (
+      <p>Often, yes — sometimes with or without improvements. Tax treatment varies by location. Consult your local assessor or tax professional.</p>
+    ),
+  },
+  {
+    q: "Are grants available?",
+    a: (
+      <>
+        <p>Sometimes. Availability depends on:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>State and local programs</li>
+          <li>Funding cycles</li>
+          <li>Eligibility requirements</li>
+        </ul>
+        <p className="mt-2">Check early. States and cities with incentives are often those facing a housing shortage, such as California, Washington, and Colorado.</p>
+      </>
+    ),
+  },
+  {
+    q: "How accurate is zoning information on ADUAtlas?",
+    a: (
+      <>
+        <p>Regulations change. ADUAtlas:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Updates information regularly</li>
+          <li>Provides direct municipal links</li>
+        </ul>
+        <p className="mt-2">Always confirm with your city before final design or construction.</p>
+      </>
+    ),
+  },
+  {
+    q: "What does \"IRC-compliant\" mean?",
+    a: (
+      <>
+        <p>The structure meets the International Residential Code for:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Structural safety</li>
+          <li>Electrical and plumbing</li>
+          <li>Energy efficiency</li>
+          <li>Life safety</li>
+        </ul>
+        <p className="mt-2">Ask your builder how they meet or exceed those expectations. Most states require IRC compliance for ADUs; some do not.</p>
+      </>
+    ),
+  },
+  {
+    q: "How does ADUAtlas match me with builders?",
+    a: (
+      <>
+        <p>You can search builders on your own by ADU type. Paid Access helps you find builders that operate in your state. Matches are based on:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>City and ZIP code</li>
+          <li>ADU types</li>
+          <li>Service area</li>
+        </ul>
+        <p className="mt-2">Builders operate locally, regionally, or nationally.</p>
+      </>
+    ),
+  },
+  {
+    q: "What do I get with paid access?",
+    a: (
+      <>
+        <p>Paid access includes:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>City-specific zoning rules</li>
+          <li>Pre-filled site-prep worksheet</li>
+          <li>National ADU Property Readiness Score</li>
+          <li>Satellite lot view with dimensions</li>
+          <li>Utility contact to locate and mark access points</li>
+          <li>Local and national builder/supplier contacts</li>
+        </ul>
+        <p className="mt-2">No subscriptions required. Annual access is $79.99 — a one-time fee.</p>
+      </>
+    ),
+  },
+  {
+    q: "Does ADUAtlas guarantee approvals or pricing?",
+    a: (
+      <p>No. ADUAtlas provides planning guidance only. Permits, pricing, and timelines are determined by your local jurisdiction and the professionals you hire.</p>
+    ),
+  },
+  {
+    q: "What does ADUAtlas not do?",
+    a: (
+      <>
+        <p>ADUAtlas does not:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Sell ADUs</li>
+          <li>Provide construction quotes</li>
+          <li>File permits</li>
+          <li>Act as a contractor or broker</li>
+          <li>Guarantee approvals or costs</li>
+        </ul>
+        <p className="mt-2">It is a planning and education platform.</p>
+      </>
+    ),
+  },
+  {
+    q: "When should I talk to a builder?",
+    a: (
+      <>
+        <p>After you understand:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Local zoning rules</li>
+          <li>Site constraints</li>
+          <li>Approximate budget</li>
+          <li>Desired ADU type and size</li>
+        </ul>
+        <p className="mt-2">Prepared homeowners receive more accurate pricing.</p>
+      </>
+    ),
+  },
+  {
+    q: "What will builders ask first?",
+    a: (
+      <>
+        <p>Be ready with:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>City and ZIP code</li>
+          <li>Budget range</li>
+          <li>ADU type and size</li>
+          <li>Lot dimensions</li>
+          <li>Placement preference</li>
+          <li>Known utility or access issues</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    q: "How does ADUAtlas help prevent buying the wrong ADU?",
+    a: (
+      <>
+        <p>By guiding you through:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>State vs. city authority</li>
+          <li>Zoning constraints</li>
+          <li>Site and utility planning</li>
+          <li>Builder expectations</li>
+        </ul>
+        <p className="mt-2">The goal is to prevent purchasing a structure that cannot be permitted or installed.</p>
+      </>
+    ),
+  },
+  {
+    q: "What is a National ADU Ready Score?",
+    a: (
+      <>
+        <p>It provides homeowners, real estate agents, and home buyers with a score that determines whether an ADU can be built on a property — and which elements make it easy or impossible. A traditional survey (required to answer these questions) typically costs $500 or more.</p>
+        <p className="mt-2">ADUAtlas provides a geospatial survey with the information needed to determine feasibility, plus a cost-free contact who comes to your home to mark the location of your utility access.</p>
+        <p className="mt-2">You also get three worksheets:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>A pre-filled pre-site cost estimate spreadsheet</li>
+          <li>A questionnaire that determines the National ADU Ready Score</li>
+          <li>A pre-filled total budget with estimated timelines</li>
+        </ul>
+        <p className="mt-2">Based on your local ADU regulations, we help you determine what you can build and a realistic approximate estimate of how much it will cost.</p>
+        <p className="mt-2">Your city and builder will request the following to provide accurate estimates and timelines — Paid Access helps you gather it up front: city, ZIP, address, budget range, timeline, purpose of the dwelling, ADU type and size, lot dimensions, primary structure dimensions and height, placement preference (or plans to request an easement), and location of utility access.</p>
+      </>
+    ),
+  },
 ];
 
 const FAQ = () => {
