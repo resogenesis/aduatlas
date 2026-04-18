@@ -40,10 +40,13 @@ const ChooseAtlas = () => {
             <div className="w-full flex flex-col gap-8 sm:gap-12">
                 {/* top content */}
                 <div className="space-y-4">
-                    <CommonSectionTitle text="Choose ADUAtlas Matters" />
+                    <CommonSectionTitle text="Save Time and Money — Learn Before You Build with ADUAtlas" />
 
                     <p className="text-secondary text-base sm:text-lg">
-                        ADUAtlas is a national marketplace that helps homeowners understand local ADU rules and matches them with builders and suppliers. Whether you're just starting or ready to build, ADUAtlas walks you through every step of the ADU process designed for homeowners. Real-time access to local ADU regulations, over 25 ADU types and structures, and our ADU Readiness score. If you are buying, selling, or building an ADU.
+                        ADUAtlas is a national marketplace that helps homeowners understand local ADU regulations and connect with qualified builders and suppliers. Whether you are just starting or ready to build, ADUAtlas guides you through every step of the ADU planning and construction process.
+                    </p>
+                    <p className="text-secondary text-base sm:text-lg">
+                        Access real-time city and state ADU rules, explore 25+ ADU types and structures, and evaluate your project with the ADU Readiness Score. Designed for homeowners, ADUAtlas provides the tools and insights needed whether you are buying, building, or selling an ADU.
                     </p>
                 </div>
 
