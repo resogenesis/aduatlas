@@ -17,15 +17,15 @@ const AduCTA = () => {
                             Any builder or contractor needs the following information from you to provide an accurate scope of work and realistic estimates. Here are the questions:
                         </p>
 
-                        <ul className="text-sm text-gray-200 mb-6 sm:mb-8 space-y-1.5">
-                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Location with ZIP code</span></li>
-                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Square footage and size of the lot and the existing structure</span></li>
-                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Type, size, and square footage of the ADU</span></li>
-                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Purpose</span></li>
-                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Budget — pre-site and structure</span></li>
-                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Timeline</span></li>
-                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Access</span></li>
-                        </ul>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-gray-200 mb-6 sm:mb-8">
+                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Location with ZIP code</span></div>
+                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Purpose</span></div>
+                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Square footage and size of the lot and the existing structure</span></div>
+                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Budget — pre-site and structure</span></div>
+                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Type, size, and square footage of the ADU</span></div>
+                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Timeline</span></div>
+                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Access</span></div>
+                        </div>
 
                         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
                             <Link to="/how-to-adu" className="border border-white cursor-pointer px-6 py-3 rounded-md bg-white text-[#0F3D33] font-medium hover:shadow-md hover:bg-transparent hover:text-white transition text-center w-full sm:w-auto">
