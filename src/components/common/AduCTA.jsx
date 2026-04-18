@@ -10,12 +10,22 @@ const AduCTA = () => {
                     <div className="text-white px-6 py-10 sm:px-10 sm:py-12 lg:pl-18 lg:py-0 lg:max-w-[55%]">
 
                         <h2 className="text-2xl sm:text-3xl font-semibold leading-snug mb-4 sm:mb-5">
-                            Whether you are ready to build or starting out ADU Atlas walks you thought the process.
+                            Whether you are ready to build or starting out, ADUAtlas walks you through the process.
                         </h2>
 
-                        <p className="text-sm text-gray-200 mb-6 sm:mb-8">
-                            Any builder contractor needs the following information from you to provide you with an accurate scope of work and realistic estimates.
+                        <p className="text-sm text-gray-200 mb-4">
+                            Any builder or contractor needs the following information from you to provide an accurate scope of work and realistic estimates. Here are the questions:
                         </p>
+
+                        <ul className="text-sm text-gray-200 mb-6 sm:mb-8 space-y-1.5">
+                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Location with ZIP code</span></li>
+                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Square footage and size of the lot and the existing structure</span></li>
+                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Type, size, and square footage of the ADU</span></li>
+                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Purpose</span></li>
+                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Budget — pre-site and structure</span></li>
+                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Timeline</span></li>
+                            <li className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Access</span></li>
+                        </ul>
 
                         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
                             <Link to="/how-to-adu" className="border border-white cursor-pointer px-6 py-3 rounded-md bg-white text-[#0F3D33] font-medium hover:shadow-md hover:bg-transparent hover:text-white transition text-center w-full sm:w-auto">
