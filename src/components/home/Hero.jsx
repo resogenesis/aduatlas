@@ -17,7 +17,7 @@ const Hero = () => {
 
                 <div className="max-w-2xl text-white/90 drop-shadow-md space-y-3 text-base sm:text-lg md:text-xl">
                     <p>
-                        ADUAtlas is a national marketplace and educational platform that helps homeowners understand how to build an ADU (Accessory Dwelling Unit or Tiny Home). Access local zoning regulations by city, navigate the building process with step-by-step tools, explore a wide range of ADU options, and connect with local and national ADU builders and suppliers.
+                        ADUAtlas is a national marketplace and educational platform that helps homeowners understand how to build an ADU (Accessory Dwelling Unit or Tiny Home). ADUAtlas provides local zoning regulations by city, step-by-step tools to navigate the building process, a wide range of ADU options, and connects users with local and national ADU builders and suppliers.
                     </p>
                     <p>
                         Explore <span className="font-bold text-white">25+ ADU types</span>, learn what you can legally build on your property, and prepare with the tools needed to move forward with confidence.
