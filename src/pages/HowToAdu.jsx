@@ -80,27 +80,27 @@ const steps = [
   {
     n: "6",
     title: "Contact Multiple ADU Builders (Minimum of 3)",
-    desc: "Request estimates for size, pricing, timelines, and scope of work. Compare experience, build methods, and familiarity with local regulations.",
+    desc: "Request estimates for size, pricing, timelines, and scope of work. Compare experience, build methods, and familiarity with local regulations. Typical turnaround: 6–12 weeks.",
   },
   {
     n: "7",
     title: "Verify HOA & Local Restrictions",
-    desc: "Confirm HOA rules, deed restrictions, and city zoning requirements (setbacks, access, parking, and placement).",
+    desc: "Confirm HOA rules, deed restrictions, and city zoning requirements (setbacks, access, parking, and placement). Typical turnaround: 1–2 weeks.",
   },
   {
     n: "8",
     title: "Finalize Budget & Site Plan",
-    desc: "Refine your total project cost and align with your builder on scope, layout, and site plan based on survey results and regulations.",
+    desc: "Refine your total project cost and align with your builder on scope, layout, and site plan based on survey results and regulations. Typical turnaround: 4 weeks.",
   },
   {
     n: "9",
     title: "Submit Plans & Apply for Permits",
-    desc: "Work with your builder or city to submit plans and secure permits for site prep, utilities, and construction.",
+    desc: "Work with your builder or city to submit plans and secure permits for site prep, utilities, and construction. Typical turnaround: 1–2 months.",
   },
   {
     n: "10",
     title: "Build, Inspect, and Obtain Certificate of Occupancy",
-    desc: "Construction begins. Inspections occur at required stages (varies by city). Upon completion, pass final inspection and obtain a Certificate of Occupancy.",
+    desc: "Construction begins. Inspections occur at required stages (varies by city). Upon completion, pass final inspection and obtain a Certificate of Occupancy. Typical turnaround: 4–6 months.",
   },
 ];
 
