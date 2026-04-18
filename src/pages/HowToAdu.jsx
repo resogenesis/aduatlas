@@ -74,8 +74,8 @@ const steps = [
   },
   {
     n: "5",
-    title: "Order a Professional Property Survey (~$500)",
-    desc: "Confirm lot dimensions, elevations, and boundaries. Use this to finalize site prep costs (grading, excavation, foundation, utility hookups). Typical turnaround: 2–3 weeks.",
+    title: "Order a Professional Property Survey",
+    desc: "Confirm lot dimensions, elevations, and boundaries. Use this to finalize site prep costs (grading, excavation, foundation, utility hookups). Typical turnaround is about 2–3 weeks and average cost is approximately $500.",
   },
   {
     n: "6",
