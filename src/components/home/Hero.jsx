@@ -22,7 +22,7 @@ const Hero = () => {
                     <p>
                         Explore <span className="font-bold text-white">25+ ADU types</span>, learn what you can legally build on your property, and prepare with the tools needed to move forward with confidence.
                     </p>
-                    <p>
+                    <p className="font-bold text-white text-lg sm:text-xl md:text-2xl">
                         Learn before you build to avoid costly mistakes — start your ADU journey here.
                     </p>
                 </div>
