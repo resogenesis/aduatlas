@@ -185,7 +185,7 @@ const faqs = [
     q: "What does \"IRC-compliant\" mean?",
     a: (
       <>
-        <p>The structure meets the International Residential Code for:</p>
+        <p>This is a standard building code many states mandate at a minimum. The structure meets the International Residential Code for:</p>
         <ul className="list-disc pl-5 mt-2 space-y-1">
           <li>Structural safety</li>
           <li>Electrical and plumbing</li>
@@ -214,16 +214,18 @@ const faqs = [
     q: "What do I get with paid access?",
     a: (
       <>
-        <p>Paid access includes:</p>
+        <p>Paid Access includes a feasibility study with:</p>
         <ul className="list-disc pl-5 mt-2 space-y-1">
-          <li>City-specific zoning rules</li>
-          <li>Pre-filled site-prep worksheet</li>
+          <li>Pre-filled pre-site-prep worksheet</li>
           <li>National ADU Property Readiness Score</li>
-          <li>Satellite lot view with dimensions</li>
+          <li>GIS satellite property view with dimensions</li>
           <li>Utility contact to locate and mark access points</li>
-          <li>Local and national builder/supplier contacts</li>
+          <li>Local and national builder/supplier contacts by state</li>
         </ul>
-        <p className="mt-2">No subscriptions required. Annual access is $79.99 — a one-time fee.</p>
+        <p className="mt-2">No subscriptions required. Annual Access is $79.99 — a one-time fee.</p>
+        <p className="mt-2">The ADUAtlas Feasibility Study isn't a commitment to build — it's how you find out if an ADU is actually possible on your property before you spend time or money.</p>
+        <p className="mt-2">With a completed study, you'll know what your lot can support, what it could cost, and whether it's worth pursuing — so you can evaluate your current home or a property you're considering, whether it's for aging in place, housing a parent, or creating rental income, without committing to a plan.</p>
+        <p className="mt-2">For $79.99, get a clear answer now — before you invest more time or head in the wrong direction.</p>
       </>
     ),
   },
@@ -245,38 +247,44 @@ const faqs = [
           <li>Act as a contractor or broker</li>
           <li>Guarantee approvals or costs</li>
         </ul>
-        <p className="mt-2">It is a planning and education platform.</p>
+        <p className="mt-2">It is a planning and education platform at this point.</p>
       </>
     ),
   },
   {
-    q: "When should I talk to a builder?",
+    q: "Why do I need the ADUAtlas feasibility study before I speak with a builder?",
     a: (
       <>
-        <p>After you understand:</p>
+        <p>Local zoning rules and site conditions decide what's even possible. Before talking to a builder, you need to understand:</p>
         <ul className="list-disc pl-5 mt-2 space-y-1">
-          <li>Local zoning rules</li>
-          <li>Site constraints</li>
-          <li>Approximate budget</li>
-          <li>Desired ADU type and size</li>
+          <li>Local zoning rules — including allowable ADU sq ft as a percentage of the primary residence</li>
+          <li>Setbacks (typically on three sides) and required distance from the primary residence</li>
+          <li>Desired ADU type and custom size</li>
+          <li>Lot size, lot dimensions, and the location of the primary residence</li>
         </ul>
-        <p className="mt-2">Prepared homeowners receive more accurate pricing.</p>
+        <p className="mt-2"><strong>Scenario:</strong> After you spend $500 on an official survey, you learn your lot is 30' × 120' = 3,600 sq ft, with a primary house of 24' × 44' = 1,056 sq ft. Apply a local rule that the ADU must be 50% or less of the primary home and a minimum of 500 sq ft, with setbacks of 3' to the alley, 3' on each side, and 10' from the main house.</p>
+        <p className="mt-2">In this case, a 24' × 22' = 528 sq ft ADU is 50% of the primary home and is legal. An additional 16" of footprint is technically buildable, but the 50% rule caps you at 528 sq ft.</p>
+        <p className="mt-2">Now add the costs: utility hook-up and site prep with excavation ≈ $25K, the ADU ≈ $100K, plus permits, builder fees, and delivery ≈ another $25K. That's $150K for a 528 sq ft ADU. Does it still make sense?</p>
+        <p className="mt-2">Use the $79 ADUAtlas feasibility study <em>before</em> ordering an official survey or speaking with a builder. Our pre-filled pre-site and ADU feasibility worksheets give you these details — you add your specific dimensions from the GIS survey and the regulations from your ZIP code.</p>
       </>
     ),
   },
   {
-    q: "What will builders ask first?",
+    q: "What information will builders need?",
     a: (
       <>
-        <p>Be ready with:</p>
+        <p>The first question: is it legal to build what you want? The ADUAtlas feasibility study answers that. Most builders cannot provide accurate pricing until you know the exact details — though some may give a price range based on what they offer.</p>
+        <p className="mt-2">A builder will need to know:</p>
         <ul className="list-disc pl-5 mt-2 space-y-1">
           <li>City and ZIP code</li>
-          <li>Budget range</li>
-          <li>ADU type and size</li>
+          <li>Total budget — pre-site and structure</li>
+          <li>ADU type, size, and height</li>
           <li>Lot dimensions</li>
           <li>Placement preference</li>
+          <li>Site access</li>
           <li>Known utility or access issues</li>
         </ul>
+        <p className="mt-2">Prepared homeowners receive accurate pricing.</p>
       </>
     ),
   },
@@ -299,16 +307,16 @@ const faqs = [
     q: "What is a National ADU Ready Score?",
     a: (
       <>
-        <p>It provides homeowners, real estate agents, and home buyers with a score that determines whether an ADU can be built on a property — and which elements make it easy or impossible. A traditional survey (required to answer these questions) typically costs $500 or more.</p>
+        <p>It provides homeowners, real estate agents, and home buyers with a score that determines whether an ADU can be built on a property — and which elements make it easy or impossible. Typically, you'd need an official survey including property dimensions and other elements, which costs a minimum of $500.</p>
+        <p className="mt-2"><em>Why spend $500 before you even know if you can build?</em></p>
         <p className="mt-2">ADUAtlas provides a geospatial survey with the information needed to determine feasibility, plus a cost-free contact who comes to your home to mark the location of your utility access.</p>
-        <p className="mt-2">You also get three worksheets:</p>
+        <p className="mt-2">Three pre-filled worksheets help determine:</p>
         <ul className="list-disc pl-5 mt-2 space-y-1">
           <li>A pre-filled pre-site cost estimate spreadsheet</li>
           <li>A questionnaire that determines the National ADU Ready Score</li>
           <li>A pre-filled total budget with estimated timelines</li>
         </ul>
-        <p className="mt-2">Based on your local ADU regulations, we help you determine what you can build and a realistic approximate estimate of how much it will cost.</p>
-        <p className="mt-2">Your city and builder will request the following to provide accurate estimates and timelines — Paid Access helps you gather it up front: city, ZIP, address, budget range, timeline, purpose of the dwelling, ADU type and size, lot dimensions, primary structure dimensions and height, placement preference (or plans to request an easement), and location of utility access.</p>
+        <p className="mt-2">Based on your local ADU regulations, the ADUAtlas feasibility study helps you determine what you can build and a realistic approximate estimate of how much it will cost. After you complete the study, you'll be prepared to walk into any conversation with a builder or your city.</p>
       </>
     ),
   },
