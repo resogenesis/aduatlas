@@ -38,18 +38,10 @@ const cards = [
 const SaveTimeMoney = () => {
   return (
     <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16">
-      <div className="max-w-3xl mx-auto text-center mb-8">
+      <div className="max-w-5xl mx-auto text-center mb-10">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-4">
           Save Time and Money with ADUAtlas
         </h2>
-        <div className="space-y-3 text-secondary text-sm sm:text-base leading-relaxed mb-6">
-          <p>
-            ADUAtlas is a national marketplace that helps homeowners understand local ADU regulations and connect with qualified builders and suppliers. Whether you are just starting or ready to build, ADUAtlas guides you through every step of the ADU planning and construction process.
-          </p>
-          <p>
-            Access real-time city and state ADU rules, explore 25+ ADU types and structures, and evaluate your project with the ADU Readiness Score — whether you are buying, building, or selling an ADU.
-          </p>
-        </div>
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm sm:text-base text-secondary">
           {steps.map((s, i) => (
             <span key={s.label} className="flex items-center gap-2">
