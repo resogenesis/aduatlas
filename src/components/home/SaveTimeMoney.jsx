@@ -1,14 +1,5 @@
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiCheck } from "react-icons/fi";
-
-const prepares = [
-  "ADU education and planning resources",
-  "Local zoning and regulatory guidance",
-  "Access to pre-filled budget and planning worksheets",
-  "National ADU Readiness Score",
-  "GIS feasibility study and site plan tools",
-  "Match with builders familiar with your regulations",
-];
+import { FiArrowRight } from "react-icons/fi";
 
 const cards = [
   {
@@ -60,24 +51,8 @@ const SaveTimeMoney = () => {
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-3">
           Save Time and Money with ADUAtlas
         </h2>
-        <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-sm sm:text-base mb-5">
+        <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-sm sm:text-base">
           EDUCATE • EXPLORE • PLAN • BUILD
-        </p>
-        <p className="text-primary font-semibold text-sm sm:text-base mb-4">
-          ADUAtlas prepares homeowners with:
-        </p>
-        <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-left max-w-2xl mx-auto mb-5">
-          {prepares.map((item) => (
-            <li key={item} className="flex items-start gap-2 text-secondary text-sm sm:text-base">
-              <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-[#2F5D50] text-white flex items-center justify-center text-xs">
-                <FiCheck />
-              </span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-        <p className="text-secondary text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-          These tools help homeowners make informed decisions before buying, selling, or building an ADU — saving time, reducing costly mistakes, and improving overall project readiness.
         </p>
       </div>
 

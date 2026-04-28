@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
+import { FiCheck } from "react-icons/fi";
 
 import aduImage1 from "../../assets/home/choose_img1.png"
 import aduImage2 from "../../assets/home/choose_img2.png"
 import aduImage3 from "../../assets/home/choose_img3.png"
+
+const prepares = [
+    "ADU education and planning resources",
+    "Local zoning and regulatory guidance",
+    "Access to pre-filled budget and planning worksheets",
+    "National ADU Readiness Score",
+    "GIS feasibility study and site plan tools",
+    "Match with builders familiar with your regulations",
+];
 
 const ChooseAtlas = () => {
     return (
@@ -10,6 +20,25 @@ const ChooseAtlas = () => {
 
             {/* LEFT SIDE */}
             <div className="w-full flex flex-col gap-6">
+                <h3 className="text-primary font-semibold text-lg sm:text-xl">
+                    ADUAtlas prepares homeowners with:
+                </h3>
+
+                <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
+                    {prepares.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-secondary text-sm sm:text-base">
+                            <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-[#2F5D50] text-white flex items-center justify-center text-xs">
+                                <FiCheck />
+                            </span>
+                            <span>{item}</span>
+                        </li>
+                    ))}
+                </ul>
+
+                <p className="text-secondary text-sm sm:text-base leading-relaxed">
+                    These tools help homeowners make informed decisions before buying, selling, or building an ADU — saving time, reducing costly mistakes, and improving overall project readiness.
+                </p>
+
                 <Link
                     to="/about"
                     className="w-fit cursor-pointer px-6 py-3 bg-[#2F5D50] rounded-md border border-[#2F5D50] text-white font-semibold text-base hover:bg-transparent hover:text-black hover:shadow-md transition-all duration-300"
