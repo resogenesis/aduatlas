@@ -36,7 +36,7 @@ const ChooseAtlas = () => {
                 </ul>
 
                 <p className="text-secondary text-sm sm:text-base leading-relaxed">
-                    These tools help homeowners make informed decisions before buying, selling, or building an ADU — saving time, reducing costly mistakes, and improving overall project readiness.
+                    These tools help homeowners make informed decisions before buying, selling, or building an ADU — saving time, reducing costly mistakes, and preparing the homeowner to speak with a builder. Whether you're just beginning your research or ready to build, ADUAtlas provides step-by-step guidance to help you move forward with confidence.
                 </p>
 
                 <Link
