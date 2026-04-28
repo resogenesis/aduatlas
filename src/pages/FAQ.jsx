@@ -1,4 +1,5 @@
 import Accordion from "../components/common/Accordion";
+import lotPlanImg from "../assets/faq/lot-plan-scenario.png";
 
 const faqs = [
   {
@@ -266,6 +267,10 @@ const faqs = [
         <p className="mt-2">In this case, a 24' × 22' = 528 sq ft ADU is 50% of the primary home and is legal. An additional 16" of footprint is technically buildable, but the 50% rule caps you at 528 sq ft.</p>
         <p className="mt-2">Now add the costs: utility hook-up and site prep with excavation ≈ $25K, the ADU ≈ $100K, plus permits, builder fees, and delivery ≈ another $25K. That's $150K for a 528 sq ft ADU. Does it still make sense?</p>
         <p className="mt-2">Use the $79 ADUAtlas feasibility study <em>before</em> ordering an official survey or speaking with a builder. Our pre-filled pre-site and ADU feasibility worksheets give you these details — you add your specific dimensions from the GIS survey and the regulations from your ZIP code.</p>
+        <figure className="mt-4">
+          <img src={lotPlanImg} alt="Sample 30' x 120' lot plan showing primary home, ADU placement, setbacks, and utility points" className="w-full rounded-lg border border-gray-200" />
+          <figcaption className="mt-2 text-xs text-gray-300 italic">Sample lot plan: 30' × 120' lot with a 24' × 44' primary home and a 24' × 22' (528 sq ft) ADU.</figcaption>
+        </figure>
       </>
     ),
   },
