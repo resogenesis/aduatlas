@@ -133,7 +133,7 @@ const HowToAdu = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <h3 className="text-white text-xl sm:text-2xl font-semibold text-center mb-2">Start Your ADU Journey with ADUAtlas</h3>
           <p className="text-white/80 text-sm text-center mb-8 max-w-3xl mx-auto">
-            Our 10-step guide gives you a clear path—what you can legally build, expected timelines, cost ranges, ADU types, and key FAQs. Matched by ZIP code, you'll connect with both local and national builders and suppliers. Whether you're just starting or ready to build, ADUAtlas keeps you informed and prepared.
+            Our 10-step guide gives you a clear path — what you can legally build, expected timelines, cost estimates, ADU types, and key FAQs. Matched by ZIP code, you'll connect with both local and national builders and suppliers. Whether you're just starting or ready to build, ADUAtlas keeps you informed and prepared. Follow these steps to be prepared to answer the questions both your city and builder will need to know.
           </p>
           <div className="grid md:grid-cols-3 gap-6">
             {categories.map((cat) => {

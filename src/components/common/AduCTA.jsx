@@ -19,12 +19,12 @@ const AduCTA = () => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-gray-200 mb-6 sm:mb-8">
                             <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Location (ZIP code)</span></div>
-                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Purpose of the ADU (rental, guest house, office, etc.)</span></div>
+                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Purpose / how will you use the ADU</span></div>
                             <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Lot size &amp; existing structure (square footage)</span></div>
                             <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Budget (site prep + structure)</span></div>
                             <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>ADU type, size, and square footage</span></div>
                             <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Timeline</span></div>
-                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Access to the property (entry points, constraints, etc.)</span></div>
+                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Access / to the space</span></div>
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
