@@ -51,8 +51,11 @@ const SaveTimeMoney = () => {
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-3">
           Save Time and Money with ADUAtlas
         </h2>
-        <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-sm sm:text-base">
+        <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-sm sm:text-base mb-5">
           EDUCATE • EXPLORE • PLAN • BUILD
+        </p>
+        <p className="text-secondary text-sm sm:text-base leading-relaxed">
+          These tools help homeowners make informed decisions before buying, selling, or building an ADU — saving time, reducing costly mistakes, and preparing the homeowner to speak with a builder. Whether you're just beginning your research or ready to build, ADUAtlas provides step-by-step guidance to help you move forward with confidence.
         </p>
       </div>
 
