@@ -44,11 +44,8 @@ const SaveTimeMoney = () => {
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-3">
           Save Time and Money with ADUAtlas
         </h2>
-        <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-sm sm:text-base mb-5">
+        <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-sm sm:text-base mb-6">
           EDUCATE • EXPLORE • PLAN • BUILD
-        </p>
-        <p className="text-secondary text-sm sm:text-base leading-relaxed mb-6">
-          ADUAtlas — a national platform designed to help homeowners across the country understand every stage of the ADU building process. Whether you're just beginning your research or ready to move forward with construction, ADUAtlas provides step-by-step guidance to help you build with confidence and be fully prepared to speak with builders.
         </p>
         <p className="text-primary font-semibold text-sm sm:text-base mb-4">
           ADUAtlas prepares homeowners with:
