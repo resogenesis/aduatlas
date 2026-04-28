@@ -3,7 +3,6 @@ import { IoDocumentTextOutline, IoTrendingUp } from "react-icons/io5";
 import { RiVerifiedBadgeLine } from "react-icons/ri";
 
 // Note: Local import
-import CommonSectionTitle from "../common/CommonSectionTitle";
 import aduImage1 from "../../assets/home/choose_img1.png"
 import aduImage2 from "../../assets/home/choose_img2.png"
 import aduImage3 from "../../assets/home/choose_img3.png"
@@ -40,8 +39,6 @@ const ChooseAtlas = () => {
             <div className="w-full flex flex-col gap-8 sm:gap-12">
                 {/* top content */}
                 <div className="space-y-4">
-                    <CommonSectionTitle text="Save Time and Money — Learn Before You Build with ADUAtlas" />
-
                     <p className="text-secondary text-base sm:text-lg">
                         ADUAtlas is a national marketplace that helps homeowners understand local ADU regulations and connect with qualified builders and suppliers. Whether you are just starting or ready to build, ADUAtlas guides you through every step of the ADU planning and construction process.
                     </p>
