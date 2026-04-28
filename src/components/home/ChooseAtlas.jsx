@@ -37,16 +37,6 @@ const ChooseAtlas = () => {
 
             {/* LEFT SIDE */}
             <div className="w-full flex flex-col gap-8 sm:gap-12">
-                {/* top content */}
-                <div className="space-y-4">
-                    <p className="text-secondary text-base sm:text-lg">
-                        ADUAtlas is a national marketplace that helps homeowners understand local ADU regulations and connect with qualified builders and suppliers. Whether you are just starting or ready to build, ADUAtlas guides you through every step of the ADU planning and construction process.
-                    </p>
-                    <p className="text-secondary text-base sm:text-lg">
-                        Access real-time city and state ADU rules, explore 25+ ADU types and structures, and evaluate your project with the ADU Readiness Score. Designed for homeowners, ADUAtlas provides the tools and insights needed whether you are buying, building, or selling an ADU.
-                    </p>
-                </div>
-
                 {/* FEATURE CARDS */}
                 <div className="grid sm:grid-cols-2 gap-6">
                     {features?.map((item, idx) => {
