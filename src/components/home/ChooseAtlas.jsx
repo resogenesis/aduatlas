@@ -1,65 +1,21 @@
-import { FiSearch } from "react-icons/fi";
-import { IoDocumentTextOutline, IoTrendingUp } from "react-icons/io5";
-import { RiVerifiedBadgeLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
-// Note: Local import
 import aduImage1 from "../../assets/home/choose_img1.png"
 import aduImage2 from "../../assets/home/choose_img2.png"
 import aduImage3 from "../../assets/home/choose_img3.png"
-
-// Note: dummy data
-const features = [
-    {
-        icon: RiVerifiedBadgeLine,
-        title: "Comprehensive Rules Database",
-        desc: "Access up-to-date ADU regulations by state, city, and ZIP code.",
-    },
-    {
-        icon: FiSearch,
-        title: "ADU Type Education",
-        desc: "Explore 25+ ADU types and structures.",
-    },
-    {
-        icon: IoDocumentTextOutline,
-        title: "Planning Tools",
-        desc: "Use our pre-populated pre-site estimate worksheets and feasibility study.",
-    },
-    {
-        icon: IoTrendingUp,
-        title: "Match with Pros",
-        desc: "Get matched with qualified professionals familiar with your city zoning.",
-    },
-];
 
 const ChooseAtlas = () => {
     return (
         <section className="container mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center py-12 sm:py-16 lg:py-25">
 
             {/* LEFT SIDE */}
-            <div className="w-full flex flex-col gap-8 sm:gap-12">
-                {/* FEATURE CARDS */}
-                <div className="grid sm:grid-cols-2 gap-6">
-                    {features?.map((item, idx) => {
-                        const Icon = item.icon;
-                        return (
-                            <div
-                                key={idx}
-                                className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition"
-                            >
-                                <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-green-900 text-white mb-4">
-                                    <Icon size={20} />
-                                </div>
-
-                                <h4 className="font-bold mb-2 text-primary text-base">{item?.title || "N/F"}</h4>
-                                <p className="text-sm text-secondary">{item?.desc || "N/F"}</p>
-                            </div>
-                        );
-                    })}
-                </div>
-
-                <button className="w-fit cursor-pointer px-6 py-3 bg-[#2F5D50] rounded-md border border-[#2F5D50] text-white font-semibold text-base hover:bg-transparent hover:text-black hover:shadow-md transition-all duration-300">
+            <div className="w-full flex flex-col gap-6">
+                <Link
+                    to="/about"
+                    className="w-fit cursor-pointer px-6 py-3 bg-[#2F5D50] rounded-md border border-[#2F5D50] text-white font-semibold text-base hover:bg-transparent hover:text-black hover:shadow-md transition-all duration-300"
+                >
                     About Us
-                </button>
+                </Link>
             </div>
 
             {/* RIGHT SIDE IMAGE COLLAGE */}

@@ -12,28 +12,44 @@ const prepares = [
 
 const cards = [
   {
-    title: "How to ADU — 10 Steps",
-    desc: "A clear path from idea to certificate of occupancy.",
+    title: "How to ADU — 10 Step Guide",
+    desc: "A clear path from idea to a feasibility study and site plan.",
     to: "/how-to-adu",
-    cta: "Next: How to ADU",
   },
   {
-    title: "Explore & Compare 25+ ADU Types",
-    desc: "Prefab, modular, container, casita, garage conversion, and more.",
-    to: "/adu-types",
-    cta: "Browse ADU Types",
-  },
-  {
-    title: "Review the ADU FAQ",
-    desc: "Costs, permits, taxes, utility hookups, and common mistakes.",
+    title: "FAQ",
+    desc: "Comprehensive answers to virtually every ADU-related question — from zoning and costs to timelines, design options, and common mistakes.",
     to: "/faq",
-    cta: "Read the FAQ",
   },
   {
-    title: "Choose Your City / State",
-    desc: "Access local zoning regulations specific to your jurisdiction.",
+    title: "ADU Video Library",
+    desc: "Explore how different ADUs are built, delivered, installed, and completed through educational video content.",
+    to: "/videos",
+  },
+  {
+    title: "ADU Type Education",
+    desc: "Compare more than 30 ADU types, styles, structures, and building methods.",
+    to: "/adu-types",
+  },
+  {
+    title: "ADU Regulations Database",
+    desc: "Choose your state, city, or ZIP code to access local ADU zoning regulations.",
     to: "/choose-your-state",
-    cta: "Find Your Regulations",
+  },
+  {
+    title: "Planning Tools",
+    desc: "Step-by-step resources to help homeowners plan timelines, budgets, and project scope.",
+    to: "/how-to-adu",
+  },
+  {
+    title: "Paid Feasibility & Estimate Tools",
+    desc: "Gain access to pre-populated pre-site estimate worksheets, budget tools, and GIS feasibility studies.",
+    to: "/feasibility",
+  },
+  {
+    title: "Match with Pros",
+    desc: "Connect with qualified builders, suppliers, and professionals familiar with your local zoning and ADU requirements.",
+    to: "/builders",
   },
 ];
 
@@ -63,16 +79,19 @@ const SaveTimeMoney = () => {
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {cards.map((c) => (
+        {cards.map((c, i) => (
           <Link
             key={c.title}
             to={c.to}
             className="group bg-white border border-gray-200 rounded-xl p-5 hover:border-[#2F5D50] hover:shadow-md transition flex flex-col"
           >
-            <h3 className="font-semibold text-primary text-base sm:text-lg mb-2">{c.title}</h3>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="shrink-0 w-7 h-7 rounded-full bg-[#2F5D50] text-white text-xs font-semibold flex items-center justify-center">{i + 1}</span>
+              <h3 className="font-semibold text-primary text-base sm:text-lg">{c.title}</h3>
+            </div>
             <p className="text-secondary text-sm leading-relaxed flex-1">{c.desc}</p>
-            <span className="mt-4 inline-flex items-center gap-2 text-[#2F5D50] text-sm font-medium group-hover:gap-3 transition-all">
-              {c.cta} <FiArrowRight />
+            <span className="mt-4 inline-flex items-center gap-1 text-[#2F5D50] text-sm font-medium group-hover:gap-2 transition-all">
+              Learn more <FiArrowRight />
             </span>
           </Link>
         ))}
