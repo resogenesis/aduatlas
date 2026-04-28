@@ -4,10 +4,10 @@ import { FiArrowRight, FiCheck } from "react-icons/fi";
 const prepares = [
   "ADU education and planning resources",
   "Local zoning and regulatory guidance",
-  "Access to pre-filled budget and planning worksheets",
+  "Pre-filled budget and planning worksheets",
   "National ADU Readiness Score",
-  "GIS feasibility study and site plan tools",
-  "Match with builders familiar with your regulations",
+  "GIS feasibility and site planning tools",
+  "Builder matching based on your local regulations",
 ];
 
 const cards = [
@@ -44,11 +44,11 @@ const SaveTimeMoney = () => {
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-3">
           Save Time and Money with ADUAtlas
         </h2>
-        <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-sm sm:text-base mb-6">
+        <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-sm sm:text-base mb-5">
           EDUCATE • EXPLORE • PLAN • BUILD
         </p>
-        <p className="text-primary font-semibold text-sm sm:text-base mb-4">
-          ADUAtlas prepares homeowners with:
+        <p className="text-secondary text-sm sm:text-base leading-relaxed mb-5">
+          ADUAtlas prepares homeowners with the tools to confidently plan, evaluate, and build an ADU — saving time, reducing costly mistakes, and improving overall project readiness.
         </p>
         <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-left max-w-2xl mx-auto">
           {prepares.map((item) => (
