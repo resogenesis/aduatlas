@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowRight, FiCheck } from "react-icons/fi";
 
-const steps = [
-  { label: "Learn the Process", to: "/how-to-adu" },
-  { label: "Explore Options", to: "/adu-types" },
-  { label: "Check Regulations", to: "/choose-your-state" },
-  { label: "Plan & Build", to: "/pricing" },
+const prepares = [
+  "ADU education and planning resources",
+  "Local zoning and regulatory guidance",
+  "Access to pre-filled budget and planning worksheets",
+  "National ADU Readiness Score",
+  "GIS feasibility study and site plan tools",
+  "Match with builders familiar with your regulations",
 ];
 
 const cards = [
@@ -38,20 +40,29 @@ const cards = [
 const SaveTimeMoney = () => {
   return (
     <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16">
-      <div className="max-w-5xl mx-auto text-center mb-10">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-4">
+      <div className="max-w-3xl mx-auto text-center mb-10">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-3">
           Save Time and Money with ADUAtlas
         </h2>
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm sm:text-base text-secondary">
-          {steps.map((s, i) => (
-            <span key={s.label} className="flex items-center gap-2">
-              <Link to={s.to} className="font-medium text-[#2F5D50] hover:underline">
-                {s.label}
-              </Link>
-              {i < steps.length - 1 && <FiArrowRight className="text-[#2F5D50]" />}
-            </span>
+        <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-sm sm:text-base mb-5">
+          EDUCATE • EXPLORE • PLAN • BUILD
+        </p>
+        <p className="text-secondary text-sm sm:text-base leading-relaxed mb-6">
+          ADUAtlas — a national platform designed to help homeowners across the country understand every stage of the ADU building process. Whether you're just beginning your research or ready to move forward with construction, ADUAtlas provides step-by-step guidance to help you build with confidence and be fully prepared to speak with builders.
+        </p>
+        <p className="text-primary font-semibold text-sm sm:text-base mb-4">
+          ADUAtlas prepares homeowners with:
+        </p>
+        <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-left max-w-2xl mx-auto">
+          {prepares.map((item) => (
+            <li key={item} className="flex items-start gap-2 text-secondary text-sm sm:text-base">
+              <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-[#2F5D50] text-white flex items-center justify-center text-xs">
+                <FiCheck />
+              </span>
+              <span>{item}</span>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
