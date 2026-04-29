@@ -13,6 +13,10 @@ const AduCTA = () => {
                             Whether you are ready to build or starting out, ADUAtlas walks you through the process.
                         </h2>
 
+                        <p className="text-base sm:text-lg font-semibold text-white mb-3">
+                            Paid Access unlocks your personalized Feasibility Study &amp; Site Plan.
+                        </p>
+
                         <p className="text-sm text-gray-200 mb-4">
                             Any builder or contractor needs the following information from you to provide an accurate scope of work and realistic estimates. Here are the questions:
                         </p>
