@@ -14,6 +14,11 @@ const features = [
         desc: "Learn before you commit",
     },
     {
+        icon: RiVerifiedBadgeLine,
+        title: "Video Library",
+        desc: "Watch and Explore ADU Construction Videos",
+    },
+    {
         icon: HiOutlineCurrencyDollar,
         title: "Accurate Estimating Tools",
         desc: "Feasibility study for a fraction of the cost",
@@ -22,11 +27,6 @@ const features = [
         icon: HiOutlineShieldCheck,
         title: "National and Local Suppliers",
         desc: "Professionals familiar with your zoning",
-    },
-    {
-        icon: RiVerifiedBadgeLine,
-        title: "Video Library",
-        desc: "Watch and Explore ADU Construction Videos",
     },
 ];
 
