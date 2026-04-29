@@ -20,10 +20,10 @@ const ChooseAtlas = () => {
                         START YOUR ADU JOURNEY
                     </p>
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-4">
-                        From idea to keys in hand
+                        From Concept to Completion
                     </h2>
                     <p className="text-secondary text-sm sm:text-base leading-relaxed">
-                        Every project starts with the right information. Explore real ADU builds, learn the process, and prepare to move forward with confidence.
+                        Every project starts here — explore real ADU builds, understand the process, and move forward with confidence.
                     </p>
                 </div>
 
