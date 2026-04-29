@@ -23,7 +23,7 @@ const ChooseAtlas = () => {
                         From Concept to Completion
                     </h2>
                     <p className="text-secondary text-sm sm:text-base leading-relaxed">
-                        Every project starts here — explore real ADU builds, understand the process, and move forward with confidence.
+                        Turn your ADU vision into reality with ADUAtlas.
                     </p>
                 </div>
 
