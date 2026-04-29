@@ -25,7 +25,7 @@ const AduCTA = () => {
                             <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>ADU type, size, and square footage</span></div>
                             <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Timeline</span></div>
                             <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Access / to the space</span></div>
-                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span className="font-semibold text-white">Paid Access unlocks your personalized Feasibility Study &amp; Site Plan</span></div>
+                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Paid Access unlocks your personalized Feasibility Study &amp; Site Plan</span></div>
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
