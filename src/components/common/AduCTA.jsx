@@ -13,10 +13,6 @@ const AduCTA = () => {
                             Whether you are ready to build or starting out, ADUAtlas walks you through the process.
                         </h2>
 
-                        <p className="text-base sm:text-lg font-semibold text-white mb-3">
-                            Paid Access unlocks your personalized Feasibility Study &amp; Site Plan.
-                        </p>
-
                         <p className="text-sm text-gray-200 mb-4">
                             Any builder or contractor needs the following information from you to provide an accurate scope of work and realistic estimates. Here are the questions:
                         </p>
@@ -29,6 +25,7 @@ const AduCTA = () => {
                             <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>ADU type, size, and square footage</span></div>
                             <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Timeline</span></div>
                             <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Access / to the space</span></div>
+                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span className="font-semibold text-white">Paid Access unlocks your personalized Feasibility Study &amp; Site Plan</span></div>
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
