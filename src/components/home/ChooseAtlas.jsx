@@ -1,52 +1,14 @@
-import { Link } from "react-router-dom";
-import { FiCheck } from "react-icons/fi";
-
 import aduImage1 from "../../assets/home/choose_img1.png"
 import aduImage2 from "../../assets/home/choose_img2.png"
 import aduImage3 from "../../assets/home/choose_img3.png"
 
-const prepares = [
-    "ADU education and planning resources",
-    "Local zoning and regulatory guidance",
-    "Access to pre-filled budget and planning worksheets",
-    "National ADU Readiness Score",
-    "GIS feasibility study and site plan tools",
-    "Match with builders familiar with your regulations",
-];
-
 const ChooseAtlas = () => {
     return (
-        <section className="container mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center py-12 sm:py-16 lg:py-25">
+        <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-25">
 
-            {/* LEFT SIDE */}
-            <div className="w-full flex flex-col gap-6">
-                <h3 className="text-primary font-semibold text-lg sm:text-xl">
-                    ADUAtlas prepares homeowners with:
-                </h3>
-
-                <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
-                    {prepares.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-secondary text-sm sm:text-base">
-                            <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-[#2F5D50] text-white flex items-center justify-center text-xs">
-                                <FiCheck />
-                            </span>
-                            <span>{item}</span>
-                        </li>
-                    ))}
-                </ul>
-
-                <Link
-                    to="/about"
-                    className="w-fit cursor-pointer px-6 py-3 bg-[#2F5D50] rounded-md border border-[#2F5D50] text-white font-semibold text-base hover:bg-transparent hover:text-black hover:shadow-md transition-all duration-300"
-                >
-                    About Us
-                </Link>
-            </div>
-
-            {/* RIGHT SIDE IMAGE COLLAGE */}
             <div className="relative flex items-center justify-center">
 
-                <div className="flex gap-3 sm:gap-4 md:gap-6 items-center w-full max-w-lg lg:max-w-none mx-auto">
+                <div className="flex gap-3 sm:gap-4 md:gap-6 items-center w-full max-w-2xl mx-auto">
 
                     {/* LEFT LARGE IMAGE */}
                     <div className="w-1/2 aspect-[2/3] overflow-hidden rounded-tr-[40px] rounded-bl-[40px] sm:rounded-tr-[60px] sm:rounded-bl-[60px] lg:rounded-tr-[80px] lg:rounded-bl-[80px] bg-gray-300">
