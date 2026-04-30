@@ -4,6 +4,7 @@ import { FiCheck, FiX, FiLock, FiShield } from "react-icons/fi";
 import { loadAnswers } from "../funnel/quizStore";
 
 const includes = [
+  "Full structured course — 6 chapters, 20+ modules",
   "Personalized Feasibility Study based on your quiz answers",
   "GIS satellite view of your lot with dimensions",
   "Pre-filled pre-site cost estimate worksheet",
@@ -20,22 +21,28 @@ const excludes = [
   "We do not guarantee permit approval or final pricing",
 ];
 
+// Funnel FAQ — tension-inducing, designed to surface objections and push to checkout.
+// (Public SEO FAQ lives at /faq with full answers.)
 const faqs = [
   {
-    q: "Is this a subscription?",
-    a: "No. $79.99 is a one-time fee for lifetime access — no recurring charges.",
+    q: "Is $79.99 a subscription?",
+    a: "No. One-time payment, lifetime access. No recurring charges, no upsells.",
   },
   {
-    q: "What if I decide not to build?",
-    a: "Most homeowners use the feasibility study to confirm whether an ADU even makes sense before spending $500+ on an official survey. The study is yours to keep either way.",
+    q: "What if my city won't approve an ADU on my lot?",
+    a: "That's exactly what the Feasibility Study answers — before you spend $500+ on an official survey. Most homeowners only find out after they've already paid a builder to design something.",
   },
   {
-    q: "Do you support my state / city?",
-    a: "ADUAtlas covers all 50 states. Detail and accuracy are highest in CA, WA, and CO; other states get the federal IRC baseline plus your city's posted rules.",
+    q: "Can't I just figure this out myself for free?",
+    a: "You can. It usually takes 40+ hours across city websites, builder calls, and forum threads — and most homeowners still miss site-prep costs, HOA restrictions, or zoning quirks. Your call on what your time is worth.",
+  },
+  {
+    q: "Do you support my state?",
+    a: "ADUAtlas covers all 50 states. Coverage depth is highest in CA, WA, and CO. Other states get the federal IRC baseline plus your city's posted rules.",
   },
   {
     q: "Refund policy?",
-    a: "// PLACEHOLDER — REPLACE: e.g. 14-day full refund if you haven't downloaded the feasibility study, no questions asked.",
+    a: "7-day full refund — if the system isn't useful within 7 days, email us and we refund in full, no questions asked.",
   },
 ];
 

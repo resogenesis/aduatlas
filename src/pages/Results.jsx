@@ -30,10 +30,10 @@ const Results = () => {
           YOUR ADU READINESS REPORT
         </p>
         <h1 className="text-center text-3xl sm:text-4xl font-bold text-primary mb-2">
-          Your ADU Readiness Score
+          Your ADU Readiness Score: {score}% — here's what you're missing.
         </h1>
         <p className="text-center text-secondary mb-10">
-          Based on your ZIP code, lot, budget, and timeline.
+          Based on your ZIP, lot, budget, timeline, and what you do (and don't) know.
         </p>
 
         <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-10 mb-8">
@@ -96,12 +96,14 @@ const Results = () => {
 
           <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-7 text-sm">
             {[
+              "Full course — 6 chapters, 20+ modules",
               "GIS satellite view with lot dimensions",
               "Pre-filled pre-site cost worksheet",
               "Total budget worksheet with timelines",
               "Refined ADU Readiness Score",
               "Free utility-marking contact",
               "Builder/supplier matches by ZIP",
+              "7-day full refund — no questions asked",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2 text-white/90">
                 <FiCheck className="shrink-0 mt-1" />

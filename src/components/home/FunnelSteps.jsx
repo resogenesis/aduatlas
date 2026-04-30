@@ -14,8 +14,8 @@ const steps = [
   },
   {
     n: "3",
-    title: "Unlock your full plan",
-    desc: "$79.99 unlocks the structured course, your Feasibility Study, GIS site plan, and a builder-ready RFP.",
+    title: "Unlock your full plan — $79.99",
+    desc: "Lifetime access to 6 chapters / 20+ modules, your Feasibility Study, GIS site plan, and a builder-ready RFP. 7-day refund.",
   },
 ];
 

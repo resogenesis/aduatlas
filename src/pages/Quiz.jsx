@@ -39,17 +39,6 @@ const questions = [
     ],
   },
   {
-    id: "primarySqft",
-    label: "How big is your existing primary home?",
-    type: "choice",
-    options: [
-      { value: "under-1000", label: "Under 1,000 sq ft" },
-      { value: "1000-2000", label: "1,000 – 2,000 sq ft" },
-      { value: "2000+", label: "Over 2,000 sq ft" },
-      { value: "unsure", label: "Not sure" },
-    ],
-  },
-  {
     id: "budget",
     label: "What's your rough budget range?",
     helper: "Site prep + structure combined.",
@@ -74,16 +63,27 @@ const questions = [
     ],
   },
   {
-    id: "topConcern",
-    label: "What's your biggest concern right now?",
+    id: "zoningKnowledge",
+    label: "How well do you know your local ADU zoning?",
+    helper: "Things like maximum ADU size as a % of your primary home, setbacks, height limits, and parking requirements.",
     type: "choice",
     options: [
-      { value: "zoning", label: "Zoning — what can I legally build?" },
-      { value: "cost", label: "Cost — what's the real total?" },
-      { value: "builder", label: "Finding a trustworthy builder" },
-      { value: "financing", label: "Financing — how do I pay for it?" },
-      { value: "hoa", label: "HOA / property restrictions" },
-      { value: "other", label: "Other" },
+      { value: "deep", label: "I've read my city's specific ADU code" },
+      { value: "general", label: "I know ADUs are allowed but haven't checked details" },
+      { value: "heard", label: "I've heard ADUs are legal in my area" },
+      { value: "none", label: "I haven't checked yet" },
+    ],
+  },
+  {
+    id: "siteCostKnowledge",
+    label: "Have you accounted for site-prep and utility hookup costs?",
+    helper: "Sewer tie-ins, trenching, stormwater drainage — these often add $10K–$100K on top of the ADU price.",
+    type: "choice",
+    options: [
+      { value: "quoted", label: "Yes — I have written quotes for site prep + utilities" },
+      { value: "estimated", label: "I have a rough estimate" },
+      { value: "assumed", label: "I assumed they're included in the ADU price" },
+      { value: "unaware", label: "I hadn't really thought about it" },
     ],
   },
 ];

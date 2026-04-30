@@ -22,7 +22,7 @@ const Welcome = () => {
           Welcome to ADUAtlas Paid Access
         </h1>
         <p className="text-secondary text-base sm:text-lg leading-relaxed mb-10">
-          Your access is unlocked. We've sent a confirmation to your email. Start with the structured course — every module unlocks the next, and Module 9 is your personalized Feasibility Study.
+          Your access is unlocked. We've sent a confirmation to your email. Start with Chapter 1 — the course is 6 chapters and 20+ modules, ending with your personalized Feasibility Study and builder-ready RFP packet.
         </p>
 
         <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-10 text-left mb-8">
@@ -31,22 +31,22 @@ const Welcome = () => {
             <li className="flex items-start gap-3">
               <span className="shrink-0 w-7 h-7 rounded-full bg-[#2F5D50] text-white text-sm font-semibold flex items-center justify-center">1</span>
               <div>
-                <p className="font-semibold text-primary text-sm sm:text-base">Start the course</p>
-                <p className="text-secondary text-sm">Module 1 covers zoning vs. building code — the foundation everything else builds on.</p>
+                <p className="font-semibold text-primary text-sm sm:text-base">Start Chapter 1 — How to ADU</p>
+                <p className="text-secondary text-sm">Process, timelines, and the foundation everything else builds on.</p>
               </div>
             </li>
             <li className="flex items-start gap-3">
               <span className="shrink-0 w-7 h-7 rounded-full bg-[#2F5D50] text-white text-sm font-semibold flex items-center justify-center">2</span>
               <div>
-                <p className="font-semibold text-primary text-sm sm:text-base">Complete the worksheets</p>
-                <p className="text-secondary text-sm">Pre-filled with your quiz answers. Each one tightens your budget and timeline estimate.</p>
+                <p className="font-semibold text-primary text-sm sm:text-base">Work through the modules</p>
+                <p className="text-secondary text-sm">20+ modules across 6 chapters — each with worksheets pre-filled from your quiz answers.</p>
               </div>
             </li>
             <li className="flex items-start gap-3">
               <span className="shrink-0 w-7 h-7 rounded-full bg-[#2F5D50] text-white text-sm font-semibold flex items-center justify-center">3</span>
               <div>
                 <p className="font-semibold text-primary text-sm sm:text-base">Unlock your Feasibility Study</p>
-                <p className="text-secondary text-sm">Module 9 generates your GIS site plan, refined readiness score, and builder RFP packet.</p>
+                <p className="text-secondary text-sm">Chapter 6 generates your GIS site plan, refined readiness score, and builder RFP packet.</p>
               </div>
             </li>
           </ol>

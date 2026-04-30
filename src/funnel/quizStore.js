@@ -8,10 +8,10 @@ const empty = {
   zip: "",
   purpose: "",
   lotSize: "",
-  primarySqft: "",
   budget: "",
   timeline: "",
-  topConcern: "",
+  zoningKnowledge: "",
+  siteCostKnowledge: "",
 };
 
 export const loadAnswers = () => {
@@ -35,4 +35,4 @@ export const clearAnswers = () => {
 };
 
 export const isComplete = (a) =>
-  Boolean(a.zip && a.purpose && a.lotSize && a.primarySqft && a.budget && a.timeline && a.topConcern);
+  Boolean(a.zip && a.purpose && a.lotSize && a.budget && a.timeline && a.zoningKnowledge && a.siteCostKnowledge);
