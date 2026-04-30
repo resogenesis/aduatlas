@@ -1,17 +1,13 @@
-import AduCTA from "../components/common/AduCTA";
-import ChooseAtlas from "../components/home/ChooseAtlas";
-import Hero from "../components/home/Hero";
-import SaveTimeMoney from "../components/home/SaveTimeMoney";
-import WhyChooseUs from "../components/home/WhyChooseUs";
+import FunnelSteps from "../components/home/FunnelSteps";
+import QuizHero from "../components/home/QuizHero";
+import RiskCallouts from "../components/home/RiskCallouts";
 
 const Home = () => {
     return (
         <div className="w-full">
-            <Hero />
-            <SaveTimeMoney />
-            <ChooseAtlas />
-            <WhyChooseUs />
-            <AduCTA />
+            <QuizHero />
+            <RiskCallouts />
+            <FunnelSteps />
         </div>
     );
 };
