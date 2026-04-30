@@ -6,9 +6,9 @@ export const FormField = ({ label, type = "text", placeholder, required, hint, n
   const isPw = type === "password";
   const inputType = isPw ? (show ? "text" : "password") : type;
   return (
-    <div className="mb-4">
-      <label className="block text-sm font-semibold text-gray-800 mb-1.5">
-        {label}{required && "*"}
+    <div className="mb-5">
+      <label className="block text-paper text-xs font-medium tracking-[0.15em] uppercase mb-2">
+        {label}{required && " *"}
       </label>
       <div className="relative">
         <input
@@ -16,19 +16,20 @@ export const FormField = ({ label, type = "text", placeholder, required, hint, n
           name={name}
           placeholder={placeholder}
           required={required}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-[#2F5D50] focus:ring-1 focus:ring-[#2F5D50]"
+          className="w-full px-4 py-3.5 rounded-xl bg-canvas border border-stroke text-paper text-sm placeholder:text-paper-dim/50 focus:outline-none focus:border-accent transition"
         />
         {isPw && (
           <button
             type="button"
             onClick={() => setShow((v) => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-paper-dim hover:text-paper transition"
+            aria-label={show ? "Hide password" : "Show password"}
           >
             {show ? <FiEyeOff /> : <FiEye />}
           </button>
         )}
       </div>
-      {hint && <p className="mt-1 text-xs text-gray-500">{hint}</p>}
+      {hint && <p className="mt-1.5 text-xs text-paper-dim/70">{hint}</p>}
     </div>
   );
 };
@@ -36,7 +37,16 @@ export const FormField = ({ label, type = "text", placeholder, required, hint, n
 export const PrimaryButton = ({ children, className = "", ...rest }) => (
   <button
     {...rest}
-    className={`w-full cursor-pointer py-3 px-5 rounded-lg bg-[#2F5D50] text-white font-semibold text-sm hover:bg-[#244A40] transition ${className}`}
+    className={`w-full cursor-pointer py-3.5 px-5 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors ${className}`}
+  >
+    {children}
+  </button>
+);
+
+export const SecondaryButton = ({ children, className = "", ...rest }) => (
+  <button
+    {...rest}
+    className={`w-full cursor-pointer py-3.5 px-5 rounded-full border border-stroke text-paper font-medium text-sm hover:border-paper-dim transition ${className}`}
   >
     {children}
   </button>

@@ -5,24 +5,30 @@ import { FormField, PrimaryButton } from "../../components/common/FormField";
 const Login = () => {
   return (
     <AuthCard
-      title="Welcome Back"
-      subtitle="Login to access your dashboard"
+      eyebrow="Welcome back"
+      title="Pick up where you left off."
+      subtitle="Log in to access your course, worksheets, and feasibility study."
       footer={
         <>
-          Don’t have an account?{" "}
-          <Link to="/signup" className="text-[#2F5D50] font-semibold">Sign up</Link>
+          New to ADUAtlas?{" "}
+          <Link to="/signup" className="text-accent hover:text-paper transition-colors font-medium">
+            Create an account
+          </Link>
         </>
       }
     >
       <form onSubmit={(e) => e.preventDefault()}>
-        <FormField label="Email Address" type="email" placeholder="you@example.com" required />
+        <FormField label="Email" type="email" placeholder="you@email.com" required />
         <FormField label="Password" type="password" placeholder="••••••••••••" required />
-        <div className="flex justify-end mb-5">
-          <Link to="/forgot-password" className="text-sm text-[#2F5D50] font-semibold hover:underline">
-            Forgot Password
+        <div className="flex justify-end mb-6">
+          <Link
+            to="/forgot-password"
+            className="text-xs text-paper-dim hover:text-paper transition-colors"
+          >
+            Forgot password?
           </Link>
         </div>
-        <PrimaryButton type="submit">Log In</PrimaryButton>
+        <PrimaryButton type="submit">Log in</PrimaryButton>
       </form>
     </AuthCard>
   );

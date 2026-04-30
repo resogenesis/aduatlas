@@ -9,36 +9,48 @@ const Signup = () => {
 
   return (
     <AuthCard
-      title="Create Your Account"
-      subtitle="Join ADU Atlas and get started today"
+      eyebrow="Create account"
+      title="Start your ADU plan."
+      subtitle="One account. Lifetime access to your course, worksheets, and feasibility study."
       footer={
         <>
-          Already have an account?{" "}
-          <Link to="/login" className="text-[#2F5D50] font-semibold">Login here</Link>
+          Already a member?{" "}
+          <Link to="/login" className="text-accent hover:text-paper transition-colors font-medium">
+            Log in
+          </Link>
         </>
       }
     >
-      <div className="grid grid-cols-2 gap-2 p-1 bg-[#F4F7F6] rounded-lg mb-6">
+      {/* Role toggle */}
+      <div className="grid grid-cols-2 gap-1 p-1 bg-canvas border border-stroke rounded-full mb-7">
         <button
           onClick={() => setRole("homeowner")}
-          className={`py-2.5 rounded-md text-sm font-semibold transition cursor-pointer ${role === "homeowner" ? "bg-[#2F5D50] text-white" : "text-gray-700"}`}
+          className={`py-2.5 rounded-full text-xs font-medium tracking-[0.05em] uppercase transition cursor-pointer ${
+            role === "homeowner"
+              ? "bg-accent text-accent-fg"
+              : "text-paper-dim hover:text-paper"
+          }`}
         >
-          I am a Homeowner
+          Homeowner
         </button>
         <button
           onClick={() => setRole("pro")}
-          className={`py-2.5 rounded-md text-sm font-semibold transition cursor-pointer ${role === "pro" ? "bg-[#2F5D50] text-white" : "text-gray-700"}`}
+          className={`py-2.5 rounded-full text-xs font-medium tracking-[0.05em] uppercase transition cursor-pointer ${
+            role === "pro"
+              ? "bg-accent text-accent-fg"
+              : "text-paper-dim hover:text-paper"
+          }`}
         >
-          I am a Professional
+          Builder / Pro
         </button>
       </div>
 
       <form onSubmit={(e) => e.preventDefault()}>
-        <FormField label="username" placeholder="JohnSmith10" required />
-        <FormField label="Email Address" type="email" placeholder="you@example.com" required />
-        <FormField label="Password" type="password" placeholder="••••••••••••" required />
+        <FormField label="Username" placeholder="JohnSmith10" required />
+        <FormField label="Email" type="email" placeholder="you@email.com" required />
+        <FormField label="Password" type="password" placeholder="••••••••••••" required hint="At least 8 characters" />
         <PrimaryButton type="submit">
-          {isPro ? "Sign Up as Builder" : "Sign Up as Homeowner"}
+          {isPro ? "Sign up as Builder" : "Sign up as Homeowner"}
         </PrimaryButton>
       </form>
     </AuthCard>
