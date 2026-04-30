@@ -87,7 +87,7 @@ const QuizHero = () => {
               </div>
 
               <div className="relative flex items-center justify-between mb-5">
-                <span className="text-xs uppercase tracking-[0.2em] text-paper-dim">Sample score</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-paper-dim">Readiness Score</span>
                 <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
               </div>
 
