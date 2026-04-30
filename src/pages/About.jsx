@@ -12,7 +12,7 @@ const About = () => {
       />
 
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 max-w-3xl">
-        <div className="space-y-5 text-secondary text-base leading-relaxed">
+        <div className="space-y-5 text-paper-dim text-base leading-relaxed">
           <p>
             You've probably noticed them everywhere lately — ADUs, tiny homes, backyard cottages. So what's driving all of this?
           </p>
@@ -22,7 +22,7 @@ const About = () => {
           <p>
             As regulations eased, demand grew — and with demand came innovation.
           </p>
-          <p className="font-semibold text-primary">That's exactly what happened with ADUs.</p>
+          <p className="font-semibold text-paper">That's exactly what happened with ADUs.</p>
           <p>
             Builders are now combining modern design, factory construction, and improved building technology to create smaller homes that are more efficient, flexible, and often faster to build. Today's ADUs range from simple, budget-friendly options to high-end architectural designs. You may hear them called casitas, cottages, cabins, sheds, or bunkies. They can be stick-built, panelized, modular, or prefab.
           </p>
@@ -38,7 +38,7 @@ const About = () => {
           <p>
             I came to this after years in commercial real estate, working primarily with smaller multifamily properties. The ADU space caught my attention — both personally and professionally. As I researched, I kept running into the same problem: there wasn't clear, practical information written for everyday homeowners.
           </p>
-          <p className="font-semibold text-primary">That's why we built ADUAtlas.</p>
+          <p className="font-semibold text-paper">That's why we built ADUAtlas.</p>
           <p>
             Our goal is to simplify the process. We help you understand your state and local ADU regulations, explore different ADU types, and connect with local and national builders who know your area. We also offer a growing video library so you can see real examples — not just read about them.
           </p>
@@ -51,7 +51,7 @@ const About = () => {
           <p>
             Our goal is simple: save you time, reduce confusion, and help you make informed decisions. We do the research so you don't have to — just remember to always confirm local regulations and builder details, as rules can change.
           </p>
-          <p className="font-semibold text-primary">Good luck — and enjoy the process.</p>
+          <p className="font-semibold text-paper">Good luck — and enjoy the process.</p>
         </div>
       </section>
 

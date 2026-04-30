@@ -130,21 +130,23 @@ const Quiz = () => {
   };
 
   return (
-    <div className="min-h-[80vh] bg-[#F4F7F6] py-12 sm:py-16">
-      <div className="container mx-auto px-4 sm:px-6 max-w-2xl">
-        <div className="mb-6">
-          <div className="flex items-center justify-between text-sm text-secondary mb-2">
-            <span>Question {step + 1} of {questions.length}</span>
+    <div className="min-h-[80vh] bg-canvas py-16 sm:py-20">
+      <div className="container mx-auto px-5 sm:px-8 max-w-2xl">
+        <div className="mb-8">
+          <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-paper-dim mb-3">
+            <span>Q {step + 1} / {questions.length}</span>
             <span>{Math.round(progress)}%</span>
           </div>
-          <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-            <div className="h-full bg-[#2F5D50] transition-all duration-300" style={{ width: `${progress}%` }} />
+          <div className="w-full h-px bg-stroke overflow-hidden">
+            <div className="h-full bg-accent transition-all duration-500" style={{ width: `${progress}%` }} />
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-10">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-primary mb-2">{q.label}</h2>
-          {q.helper && <p className="text-secondary text-sm mb-6">{q.helper}</p>}
+        <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-12">
+          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-snug tracking-tight mb-3">
+            {q.label}
+          </h2>
+          {q.helper && <p className="text-paper-dim text-sm sm:text-base mb-7">{q.helper}</p>}
 
           {q.type === "text" && (
             <input
@@ -155,7 +157,7 @@ const Quiz = () => {
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && next()}
               placeholder={q.placeholder}
-              className="w-full px-4 py-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:border-[#2F5D50] focus:ring-2 focus:ring-[#2F5D50]/20"
+              className="w-full px-5 py-4 text-lg bg-canvas border border-stroke rounded-xl text-paper placeholder:text-paper-dim/60 focus:outline-none focus:border-accent transition"
             />
           )}
 
@@ -167,10 +169,10 @@ const Quiz = () => {
                   <button
                     key={opt.value}
                     onClick={() => setValue(opt.value)}
-                    className={`text-left px-4 py-3 rounded-lg border transition ${
+                    className={`text-left px-5 py-4 rounded-xl border transition-all ${
                       selected
-                        ? "border-[#2F5D50] bg-[#2F5D50] text-white"
-                        : "border-gray-200 bg-white text-gray-800 hover:border-[#2F5D50]"
+                        ? "border-accent bg-accent text-accent-fg"
+                        : "border-stroke bg-canvas text-paper hover:border-paper-dim"
                     }`}
                   >
                     {opt.label}
@@ -180,14 +182,14 @@ const Quiz = () => {
             </div>
           )}
 
-          {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
+          {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
 
-          <div className="flex items-center justify-between mt-8">
+          <div className="flex items-center justify-between mt-10">
             <button
               onClick={back}
               disabled={step === 0}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-medium transition ${
-                step === 0 ? "text-gray-300 cursor-not-allowed" : "text-secondary hover:text-primary"
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition ${
+                step === 0 ? "text-stroke cursor-not-allowed" : "text-paper-dim hover:text-paper"
               }`}
             >
               <FiArrowLeft /> Back
@@ -195,15 +197,15 @@ const Quiz = () => {
 
             <button
               onClick={next}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#2F5D50] text-white font-semibold hover:bg-[#244A40] transition"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
             >
               {step === questions.length - 1 ? "See My Results" : "Next"} <FiArrowRight />
             </button>
           </div>
         </div>
 
-        <p className="text-center text-xs text-secondary mt-6">
-          Takes ~2 minutes. No signup required to see your score.
+        <p className="text-center text-xs text-paper-dim mt-7">
+          ~2 minutes · No signup required to see your score
         </p>
       </div>
     </div>

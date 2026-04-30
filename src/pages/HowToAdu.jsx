@@ -19,15 +19,15 @@ const HowToAdu = () => {
       />
 
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 max-w-3xl">
-        <p className="text-secondary text-base sm:text-lg leading-relaxed mb-8 text-center">
+        <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-8 text-center">
           The ADU process isn't a single project. It's a stack of decisions where each one constrains the next — and where one wrong assumption early on can cost months and tens of thousands of dollars.
         </p>
 
-        <div className="bg-[#F4F7F6] rounded-2xl p-6 sm:p-8 mb-10">
-          <p className="text-primary font-semibold mb-4">A few things most homeowners don't realize:</p>
+        <div className="bg-surface-1-solid border border-stroke rounded-2xl p-6 sm:p-8 mb-10">
+          <p className="text-paper font-semibold mb-4">A few things most homeowners don't realize:</p>
           <ul className="space-y-3">
             {teasers.map((t) => (
-              <li key={t} className="flex items-start gap-3 text-secondary text-sm sm:text-base">
+              <li key={t} className="flex items-start gap-3 text-paper-dim text-sm sm:text-base">
                 <span className="shrink-0 mt-1 w-2 h-2 rounded-full bg-[#2F5D50]" />
                 <span>{t}</span>
               </li>
@@ -35,7 +35,7 @@ const HowToAdu = () => {
           </ul>
         </div>
 
-        <p className="text-secondary text-base sm:text-lg leading-relaxed text-center">
+        <p className="text-paper-dim text-base sm:text-lg leading-relaxed text-center">
           The full step-by-step process — what to do, in what order, and what to ask your city and builders along the way — is inside the ADU system.
         </p>
       </section>

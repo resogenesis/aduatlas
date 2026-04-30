@@ -1,101 +1,87 @@
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
+import { FaXTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
+import Logomark from "../brand/Logomark";
 
-import footer_logo from "../../assets/footer_logo.svg"
-
-const footerLinks = [
+const sections = [
     {
-        title: "Product",
+        title: "Funnel",
         links: [
-            { name: "How It Works", path: "/how-to-adu" },
-            { name: "Pricing", path: "/pricing" },
-            { name: "ADU Rule", path: "/choose-your-state" },
-            { name: "ADU Types", path: "/adu-types" },
+            { name: "Reality Check", path: "/quiz" },
+            { name: "Unlock Plan", path: "/unlock" },
+            { name: "About", path: "/about" },
         ],
     },
     {
         title: "Resources",
         links: [
-            { name: "Learning Hub", path: "/how-to-adu" },
-            { name: "About Us", path: "/about" },
-            { name: "Contact", path: "/dashboard/help" },
-            { name: "For Builders", path: "/pricing" },
-            { name: "For Supplier", path: "/pricing" },
+            { name: "How to ADU", path: "/how-to-adu" },
+            { name: "ADU Types", path: "/adu-types" },
+            { name: "FAQ", path: "/faq" },
+            { name: "By State", path: "/choose-your-state" },
         ],
     },
     {
         title: "Legal",
         links: [
-            { name: "Privacy Policy", path: "#" },
-            { name: "Terms of Service", path: "#" },
-            { name: "Cookie Policy", path: "#" },
+            { name: "Privacy", path: "#" },
+            { name: "Terms", path: "#" },
+            { name: "Refund Policy", path: "#" },
         ],
     },
 ];
 
 const Footer = () => {
     return (
-        <footer className="bg-[#171B26] text-gray-300 pt-10 sm:pt-16 pb-6">
-            <div className="container mx-auto px-4 sm:px-6">
+        <footer className="bg-canvas border-t border-stroke pt-20 pb-10">
+            <div className="container mx-auto px-5 sm:px-8">
 
-                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12">
+                <div className="grid grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 mb-16">
 
-                    <div className="col-span-2 md:col-span-2 lg:col-span-2">
-
-                        <div className="mb-4 w-40 sm:w-57">
-                            <img src={footer_logo} alt="ADUAtlas.com" className="w-full h-full object-contain" />
-                        </div>
-
-                        <p className="text-sm leading-relaxed mb-6 text-white">
-                            Simplifying ADU regulations and connecting homeowners
-                            with trusted professionals.
+                    <div className="col-span-2 lg:col-span-5">
+                        <Link to="/" className="text-paper hover:text-accent transition-colors inline-block mb-5">
+                            <Logomark className="h-8" />
+                        </Link>
+                        <p className="text-paper-dim text-sm leading-relaxed max-w-sm mb-7">
+                            The 2-minute Reality Check, plus the system that gets you builder-ready before you call a single contractor.
                         </p>
-
-                        <h4 className="text-white font-medium mb-3 text-lg sm:text-2xl">
-                            Follow Us
-                        </h4>
-
-                        <div className="flex gap-3">
-                            {[FaFacebookF, FaTwitter, FaLinkedinIn, FaPinterestP].map(
-                                (Icon, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="w-9 h-9 flex items-center justify-center border border-gray-500 rounded-md hover:bg-white hover:text-black transition cursor-pointer"
-                                    >
-                                        <Icon size={14} />
-                                    </div>
-                                )
-                            )}
+                        <div className="flex gap-2">
+                            {[FaXTwitter, FaInstagram, FaLinkedinIn].map((Icon, idx) => (
+                                <a
+                                    key={idx}
+                                    href="#"
+                                    className="w-9 h-9 flex items-center justify-center rounded-full border border-stroke text-paper-dim hover:text-accent-fg hover:bg-accent hover:border-accent transition-colors"
+                                >
+                                    <Icon size={14} />
+                                </a>
+                            ))}
                         </div>
                     </div>
 
-                    {footerLinks?.map((section, i) => (
-                        <div key={i}>
-                            <h3 className="text-white text-lg sm:text-xl lg:text-2xl font-semibold mb-3 sm:mb-4">
-                                {section?.title || "N/F"}
+                    {sections.map((section) => (
+                        <div key={section.title} className="col-span-1 lg:col-span-2 lg:col-start-auto">
+                            <h3 className="text-paper text-xs font-medium tracking-[0.2em] uppercase mb-4">
+                                {section.title}
                             </h3>
-
-                            <ul className="space-y-2 sm:space-y-3 text-sm text-white">
-                                {section?.links?.map((link, index) => (
-                                    <li key={index}>
+                            <ul className="space-y-3">
+                                {section.links.map((link) => (
+                                    <li key={link.name}>
                                         <Link
                                             to={link.path}
-                                            className="hover:text-gray-300 transition"
+                                            className="text-paper-dim text-sm hover:text-paper transition-colors"
                                         >
-                                            {link.name || "N/F"}
+                                            {link.name}
                                         </Link>
                                     </li>
                                 ))}
                             </ul>
                         </div>
                     ))}
-
                 </div>
 
-                <div className="border-t border-gray-600 mt-12 pt-6 text-center text-sm text-gray-400">
-                    © 2026 ADUAtlas. All rights reserved.
+                <div className="border-t border-stroke pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+                    <p className="text-paper-dim text-xs">© 2026 ADUAtlas. All rights reserved.</p>
+                    <p className="text-paper-dim text-xs">Built for homeowners who refuse to guess.</p>
                 </div>
-
             </div>
         </footer>
     );

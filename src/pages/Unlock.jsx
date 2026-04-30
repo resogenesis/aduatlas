@@ -87,46 +87,48 @@ const Unlock = () => {
   };
 
   return (
-    <div className="min-h-[80vh] bg-[#F4F7F6] py-12 sm:py-16">
-      <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
+    <div className="min-h-[80vh] bg-canvas py-16 sm:py-24">
+      <div className="container mx-auto px-5 sm:px-8 max-w-3xl">
 
-        <div className="text-center mb-10">
-          <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-xs sm:text-sm mb-3">
-            ADUATLAS PAID ACCESS
+        <div className="text-center mb-14">
+          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-5">
+            ADUAtlas Paid Access
           </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
-            Unlock your full ADU plan for $79.99
+          <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+            Unlock the full plan.
+            <br />
+            <span className="italic text-accent">$79.99</span>
           </h1>
-          <p className="text-secondary text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-paper-dim text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
             One-time payment. Lifetime access. Replaces a $500+ official survey and weeks of builder back-and-forth.
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-8">
-          <div className="bg-gradient-to-br from-[#0F3D33] to-[#1F6F57] px-6 sm:px-10 py-8 text-white">
-            <div className="flex items-baseline gap-2 mb-2">
-              <span className="text-5xl font-bold">$79.99</span>
-              <span className="text-white/70 line-through text-sm">$500+ official survey</span>
+        <div className="bg-surface-1-solid border border-stroke rounded-3xl overflow-hidden mb-6">
+          <div className="bg-accent text-accent-fg px-8 sm:px-12 py-9">
+            <div className="flex items-baseline gap-3 mb-1">
+              <span className="font-display text-6xl sm:text-7xl">$79.99</span>
+              <span className="text-accent-fg/60 line-through text-sm">$500+ official survey</span>
             </div>
-            <p className="text-white/90 text-sm">One-time · Lifetime access · No subscription</p>
+            <p className="text-accent-fg/80 text-sm">One-time · Lifetime access · No subscription</p>
           </div>
 
-          <div className="px-6 sm:px-10 py-8">
-            <h3 className="font-semibold text-primary text-lg mb-4">What's included</h3>
-            <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-8">
+          <div className="px-8 sm:px-12 py-10">
+            <h3 className="text-paper text-xs uppercase tracking-[0.2em] mb-5">What's included</h3>
+            <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-3 mb-10">
               {includes.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm text-secondary">
-                  <FiCheck className="shrink-0 mt-0.5 text-[#2F5D50]" />
+                <li key={item} className="flex items-start gap-3 text-sm text-paper-dim">
+                  <FiCheck className="shrink-0 mt-0.5 text-accent" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
 
-            <h3 className="font-semibold text-primary text-lg mb-3">What we don't do (transparency)</h3>
-            <ul className="space-y-2 mb-8">
+            <h3 className="text-paper text-xs uppercase tracking-[0.2em] mb-3">What we don't do</h3>
+            <ul className="space-y-2 mb-10">
               {excludes.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm text-secondary">
-                  <FiX className="shrink-0 mt-0.5 text-gray-400" />
+                <li key={item} className="flex items-start gap-3 text-sm text-paper-dim">
+                  <FiX className="shrink-0 mt-0.5 text-stroke" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -134,9 +136,9 @@ const Unlock = () => {
 
             {!emailSubmitted ? (
               <form onSubmit={submitEmail} className="space-y-3">
-                <label className="block text-sm font-semibold text-primary">
+                <label className="block text-paper text-sm font-medium">
                   Email to start
-                  <span className="text-secondary font-normal ml-1">(we'll send your receipt + access link here)</span>
+                  <span className="text-paper-dim font-normal ml-1">(receipt + access link)</span>
                 </label>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <input
@@ -145,38 +147,38 @@ const Unlock = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@email.com"
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#2F5D50] focus:ring-2 focus:ring-[#2F5D50]/20"
+                    className="flex-1 px-5 py-4 bg-canvas border border-stroke rounded-xl text-paper placeholder:text-paper-dim/60 focus:outline-none focus:border-accent transition"
                   />
                   <button
                     type="submit"
-                    className="px-6 py-3 rounded-lg bg-[#2F5D50] text-white font-semibold hover:bg-[#244A40] transition"
+                    className="px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
                   >
                     Continue
                   </button>
                 </div>
                 {!hasQuiz && (
-                  <p className="text-xs text-secondary">
-                    Tip: <Link to="/quiz" className="underline">take the 2-minute quiz first</Link> so your feasibility study is personalized.
+                  <p className="text-xs text-paper-dim">
+                    Tip: <Link to="/quiz" className="underline hover:text-paper">take the 2-minute quiz first</Link> so your study is personalized.
                   </p>
                 )}
               </form>
             ) : (
-              <div className="space-y-4">
-                <div className="bg-[#F4F7F6] rounded-lg p-4 flex items-center gap-3">
-                  <FiCheck className="text-[#2F5D50] text-xl shrink-0" />
+              <div className="space-y-5">
+                <div className="bg-canvas border border-stroke rounded-xl p-4 flex items-center gap-3">
+                  <FiCheck className="text-accent text-xl shrink-0" />
                   <div className="text-sm">
-                    <span className="font-semibold text-primary">Email saved.</span>{" "}
-                    <span className="text-secondary">{email}</span>
+                    <span className="text-paper font-medium">Email saved.</span>{" "}
+                    <span className="text-paper-dim">{email}</span>
                   </div>
                 </div>
                 <button
                   onClick={startCheckout}
                   disabled={loading}
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg bg-[#2F5D50] text-white text-lg font-semibold hover:bg-[#244A40] transition disabled:opacity-60"
+                  className="w-full inline-flex items-center justify-center gap-2 px-7 py-5 rounded-full bg-accent text-accent-fg text-lg font-semibold hover:bg-paper transition-colors disabled:opacity-60"
                 >
                   <FiLock /> {loading ? "Redirecting…" : "Unlock for $79.99"}
                 </button>
-                <p className="text-center text-xs text-secondary flex items-center justify-center gap-1.5">
+                <p className="text-center text-xs text-paper-dim flex items-center justify-center gap-1.5">
                   <FiShield /> Secure checkout · Mock for now — Stripe integration pending
                 </p>
               </div>
@@ -184,13 +186,13 @@ const Unlock = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-10">
-          <h3 className="font-semibold text-primary text-lg mb-5">Frequently asked</h3>
-          <div className="space-y-5">
+        <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-12">
+          <h3 className="text-paper text-xs uppercase tracking-[0.2em] mb-6">Frequently asked</h3>
+          <div className="divide-y divide-stroke">
             {faqs.map((f) => (
-              <div key={f.q}>
-                <p className="font-semibold text-primary text-sm sm:text-base mb-1">{f.q}</p>
-                <p className="text-secondary text-sm leading-relaxed">{f.a}</p>
+              <div key={f.q} className="py-5 first:pt-0 last:pb-0">
+                <p className="font-display text-paper text-base sm:text-lg mb-2">{f.q}</p>
+                <p className="text-paper-dim text-sm leading-relaxed">{f.a}</p>
               </div>
             ))}
           </div>

@@ -22,23 +22,23 @@ const ChooseState = () => {
       />
 
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 max-w-4xl">
-        <p className="text-secondary text-base sm:text-lg leading-relaxed mb-8 text-center">
+        <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-8 text-center">
           ADU rules in the U.S. layer state code on top of city zoning on top of HOA restrictions. State A might mandate ADUs while City B inside it adds setback rules and impact fees that change the math entirely. Don't trust generic answers from one source.
         </p>
 
-        <div className="bg-[#F4F7F6] rounded-2xl p-6 sm:p-8 mb-10">
-          <p className="text-primary font-semibold mb-5 text-center">All 50 states covered:</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-2 text-secondary text-sm">
+        <div className="bg-surface-1-solid border border-stroke rounded-2xl p-6 sm:p-8 mb-10">
+          <p className="text-paper font-semibold mb-5 text-center">All 50 states covered:</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-2 text-paper-dim text-sm">
             {stateNames.map((s) => (
               <div key={s} className="flex items-start gap-2">
-                <span className="text-[#2F5D50] shrink-0 mt-0.5">·</span>
+                <span className="text-accent shrink-0 mt-0.5">·</span>
                 <span>{s}</span>
               </div>
             ))}
           </div>
         </div>
 
-        <p className="text-secondary text-base sm:text-lg leading-relaxed text-center">
+        <p className="text-paper-dim text-base sm:text-lg leading-relaxed text-center">
           The state-by-state breakdown — what each state mandates, where city rules diverge, and which authority controls what — is inside the ADU system, with your specific ZIP code's rules pulled into your Feasibility Study.
         </p>
       </section>

@@ -1,107 +1,94 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import Logo from "./Logo";
+import { Link, NavLink } from "react-router-dom";
+import { FiMenu, FiX } from "react-icons/fi";
+import Logomark from "../brand/Logomark";
 
 const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "How to ADU", path: "/how-to-adu" },
-  { name: "ADU Types", path: "/adu-types" },
+  { name: "How it works", path: "/#how" },
+  { name: "Reality Check", path: "/quiz" },
   { name: "FAQ", path: "/faq" },
-  { name: "Video Library", path: "/videos" },
-  { name: "Choose City/State", path: "/choose-your-state" },
-  { name: "About Us", path: "/about" },
+  { name: "About", path: "/about" },
 ];
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="w-full sticky top-0 bg-white z-50 shadow-md">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-2 lg:py-4">
-        {/* Logo */}
-        <Logo />
+    <header className="w-full sticky top-0 z-50 bg-canvas/85 backdrop-blur-md border-b border-stroke">
+      <div className="container mx-auto px-5 sm:px-8 flex items-center justify-between py-3 lg:py-4">
+        <Link to="/" className="text-paper hover:text-accent transition-colors">
+          <Logomark className="h-7" />
+        </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-6">
+        {/* Desktop nav */}
+        <nav className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link
+            <NavLink
               key={link.name}
               to={link.path}
-              className="text-sm font-medium text-gray-700 hover:text-[#2F5D50] transition"
+              className={({ isActive }) =>
+                `text-sm font-medium transition-colors ${isActive ? "text-paper" : "text-paper-dim hover:text-paper"}`
+              }
             >
               {link.name}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 
-        {/* Desktop Auth Buttons */}
+        {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <Link
             to="/login"
-            className="px-5 py-2 rounded-md border border-[#2F5D50] text-[#2F5D50] font-semibold text-sm hover:bg-[#2F5D50] hover:text-white transition"
+            className="text-sm font-medium text-paper-dim hover:text-paper transition-colors"
           >
-            Log In
+            Log in
           </Link>
           <Link
-            to="/signup"
-            className="px-5 py-2 rounded-md bg-[#2F5D50] text-white font-semibold text-sm hover:bg-[#244A40] transition"
+            to="/quiz"
+            className="px-5 py-2.5 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors"
           >
-            Sign Up
+            Start Free
           </Link>
         </div>
 
-        {/* Mobile Hamburger */}
+        {/* Mobile toggle */}
         <button
-          className="lg:hidden flex flex-col gap-1.5 cursor-pointer p-2"
+          className="lg:hidden p-2 text-paper"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
-          <span
-            className={`block w-6 h-0.5 bg-gray-800 transition-transform duration-300 ${
-              mobileOpen ? "rotate-45 translate-y-2" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-gray-800 transition-opacity duration-300 ${
-              mobileOpen ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-gray-800 transition-transform duration-300 ${
-              mobileOpen ? "-rotate-45 -translate-y-2" : ""
-            }`}
-          />
+          {mobileOpen ? <FiX className="text-2xl" /> : <FiMenu className="text-2xl" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg">
-          <nav className="flex flex-col px-6 py-4 gap-3">
+        <div className="lg:hidden bg-canvas border-t border-stroke">
+          <nav className="flex flex-col px-5 py-4 gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-sm font-medium text-gray-700 hover:text-[#2F5D50] py-2 transition"
+                className="text-paper text-base font-medium py-3"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.name}
               </Link>
             ))}
-            <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-gray-100">
+            <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-stroke">
               <Link
                 to="/login"
-                className="px-5 py-2.5 rounded-md border border-[#2F5D50] text-[#2F5D50] font-semibold text-sm text-center hover:bg-[#2F5D50] hover:text-white transition"
+                className="text-paper-dim text-sm py-2"
                 onClick={() => setMobileOpen(false)}
               >
-                Log In
+                Log in
               </Link>
               <Link
-                to="/signup"
-                className="px-5 py-2.5 rounded-md bg-[#2F5D50] text-white font-semibold text-sm text-center hover:bg-[#244A40] transition"
+                to="/quiz"
+                className="px-5 py-3 rounded-full bg-accent text-accent-fg font-semibold text-sm text-center"
                 onClick={() => setMobileOpen(false)}
               >
-                Sign Up
+                Start Free
               </Link>
             </div>
           </nav>

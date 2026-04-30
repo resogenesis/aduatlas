@@ -59,15 +59,15 @@ const faqs = [
 const FAQ = () => {
   return (
     <div>
-      <section className="bg-white py-12 sm:py-16">
+      <section className="bg-canvas py-12 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 max-w-3xl text-center">
-          <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-xs sm:text-sm mb-3 uppercase">
+          <p className="text-accent font-semibold tracking-[0.2em] text-xs sm:text-sm mb-3 uppercase">
             Six questions every ADU homeowner should answer first
           </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-paper leading-tight">
             Most ADU projects fail in the questions you didn't ask.
           </h1>
-          <p className="mt-5 text-secondary text-sm sm:text-base leading-relaxed">
+          <p className="mt-5 text-paper-dim text-sm sm:text-base leading-relaxed">
             Answer these honestly. If even one of them gives you pause, you have a real risk in your project — and you're not alone. The full system walks you through each one.
           </p>
         </div>

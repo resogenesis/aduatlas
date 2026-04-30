@@ -19,82 +19,83 @@ const Results = () => {
 
   const { score, band, findings } = calculateScore(answers);
 
-  const ringColor =
-    score >= 80 ? "#1F6F57" : score >= 60 ? "#2F5D50" : score >= 40 ? "#C68B00" : "#B23A3A";
+  const circumference = 2 * Math.PI * 52;
+  const offset = circumference - (score / 100) * circumference;
 
   return (
-    <div className="min-h-[80vh] bg-[#F4F7F6] py-12 sm:py-16">
-      <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
+    <div className="min-h-[80vh] bg-canvas py-16 sm:py-24">
+      <div className="container mx-auto px-5 sm:px-8 max-w-3xl">
 
-        <p className="text-center text-[#2F5D50] font-semibold tracking-[0.2em] text-xs sm:text-sm mb-3">
-          YOUR ADU READINESS REPORT
+        <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-5 text-center">
+          Your ADU Readiness Report
         </p>
-        <h1 className="text-center text-3xl sm:text-4xl font-bold text-primary mb-2">
-          Your ADU Readiness Score: {score}% — here's what you're missing.
+        <h1 className="font-display font-medium text-paper text-3xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-center mb-4">
+          Your score: <span className="text-accent">{score}%</span>
+          <br className="hidden sm:block" />
+          <span className="italic text-paper-dim">— here's what you're missing.</span>
         </h1>
-        <p className="text-center text-secondary mb-10">
+        <p className="text-paper-dim text-base sm:text-lg max-w-xl mx-auto text-center mb-12">
           Based on your ZIP, lot, budget, timeline, and what you do (and don't) know.
         </p>
 
-        <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-10 mb-8">
-          <div className="flex flex-col sm:flex-row items-center gap-8">
-            <div className="relative w-40 h-40 shrink-0">
+        <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-12 mb-6">
+          <div className="flex flex-col sm:flex-row items-center gap-10">
+            <div className="relative w-44 h-44 shrink-0">
               <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90">
-                <circle cx="60" cy="60" r="52" fill="none" stroke="#E5E7EB" strokeWidth="12" />
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#2A2D26" strokeWidth="6" />
                 <circle
                   cx="60" cy="60" r="52" fill="none"
-                  stroke={ringColor}
-                  strokeWidth="12"
-                  strokeDasharray={`${(score / 100) * 326.7} 326.7`}
-                  strokeLinecap="round"
+                  stroke="#C6F24E" strokeWidth="6" strokeLinecap="round"
+                  strokeDasharray={circumference}
+                  strokeDashoffset={offset}
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-4xl font-bold text-primary">{score}</span>
-                <span className="text-xs text-secondary uppercase tracking-wider">/ 100</span>
+                <span className="font-display font-medium text-paper text-6xl leading-none">{score}</span>
+                <span className="text-paper-dim text-xs uppercase tracking-[0.2em] mt-2">/ 100</span>
               </div>
             </div>
 
             <div className="flex-1 text-center sm:text-left">
-              <p className="text-sm text-secondary uppercase tracking-wider mb-1">Result</p>
-              <h2 className="text-2xl sm:text-3xl font-semibold text-primary mb-3" style={{ color: ringColor }}>
+              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Result</p>
+              <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl mb-4">
                 {band}
               </h2>
-              <p className="text-secondary text-sm sm:text-base leading-relaxed">
-                This is a preliminary snapshot. Your full Feasibility Study and Site Plan refines this score with GIS lot data, your local zoning rules, and pre-site cost estimates.
+              <p className="text-paper-dim text-sm sm:text-base leading-relaxed">
+                This is preliminary. Your full Feasibility Study refines this with GIS lot data, your local zoning rules, and pre-site cost estimates.
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-10 mb-8">
-          <h3 className="text-lg sm:text-xl font-semibold text-primary mb-5">
+        <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-12 mb-6">
+          <h3 className="font-display font-medium text-paper text-xl sm:text-2xl mb-6">
             What we found about your situation
           </h3>
-          <ul className="space-y-3.5">
+          <ul className="space-y-5">
             {findings.map((f, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="shrink-0 mt-0.5 w-6 h-6 rounded-full bg-[#2F5D50]/10 text-[#2F5D50] flex items-center justify-center text-xs font-semibold">
-                  {i + 1}
+              <li key={i} className="flex items-start gap-4">
+                <span className="font-display text-accent text-2xl leading-none shrink-0 w-7">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="text-secondary text-sm sm:text-base leading-relaxed">{f}</span>
+                <span className="text-paper-dim text-sm sm:text-base leading-relaxed">{f}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="bg-gradient-to-br from-[#0F3D33] to-[#1F6F57] rounded-2xl p-6 sm:p-10 text-white shadow-lg">
-          <div className="flex items-center gap-2 mb-3 text-sm font-semibold tracking-wider uppercase text-white/80">
-            <FiLock /> Locked — unlock with Paid Access
+        <div className="bg-accent text-accent-fg rounded-3xl p-8 sm:p-12">
+          <div className="inline-flex items-center gap-2 mb-4 text-xs font-semibold tracking-[0.2em] uppercase">
+            <FiLock /> Locked
           </div>
-          <h3 className="text-2xl sm:text-3xl font-semibold mb-3">
-            Get your full Feasibility Study + Site Plan
+          <h3 className="font-display font-medium text-3xl sm:text-4xl leading-tight mb-4">
+            Unlock the full plan + your Feasibility Study.
           </h3>
-          <p className="text-white/90 mb-6 text-sm sm:text-base leading-relaxed">
-            Your free score is the headline. Paid Access unlocks the full plan: GIS lot view with dimensions, pre-filled pre-site cost worksheet, total budget worksheet, your refined ADU Readiness Score, a utility-marking contact, and a builder-ready RFP packet.
+          <p className="text-accent-fg/80 mb-7 text-sm sm:text-base leading-relaxed max-w-xl">
+            6 chapters. 20+ modules. GIS site plan. Pre-filled budget worksheets. Refined readiness score. Builder-ready RFP packet.
           </p>
 
-          <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-7 text-sm">
+          <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-9 text-sm">
             {[
               "Full course — 6 chapters, 20+ modules",
               "GIS satellite view with lot dimensions",
@@ -105,28 +106,28 @@ const Results = () => {
               "Builder/supplier matches by ZIP",
               "7-day full refund — no questions asked",
             ].map((item) => (
-              <li key={item} className="flex items-start gap-2 text-white/90">
+              <li key={item} className="flex items-start gap-2">
                 <FiCheck className="shrink-0 mt-1" />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+          <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
             <Link
               to="/unlock"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-white text-[#0F3D33] font-semibold hover:bg-white/90 transition"
+              className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
             >
-              Unlock for $79.99 <FiArrowRight />
+              Unlock for $79.99 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <span className="text-white/70 text-sm">One-time payment · Lifetime access</span>
+            <span className="text-accent-fg/70 text-sm">One-time · Lifetime access · 7-day refund</span>
           </div>
         </div>
 
-        <p className="text-center text-xs text-secondary mt-8">
-          <Link to="/quiz" className="underline hover:text-primary">Retake the quiz</Link>
-          {" · "}
-          <Link to="/" className="underline hover:text-primary">Back to homepage</Link>
+        <p className="text-center text-xs text-paper-dim mt-10">
+          <Link to="/quiz" className="hover:text-paper transition">Retake quiz</Link>
+          <span className="mx-2">·</span>
+          <Link to="/" className="hover:text-paper transition">Back to homepage</Link>
         </p>
 
       </div>

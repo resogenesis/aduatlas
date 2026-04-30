@@ -13,60 +13,49 @@ import { setPaid } from "../funnel/paymentStore";
 
 const Welcome = () => {
   useEffect(() => {
-    // Mock-only: simulate the webhook that sets users.paid_at, so the
-    // PaidGate components unlock for the rest of the session.
     setPaid(true);
   }, []);
 
   return (
-    <div className="min-h-[80vh] bg-[#F4F7F6] py-12 sm:py-16">
-      <div className="container mx-auto px-4 sm:px-6 max-w-2xl text-center">
+    <div className="min-h-[80vh] bg-canvas py-16 sm:py-24">
+      <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
 
-        <div className="w-20 h-20 mx-auto rounded-full bg-[#2F5D50]/10 flex items-center justify-center mb-6">
-          <FiCheckCircle className="text-[#2F5D50] text-4xl" />
+        <div className="w-20 h-20 mx-auto rounded-full bg-accent/15 flex items-center justify-center mb-7">
+          <FiCheckCircle className="text-accent text-4xl" />
         </div>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
-          Welcome to ADUAtlas Paid Access
+        <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+          You're in.
         </h1>
-        <p className="text-secondary text-base sm:text-lg leading-relaxed mb-10">
-          Your access is unlocked. We've sent a confirmation to your email. Start with Chapter 1 — the course is 6 chapters and 20+ modules, ending with your personalized Feasibility Study and builder-ready RFP packet.
+        <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-12 max-w-xl mx-auto">
+          Confirmation is on its way to your email. Start with Chapter 1 — the course is 6 chapters and 20+ modules, ending with your personalized Feasibility Study and builder-ready RFP packet.
         </p>
 
-        <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-10 text-left mb-8">
-          <h3 className="font-semibold text-primary text-lg mb-4">Your next 3 steps</h3>
-          <ol className="space-y-4">
-            <li className="flex items-start gap-3">
-              <span className="shrink-0 w-7 h-7 rounded-full bg-[#2F5D50] text-white text-sm font-semibold flex items-center justify-center">1</span>
-              <div>
-                <p className="font-semibold text-primary text-sm sm:text-base">Start Chapter 1 — How to ADU</p>
-                <p className="text-secondary text-sm">Process, timelines, and the foundation everything else builds on.</p>
-              </div>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="shrink-0 w-7 h-7 rounded-full bg-[#2F5D50] text-white text-sm font-semibold flex items-center justify-center">2</span>
-              <div>
-                <p className="font-semibold text-primary text-sm sm:text-base">Work through the modules</p>
-                <p className="text-secondary text-sm">20+ modules across 6 chapters — each with worksheets pre-filled from your quiz answers.</p>
-              </div>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="shrink-0 w-7 h-7 rounded-full bg-[#2F5D50] text-white text-sm font-semibold flex items-center justify-center">3</span>
-              <div>
-                <p className="font-semibold text-primary text-sm sm:text-base">Unlock your Feasibility Study</p>
-                <p className="text-secondary text-sm">Chapter 6 generates your GIS site plan, refined readiness score, and builder RFP packet.</p>
-              </div>
-            </li>
+        <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-10 text-left mb-10">
+          <h3 className="text-paper text-xs uppercase tracking-[0.2em] mb-6">Your next 3 steps</h3>
+          <ol className="space-y-6">
+            {[
+              { n: "01", t: "Start Chapter 1 — How to ADU", d: "Process, timelines, and the foundation everything else builds on." },
+              { n: "02", t: "Work through the modules", d: "20+ modules across 6 chapters — each with worksheets pre-filled from your quiz answers." },
+              { n: "03", t: "Unlock your Feasibility Study", d: "Chapter 6 generates your GIS site plan, refined readiness score, and builder RFP packet." },
+            ].map((s) => (
+              <li key={s.n} className="flex items-start gap-5">
+                <span className="font-display text-accent text-2xl leading-none w-8 shrink-0">{s.n}</span>
+                <div>
+                  <p className="font-display text-paper text-lg mb-1">{s.t}</p>
+                  <p className="text-paper-dim text-sm leading-relaxed">{s.d}</p>
+                </div>
+              </li>
+            ))}
           </ol>
         </div>
 
         <Link
           to="/course/c1"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#2F5D50] text-white font-semibold hover:bg-[#244A40] transition"
+          className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
         >
-          Start Chapter 1 <FiArrowRight />
+          Start Chapter 1 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>
-
       </div>
     </div>
   );
