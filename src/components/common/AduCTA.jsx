@@ -1,56 +1,81 @@
 import { Link } from "react-router-dom";
-import aduCta from "../../assets/home/container_img.png"
+import { FiArrowRight } from "react-icons/fi";
+
+const intake = [
+  "Location (ZIP code)",
+  "Purpose — how will you use the ADU",
+  "Lot size & existing structure (sq ft)",
+  "Budget (site prep + structure)",
+  "ADU type, size, and sq ft",
+  "Timeline",
+  "Access to the space",
+];
 
 const AduCTA = () => {
-    return (
-        <section className="w-full py-12 sm:py-16 lg:py-25">
-            <div className="container mx-auto px-4 sm:px-6">
-                <div className="flex flex-col lg:flex-row lg:items-stretch justify-between bg-linear-to-r from-[#0F3D33] to-[#1F6F57] rounded-2xl overflow-hidden">
+  return (
+    <section className="bg-canvas py-20 sm:py-28 border-t border-stroke">
+      <div className="container mx-auto px-5 sm:px-8 max-w-6xl">
 
-                    <div className="text-white px-6 py-10 sm:px-10 sm:py-12 lg:pl-18 lg:pr-6 lg:py-12 lg:max-w-[55%]">
+        <div className="relative bg-surface-1-solid border border-stroke rounded-3xl overflow-hidden">
+          {/* ambient accent glow */}
+          <div aria-hidden className="pointer-events-none absolute -top-40 -right-40 w-[36rem] h-[36rem] rounded-full bg-accent/8 blur-3xl" />
 
-                        <h2 className="text-2xl sm:text-3xl font-semibold leading-snug mb-4 sm:mb-5">
-                            Whether you are ready to build or starting out, ADUAtlas walks you through the process.
-                        </h2>
+          <div className="relative grid lg:grid-cols-12 gap-10 lg:gap-12 p-8 sm:p-12 lg:p-16">
 
-                        <p className="text-sm text-gray-200 mb-4">
-                            Any builder or contractor needs the following information from you to provide an accurate scope of work and realistic estimates. Here are the questions:
-                        </p>
+            {/* LEFT: copy */}
+            <div className="lg:col-span-7">
+              <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-5">
+                Before you call a builder
+              </p>
+              <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight mb-5">
+                Every builder will ask <span className="italic text-paper-dim">these seven things.</span>
+              </h2>
+              <p className="text-paper-dim text-base leading-relaxed max-w-lg mb-8">
+                Show up with the answers and quotes are accurate the first time. Show up without them and every estimate you get is a guess.
+              </p>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-gray-200 mb-6 sm:mb-8">
-                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Location (ZIP code)</span></div>
-                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Purpose / how will you use the ADU</span></div>
-                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Lot size &amp; existing structure (square footage)</span></div>
-                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Budget (site prep + structure)</span></div>
-                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>ADU type, size, and square footage</span></div>
-                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Timeline</span></div>
-                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Access / to the space</span></div>
-                            <div className="flex items-start gap-2"><span className="text-white mt-1 shrink-0">•</span><span>Paid Access unlocks your personalized Feasibility Study &amp; Site Plan</span></div>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
-                            <Link to="/how-to-adu" className="border border-white cursor-pointer px-6 py-3 rounded-md bg-white text-[#0F3D33] font-medium hover:shadow-md hover:bg-transparent hover:text-white transition text-center w-full sm:w-auto">
-                                How to ADU
-                            </Link>
-
-                            <Link to="/pricing" className="cursor-pointer px-6 py-3 rounded-md border border-white text-white hover:bg-white hover:text-[#0F3D33] transition text-center w-full sm:w-auto">
-                                ADU Paid Access
-                            </Link>
-                        </div>
-                    </div>
-
-                    <div className="w-full lg:w-[45%] lg:self-stretch">
-                        <img
-                            src={aduCta}
-                            alt="ADU build"
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-
-                </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  to="/quiz"
+                  className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+                >
+                  Start the Reality Check <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  to="/unlock"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-stroke text-paper font-medium hover:border-paper-dim transition"
+                >
+                  Unlock Paid Access
+                </Link>
+              </div>
             </div>
-        </section>
-    );
+
+            {/* RIGHT: editorial intake list */}
+            <div className="lg:col-span-5 lg:border-l lg:border-stroke lg:pl-12">
+              <p className="text-paper text-xs uppercase tracking-[0.2em] mb-6">The seven questions</p>
+              <ul className="space-y-px">
+                {intake.map((item, i) => (
+                  <li
+                    key={item}
+                    className="flex items-baseline gap-5 py-3 border-b border-stroke last:border-b-0"
+                  >
+                    <span className="font-display text-paper-dim text-sm tabular-nums shrink-0 w-6">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-paper text-sm sm:text-base">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="text-paper-dim text-xs italic leading-relaxed mt-6">
+                Paid Access unlocks your personalized Feasibility Study & Site Plan that answers all seven for your specific lot.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default AduCTA;
