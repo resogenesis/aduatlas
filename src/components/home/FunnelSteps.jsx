@@ -4,19 +4,19 @@ import { useReveal } from "../../hooks/useReveal";
 
 const steps = [
   {
-    n: "1",
-    title: "Take the 2-minute Reality Check",
-    desc: "Answer 7 quick questions about your property, budget, and goals. No signup needed.",
+    n: "01",
+    title: "Check your property",
+    desc: "Type your address. Get an instant snapshot — lot size, what's likely buildable, rough cost band — with confidence labels on every line.",
   },
   {
-    n: "2",
-    title: "Get your free Readiness Score",
-    desc: "See your personalized score and the top 3 risks specific to your situation.",
+    n: "02",
+    title: "See what's verified vs. estimated",
+    desc: "Free output is honest about what we know, what we're modeling, and what still needs verification. No fake confidence.",
   },
   {
-    n: "3",
-    title: "Unlock your full plan — $79.99",
-    desc: "Lifetime access to 6 chapters / 20+ modules, your Feasibility Study, GIS site plan, and a builder-ready RFP. 7-day refund.",
+    n: "03",
+    title: "Unlock the Builder-Ready Report",
+    desc: "$399 verifies every line, names your real costs and risks, and produces a builder-ready packet for apples-to-apples bids. 7-day refund.",
   },
 ];
 
@@ -25,46 +25,46 @@ const StepCard = ({ s, i }) => {
   return (
     <div
       ref={ref}
-      className="bg-canvas rounded-xl p-6 sm:p-7 relative group hover:-translate-y-1 transition-transform duration-300"
+      className="bg-surface-1-solid border border-stroke rounded-2xl p-7 sm:p-8 relative group hover:-translate-y-1 hover:border-accent/40 transition-all duration-300"
     >
-      <span className="absolute -top-3 -left-3 w-10 h-10 rounded-full bg-[#2F5D50] text-white flex items-center justify-center font-bold shadow-md group-hover:bg-accent group-hover:text-accent-fg group-hover:scale-110 transition-all duration-300">
+      <span className="font-display text-paper-dim text-3xl mb-4 block group-hover:text-accent transition-colors">
         {s.n}
       </span>
-      <h3 className="font-semibold text-primary text-base sm:text-lg mb-2 mt-2">{s.title}</h3>
-      <p className="text-secondary text-sm leading-relaxed">{s.desc}</p>
+      <h3 className="font-display text-paper text-xl sm:text-2xl leading-snug mb-3">{s.title}</h3>
+      <p className="text-paper-dim text-sm sm:text-base leading-relaxed">{s.desc}</p>
     </div>
   );
 };
 
 const FunnelSteps = () => {
   const headRef = useReveal(0);
-  const ctaRef = useReveal(300);
+  const ctaRef = useReveal(360);
   return (
-    <section className="bg-[#F4F7F6] py-14 sm:py-20">
-      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
-        <div ref={headRef} className="text-center mb-10 sm:mb-14">
-          <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-xs sm:text-sm mb-3 uppercase">
+    <section className="bg-canvas py-24 sm:py-32 border-t border-stroke">
+      <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
+        <div ref={headRef} className="mb-14 sm:mb-20 max-w-2xl">
+          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
             How it works
           </p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary leading-snug">
-            From "I'm curious" to builder-ready in three steps
+          <h2 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+            Curiosity to <span className="italic">buildable plan</span> in three moves.
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mb-12">
+        <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mb-14">
           {steps.map((s, i) => <StepCard key={s.n} s={s} i={i} />)}
         </div>
 
-        <div ref={ctaRef} className="text-center">
+        <div ref={ctaRef} className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
           <Link
-            to="/quiz"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-md bg-[#2F5D50] text-white font-semibold hover:bg-[#244A40] transition shadow-sm"
+            to="/"
+            className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
           >
-            Start the Reality Check <FiArrowRight />
+            Check my property <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>
-          <p className="text-xs text-secondary mt-3">
-            Takes ~2 minutes · No signup · No credit card to start
-          </p>
+          <span className="text-paper-dim text-sm">
+            No signup · No credit card · Honest about what we don't know yet
+          </span>
         </div>
       </div>
     </section>
