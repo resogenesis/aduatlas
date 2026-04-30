@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
-import AduCTA from "../components/common/AduCTA";
 import { useReveal } from "../hooks/useReveal";
 
 const stats = [
@@ -185,7 +184,6 @@ const About = () => {
         </div>
       </section>
 
-      <AduCTA />
     </div>
   );
 };

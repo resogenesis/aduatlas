@@ -1,6 +1,5 @@
 import { FiBookOpen, FiClipboard, FiBarChart2 } from "react-icons/fi";
 import PageHeader from "../../components/common/PageHeader";
-import AduCTA from "../../components/common/AduCTA";
 import Accordion from "../../components/common/Accordion";
 import heroImg from "../../assets/home/hero_image.png";
 import img1 from "../../assets/home/choose_img1.png";
@@ -197,7 +196,6 @@ const HowToAdu = () => {
         </div>
       </section>
 
-      <AduCTA />
     </div>
   );
 };

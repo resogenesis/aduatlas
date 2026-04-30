@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import PageHeader from "../../components/common/PageHeader";
-import AduCTA from "../../components/common/AduCTA";
 import heroImg from "../../assets/home/hero_image.png";
 import img1 from "../../assets/home/choose_img1.png";
 import img2 from "../../assets/home/choose_img2.png";
@@ -119,7 +118,6 @@ const AduTypes = () => {
         </div>
       </section>
 
-      <AduCTA />
     </div>
   );
 };
