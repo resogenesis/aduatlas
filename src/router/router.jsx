@@ -12,6 +12,7 @@ import AduTypes from "../pages/AduTypes";
 import ChooseState from "../pages/ChooseState";
 import Videos from "../pages/Videos";
 import Pricing from "../pages/Pricing";
+import Property from "../pages/Property";
 import Quiz from "../pages/Quiz";
 import Results from "../pages/Results";
 import Unlock from "../pages/Unlock";
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <Home /> },
+      { path: "property", element: <Property /> },
       { path: "quiz", element: <Quiz /> },
       { path: "results", element: <Results /> },
       { path: "unlock", element: <Unlock /> },
