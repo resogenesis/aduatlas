@@ -89,7 +89,7 @@ export const login = ({ email, password }) => {
 export const routeForUser = (user) => {
   if (!user) return "/";
   if (user.role === "pro") return "/builder";
-  if (user.paid) return "/course/c1";
+  if (user.paid) return "/dashboard";
   return "/quiz";
 };
 

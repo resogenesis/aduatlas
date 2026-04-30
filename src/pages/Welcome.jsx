@@ -51,10 +51,10 @@ const Welcome = () => {
         </div>
 
         <Link
-          to="/course/c1"
+          to="/dashboard"
           className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
         >
-          Start Chapter 1 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+          Go to dashboard <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
     </div>
