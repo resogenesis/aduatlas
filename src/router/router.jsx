@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layout/RootLayout";
 import AppLayout from "../layout/AppLayout";
+import BuilderLayout from "../layout/BuilderLayout";
 import DashboardLayout from "../layout/DashboardLayout";
 
 import Home from "../pages/Home";
@@ -19,7 +20,13 @@ import BuilderListing from "../pages/BuilderListing";
 import BuilderProfile from "../pages/BuilderProfile";
 import Feasibility from "../pages/Feasibility";
 import UtilityEstimator from "../pages/UtilityEstimator";
-import BuilderHome from "../pages/BuilderHome";
+import BuilderDashboard from "../pages/builder/Dashboard";
+import BuilderLeads from "../pages/builder/Leads";
+import BuilderLeadDetail from "../pages/builder/LeadDetail";
+import BuilderProfilePage from "../pages/builder/Profile";
+import BuilderBilling from "../pages/builder/Billing";
+import BuilderSettings from "../pages/builder/Settings";
+import BuilderGate from "../components/funnel/BuilderGate";
 
 import Dashboard from "../pages/app/Dashboard";
 import CourseIndex from "../pages/app/CourseIndex";
@@ -66,8 +73,20 @@ const router = createBrowserRouter([
       { path: "signup", element: <Signup /> },
       { path: "forgot-password", element: <ForgotPassword /> },
 
-      // Builder-side (separate from homeowner app shell)
-      { path: "builder", element: <BuilderHome /> },
+    ],
+  },
+
+  // ─── Builder portal (sidebar layout, role-gated) ─────────────────
+  {
+    path: "/builder",
+    element: <BuilderGate><BuilderLayout /></BuilderGate>,
+    children: [
+      { index: true, element: <BuilderDashboard /> },
+      { path: "leads", element: <BuilderLeads /> },
+      { path: "leads/:id", element: <BuilderLeadDetail /> },
+      { path: "profile", element: <BuilderProfilePage /> },
+      { path: "billing", element: <BuilderBilling /> },
+      { path: "settings", element: <BuilderSettings /> },
     ],
   },
 
