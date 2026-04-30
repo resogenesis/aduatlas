@@ -1,3 +1,5 @@
+import { useReveal } from "../../hooks/useReveal";
+
 const risks = [
   {
     n: "01",
@@ -16,11 +18,36 @@ const risks = [
   },
 ];
 
+const RiskRow = ({ r, i }) => {
+  const ref = useReveal(i * 100);
+  return (
+    <div
+      ref={ref}
+      className="group grid grid-cols-12 gap-4 sm:gap-8 py-8 sm:py-10 border-t border-stroke last:border-b transition-colors hover:bg-surface-1-solid/40"
+    >
+      <div className="col-span-12 sm:col-span-2 flex items-start">
+        <span className="font-display text-paper-dim text-3xl sm:text-4xl group-hover:text-accent transition-colors">
+          {r.n}
+        </span>
+      </div>
+      <div className="col-span-12 sm:col-span-10">
+        <h3 className="font-display font-medium text-paper text-xl sm:text-2xl lg:text-3xl leading-snug mb-3 sm:mb-4">
+          {r.title}
+        </h3>
+        <p className="text-paper-dim text-base leading-relaxed max-w-2xl">
+          {r.desc}
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const RiskCallouts = () => {
+  const headRef = useReveal(0);
   return (
     <section className="bg-canvas py-24 sm:py-32">
       <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
-        <div className="mb-14 sm:mb-20 max-w-2xl">
+        <div ref={headRef} className="mb-14 sm:mb-20 max-w-2xl">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
             Where projects derail
           </p>
@@ -30,24 +57,7 @@ const RiskCallouts = () => {
         </div>
 
         <div className="space-y-px">
-          {risks.map((r, i) => (
-            <div
-              key={r.n}
-              className="group grid grid-cols-12 gap-4 sm:gap-8 py-8 sm:py-10 border-t border-stroke last:border-b transition-colors hover:bg-surface-1-solid/40"
-            >
-              <div className="col-span-12 sm:col-span-2 flex items-start">
-                <span className="font-display text-paper-dim text-3xl sm:text-4xl">{r.n}</span>
-              </div>
-              <div className="col-span-12 sm:col-span-10">
-                <h3 className="font-display font-medium text-paper text-xl sm:text-2xl lg:text-3xl leading-snug mb-3 sm:mb-4">
-                  {r.title}
-                </h3>
-                <p className="text-paper-dim text-base leading-relaxed max-w-2xl">
-                  {r.desc}
-                </p>
-              </div>
-            </div>
-          ))}
+          {risks.map((r, i) => <RiskRow key={r.n} r={r} i={i} />)}
         </div>
       </div>
     </section>

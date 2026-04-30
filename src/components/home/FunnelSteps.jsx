@@ -1,71 +1,70 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
+import { useReveal } from "../../hooks/useReveal";
 
 const steps = [
   {
-    n: "01",
-    title: "Take the Reality Check",
-    desc: "Seven questions. Two minutes. No signup. Zero credit card.",
+    n: "1",
+    title: "Take the 2-minute Reality Check",
+    desc: "Answer 7 quick questions about your property, budget, and goals. No signup needed.",
   },
   {
-    n: "02",
-    title: "Get your Readiness Score",
-    desc: "Personalized score, with the top three risks specific to your situation.",
+    n: "2",
+    title: "Get your free Readiness Score",
+    desc: "See your personalized score and the top 3 risks specific to your situation.",
   },
   {
-    n: "03",
-    title: "Unlock the full plan — $79.99",
-    desc: "6 chapters. 20+ modules. Feasibility study, GIS site plan, builder-ready RFP. 7-day refund.",
+    n: "3",
+    title: "Unlock your full plan — $79.99",
+    desc: "Lifetime access to 6 chapters / 20+ modules, your Feasibility Study, GIS site plan, and a builder-ready RFP. 7-day refund.",
   },
 ];
 
-const FunnelSteps = () => {
+const StepCard = ({ s, i }) => {
+  const ref = useReveal(i * 120);
   return (
-    <section className="bg-surface-1-solid py-24 sm:py-32 border-t border-stroke">
-      <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
+    <div
+      ref={ref}
+      className="bg-canvas rounded-xl p-6 sm:p-7 relative group hover:-translate-y-1 transition-transform duration-300"
+    >
+      <span className="absolute -top-3 -left-3 w-10 h-10 rounded-full bg-[#2F5D50] text-white flex items-center justify-center font-bold shadow-md group-hover:bg-accent group-hover:text-accent-fg group-hover:scale-110 transition-all duration-300">
+        {s.n}
+      </span>
+      <h3 className="font-semibold text-primary text-base sm:text-lg mb-2 mt-2">{s.title}</h3>
+      <p className="text-secondary text-sm leading-relaxed">{s.desc}</p>
+    </div>
+  );
+};
 
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 mb-14 sm:mb-20">
-          <div className="lg:col-span-5">
-            <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
-              How it works
-            </p>
-            <h2 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
-              From <span className="italic">"I'm curious"</span> to builder-ready in three moves.
-            </h2>
-          </div>
-          <div className="lg:col-span-7 lg:pt-3">
-            <p className="text-paper-dim text-base sm:text-lg leading-relaxed max-w-xl">
-              Skip the YouTube rabbit hole and the four-hour city-website session. Atlas gives you the answers in the order they actually matter.
-            </p>
-          </div>
+const FunnelSteps = () => {
+  const headRef = useReveal(0);
+  const ctaRef = useReveal(300);
+  return (
+    <section className="bg-[#F4F7F6] py-14 sm:py-20">
+      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+        <div ref={headRef} className="text-center mb-10 sm:mb-14">
+          <p className="text-[#2F5D50] font-semibold tracking-[0.2em] text-xs sm:text-sm mb-3 uppercase">
+            How it works
+          </p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary leading-snug">
+            From "I'm curious" to builder-ready in three steps
+          </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-px bg-stroke rounded-2xl overflow-hidden">
-          {steps.map((s) => (
-            <div key={s.n} className="bg-canvas p-7 sm:p-9 flex flex-col">
-              <div className="flex items-center justify-between mb-6">
-                <span className="font-display text-paper-dim text-2xl">{s.n}</span>
-                <span className="w-8 h-px bg-stroke" />
-              </div>
-              <h3 className="font-display font-medium text-paper text-xl sm:text-2xl leading-snug mb-3">
-                {s.title}
-              </h3>
-              <p className="text-paper-dim text-sm leading-relaxed flex-1">{s.desc}</p>
-            </div>
-          ))}
+        <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mb-12">
+          {steps.map((s, i) => <StepCard key={s.n} s={s} i={i} />)}
         </div>
 
-        <div className="mt-14 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+        <div ref={ctaRef} className="text-center">
           <Link
             to="/quiz"
-            className="group inline-flex items-center gap-3 px-7 py-4 bg-accent text-accent-fg font-semibold rounded-full hover:bg-paper transition-colors"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-md bg-[#2F5D50] text-white font-semibold hover:bg-[#244A40] transition shadow-sm"
           >
-            Start the Reality Check
-            <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+            Start the Reality Check <FiArrowRight />
           </Link>
-          <span className="text-paper-dim text-sm">
-            ~2 minutes · No signup · No credit card to start
-          </span>
+          <p className="text-xs text-secondary mt-3">
+            Takes ~2 minutes · No signup · No credit card to start
+          </p>
         </div>
       </div>
     </section>
