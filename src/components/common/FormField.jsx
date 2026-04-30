@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
-export const FormField = ({ label, type = "text", placeholder, required, hint, name }) => {
+export const FormField = ({ label, type = "text", placeholder, required, hint, name, value, onChange }) => {
   const [show, setShow] = useState(false);
   const isPw = type === "password";
   const inputType = isPw ? (show ? "text" : "password") : type;
+  const controlledProps = onChange ? { value: value ?? "", onChange } : {};
   return (
     <div className="mb-5">
       <label className="block text-paper text-xs font-medium tracking-[0.15em] uppercase mb-2">
@@ -16,6 +17,7 @@ export const FormField = ({ label, type = "text", placeholder, required, hint, n
           name={name}
           placeholder={placeholder}
           required={required}
+          {...controlledProps}
           className="w-full px-4 py-3.5 rounded-xl bg-canvas border border-stroke text-paper text-sm placeholder:text-paper-dim/50 focus:outline-none focus:border-accent transition"
         />
         {isPw && (

@@ -25,6 +25,7 @@ import PaidGate from "../components/funnel/PaidGate";
 import Login from "../pages/auth/Login";
 import Signup from "../pages/auth/Signup";
 import ForgotPassword from "../pages/auth/ForgotPassword";
+import BuilderHome from "../pages/BuilderHome";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Profile from "../pages/dashboard/Profile";
 import Billing from "../pages/dashboard/Billing";
@@ -69,6 +70,9 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "signup", element: <Signup /> },
       { path: "forgot-password", element: <ForgotPassword /> },
+
+      // ─── Builder dashboard (mock) ──────────────────────────────────
+      { path: "builder", element: <BuilderHome /> },
     ],
   },
   {
