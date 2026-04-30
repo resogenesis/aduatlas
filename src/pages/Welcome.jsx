@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
+import { setPaid } from "../funnel/paymentStore";
 
 // INTEGRATION POINT (Stripe webhook + Supabase): when this page loads in
 // production, the Stripe success_url will include ?session_id=. The
@@ -10,6 +12,12 @@ import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
 // transactional email here.
 
 const Welcome = () => {
+  useEffect(() => {
+    // Mock-only: simulate the webhook that sets users.paid_at, so the
+    // PaidGate components unlock for the rest of the session.
+    setPaid(true);
+  }, []);
+
   return (
     <div className="min-h-[80vh] bg-[#F4F7F6] py-12 sm:py-16">
       <div className="container mx-auto px-4 sm:px-6 max-w-2xl text-center">
@@ -53,10 +61,10 @@ const Welcome = () => {
         </div>
 
         <Link
-          to="/how-to-adu"
+          to="/course/c1"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#2F5D50] text-white font-semibold hover:bg-[#244A40] transition"
         >
-          Start Module 1 <FiArrowRight />
+          Start Chapter 1 <FiArrowRight />
         </Link>
 
       </div>
