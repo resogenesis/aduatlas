@@ -122,31 +122,8 @@ const QuizHero = () => {
         </div>
       </div>
 
-      {/* Animated trust ticker */}
-      <div className="relative mt-16 sm:mt-20 border-y border-stroke bg-surface-1-solid/40 overflow-hidden">
-        <div className="flex animate-ticker py-4 whitespace-nowrap">
-          {Array.from({ length: 2 }).map((_, dup) => (
-            <div key={dup} className="flex items-center gap-10 sm:gap-14 px-7 text-paper-dim text-sm">
-              {tickerItems.map((t, i) => (
-                <span key={`${dup}-${i}`} className="inline-flex items-center gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                  <span>{t}</span>
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 };
-
-const tickerItems = [
-  "1,247 properties checked this month",
-  "Avg. surprise cost found: $32,400",
-  "94% of homeowners learn something they didn't know",
-  "Coverage: California · Washington · Colorado · Texas",
-  "Built for homeowners who refuse to guess",
-];
 
 export default QuizHero;
