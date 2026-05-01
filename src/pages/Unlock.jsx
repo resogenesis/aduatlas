@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiLock, FiShield } from "react-icons/fi";
 import { captureLead } from "../lib/supabase";
 import { startCheckout } from "../lib/checkout";
+import { sendEmail, TEMPLATES } from "../lib/email";
 import { EV, identify, track } from "../lib/analytics";
 import { loadAnswers } from "../funnel/quizStore";
 
@@ -101,6 +102,8 @@ const Unlock = () => {
     await captureLead({ email, source: "unlock", quizAnswers });
     identify(email, { email });
     track(EV.EMAIL_CAPTURED, { tier: selectedTier });
+    // Fire transactional email (no-op when Resend isn't wired yet).
+    sendEmail({ template: TEMPLATES.COMPLETE_PLAN, to: email, data: { url: window.location.origin + "/unlock" } });
     setEmailSubmitted(true);
   };
 

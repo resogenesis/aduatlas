@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { FiCreditCard, FiLogOut, FiMail, FiRotateCcw, FiShield, FiUser } from "react-icons/fi";
 import { currentUser, logout } from "../../funnel/authStore";
+import { sendEmail, TEMPLATES } from "../../lib/email";
+import { EV, track } from "../../lib/analytics";
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -11,9 +13,11 @@ const Settings = () => {
     navigate("/", { replace: true });
   };
 
-  const handleRefund = () => {
-    // INTEGRATION POINT (Stripe + Resend): trigger refund-request flow —
-    // creates a refund task, fires "refund-requested" email to support.
+  const handleRefund = async () => {
+    track(EV.REFUND_REQUESTED);
+    if (user?.email) {
+      sendEmail({ template: TEMPLATES.REFUND_REQUESTED, to: user.email });
+    }
     alert("Refund request received. Our team will email you within 1 business day.");
   };
 
