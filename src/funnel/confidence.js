@@ -56,13 +56,20 @@ export const TIER = {
 //     value: "~720 sq ft",
 //     confidence: "medium",
 //     source: "Zoning model",
+//     lastUpdated: "2026-04-12",
+//     toGreen: "Cross-check Pasadena §17.50.290 + 2024 lot-coverage amendment.",
 //     unlocksAt: TIER.REPORT,
 //   })
-export const datapoint = ({ label, value, confidence, source, unlocksAt, note }) => ({
+//
+// `toGreen` is what would raise the confidence to high — the engine of the
+// upsell. Surfaced inline as a 'What would make this green?' expander.
+export const datapoint = ({ label, value, confidence, source, lastUpdated, toGreen, unlocksAt, note }) => ({
   label,
   value,
   confidence,
   source: source || null,
+  lastUpdated: lastUpdated || null,
+  toGreen: toGreen || null,
   unlocksAt: unlocksAt || null,
   note: note || null,
   canUpgrade: Boolean(CONFIDENCE_META[confidence]?.canUpgrade && unlocksAt),

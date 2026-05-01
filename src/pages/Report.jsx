@@ -22,17 +22,17 @@ const buildable = [
   datapoint({ label: "Max ADU size", value: "850 sq ft", confidence: CONFIDENCE.HIGH, source: "City cap (state baseline + local)", note: "State law allows up to 1,200 sq ft, but Pasadena caps RS-6 detached at 850." }),
   datapoint({ label: "Required setbacks", value: "Side 4' / Rear 4' / 10' from primary", confidence: CONFIDENCE.HIGH, source: "Pasadena ADU code" }),
   datapoint({ label: "Height limit", value: "16 ft (1 story)", confidence: CONFIDENCE.HIGH, source: "City code", note: "2-story permitted only with conditional use; not recommended." }),
-  datapoint({ label: "Recommended footprint", value: "24' × 32' = 768 sq ft", confidence: CONFIDENCE.MEDIUM, source: "Lot envelope analysis", note: "Maximizes usable space while leaving 4 ft side, 4 ft rear, 10 ft from main house." }),
+  datapoint({ label: "Recommended footprint", value: "24' × 32' = 768 sq ft", confidence: CONFIDENCE.MEDIUM, source: "Lot envelope analysis", lastUpdated: "2026-04-22", note: "Maximizes usable space while leaving 4 ft side, 4 ft rear, 10 ft from main house.", toGreen: "Verified site survey confirms exact lot dimensions and locks footprint to ±2 ft. Includes neighbor-fence and tree clearance check." }),
   datapoint({ label: "Parking required", value: "None (within 0.5 mi of transit)", confidence: CONFIDENCE.HIGH, source: "AB 68 + city overlay" }),
 ];
 
 const cost = [
-  datapoint({ label: "Site prep + foundation", value: "$32K – $48K", confidence: CONFIDENCE.HIGH, source: "Pasadena builder bids 2024-26", note: "Driveway access supports standard pour; no slope work needed." }),
-  datapoint({ label: "Utility hookups", value: "$18K – $34K", confidence: CONFIDENCE.MEDIUM, source: "Sewer ~28 ft from pad; electric panel needs sub-panel" }),
-  datapoint({ label: "Structure (768 sq ft prefab)", value: "$140K – $185K", confidence: CONFIDENCE.HIGH, source: "Regional prefab market 2026" }),
-  datapoint({ label: "Permits + impact + plan check", value: "$11K – $14K", confidence: CONFIDENCE.HIGH, source: "Pasadena fee schedule" }),
-  datapoint({ label: "Crane / delivery / sales tax", value: "$8K – $12K", confidence: CONFIDENCE.MEDIUM, source: "Standard prefab logistics" }),
-  datapoint({ label: "Total all-in", value: "$209K – $293K", confidence: CONFIDENCE.MEDIUM, source: "Sum of above ± 15%", note: "Excludes interior upgrades, landscaping, and contingency (recommend +10%)." }),
+  datapoint({ label: "Site prep + foundation", value: "$32K – $48K", confidence: CONFIDENCE.HIGH, source: "Pasadena builder bids 2024-26", lastUpdated: "2026-04-15", note: "Driveway access supports standard pour; no slope work needed." }),
+  datapoint({ label: "Utility hookups", value: "$18K – $34K", confidence: CONFIDENCE.MEDIUM, source: "Sewer ~28 ft from pad; electric panel needs sub-panel", lastUpdated: "2026-04-22", toGreen: "Site walk-through with a utility contractor narrows this to ±$3K. Concierge tier includes the walk-through." }),
+  datapoint({ label: "Structure (768 sq ft prefab)", value: "$140K – $185K", confidence: CONFIDENCE.HIGH, source: "Regional prefab market 2026", lastUpdated: "2026-04-10" }),
+  datapoint({ label: "Permits + impact + plan check", value: "$11K – $14K", confidence: CONFIDENCE.HIGH, source: "Pasadena fee schedule", lastUpdated: "2026-03-30" }),
+  datapoint({ label: "Crane / delivery / sales tax", value: "$8K – $12K", confidence: CONFIDENCE.MEDIUM, source: "Standard prefab logistics", lastUpdated: "2026-04-10", toGreen: "Final delivery quote from your selected prefab manufacturer locks this exactly. Quoted as part of builder selection." }),
+  datapoint({ label: "Total all-in", value: "$209K – $293K", confidence: CONFIDENCE.MEDIUM, source: "Sum of above ± 15%", lastUpdated: "2026-04-22", note: "Excludes interior upgrades, landscaping, and contingency (recommend +10%).", toGreen: "Tightens to ±10% once utility walk-through and final prefab quote land." }),
 ];
 
 const risks = [
