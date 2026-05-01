@@ -36,7 +36,12 @@ const Property = () => {
           Honest answer: some of this is verified, most is estimated, and a few things still need a closer look. The Builder-Ready Report verifies every line below.
         </p>
 
-        <ConfidenceSummary points={points} />
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <ConfidenceSummary points={points} />
+          <Link to="/methodology" className="text-paper-dim text-xs hover:text-paper transition-colors underline-offset-4 hover:underline">
+            How we know what we know →
+          </Link>
+        </div>
       </section>
 
       {/* Output rows */}

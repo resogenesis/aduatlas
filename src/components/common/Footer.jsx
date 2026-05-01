@@ -21,11 +21,12 @@ const sections = [
         ],
     },
     {
-        title: "Legal",
+        title: "Trust",
         links: [
-            { name: "Privacy", path: "#" },
-            { name: "Terms", path: "#" },
+            { name: "Methodology", path: "/methodology" },
+            { name: "Sample Report", path: "/report/sample" },
             { name: "Refund Policy", path: "#" },
+            { name: "Privacy & Terms", path: "#" },
         ],
     },
 ];

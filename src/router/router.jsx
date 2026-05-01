@@ -14,6 +14,7 @@ import Videos from "../pages/Videos";
 import Pricing from "../pages/Pricing";
 import Property from "../pages/Property";
 import Report from "../pages/Report";
+import Methodology from "../pages/Methodology";
 import Quiz from "../pages/Quiz";
 import Results from "../pages/Results";
 import Unlock from "../pages/Unlock";
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "property", element: <Property /> },
       { path: "report/sample", element: <Report /> },
+      { path: "methodology", element: <Methodology /> },
       { path: "quiz", element: <Quiz /> },
       { path: "results", element: <Results /> },
       { path: "unlock", element: <Unlock /> },
