@@ -35,6 +35,7 @@ const tiers = [
       "Pre-filled property worksheet (your project brief)",
       "Saved scenarios + take-home summary",
       "Email support",
+      "$79 credits toward the Builder-Ready Report if you upgrade within 30 days",
     ],
     cta: "Start the Roadmap",
     ctaTo: "#buy",
@@ -49,13 +50,13 @@ const tiers = [
     confidence: "Verified, builder-ready clarity",
     bullets: [
       "Everything in Roadmap",
-      "Property snapshot — verified against city + parcel records",
-      "What you can build — sized envelope + 2–3 ADU type options",
-      "Cost breakdown — line-item budget with ±20% bands",
-      "Risk register — site, utility, HOA, financing, permitting",
+      "Property snapshot, verified against city + parcel records",
+      "What you can build: sized envelope + 2–3 ADU type options",
+      "Cost breakdown with line-item budget and ±20% bands",
+      "Risk register: site, utility, HOA, financing, permitting",
       "Financing pathways with grants applicable to your ZIP",
       "Specific next 3 steps (named, sequenced)",
-      "Builder Packet (PDF) — apples-to-apples RFP for builders",
+      "Builder Packet (PDF): apples-to-apples RFP for builders",
       "7-day full refund",
     ],
     cta: "Get my Builder-Ready Report",
@@ -107,7 +108,7 @@ const Unlock = () => {
             Turn curiosity <span className="italic">into a buildable plan.</span>
           </h1>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed">
-            You're not paying for content. You're paying for confidence — verified data, named next steps, and a packet builders can actually quote against.
+            You're not paying for content. You're paying for confidence: verified data, named next steps, and a packet builders can actually quote against.
           </p>
         </div>
 
@@ -236,7 +237,10 @@ const Unlock = () => {
             )}
 
             <p className="text-paper-dim text-xs leading-relaxed mt-6 italic">
-              7-day full refund — if the system isn't useful within 7 days, we refund in full, no questions asked.
+              7-day full refund. If the system isn't useful within 7 days, we refund in full, no questions asked.
+            </p>
+            <p className="text-paper-dim/70 text-[0.65rem] leading-relaxed mt-3">
+              ADUAtlas provides verified pre-construction guidance, not legal advice, engineering, appraisal, or permit determination. Always confirm with your city, a licensed architect or engineer, and a qualified contractor before committing to a design. <Link to="/methodology" className="underline-offset-2 hover:underline hover:text-paper-dim transition">Read our methodology →</Link>
             </p>
           </div>
 

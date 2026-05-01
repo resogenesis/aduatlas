@@ -18,7 +18,7 @@ const faqs = [
     q: "Have you accounted for site prep and utility hookups?",
     a: (
       <p>
-        Builder ADU prices typically cover the structure — not the sewer tie-in, water and gas trenching, stormwater drainage, foundation prep, or grading. These regularly add $10,000 to $100,000+ on top. Most homeowners only discover this after construction starts.
+        Builder ADU prices typically cover the structure, not the sewer tie-in, water and gas trenching, stormwater drainage, foundation prep, or grading. These regularly add $10,000 to $100,000+ on top. Most homeowners only discover this after construction starts.
       </p>
     ),
   },
@@ -31,7 +31,7 @@ const faqs = [
     ),
   },
   {
-    q: "Are you ready to compare builder quotes — or just collect them?",
+    q: "Are you ready to compare builder quotes, or just collect them?",
     a: (
       <p>
         Without a defined scope, lot dimensions, and a clear specification, every builder gives you a different number for a different scope. Comparing those quotes is impossible. The fix isn't more quotes; it's a feasibility study and an apples-to-apples spec sheet.
@@ -42,7 +42,7 @@ const faqs = [
     q: "Do you know the difference between state and city ADU rules?",
     a: (
       <p>
-        States generally set the structural code (the IRC). Cities set the zoning — what, where, and how big. Both apply, and they conflict more often than people expect. Knowing which authority decides what saves weeks of back-and-forth.
+        States generally set the structural code (the IRC). Cities set the zoning: what, where, and how big. Both apply, and they conflict more often than people expect. Knowing which authority decides what saves weeks of back-and-forth.
       </p>
     ),
   },
@@ -50,7 +50,7 @@ const faqs = [
     q: "Will your project taxes, permits, and impact fees actually fit your budget?",
     a: (
       <p>
-        Property taxes usually rise. Permit, plan-check, school, and impact fees vary widely by city — sometimes by tens of thousands. These are almost never in the advertised "ADU price." If you don't know your local numbers, your budget is a guess.
+        Property taxes usually rise. Permit, plan-check, school, and impact fees vary widely by city, sometimes by tens of thousands. These are almost never in the advertised "ADU price." If you don't know your local numbers, your budget is a guess.
       </p>
     ),
   },
@@ -68,7 +68,7 @@ const FAQ = () => {
             Most ADU projects fail in the questions you didn't ask.
           </h1>
           <p className="mt-5 text-paper-dim text-sm sm:text-base leading-relaxed">
-            Answer these honestly. If even one of them gives you pause, you have a real risk in your project — and you're not alone. The full system walks you through each one.
+            Answer these honestly. If even one of them gives you pause, you have a real risk in your project, and you're not alone. The full system walks you through each one.
           </p>
         </div>
       </section>
@@ -77,7 +77,7 @@ const FAQ = () => {
         <Accordion items={faqs} />
       </section>
 
-      <PublicStubFooter chapterName="Full answers — Chapter 4" />
+      <PublicStubFooter chapterName="Full answers · Chapter 4" />
     </div>
   );
 };

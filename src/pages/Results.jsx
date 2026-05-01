@@ -32,7 +32,7 @@ const Results = () => {
         <h1 className="font-display font-medium text-paper text-3xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-center mb-4">
           Your score: <span className="text-accent">{score}%</span>
           <br className="hidden sm:block" />
-          <span className="italic text-paper-dim">— here's what you're missing.</span>
+          <span className="italic text-paper-dim">Here's what you're missing.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg max-w-xl mx-auto text-center mb-12">
           Based on your ZIP, lot, budget, timeline, and what you do (and don't) know.
@@ -97,14 +97,14 @@ const Results = () => {
 
           <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-9 text-sm">
             {[
-              "Full course — 6 chapters, 20+ modules",
+              "Full course: 6 chapters, 20+ modules",
               "GIS satellite view with lot dimensions",
               "Pre-filled pre-site cost worksheet",
               "Total budget worksheet with timelines",
               "Refined ADU Readiness Score",
               "Free utility-marking contact",
               "Builder/supplier matches by ZIP",
-              "7-day full refund — no questions asked",
+              "7-day full refund, no questions asked",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
                 <FiCheck className="shrink-0 mt-1" />

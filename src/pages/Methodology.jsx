@@ -50,8 +50,8 @@ const notDoing = [
   "Legal advice. We are not lawyers.",
   "Engineering, structural, or geotechnical analysis.",
   "Appraisal or estimated future market value of your home.",
-  "Permit determination — only your city's permit office can issue or deny.",
-  "Contractor licensing verification — we don't replace your due diligence.",
+  "Permit determination. Only your city's permit office can issue or deny.",
+  "Contractor licensing verification. We don't replace your due diligence.",
   "Lender prequalification or financing approval.",
 ];
 
@@ -117,7 +117,7 @@ const Methodology = () => {
             Every yellow row has a verification path.
           </h2>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-7 max-w-2xl">
-            Click "What raises this?" on any medium or low row in your snapshot. We'll show you exactly what we'd do to verify it — and which paid tier delivers that verification. No hidden steps. No buying twice.
+            Click "What raises this?" on any medium or low row in your snapshot. We'll show you exactly what we'd do to verify it, and which paid tier delivers that verification. No hidden steps. No buying twice.
           </p>
           <div className="bg-canvas border border-stroke rounded-2xl p-6">
             <p className="text-paper-dim text-[0.65rem] font-semibold tracking-[0.2em] uppercase mb-2">Example</p>
@@ -146,7 +146,7 @@ const Methodology = () => {
             ))}
           </div>
           <p className="text-paper-dim text-xs italic mt-6 leading-relaxed">
-            Every datapoint in your output shows a "last updated" date. If it looks stale, that means we haven't refreshed that source recently — and we'd rather show you the date than pretend it's fresh.
+            Every datapoint in your output shows a "last updated" date. If it looks stale, it means we haven't refreshed that source recently. We'd rather show you the date than pretend it's fresh.
           </p>
         </section>
 
@@ -156,7 +156,7 @@ const Methodology = () => {
             <FiShield /> What we don't do
           </div>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-5">
-            Verified pre-construction guidance — <span className="italic text-paper-dim">not legal, engineering, or appraisal.</span>
+            Verified pre-construction guidance. <span className="italic text-paper-dim">Not legal, engineering, or appraisal.</span>
           </h2>
           <p className="text-paper-dim text-base leading-relaxed mb-7 max-w-2xl">
             ADUAtlas is a planning and decision-support tool. We help you understand what's possible and what to verify next. We do not replace any of the following:
@@ -170,7 +170,7 @@ const Methodology = () => {
             ))}
           </ul>
           <p className="text-paper-dim text-xs italic mt-7 leading-relaxed max-w-2xl">
-            Always confirm with your city, a licensed architect or engineer, your lender, and a qualified contractor before committing to a design or breaking ground. Our reports are designed to make those conversations sharper — not to replace them.
+            Always confirm with your city, a licensed architect or engineer, your lender, and a qualified contractor before committing to a design or breaking ground. Our reports are designed to make those conversations sharper, not to replace them.
           </p>
         </section>
 

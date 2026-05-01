@@ -6,7 +6,7 @@ const steps = [
   {
     n: "01",
     title: "Check your property",
-    desc: "Type your address. Get an instant snapshot — lot size, what's likely buildable, rough cost band — with confidence labels on every line.",
+    desc: "Type your address. Get an instant snapshot of lot size, what's likely buildable, and a rough cost band, with confidence labels on every line.",
   },
   {
     n: "02",

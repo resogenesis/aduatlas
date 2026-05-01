@@ -4,12 +4,12 @@ const risks = [
   {
     n: "01",
     title: "Most homeowners don't know what they can legally build.",
-    desc: "Zoning rules vary by state, city, and ZIP — and they change. Discovering this after your design is locked is the #1 source of thousands in wasted spend.",
+    desc: "Zoning rules vary by state, city, and ZIP, and they change. Discovering this after your design is locked is the #1 source of thousands in wasted spend.",
   },
   {
     n: "02",
     title: "Site prep + utility hookups are the surprise cost killer.",
-    desc: "Sewer ties, stormwater, trenching for water and gas — these regularly add $10K–$100K to a project that builders quoted on \"the structure only.\"",
+    desc: "Sewer ties, stormwater, trenching for water and gas. These regularly add $10K–$100K to a project that builders quoted on \"the structure only.\"",
   },
   {
     n: "03",

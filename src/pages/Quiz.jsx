@@ -48,7 +48,7 @@ const questions = [
       { value: "100-200k", label: "$100K – $200K" },
       { value: "200-400k", label: "$200K – $400K" },
       { value: "400k+", label: "$400K+" },
-      { value: "unsure", label: "Unsure — that's part of why I'm here" },
+      { value: "unsure", label: "Unsure. That's part of why I'm here" },
     ],
   },
   {
@@ -77,10 +77,10 @@ const questions = [
   {
     id: "siteCostKnowledge",
     label: "Have you accounted for site-prep and utility hookup costs?",
-    helper: "Sewer tie-ins, trenching, stormwater drainage — these often add $10K–$100K on top of the ADU price.",
+    helper: "Sewer tie-ins, trenching, stormwater drainage. These often add $10K–$100K on top of the ADU price.",
     type: "choice",
     options: [
-      { value: "quoted", label: "Yes — I have written quotes for site prep + utilities" },
+      { value: "quoted", label: "Yes, I have written quotes for site prep + utilities" },
       { value: "estimated", label: "I have a rough estimate" },
       { value: "assumed", label: "I assumed they're included in the ADU price" },
       { value: "unaware", label: "I hadn't really thought about it" },

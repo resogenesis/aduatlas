@@ -53,7 +53,7 @@ const QuizHero = () => {
             className="mt-7 sm:mt-9 text-paper-dim text-base sm:text-lg lg:text-xl max-w-xl leading-relaxed animate-fade-up"
             style={{ animationDelay: "240ms" }}
           >
-            Get a real answer on feasibility, cost, and next steps — before talking to a builder, ordering a $500 survey, or drawing a single line.
+            Get a real answer on feasibility, cost, and next steps before talking to a builder, ordering a $500 survey, or drawing a single line.
           </p>
 
           <div className="mt-9 sm:mt-12 animate-fade-up" style={{ animationDelay: "380ms" }}>

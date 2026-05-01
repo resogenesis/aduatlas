@@ -44,14 +44,14 @@ const risks = [
 
 const financing = [
   { label: "HELOC", desc: "Strongest fit given 22 yrs of equity. Estimated rate 8.0–8.75% APR. Apply with primary lender." },
-  { label: "Cash-out refinance", desc: "Not recommended — current first mortgage rate (3.4%) is significantly below market." },
+  { label: "Cash-out refinance", desc: "Not recommended. Current first mortgage rate (3.4%) is significantly below market." },
   { label: "Renovation mortgage (HomeStyle / 203k)", desc: "Possible but cumbersome; expect 60–90 day close." },
   { label: "CalHFA $40K ADU pre-development grant", desc: "You qualify based on income range and primary residence status. Apply within 30 days of plan approval." },
 ];
 
 const nextSteps = [
   { n: "01", title: "Order a boundary survey", desc: "Pasadena requires one for ADU permits. ~$700, 2–3 weeks. Use the surveyors listed in your packet." },
-  { n: "02", title: "Get 3 builder bids using the Builder Packet", desc: "Send the export below to the three matched builders. Bids will be apples-to-apples — same scope, same exclusions called out." },
+  { n: "02", title: "Get 3 builder bids using the Builder Packet", desc: "Send the export below to the three matched builders. Bids will be apples-to-apples: same scope, same exclusions called out." },
   { n: "03", title: "Apply for the CalHFA grant", desc: "Don't skip this. The grant covers permit, plan check, and survey costs once you have an approved plan." },
 ];
 
@@ -80,7 +80,7 @@ const Report = () => {
               to="/unlock"
               className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
             >
-              Get my Builder-Ready Report — $399 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              Get my Builder-Ready Report · $399 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <button
               onClick={() => alert("INTEGRATION POINT: server-side PDF generation pending.")}
@@ -89,6 +89,10 @@ const Report = () => {
               <FiDownload /> Download sample (PDF)
             </button>
           </div>
+
+          <p className="text-paper-dim/70 text-[0.65rem] leading-relaxed mt-7 max-w-3xl">
+            ADUAtlas provides verified pre-construction guidance, not legal advice, engineering, appraisal, or permit determination. Always confirm with your city, a licensed architect or engineer, and a qualified contractor before committing to a design. <Link to="/methodology" className="underline-offset-2 hover:underline hover:text-paper-dim transition">Read our methodology →</Link>
+          </p>
         </div>
       </section>
 
@@ -179,7 +183,7 @@ const Report = () => {
                 <h4 className="font-display text-paper text-lg">builder_packet.pdf</h4>
               </div>
               <p className="text-paper-dim text-sm leading-relaxed mb-5">
-                One-page RFP — your lot, scope, constraints, and exclusions. Builders quote against the same spec.
+                One-page RFP with your lot, scope, constraints, and exclusions. Builders quote against the same spec.
               </p>
               <button
                 onClick={() => alert("INTEGRATION POINT: PDF generation pending.")}

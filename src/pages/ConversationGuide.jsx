@@ -13,7 +13,7 @@ const sections = [
   {
     n: "01",
     eyebrow: "Scope clarity",
-    title: "What exactly is in your bid — and what's not?",
+    title: "What exactly is in your bid, and what's not?",
     questions: [
       "Is site prep included? Specifically: grading, foundation, excavation? If not, what's your typical range?",
       "Are utility hookups (sewer tie-in, water, electric panel upgrade, gas line) in your number? Or quoted separately?",
@@ -38,7 +38,7 @@ const sections = [
     eyebrow: "Timeline + permitting",
     title: "What does your timeline really mean?",
     questions: [
-      "From signed contract to certificate of occupancy — what's your honest range, not your marketing range?",
+      "From signed contract to certificate of occupancy: what's your honest range, not your marketing range?",
       "Who handles permit submission and revisions: you, my architect, or me?",
       "Have you built in Pasadena recently? How many ADUs in the last 12 months?",
       "What's the longest delay you've had on a project like mine in the last year, and what caused it?",
@@ -50,9 +50,9 @@ const sections = [
     title: "Trust but verify.",
     questions: [
       "Can I see your CSLB license number and current bond?",
-      "Three recent ADU clients in Pasadena or LA County I can call directly — names and numbers.",
+      "Three recent ADU clients in Pasadena or LA County I can call directly, with names and numbers.",
       "Any liens, complaints, or unresolved disputes filed against your company in the last 3 years?",
-      "What's your insurance coverage — general liability, workers' comp limits, builder's risk?",
+      "What's your insurance coverage: general liability, workers' comp limits, builder's risk?",
     ],
   },
   {
@@ -63,7 +63,7 @@ const sections = [
       "What's your payment schedule? (California caps the down payment at the lesser of $1,000 or 10%.)",
       "What happens to my deposit if you go out of business or walk away?",
       "Do you accept lien waivers from your subs, and will you provide them with each draw?",
-      "What's your warranty: structure, mechanicals, workmanship — for how long, and what's excluded?",
+      "What's your warranty on structure, mechanicals, and workmanship? For how long, and what's excluded?",
     ],
   },
 ];
@@ -158,7 +158,7 @@ const ConversationGuide = () => {
             Want this for your address?
           </h2>
           <p className="text-accent-fg/80 text-sm sm:text-base mb-6 max-w-xl mx-auto">
-            The Conversation Guide is generated automatically with every $399 Builder-Ready Report — questions tuned to your lot's actual risks.
+            The Conversation Guide is generated automatically with every $399 Builder-Ready Report, with questions tuned to your lot's actual risks.
           </p>
           <Link
             to="/unlock"

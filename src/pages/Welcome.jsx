@@ -28,15 +28,15 @@ const Welcome = () => {
           You're in.
         </h1>
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-12 max-w-xl mx-auto">
-          Confirmation is on its way to your email. Start with Chapter 1 — the course is 6 chapters and 20+ modules, ending with your personalized Feasibility Study and builder-ready RFP packet.
+          Confirmation is on its way to your email. Start with Chapter 1. The course is 6 chapters and 20+ modules, ending with your personalized Feasibility Study and builder-ready RFP packet.
         </p>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-10 text-left mb-10">
           <h3 className="text-paper text-xs uppercase tracking-[0.2em] mb-6">Your next 3 steps</h3>
           <ol className="space-y-6">
             {[
-              { n: "01", t: "Start Chapter 1 — How to ADU", d: "Process, timelines, and the foundation everything else builds on." },
-              { n: "02", t: "Work through the modules", d: "20+ modules across 6 chapters — each with worksheets pre-filled from your quiz answers." },
+              { n: "01", t: "Start Chapter 1: How to ADU", d: "Process, timelines, and the foundation everything else builds on." },
+              { n: "02", t: "Work through the modules", d: "20+ modules across 6 chapters, each with worksheets pre-filled from your quiz answers." },
               { n: "03", t: "Unlock your Feasibility Study", d: "Chapter 6 generates your GIS site plan, refined readiness score, and builder RFP packet." },
             ].map((s) => (
               <li key={s.n} className="flex items-start gap-5">

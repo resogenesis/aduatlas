@@ -127,7 +127,7 @@ const mockPropertyOutput = (q) => {
       source: "Zoning model + lot coverage rule",
       lastUpdated: "2026-04-12",
       unlocksAt: TIER.REPORT,
-      toGreen: "We apply your city's actual ADU sq-ft cap, the percentage-of-primary-home rule, and your lot's measured coverage — not a generic state baseline. Often raises or lowers this estimate by 200+ sq ft.",
+      toGreen: "We apply your city's actual ADU sq-ft cap, the percentage-of-primary-home rule, and your lot's measured coverage, not a generic state baseline. Often raises or lowers this estimate by 200+ sq ft.",
     }),
     datapoint({
       label: "Setbacks",
@@ -155,7 +155,7 @@ const mockPropertyOutput = (q) => {
       lastUpdated: "2026-04-01",
       unlocksAt: TIER.REPORT,
       note: "Wide because site prep and utility hookup costs vary 5×.",
-      toGreen: "We model your specific site: sewer distance to pad, slope, soil class, panel capacity, crane access. The verified range typically tightens to ±15% — and surfaces the exact line-items that drive the spread.",
+      toGreen: "We model your specific site: sewer distance to pad, slope, soil class, panel capacity, crane access. The verified range typically tightens to ±15% and surfaces the exact line-items that drive the spread.",
     }),
     datapoint({
       label: "Sewer access",
@@ -171,7 +171,7 @@ const mockPropertyOutput = (q) => {
       confidence: CONFIDENCE.LOW,
       source: "Requires HOA / title check",
       unlocksAt: TIER.REPORT,
-      toGreen: "We check your parcel against recorded CC&Rs and known HOA boundaries. Even when zoning permits an ADU, an HOA or deed restriction can prohibit it outright — discovering this late is the most expensive surprise homeowners face.",
+      toGreen: "We check your parcel against recorded CC&Rs and known HOA boundaries. Even when zoning permits an ADU, an HOA or deed restriction can prohibit it outright. Discovering this late is the most expensive surprise homeowners face.",
     }),
   ];
 };
