@@ -12,7 +12,7 @@ import {
 // in Slice 4. (`Lorem ipsum` markers indicate filler.)
 const CONTENT = {
   c1: [
-    { h: "What you'll learn", p: "The full ADU process from first idea to certificate of occupancy — in the order things actually happen, not the order they're posted on city websites." },
+    { h: "What you'll learn", p: "The full ADU process from first idea to certificate of occupancy, in the order things actually happen, not the order they're posted on city websites." },
     { h: "Why most homeowners get this wrong", p: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
     { h: "The five phases", p: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
   ],

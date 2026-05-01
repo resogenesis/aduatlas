@@ -204,7 +204,7 @@ const buildReadyChecklist = ({ packet, score, courseProgress }) => {
       label: "Financing path identified",
       done: Boolean(packet.budget) && courseProgress >= 50,
       doneCopy: "Path mapped in course chapter 3.",
-      todoCopy: "Cover financing in Chapter 3 — Budget & Site Prep.",
+      todoCopy: "Cover financing in Chapter 3: Budget & Site Prep.",
       cta: { label: "Open chapter", to: "/course/c3" },
     },
     {

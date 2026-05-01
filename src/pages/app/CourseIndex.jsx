@@ -43,7 +43,7 @@ const CourseIndex = () => {
                 </span>
               </div>
               <h3 className="font-display text-paper text-lg sm:text-xl leading-snug mb-2">
-                Chapter {c.n} — {c.title}
+                Chapter {c.n} · {c.title}
               </h3>
               <p className="text-paper-dim text-sm leading-relaxed mb-5">{c.blurb}</p>
               <span className="inline-flex items-center gap-1.5 text-accent text-sm font-medium group-hover:gap-2.5 transition-all">

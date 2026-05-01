@@ -40,14 +40,14 @@ const AduTypes = () => {
     <div>
       <PageHeader
         title="ADU Types"
-        subtitle="More options than most homeowners realize — and the wrong choice for your lot or zoning can quietly add tens of thousands."
+        subtitle="More options than most homeowners realize. The wrong choice for your lot or zoning can quietly add tens of thousands."
         bg={heroImg}
       />
 
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 max-w-4xl">
         <div className="text-center mb-10">
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-            There are 30+ ADU and tiny-home types in common use. Each has different cost, timeline, and zoning implications — and not every type is allowed on every lot.
+            There are 30+ ADU and tiny-home types in common use. Each has different cost, timeline, and zoning implications, and not every type is allowed on every lot.
           </p>
         </div>
 
@@ -64,7 +64,7 @@ const AduTypes = () => {
         </div>
 
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed text-center">
-          Side-by-side comparisons — cost ranges, timelines, long-term value impact, and which types match your specific zoning — are inside the ADU system.
+          Side-by-side comparisons (cost ranges, timelines, long-term value impact, and which types match your specific zoning) are inside the ADU system.
         </p>
       </section>
 

@@ -42,7 +42,7 @@ const MyProperty = () => {
         Your project brief.
       </h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-10">
-        These are the same questions every builder asks. Fill them in once and they flow into your Feasibility Study, Builder Packet, and quotes — apples-to-apples.
+        These are the same questions every builder asks. Fill them in once and they flow into your Feasibility Study, Builder Packet, and quotes (apples-to-apples).
       </p>
 
       {/* Progress bar */}

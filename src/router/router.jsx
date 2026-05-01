@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layout/RootLayout";
 import AppLayout from "../layout/AppLayout";
 import BuilderLayout from "../layout/BuilderLayout";
-import DashboardLayout from "../layout/DashboardLayout";
 
 import Home from "../pages/Home";
 import About from "../pages/About";
@@ -24,6 +23,7 @@ import BuilderListing from "../pages/BuilderListing";
 import BuilderProfile from "../pages/BuilderProfile";
 import Feasibility from "../pages/Feasibility";
 import UtilityEstimator from "../pages/UtilityEstimator";
+
 import BuilderDashboard from "../pages/builder/Dashboard";
 import BuilderLeads from "../pages/builder/Leads";
 import BuilderLeadDetail from "../pages/builder/LeadDetail";
@@ -44,15 +44,8 @@ import Login from "../pages/auth/Login";
 import Signup from "../pages/auth/Signup";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 
-import Dashboard_OLD from "../pages/dashboard/Dashboard";
-import Profile from "../pages/dashboard/Profile";
-import Billing from "../pages/dashboard/Billing";
-import Bookmarks from "../pages/dashboard/Bookmarks";
-import HelpCenter from "../pages/dashboard/HelpCenter";
-import ManageBuilds from "../pages/dashboard/ManageBuilds";
-
 const router = createBrowserRouter([
-  // ─── Public site (with marketing header/footer) ──────────────────
+  // ─── Public site ──────────────────────────────────────────────────
   {
     path: "/",
     element: <RootLayout />,
@@ -60,8 +53,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "property", element: <Property /> },
       { path: "report/sample", element: <Report /> },
-      { path: "methodology", element: <Methodology /> },
       { path: "report/sample/conversation-guide", element: <ConversationGuide /> },
+      { path: "methodology", element: <Methodology /> },
       { path: "quiz", element: <Quiz /> },
       { path: "results", element: <Results /> },
       { path: "unlock", element: <Unlock /> },
@@ -80,7 +73,6 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "signup", element: <Signup /> },
       { path: "forgot-password", element: <ForgotPassword /> },
-
     ],
   },
 
@@ -120,20 +112,6 @@ const router = createBrowserRouter([
 
       // Settings
       { path: "settings", element: <Settings /> },
-    ],
-  },
-
-  // ─── Legacy dashboard (kept routed but no longer linked) ─────────
-  {
-    path: "/dashboard-old",
-    element: <DashboardLayout />,
-    children: [
-      { index: true, element: <Dashboard_OLD /> },
-      { path: "profile", element: <Profile /> },
-      { path: "billing", element: <Billing /> },
-      { path: "bookmarks", element: <Bookmarks /> },
-      { path: "help", element: <HelpCenter /> },
-      { path: "manage-builds", element: <ManageBuilds /> },
     ],
   },
 ]);

@@ -11,7 +11,7 @@ const PACKET_KEY = "aduatlas.packet";
 export const chapters = [
   { id: "c1", n: 1, title: "How to ADU", blurb: "The full process, in the order it actually happens.", minutes: 12 },
   { id: "c2", n: 2, title: "ADU Types", blurb: "30+ types side-by-side: cost, timeline, value impact.", minutes: 14 },
-  { id: "c3", n: 3, title: "Budget & Site Prep", blurb: "Why builder quotes always look low — and what to add.", minutes: 16 },
+  { id: "c3", n: 3, title: "Budget & Site Prep", blurb: "Why builder quotes always look low, and what to add.", minutes: 16 },
   { id: "c4", n: 4, title: "Rules & Regulations", blurb: "State, city, ZIP, HOA — who decides what, and how to check.", minutes: 18 },
   { id: "c5", n: 5, title: "Builder Readiness", blurb: "What builders ask, what to bring, what to demand.", minutes: 11 },
   { id: "c6", n: 6, title: "Feasibility & RFP", blurb: "Generate your site plan and builder packet.", minutes: 9 },
