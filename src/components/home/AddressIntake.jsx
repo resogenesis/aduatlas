@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowRight, FiMapPin } from "react-icons/fi";
+import { EV, track } from "../../lib/analytics";
 
 // Address-first hero CTA. The user enters an address; we route to the free
 // /property output page where confidence chips surface what we know vs.
 // what's estimated vs. unknown.
 //
-// INTEGRATION POINT: replace the plain input with a Mapbox / Google Places
-// autocomplete in Slice 2. For now we just URL-encode whatever's typed.
+// TODO: wire Mapbox autocomplete (token in VITE_MAPBOX_TOKEN). For now
+// the plain input ships and we URL-encode whatever's typed.
 
 const AddressIntake = ({ size = "lg" }) => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const AddressIntake = ({ size = "lg" }) => {
     e.preventDefault();
     const trimmed = value.trim();
     if (trimmed.length < 5) return;
+    track(EV.ADDRESS_SUBMITTED, { length: trimmed.length });
     navigate(`/property?q=${encodeURIComponent(trimmed)}`);
   };
 

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiLock } from "react-icons/fi";
 import { isComplete, loadAnswers } from "../funnel/quizStore";
 import { calculateScore } from "../funnel/scoring";
+import { EV, track } from "../lib/analytics";
 
 const Results = () => {
   const navigate = useNavigate();
@@ -11,8 +12,10 @@ const Results = () => {
   useEffect(() => {
     if (!isComplete(answers)) {
       navigate("/quiz", { replace: true });
+      return;
     }
-    // INTEGRATION POINT (analytics): fire "results_viewed" event here.
+    const { score, band } = calculateScore(answers);
+    track(EV.RESULTS_VIEWED, { score, band, zip: answers.zip });
   }, [answers, navigate]);
 
   if (!isComplete(answers)) return null;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { loadAnswers, saveAnswers } from "../funnel/quizStore";
+import { EV, track } from "../lib/analytics";
 
 const questions = [
   {
@@ -116,10 +117,11 @@ const Quiz = () => {
       setError("Please choose an option.");
       return;
     }
+    if (step === 0) track(EV.QUIZ_STARTED);
     if (step < questions.length - 1) {
       setStep((s) => s + 1);
     } else {
-      // INTEGRATION POINT (analytics): fire "quiz_completed" event here.
+      track(EV.QUIZ_COMPLETED, { zip: answers.zip });
       navigate("/results");
     }
   };

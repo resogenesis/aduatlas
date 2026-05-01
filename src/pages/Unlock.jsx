@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiLock, FiShield } from "react-icons/fi";
+import { captureLead } from "../lib/supabase";
+import { startCheckout } from "../lib/checkout";
+import { EV, identify, track } from "../lib/analytics";
+import { loadAnswers } from "../funnel/quizStore";
 
 // 4-tier confidence ladder. Free / $79 Roadmap / $399 Builder-Ready Report /
 // Concierge (sidebar CTA, sold-by-application — not self-serve).
@@ -80,18 +84,42 @@ const Unlock = () => {
   const [loading, setLoading] = useState(false);
   const [selectedTier, setSelectedTier] = useState("report");
 
-  const submitEmail = (e) => {
+  useEffect(() => {
+    track(EV.UNLOCK_VIEWED);
+  }, []);
+
+  useEffect(() => {
+    track(EV.TIER_SELECTED, { tier: selectedTier });
+  }, [selectedTier]);
+
+  const submitEmail = async (e) => {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
-    // INTEGRATION POINT (Supabase + Resend): insert lead, fire 'complete your plan' email.
+
+    // Persist lead. No-op when Supabase env vars aren't set.
+    const quizAnswers = loadAnswers();
+    await captureLead({ email, source: "unlock", quizAnswers });
+    identify(email, { email });
+    track(EV.EMAIL_CAPTURED, { tier: selectedTier });
     setEmailSubmitted(true);
   };
 
-  const startCheckout = async () => {
+  const handleCheckout = async () => {
     setLoading(true);
-    // INTEGRATION POINT (Stripe): create Checkout Session for selectedTier.
-    await new Promise((r) => setTimeout(r, 600));
-    navigate("/welcome");
+    track(EV.CHECKOUT_STARTED, { tier: selectedTier });
+    const quizAnswers = loadAnswers();
+    const res = await startCheckout({ tier: selectedTier, email, quizAnswers });
+    if (!res.ok) {
+      setLoading(false);
+      alert(`Checkout failed: ${res.error}. Set VITE_CHECKOUT_ENDPOINT in .env.local.`);
+      return;
+    }
+    if (res.mock) {
+      // Mock fallback: navigate within the SPA.
+      navigate(res.url);
+      return;
+    }
+    window.location.href = res.url;
   };
 
   const selected = tiers.find((t) => t.id === selectedTier);
@@ -224,7 +252,7 @@ const Unlock = () => {
                   </div>
                 </div>
                 <button
-                  onClick={startCheckout}
+                  onClick={handleCheckout}
                   disabled={loading}
                   className="w-full inline-flex items-center justify-center gap-2 px-7 py-5 rounded-full bg-accent text-accent-fg text-lg font-semibold hover:bg-paper transition-colors disabled:opacity-60"
                 >

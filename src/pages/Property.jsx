@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { FiArrowRight, FiMapPin } from "react-icons/fi";
 import { ConfidenceRow, ConfidenceSummary } from "../components/funnel/ConfidenceChip";
 import { CONFIDENCE, TIER, datapoint } from "../funnel/confidence";
+import { EV, track } from "../lib/analytics";
 
 // Free instant feasibility output. Every row carries a confidence level;
 // medium and low rows surface inline 'Verify →' upsell CTAs to /unlock.
@@ -12,9 +13,17 @@ const Property = () => {
   const q = (params.get("q") || "").trim();
 
   // Derive a deterministic-looking but mock output from the address string
-  // so different inputs feel personalized. INTEGRATION POINT: replace with
-  // real GIS + zoning lookup against ATTOM / Regrid / Mapbox.
+  // so different inputs feel personalized. TODO: replace with real GIS +
+  // zoning lookup against ATTOM / Regrid / Mapbox.
   const points = useMemo(() => mockPropertyOutput(q), [q]);
+
+  useEffect(() => {
+    track(EV.PROPERTY_VIEWED, {
+      hasAddress: Boolean(q),
+      mediumCount: points.filter((p) => p.confidence === "medium").length,
+      lowCount: points.filter((p) => p.confidence === "low").length,
+    });
+  }, [q, points]);
 
   const lowOrMedium = points.filter((p) => p.confidence !== "high").length;
 

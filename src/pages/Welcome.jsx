@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
 import { setPaid } from "../funnel/paymentStore";
+import { EV, track } from "../lib/analytics";
 
 // INTEGRATION POINT (Stripe webhook + Supabase): when this page loads in
 // production, the Stripe success_url will include ?session_id=. The
@@ -14,6 +15,7 @@ import { setPaid } from "../funnel/paymentStore";
 const Welcome = () => {
   useEffect(() => {
     setPaid(true);
+    track(EV.PURCHASE_COMPLETED);
   }, []);
 
   return (
