@@ -170,22 +170,40 @@ const Report = () => {
           </ol>
         </Section>
 
-        {/* 7. Builder Packet */}
-        <Section number="07" title="Builder Packet (export)" subtitle="The data builders actually need, formatted for an RFP.">
-          <div className="bg-canvas border border-stroke rounded-2xl p-6 sm:p-8">
-            <div className="flex items-center gap-3 mb-3">
-              <FiFileText className="text-accent text-xl" />
-              <h4 className="font-display text-paper text-lg">builder_packet.pdf</h4>
+        {/* 7. Builder Packet + Conversation Guide */}
+        <Section number="07" title="Builder Packet + Conversation Guide" subtitle="What you take to every builder. Same scope. Same questions. Apples-to-apples.">
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="bg-canvas border border-stroke rounded-2xl p-6 sm:p-7">
+              <div className="flex items-center gap-3 mb-3">
+                <FiFileText className="text-accent text-xl" />
+                <h4 className="font-display text-paper text-lg">builder_packet.pdf</h4>
+              </div>
+              <p className="text-paper-dim text-sm leading-relaxed mb-5">
+                One-page RFP — your lot, scope, constraints, and exclusions. Builders quote against the same spec.
+              </p>
+              <button
+                onClick={() => alert("INTEGRATION POINT: PDF generation pending.")}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors"
+              >
+                <FiDownload /> Download Builder Packet
+              </button>
             </div>
-            <p className="text-paper-dim text-sm leading-relaxed mb-5">
-              Single-page PDF you send to every builder. Same scope. Same exclusions. Apples-to-apples bids.
-            </p>
-            <button
-              onClick={() => alert("INTEGRATION POINT: PDF generation pending.")}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors"
+
+            <Link
+              to="/report/sample/conversation-guide"
+              className="group bg-canvas border border-stroke rounded-2xl p-6 sm:p-7 hover:border-accent transition-colors"
             >
-              <FiDownload /> Download Builder Packet
-            </button>
+              <div className="flex items-center gap-3 mb-3">
+                <FiFileText className="text-accent text-xl" />
+                <h4 className="font-display text-paper text-lg">conversation_guide.pdf</h4>
+              </div>
+              <p className="text-paper-dim text-sm leading-relaxed mb-5">
+                Five conversations every builder should pass. Lot-specific questions a homeowner shouldn't have to know to ask.
+              </p>
+              <span className="inline-flex items-center gap-2 text-accent text-sm font-semibold group-hover:gap-3 transition-all">
+                Open Conversation Guide <FiArrowRight />
+              </span>
+            </Link>
           </div>
         </Section>
 
