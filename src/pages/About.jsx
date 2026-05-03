@@ -47,10 +47,10 @@ const chapters = [
   {
     n: "04",
     eyebrow: "Why we built it",
-    title: "I came to this after years in commercial real estate.",
+    title: "We came to this after years in commercial real estate.",
     body: (
       <>
-        <p>Working primarily with smaller multifamily properties, the ADU space caught my attention — both personally and professionally. As I researched, I kept running into the same problem: there wasn't clear, practical information written for everyday homeowners.</p>
+        <p>Working primarily with smaller multifamily properties, the ADU space caught our attention — both personally and professionally. As we researched, we kept running into the same problem: there wasn't clear, practical information written for everyday homeowners.</p>
       </>
     ),
   },
