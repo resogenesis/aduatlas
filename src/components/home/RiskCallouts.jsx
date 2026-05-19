@@ -4,12 +4,12 @@ const risks = [
   {
     n: "01",
     title: "Most homeowners don't know what they can legally build.",
-    desc: "ADU rules vary by state, city, and ZIP—and they change. Discovering zoning limits after your design is finalized is one of the biggest causes of wasted time and thousands in avoidable costs.",
+    desc: "ADU rules vary by state, city, and ZIP and they change. Discovering zoning limits after your design is finalized is one of the biggest causes of wasted time and thousands in avoidable costs.",
   },
   {
     n: "02",
     title: "Site prep + utility hookups are often the biggest hidden ADU costs.",
-    desc: "Grading, excavation, foundation work, access constraints, sewer, stormwater, water, gas, and trenching can add $10K–$100K+ beyond builder \"structure-only\" pricing.",
+    desc: "Grading, excavation, foundation work, access constraints, sewer, stormwater, water, gas, and trenching can add $10K to $100K+ beyond builder \"structure only\" pricing.",
   },
   {
     n: "03",
