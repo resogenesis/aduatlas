@@ -14,10 +14,10 @@ const PublicStubFooter = ({ chapterName }) => {
             <FiLock /> {chapterName ? `${chapterName} — locked` : "Locked"}
           </div>
           <h3 className="font-display font-medium text-paper text-2xl sm:text-3xl leading-snug tracking-tight mb-4">
-            The full step-by-step is inside the ADU system.
+            The full step by step is inside the ADU system.
           </h3>
           <p className="text-paper-dim text-sm sm:text-base leading-relaxed mb-8 max-w-md mx-auto">
-            Start with the 2-minute Reality Check. Find out exactly where you stand — then unlock the full plan if it's right for you.
+            Start with the 2 minute Reality Check. Find out exactly where you stand, then unlock the full plan if it's right for you.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
@@ -30,7 +30,7 @@ const PublicStubFooter = ({ chapterName }) => {
               to="/unlock"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-stroke text-paper font-medium hover:border-paper-dim transition"
             >
-              See What's Inside ($79.99)
+              See What's Inside ($99)
             </Link>
           </div>
         </div>

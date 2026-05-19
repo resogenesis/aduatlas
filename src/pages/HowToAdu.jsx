@@ -36,7 +36,7 @@ const HowToAdu = () => {
         </div>
 
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed text-center">
-          The full step-by-step process (what to do, in what order, and what to ask your city and builders along the way) is inside the ADU system.
+          The full step by step process (what to do, in what order, and what to ask your city and builders along the way) is inside the ADU system.
         </p>
       </section>
 

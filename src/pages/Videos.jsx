@@ -24,10 +24,10 @@ const Videos = () => {
       <section className="container mx-auto px-4 sm:px-6 py-12">
         <div className="max-w-3xl mx-auto mb-10 space-y-4 text-secondary text-sm sm:text-base leading-relaxed">
           <p>
-            The ADUAtlas Video Library features short and long-form videos showcasing ADU builds, tiny homes, prefab ADUs, and modular home construction. Watch everything from a finished ADU delivered by crane to a custom backyard home built from the ground up, including step-by-step construction and installation footage.
+            The ADUAtlas Video Library features short and long form videos showcasing ADU builds, tiny homes, prefab ADUs, and modular home construction. Watch everything from a finished ADU delivered by crane to a custom backyard home built from the ground up, including step by step construction and installation footage.
           </p>
           <p>
-            Explore videos covering ADU design ideas, building methods, costs, timelines, and real-world projects. The library includes builder showcases, sponsor features, homeowner videos, AI-generated concepts, and unique ADU builds across a wide range of styles and budgets.
+            Explore videos covering ADU design ideas, building methods, costs, timelines, and real world projects. The library includes builder showcases, sponsor features, homeowner videos, AI generated concepts, and unique ADU builds across a wide range of styles and budgets.
           </p>
           <p>
             Browse the ADUAtlas Video Library to discover real ADU projects, innovative designs, and expert insights across the growing accessory dwelling unit market.
