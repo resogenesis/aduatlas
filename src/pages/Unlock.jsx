@@ -54,7 +54,7 @@ const tiers = [
     price: "$399",
     pricePeriod: "one-time",
     pitch: "Tier 3",
-    desc: "A personalized pre-construction planning package designed to help homeowners understand what they can realistically build before hiring a builder or ordering an expensive survey.",
+    desc: "A personalized pre construction planning package designed to help homeowners understand what they can realistically build before hiring a builder or ordering an expensive survey.",
     confidence: "Know what you can build before spending thousands.",
     bullets: [
       "Everything included in Tier 1 + Tier 2",
@@ -77,7 +77,7 @@ const conciergePoints = [
   "60-min planning consult with an ADU specialist",
   "Independent review of your Feasibility Report",
   "Curated introductions to vetted designers, lenders, builders",
-  "Ongoing question-answering through pre-construction",
+  "Ongoing question-answering through pre construction",
 ];
 
 const Unlock = () => {
@@ -278,7 +278,7 @@ const Unlock = () => {
               7-day full refund. If the system isn't useful within 7 days, we refund in full, no questions asked.
             </p>
             <p className="text-paper-dim/70 text-[0.65rem] leading-relaxed mt-3">
-              ADUAtlas provides verified pre-construction guidance, not legal advice, engineering, appraisal, or permit determination. Always confirm with your city, a licensed architect or engineer, and a qualified contractor before committing to a design. <Link to="/methodology" className="underline-offset-2 hover:underline hover:text-paper-dim transition">Read our methodology →</Link>
+              ADUAtlas provides verified pre construction guidance, not legal advice, engineering, appraisal, or permit determination. Always confirm with your city, a licensed architect or engineer, and a qualified contractor before committing to a design. <Link to="/methodology" className="underline-offset-2 hover:underline hover:text-paper-dim transition">Read our methodology →</Link>
             </p>
           </div>
 
