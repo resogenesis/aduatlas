@@ -134,7 +134,7 @@ const About = () => {
             className="font-display font-medium text-paper text-[2.6rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.02] tracking-tight max-w-4xl animate-fade-up"
             style={{ animationDelay: "120ms" }}
           >
-            Pre Construction intelligence <span className="italic text-paper-dim">for homeowners.</span>
+            Pre Construction Intelligence <span className="italic text-paper-dim">for homeowners.</span>
           </h1>
           <p
             className="mt-7 sm:mt-9 text-paper-dim text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed animate-fade-up"
