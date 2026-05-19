@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FiArrowRight, FiDownload, FiMapPin, FiPrinter, FiShare2 } from "react-icons/fi";
 
 // Builder Conversation Guide — a standalone deliverable bundled with the
-// Builder-Ready Report. Intentionally print-friendly and screenshot-friendly
+// Feasibility Report. Intentionally print-friendly and screenshot-friendly
 // so homeowners distribute it for us.
 //
 // Sample is for: 1247 Mulberry Lane, Pasadena CA 91103.
@@ -115,7 +115,7 @@ const ConversationGuide = () => {
           Take this to every builder you talk to. Same questions, same scope. Bids become apples-to-apples instead of guesses.
         </p>
         <p className="text-paper-dim/70 text-sm italic mb-12">
-          Pulled from the Builder-Ready Report for {sampleAddress}. Lot-specific questions update with your address.
+          Pulled from the Feasibility Report for {sampleAddress}. Lot-specific questions update with your address.
         </p>
 
         <div className="space-y-10">
@@ -147,7 +147,7 @@ const ConversationGuide = () => {
               ADUAtlas Builder Conversation Guide · {sampleAddress}
             </p>
             <p className="text-paper-dim/70 text-[0.65rem] italic">
-              Generated as part of your $399 Builder-Ready Report.
+              Generated as part of your $399 Feasibility Report.
             </p>
           </div>
         </div>
@@ -158,7 +158,7 @@ const ConversationGuide = () => {
             Want this for your address?
           </h2>
           <p className="text-accent-fg/80 text-sm sm:text-base mb-6 max-w-xl mx-auto">
-            The Conversation Guide is generated automatically with every $399 Builder-Ready Report, with questions tuned to your lot's actual risks.
+            The Conversation Guide is generated automatically with every $399 Feasibility Report, with questions tuned to your lot's actual risks.
           </p>
           <Link
             to="/unlock"

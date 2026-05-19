@@ -22,7 +22,7 @@ const TEMPLATES = {
     html: `
       <p>You started your ADU Reality Check on ADUAtlas. Pick up where you left off:</p>
       <p><a href="${data.url || "https://aduatlas.com/quiz"}">Continue your plan →</a></p>
-      <p>The full Builder-Ready Report unlocks every yellow row in your snapshot, gives you a builder-ready RFP, and includes a 7-day full refund.</p>
+      <p>The full Feasibility Report unlocks every yellow row in your snapshot, gives you a builder-ready RFP, and includes a 7-day full refund.</p>
     `,
   }),
 
@@ -31,7 +31,7 @@ const TEMPLATES = {
     html: `
       <p>Welcome to ADUAtlas Paid Access.</p>
       <p>Start with your dashboard: <a href="${data.dashboardUrl || "https://aduatlas.com/dashboard"}">${data.dashboardUrl || "aduatlas.com/dashboard"}</a></p>
-      <p>Your Builder-Ready Report is generated as you complete your project brief and the course chapters.</p>
+      <p>Your Feasibility Report is generated as you complete your project brief and the course chapters.</p>
       <p>7-day full refund. Just reply to this email.</p>
     `,
   }),

@@ -7,64 +7,66 @@ import { sendEmail, TEMPLATES } from "../lib/email";
 import { EV, identify, track } from "../lib/analytics";
 import { loadAnswers } from "../funnel/quizStore";
 
-// 4-tier confidence ladder. Free / $79 Roadmap / $399 Builder-Ready Report /
-// Concierge (sidebar CTA, sold-by-application — not self-serve).
+// 3-tier ADU readiness ladder. Free Explorer / $99 Build Prepared / $399
+// Feasibility Report. Concierge stays in the sidebar (application-only).
 
 const tiers = [
   {
     id: "free",
-    name: "Explorer",
+    name: "ADU Explorer",
     price: "Free",
     pricePeriod: "",
-    pitch: "I'm curious",
-    confidence: "Honest uncertainty",
+    pitch: "Tier 1",
+    desc: "Start your ADU journey with essential tools to understand your options before moving forward.",
+    confidence: "Know your options. Understand your property. Build smarter.",
     bullets: [
-      "Address-based property snapshot",
-      "Estimated lot size, max ADU, setbacks",
-      "Cost range with confidence labels",
-      "Public city + state ADU summaries",
+      "Personalized ADU Ready Score",
+      "State code ADU regulations",
+      "General zoning and build guidance",
+      "Overview of ADU types and structures",
+      "Access to video library",
     ],
-    cta: "Try the address check",
+    cta: "Start your ADU journey",
     ctaTo: "/",
   },
   {
     id: "roadmap",
-    name: "Personalized Roadmap",
-    price: "$79",
+    name: "ADU Build Prepared",
+    price: "$99",
     pricePeriod: "one-time",
-    pitch: "I want direction",
-    confidence: "A clear next-step plan",
+    pitch: "Tier 2",
+    desc: "Move beyond basic research with personalized education, deeper regulatory guidance, and planning support designed to prepare you for real-world ADU decisions.",
+    confidence: "Reduce costly mistakes and prepare with confidence.",
     bullets: [
-      "Everything in Explorer",
-      "Personalized roadmap based on your lot, budget, and goals",
-      "Pre-filled property worksheet (your project brief)",
-      "Saved scenarios + take-home summary",
-      "Email support",
-      "$79 credits toward the Builder-Ready Report if you upgrade within 30 days",
+      "Everything included in Tier 1",
+      "Personalized ADU education course based on your ADU Ready Score",
+      "State + city-specific ADU regulations",
+      "Direct email support",
+      "$99 credit toward your ADU Feasibility Report upgrade (valid within 90 days)",
     ],
-    cta: "Start the Roadmap",
+    cta: "Start Build Prepared",
     ctaTo: "#buy",
     highlight: false,
   },
   {
     id: "report",
-    name: "Builder-Ready Report",
+    name: "ADU Feasibility Report",
     price: "$399",
     pricePeriod: "one-time",
-    pitch: "I want confidence",
-    confidence: "Verified, builder-ready clarity",
+    pitch: "Tier 3",
+    desc: "A personalized pre-construction planning package designed to help homeowners understand what they can realistically build before hiring a builder or ordering an expensive survey.",
+    confidence: "Know what you can build before spending thousands.",
     bullets: [
-      "Everything in Roadmap",
-      "Property snapshot, verified against city + parcel records",
-      "What you can build: sized envelope + 2–3 ADU type options",
-      "Cost breakdown with line-item budget and ±20% bands",
-      "Risk register: site, utility, HOA, financing, permitting",
-      "Financing pathways with grants applicable to your ZIP",
-      "Specific next 3 steps (named, sequenced)",
-      "Builder Packet (PDF): apples-to-apples RFP for builders",
+      "Everything included in Tier 1 + Tier 2",
+      "Pre-site dynamic cost calculator",
+      "Property snapshot verified against city + parcel records",
+      "Buildable ADU size envelope + several ADU type recommendations",
+      "Risk assessment for site, utilities, HOA, financing, and permitting",
+      "Personalized next-step action plan",
+      "Feasibility Packet PDF for apples-to-apples builder comparisons",
       "7-day full refund",
     ],
-    cta: "Get my Builder-Ready Report",
+    cta: "Get my Feasibility Report",
     ctaTo: "#buy",
     highlight: true,
     badge: "Most popular",
@@ -73,7 +75,7 @@ const tiers = [
 
 const conciergePoints = [
   "60-min planning consult with an ADU specialist",
-  "Independent review of your Builder-Ready Report",
+  "Independent review of your Feasibility Report",
   "Curated introductions to vetted designers, lenders, builders",
   "Ongoing question-answering through pre-construction",
 ];
@@ -133,13 +135,13 @@ const Unlock = () => {
 
         <div className="text-center mb-14 max-w-3xl mx-auto">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-5">
-            Pick your confidence level
+            Pick your readiness tier
           </p>
           <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-            Turn curiosity <span className="italic">into a buildable plan.</span>
+            From ADU-curious <span className="italic">to build-ready.</span>
           </h1>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed">
-            You're not paying for content. You're paying for confidence: verified data, named next steps, and a packet builders can actually quote against.
+            Every tier returns a personalized ADU Ready Score. Pay for the depth of preparation that matches where you are: exploring your options, getting serious, or ready to talk to builders.
           </p>
         </div>
 
@@ -176,9 +178,14 @@ const Unlock = () => {
                   </span>
                 )}
               </div>
-              <p className={`text-sm mb-6 italic ${t.highlight ? "text-accent-fg/80" : "text-paper-dim"}`}>
+              <p className={`text-sm mb-3 italic ${t.highlight ? "text-accent-fg/80" : "text-paper-dim"}`}>
                 {t.confidence}
               </p>
+              {t.desc && (
+                <p className={`text-xs leading-relaxed mb-5 ${t.highlight ? "text-accent-fg/75" : "text-paper-dim/85"}`}>
+                  {t.desc}
+                </p>
+              )}
               <ul className="space-y-2.5 mb-7">
                 {t.bullets.map((b) => (
                   <li

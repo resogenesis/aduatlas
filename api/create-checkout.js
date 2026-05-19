@@ -3,8 +3,8 @@
 //
 // Required env (server-side, never VITE_-prefixed):
 //   STRIPE_SECRET_KEY
-//   STRIPE_PRICE_ROADMAP   (price_... for $79 Roadmap)
-//   STRIPE_PRICE_REPORT    (price_... for $399 Builder-Ready Report)
+//   STRIPE_PRICE_ROADMAP   (price_... for $99 Build Prepared)
+//   STRIPE_PRICE_REPORT    (price_... for $399 Feasibility Report)
 //   APP_BASE_URL           (e.g. https://aduatlas.com)
 //
 // Body shape (POST JSON):
@@ -59,8 +59,8 @@ export default async function handler(req, res) {
         tier,
         quiz_answers: quizAnswers ? JSON.stringify(quizAnswers).slice(0, 480) : "",
       },
-      // Apply $79 Roadmap credit toward the $399 Report when applicable.
-      // (Implementation TODO: detect prior Roadmap purchase via stripe_customer_id.)
+      // Apply $99 Build Prepared credit toward the $399 Feasibility Report when applicable.
+      // (Implementation TODO: detect prior Build Prepared purchase via stripe_customer_id.)
     });
 
     res.status(200).json({ url: session.url });

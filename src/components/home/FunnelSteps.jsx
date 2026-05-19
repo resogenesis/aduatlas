@@ -15,7 +15,7 @@ const steps = [
   },
   {
     n: "03",
-    title: "Unlock the Builder-Ready Report",
+    title: "Unlock the Feasibility Report",
     desc: "$399 verifies every line, names your real costs and risks, and produces a builder-ready packet for apples-to-apples bids. 7-day refund.",
   },
 ];

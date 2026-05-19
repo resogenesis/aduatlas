@@ -4,17 +4,17 @@ const risks = [
   {
     n: "01",
     title: "Most homeowners don't know what they can legally build.",
-    desc: "Zoning rules vary by state, city, and ZIP, and they change. Discovering this after your design is locked is the #1 source of thousands in wasted spend.",
+    desc: "ADU rules vary by state, city, and ZIP—and they change. Discovering zoning limits after your design is finalized is one of the biggest causes of wasted time and thousands in avoidable costs.",
   },
   {
     n: "02",
-    title: "Site prep + utility hookups are the surprise cost killer.",
-    desc: "Sewer ties, stormwater, trenching for water and gas. These regularly add $10K–$100K to a project that builders quoted on \"the structure only.\"",
+    title: "Site prep + utility hookups are often the biggest hidden ADU costs.",
+    desc: "Grading, excavation, foundation work, access constraints, sewer, stormwater, water, gas, and trenching can add $10K–$100K+ beyond builder \"structure-only\" pricing.",
   },
   {
     n: "03",
-    title: "Builders can't quote accurately without your details.",
-    desc: "Without lot dimensions, zoning constraints, and a clear scope, every quote is a rough guess. Comparing them apples-to-apples becomes impossible.",
+    title: "Builders can't quote accurately without your property details.",
+    desc: "Without lot dimensions, zoning limits, site conditions, and a clear project scope, most builder quotes are rough estimates and often lead to costly surprises later.",
   },
 ];
 

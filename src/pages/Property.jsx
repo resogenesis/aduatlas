@@ -42,7 +42,7 @@ const Property = () => {
           Here's what we can <span className="italic text-paper-dim">tell so far.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed mb-7">
-          Honest answer: some of this is verified, most is estimated, and a few things still need a closer look. The Builder-Ready Report verifies every line below.
+          Honest answer: some of this is verified, most is estimated, and a few things still need a closer look. The Feasibility Report verifies every line below.
         </p>
 
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -70,7 +70,7 @@ const Property = () => {
               {lowOrMedium} {lowOrMedium === 1 ? "row" : "rows"} above are estimated or unknown.
             </h2>
             <p className="text-accent-fg/80 text-sm sm:text-base mb-7 max-w-xl leading-relaxed">
-              The Builder-Ready Report cross-checks each row against city records, parcel data, and utility maps. You get verified numbers you can actually take to a builder or your city.
+              The Feasibility Report cross-checks each row against city records, parcel data, and utility maps. You get verified numbers you can actually take to a builder or your city.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link

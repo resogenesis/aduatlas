@@ -38,7 +38,7 @@ const QuizHero = () => {
           <div className="inline-flex items-center gap-2 mb-7 sm:mb-8 animate-fade-up" style={{ animationDelay: "0ms" }}>
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
             <span className="text-paper-dim text-xs sm:text-sm font-medium tracking-[0.2em] uppercase">
-              Pre-construction intelligence for homeowners
+              ADU Pre-Construction Preparation for Homeowners
             </span>
           </div>
 
@@ -46,14 +46,21 @@ const QuizHero = () => {
             className="font-display font-medium text-paper text-[2.6rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.02] tracking-tight max-w-4xl animate-fade-up"
             style={{ animationDelay: "100ms" }}
           >
-            Find out what you can build <span className="italic">on your property.</span>
+            Find Out What You Can Build <span className="italic">on Your Property.</span>
           </h1>
 
           <p
             className="mt-7 sm:mt-9 text-paper-dim text-base sm:text-lg lg:text-xl max-w-xl leading-relaxed animate-fade-up"
             style={{ animationDelay: "240ms" }}
           >
-            Get a real answer on feasibility, cost, and next steps before talking to a builder, ordering a $500 survey, or drawing a single line.
+            Most homeowners underestimate the complexity of building an ADU. Get real answers on feasibility, cost, and next steps before talking to a builder, ordering a $500 survey, or designing the wrong ADU.
+          </p>
+
+          <p
+            className="mt-4 text-paper text-base sm:text-lg max-w-xl leading-relaxed animate-fade-up"
+            style={{ animationDelay: "300ms" }}
+          >
+            Know your options before you decide—and save time, money, and costly mistakes with ADUAtlas.
           </p>
 
           <div className="mt-9 sm:mt-12 animate-fade-up" style={{ animationDelay: "380ms" }}>
