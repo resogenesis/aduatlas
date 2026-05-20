@@ -121,9 +121,9 @@ const Results = () => {
               to="/unlock"
               className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
             >
-              Unlock for $79.99 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              Unlock for $99 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <span className="text-accent-fg/70 text-sm">One-time · Lifetime access · 7-day refund</span>
+            <span className="text-accent-fg/70 text-sm">One time · Lifetime access · 7 day refund</span>
           </div>
         </div>
 

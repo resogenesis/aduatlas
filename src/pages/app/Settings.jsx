@@ -49,7 +49,7 @@ const Settings = () => {
 
       {/* Billing */}
       <Section icon={FiCreditCard} title="Billing">
-        <Row label="Plan" value="ADUAtlas Paid Access — $79.99 (one-time)" />
+        <Row label="Plan" value="ADUAtlas Paid Access · $99 (one-time)" />
         <Row label="Payment status" value={user?.paid ? "Paid" : "Unpaid"} />
         <Row label="Receipt" value="Available after purchase" action={{
           label: "Email receipt",

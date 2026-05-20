@@ -45,7 +45,7 @@ const Leads = () => {
         Qualified Builder Packets.
       </h1>
       <p className="text-paper-dim text-base sm:text-lg mb-10 max-w-2xl">
-        Every lead has paid $79.99, completed the system, and submitted a packet. Click any row to see the full project brief.
+        Every lead has paid $99, completed the system, and submitted a packet. Click any row to see the full project brief.
       </p>
 
       {/* Filters + search */}

@@ -31,7 +31,7 @@ const PayPaywall = ({ location, chapterName }) => (
         This is part of the <span className="italic">paid system.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-        The course, feasibility tool, and builder match unlock together with one $79.99 payment. 7-day full refund if it's not for you.
+        The course, feasibility tool, and builder match unlock together with one $99 payment. 7 day full refund if it's not for you.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
@@ -39,7 +39,7 @@ const PayPaywall = ({ location, chapterName }) => (
           state={{ from: location.pathname }}
           className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
         >
-          Unlock for $79.99 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+          Unlock for $99 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>
         <Link
           to="/quiz"

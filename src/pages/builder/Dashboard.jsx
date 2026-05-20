@@ -27,7 +27,7 @@ const Dashboard = () => {
           Welcome back, <span className="italic text-paper-dim">{user?.username || "builder"}.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg mt-3 max-w-2xl">
-          Every homeowner here paid $79.99, completed the course, and produced a builder-ready packet. No tire-kickers.
+          Every homeowner here paid $99, completed the course, and produced a builder ready packet. No tire kickers.
         </p>
       </div>
 

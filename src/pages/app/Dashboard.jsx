@@ -6,7 +6,7 @@ import { isComplete, loadAnswers } from "../../funnel/quizStore";
 import { calculateScore } from "../../funnel/scoring";
 
 // Dashboard reframed as the project control panel.
-// Spine = Builder-Ready 5-item checklist + property card.
+// Spine = Build Ready 5-item checklist + property card.
 // Course collapses into a single 'Knowledge' link in the support layer.
 
 const Dashboard = () => {
@@ -35,7 +35,7 @@ const Dashboard = () => {
           Hey, <span className="italic text-paper-dim">{user?.username || "there"}.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg mt-3 max-w-2xl">
-          Turn curiosity into a buildable plan. Hit all five Builder-Ready milestones to unlock builder matches.
+          Turn curiosity into a buildable plan. Hit all five Build Ready milestones to unlock builder matches.
         </p>
       </div>
 
@@ -63,13 +63,13 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Builder-Ready 5-item checklist — the spine */}
+      {/* Build Ready 5-item checklist, the spine */}
       <div className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-10 mb-6">
         <div className="flex items-end justify-between gap-4 mb-7 flex-wrap">
           <div>
-            <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Builder-Ready</p>
+            <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Build Ready</p>
             <h2 className="font-display font-medium text-paper text-2xl sm:text-3xl">
-              {isReady ? "You're builder-ready." : `${completedCount} of 5 milestones`}
+              {isReady ? "You're build ready." : `${completedCount} of 5 milestones`}
             </h2>
           </div>
           {isReady && (
@@ -168,7 +168,7 @@ const Dashboard = () => {
   );
 };
 
-// Translate state into the 5-item Builder-Ready checklist.
+// Translate state into the 5-item Build Ready checklist.
 const buildReadyChecklist = ({ packet, score, courseProgress }) => {
   return [
     {
