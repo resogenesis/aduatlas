@@ -114,14 +114,14 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Builder Packet progress + Knowledge support layer */}
+      {/* Feasibility Packet progress + Knowledge support layer */}
       <div className="grid lg:grid-cols-3 gap-6">
 
         {/* Packet (2 cols) */}
         <div className="lg:col-span-2 bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-9">
           <div className="flex items-end justify-between gap-4 mb-5 flex-wrap">
             <div>
-              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Builder Packet</p>
+              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Feasibility Packet</p>
               <p className="font-display text-paper text-2xl">{packet.percent}% complete</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-2">

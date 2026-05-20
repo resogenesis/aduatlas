@@ -32,7 +32,7 @@ const Profile = () => {
         Your company profile.
       </h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-10">
-        We use this to match you to the right Builder Packets. Be specific about service area and ADU types — narrower is better.
+        We use this to match you to the right Builder Packets. Be specific about service area and ADU types. Narrower is better.
       </p>
 
       <form onSubmit={handleSave} className="space-y-7">

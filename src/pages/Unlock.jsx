@@ -33,14 +33,14 @@ const tiers = [
     id: "roadmap",
     name: "ADU Build Prepared",
     price: "$99",
-    pricePeriod: "one-time",
+    pricePeriod: "one time",
     pitch: "Tier 2",
-    desc: "Move beyond basic research with personalized education, deeper regulatory guidance, and planning support designed to prepare you for real-world ADU decisions.",
+    desc: "Move beyond basic research with personalized education, deeper regulatory guidance, and planning support designed to prepare you for real world ADU decisions.",
     confidence: "Reduce costly mistakes and prepare with confidence.",
     bullets: [
       "Everything included in Tier 1",
       "Personalized ADU education course based on your ADU Ready Score",
-      "State + city-specific ADU regulations",
+      "State + city specific ADU regulations",
       "Direct email support",
       "$99 credit toward your ADU Feasibility Report upgrade (valid within 90 days)",
     ],
@@ -52,7 +52,7 @@ const tiers = [
     id: "report",
     name: "ADU Feasibility Report",
     price: "$399",
-    pricePeriod: "one-time",
+    pricePeriod: "one time",
     pitch: "Tier 3",
     desc: "A personalized pre construction planning package designed to help homeowners understand what they can realistically build before hiring a builder or ordering an expensive survey.",
     confidence: "Know what you can build before spending thousands.",
@@ -63,8 +63,8 @@ const tiers = [
       "Buildable ADU size envelope + several ADU type recommendations",
       "Risk assessment for site, utilities, HOA, financing, and permitting",
       "Personalized next-step action plan",
-      "Feasibility Packet PDF for apples-to-apples builder comparisons",
-      "7-day full refund",
+      "Feasibility Packet PDF for apples to apples builder comparisons",
+      "7 day full refund",
     ],
     cta: "Get my Feasibility Report",
     ctaTo: "#buy",
@@ -275,7 +275,7 @@ const Unlock = () => {
             )}
 
             <p className="text-paper-dim text-xs leading-relaxed mt-6 italic">
-              7-day full refund. If the system isn't useful within 7 days, we refund in full, no questions asked.
+              7 day full refund. If the system isn't useful within 7 days, we refund in full, no questions asked.
             </p>
             <p className="text-paper-dim/70 text-[0.65rem] leading-relaxed mt-3">
               ADUAtlas provides verified pre construction guidance, not legal advice, engineering, appraisal, or permit determination. Always confirm with your city, a licensed architect or engineer, and a qualified contractor before committing to a design. <Link to="/methodology" className="underline-offset-2 hover:underline hover:text-paper-dim transition">Read our methodology →</Link>

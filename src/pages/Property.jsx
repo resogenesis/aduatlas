@@ -172,7 +172,7 @@ const mockPropertyOutput = (q) => {
       confidence: CONFIDENCE.LOW,
       source: "Requires utility map review",
       unlocksAt: TIER.REPORT,
-      toGreen: "We pull your city's sewer-line map, measure the distance from the closest tie-in to the proposed ADU pad, and flag whether a gravity tie-in works or a grinder pump is required (a $4K–$8K cost difference).",
+      toGreen: "We pull your city's sewer line map, measure the distance from the closest tie in to the proposed ADU pad, and flag whether a gravity tie in works or a grinder pump is required (a $4K–$8K cost difference).",
     }),
     datapoint({
       label: "HOA / deed restrictions",

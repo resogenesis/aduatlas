@@ -20,7 +20,7 @@ const levels = [
     label: "Medium",
     when: "Modeled from public data and standard assumptions.",
     examples: [
-      "Max ADU size estimated from city's percent-of-primary rule + your lot size",
+      "Max ADU size estimated from city's percent of primary rule + your lot size",
       "Cost ranges from regional builder bids and prefab market data",
       "Setback estimates from the local minimum (before checking easements)",
     ],
@@ -29,11 +29,11 @@ const levels = [
     icon: FiAlertTriangle,
     pillClass: "bg-red-400/10 text-red-300 border-red-400/30",
     label: "Low",
-    when: "Requires on-site verification or a closer look at title / city records.",
+    when: "Requires on site verification or a closer look at title / city records.",
     examples: [
       "Sewer line distance to your specific pad",
       "HOA / deed restrictions recorded against the parcel",
-      "Soil bearing or slope-related foundation needs",
+      "Soil bearing or slope related foundation needs",
     ],
   },
 ];
@@ -43,7 +43,7 @@ const sources = [
   { name: "City zoning maps", cadence: "Quarterly review per city", coverage: "Top 25 ADU markets" },
   { name: "Permit fee schedules", cadence: "Monthly review", coverage: "Top 25 ADU markets" },
   { name: "Regional cost models", cadence: "Refreshed every 3 months", coverage: "CA, WA, CO, TX" },
-  { name: "ADU code amendments", cadence: "Tracked per-jurisdiction", coverage: "CA + state-level updates nationwide" },
+  { name: "ADU code amendments", cadence: "Tracked per jurisdiction", coverage: "CA + state level updates nationwide" },
 ];
 
 const notDoing = [
@@ -125,7 +125,7 @@ const Methodology = () => {
               <span className="text-paper-dim">Sewer access:</span> Unknown · <span className="inline-block w-2 h-2 rounded-full bg-red-400 mr-1"></span>Low
             </p>
             <p className="text-paper-dim text-sm leading-relaxed italic">
-              "We pull your city's sewer-line map, measure the distance from the closest tie-in to the proposed ADU pad, and flag whether a gravity tie-in works or a grinder pump is required (a $4K–$8K cost difference)."
+              "We pull your city's sewer line map, measure the distance from the closest tie in to the proposed ADU pad, and flag whether a gravity tie in works or a grinder pump is required (a $4K–$8K cost difference)."
             </p>
           </div>
         </section>

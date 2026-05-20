@@ -41,15 +41,15 @@ const Settings = () => {
           label: "Change",
           onClick: () => alert("INTEGRATION POINT (Supabase Auth): password update flow."),
         }} />
-        <Row label="Magic-link login" value="Enabled" action={{
+        <Row label="Magic link login" value="Enabled" action={{
           label: "Send link",
-          onClick: () => alert("INTEGRATION POINT (Resend): trigger magic-link email."),
+          onClick: () => alert("INTEGRATION POINT (Resend): trigger magic link email."),
         }} />
       </Section>
 
       {/* Billing */}
       <Section icon={FiCreditCard} title="Billing">
-        <Row label="Plan" value="ADUAtlas Paid Access · $99 (one-time)" />
+        <Row label="Plan" value="ADUAtlas Paid Access · $99 (one time)" />
         <Row label="Payment status" value={user?.paid ? "Paid" : "Unpaid"} />
         <Row label="Receipt" value="Available after purchase" action={{
           label: "Email receipt",
@@ -60,7 +60,7 @@ const Settings = () => {
       {/* Refund */}
       <Section icon={FiRotateCcw} title="Refund (within 7 days)">
         <p className="text-paper-dim text-sm leading-relaxed mb-5">
-          We offer a 7-day full refund, no questions asked. If the system isn't useful within a week, request a refund and we'll handle it within one business day.
+          We offer a 7 day full refund, no questions asked. If the system isn't useful within a week, request a refund and we'll handle it within one business day.
         </p>
         <button
           onClick={handleRefund}

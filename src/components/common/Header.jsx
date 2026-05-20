@@ -6,6 +6,7 @@ import Logomark from "../brand/Logomark";
 const navLinks = [
   { name: "How it works", path: "/#how" },
   { name: "Reality Check", path: "/quiz" },
+  { name: "Pricing", path: "/unlock" },
   { name: "FAQ", path: "/faq" },
   { name: "About", path: "/about" },
 ];

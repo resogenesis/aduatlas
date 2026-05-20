@@ -39,7 +39,7 @@ const ChooseState = () => {
         </div>
 
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed text-center">
-          The state-by-state breakdown (what each state mandates, where city rules diverge, and which authority controls what) is inside the ADU system, with your specific ZIP code's rules pulled into your Feasibility Study.
+          The state by state breakdown (what each state mandates, where city rules diverge, and which authority controls what) is inside the ADU system, with your specific ZIP code's rules pulled into your Feasibility Report.
         </p>
       </section>
 

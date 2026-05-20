@@ -25,7 +25,7 @@ const PayPaywall = ({ location, chapterName }) => (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
     <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
       <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] uppercase mb-7">
-        <FiLock /> {chapterName ? `${chapterName} — locked` : "Locked"}
+        <FiLock /> {chapterName ? `${chapterName} · locked` : "Locked"}
       </div>
       <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
         This is part of the <span className="italic">paid system.</span>
@@ -56,7 +56,7 @@ const FeasibilityPaywall = ({ progress }) => (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
     <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
       <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] uppercase mb-7">
-        <FiLock /> Feasibility — locked
+        <FiLock /> Feasibility · locked
       </div>
       <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
         Finish the course first.
@@ -65,7 +65,7 @@ const FeasibilityPaywall = ({ progress }) => (
         Feasibility unlocks at <span className="text-paper font-medium">80% course progress</span>. You're at <span className="text-accent">{progress}%</span>.
       </p>
       <p className="text-paper-dim text-sm leading-relaxed mb-10 max-w-xl mx-auto italic">
-        Each chapter sharpens your inputs — running Feasibility before you've covered budget and regulations would give you a worse plan, not a faster one.
+        Each chapter sharpens your inputs. Running Feasibility before you've covered budget and regulations would give you a worse plan, not a faster one.
       </p>
       <Link
         to="/course"
@@ -81,7 +81,7 @@ const BuilderPaywall = ({ progress, packetPercent, feasOk }) => (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
     <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
       <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] uppercase mb-7">
-        <FiLock /> Builders — locked
+        <FiLock /> Builders · locked
       </div>
       <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
         Builders only see <span className="italic">prepared homeowners.</span>
@@ -94,7 +94,7 @@ const BuilderPaywall = ({ progress, packetPercent, feasOk }) => (
         <div className="space-y-3">
           <Row label="Course progress" value={`${progress}%`} done={progress >= 80} />
           <Row label="Feasibility study" value={feasOk ? "Run" : "Not run"} done={feasOk} />
-          <Row label="Builder packet" value={`${packetPercent}%`} done={packetPercent >= 75} />
+          <Row label="Feasibility packet" value={`${packetPercent}%`} done={packetPercent >= 75} />
         </div>
       </div>
 

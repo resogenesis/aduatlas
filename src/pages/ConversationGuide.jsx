@@ -16,7 +16,7 @@ const sections = [
     title: "What exactly is in your bid, and what's not?",
     questions: [
       "Is site prep included? Specifically: grading, foundation, excavation? If not, what's your typical range?",
-      "Are utility hookups (sewer tie-in, water, electric panel upgrade, gas line) in your number? Or quoted separately?",
+      "Are utility hookups (sewer tie in, water, electric panel upgrade, gas line) in your number? Or quoted separately?",
       "Are permit, plan check, school, and impact fees included or pass-through?",
       "What's your contingency line for unforeseen site conditions, and what triggers it?",
       "Is interior finish at builder grade, or is your number for a base shell only?",
@@ -27,7 +27,7 @@ const sections = [
     eyebrow: "Lot-specific risks",
     title: "Have you actually looked at my lot?",
     questions: [
-      "My sewer is ~28 ft from the proposed pad. What's your contingency for a shallow tie-in or grinder pump need?",
+      "My sewer is ~28 ft from the proposed pad. What's your contingency for a shallow tie in or grinder pump need?",
       "There's a mature pepper tree at my rear lot line. How do you handle root encroachment if the foundation lands within 8 ft?",
       "My existing electric panel is 100A. What sub-panel capacity will the ADU need, and does your number include the upgrade?",
       "Are there neighbor-fence or access constraints I should know about that change your delivery cost?",
@@ -112,7 +112,7 @@ const ConversationGuide = () => {
           Five conversations <span className="italic text-paper-dim">every builder should pass.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed max-w-2xl mb-3">
-          Take this to every builder you talk to. Same questions, same scope. Bids become apples-to-apples instead of guesses.
+          Take this to every builder you talk to. Same questions, same scope. Bids become apples to apples instead of guesses.
         </p>
         <p className="text-paper-dim/70 text-sm italic mb-12">
           Pulled from the Feasibility Report for {sampleAddress}. Lot-specific questions update with your address.

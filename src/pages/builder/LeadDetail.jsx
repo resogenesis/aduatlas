@@ -106,7 +106,7 @@ const LeadDetail = () => {
         <p className="text-paper-dim text-sm sm:text-base leading-relaxed max-w-2xl mb-7">
           {lead.status === "claimed"
             ? "We've notified the homeowner that you're working on a quote. Reach out through the contact info on their packet within 48 hours to keep the lead warm."
-            : "Claim this lead to lock in exclusive contact for 48 hours. Pass if it's not a fit — we won't hold it against you."}
+            : "Claim this lead to lock in exclusive contact for 48 hours. Pass if it's not a fit. We won't hold it against you."}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3">

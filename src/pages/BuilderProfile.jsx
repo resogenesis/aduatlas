@@ -50,12 +50,12 @@ const BuilderProfile = () => {
         <section className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-8">
           <h3 className="text-xl font-semibold text-primary mb-3">About</h3>
           <p className="text-secondary text-sm leading-relaxed">
-            Pacific ADU Builders designs and constructs detached and prefab ADUs across the Southwest. With more than 12 years of experience navigating local zoning and permitting, our team delivers move-in-ready units on schedule and on budget.
+            Pacific ADU Builders designs and constructs detached and prefab ADUs across the Southwest. With more than 12 years of experience navigating local zoning and permitting, our team delivers move in ready units on schedule and on budget.
           </p>
 
           <h3 className="text-xl font-semibold text-primary mt-6 mb-3">Services Offered</h3>
           <div className="grid sm:grid-cols-2 gap-2">
-            {["Feasibility Study", "Permitting", "Site Prep", "Construction", "Finish Work", "Post-build Warranty"].map((s) => (
+            {["Feasibility Report", "Permitting", "Site Prep", "Construction", "Finish Work", "Post build Warranty"].map((s) => (
               <div key={s} className="text-sm inline-flex items-center gap-2"><FiCheck className="text-[#2F5D50]" /> {s}</div>
             ))}
           </div>

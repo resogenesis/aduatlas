@@ -36,7 +36,7 @@ const cost = [
 ];
 
 const risks = [
-  { severity: "med", title: "Sewer depth not yet confirmed", desc: "Sewer is ~28 ft from the proposed pad; depth will determine whether a simple gravity tie-in works or whether a grinder pump is required (+$4–8K)." },
+  { severity: "med", title: "Sewer depth not yet confirmed", desc: "Sewer is ~28 ft from the proposed pad; depth will determine whether a simple gravity tie in works or whether a grinder pump is required (+$4–8K)." },
   { severity: "low", title: "Mature pepper tree at rear lot line", desc: "Roots may interfere with footing if foundation is placed within 8 ft. Arborist consult ~$300 recommended before final placement." },
   { severity: "low", title: "Pasadena historic-overlay check", desc: "Property is outside the listed historic district per current GIS, but overlay maps revise quarterly. Confirm at permit submittal." },
   { severity: "med", title: "Electric panel capacity", desc: "Existing 100A panel; ADU needs at minimum a 60A subfeed. Plan for $2.5K–4K upgrade or sub-panel." },
@@ -51,7 +51,7 @@ const financing = [
 
 const nextSteps = [
   { n: "01", title: "Order a boundary survey", desc: "Pasadena requires one for ADU permits. ~$700, 2–3 weeks. Use the surveyors listed in your packet." },
-  { n: "02", title: "Get 3 builder bids using the Builder Packet", desc: "Send the export below to the three matched builders. Bids will be apples-to-apples: same scope, same exclusions called out." },
+  { n: "02", title: "Get 3 builder bids using the Feasibility Packet", desc: "Send the export below to the three matched builders. Bids will be apples to apples: same scope, same exclusions called out." },
   { n: "03", title: "Apply for the CalHFA grant", desc: "Don't skip this. The grant covers permit, plan check, and survey costs once you have an approved plan." },
 ];
 
@@ -174,22 +174,22 @@ const Report = () => {
           </ol>
         </Section>
 
-        {/* 7. Builder Packet + Conversation Guide */}
-        <Section number="07" title="Builder Packet + Conversation Guide" subtitle="What you take to every builder. Same scope. Same questions. Apples-to-apples.">
+        {/* 7. Feasibility Packet + Conversation Guide */}
+        <Section number="07" title="Feasibility Packet + Conversation Guide" subtitle="What you take to every builder. Same scope. Same questions. Apples to apples.">
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="bg-canvas border border-stroke rounded-2xl p-6 sm:p-7">
               <div className="flex items-center gap-3 mb-3">
                 <FiFileText className="text-accent text-xl" />
-                <h4 className="font-display text-paper text-lg">builder_packet.pdf</h4>
+                <h4 className="font-display text-paper text-lg">feasibility_packet.pdf</h4>
               </div>
               <p className="text-paper-dim text-sm leading-relaxed mb-5">
-                One-page RFP with your lot, scope, constraints, and exclusions. Builders quote against the same spec.
+                One page RFP with your lot, scope, constraints, and exclusions. Builders quote against the same spec.
               </p>
               <button
                 onClick={() => alert("INTEGRATION POINT: PDF generation pending.")}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors"
               >
-                <FiDownload /> Download Builder Packet
+                <FiDownload /> Download Feasibility Packet
               </button>
             </div>
 
@@ -202,7 +202,7 @@ const Report = () => {
                 <h4 className="font-display text-paper text-lg">conversation_guide.pdf</h4>
               </div>
               <p className="text-paper-dim text-sm leading-relaxed mb-5">
-                Five conversations every builder should pass. Lot-specific questions a homeowner shouldn't have to know to ask.
+                Five conversations every builder should pass. Lot specific questions a homeowner shouldn't have to know to ask.
               </p>
               <span className="inline-flex items-center gap-2 text-accent text-sm font-semibold group-hover:gap-3 transition-all">
                 Open Conversation Guide <FiArrowRight />
@@ -217,7 +217,7 @@ const Report = () => {
             Get this for your address.
           </h2>
           <p className="text-accent-fg/80 text-base sm:text-lg max-w-xl mx-auto mb-7">
-            $399. One-time. 7-day full refund. Replaces a $500+ official survey and weeks of builder back-and-forth.
+            $399. One time. 7 day full refund. Replaces a $500+ official survey and weeks of builder back and forth.
           </p>
           <Link
             to="/unlock"

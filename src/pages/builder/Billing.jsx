@@ -3,7 +3,7 @@ import { FiCheck, FiCreditCard, FiZap } from "react-icons/fi";
 const tiers = [
   {
     id: "pilot",
-    name: "Pilot — Free",
+    name: "Pilot · Free",
     price: "$0",
     cadence: "during launch period",
     badge: "Current",
@@ -48,7 +48,7 @@ const Billing = () => {
         Plan & invoices.
       </h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-10">
-        You're on the pilot plan during the launch period — no charges. After the pilot, switch to per-lead or subscription.
+        You're on the pilot plan during the launch period. No charges. After the pilot, switch to per lead or subscription.
       </p>
 
       {/* Current plan card */}

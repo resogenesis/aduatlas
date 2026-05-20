@@ -77,8 +77,8 @@ const questions = [
   },
   {
     id: "siteCostKnowledge",
-    label: "Have you accounted for site-prep and utility hookup costs?",
-    helper: "Sewer tie-ins, trenching, stormwater drainage. These often add $10K–$100K on top of the ADU price.",
+    label: "Have you accounted for site prep and utility hookup costs?",
+    helper: "Sewer tie ins, trenching, stormwater drainage. These often add $10K to $100K on top of the ADU price.",
     type: "choice",
     options: [
       { value: "quoted", label: "Yes, I have written quotes for site prep + utilities" },

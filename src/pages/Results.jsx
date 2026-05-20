@@ -65,7 +65,7 @@ const Results = () => {
                 {band}
               </h2>
               <p className="text-paper-dim text-sm sm:text-base leading-relaxed">
-                This is preliminary. Your full Feasibility Study refines this with GIS lot data, your local zoning rules, and pre-site cost estimates.
+                This is preliminary. Your full Feasibility Report refines this with GIS lot data, your local zoning rules, and pre site cost estimates.
               </p>
             </div>
           </div>
@@ -92,22 +92,22 @@ const Results = () => {
             <FiLock /> Locked
           </div>
           <h3 className="font-display font-medium text-3xl sm:text-4xl leading-tight mb-4">
-            Unlock the full plan + your Feasibility Study.
+            Unlock the full plan + your Feasibility Report.
           </h3>
           <p className="text-accent-fg/80 mb-7 text-sm sm:text-base leading-relaxed max-w-xl">
-            6 chapters. 20+ modules. GIS site plan. Pre-filled budget worksheets. Refined readiness score. Builder-ready RFP packet.
+            6 chapters. 20+ modules. GIS site plan. Pre filled budget worksheets. Refined readiness score. Feasibility Packet.
           </p>
 
           <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-9 text-sm">
             {[
               "Full course: 6 chapters, 20+ modules",
               "GIS satellite view with lot dimensions",
-              "Pre-filled pre-site cost worksheet",
+              "Pre filled pre site cost worksheet",
               "Total budget worksheet with timelines",
               "Refined ADU Readiness Score",
-              "Free utility-marking contact",
+              "Free utility marking contact",
               "Builder/supplier matches by ZIP",
-              "7-day full refund, no questions asked",
+              "7 day full refund, no questions asked",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
                 <FiCheck className="shrink-0 mt-1" />
