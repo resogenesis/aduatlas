@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiSearch } from "react-icons/fi";
-import { allLeads } from "../../funnel/builderStore";
+import { allLeads } from "../../stores/builderStore";
 
 const FILTERS = [
   { id: "all", label: "All" },

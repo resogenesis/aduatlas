@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowUpRight, FiCheck, FiHelpCircle, FiAlertTriangle, FiChevronDown } from "react-icons/fi";
-import { CONFIDENCE_META, TIER } from "../../funnel/confidence";
+import { CONFIDENCE_META, TIER } from "../../stores/confidence";
 
 const ICON = {
   high: FiCheck,

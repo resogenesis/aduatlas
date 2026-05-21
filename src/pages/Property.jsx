@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { FiArrowRight, FiMapPin } from "react-icons/fi";
-import { ConfidenceRow, ConfidenceSummary } from "../components/funnel/ConfidenceChip";
-import { CONFIDENCE, TIER, datapoint } from "../funnel/confidence";
+import { ConfidenceRow, ConfidenceSummary } from "../components/gates/ConfidenceChip";
+import { CONFIDENCE, TIER, datapoint } from "../stores/confidence";
 import { EV, track } from "../lib/analytics";
 
 // Free instant feasibility output. Every row carries a confidence level;
@@ -42,7 +42,7 @@ const Property = () => {
           Here's what we can <span className="italic text-paper-dim">tell so far.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed mb-7">
-          Honest answer: some of this is verified, most is estimated, and a few things still need a closer look. The Feasibility Report verifies every line below.
+          Honest answer: most homeowners looking to buy or build ADU homes don't even know that they need to know these. The Feasibility Report verifies every line below.
         </p>
 
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -77,7 +77,7 @@ const Property = () => {
                 to="/unlock"
                 className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
               >
-                See the report tiers <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                Sign Up <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/quiz"
@@ -122,7 +122,7 @@ const mockPropertyOutput = (q) => {
     datapoint({
       label: "Detached ADU allowed",
       value: "Likely yes",
-      confidence: CONFIDENCE.MEDIUM,
+      confidence: CONFIDENCE.LOW,
       source: "State + city zoning model",
       lastUpdated: "2026-04-12",
       unlocksAt: TIER.REPORT,
@@ -132,7 +132,7 @@ const mockPropertyOutput = (q) => {
     datapoint({
       label: "Max ADU size",
       value: `~${maxAdu} sq ft`,
-      confidence: CONFIDENCE.MEDIUM,
+      confidence: CONFIDENCE.LOW,
       source: "Zoning model + lot coverage rule",
       lastUpdated: "2026-04-12",
       unlocksAt: TIER.REPORT,
@@ -141,7 +141,7 @@ const mockPropertyOutput = (q) => {
     datapoint({
       label: "Setbacks",
       value: `${setbackSide} ft side · ${setbackRear} ft rear`,
-      confidence: CONFIDENCE.MEDIUM,
+      confidence: CONFIDENCE.LOW,
       source: "Standard local minimum",
       lastUpdated: "2026-03-22",
       unlocksAt: TIER.REPORT,
@@ -150,7 +150,7 @@ const mockPropertyOutput = (q) => {
     datapoint({
       label: "Stories permitted",
       value: stories,
-      confidence: CONFIDENCE.MEDIUM,
+      confidence: CONFIDENCE.LOW,
       source: "Height envelope estimate",
       lastUpdated: "2026-03-22",
       unlocksAt: TIER.REPORT,
@@ -159,7 +159,7 @@ const mockPropertyOutput = (q) => {
     datapoint({
       label: "Cost range (site prep + structure)",
       value: `$${costLow}K – $${costHigh}K`,
-      confidence: CONFIDENCE.MEDIUM,
+      confidence: CONFIDENCE.LOW,
       source: "Regional cost model",
       lastUpdated: "2026-04-01",
       unlocksAt: TIER.REPORT,

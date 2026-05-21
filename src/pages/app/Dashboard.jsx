@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiBookOpen, FiCheck, FiDownload, FiMapPin } from "react-icons/fi";
-import { currentUser } from "../../funnel/authStore";
-import { courseProgress, loadPacket, packetProgress } from "../../funnel/courseStore";
-import { isComplete, loadAnswers } from "../../funnel/quizStore";
-import { calculateScore } from "../../funnel/scoring";
+import { currentUser } from "../../stores/authStore";
+import { courseProgress, loadPacket, packetProgress } from "../../stores/courseStore";
+import { isComplete, loadAnswers } from "../../stores/quizStore";
+import { calculateScore } from "../../stores/scoring";
 
 // Dashboard reframed as the project control panel.
 // Spine = Build Ready 5-item checklist + property card.

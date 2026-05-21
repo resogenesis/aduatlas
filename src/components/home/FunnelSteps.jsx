@@ -5,18 +5,18 @@ import { useReveal } from "../../hooks/useReveal";
 const steps = [
   {
     n: "01",
-    title: "Check your property",
-    desc: "Type your address. Get an instant snapshot of lot size, what's likely buildable, and a rough cost band, with confidence labels on every line.",
+    title: "Drop your address",
+    desc: "Get an instant property snapshot: lot size, what's likely buildable, and a rough cost band. No signup. No credit card.",
   },
   {
     n: "02",
-    title: "See what's verified vs. estimated",
-    desc: "Free output is honest about what we know, what we're modeling, and what still needs verification. No fake confidence.",
+    title: "See what actually fits your lot",
+    desc: "We model your specific lot against local zoning, then show ADU sizes, types, and cost ranges that match — with confidence labels on every line.",
   },
   {
     n: "03",
-    title: "Unlock the Feasibility Report",
-    desc: "$399 verifies every line, names your real costs and risks, and produces a builder ready packet for apples to apples bids. 7 day refund.",
+    title: "Walk into builder meetings prepared",
+    desc: "The Feasibility Report verifies each line against city records, parcel data, and utility maps. Bring a packet, not a guess.",
   },
 ];
 
@@ -44,10 +44,10 @@ const FunnelSteps = () => {
       <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
         <div ref={headRef} className="mb-14 sm:mb-20 max-w-2xl">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
-            How it works
+            Home
           </p>
           <h2 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
-            Curiosity to <span className="italic">buildable plan</span> in three moves.
+            From curiosity to a <span className="italic">builder ready plan.</span>
           </h2>
         </div>
 

@@ -1,5 +1,5 @@
 import PageHeader from "../components/common/PageHeader";
-import PublicStubFooter from "../components/funnel/PublicStubFooter";
+import PublicStubFooter from "../components/gates/PublicStubFooter";
 import heroImg from "../assets/home/hero_image.png";
 
 const teasers = [

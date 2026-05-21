@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiLock } from "react-icons/fi";
-import { isComplete, loadAnswers } from "../funnel/quizStore";
-import { calculateScore } from "../funnel/scoring";
+import { isComplete, loadAnswers } from "../stores/quizStore";
+import { calculateScore } from "../stores/scoring";
 import { EV, track } from "../lib/analytics";
 
 const Results = () => {
@@ -92,21 +92,19 @@ const Results = () => {
             <FiLock /> Locked
           </div>
           <h3 className="font-display font-medium text-3xl sm:text-4xl leading-tight mb-4">
-            Unlock the full plan + your Feasibility Report.
+            Unlock ADU Build Prepared.
           </h3>
           <p className="text-accent-fg/80 mb-7 text-sm sm:text-base leading-relaxed max-w-xl">
-            6 chapters. 20+ modules. GIS site plan. Pre filled budget worksheets. Refined readiness score. Feasibility Packet.
+            Personalized education, state + city specific zoning guidance, and direct support — built around your ADU Ready Score.
           </p>
 
           <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-9 text-sm">
             {[
-              "Full course: 6 chapters, 20+ modules",
-              "GIS satellite view with lot dimensions",
-              "Pre filled pre site cost worksheet",
-              "Total budget worksheet with timelines",
-              "Refined ADU Readiness Score",
-              "Free utility marking contact",
-              "Builder/supplier matches by ZIP",
+              "Everything in the free Explorer tier",
+              "Personalized ADU education course based on your Ready Score",
+              "State + city specific ADU regulations",
+              "Direct email support",
+              "$99 credit toward Feasibility Report upgrade (90 days)",
               "7 day full refund, no questions asked",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">

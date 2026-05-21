@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FiCheck, FiSave } from "react-icons/fi";
-import { loadBuilderProfile, saveBuilderProfile } from "../../funnel/builderStore";
+import { loadBuilderProfile, saveBuilderProfile } from "../../stores/builderStore";
 
 const ADU_TYPES = [
   "Detached prefab", "Detached stick-built", "Garage conversion",

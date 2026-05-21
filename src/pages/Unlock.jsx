@@ -5,7 +5,7 @@ import { captureLead } from "../lib/supabase";
 import { startCheckout } from "../lib/checkout";
 import { sendEmail, TEMPLATES } from "../lib/email";
 import { EV, identify, track } from "../lib/analytics";
-import { loadAnswers } from "../funnel/quizStore";
+import { loadAnswers } from "../stores/quizStore";
 
 // 3-tier ADU readiness ladder. Free Explorer / $99 Build Prepared / $399
 // Feasibility Report. Concierge stays in the sidebar (application-only).
@@ -21,12 +21,11 @@ const tiers = [
     confidence: "Know your options. Understand your property. Build smarter.",
     bullets: [
       "Personalized ADU Ready Score",
-      "State code ADU regulations",
       "General zoning and build guidance",
       "Overview of ADU types and structures",
       "Access to video library",
     ],
-    cta: "Start your ADU journey",
+    cta: "Sign up today",
     ctaTo: "/",
   },
   {

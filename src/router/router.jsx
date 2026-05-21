@@ -30,7 +30,7 @@ import BuilderLeadDetail from "../pages/builder/LeadDetail";
 import BuilderProfilePage from "../pages/builder/Profile";
 import BuilderBilling from "../pages/builder/Billing";
 import BuilderSettings from "../pages/builder/Settings";
-import BuilderGate from "../components/funnel/BuilderGate";
+import BuilderGate from "../components/gates/BuilderGate";
 
 import Dashboard from "../pages/app/Dashboard";
 import CourseIndex from "../pages/app/CourseIndex";
@@ -38,7 +38,7 @@ import CourseChapter from "../pages/app/CourseChapter";
 import MyProperty from "../pages/app/MyProperty";
 import Settings from "../pages/app/Settings";
 
-import PaidGate from "../components/funnel/PaidGate";
+import PaidGate from "../components/gates/PaidGate";
 
 import Login from "../pages/auth/Login";
 import Signup from "../pages/auth/Signup";

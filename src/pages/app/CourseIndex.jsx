@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiClock } from "react-icons/fi";
-import { chapters, courseProgress, getCompletedChapters } from "../../funnel/courseStore";
+import { chapters, courseProgress, getCompletedChapters } from "../../stores/courseStore";
 
 const CourseIndex = () => {
   const done = getCompletedChapters();

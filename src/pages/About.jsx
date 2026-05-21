@@ -61,7 +61,7 @@ const chapters = [
   },
   {
     n: "05",
-    eyebrow: "How It Works",
+    eyebrow: "Home",
     title: "Our goal is to simplify the process.",
     body: (
       <>
@@ -191,7 +191,7 @@ const About = () => {
               to="/unlock"
               className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-accent-fg/20 text-accent-fg font-medium hover:border-accent-fg/60 transition"
             >
-              See pricing
+              Sign Up
             </Link>
           </div>
         </div>

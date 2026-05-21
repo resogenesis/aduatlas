@@ -6,7 +6,7 @@ import {
   getCompletedChapters,
   markChapterComplete,
   unmarkChapter,
-} from "../../funnel/courseStore";
+} from "../../stores/courseStore";
 
 // Placeholder content map. Replace with real Markdown / MDX content per chapter
 // in Slice 4. (`Lorem ipsum` markers indicate filler.)

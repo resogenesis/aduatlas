@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { FiArrowRight, FiLock } from "react-icons/fi";
-import { isPaid } from "../../funnel/paymentStore";
-import { isBuildersUnlocked, isFeasibilityUnlocked, courseProgress, packetProgress } from "../../funnel/courseStore";
+import { isPaid } from "../../stores/paymentStore";
+import { isBuildersUnlocked, isFeasibilityUnlocked, courseProgress, packetProgress } from "../../stores/courseStore";
 
 // Two layers:
 // 1. Paid gate (any /course/*, /feasibility, /builders) — must have purchased.

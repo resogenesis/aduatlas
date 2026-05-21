@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthCard from "../../components/common/AuthCard";
 import { FormField, PrimaryButton } from "../../components/common/FormField";
-import { routeForUser, signup } from "../../funnel/authStore";
+import { routeForUser, signup } from "../../stores/authStore";
 
 const Signup = () => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { currentUser } from "../../funnel/authStore";
+import { currentUser } from "../../stores/authStore";
 
 // Only logged-in users with role "pro" can access /builder/*.
 // Logged-out → /login.  Logged in as homeowner → /dashboard.

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FiAlertTriangle, FiArrowRight, FiCheck, FiDownload, FiFileText, FiMapPin } from "react-icons/fi";
-import { ConfidenceRow, ConfidenceSummary } from "../components/funnel/ConfidenceChip";
-import { CONFIDENCE, datapoint } from "../funnel/confidence";
+import { ConfidenceRow, ConfidenceSummary } from "../components/gates/ConfidenceChip";
+import { CONFIDENCE, datapoint } from "../stores/confidence";
 
 // Sample Feasibility Report. Shows the 7-section deliverable a homeowner
 // gets at the $399 tier. All data is mock and labeled 'Sample report'.
@@ -223,7 +223,7 @@ const Report = () => {
             to="/unlock"
             className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
           >
-            See pricing tiers <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+            Sign Up <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>

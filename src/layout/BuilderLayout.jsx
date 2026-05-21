@@ -2,8 +2,8 @@ import { useState } from "react";
 import { NavLink, Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
 import { FiGrid, FiInbox, FiBriefcase, FiCreditCard, FiSettings, FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import Logomark from "../components/brand/Logomark";
-import { currentUser, logout } from "../funnel/authStore";
-import { builderStats } from "../funnel/builderStore";
+import { currentUser, logout } from "../stores/authStore";
+import { builderStats } from "../stores/builderStore";
 
 const nav = [
   { to: "/builder", label: "Dashboard", Icon: FiGrid, end: true },

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FiCreditCard, FiLogOut, FiMail, FiRotateCcw, FiShield, FiUser } from "react-icons/fi";
-import { currentUser, logout } from "../../funnel/authStore";
+import { currentUser, logout } from "../../stores/authStore";
 import { sendEmail, TEMPLATES } from "../../lib/email";
 import { EV, track } from "../../lib/analytics";
 

@@ -1,18 +1,19 @@
+import { FiMap, FiTool, FiClipboard } from "react-icons/fi";
 import { useReveal } from "../../hooks/useReveal";
 
 const risks = [
   {
-    n: "01",
+    Icon: FiMap,
     title: "Most homeowners don't know what they can legally build.",
     desc: "ADU rules vary by state, city, and ZIP and they change. Discovering zoning limits after your design is finalized is one of the biggest causes of wasted time and thousands in avoidable costs.",
   },
   {
-    n: "02",
+    Icon: FiTool,
     title: "Site prep + utility hookups are often the biggest hidden ADU costs.",
     desc: "Grading, excavation, foundation work, access constraints, sewer, stormwater, water, gas, and trenching can add $10K to $100K+ beyond builder \"structure only\" pricing.",
   },
   {
-    n: "03",
+    Icon: FiClipboard,
     title: "Builders can't quote accurately without your property details.",
     desc: "Without lot dimensions, zoning limits, site conditions, and a clear project scope, most builder quotes are rough estimates and often lead to costly surprises later.",
   },
@@ -26,8 +27,8 @@ const RiskRow = ({ r, i }) => {
       className="group grid grid-cols-12 gap-4 sm:gap-8 py-8 sm:py-10 border-t border-stroke last:border-b transition-colors hover:bg-surface-1-solid/40"
     >
       <div className="col-span-12 sm:col-span-2 flex items-start">
-        <span className="font-display text-paper-dim text-3xl sm:text-4xl group-hover:text-accent transition-colors">
-          {r.n}
+        <span className="text-paper-dim text-3xl sm:text-4xl group-hover:text-accent transition-colors" aria-hidden>
+          <r.Icon />
         </span>
       </div>
       <div className="col-span-12 sm:col-span-10">
@@ -57,7 +58,7 @@ const RiskCallouts = () => {
         </div>
 
         <div className="space-y-px">
-          {risks.map((r, i) => <RiskRow key={r.n} r={r} i={i} />)}
+          {risks.map((r, i) => <RiskRow key={i} r={r} i={i} />)}
         </div>
       </div>
     </section>

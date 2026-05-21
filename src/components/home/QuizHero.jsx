@@ -46,7 +46,7 @@ const QuizHero = () => {
             className="font-display font-medium text-paper text-[2.6rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.02] tracking-tight max-w-4xl animate-fade-up"
             style={{ animationDelay: "100ms" }}
           >
-            Find Out What You Can Build <span className="italic">on Your Property</span>
+            Find Out Which ADU <span className="italic">Fits Your Needs</span>
           </h1>
 
           <p

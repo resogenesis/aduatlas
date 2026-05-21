@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FiBell, FiLogOut, FiMail, FiShield, FiUser } from "react-icons/fi";
-import { currentUser, logout } from "../../funnel/authStore";
+import { currentUser, logout } from "../../stores/authStore";
 
 const Settings = () => {
   const navigate = useNavigate();

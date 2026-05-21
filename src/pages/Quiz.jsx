@@ -1,19 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
-import { loadAnswers, saveAnswers } from "../funnel/quizStore";
+import { loadAnswers, saveAnswers } from "../stores/quizStore";
 import { EV, track } from "../lib/analytics";
 
 const questions = [
-  {
-    id: "zip",
-    label: "What's your ZIP code?",
-    helper: "We use this to pull local zoning rules.",
-    type: "text",
-    placeholder: "90210",
-    validate: (v) => /^\d{5}$/.test(v.trim()),
-    errorMsg: "Enter a valid 5-digit ZIP.",
-  },
   {
     id: "purpose",
     label: "Why are you considering an ADU?",

@@ -164,7 +164,7 @@ const ConversationGuide = () => {
             to="/unlock"
             className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
           >
-            See pricing tiers <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+            Sign Up <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </article>

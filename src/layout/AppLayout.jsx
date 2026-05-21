@@ -2,8 +2,8 @@ import { useState } from "react";
 import { NavLink, Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
 import { FiGrid, FiBookOpen, FiHome, FiTarget, FiUsers, FiSettings, FiLock, FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import Logomark from "../components/brand/Logomark";
-import { isBuildersUnlocked, isFeasibilityUnlocked } from "../funnel/courseStore";
-import { currentUser, logout } from "../funnel/authStore";
+import { isBuildersUnlocked, isFeasibilityUnlocked } from "../stores/courseStore";
+import { currentUser, logout } from "../stores/authStore";
 
 const baseNav = [
   { to: "/dashboard", label: "Dashboard", Icon: FiGrid },

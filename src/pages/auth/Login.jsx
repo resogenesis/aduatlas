@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthCard from "../../components/common/AuthCard";
 import { FormField, PrimaryButton } from "../../components/common/FormField";
-import { DEMO_ACCOUNTS, login, routeForUser } from "../../funnel/authStore";
+import { DEMO_ACCOUNTS, login, routeForUser } from "../../stores/authStore";
 
 const Login = () => {
   const navigate = useNavigate();

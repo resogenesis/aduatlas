@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheckCircle, FiInbox, FiTrendingUp, FiUserCheck } from "react-icons/fi";
-import { currentUser } from "../../funnel/authStore";
-import { allLeads, builderStats } from "../../funnel/builderStore";
+import { currentUser } from "../../stores/authStore";
+import { allLeads, builderStats } from "../../stores/builderStore";
 
 const Dashboard = () => {
   const user = currentUser();

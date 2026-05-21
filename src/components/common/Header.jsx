@@ -4,9 +4,8 @@ import { FiMenu, FiX } from "react-icons/fi";
 import Logomark from "../brand/Logomark";
 
 const navLinks = [
-  { name: "How it works", path: "/#how" },
+  { name: "Home", path: "/" },
   { name: "Reality Check", path: "/quiz" },
-  { name: "Pricing", path: "/unlock" },
   { name: "FAQ", path: "/faq" },
   { name: "About", path: "/about" },
 ];
@@ -48,7 +47,7 @@ const Header = () => {
             to="/quiz"
             className="px-5 py-2.5 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors"
           >
-            Start Free
+            Sign Up
           </Link>
         </div>
 
@@ -89,7 +88,7 @@ const Header = () => {
                 className="px-5 py-3 rounded-full bg-accent text-accent-fg font-semibold text-sm text-center"
                 onClick={() => setMobileOpen(false)}
               >
-                Start Free
+                Sign Up
               </Link>
             </div>
           </nav>

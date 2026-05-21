@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FiArrowLeft, FiCheck, FiCheckCircle, FiDownload, FiMail, FiX } from "react-icons/fi";
-import { getLead, setLeadStatus } from "../../funnel/builderStore";
+import { getLead, setLeadStatus } from "../../stores/builderStore";
 
 // Mark a lead as "viewed" the first time it's opened, then show the
 // full Builder Packet snapshot + actions to claim / pass.

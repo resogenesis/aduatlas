@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
-import { setPaid } from "../funnel/paymentStore";
-import { currentUser } from "../funnel/authStore";
+import { setPaid } from "../stores/paymentStore";
+import { currentUser } from "../stores/authStore";
 import { EV, track } from "../lib/analytics";
 import { sendEmail, TEMPLATES } from "../lib/email";
 

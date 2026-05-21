@@ -1,5 +1,5 @@
 import Accordion from "../components/common/Accordion";
-import PublicStubFooter from "../components/funnel/PublicStubFooter";
+import PublicStubFooter from "../components/gates/PublicStubFooter";
 
 const faqs = [
   {
@@ -58,7 +58,7 @@ const FAQ = () => {
       <section className="bg-canvas py-12 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 max-w-3xl text-center">
           <p className="text-accent font-semibold tracking-[0.2em] text-xs sm:text-sm mb-3 uppercase">
-            Free FAQ
+            FAQ
           </p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-paper leading-tight">
             Six questions every ADU homeowner should know before contacting a builder or city.

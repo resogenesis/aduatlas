@@ -117,7 +117,7 @@ const Methodology = () => {
             Every yellow row has a verification path.
           </h2>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-7 max-w-2xl">
-            Click "What raises this?" on any medium or low row in your snapshot. We'll show you exactly what we'd do to verify it, and which paid tier delivers that verification. No hidden steps. No buying twice.
+            Click "What raises this?" on any low row in your snapshot. We'll show you exactly what we'd do to verify it, and which paid tier delivers that verification. No hidden steps. No buying twice.
           </p>
           <div className="bg-canvas border border-stroke rounded-2xl p-6">
             <p className="text-paper-dim text-[0.65rem] font-semibold tracking-[0.2em] uppercase mb-2">Example</p>

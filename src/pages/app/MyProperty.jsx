@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiCheck, FiSave } from "react-icons/fi";
-import { loadPacket, packetProgress, savePacket } from "../../funnel/courseStore";
+import { loadPacket, packetProgress, savePacket } from "../../stores/courseStore";
 
 const fields = [
   { key: "address", label: "Property address", placeholder: "123 Main St, Anytown CA 90210", type: "text" },
