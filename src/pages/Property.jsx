@@ -104,12 +104,6 @@ const Property = () => {
 const mockPropertyOutput = (q) => {
   const seed = hash(q);
   const lotSqft = 3000 + (seed % 9) * 800;
-  const maxAdu = Math.round(lotSqft * 0.18);
-  const setbackSide = 3 + (seed % 3);
-  const setbackRear = 5 + (seed % 4);
-  const costLow = 145 + (seed % 8) * 10;
-  const costHigh = 220 + (seed % 12) * 15;
-  const stories = (seed % 3 === 0) ? "1 or 2 stories likely OK" : "1 story recommended";
 
   return [
     datapoint({
@@ -121,49 +115,42 @@ const mockPropertyOutput = (q) => {
     }),
     datapoint({
       label: "Detached ADU allowed",
-      value: "Likely yes",
+      value: "Unknown",
       confidence: CONFIDENCE.LOW,
-      source: "State + city zoning model",
-      lastUpdated: "2026-04-12",
+      source: "Requires zoning code review",
       unlocksAt: TIER.REPORT,
-      note: "Confirmed jurisdiction permits detached ADUs; specific lot constraints not yet checked.",
       toGreen: "We pull your lot's specific zoning designation, check it against the city's current ADU code (with the latest amendment date), and verify no lot-specific overlay (historic, hillside, coastal) overrides the baseline rule.",
     }),
     datapoint({
       label: "Max ADU size",
-      value: `~${maxAdu} sq ft`,
+      value: "Unknown",
       confidence: CONFIDENCE.LOW,
-      source: "Zoning model + lot coverage rule",
-      lastUpdated: "2026-04-12",
+      source: "Requires zoning + lot coverage review",
       unlocksAt: TIER.REPORT,
       toGreen: "We apply your city's actual ADU sq-ft cap, the percentage-of-primary-home rule, and your lot's measured coverage, not a generic state baseline. Often raises or lowers this estimate by 200+ sq ft.",
     }),
     datapoint({
       label: "Setbacks",
-      value: `${setbackSide} ft side · ${setbackRear} ft rear`,
+      value: "Unknown",
       confidence: CONFIDENCE.LOW,
-      source: "Standard local minimum",
-      lastUpdated: "2026-03-22",
+      source: "Requires zoning class + easement check",
       unlocksAt: TIER.REPORT,
       toGreen: "We check your specific zoning class and any easements recorded against the parcel. Easements (utility, drainage, access) frequently override the standard minimum and can cut buildable area.",
     }),
     datapoint({
       label: "Stories permitted",
-      value: stories,
+      value: "Unknown",
       confidence: CONFIDENCE.LOW,
-      source: "Height envelope estimate",
-      lastUpdated: "2026-03-22",
+      source: "Requires height envelope check",
       unlocksAt: TIER.REPORT,
       toGreen: "We measure your lot's height envelope against the actual code, including any conditional-use requirement that 2-story ADUs may trigger. Some cities permit 2-story by right; many do not.",
     }),
     datapoint({
       label: "Cost range (site prep + structure)",
-      value: `$${costLow}K – $${costHigh}K`,
+      value: "Unknown",
       confidence: CONFIDENCE.LOW,
-      source: "Regional cost model",
-      lastUpdated: "2026-04-01",
+      source: "Requires site-specific cost model",
       unlocksAt: TIER.REPORT,
-      note: "Wide because site prep and utility hookup costs vary 5×.",
       toGreen: "We model your specific site: sewer distance to pad, slope, soil class, panel capacity, crane access. The verified range typically tightens to ±15% and surfaces the exact line-items that drive the spread.",
     }),
     datapoint({

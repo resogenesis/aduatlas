@@ -4,7 +4,7 @@ import Logomark from "../brand/Logomark";
 
 const sections = [
     {
-        title: "Funnel",
+        title: "Start Here",
         links: [
             { name: "Reality Check", path: "/quiz" },
             { name: "Unlock Plan", path: "/unlock" },
