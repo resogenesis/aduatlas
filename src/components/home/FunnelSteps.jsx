@@ -28,7 +28,6 @@ const steps = [
       "Interactive pre-site budget worksheet",
       "Pre-site planning considerations",
     ],
-    closer: "A Property Feasibility Study turns guesswork into a solid plan.",
   },
   {
     n: "03",
@@ -41,7 +40,6 @@ const steps = [
       "Plan for pre-site requirements",
       "Make informed decisions before construction begins",
     ],
-    closer: "The better prepared you are, the fewer surprises you'll face later.",
   },
 ];
 

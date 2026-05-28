@@ -1,27 +1,34 @@
+import { FiMap, FiHome, FiDollarSign, FiCompass, FiClipboard, FiUsers } from "react-icons/fi";
 import { useReveal } from "../../hooks/useReveal";
 
 const items = [
   {
+    Icon: FiMap,
     title: "Understand local ADU regulations",
     desc: "and how they pertain to your property.",
   },
   {
+    Icon: FiHome,
     title: "Explore 30+ ADU types",
     desc: "compare construction, design methods, and costs.",
   },
   {
+    Icon: FiDollarSign,
     title: "Build a realistic total budget",
     desc: "understand both pre-site and ADU structure cost.",
   },
   {
+    Icon: FiCompass,
     title: "Follow the ADUAtlas 10-Step Guide",
     desc: "the process to your property feasibility.",
   },
   {
+    Icon: FiClipboard,
     title: "Obtain a realistic feasibility study",
     desc: "for your property before you make any decisions.",
   },
   {
+    Icon: FiUsers,
     title: "Be prepared to speak with builders",
     desc: "about the specifics of your property, with a feasibility study that lets you get reasonable quotes that are easy to compare.",
   },
@@ -29,6 +36,7 @@ const items = [
 
 const ItemRow = ({ item, i }) => {
   const ref = useReveal(i * 80);
+  const { Icon } = item;
   return (
     <div
       ref={ref}
@@ -36,9 +44,9 @@ const ItemRow = ({ item, i }) => {
     >
       <span
         aria-hidden
-        className="font-display text-paper-dim text-2xl sm:text-3xl tabular-nums shrink-0 w-10 sm:w-12 group-hover:text-accent transition-colors"
+        className="text-paper-dim text-3xl sm:text-4xl shrink-0 w-10 sm:w-12 group-hover:text-accent transition-colors mt-1"
       >
-        {String(i + 1).padStart(2, "0")}
+        <Icon />
       </span>
       <div className="min-w-0">
         <h3 className="font-display font-medium text-paper text-lg sm:text-xl lg:text-2xl leading-snug">
@@ -63,14 +71,11 @@ const RiskCallouts = () => {
             Where projects derail
           </p>
           <h2 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
-            Most homeowners are unprepared <span className="italic">— and this is how projects go off track.</span>
+            Most homeowners are unprepared. <span className="italic">This is how projects go off track.</span>
           </h2>
-          <div className="mt-7 space-y-4 text-paper-dim text-base sm:text-lg leading-relaxed">
-            <p>
-              Learn about the process and products before you waste any time or money. ADUAtlas provides specific information on both.
-            </p>
-            <p className="text-paper font-medium">ADUAtlas helps you:</p>
-          </div>
+          <p className="mt-7 text-paper-dim text-base sm:text-lg leading-relaxed">
+            Learn about the process and products before you waste any time or money. ADUAtlas provides specific information on both.
+          </p>
         </div>
 
         <div className="space-y-px">

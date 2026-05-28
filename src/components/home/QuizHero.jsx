@@ -49,20 +49,12 @@ const QuizHero = () => {
             Find Out What You Can <span className="italic">Legally Build</span> on Your Property
           </h1>
 
-          <div
-            className="mt-7 sm:mt-9 text-paper-dim text-base sm:text-lg lg:text-xl max-w-xl leading-relaxed animate-fade-up space-y-4"
+          <p
+            className="mt-7 sm:mt-9 text-paper-dim text-base sm:text-lg lg:text-xl max-w-xl leading-relaxed animate-fade-up"
             style={{ animationDelay: "240ms" }}
           >
-            <p>
-              Most homeowners underestimate the complexity of building an ADU and end up making mistakes that cost time and money. ADUAtlas gives homeowners the opportunity to learn the process and obtain property-specific information before making important decisions.
-            </p>
-            <p>
-              Before investing in surveys, site plans, permits, or builder consultations, you need to understand your local ADU zoning regulations, pre-site costs, project timelines, and available ADU options.
-            </p>
-            <p className="text-paper font-medium">
-              Save time. Avoid costly mistakes. Build with confidence.
-            </p>
-          </div>
+            Most homeowners underestimate the complexity of building an ADU and end up making mistakes that cost time and money. ADUAtlas gives homeowners the opportunity to learn the process and obtain property-specific information before making important decisions. Before investing in surveys, site plans, permits, or builder consultations, you need to understand your local ADU zoning regulations, pre-site costs, project timelines, and available ADU options.
+          </p>
 
           <div className="mt-9 sm:mt-12 animate-fade-up" style={{ animationDelay: "380ms" }}>
             <AddressIntake size="lg" />
