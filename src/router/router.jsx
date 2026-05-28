@@ -11,6 +11,7 @@ import AduTypes from "../pages/AduTypes";
 import ChooseState from "../pages/ChooseState";
 import Videos from "../pages/Videos";
 import Pricing from "../pages/Pricing";
+import CourseOutline from "../pages/CourseOutline";
 import Property from "../pages/Property";
 import Report from "../pages/Report";
 import Methodology from "../pages/Methodology";
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
       { path: "choose-your-state", element: <ChooseState /> },
       { path: "videos", element: <Videos /> },
       { path: "pricing", element: <Pricing /> },
+      { path: "course-outline", element: <CourseOutline /> },
 
       // Auth
       { path: "login", element: <Login /> },

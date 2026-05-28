@@ -142,6 +142,12 @@ const Unlock = () => {
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed">
             Every tier returns a personalized ADU Ready Score. Pay for the depth of preparation that matches where you are: exploring your options, getting serious, or ready to talk to builders.
           </p>
+          <Link
+            to="/course-outline"
+            className="mt-5 inline-flex items-center gap-1.5 text-paper hover:text-accent text-sm font-medium transition-colors"
+          >
+            See the full ADU Course outline <FiArrowRight className="text-xs" />
+          </Link>
         </div>
 
         {/* Tier cards */}

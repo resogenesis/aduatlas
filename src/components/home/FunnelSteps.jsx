@@ -102,8 +102,14 @@ const FunnelSteps = () => {
           >
             Start the ADU Course <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>
+          <Link
+            to="/course-outline"
+            className="group inline-flex items-center gap-1.5 text-paper hover:text-accent text-sm font-medium transition-colors"
+          >
+            See full course outline <FiArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
+          </Link>
           <span className="text-paper-dim text-sm">
-            $99 · Lifetime access · 7-day refund
+            $99 · Lifetime access · credit toward Feasibility Study
           </span>
         </div>
       </div>
