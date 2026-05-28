@@ -38,7 +38,7 @@ const QuizHero = () => {
           <div className="inline-flex items-center gap-2 mb-7 sm:mb-8 animate-fade-up" style={{ animationDelay: "0ms" }}>
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
             <span className="text-paper-dim text-xs sm:text-sm font-medium tracking-[0.2em] uppercase">
-              ADU Pre Construction Preparation for Homeowners
+              ADUAtlas Pre Construction Preparation for Homeowners
             </span>
           </div>
 
@@ -46,15 +46,23 @@ const QuizHero = () => {
             className="font-display font-medium text-paper text-[2.6rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.02] tracking-tight max-w-4xl animate-fade-up"
             style={{ animationDelay: "100ms" }}
           >
-            Find Out Which ADU <span className="italic">Fits Your Needs</span>
+            Find Out What You Can <span className="italic">Legally Build</span> on Your Property
           </h1>
 
-          <p
-            className="mt-7 sm:mt-9 text-paper-dim text-base sm:text-lg lg:text-xl max-w-xl leading-relaxed animate-fade-up"
+          <div
+            className="mt-7 sm:mt-9 text-paper-dim text-base sm:text-lg lg:text-xl max-w-xl leading-relaxed animate-fade-up space-y-4"
             style={{ animationDelay: "240ms" }}
           >
-            Most homeowners underestimate the complexity of building an ADU. Get real answers on feasibility, cost, and next steps before talking to a builder, ordering a $500 survey, or designing the wrong ADU.
-          </p>
+            <p>
+              Most homeowners underestimate the complexity of building an ADU and end up making mistakes that cost time and money. ADUAtlas gives homeowners the opportunity to learn the process and obtain property-specific information before making important decisions.
+            </p>
+            <p>
+              Before investing in surveys, site plans, permits, or builder consultations, you need to understand your local ADU zoning regulations, pre-site costs, project timelines, and available ADU options.
+            </p>
+            <p className="text-paper font-medium">
+              Save time. Avoid costly mistakes. Build with confidence.
+            </p>
+          </div>
 
           <div className="mt-9 sm:mt-12 animate-fade-up" style={{ animationDelay: "380ms" }}>
             <AddressIntake size="lg" />
@@ -67,7 +75,7 @@ const QuizHero = () => {
             <span className="text-paper-dim">No signup required</span>
             <span className="text-paper-dim/40">·</span>
             <Link to="/quiz" className="text-paper hover:text-accent transition-colors inline-flex items-center gap-1.5">
-              New to ADUs? Start here <FiArrowRight className="text-xs" />
+              Reality Check <FiArrowRight className="text-xs" />
             </Link>
           </div>
         </div>

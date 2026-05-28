@@ -1,22 +1,47 @@
 import { Link } from "react-router-dom";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowRight, FiCheck } from "react-icons/fi";
 import { useReveal } from "../../hooks/useReveal";
 
 const steps = [
   {
     n: "01",
-    title: "Drop your address",
-    desc: "Get an instant property snapshot: lot size, what's likely buildable, and a rough cost band. No signup. No credit card.",
+    title: "Learn before you build",
+    lede: "Take the How to ADU Course.",
+    intro: "You will learn:",
+    bullets: [
+      "City and state ADU regulations",
+      "25+ ADU types, construction methods, and a video library",
+      "Budget planning and timelines, including pre-site and utility costs",
+      "Common homeowner mistakes in the FAQ chapter",
+    ],
   },
   {
     n: "02",
-    title: "See what actually fits your lot",
-    desc: "We model your specific lot against local zoning, then show ADU sizes, types, and cost ranges that match — with confidence labels on every line.",
+    title: "Get a Property Feasibility Study",
+    lede: "The study provides information builders need to discuss your project. It includes — but is not limited to — the following:",
+    bullets: [
+      "Existing structure placement",
+      "Lot dimensions",
+      "Local ADU zoning overlays",
+      "Setback requirements",
+      "Potential ADU placement",
+      "Interactive pre-site budget worksheet",
+      "Pre-site planning considerations",
+    ],
+    closer: "A Property Feasibility Study turns guesswork into a solid plan.",
   },
   {
     n: "03",
-    title: "Walk into builder meetings prepared",
-    desc: "The Feasibility Report verifies each line against city records, parcel data, and utility maps. Bring a packet, not a guess.",
+    title: "Move forward prepared",
+    lede: "After completing the course and receiving your Property Feasibility Study, you will be better prepared to discuss your project with builders.",
+    bullets: [
+      "Compare builder quotes more effectively",
+      "Understand potential project costs",
+      "Evaluate ADU options",
+      "Plan for pre-site requirements",
+      "Make informed decisions before construction begins",
+    ],
+    closer: "The better prepared you are, the fewer surprises you'll face later.",
   },
 ];
 
@@ -25,13 +50,31 @@ const StepCard = ({ s, i }) => {
   return (
     <div
       ref={ref}
-      className="bg-surface-1-solid border border-stroke rounded-2xl p-7 sm:p-8 relative group hover:-translate-y-1 hover:border-accent/40 transition-all duration-300"
+      className="bg-surface-1-solid border border-stroke rounded-2xl p-7 sm:p-8 relative group hover:border-accent/40 transition-all duration-300"
     >
       <span className="font-display text-paper-dim text-3xl mb-4 block group-hover:text-accent transition-colors">
         {s.n}
       </span>
-      <h3 className="font-display text-paper text-xl sm:text-2xl leading-snug mb-3">{s.title}</h3>
-      <p className="text-paper-dim text-sm sm:text-base leading-relaxed">{s.desc}</p>
+      <h3 className="font-display text-paper text-xl sm:text-2xl leading-snug mb-2">{s.title}</h3>
+      {s.lede && (
+        <p className="text-paper-dim text-sm sm:text-base leading-relaxed mb-4">{s.lede}</p>
+      )}
+      {s.intro && (
+        <p className="text-paper text-sm font-medium mb-2">{s.intro}</p>
+      )}
+      <ul className="space-y-2 mb-4">
+        {s.bullets.map((b) => (
+          <li key={b} className="flex gap-2.5 text-paper-dim text-sm sm:text-base leading-snug">
+            <FiCheck className="text-accent shrink-0 mt-1" aria-hidden />
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+      {s.closer && (
+        <p className="text-paper text-sm sm:text-base leading-relaxed pt-3 border-t border-stroke">
+          {s.closer}
+        </p>
+      )}
     </div>
   );
 };
@@ -41,29 +84,26 @@ const FunnelSteps = () => {
   const ctaRef = useReveal(360);
   return (
     <section className="bg-canvas py-24 sm:py-32 border-t border-stroke">
-      <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
+      <div className="container mx-auto px-5 sm:px-8 max-w-6xl">
         <div ref={headRef} className="mb-14 sm:mb-20 max-w-2xl">
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
-            Home
-          </p>
-          <h2 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
-            From curiosity to a <span className="italic">builder ready plan.</span>
+          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight">
+            How ADUAtlas works.
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mb-14">
-          {steps.map((s, i) => <StepCard key={s.n} s={s} i={i} />)}
+        <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mb-14 items-start">
+          {steps.map((s) => <StepCard key={s.n} s={s} i={parseInt(s.n, 10) - 1} />)}
         </div>
 
         <div ref={ctaRef} className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
           <Link
-            to="/"
+            to="/unlock"
             className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
           >
-            Check my property <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+            Start the ADU Course <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>
           <span className="text-paper-dim text-sm">
-            No signup · No credit card · Honest about what we don't know yet
+            $99 · Lifetime access · 7-day refund
           </span>
         </div>
       </div>

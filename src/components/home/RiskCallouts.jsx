@@ -1,42 +1,51 @@
-import { FiMap, FiTool, FiClipboard } from "react-icons/fi";
 import { useReveal } from "../../hooks/useReveal";
 
-const risks = [
+const items = [
   {
-    Icon: FiMap,
-    title: "Most homeowners don't know what they can legally build.",
-    desc: "ADU rules vary by state, city, and ZIP and they change. Discovering zoning limits after your design is finalized is one of the biggest causes of wasted time and thousands in avoidable costs.",
+    title: "Understand local ADU regulations",
+    desc: "and how they pertain to your property.",
   },
   {
-    Icon: FiTool,
-    title: "Site prep + utility hookups are often the biggest hidden ADU costs.",
-    desc: "Grading, excavation, foundation work, access constraints, sewer, stormwater, water, gas, and trenching can add $10K to $100K+ beyond builder \"structure only\" pricing.",
+    title: "Explore 30+ ADU types",
+    desc: "compare construction, design methods, and costs.",
   },
   {
-    Icon: FiClipboard,
-    title: "Builders can't quote accurately without your property details.",
-    desc: "Without lot dimensions, zoning limits, site conditions, and a clear project scope, most builder quotes are rough estimates and often lead to costly surprises later.",
+    title: "Build a realistic total budget",
+    desc: "understand both pre-site and ADU structure cost.",
+  },
+  {
+    title: "Follow the ADUAtlas 10-Step Guide",
+    desc: "the process to your property feasibility.",
+  },
+  {
+    title: "Obtain a realistic feasibility study",
+    desc: "for your property before you make any decisions.",
+  },
+  {
+    title: "Be prepared to speak with builders",
+    desc: "about the specifics of your property, with a feasibility study that lets you get reasonable quotes that are easy to compare.",
   },
 ];
 
-const RiskRow = ({ r, i }) => {
-  const ref = useReveal(i * 100);
+const ItemRow = ({ item, i }) => {
+  const ref = useReveal(i * 80);
   return (
     <div
       ref={ref}
-      className="group grid grid-cols-12 gap-4 sm:gap-8 py-8 sm:py-10 border-t border-stroke last:border-b transition-colors hover:bg-surface-1-solid/40"
+      className="group flex gap-5 sm:gap-7 py-6 sm:py-7 border-t border-stroke last:border-b transition-colors hover:bg-surface-1-solid/40"
     >
-      <div className="col-span-12 sm:col-span-2 flex items-start">
-        <span className="text-paper-dim text-3xl sm:text-4xl group-hover:text-accent transition-colors" aria-hidden>
-          <r.Icon />
-        </span>
-      </div>
-      <div className="col-span-12 sm:col-span-10">
-        <h3 className="font-display font-medium text-paper text-xl sm:text-2xl lg:text-3xl leading-snug mb-3 sm:mb-4">
-          {r.title}
+      <span
+        aria-hidden
+        className="font-display text-paper-dim text-2xl sm:text-3xl tabular-nums shrink-0 w-10 sm:w-12 group-hover:text-accent transition-colors"
+      >
+        {String(i + 1).padStart(2, "0")}
+      </span>
+      <div className="min-w-0">
+        <h3 className="font-display font-medium text-paper text-lg sm:text-xl lg:text-2xl leading-snug">
+          {item.title}
         </h3>
-        <p className="text-paper-dim text-base leading-relaxed max-w-2xl">
-          {r.desc}
+        <p className="text-paper-dim text-base leading-relaxed mt-1.5 max-w-2xl">
+          {item.desc}
         </p>
       </div>
     </div>
@@ -45,21 +54,32 @@ const RiskRow = ({ r, i }) => {
 
 const RiskCallouts = () => {
   const headRef = useReveal(0);
+  const closeRef = useReveal(120);
   return (
     <section className="bg-canvas py-24 sm:py-32">
       <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
-        <div ref={headRef} className="mb-14 sm:mb-20 max-w-2xl">
+        <div ref={headRef} className="mb-12 sm:mb-16 max-w-3xl">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
             Where projects derail
           </p>
           <h2 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
-            The three things that <span className="italic">silently</span> kill ADU projects.
+            Most homeowners are unprepared <span className="italic">— and this is how projects go off track.</span>
           </h2>
+          <div className="mt-7 space-y-4 text-paper-dim text-base sm:text-lg leading-relaxed">
+            <p>
+              Learn about the process and products before you waste any time or money. ADUAtlas provides specific information on both.
+            </p>
+            <p className="text-paper font-medium">ADUAtlas helps you:</p>
+          </div>
         </div>
 
         <div className="space-y-px">
-          {risks.map((r, i) => <RiskRow key={i} r={r} i={i} />)}
+          {items.map((item, i) => <ItemRow key={i} item={item} i={i} />)}
         </div>
+
+        <p ref={closeRef} className="mt-12 sm:mt-14 text-paper text-lg sm:text-xl font-display leading-snug max-w-2xl">
+          Be prepared before speaking with builders, suppliers, or your city.
+        </p>
       </div>
     </section>
   );
