@@ -40,7 +40,7 @@ const ChooseState = () => {
         </div>
 
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed text-center">
-          The detailed breakdown (which states have a baseline, where city rules diverge, and which authority controls what) is inside the ADU Course, with your specific ZIP code's rules pulled into your Property Feasibility Study.
+          The detailed breakdown (which states have a baseline, where city rules diverge, and which authority controls what) is inside the ADU Course, with your specific ZIP code's rules pulled into your Property Feasibility Report.
         </p>
       </section>
 

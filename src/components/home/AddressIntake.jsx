@@ -80,7 +80,7 @@ const AddressIntake = ({ size = "lg" }) => {
             isLg ? "px-5 sm:px-7 py-3 sm:py-4 text-sm sm:text-base" : "px-5 py-2.5 text-sm"
           }`}
         >
-          Check your property
+          Property Snapshot
           <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </button>
       </div>

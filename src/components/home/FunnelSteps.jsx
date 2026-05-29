@@ -17,7 +17,7 @@ const steps = [
   },
   {
     n: "02",
-    title: "Get a Property Feasibility Study",
+    title: "Get a Property Feasibility Report",
     lede: "The study provides information builders need to discuss your project. It includes — but is not limited to — the following:",
     bullets: [
       "Existing structure placement",
@@ -32,7 +32,7 @@ const steps = [
   {
     n: "03",
     title: "Move forward prepared",
-    lede: "After completing the course and receiving your Property Feasibility Study, you will be better prepared to discuss your project with builders.",
+    lede: "After completing the course and receiving your Property Feasibility Report, you will be better prepared to discuss your project with builders.",
     bullets: [
       "Compare builder quotes more effectively",
       "Understand potential project costs",
@@ -107,7 +107,7 @@ const FunnelSteps = () => {
             See full course outline <FiArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
           </Link>
           <span className="text-paper-dim text-sm">
-            $99 · Lifetime access · credit toward Feasibility Study
+            $99 · Lifetime access · credit toward Property Feasibility Report
           </span>
         </div>
       </div>

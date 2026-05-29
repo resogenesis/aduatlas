@@ -40,7 +40,7 @@ const Welcome = () => {
           You're in.
         </h1>
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-12 max-w-xl mx-auto">
-          Confirmation is on its way to your email. Start with Chapter 1. The course is 6 chapters and 20+ modules, ending with your personalized Feasibility Report and Feasibility Packet.
+          Confirmation is on its way to your email. Start with Chapter 1. The course is 6 chapters and 20+ modules, ending with your personalized Property Feasibility Report and Feasibility Packet.
         </p>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-10 text-left mb-10">
@@ -49,7 +49,7 @@ const Welcome = () => {
             {[
               { n: "01", t: "Start Chapter 1: How to ADU", d: "Process, timelines, and the foundation everything else builds on." },
               { n: "02", t: "Work through the modules", d: "20+ modules across 6 chapters, each with worksheets pre-filled from your quiz answers." },
-              { n: "03", t: "Unlock your Feasibility Report", d: "Chapter 6 generates your GIS site plan, refined readiness score, and Feasibility Packet." },
+              { n: "03", t: "Unlock your Property Feasibility Report", d: "Chapter 6 generates your GIS site plan, refined feasibility score, and Feasibility Packet." },
             ].map((s) => (
               <li key={s.n} className="flex items-start gap-5">
                 <span className="font-display text-accent text-2xl leading-none w-8 shrink-0">{s.n}</span>

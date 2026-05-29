@@ -54,7 +54,7 @@ const Feasibility = () => {
 
   return (
     <div>
-      <PageHeader title="Zoning & Legal Feasibility" subtitle="Answer each question to generate your ADU Site Ready Score." />
+      <PageHeader title="Zoning & Legal Feasibility" subtitle="Answer each question to generate your Property Feasibility Report." />
 
       <section className="container mx-auto px-4 sm:px-6 py-10 max-w-3xl">
         <div className="flex flex-col gap-3 mb-8">
@@ -80,8 +80,7 @@ const Feasibility = () => {
         </div>
 
         <div className="bg-[#F4F7F6] rounded-2xl p-6 sm:p-8 text-center">
-          <h3 className="text-lg font-semibold text-primary mb-1">Your ADU Site Ready Score</h3>
-          <p className="text-xs text-gray-500">National ADU Site Ready Score (NASR)</p>
+          <h3 className="text-lg font-semibold text-primary mb-1">Your Property Feasibility Report Score</h3>
           <div className="text-5xl font-bold text-[#2F5D50] my-3">{score}<span className="text-xl text-gray-400">/100</span></div>
           <button onClick={reset} className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#2F5D50] text-white text-sm font-semibold">
             <FiRefreshCcw /> Retake Quiz

@@ -3,7 +3,7 @@ import { FiAlertTriangle, FiArrowRight, FiCheck, FiDownload, FiFileText, FiMapPi
 import { ConfidenceRow, ConfidenceSummary } from "../components/gates/ConfidenceChip";
 import { CONFIDENCE, datapoint } from "../stores/confidence";
 
-// Sample Feasibility Report. Shows the 7-section deliverable a homeowner
+// Sample Property Feasibility Report. Shows the 7-section deliverable a homeowner
 // gets at the $399 tier. All data is mock and labeled 'Sample report'.
 
 const sampleAddress = "1247 Mulberry Lane, Pasadena CA 91103";
@@ -66,7 +66,7 @@ const Report = () => {
             <FiMapPin /> {sampleAddress}
           </div>
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
-            Sample Feasibility Report
+            Sample Property Feasibility Report
           </p>
           <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
             What you can build, <span className="italic">verified.</span>
@@ -80,7 +80,7 @@ const Report = () => {
               to="/unlock"
               className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
             >
-              Get my Feasibility Report · $399 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              Get my Property Feasibility Report · $399 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <button
               onClick={() => alert("INTEGRATION POINT: server-side PDF generation pending.")}

@@ -8,7 +8,7 @@ import { EV, identify, track } from "../lib/analytics";
 import { loadAnswers } from "../stores/quizStore";
 
 // 3-tier ADU readiness ladder. Free Explorer / $99 Build Prepared / $399
-// Feasibility Report. Concierge stays in the sidebar (application-only).
+// Property Feasibility Report. Concierge stays in the sidebar (application-only).
 
 const tiers = [
   {
@@ -20,7 +20,7 @@ const tiers = [
     desc: "Start your ADU journey with essential tools to understand your options before moving forward.",
     confidence: "Know your options. Understand your property. Build smarter.",
     bullets: [
-      "Personalized ADU Ready Score",
+      "Personalized Reality Check Score",
       "General zoning and build guidance",
       "Overview of ADU types and structures",
       "Access to video library",
@@ -38,10 +38,10 @@ const tiers = [
     confidence: "Reduce costly mistakes and prepare with confidence.",
     bullets: [
       "Everything included in Tier 1",
-      "Personalized ADU education course based on your ADU Ready Score",
+      "Personalized ADU education course based on your Reality Check Score",
       "City and ZIP-specific ADU regulations",
       "Direct email support",
-      "$99 credit toward your ADU Feasibility Report upgrade (valid within 90 days)",
+      "$99 credit toward your Property Feasibility Report upgrade (valid within 90 days)",
     ],
     cta: "Start Build Prepared",
     ctaTo: "#buy",
@@ -49,7 +49,7 @@ const tiers = [
   },
   {
     id: "report",
-    name: "ADU Feasibility Report",
+    name: "Property Feasibility Report",
     price: "$399",
     pricePeriod: "one time",
     pitch: "Tier 3",
@@ -65,7 +65,7 @@ const tiers = [
       "Feasibility Packet PDF for apples to apples builder comparisons",
       "7 day full refund",
     ],
-    cta: "Get my Feasibility Report",
+    cta: "Get my Property Feasibility Report",
     ctaTo: "#buy",
     highlight: true,
     badge: "Most popular",
@@ -74,7 +74,7 @@ const tiers = [
 
 const conciergePoints = [
   "60-min planning consult with an ADU specialist",
-  "Independent review of your Feasibility Report",
+  "Independent review of your Property Feasibility Report",
   "Curated introductions to vetted designers, lenders, builders",
   "Ongoing question-answering through pre construction",
 ];
@@ -134,13 +134,13 @@ const Unlock = () => {
 
         <div className="text-center mb-14 max-w-3xl mx-auto">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-5">
-            Pick your readiness tier
+            Sign Up
           </p>
           <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
             From ADU-curious <span className="italic">to build-ready.</span>
           </h1>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed">
-            Every tier returns a personalized ADU Ready Score. Pay for the depth of preparation that matches where you are: exploring your options, getting serious, or ready to talk to builders.
+            Every tier returns a personalized Reality Check Score. Pay for the depth of preparation that matches where you are: exploring your options, getting serious, or ready to talk to builders.
           </p>
           <Link
             to="/course-outline"

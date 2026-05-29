@@ -39,7 +39,7 @@ const PayPaywall = ({ location, chapterName }) => (
           state={{ from: location.pathname }}
           className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
         >
-          Unlock for $99 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+          Sign Up for $99 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>
         <Link
           to="/quiz"

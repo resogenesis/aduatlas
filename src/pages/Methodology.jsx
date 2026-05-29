@@ -219,7 +219,7 @@ const Methodology = () => {
             to="/"
             className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
           >
-            Check your property <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+            Property Snapshot <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </section>
       </div>

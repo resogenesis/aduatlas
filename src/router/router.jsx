@@ -18,6 +18,7 @@ import Property from "../pages/Property";
 import Methodology from "../pages/Methodology";
 // import ConversationGuide from "../pages/ConversationGuide";
 import Quiz from "../pages/Quiz";
+import KnowledgeCheck from "../pages/KnowledgeCheck";
 import Results from "../pages/Results";
 import Unlock from "../pages/Unlock";
 import Welcome from "../pages/Welcome";
@@ -59,6 +60,7 @@ const router = createBrowserRouter([
       // { path: "report/sample/conversation-guide", element: <ConversationGuide /> },
       { path: "methodology", element: <Methodology /> },
       { path: "quiz", element: <Quiz /> },
+      { path: "knowledge-check", element: <KnowledgeCheck /> },
       { path: "results", element: <Results /> },
       { path: "unlock", element: <Unlock /> },
       { path: "welcome", element: <Welcome /> },

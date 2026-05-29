@@ -8,7 +8,7 @@
 //   medium — modeled from public data + standard assumptions
 //   low    — unknown / requires site verification
 //
-// Anywhere a row is medium or low → upgrade to Feasibility Report removes
+// Anywhere a row is medium or low → upgrade to Property Feasibility Report removes
 // the uncertainty. That's the entire pricing rationale.
 
 export const CONFIDENCE = {

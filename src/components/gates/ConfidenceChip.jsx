@@ -11,7 +11,7 @@ const ICON = {
 
 const TIER_LABEL = {
   [TIER.ROADMAP]: "Build Prepared ($99)",
-  [TIER.REPORT]: "Feasibility Report ($399)",
+  [TIER.REPORT]: "Property Feasibility Report ($399)",
   [TIER.CONCIERGE]: "Concierge",
 };
 

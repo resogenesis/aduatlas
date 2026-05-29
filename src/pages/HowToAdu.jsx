@@ -9,7 +9,7 @@ const pillars = [
   },
   {
     Icon: FiClipboard,
-    title: "A Personalized Property Feasibility Study",
+    title: "A Personalized Property Feasibility Report",
     desc: "Your lot, your zoning, your buildable area.",
   },
   {
@@ -37,7 +37,7 @@ const steps = [
   },
   {
     n: "04",
-    title: "Obtain a Property Feasibility Study",
+    title: "Obtain a Property Feasibility Report",
     desc: "Use GIS property data and zoning overlays to understand what may realistically fit on your property.",
   },
   {
@@ -102,7 +102,7 @@ const HowToAdu = () => {
             How ADUAtlas prepares homeowners before they build.
           </h2>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed mt-5 max-w-2xl">
-            An ADU Course, a personalized Property Feasibility Study, and access to professional profiles, including national and local builders and suppliers, for less than the cost of a typical survey.
+            An ADU Course, a personalized Property Feasibility Report, and access to professional profiles, including national and local builders and suppliers, for less than the cost of a typical survey.
           </p>
 
           <div className="grid md:grid-cols-3 gap-4 sm:gap-5 mt-10 sm:mt-12">

@@ -30,7 +30,7 @@ const Results = () => {
       <div className="container mx-auto px-5 sm:px-8 max-w-3xl">
 
         <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-5 text-center">
-          Your ADU Readiness Report
+          Reality Check Results
         </p>
         <h1 className="font-display font-medium text-paper text-3xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-center mb-4">
           Your score: <span className="text-accent">{score}%</span>
@@ -65,7 +65,7 @@ const Results = () => {
                 {band}
               </h2>
               <p className="text-paper-dim text-sm sm:text-base leading-relaxed">
-                This is preliminary. Your full Feasibility Report refines this with GIS lot data, your local zoning rules, and pre site cost estimates.
+                This is preliminary. Your full Property Feasibility Report refines this with GIS lot data, your local zoning rules, and pre site cost estimates.
               </p>
             </div>
           </div>
@@ -92,19 +92,19 @@ const Results = () => {
             <FiLock /> Locked
           </div>
           <h3 className="font-display font-medium text-3xl sm:text-4xl leading-tight mb-4">
-            Unlock ADU Build Prepared.
+            Sign Up for ADU Build Prepared.
           </h3>
           <p className="text-accent-fg/80 mb-7 text-sm sm:text-base leading-relaxed max-w-xl">
-            Personalized education, city and ZIP-specific zoning guidance, and direct support — built around your ADU Ready Score.
+            Personalized education, city and ZIP-specific zoning guidance, and direct support — built around your Reality Check Score.
           </p>
 
           <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-9 text-sm">
             {[
               "Everything in the free Explorer tier",
-              "Personalized ADU education course based on your Ready Score",
+              "Personalized ADU education course based on your Reality Check Score",
               "City and ZIP-specific ADU regulations",
               "Direct email support",
-              "$99 credit toward Feasibility Report upgrade (90 days)",
+              "$99 credit toward Property Feasibility Report upgrade (90 days)",
               "7 day full refund, no questions asked",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
@@ -119,7 +119,7 @@ const Results = () => {
               to="/unlock"
               className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
             >
-              Unlock for $99 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              Sign Up for $99 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <span className="text-accent-fg/70 text-sm">One time · Lifetime access · 7 day refund</span>
           </div>

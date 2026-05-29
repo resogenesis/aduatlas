@@ -24,7 +24,13 @@ const Signup = () => {
       setError(res.error);
       return;
     }
-    navigate(routeForUser(res.user), { replace: true });
+    // New homeowners take the 10-question knowledge check first (funnels into
+    // the course); builders/pros go straight to their portal.
+    if (res.user.role === "pro") {
+      navigate(routeForUser(res.user), { replace: true });
+    } else {
+      navigate("/knowledge-check", { replace: true });
+    }
   };
 
   return (

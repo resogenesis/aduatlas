@@ -70,11 +70,11 @@ export const questions = [
     helper: "Which one piece of prep makes builder quotes comparable?",
     correct: "c",
     explanation:
-      "A Property Feasibility Study with zoning and property details is the highest-leverage prep. Without it, builder quotes can't be compared apples-to-apples.",
+      "A Property Feasibility Report with zoning and property details is the highest-leverage prep. Without it, builder quotes can't be compared apples-to-apples.",
     options: [
       { value: "a", label: "A plat survey of your property" },
       { value: "b", label: "Type and size of the ADU" },
-      { value: "c", label: "A Property Feasibility Study with zoning and property details" },
+      { value: "c", label: "A Property Feasibility Report with zoning and property details" },
       { value: "d", label: "City and ZIP code zoning regulations and ADU type" },
     ],
   },

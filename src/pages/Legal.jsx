@@ -65,7 +65,7 @@ const Legal = () => {
           <section id="overview" className="scroll-mt-20">
             <h2 className="font-display font-medium text-paper text-2xl sm:text-3xl tracking-tight mb-4">Overview</h2>
             <p>
-              ADUAtlas is a planning and decision-support service for homeowners considering an Accessory Dwelling Unit. We collect the minimum information needed to deliver a property snapshot, the ADU Course, and (when purchased) a Property Feasibility Study.
+              ADUAtlas is a planning and decision-support service for homeowners considering an Accessory Dwelling Unit. We collect the minimum information needed to deliver a property snapshot, the ADU Course, and (when purchased) a Property Feasibility Report.
             </p>
             <p className="mt-3">
               We are not a law firm, an engineering firm, an appraiser, or a permitting authority. Our reports are intended to make conversations with your city, builder, lender, and licensed professionals sharper, not to replace them.
@@ -87,7 +87,7 @@ const Legal = () => {
           <section id="use" className="scroll-mt-20">
             <h2 className="font-display font-medium text-paper text-2xl sm:text-3xl tracking-tight mb-4">How we use it</h2>
             <ul className="space-y-3 list-disc pl-5">
-              <li>Generate your property snapshot, ADU Ready Score, and Property Feasibility Study.</li>
+              <li>Generate your property snapshot, Reality Check Score, and Property Feasibility Report.</li>
               <li>Deliver the ADU Course and track your progress through chapters.</li>
               <li>Send transactional emails (receipts, password resets, course updates, study delivery).</li>
               <li>Send product updates and tips if you opt in. You can unsubscribe at any time.</li>
@@ -113,7 +113,7 @@ const Legal = () => {
               <li><span className="text-paper">Supabase</span> hosts our database and authentication.</li>
               <li><span className="text-paper">Resend</span> delivers transactional and course emails.</li>
               <li><span className="text-paper">Mapbox</span> powers address autocomplete on the property check.</li>
-              <li><span className="text-paper">Public records and GIS data providers</span> for parcel, zoning, and permit data used in your snapshot and Property Feasibility Study.</li>
+              <li><span className="text-paper">Public records and GIS data providers</span> for parcel, zoning, and permit data used in your snapshot and Property Feasibility Report.</li>
             </ul>
           </section>
 
@@ -136,7 +136,7 @@ const Legal = () => {
               <span className="text-paper">Course access:</span> The ADU Course is yours to keep. You can revisit any chapter at any time. Course content is updated as ADU regulations, types, and costs change; an optional $99 annual renewal gives you the refreshed content for the following 12 months. Without renewal, your access continues to the content as it was at the time of your most recent renewal.
             </p>
             <p className="mt-3">
-              <span className="text-paper">Property Feasibility Study:</span> A one-time deliverable priced at $399, reduced by the $99 course credit when purchased after the course. The Study summarizes lot, zoning, setback, buildable area, and pre-site considerations as of the date of delivery. It is not a substitute for a survey, civil drawings, soils report, structural engineering, or city permit.
+              <span className="text-paper">Property Feasibility Report:</span> A one-time deliverable priced at $399, reduced by the $99 course credit when purchased after the course. The Report summarizes lot, zoning, setback, buildable area, and pre-site considerations as of the date of delivery. It is not a substitute for a survey, civil drawings, soils report, structural engineering, or city permit.
             </p>
             <p className="mt-3">
               <span className="text-paper">Acceptable use:</span> Do not scrape the site, share your account, or use the service to harass, defraud, or harm others. We may suspend accounts that violate these terms.
@@ -155,7 +155,7 @@ const Legal = () => {
               <span className="text-paper">Course renewal ($99/year):</span> 7-day refund on a renewal charge if you have not opened any chapter or downloaded any updated material since the renewal.
             </p>
             <p className="mt-3">
-              <span className="text-paper">Property Feasibility Study ($399):</span> Refundable up to the point we begin compiling your Study (typically within 24 hours of purchase). Once compilation has started, the Study is non-refundable because the work is bespoke to your parcel.
+              <span className="text-paper">Property Feasibility Report ($399):</span> Refundable up to the point we begin compiling your Report (typically within 24 hours of purchase). Once compilation has started, the Report is non-refundable because the work is bespoke to your parcel.
             </p>
             <p className="mt-3">
               Refunds are issued to the original payment method and typically appear within 5 to 10 business days, depending on your bank.

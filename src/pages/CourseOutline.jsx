@@ -107,7 +107,7 @@ const CourseOutline = () => {
               <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Course fee</p>
               <p className="font-display text-paper text-3xl sm:text-4xl">$99</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
-                Applied as a credit toward the $399 Property Feasibility Study.
+                Applied as a credit toward the $399 Property Feasibility Report.
               </p>
             </div>
             <div className="bg-surface-1-solid p-6 sm:p-7">
@@ -185,7 +185,7 @@ const CourseOutline = () => {
             </Link>
             <span className="text-paper-dim text-sm inline-flex items-center gap-2">
               <FiCheck className="text-accent" />
-              Credit toward your $399 Property Feasibility Study
+              Credit toward your $399 Property Feasibility Report
             </span>
           </div>
         </div>

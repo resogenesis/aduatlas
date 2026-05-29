@@ -42,7 +42,7 @@ const Property = () => {
           Here's what we can <span className="italic text-paper-dim">tell so far.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed mb-7">
-          Honest answer: most homeowners looking to buy or build ADU homes don't even know that they need to know these. The Feasibility Report verifies every line below.
+          Honest answer: most homeowners looking to buy or build ADU homes don't even know that they need to know these. The Property Feasibility Report verifies every line below.
         </p>
 
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -70,7 +70,7 @@ const Property = () => {
               {lowOrMedium} {lowOrMedium === 1 ? "row" : "rows"} above are estimated or unknown.
             </h2>
             <p className="text-accent-fg/80 text-sm sm:text-base mb-7 max-w-xl leading-relaxed">
-              The Feasibility Report cross-checks each row against city records, parcel data, and utility maps. You get verified numbers you can actually take to a builder or your city.
+              The Property Feasibility Report cross-checks each row against city records, parcel data, and utility maps. You get verified numbers you can actually take to a builder or your city.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link

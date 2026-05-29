@@ -74,7 +74,7 @@ const RiskCallouts = () => {
             Most homeowners are unprepared. <span className="italic">This is how projects go off track.</span>
           </h2>
           <p className="mt-7 text-paper-dim text-base sm:text-lg leading-relaxed">
-            Learn about the process and products before you waste any time or money. ADUAtlas provides specific information on both.
+            Learn about the process and products before you waste any time or money.<br />ADUAtlas provides specific information on both.
           </p>
         </div>
 

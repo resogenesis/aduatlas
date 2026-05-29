@@ -7,7 +7,7 @@ const sections = [
         title: "Start Here",
         links: [
             { name: "Reality Check", path: "/quiz" },
-            { name: "Unlock Plan", path: "/unlock" },
+            { name: "Sign Up", path: "/unlock" },
             { name: "About", path: "/about" },
         ],
     },
