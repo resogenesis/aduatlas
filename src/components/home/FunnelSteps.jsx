@@ -9,7 +9,7 @@ const steps = [
     lede: "Take the How to ADU Course.",
     intro: "You will learn:",
     bullets: [
-      "City and state ADU regulations",
+      "City, county, and ZIP-level ADU regulations",
       "25+ ADU types, construction methods, and a video library",
       "Budget planning and timelines, including pre-site and utility costs",
       "Common homeowner mistakes in the FAQ chapter",

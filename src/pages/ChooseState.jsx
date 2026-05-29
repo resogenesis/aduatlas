@@ -1,6 +1,5 @@
 import PageHeader from "../components/common/PageHeader";
 import PublicStubFooter from "../components/gates/PublicStubFooter";
-import heroImg from "../assets/home/hero_image.png";
 
 const stateNames = [
   "Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware",
@@ -16,18 +15,20 @@ const ChooseState = () => {
   return (
     <div>
       <PageHeader
-        title="ADU Regulations by State"
-        subtitle="Every state is different. Every city inside that state is different again. Knowing which rules apply to your specific lot is half the battle."
-        bg={heroImg}
+        title="ADU Regulations Where You Live"
+        subtitle="Only a handful of states have written ADU rules into state law. For most homeowners, what you can build is decided by your city, county, ZIP, and HOA."
       />
 
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 max-w-4xl">
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-8 text-center">
-          ADU rules in the U.S. layer state code on top of city zoning on top of HOA restrictions. State A might mandate ADUs while City B inside it adds setback rules and impact fees that change the math entirely. Don't trust generic answers from one source.
+          ADU rules in the U.S. mostly live at the local level. A small number of states have a statewide ADU baseline; the rest leave it to your city, county, and HOA. Two homes ten miles apart can have completely different setbacks, size caps, and impact fees. Don't trust generic answers.
         </p>
 
         <div className="bg-surface-1-solid border border-stroke rounded-2xl p-6 sm:p-8 mb-10">
-          <p className="text-paper font-semibold mb-5 text-center">All 50 states covered:</p>
+          <p className="text-paper font-semibold mb-2 text-center">Browse by state</p>
+          <p className="text-paper-dim text-sm text-center mb-5">
+            Inside each state, the real rules live at the city, county, and ZIP level.
+          </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-2 text-paper-dim text-sm">
             {stateNames.map((s) => (
               <div key={s} className="flex items-start gap-2">
@@ -39,7 +40,7 @@ const ChooseState = () => {
         </div>
 
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed text-center">
-          The state by state breakdown (what each state mandates, where city rules diverge, and which authority controls what) is inside the ADU system, with your specific ZIP code's rules pulled into your Feasibility Report.
+          The detailed breakdown (which states have a baseline, where city rules diverge, and which authority controls what) is inside the ADU Course, with your specific ZIP code's rules pulled into your Property Feasibility Study.
         </p>
       </section>
 

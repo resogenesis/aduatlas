@@ -23,7 +23,7 @@ const chapters = [
   {
     n: "03",
     title: "Understanding ADU Regulations",
-    desc: "State, city, county, and local regulations that impact your project.",
+    desc: "City, county, ZIP-level, and HOA regulations that impact your project.",
   },
   {
     n: "04",

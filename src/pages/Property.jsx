@@ -127,7 +127,7 @@ const mockPropertyOutput = (q) => {
       confidence: CONFIDENCE.LOW,
       source: "Requires zoning + lot coverage review",
       unlocksAt: TIER.REPORT,
-      toGreen: "We apply your city's actual ADU sq-ft cap, the percentage-of-primary-home rule, and your lot's measured coverage, not a generic state baseline. Often raises or lowers this estimate by 200+ sq ft.",
+      toGreen: "We apply your city's actual ADU sq-ft cap, the percentage-of-primary-home rule, and your lot's measured coverage, not a generic baseline. Often raises or lowers this estimate by 200+ sq ft.",
     }),
     datapoint({
       label: "Setbacks",

@@ -24,9 +24,7 @@ const sections = [
         title: "Trust",
         links: [
             { name: "Methodology", path: "/methodology" },
-            { name: "Sample Report", path: "/report/sample" },
-            { name: "Refund Policy", path: "#" },
-            { name: "Privacy & Terms", path: "#" },
+            { name: "Privacy & Terms", path: "/legal" },
         ],
     },
 ];

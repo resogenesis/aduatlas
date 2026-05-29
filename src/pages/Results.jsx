@@ -95,14 +95,14 @@ const Results = () => {
             Unlock ADU Build Prepared.
           </h3>
           <p className="text-accent-fg/80 mb-7 text-sm sm:text-base leading-relaxed max-w-xl">
-            Personalized education, state + city specific zoning guidance, and direct support — built around your ADU Ready Score.
+            Personalized education, city and ZIP-specific zoning guidance, and direct support — built around your ADU Ready Score.
           </p>
 
           <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-9 text-sm">
             {[
               "Everything in the free Explorer tier",
               "Personalized ADU education course based on your Ready Score",
-              "State + city specific ADU regulations",
+              "City and ZIP-specific ADU regulations",
               "Direct email support",
               "$99 credit toward Feasibility Report upgrade (90 days)",
               "7 day full refund, no questions asked",

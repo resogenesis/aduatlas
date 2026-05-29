@@ -39,7 +39,7 @@ const tiers = [
     bullets: [
       "Everything included in Tier 1",
       "Personalized ADU education course based on your ADU Ready Score",
-      "State + city specific ADU regulations",
+      "City and ZIP-specific ADU regulations",
       "Direct email support",
       "$99 credit toward your ADU Feasibility Report upgrade (valid within 90 days)",
     ],

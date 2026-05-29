@@ -12,10 +12,11 @@ import ChooseState from "../pages/ChooseState";
 import Videos from "../pages/Videos";
 import Pricing from "../pages/Pricing";
 import CourseOutline from "../pages/CourseOutline";
+import Legal from "../pages/Legal";
 import Property from "../pages/Property";
-import Report from "../pages/Report";
+// import Report from "../pages/Report";
 import Methodology from "../pages/Methodology";
-import ConversationGuide from "../pages/ConversationGuide";
+// import ConversationGuide from "../pages/ConversationGuide";
 import Quiz from "../pages/Quiz";
 import Results from "../pages/Results";
 import Unlock from "../pages/Unlock";
@@ -53,8 +54,9 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "property", element: <Property /> },
-      { path: "report/sample", element: <Report /> },
-      { path: "report/sample/conversation-guide", element: <ConversationGuide /> },
+      // Sample report + conversation guide commented out for now.
+      // { path: "report/sample", element: <Report /> },
+      // { path: "report/sample/conversation-guide", element: <ConversationGuide /> },
       { path: "methodology", element: <Methodology /> },
       { path: "quiz", element: <Quiz /> },
       { path: "results", element: <Results /> },
@@ -70,6 +72,7 @@ const router = createBrowserRouter([
       { path: "videos", element: <Videos /> },
       { path: "pricing", element: <Pricing /> },
       { path: "course-outline", element: <CourseOutline /> },
+      { path: "legal", element: <Legal /> },
 
       // Auth
       { path: "login", element: <Login /> },

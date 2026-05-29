@@ -6,44 +6,64 @@ const levels = [
   {
     icon: FiCheck,
     pillClass: "bg-accent/15 text-accent border-accent/30",
-    label: "High",
-    when: "Verified from authoritative public data.",
+    label: "Verified",
+    when: "Pulled directly from an authoritative public source.",
     examples: [
       "County parcel records (lot size, owner, dimensions)",
-      "Pulled directly from city zoning maps",
-      "Posted on a city's official permit fee schedule",
+      "City zoning maps and ADU code text",
+      "Official permit fee schedules",
     ],
   },
   {
     icon: FiHelpCircle,
     pillClass: "bg-yellow-400/10 text-yellow-300 border-yellow-400/30",
-    label: "Medium",
+    label: "Estimated",
     when: "Modeled from public data and standard assumptions.",
     examples: [
-      "Max ADU size estimated from city's percent of primary rule + your lot size",
+      "Max ADU size from the city's percent-of-primary rule applied to your lot",
       "Cost ranges from regional builder bids and prefab market data",
-      "Setback estimates from the local minimum (before checking easements)",
+      "Setbacks from the local minimum, before easements are checked",
     ],
   },
   {
     icon: FiAlertTriangle,
     pillClass: "bg-red-400/10 text-red-300 border-red-400/30",
-    label: "Low",
-    when: "Requires on site verification or a closer look at title / city records.",
+    label: "Unknown",
+    when: "Requires on-site verification or a closer look at title or city records.",
     examples: [
       "Sewer line distance to your specific pad",
-      "HOA / deed restrictions recorded against the parcel",
-      "Soil bearing or slope related foundation needs",
+      "HOA or deed restrictions recorded against the parcel",
+      "Soil bearing or slope-related foundation needs",
     ],
   },
 ];
 
 const sources = [
-  { name: "County parcel data", cadence: "Updated nightly", coverage: "All US counties" },
-  { name: "City zoning maps", cadence: "Quarterly review per city", coverage: "Top 25 ADU markets" },
-  { name: "Permit fee schedules", cadence: "Monthly review", coverage: "Top 25 ADU markets" },
-  { name: "Regional cost models", cadence: "Refreshed every 3 months", coverage: "CA, WA, CO, TX" },
-  { name: "ADU code amendments", cadence: "Tracked per jurisdiction", coverage: "CA + state level updates nationwide" },
+  {
+    name: "County parcel data",
+    cadence: "Refreshed nightly where available",
+    coverage: "Lot size, owner, dimensions",
+  },
+  {
+    name: "City zoning maps and ADU code",
+    cadence: "Reviewed per jurisdiction we cover",
+    coverage: "Districts, overlays, base ADU rules",
+  },
+  {
+    name: "Permit fee schedules",
+    cadence: "Reviewed quarterly per city",
+    coverage: "Posted by the city's permit office",
+  },
+  {
+    name: "Regional cost models",
+    cadence: "Refreshed quarterly",
+    coverage: "Site prep + structure ranges by metro",
+  },
+  {
+    name: "ADU code amendments",
+    cadence: "Tracked as states and cities publish",
+    coverage: "City and county ordinance changes (state baseline where one exists)",
+  },
 ];
 
 const notDoing = [
@@ -61,30 +81,38 @@ const Methodology = () => {
   return (
     <div className="bg-canvas">
       {/* Hero */}
-      <section className="relative overflow-hidden pt-32 sm:pt-40 lg:pt-48 pb-14 sm:pb-20">
-        <div aria-hidden className="pointer-events-none absolute -top-40 -right-40 w-[40rem] h-[40rem] rounded-full bg-accent/10 blur-3xl animate-drift-glow" />
-        <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 w-[40rem] h-[40rem] rounded-full bg-accent/5 blur-3xl animate-drift-glow" style={{ animationDelay: "-7s" }} />
+      <section className="relative overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-12 border-b border-stroke">
+        <div aria-hidden className="pointer-events-none absolute -top-24 right-0 w-[28rem] h-[28rem] rounded-full bg-accent/8 blur-3xl animate-drift-glow" />
 
         <div ref={heroRef} className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-5 animate-fade-up">
-            How we know what we know
-          </p>
-          <h1 className="font-display font-medium text-paper text-[2.6rem] sm:text-6xl lg:text-7xl leading-[1.02] tracking-tight max-w-3xl animate-fade-up" style={{ animationDelay: "120ms" }}>
-            Honest about what's <span className="italic text-paper-dim">verified, estimated, and unknown.</span>
+          <div className="inline-flex items-center gap-2 mb-4 animate-fade-up">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
+            <span className="text-paper-dim text-xs font-medium tracking-[0.2em] uppercase">
+              Methodology
+            </span>
+          </div>
+          <h1
+            className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight max-w-3xl animate-fade-up"
+            style={{ animationDelay: "100ms" }}
+          >
+            Honest about what's <span className="italic">verified, estimated, and unknown.</span>
           </h1>
-          <p className="mt-7 text-paper-dim text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed animate-fade-up" style={{ animationDelay: "260ms" }}>
-            Every datapoint we show carries a confidence label. This page explains what each label means, where our data comes from, and exactly what we will and won't claim to know.
+          <p
+            className="mt-5 text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed animate-fade-up"
+            style={{ animationDelay: "240ms" }}
+          >
+            Every datapoint we show carries a confidence label. This page explains what each label means, where the data comes from, and exactly what we will and won't claim to know.
           </p>
         </div>
       </section>
 
-      <div className="container mx-auto px-5 sm:px-8 max-w-4xl pb-20 space-y-6">
+      <div className="container mx-auto px-5 sm:px-8 max-w-4xl py-14 sm:py-20 space-y-6">
 
         {/* Confidence levels */}
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-5">The three levels</p>
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-10">
-            Confidence is a system, not a marketing line.
+          <p className="text-accent text-xs uppercase tracking-[0.2em] mb-5">The three labels</p>
+          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-9">
+            What each chip means on your snapshot.
           </h2>
           <div className="space-y-7">
             {levels.map(({ icon: Icon, pillClass, label, when, examples }) => (
@@ -110,29 +138,31 @@ const Methodology = () => {
           </div>
         </section>
 
-        {/* "What would make this green?" */}
+        {/* What raises a row */}
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-5">The path to green</p>
+          <p className="text-accent text-xs uppercase tracking-[0.2em] mb-5">The path to verified</p>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-5">
-            Every yellow row has a verification path.
+            Every Estimated or Unknown row has a path to Verified.
           </h2>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-7 max-w-2xl">
-            Click "What raises this?" on any low row in your snapshot. We'll show you exactly what we'd do to verify it, and which paid tier delivers that verification. No hidden steps. No buying twice.
+            Click "What raises this?" on any row in your snapshot. We show you exactly what we'd do to verify it, and which paid tier delivers that verification. No hidden steps. No buying twice.
           </p>
           <div className="bg-canvas border border-stroke rounded-2xl p-6">
             <p className="text-paper-dim text-[0.65rem] font-semibold tracking-[0.2em] uppercase mb-2">Example</p>
             <p className="text-paper text-sm sm:text-base mb-2">
-              <span className="text-paper-dim">Sewer access:</span> Unknown · <span className="inline-block w-2 h-2 rounded-full bg-red-400 mr-1"></span>Low
+              <span className="text-paper-dim">Sewer access:</span> Unknown
+              <span className="inline-block w-2 h-2 rounded-full bg-red-400 mx-2 align-middle" />
+              <span className="text-red-300 text-xs uppercase tracking-wider">Low</span>
             </p>
             <p className="text-paper-dim text-sm leading-relaxed italic">
-              "We pull your city's sewer line map, measure the distance from the closest tie in to the proposed ADU pad, and flag whether a gravity tie in works or a grinder pump is required (a $4K–$8K cost difference)."
+              "We pull your city's sewer line map, measure the distance from the closest tie-in to the proposed ADU pad, and flag whether a gravity tie-in works or a grinder pump is required (a $4K to $8K cost difference)."
             </p>
           </div>
         </section>
 
         {/* Data sources + cadence */}
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-5">Sources & cadence</p>
+          <p className="text-accent text-xs uppercase tracking-[0.2em] mb-5">Sources and cadence</p>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-7">
             Where the data comes from. When it's refreshed.
           </h2>
@@ -146,17 +176,20 @@ const Methodology = () => {
             ))}
           </div>
           <p className="text-paper-dim text-xs italic mt-6 leading-relaxed">
-            Every datapoint in your output shows a "last updated" date. If it looks stale, it means we haven't refreshed that source recently. We'd rather show you the date than pretend it's fresh.
+            Every datapoint in your output shows a "last updated" date. If it looks stale, we haven't refreshed that source recently. We'd rather show you the date than pretend it's fresh.
+          </p>
+          <p className="text-paper-dim text-xs italic mt-3 leading-relaxed">
+            Coverage expands jurisdiction by jurisdiction. Most ADU rules live at the city, county, and ZIP level. If your city's ADU code isn't yet in our verified set, we will surface any state baseline where one exists and flag what we don't yet know.
           </p>
         </section>
 
-        {/* What we don't do — liability boundary */}
+        {/* What we don't do */}
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <div className="flex items-center gap-2 text-paper-dim text-xs uppercase tracking-[0.2em] mb-5">
+          <div className="flex items-center gap-2 text-accent text-xs uppercase tracking-[0.2em] mb-5">
             <FiShield /> What we don't do
           </div>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-5">
-            Verified pre construction guidance. <span className="italic text-paper-dim">Not legal, engineering, or appraisal.</span>
+            Pre construction guidance. <span className="italic text-paper-dim">Not legal, engineering, or appraisal.</span>
           </h2>
           <p className="text-paper-dim text-base leading-relaxed mb-7 max-w-2xl">
             ADUAtlas is a planning and decision-support tool. We help you understand what's possible and what to verify next. We do not replace any of the following:
@@ -170,7 +203,7 @@ const Methodology = () => {
             ))}
           </ul>
           <p className="text-paper-dim text-xs italic mt-7 leading-relaxed max-w-2xl">
-            Always confirm with your city, a licensed architect or engineer, your lender, and a qualified contractor before committing to a design or breaking ground. Our reports are designed to make those conversations sharper, not to replace them.
+            Always confirm with your city, a licensed architect or engineer, your lender, and a qualified contractor before committing to a design or breaking ground. Our reports are built to make those conversations sharper, not to replace them.
           </p>
         </section>
 
@@ -180,13 +213,13 @@ const Methodology = () => {
             Now go check your property.
           </h2>
           <p className="text-accent-fg/80 text-base sm:text-lg max-w-xl mx-auto mb-7">
-            Honest output. Source-dated. Confidence-labeled. Free to start.
+            Honest output. Source dated. Confidence labeled. Free to start.
           </p>
           <Link
             to="/"
             className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
           >
-            Check my property <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+            Check your property <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </section>
       </div>
