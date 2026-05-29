@@ -14,13 +14,13 @@ const Results = () => {
       navigate("/quiz", { replace: true });
       return;
     }
-    const { score, band } = calculateScore(answers);
-    track(EV.RESULTS_VIEWED, { score, band, zip: answers.zip });
+    const { score, band, correctCount, total } = calculateScore(answers);
+    track(EV.RESULTS_VIEWED, { score, band, correctCount, total });
   }, [answers, navigate]);
 
   if (!isComplete(answers)) return null;
 
-  const { score, band, findings } = calculateScore(answers);
+  const { score, band, findings, correctCount, total } = calculateScore(answers);
 
   const circumference = 2 * Math.PI * 52;
   const offset = circumference - (score / 100) * circumference;
@@ -38,7 +38,7 @@ const Results = () => {
           <span className="italic text-paper-dim">Here's what you're missing.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg max-w-xl mx-auto text-center mb-12">
-          Based on your ZIP, lot, budget, timeline, and what you do (and don't) know.
+          You answered <span className="text-paper">{correctCount} of {total}</span> correctly. Below: what you missed, and what to do about it.
         </p>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-12 mb-6">

@@ -1,17 +1,17 @@
-// Lightweight quiz state store backed by sessionStorage.
+// Reality Check knowledge-test answers, backed by sessionStorage.
 // INTEGRATION POINT (Supabase): when a user submits email on /unlock,
 // persist these answers to a `quiz_answers` row keyed by user id.
 
-const KEY = "aduatlas.quiz.v1";
+const KEY = "aduatlas.quiz.v2";
 
 const empty = {
-  zip: "",
-  purpose: "",
-  lotSize: "",
-  budget: "",
-  timeline: "",
-  zoningKnowledge: "",
-  siteCostKnowledge: "",
+  q1: "",
+  q2: "",
+  q3: "",
+  q4: "",
+  q5: "",
+  q6: "",
+  q7: "",
 };
 
 export const loadAnswers = () => {
@@ -35,4 +35,4 @@ export const clearAnswers = () => {
 };
 
 export const isComplete = (a) =>
-  Boolean(a.zip && a.purpose && a.lotSize && a.budget && a.timeline && a.zoningKnowledge && a.siteCostKnowledge);
+  Boolean(a.q1 && a.q2 && a.q3 && a.q4 && a.q5 && a.q6 && a.q7);

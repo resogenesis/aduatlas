@@ -4,78 +4,106 @@ import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { loadAnswers, saveAnswers } from "../stores/quizStore";
 import { EV, track } from "../lib/analytics";
 
-const questions = [
+// The Reality Check is a 7-question knowledge test. Each question has one
+// correct answer (`correct` key matches the option `value`). Results scores
+// against these and surfaces gap-explanations for any wrong answers.
+export const questions = [
   {
-    id: "purpose",
-    label: "Why are you considering an ADU?",
-    type: "choice",
+    id: "q1",
+    label: "Can you legally build an ADU on your property?",
+    helper: "Which of these determines whether an ADU can be built on a property?",
+    correct: "b",
+    explanation:
+      "ADU eligibility depends on a combination of zoning, setbacks, lot size, and local regulations. No single factor decides it.",
     options: [
-      { value: "rental", label: "Rental income" },
-      { value: "aging-parent", label: "Housing an aging parent" },
-      { value: "adult-child", label: "Housing an adult child" },
-      { value: "office", label: "Home office / studio" },
-      { value: "value", label: "Increase property value" },
-      { value: "other", label: "Other / exploring" },
+      { value: "a", label: "Lot sq ft, ZIP code zoning regulations" },
+      { value: "b", label: "Zoning, setbacks, lot size, and local regulations" },
+      { value: "c", label: "City zoning regulations and primary home sq ft" },
+      { value: "d", label: "HOA and city regulations alone" },
     ],
   },
   {
-    id: "lotSize",
-    label: "Approximately how big is your lot?",
-    type: "choice",
+    id: "q2",
+    label: "What makes ADU projects more expensive than most homeowners expect?",
+    helper: "Pick the line item that catches most homeowners off guard.",
+    correct: "c",
+    explanation:
+      "Pre-site costs (utilities, excavation, foundation, permits) are the #1 surprise expense, typically adding $10,000 to $100,000 beyond the builder's structure price.",
     options: [
-      { value: "under-3000", label: "Under 3,000 sq ft" },
-      { value: "3000-5000", label: "3,000 – 5,000 sq ft" },
-      { value: "5000-10000", label: "5,000 – 10,000 sq ft" },
-      { value: "10000+", label: "Over 10,000 sq ft" },
-      { value: "unsure", label: "Not sure" },
+      { value: "a", label: "ADU price, delivery, construction, site prep" },
+      { value: "b", label: "Inaccurate estimates and ADU construction" },
+      { value: "c", label: "Pre-site costs like utilities, excavation, and permits" },
+      { value: "d", label: "City inspection delays and pre-site prep" },
     ],
   },
   {
-    id: "budget",
-    label: "What's your rough budget range?",
-    helper: "Site prep + structure combined.",
-    type: "choice",
+    id: "q3",
+    label: "What determines the maximum size of an ADU?",
+    helper: "What sets the actual cap on how big your ADU can be?",
+    correct: "b",
+    explanation:
+      "Max ADU size is set by local zoning rules (a percent-of-primary rule, a hard sq ft cap), the setback envelope, and the buildable area left on your specific lot.",
     options: [
-      { value: "under-100k", label: "Under $100K" },
-      { value: "100-200k", label: "$100K – $200K" },
-      { value: "200-400k", label: "$200K – $400K" },
-      { value: "400k+", label: "$400K+" },
-      { value: "unsure", label: "Unsure. That's part of why I'm here" },
+      { value: "a", label: "Sq ft of lot, budget, primary structure sq ft" },
+      { value: "b", label: "Local zoning regulations, setbacks, and lot conditions" },
+      { value: "c", label: "Lot size, ADU type, budget" },
+      { value: "d", label: "City zoning regulations alone" },
     ],
   },
   {
-    id: "timeline",
-    label: "When do you want to break ground?",
-    type: "choice",
+    id: "q4",
+    label: "Which ADU construction type is usually the cheapest?",
+    helper: "By per-sq-ft cost, before site prep.",
+    correct: "a",
+    explanation:
+      "Modular ADUs are usually the cheapest construction type. They are factory-built to a shared spec, which reduces labor cost and shortens the on-site timeline.",
     options: [
-      { value: "6mo", label: "Within 6 months" },
-      { value: "6-12mo", label: "6 – 12 months" },
-      { value: "1-2yr", label: "1 – 2 years" },
-      { value: "exploring", label: "Just exploring for now" },
+      { value: "a", label: "Modular" },
+      { value: "b", label: "Prefab" },
+      { value: "c", label: "Shipping container" },
+      { value: "d", label: "There is no single \"cheapest\" option for every property" },
     ],
   },
   {
-    id: "zoningKnowledge",
-    label: "How well do you know your local ADU zoning?",
-    helper: "Things like maximum ADU size as a % of your primary home, setbacks, height limits, and parking requirements.",
-    type: "choice",
+    id: "q5",
+    label: "Before speaking with builders, what information is most important?",
+    helper: "Which one piece of prep makes builder quotes comparable?",
+    correct: "c",
+    explanation:
+      "A Property Feasibility Study with zoning and property details is the highest-leverage prep. Without it, builder quotes can't be compared apples-to-apples.",
     options: [
-      { value: "deep", label: "I've read my city's specific ADU code" },
-      { value: "general", label: "I know ADUs are allowed but haven't checked details" },
-      { value: "heard", label: "I've heard ADUs are legal in my area" },
-      { value: "none", label: "I haven't checked yet" },
+      { value: "a", label: "A plat survey of your property" },
+      { value: "b", label: "Type and size of the ADU" },
+      { value: "c", label: "A Property Feasibility Study with zoning and property details" },
+      { value: "d", label: "City and ZIP code zoning regulations and ADU type" },
     ],
   },
   {
-    id: "siteCostKnowledge",
-    label: "Have you accounted for site prep and utility hookup costs?",
-    helper: "Sewer tie ins, trenching, stormwater drainage. These often add $10K to $100K on top of the ADU price.",
-    type: "choice",
+    id: "q6",
+    label: "Why can't builders give you an accurate quote over the phone?",
+    helper: "What's missing from a phone quote?",
+    correct: "b",
+    explanation:
+      "An ADU structure is only part of the total price. Pre-site work, permits, utility tie-ins, and finish levels all vary per property and can't be quoted without seeing your specific lot and scope.",
     options: [
-      { value: "quoted", label: "Yes, I have written quotes for site prep + utilities" },
-      { value: "estimated", label: "I have a rough estimate" },
-      { value: "assumed", label: "I assumed they're included in the ADU price" },
-      { value: "unaware", label: "I hadn't really thought about it" },
+      { value: "a", label: "They can, by just giving you the price of the ADU" },
+      { value: "b", label: "An ADU structure is not the only expense" },
+      { value: "c", label: "They have to see if it will fit in the space" },
+      { value: "d", label: "Builders want to upsell and know your budget first" },
+    ],
+  },
+  {
+    id: "q7",
+    label: "What is one of the biggest mistakes homeowners make?",
+    helper: "What goes wrong earliest in the process?",
+    correct: "a",
+    explanation:
+      "The most common mistake is starting too early — calling builders or paying for surveys before understanding the process and what's actually possible on your property.",
+    options: [
+      { value: "a", label: "Starting too early without understanding the process and property limitations" },
+      { value: "b", label: "Not looking at all the ADU options available" },
+      { value: "c", label: "Researching permits, zoning, and pre-site estimates" },
+      { value: "d", label: "Looking at multiple builders" },
     ],
   },
 ];
@@ -100,10 +128,6 @@ const Quiz = () => {
   };
 
   const next = () => {
-    if (q.validate && !q.validate(value)) {
-      setError(q.errorMsg || "Please complete this question.");
-      return;
-    }
     if (!value) {
       setError("Please choose an option.");
       return;
@@ -112,7 +136,7 @@ const Quiz = () => {
     if (step < questions.length - 1) {
       setStep((s) => s + 1);
     } else {
-      track(EV.QUIZ_COMPLETED, { zip: answers.zip });
+      track(EV.QUIZ_COMPLETED);
       navigate("/results");
     }
   };
@@ -136,44 +160,29 @@ const Quiz = () => {
         </div>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-12">
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-snug tracking-tight mb-3">
+          <h2 className="font-display font-medium text-paper text-2xl sm:text-3xl leading-snug tracking-tight mb-3">
             {q.label}
           </h2>
           {q.helper && <p className="text-paper-dim text-sm sm:text-base mb-7">{q.helper}</p>}
 
-          {q.type === "text" && (
-            <input
-              type="text"
-              inputMode="numeric"
-              autoFocus
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && next()}
-              placeholder={q.placeholder}
-              className="w-full px-5 py-4 text-lg bg-canvas border border-stroke rounded-xl text-paper placeholder:text-paper-dim/60 focus:outline-none focus:border-accent transition"
-            />
-          )}
-
-          {q.type === "choice" && (
-            <div className="grid gap-2.5">
-              {q.options.map((opt) => {
-                const selected = value === opt.value;
-                return (
-                  <button
-                    key={opt.value}
-                    onClick={() => setValue(opt.value)}
-                    className={`text-left px-5 py-4 rounded-xl border transition-all ${
-                      selected
-                        ? "border-accent bg-accent text-accent-fg"
-                        : "border-stroke bg-canvas text-paper hover:border-paper-dim"
-                    }`}
-                  >
-                    {opt.label}
-                  </button>
-                );
-              })}
-            </div>
-          )}
+          <div className="grid gap-2.5">
+            {q.options.map((opt) => {
+              const selected = value === opt.value;
+              return (
+                <button
+                  key={opt.value}
+                  onClick={() => setValue(opt.value)}
+                  className={`text-left px-5 py-4 rounded-xl border transition-all ${
+                    selected
+                      ? "border-accent bg-accent text-accent-fg"
+                      : "border-stroke bg-canvas text-paper hover:border-paper-dim"
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              );
+            })}
+          </div>
 
           {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
 

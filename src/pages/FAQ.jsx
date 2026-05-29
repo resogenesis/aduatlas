@@ -3,23 +3,23 @@ import PublicStubFooter from "../components/gates/PublicStubFooter";
 
 const faqs = [
   {
-    q: "Do you know the ADU regulations for your city and ZIP code?",
+    q: "Do you know what you can build, including size, style, and cost?",
     a: (
       <p>
-        Many homeowners assume "ADUs are legal here" means their plan will work. Not always. Cities cap ADU size as a percentage of the primary home, set specific setbacks, restrict height, and change the rules. Many discover the conflict only after they've already decided on a particular ADU. You need a feasibility study completed before you know what size ADU to build.
+        Many homeowners assume "ADUs are legal here" means their plan will work. Not always. Cities cap ADU size as a percentage of the primary home, set specific setbacks, restrict height, and update the rules. Many discover the conflict only after they've already decided on a particular ADU. You need a feasibility study completed before you know what size ADU to build.
       </p>
     ),
   },
   {
-    q: "Have you accounted for site prep and utility hookup costs?",
+    q: "What is your all-in budget?",
     a: (
       <p>
-        Builder ADU prices typically cover the structure, not the sewer tie in, water and gas trenching, stormwater drainage, foundation prep, or grading. These regularly add $10,000 to $100,000+ on top. Homeowners need these estimates before they begin a project.
+        Builder ADU prices typically cover the price of the structure only. Do you have any idea what the survey or site plan, site prep, utility hookups, foundation, city permits, and inspections can cost? Are you prepared to spend an additional $10,000 to $100,000 for site prep? Do you have any idea how to estimate those? Will those expenses affect the amount you had planned to spend on an ADU?
       </p>
     ),
   },
   {
-    q: "Will your HOA allow an ADU on your property?",
+    q: "Will your HOA allow an ADU on your property, or is there a deed restriction?",
     a: (
       <p>
         Even if local zoning allows an ADU, your HOA's CC&Rs can override city and state regulations. Some HOAs require architectural review; others have blanket prohibitions. This is a common late stage surprise. Most homeowners know how flexible their own HOA can be. If you don't, the ADU course shows you how to determine whether an HOA or a city prohibits ADUs on a particular street. Always verify local ADU zoning with your city. The carpenter's rule: measure twice, cut once.
@@ -30,7 +30,7 @@ const faqs = [
     q: "Are you prepared to speak with a builder?",
     a: (
       <p>
-        Without a defined scope, lot dimensions, ADU size, placement, and a realistic pre site estimate, a builder cannot give you an accurate total estimate or clear specifications. Only a realistic feasibility study will prepare you and provide general estimates for everything. When you collect 3 bids, you'll know what should be included so there are no surprises. An average survey runs $600 to $1,200. Save time and money with the ADUAtlas feasibility study tailored to your property and your ZIP code's ADU regulations.
+        You need a defined scope of work, knowledge of ADUs and the one you want, the build process, and a realistic budget, including ADU legal placement, size and style, pre-site estimates, surveys, cost of permits, inspections, and a site plan / Feasibility Study. Without all this information, getting an accurate estimate is not possible. An average survey can run $500 to $2,500, and that will not include your city zoning regulations like placement with setbacks, or utility connections, among other pre-site costs. Save yourself a lot of time and money by being prepared with the ADUAtlas Feasibility Study tailored to your property and your city's ADU regulations.
       </p>
     ),
   },
@@ -61,7 +61,9 @@ const FAQ = () => {
             FAQ
           </p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-paper leading-tight">
-            Six questions every ADU homeowner should know before contacting a builder or city.
+            Six questions every ADU homeowner should know
+            <br className="hidden sm:block" />
+            <span className="sm:inline"> before contacting a builder or your city.</span>
           </h1>
           <p className="mt-5 text-paper-dim text-sm sm:text-base leading-relaxed">
             Many ADU projects fail because of the questions homeowners never knew to ask. Answer these honestly. If even one gives you pause, you have a real risk in your project, and you're not alone. The $99 course covers these and 20+ other common questions you need answered before contacting a builder or your city.
