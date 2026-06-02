@@ -37,7 +37,7 @@ const Login = () => {
       footer={
         <>
           New to ADUAtlas?{" "}
-          <Link to="/signup" className="text-accent hover:text-paper transition-colors font-medium">
+          <Link to="/create-account" className="text-accent hover:text-paper transition-colors font-medium">
             Create an account
           </Link>
         </>

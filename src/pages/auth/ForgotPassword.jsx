@@ -29,7 +29,7 @@ const ForgotPassword = () => {
 
       <p className="mt-5 text-center text-xs text-paper-dim leading-relaxed">
         New here?{" "}
-        <Link to="/signup" className="text-paper hover:text-accent transition-colors">
+        <Link to="/create-account" className="text-paper hover:text-accent transition-colors">
           Create an account
         </Link>
       </p>

@@ -63,6 +63,7 @@ const router = createBrowserRouter([
       { path: "knowledge-check", element: <KnowledgeCheck /> },
       { path: "results", element: <Results /> },
       { path: "unlock", element: <Unlock /> },
+      { path: "signup", element: <Unlock /> },
       { path: "welcome", element: <Welcome /> },
       { path: "about", element: <About /> },
 
@@ -78,7 +79,7 @@ const router = createBrowserRouter([
 
       // Auth
       { path: "login", element: <Login /> },
-      { path: "signup", element: <Signup /> },
+      { path: "create-account", element: <Signup /> },
       { path: "forgot-password", element: <ForgotPassword /> },
     ],
   },

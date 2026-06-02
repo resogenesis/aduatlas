@@ -44,7 +44,7 @@ const Header = () => {
             Log in
           </Link>
           <Link
-            to="/quiz"
+            to="/signup"
             className="px-5 py-2.5 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors"
           >
             Sign Up
@@ -84,7 +84,7 @@ const Header = () => {
                 Log in
               </Link>
               <Link
-                to="/quiz"
+                to="/signup"
                 className="px-5 py-3 rounded-full bg-accent text-accent-fg font-semibold text-sm text-center"
                 onClick={() => setMobileOpen(false)}
               >
