@@ -41,7 +41,7 @@ const Footer = () => {
                             <Logomark className="h-8" />
                         </Link>
                         <p className="text-paper-dim text-sm leading-relaxed max-w-sm mb-7">
-                            ADU Pre Construction Preparation for Homeowners. Know your options before you call a single contractor.
+                            ADU Pre-Construction Preparation for Homeowners. Know your options before you call a single contractor.
                         </p>
                         <div className="flex gap-2">
                             {[FaXTwitter, FaInstagram, FaLinkedinIn].map((Icon, idx) => (

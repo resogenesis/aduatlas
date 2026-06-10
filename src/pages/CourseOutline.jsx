@@ -94,7 +94,7 @@ const CourseOutline = () => {
               Course outline.
             </h1>
             <p className="mt-6 text-paper-dim text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed">
-              Designed for homeowners in the pre construction planning phase, nationwide.
+              Designed for homeowners in the pre-construction planning phase, nationwide.
             </p>
           </div>
 
@@ -107,7 +107,7 @@ const CourseOutline = () => {
               <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Course fee</p>
               <p className="font-display text-paper text-3xl sm:text-4xl">$99</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
-                Applied as a credit toward the $399 Property Feasibility Report.
+                Your $99 is credited toward the $399 Property Feasibility Report when you upgrade within 90 days.
               </p>
             </div>
             <div className="bg-surface-1-solid p-6 sm:p-7">
@@ -119,7 +119,7 @@ const CourseOutline = () => {
             </div>
             <div className="bg-surface-1-solid p-6 sm:p-7">
               <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Length</p>
-              <p className="font-display text-paper text-3xl sm:text-4xl">10 chapters</p>
+              <p className="font-display text-paper text-3xl sm:text-4xl">10 modules</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
                 Each ends with a short quiz so you know what you actually retained.
               </p>
@@ -171,7 +171,7 @@ const CourseOutline = () => {
           </div>
 
           <p className="text-paper-dim text-sm mt-8">
-            Chapters 9–10 finalizing. Your access never expires. Renew any year for $99 to refresh with the latest regulations, types, and costs.
+            The 10-module ADUAtlas course. Your access never expires. Renew any year for $99 to refresh with the latest regulations, types, and costs.
           </p>
 
           {/* CTA */}
@@ -185,7 +185,7 @@ const CourseOutline = () => {
             </Link>
             <span className="text-paper-dim text-sm inline-flex items-center gap-2">
               <FiCheck className="text-accent" />
-              Credit toward your $399 Property Feasibility Report
+              $99 credited toward your $399 Report when you upgrade within 90 days
             </span>
           </div>
         </div>

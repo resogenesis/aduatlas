@@ -107,7 +107,7 @@ const FunnelSteps = () => {
             See full course outline <FiArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
           </Link>
           <span className="text-paper-dim text-sm">
-            $99 · Lifetime access · credit toward Property Feasibility Report
+            $99 · Lifetime access · $99 credited toward the $399 Report when you upgrade within 90 days
           </span>
         </div>
       </div>

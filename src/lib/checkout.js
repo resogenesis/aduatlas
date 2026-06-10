@@ -4,6 +4,8 @@
 //
 // Required env vars on the frontend:
 //   VITE_CHECKOUT_ENDPOINT    (defaults to /api/create-checkout)
+//   VITE_VERIFY_ENDPOINT      (optional; /api/verify-session — used by /welcome
+//                              to confirm a real Stripe session was paid)
 //
 // Backend (not in this repo yet) needs:
 //   STRIPE_SECRET_KEY
@@ -17,8 +19,12 @@ export const checkoutEnabled = Boolean(import.meta.env.VITE_CHECKOUT_ENDPOINT);
 
 export const startCheckout = async ({ tier, email, quizAnswers = null }) => {
   if (!checkoutEnabled) {
-    // Mock fallback: return a known path the caller can redirect to.
-    return { ok: true, url: "/welcome", mock: true };
+    // Mock fallback: return a known path the caller can redirect to. We pass
+    // the selected tier and an explicit `mock=1` marker so /welcome only grants
+    // (mock) access when it was actually reached from this checkout — a bare
+    // /welcome load must NOT grant access.
+    const t = encodeURIComponent(tier || "");
+    return { ok: true, url: `/welcome?tier=${t}&mock=1`, mock: true };
   }
   try {
     const res = await fetch(endpoint, {

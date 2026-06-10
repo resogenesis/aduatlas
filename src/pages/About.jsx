@@ -7,7 +7,7 @@ const stats = [
   { n: "30+", label: "ADU and tiny home types in common use today" },
   { n: "$10K to $100K+", label: "Potential hidden site prep and utility costs" },
   { n: "1 in 4", label: "Homeowners 60+ considering an ADU for income or family" },
-  { n: "80%+", label: "Homeowners underestimate zoning and pre construction complexity" },
+  { n: "80%+", label: "Homeowners underestimate zoning and pre-construction complexity" },
   { n: "6 to 12 Months", label: "Typical ADU timeline from planning to completion" },
 ];
 
@@ -134,7 +134,7 @@ const About = () => {
             className="font-display font-medium text-paper text-[2.6rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.02] tracking-tight max-w-4xl animate-fade-up"
             style={{ animationDelay: "120ms" }}
           >
-            Pre Construction Intelligence <span className="italic text-paper-dim">for homeowners.</span>
+            Pre-Construction Intelligence <span className="italic text-paper-dim">for homeowners.</span>
           </h1>
           <p
             className="mt-7 sm:mt-9 text-paper-dim text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed animate-fade-up"

@@ -112,11 +112,13 @@ const router = createBrowserRouter([
       // Project brief
       { path: "my-property", element: <PaidGate><MyProperty /></PaidGate> },
 
-      // Gated tools
-      { path: "feasibility", element: <PaidGate requireFeasibility><Feasibility /></PaidGate> },
-      { path: "utility-estimator", element: <PaidGate requireFeasibility><UtilityEstimator /></PaidGate> },
-      { path: "builders", element: <PaidGate requireBuilders><BuilderListing /></PaidGate> },
-      { path: "builders/:id", element: <PaidGate requireBuilders><BuilderProfile /></PaidGate> },
+      // Gated tools — these are the $399 Feasibility Report deliverables, so
+      // they require the "report" tier (not just any paid purchase) on top of
+      // the existing course-progress gates.
+      { path: "feasibility", element: <PaidGate requireTier="report" requireFeasibility><Feasibility /></PaidGate> },
+      { path: "utility-estimator", element: <PaidGate requireTier="report" requireFeasibility><UtilityEstimator /></PaidGate> },
+      { path: "builders", element: <PaidGate requireTier="report" requireBuilders><BuilderListing /></PaidGate> },
+      { path: "builders/:id", element: <PaidGate requireTier="report" requireBuilders><BuilderProfile /></PaidGate> },
 
       // Settings
       { path: "settings", element: <Settings /> },

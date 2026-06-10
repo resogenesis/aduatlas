@@ -91,7 +91,7 @@ const Report = () => {
           </div>
 
           <p className="text-paper-dim/70 text-[0.65rem] leading-relaxed mt-7 max-w-3xl">
-            ADUAtlas provides verified pre construction guidance, not legal advice, engineering, appraisal, or permit determination. Always confirm with your city, a licensed architect or engineer, and a qualified contractor before committing to a design. <Link to="/methodology" className="underline-offset-2 hover:underline hover:text-paper-dim transition">Read our methodology →</Link>
+            ADUAtlas provides verified pre-construction guidance, not legal advice, engineering, appraisal, or permit determination. Always confirm with your city, a licensed architect or engineer, and a qualified contractor before committing to a design. <Link to="/methodology" className="underline-offset-2 hover:underline hover:text-paper-dim transition">Read our methodology →</Link>
           </p>
         </div>
       </section>

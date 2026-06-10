@@ -189,7 +189,7 @@ const Methodology = () => {
             <FiShield /> What we don't do
           </div>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-5">
-            Pre construction guidance. <span className="italic text-paper-dim">Not legal, engineering, or appraisal.</span>
+            Pre-construction guidance. <span className="italic text-paper-dim">Not legal, engineering, or appraisal.</span>
           </h2>
           <p className="text-paper-dim text-base leading-relaxed mb-7 max-w-2xl">
             ADUAtlas is a planning and decision-support tool. We help you understand what's possible and what to verify next. We do not replace any of the following:

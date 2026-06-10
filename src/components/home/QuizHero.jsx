@@ -38,7 +38,7 @@ const QuizHero = () => {
           <div className="inline-flex items-center gap-2 mb-7 sm:mb-8 animate-fade-up" style={{ animationDelay: "0ms" }}>
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
             <span className="text-paper-dim text-xs sm:text-sm font-medium tracking-[0.2em] uppercase">
-              ADUAtlas Pre Construction Preparation for Homeowners
+              ADUAtlas Pre-Construction Preparation for Homeowners
             </span>
           </div>
 

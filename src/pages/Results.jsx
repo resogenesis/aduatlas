@@ -65,7 +65,7 @@ const Results = () => {
                 {band}
               </h2>
               <p className="text-paper-dim text-sm sm:text-base leading-relaxed">
-                This is preliminary. Your full Property Feasibility Report refines this with GIS lot data, your local zoning rules, and pre site cost estimates.
+                This is preliminary. Your full Property Feasibility Report refines this with GIS lot data, your local zoning rules, and pre-site cost estimates.
               </p>
             </div>
           </div>
@@ -104,7 +104,7 @@ const Results = () => {
               "Personalized ADU education course based on your Reality Check Score",
               "City and ZIP-specific ADU regulations",
               "Direct email support",
-              "$99 credit toward Property Feasibility Report upgrade (90 days)",
+              "Your $99 credited toward the $399 Property Feasibility Report when you upgrade within 90 days",
               "7 day full refund, no questions asked",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">

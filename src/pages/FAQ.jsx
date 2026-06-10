@@ -43,10 +43,10 @@ const faqs = [
     ),
   },
   {
-    q: "Will your total ADU budget (pre site, permits, structure) match your actual budget?",
+    q: "Will your total ADU budget (pre-site, permits, structure) match your actual budget?",
     a: (
       <p>
-        Do you have a realistic all in budget that includes an official survey, a pre site plan for utilities, foundations, permits, excavating, plus the total ADU cost with setup, delivery, and timelines? Some builders can provide everything, and some do it well. Either way, it makes sense to know what to expect before collecting 3 quotes. Start with the $99 course to understand the process, learn about ADU types, and prep the right way. Then get the $399 feasibility study (the $99 applies as credit). After the course and feasibility study you may change your mind, or find the ADU tiny home of your dreams.
+        Do you have a realistic all in budget that includes an official survey, a pre-site plan for utilities, foundations, permits, excavating, plus the total ADU cost with setup, delivery, and timelines? Some builders can provide everything, and some do it well. Either way, it makes sense to know what to expect before collecting 3 quotes. Start with the $99 course to understand the process, learn about ADU types, and prep the right way. Then get the $399 feasibility study (your $99 is credited toward the $399 Report when you upgrade within 90 days). After the course and feasibility study you may change your mind, or find the ADU tiny home of your dreams.
       </p>
     ),
   },

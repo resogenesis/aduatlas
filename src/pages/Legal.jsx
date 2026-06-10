@@ -136,7 +136,7 @@ const Legal = () => {
               <span className="text-paper">Course access:</span> The ADU Course is yours to keep. You can revisit any chapter at any time. Course content is updated as ADU regulations, types, and costs change; an optional $99 annual renewal gives you the refreshed content for the following 12 months. Without renewal, your access continues to the content as it was at the time of your most recent renewal.
             </p>
             <p className="mt-3">
-              <span className="text-paper">Property Feasibility Report:</span> A one-time deliverable priced at $399, reduced by the $99 course credit when purchased after the course. The Report summarizes lot, zoning, setback, buildable area, and pre-site considerations as of the date of delivery. It is not a substitute for a survey, civil drawings, soils report, structural engineering, or city permit.
+              <span className="text-paper">Property Feasibility Report:</span> A one-time deliverable priced at $399. If you bought the $99 course first, your $99 is credited toward the $399 Report when you upgrade within 90 days of your course purchase. The Report summarizes lot, zoning, setback, buildable area, and pre-site considerations as of the date of delivery. It is not a substitute for a survey, civil drawings, soils report, structural engineering, or city permit.
             </p>
             <p className="mt-3">
               <span className="text-paper">Acceptable use:</span> Do not scrape the site, share your account, or use the service to harass, defraud, or harm others. We may suspend accounts that violate these terms.
