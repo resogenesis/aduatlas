@@ -7,7 +7,6 @@ import { routeForUser, signup } from "../../stores/authStore";
 const Signup = () => {
   const navigate = useNavigate();
   const [role, setRole] = useState("homeowner");
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -20,8 +19,9 @@ const Signup = () => {
     e.preventDefault();
     setError("");
     setNotice("");
-    // Real Supabase Auth when configured; mock otherwise.
-    const res = await signup({ email, password, username, role });
+    // Real Supabase Auth when configured; mock otherwise. Email is the
+    // identity — display name derives from it in the auth store.
+    const res = await signup({ email, password, role });
     if (!res.ok) {
       setError(res.error);
       return;
@@ -80,13 +80,6 @@ const Signup = () => {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <FormField
-          label="Username"
-          placeholder="JohnSmith10"
-          required
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
         <FormField
           label="Email"
           type="email"
