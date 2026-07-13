@@ -23,7 +23,12 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^[A-Z_]' }],
     },
+  },
+  {
+    // Serverless functions run on Node, not in the browser.
+    files: ['api/**/*.js'],
+    languageOptions: { globals: globals.node },
   },
 ])

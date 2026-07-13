@@ -41,6 +41,12 @@ import CourseChapter from "../pages/app/CourseChapter";
 import MyProperty from "../pages/app/MyProperty";
 import Settings from "../pages/app/Settings";
 
+import AdminLayout from "../layout/AdminLayout";
+import AdminGate from "../components/gates/AdminGate";
+import AdminOverview from "../pages/admin/AdminOverview";
+import AdminUsers from "../pages/admin/AdminUsers";
+import AdminAdmins from "../pages/admin/AdminAdmins";
+
 import PaidGate from "../components/gates/PaidGate";
 
 import Login from "../pages/auth/Login";
@@ -81,6 +87,17 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "create-account", element: <Signup /> },
       { path: "forgot-password", element: <ForgotPassword /> },
+    ],
+  },
+
+  // ─── Admin console (role-gated: admin only) ──────────────────────
+  {
+    path: "/admin",
+    element: <AdminGate><AdminLayout /></AdminGate>,
+    children: [
+      { index: true, element: <AdminOverview /> },
+      { path: "users", element: <AdminUsers /> },
+      { path: "admins", element: <AdminAdmins /> },
     ],
   },
 

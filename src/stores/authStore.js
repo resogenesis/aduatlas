@@ -76,6 +76,7 @@ export const currentUser = () => {
 // Where to send a user after auth based on their role + paid state.
 export const routeForUser = (user) => {
   if (!user) return "/";
+  if (user.role === "admin") return "/admin";
   if (user.role === "pro") return "/builder";
   if (user.paid) return "/dashboard";
   return "/quiz";
