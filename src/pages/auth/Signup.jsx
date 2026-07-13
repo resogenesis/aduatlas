@@ -14,14 +14,21 @@ const Signup = () => {
 
   const isPro = role === "pro";
 
-  const handleSubmit = (e) => {
+  const [notice, setNotice] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    // INTEGRATION POINT (Supabase Auth): replace signup() with
-    // supabase.auth.signUp + insert into users table with role.
-    const res = signup({ email, password, username, role });
+    setNotice("");
+    // Real Supabase Auth when configured; mock otherwise.
+    const res = await signup({ email, password, username, role });
     if (!res.ok) {
       setError(res.error);
+      return;
+    }
+    // Email-confirmation flow: no session yet — tell them to check their inbox.
+    if (res.needsConfirmation) {
+      setNotice("Check your email to confirm your account, then log in.");
       return;
     }
     // New homeowners take the 10-question knowledge check first (funnels into
@@ -101,6 +108,11 @@ const Signup = () => {
         {error && (
           <p className="mb-4 text-sm text-red-400 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
             {error}
+          </p>
+        )}
+        {notice && (
+          <p className="mb-4 text-sm text-accent bg-accent/10 border border-accent/30 rounded-xl px-4 py-3">
+            {notice}
           </p>
         )}
 

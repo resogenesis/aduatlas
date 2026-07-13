@@ -1,14 +1,20 @@
-// Mock auth store. Lets users sign up and log in locally without a backend.
+// Auth store. Real Supabase Auth when configured (VITE_SUPABASE_* set),
+// otherwise a localStorage mock so the app runs with no backend.
 //
-// Demo accounts (always work):
-//   Homeowner (paid):  demo@aduatlas.com / demo1234     → /course/c1
-//   Builder:           builder@aduatlas.com / demo1234  → /builder
+// DESIGN — synchronous consumers, async source of truth:
+//   Gates/layouts/pages read currentUser() / isPaid() SYNCHRONOUSLY during
+//   render. So instead of making all of them async, real auth HYDRATES the same
+//   localStorage keys the mock used (SESSION_KEY + the paid mirror). The session
+//   is bootstrapped before first paint (initAuth() in main.jsx), and login/
+//   signup/logout await hydration before they navigate, so the post-action
+//   render always reads fresh state. paid state is sourced from `users.paid_at`
+//   (server truth) — the localStorage flag stays a UX cache only.
 //
-// INTEGRATION POINT (Supabase Auth): replace these functions with calls to
-// supabase.auth.signInWithPassword / signUp / getSession. The shape of
-// `currentUser()` is intentionally close to a Supabase user object so the
-// swap is mostly mechanical.
+// Demo accounts (always work, any env — remove the UI before prod if undesired):
+//   Homeowner (paid):  demo@aduatlas.com / demo1234
+//   Builder:           builder@aduatlas.com / demo1234
 
+import { supabase } from "../lib/supabase";
 import { setPaid } from "./paymentStore";
 
 const USERS_KEY = "aduatlas.mock.users";
@@ -52,7 +58,7 @@ const writeSession = (user) => {
     window.localStorage.removeItem(SESSION_KEY);
     return;
   }
-  const { password, ...safe } = user;
+  const { password: _, ...safe } = user;
   window.localStorage.setItem(SESSION_KEY, JSON.stringify(safe));
 };
 
@@ -66,25 +72,6 @@ export const currentUser = () => {
   }
 };
 
-export const login = ({ email, password }) => {
-  const e = (email || "").trim().toLowerCase();
-  const pw = password || "";
-
-  const demo = DEMOS.find((d) => d.email === e && d.password === pw);
-  if (demo) {
-    writeSession(demo);
-    if (demo.paid) setPaid(true);
-    return { ok: true, user: demo };
-  }
-
-  const user = readUsers().find((u) => u.email === e && u.password === pw);
-  if (!user) return { ok: false, error: "Email or password is incorrect." };
-
-  writeSession(user);
-  if (user.paid) setPaid(true);
-  return { ok: true, user };
-};
-
 // Where to send a user after auth based on their role + paid state.
 export const routeForUser = (user) => {
   if (!user) return "/";
@@ -93,23 +80,134 @@ export const routeForUser = (user) => {
   return "/quiz";
 };
 
-export const signup = ({ email, password, username, role = "homeowner" }) => {
+// ── Supabase-backed path ─────────────────────────────────────────────────────
+
+// Pull the user's row from `users` and mirror role/paid into localStorage so the
+// synchronous consumers see the server truth. Returns the session-shaped user.
+const hydrateFromSession = async (session) => {
+  if (!session?.user) {
+    writeSession(null);
+    setPaid(false);
+    return null;
+  }
+  const authUser = session.user;
+
+  let row = null;
+  try {
+    const { data } = await supabase
+      .from("users")
+      .select("role, paid_at, paid_tier, refunded_at")
+      .eq("auth_user_id", authUser.id)
+      .maybeSingle();
+    row = data;
+  } catch {
+    // network/RLS hiccup — fall back to metadata; don't block login.
+  }
+
+  const paid = Boolean(row?.paid_at) && !row?.refunded_at;
+  const user = {
+    id: authUser.id,
+    email: authUser.email,
+    username: authUser.user_metadata?.username || authUser.email?.split("@")[0],
+    role: row?.role || authUser.user_metadata?.role || "homeowner",
+    paid,
+  };
+  writeSession(user);
+  setPaid(paid, row?.paid_tier || undefined);
+  return user;
+};
+
+// Re-read entitlement from the server for the current session (e.g. after the
+// Stripe success redirect). Safe no-op when Supabase is disabled.
+export const refreshEntitlement = async () => {
+  if (!supabase) return currentUser();
+  const { data } = await supabase.auth.getSession();
+  return hydrateFromSession(data.session);
+};
+
+// Bootstrap auth before first paint + keep the mirror in sync on changes.
+export const initAuth = async () => {
+  if (!supabase) return;
+  try {
+    const { data } = await supabase.auth.getSession();
+    await hydrateFromSession(data.session);
+  } catch {
+    // ignore — app still renders logged-out
+  }
+  supabase.auth.onAuthStateChange((_event, session) => {
+    hydrateFromSession(session);
+  });
+};
+
+// ── Public API (async; callers await before navigating) ──────────────────────
+
+export const login = async ({ email, password }) => {
   const e = (email || "").trim().toLowerCase();
   const pw = password || "";
+
+  // Demo accounts short-circuit (work in any env for testing).
+  const demo = DEMOS.find((d) => d.email === e && d.password === pw);
+  if (demo) {
+    writeSession(demo);
+    if (demo.paid) setPaid(true);
+    return { ok: true, user: demo };
+  }
+
+  if (supabase) {
+    const { data, error } = await supabase.auth.signInWithPassword({ email: e, password: pw });
+    if (error) return { ok: false, error: error.message || "Email or password is incorrect." };
+    const user = await hydrateFromSession(data.session);
+    return { ok: true, user };
+  }
+
+  // Mock fallback (no backend configured).
+  const user = readUsers().find((u) => u.email === e && u.password === pw);
+  if (!user) return { ok: false, error: "Email or password is incorrect." };
+  writeSession(user);
+  if (user.paid) setPaid(true);
+  return { ok: true, user };
+};
+
+export const signup = async ({ email, password, username, role = "homeowner" }) => {
+  const e = (email || "").trim().toLowerCase();
+  const pw = password || "";
+  const safeRole = role === "pro" ? "pro" : "homeowner";
+  const name = (username || "").trim() || e.split("@")[0];
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return { ok: false, error: "Enter a valid email." };
   if (pw.length < 4) return { ok: false, error: "Password is too short." };
 
+  if (supabase) {
+    const { data, error } = await supabase.auth.signUp({
+      email: e,
+      password: pw,
+      // role + username land in auth metadata; the on_auth_user_created trigger
+      // copies role into public.users (clamped to homeowner|pro server-side).
+      options: { data: { username: name, role: safeRole } },
+    });
+    if (error) return { ok: false, error: error.message };
+    if (data.session) {
+      const user = await hydrateFromSession(data.session);
+      return { ok: true, user };
+    }
+    // Email confirmation is enabled — no session yet.
+    return {
+      ok: true,
+      needsConfirmation: true,
+      user: { id: data.user?.id, email: e, username: name, role: safeRole, paid: false },
+    };
+  }
+
+  // Mock fallback.
   const users = readUsers();
   if (users.some((u) => u.email === e)) {
     return { ok: false, error: "An account with this email already exists." };
   }
-
   const user = {
     id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
     email: e,
     password: pw,
-    username: (username || "").trim() || e.split("@")[0],
-    role,
+    username: name,
+    role: safeRole,
     paid: false,
   };
   users.push(user);
@@ -118,11 +216,18 @@ export const signup = ({ email, password, username, role = "homeowner" }) => {
   return { ok: true, user };
 };
 
-export const logout = () => {
+export const logout = async () => {
+  // Clear the local mirror synchronously so callers that navigate without
+  // awaiting still render logged-out immediately.
   writeSession(null);
-  // Note: we intentionally do NOT clear paid flag here — that's a separate
-  // gate tied to the (mock) Stripe payment. Real auth will need to recheck
-  // users.paid_at on each session restore.
+  setPaid(false);
+  if (supabase) {
+    try {
+      await supabase.auth.signOut();
+    } catch {
+      // already cleared locally
+    }
+  }
 };
 
 export const DEMO_ACCOUNTS = [

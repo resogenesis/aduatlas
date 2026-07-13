@@ -6,9 +6,10 @@
 //   VITE_SUPABASE_URL
 //   VITE_SUPABASE_ANON_KEY
 //
-// Schema expected:
-//   leads(id uuid pk, email text, source text, quiz_answers jsonb, created_at timestamptz default now())
-//   users(id uuid pk, email text unique, stripe_customer_id text, paid_at timestamptz, role text, created_at timestamptz default now())
+// Schema: see supabase/migrations/0001_init.sql (version-controlled).
+// `leads` is PII-protected — no direct anon table access — so lead writes go
+// through the security-definer RPC `capture_lead(p_email, p_source, p_quiz_answers)`
+// rather than a direct .from("leads").upsert().
 
 import { createClient } from "@supabase/supabase-js";
 
@@ -22,31 +23,30 @@ export const supabase = supabaseEnabled
   : null;
 
 // ── Leads ───────────────────────────────────────────────────────────────────
-// Insert a lead (email + quiz answers) when a homeowner submits the email
-// gate on /unlock. Idempotent on (email).
+// Insert/merge a lead (email + quiz answers) when a homeowner submits the email
+// gate on /unlock. Idempotent on (email) — handled server-side by capture_lead.
 export const captureLead = async ({ email, source = "unlock", quizAnswers = null }) => {
   if (!supabase) return { ok: false, error: "supabase-disabled" };
-  const { data, error } = await supabase
-    .from("leads")
-    .upsert(
-      { email: email.trim().toLowerCase(), source, quiz_answers: quizAnswers },
-      { onConflict: "email" }
-    )
-    .select()
-    .single();
+  const { data, error } = await supabase.rpc("capture_lead", {
+    p_email: email.trim().toLowerCase(),
+    p_source: source,
+    p_quiz_answers: quizAnswers,
+  });
   if (error) return { ok: false, error: error.message };
-  return { ok: true, lead: data };
+  return { ok: true, leadId: data };
 };
 
 // ── Quiz answers ────────────────────────────────────────────────────────────
 // Persist anonymous quiz answers tied to an email (when known) for funnel
-// analytics. Stored in the same `leads` row.
+// analytics. Merged into the same `leads` row via capture_lead (which COALESCEs
+// quiz_answers, so this never wipes an existing capture).
 export const saveQuizAnswers = async ({ email, answers }) => {
   if (!supabase || !email) return { ok: false, error: "no-email-or-supabase" };
-  const { error } = await supabase
-    .from("leads")
-    .update({ quiz_answers: answers })
-    .eq("email", email.trim().toLowerCase());
+  const { error } = await supabase.rpc("capture_lead", {
+    p_email: email.trim().toLowerCase(),
+    p_source: "quiz",
+    p_quiz_answers: answers,
+  });
   if (error) return { ok: false, error: error.message };
   return { ok: true };
 };

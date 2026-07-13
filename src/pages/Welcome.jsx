@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { FiArrowRight, FiCheckCircle, FiInfo } from "react-icons/fi";
 import { setPaid, TIERS } from "../stores/paymentStore";
-import { currentUser } from "../stores/authStore";
+import { currentUser, refreshEntitlement } from "../stores/authStore";
 import { EV, track } from "../lib/analytics";
 import { sendEmail, TEMPLATES } from "../lib/email";
 
@@ -49,6 +49,14 @@ const Welcome = () => {
       // Flip the LOCAL access hint + fire side effects. The real gate is
       // server-side users.paid_at; this only drives SPA rendering.
       setPaid(true, resolvedTier || undefined);
+      // Pull server truth (webhook-written users.paid_at) into the session
+      // mirror so role/paid reflect the purchase without a reload. If the
+      // webhook hasn't landed yet the server still says unpaid — re-assert the
+      // local hint so a verified checkout is never paywalled by the race; the
+      // next initAuth() re-syncs once the webhook lands.
+      refreshEntitlement().then((u) => {
+        if (u && !u.paid) setPaid(true, resolvedTier || undefined);
+      });
       track(EV.PURCHASE_COMPLETED);
       const u = currentUser();
       if (u?.email) {

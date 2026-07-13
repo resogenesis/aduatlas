@@ -10,12 +10,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    // INTEGRATION POINT (Supabase Auth): replace login() with
-    // supabase.auth.signInWithPassword. routeForUser() stays.
-    const res = login({ email, password });
+    // Real Supabase Auth when configured; mock otherwise. routeForUser() stays.
+    const res = await login({ email, password });
     if (!res.ok) {
       setError(res.error);
       return;
