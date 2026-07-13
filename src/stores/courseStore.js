@@ -114,6 +114,26 @@ export const loadPacket = () => {
 
 export const savePacket = (next) => writePacket(next);
 
+// Merge server-side progress (from the signed-in user's row) into local state.
+// Union for chapters and blank-fill for the packet, so a login/refresh NEVER
+// wipes progress made locally — it only ever adds what the server also knows.
+// Safe to call on every auth hydration.
+export const mergeServerProgress = ({ completedChapters, builderPacket } = {}) => {
+  if (Array.isArray(completedChapters) && completedChapters.length) {
+    const s = getCompletedChapters();
+    completedChapters.forEach((id) => s.add(id));
+    writeSet(COMPLETED_KEY, s);
+  }
+  if (builderPacket && typeof builderPacket === "object") {
+    const own = readPacket();
+    const merged = { ...own };
+    for (const [k, v] of Object.entries(builderPacket)) {
+      if (v != null && v !== "" && (merged[k] == null || merged[k] === "")) merged[k] = v;
+    }
+    writePacket(merged);
+  }
+};
+
 export const packetProgress = () => {
   const p = loadPacket();
   const filled = PACKET_FIELDS.filter((f) => Boolean(String(p[f.key] || "").trim())).length;

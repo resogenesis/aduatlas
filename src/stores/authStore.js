@@ -16,6 +16,7 @@
 
 import { supabase } from "../lib/supabase";
 import { setPaid } from "./paymentStore";
+import { mergeServerProgress } from "./courseStore";
 
 const USERS_KEY = "aduatlas.mock.users";
 const SESSION_KEY = "aduatlas.mock.session";
@@ -96,7 +97,7 @@ const hydrateFromSession = async (session) => {
   try {
     const { data } = await supabase
       .from("users")
-      .select("role, paid_at, paid_tier, refunded_at")
+      .select("role, paid_at, paid_tier, refunded_at, completed_chapters, builder_packet")
       .eq("auth_user_id", authUser.id)
       .maybeSingle();
     row = data;
@@ -114,6 +115,13 @@ const hydrateFromSession = async (session) => {
   };
   writeSession(user);
   setPaid(paid, row?.paid_tier || undefined);
+  // Merge any server-side course progress / packet into local state (union +
+  // blank-fill, never destructive) so the progress-based gates reflect what
+  // this account has done, cross-device.
+  mergeServerProgress({
+    completedChapters: row?.completed_chapters,
+    builderPacket: row?.builder_packet,
+  });
   return user;
 };
 
