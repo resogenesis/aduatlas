@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { FiRefreshCcw } from "react-icons/fi";
 import PageHeader from "../components/common/PageHeader";
+import BuildableEnvelope from "../components/tools/BuildableEnvelope";
 
 // Feasibility questions grouped into the four dimensions a real ADU
 // pre-screen covers. Each answers Yes / Unsure / No; "Unsure" scores partial
@@ -85,6 +86,17 @@ const Feasibility = () => {
       />
 
       <section className="container mx-auto px-5 sm:px-8 py-12 sm:py-16 max-w-3xl">
+        <div className="mb-12">
+          <BuildableEnvelope />
+        </div>
+
+        <h3 className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-1">
+          Readiness checklist
+        </h3>
+        <p className="text-paper-dim text-sm mb-6">
+          The envelope shows what fits; this shows whether you're cleared to build it.
+        </p>
+
         {groups.map((group, gi) => (
           <div key={group.title} className="mb-10">
             <h3 className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-4">
