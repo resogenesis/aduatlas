@@ -34,6 +34,59 @@ const BuildableEnvelope = () => {
   const [v, setV] = useState(DEFAULTS);
   const set = (k, val) => setV((s) => ({ ...s, [k]: Math.max(0, Number(val) || 0) }));
 
+  // Address → parcel lookup (api/property-lookup, RentCast). Public records give
+  // lot AREA and building AREA, not dimensions — so derive plausible width/depth
+  // from area (residential lots run ~1:2 width:depth) and let the user refine.
+  const [address, setAddress] = useState("");
+  const [look, setLook] = useState({ status: "idle", msg: "", tone: "text-paper-dim" });
+
+  const applyLookup = (d) => {
+    const area = Number(d.lotSize) || 0;
+    const bld = Number(d.buildingSize) || 0;
+    setV((s) => {
+      const width = area > 0 ? Math.max(20, Math.round(Math.sqrt(area / 2))) : s.lotWidth;
+      const depth = area > 0 ? Math.max(20, Math.round(area / width)) : s.lotDepth;
+      const bw = Math.max(1, width - 2 * s.side);
+      const houseDepth = bld > 0
+        ? Math.min(Math.max(0, depth - s.front - s.rear), Math.max(10, Math.round(bld / bw)))
+        : s.houseDepth;
+      return { ...s, lotWidth: width, lotDepth: depth, houseDepth };
+    });
+  };
+
+  const lookup = async () => {
+    const a = address.trim();
+    if (!a) return;
+    setLook({ status: "loading", msg: "", tone: "text-paper-dim" });
+    try {
+      const r = await fetch(`/api/property-lookup?address=${encodeURIComponent(a)}`);
+      if (r.status === 501) {
+        setLook({ status: "idle", msg: "Address lookup isn't enabled yet — enter your dimensions below.", tone: "text-amber-300" });
+        return;
+      }
+      if (r.status === 404) {
+        setLook({ status: "idle", msg: "No public record found for that address. Enter dimensions manually.", tone: "text-amber-300" });
+        return;
+      }
+      if (!r.ok) {
+        setLook({ status: "idle", msg: "Lookup failed. Enter your dimensions manually.", tone: "text-red-300" });
+        return;
+      }
+      const d = await r.json();
+      applyLookup(d);
+      const bits = [];
+      if (d.lotSize) bits.push(`lot ${Number(d.lotSize).toLocaleString()} sq ft`);
+      if (d.buildingSize) bits.push(`home ${Number(d.buildingSize).toLocaleString()} sq ft`);
+      setLook({
+        status: "idle",
+        msg: `Filled from public records${bits.length ? ` (${bits.join(" · ")})` : ""}. Dimensions are estimated from area — adjust to your plat map.`,
+        tone: "text-accent",
+      });
+    } catch {
+      setLook({ status: "idle", msg: "Lookup failed. Enter your dimensions manually.", tone: "text-red-300" });
+    }
+  };
+
   const calc = useMemo(() => {
     const buildableW = Math.max(0, v.lotWidth - 2 * v.side);
     const buildableD = Math.max(0, v.lotDepth - v.front - v.rear);
@@ -65,6 +118,31 @@ const BuildableEnvelope = () => {
         Enter your lot dimensions and setbacks — from your quiz, plat map, or Chapter 4 — to
         see the area where an ADU is allowed and the largest one that fits behind your home.
       </p>
+
+      {/* Address auto-fill */}
+      <div className="mb-6">
+        <label className="block text-paper-dim text-[11px] font-medium tracking-[0.12em] uppercase mb-1.5">
+          Auto-fill from address
+        </label>
+        <div className="flex gap-2">
+          <input
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && lookup()}
+            placeholder="123 Main St, City, ST 90210"
+            className="flex-1 min-w-0 px-3 py-2 rounded-lg bg-canvas border border-stroke text-paper text-sm placeholder:text-paper-dim/50 focus:outline-none focus:border-accent transition"
+          />
+          <button
+            type="button"
+            onClick={lookup}
+            disabled={look.status === "loading" || !address.trim()}
+            className="shrink-0 px-4 py-2 rounded-lg bg-accent text-accent-fg text-sm font-semibold hover:bg-paper transition-colors disabled:opacity-50"
+          >
+            {look.status === "loading" ? "Looking…" : "Look up"}
+          </button>
+        </div>
+        {look.msg && <p className={`mt-2 text-xs leading-relaxed ${look.tone}`}>{look.msg}</p>}
+      </div>
 
       <div className="grid sm:grid-cols-[1fr_auto] gap-8 items-start">
         {/* Inputs + readout */}
