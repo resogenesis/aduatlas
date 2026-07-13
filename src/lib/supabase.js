@@ -50,3 +50,36 @@ export const saveQuizAnswers = async ({ email, answers }) => {
   if (error) return { ok: false, error: error.message };
   return { ok: true };
 };
+
+// ── Builder packet (owned app data) ──────────────────────────────────────────
+// `users.builder_packet` is a jsonb column the signed-in user may read/write on
+// their own row (RLS: owned app-data, unlike the service-role-only billing cols).
+// These are best-effort — callers keep the localStorage copy as the source of
+// truth for synchronous rendering and just mirror to the server for durability
+// and cross-device continuity. No-op when Supabase is disabled or logged out.
+export const fetchBuilderPacket = async () => {
+  if (!supabase) return { ok: false, error: "supabase-disabled" };
+  const { data: sess } = await supabase.auth.getSession();
+  const authUser = sess?.session?.user;
+  if (!authUser) return { ok: false, error: "logged-out" };
+  const { data, error } = await supabase
+    .from("users")
+    .select("builder_packet")
+    .eq("auth_user_id", authUser.id)
+    .maybeSingle();
+  if (error) return { ok: false, error: error.message };
+  return { ok: true, packet: data?.builder_packet || null };
+};
+
+export const saveBuilderPacket = async (packet) => {
+  if (!supabase) return { ok: false, error: "supabase-disabled" };
+  const { data: sess } = await supabase.auth.getSession();
+  const authUser = sess?.session?.user;
+  if (!authUser) return { ok: false, error: "logged-out" };
+  const { error } = await supabase
+    .from("users")
+    .update({ builder_packet: packet })
+    .eq("auth_user_id", authUser.id);
+  if (error) return { ok: false, error: error.message };
+  return { ok: true };
+};

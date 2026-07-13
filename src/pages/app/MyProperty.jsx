@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiCheck, FiSave } from "react-icons/fi";
 import { loadPacket, packetProgress, savePacket } from "../../stores/courseStore";
+import { fetchBuilderPacket, saveBuilderPacket } from "../../lib/supabase";
 
 const fields = [
   { key: "address", label: "Property address", placeholder: "123 Main St, Anytown CA 90210", type: "text" },
@@ -22,13 +23,38 @@ const MyProperty = () => {
   const [packet, setPacket] = useState(loadPacket);
   const [savedAt, setSavedAt] = useState(null);
 
+  // Hydrate from the server on mount: if this user saved a packet before (e.g.
+  // on another device), pull it in. Server wins over the empty defaults but we
+  // keep any locally-entered values the server doesn't have. Best-effort —
+  // silently ignored when logged out or Supabase is disabled.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const res = await fetchBuilderPacket();
+      if (cancelled || !res.ok || !res.packet) return;
+      setPacket((local) => {
+        const merged = { ...local };
+        for (const [k, v] of Object.entries(res.packet)) {
+          if (v != null && v !== "") merged[k] = v;
+        }
+        savePacket(merged); // keep the localStorage mirror in sync
+        return merged;
+      });
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const setField = (key, value) => setPacket((p) => ({ ...p, [key]: value }));
 
   const handleSave = (e) => {
     e?.preventDefault?.();
     savePacket(packet);
     setSavedAt(new Date());
-    // INTEGRATION POINT (Supabase): upsert builder_packet jsonb on the user row.
+    // Mirror to Supabase (users.builder_packet). Best-effort: the local save
+    // above is the synchronous source of truth; this adds durability.
+    saveBuilderPacket(packet);
   };
 
   const progress = packetProgress();
