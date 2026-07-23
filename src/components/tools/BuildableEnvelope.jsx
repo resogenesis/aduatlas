@@ -1,14 +1,25 @@
-import { useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState } from "react";
+import { buildLotModel, DEFAULT_LOT_INPUT } from "./lotModel";
+import SitePlan2D from "./SitePlan2D";
+import FeasibilityCards from "./FeasibilityCards";
 
-// Buildable-envelope visualizer. Takes lot dimensions + setbacks + the existing
-// home's footprint and draws a to-scale site plan: the lot, the setback lines,
-// the resulting buildable area, and the largest ADU that fits in the rear yard.
+// Heavy views are code-split: the 3D model (Canvas + three) and the satellite
+// map (MapLibre) each stream in only when their tab is active.
+const SiteModel3D = lazy(() => import("./SiteModel3D"));
+const LotMap = lazy(() => import("./LotMap"));
+
+// Buildable-envelope / feasibility visualizer.
 //
-// This is geometry from user-entered numbers — NOT a GIS/parcel lookup. The
-// course teaches homeowners how to find their lot dimensions and local setbacks;
-// this turns those numbers into the "largest possible placement" drawing that a
-// full parcel-data pipeline would otherwise be needed to produce. Assumes a
-// detached ADU sited in the rear yard behind the existing home.
+// Flow mirrors how homeowners think: find the property (address → coords), see
+// what fits (site plan + 3D model), then the real-world context (satellite).
+// All three views + the stat cards read from ONE shared lotModel so they never
+// disagree. The 3D "architectural model" is the default premium view; the 2D
+// plan is the print/measurement view; satellite is an optional layer.
+//
+// HONEST SCOPE: geometry comes from user-entered numbers (or dimensions we
+// ESTIMATED from public-record lot AREA) — not a survey or the zoning code.
+// Anything that needs municipal data (FAR/height limits, legal setbacks,
+// by-right size, utilities) is shown as "verify your zone," never as a verdict.
 
 const NUM_FIELDS = [
   { key: "lotWidth", label: "Lot width", unit: "ft" },
@@ -19,30 +30,40 @@ const NUM_FIELDS = [
   { key: "houseDepth", label: "Existing home depth", unit: "ft" },
 ];
 
-const DEFAULTS = {
-  lotWidth: 50,
-  lotDepth: 120,
-  front: 20,
-  rear: 4,
-  side: 4,
-  houseDepth: 45,
-};
-
-const fmt = (n) => Math.round(n).toLocaleString();
+const VIEWS = [
+  { key: "3d", label: "3D model" },
+  { key: "plan", label: "Site plan" },
+  { key: "map", label: "Satellite" },
+];
 
 const BuildableEnvelope = () => {
-  const [v, setV] = useState(DEFAULTS);
-  const set = (k, val) => setV((s) => ({ ...s, [k]: Math.max(0, Number(val) || 0) }));
+  const [v, setV] = useState(DEFAULT_LOT_INPUT);
+  // True while the current dimensions came from an area-derived lookup rather
+  // than being entered/confirmed by the homeowner. Any manual edit clears it.
+  const [dimsEstimated, setDimsEstimated] = useState(false);
+  const set = (k, val) => {
+    setV((s) => ({ ...s, [k]: Math.max(0, Number(val) || 0) }));
+    setDimsEstimated(false);
+  };
 
-  // Address → parcel lookup (api/property-lookup, RentCast). Public records give
-  // lot AREA and building AREA, not dimensions — so derive plausible width/depth
-  // from area (residential lots run ~1:2 width:depth) and let the user refine.
   const [address, setAddress] = useState("");
   const [look, setLook] = useState({ status: "idle", msg: "", tone: "text-paper-dim" });
+  const [coords, setCoords] = useState(null);
+
+  const [view, setView] = useState("3d");
+  const [showSetbacks, setShowSetbacks] = useState(true);
+  const [showDimensions, setShowDimensions] = useState(true);
+  const [showShadows, setShowShadows] = useState(true);
+
+  const model = useMemo(() => buildLotModel(v, { dimsEstimated }), [v, dimsEstimated]);
 
   const applyLookup = (d) => {
     const area = Number(d.lotSize) || 0;
     const bld = Number(d.buildingSize) || 0;
+    const lat = Number(d.latitude);
+    const lng = Number(d.longitude);
+    setCoords(Number.isFinite(lat) && Number.isFinite(lng) && lat !== 0 ? { lat, lng } : null);
+    setDimsEstimated(area > 0);
     setV((s) => {
       const width = area > 0 ? Math.max(20, Math.round(Math.sqrt(area / 2))) : s.lotWidth;
       const depth = area > 0 ? Math.max(20, Math.round(area / width)) : s.lotDepth;
@@ -87,36 +108,15 @@ const BuildableEnvelope = () => {
     }
   };
 
-  const calc = useMemo(() => {
-    const buildableW = Math.max(0, v.lotWidth - 2 * v.side);
-    const buildableD = Math.max(0, v.lotDepth - v.front - v.rear);
-    // Existing home occupies the front of the buildable band; the ADU takes the
-    // rear yard behind it.
-    const aduD = Math.max(0, buildableD - v.houseDepth);
-    const aduFootprint = buildableW * aduD;
-    const buildableArea = buildableW * buildableD;
-    return { buildableW, buildableD, aduD, aduFootprint, buildableArea };
-  }, [v]);
-
-  // ── SVG layout (scaled so the longer lot dimension fits a fixed box) ──
-  const PAD = 24;
-  const MAX = 300;
-  const scale = v.lotWidth > 0 && v.lotDepth > 0
-    ? Math.min(MAX / v.lotWidth, MAX / v.lotDepth)
-    : 1;
-  const sx = (ft) => PAD + ft * scale;
-  const sy = (ft) => PAD + ft * scale;
-  const w = v.lotWidth * scale + PAD * 2;
-  const h = v.lotDepth * scale + PAD * 2;
-
-  const fits = calc.buildableW > 0 && calc.aduD > 0;
+  const activeView = view === "map" && !coords ? "3d" : view;
 
   return (
     <div className="bg-surface-1-solid rounded-3xl border border-stroke p-6 sm:p-8">
-      <h3 className="font-display text-paper text-2xl mb-1">Buildable envelope</h3>
+      <h3 className="font-display text-paper text-2xl mb-1">Feasibility model</h3>
       <p className="text-paper-dim text-sm leading-relaxed mb-6">
-        Enter your lot dimensions and setbacks — from your quiz, plat map, or Chapter 4 — to
-        see the area where an ADU is allowed and the largest one that fits behind your home.
+        Enter your lot dimensions and setbacks — or look up an address — to see the buildable area
+        and the largest ADU that fits behind your home, as a 3D model, a printable site plan, or on
+        the real aerial.
       </p>
 
       {/* Address auto-fill */}
@@ -144,123 +144,138 @@ const BuildableEnvelope = () => {
         {look.msg && <p className={`mt-2 text-xs leading-relaxed ${look.tone}`}>{look.msg}</p>}
       </div>
 
-      <div className="grid sm:grid-cols-[1fr_auto] gap-8 items-start">
-        {/* Inputs + readout */}
+      {/* Dimension inputs */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+        {NUM_FIELDS.map((f) => (
+          <div key={f.key}>
+            <label className="block text-paper-dim text-[11px] font-medium tracking-[0.12em] uppercase mb-1.5">
+              {f.label}
+            </label>
+            <div className="flex items-center gap-1.5">
+              <input
+                type="number"
+                min="0"
+                value={v[f.key]}
+                onChange={(e) => set(f.key, e.target.value)}
+                className="w-full px-3 py-2 rounded-lg bg-canvas border border-stroke text-paper text-sm focus:outline-none focus:border-accent transition"
+              />
+              <span className="text-paper-dim text-xs">{f.unit}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Visualizer + cards */}
+      <div className="grid gap-6 lg:grid-cols-[1fr_320px] items-start">
         <div>
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            {NUM_FIELDS.map((f) => (
-              <div key={f.key}>
-                <label className="block text-paper-dim text-[11px] font-medium tracking-[0.12em] uppercase mb-1.5">
-                  {f.label}
-                </label>
-                <div className="flex items-center gap-1.5">
-                  <input
-                    type="number"
-                    min="0"
-                    value={v[f.key]}
-                    onChange={(e) => set(f.key, e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg bg-canvas border border-stroke text-paper text-sm focus:outline-none focus:border-accent transition"
-                  />
-                  <span className="text-paper-dim text-xs">{f.unit}</span>
-                </div>
+          {/* View tabs */}
+          <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
+            <div className="inline-flex rounded-lg border border-stroke bg-canvas p-0.5">
+              {VIEWS.map((tab) => {
+                const disabled = tab.key === "map" && !coords;
+                const on = activeView === tab.key;
+                return (
+                  <button
+                    key={tab.key}
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => setView(tab.key)}
+                    title={disabled ? "Look up an address to enable satellite" : undefined}
+                    className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+                      on
+                        ? "bg-accent text-accent-fg"
+                        : disabled
+                        ? "text-paper-dim/40 cursor-not-allowed"
+                        : "text-paper-dim hover:text-paper"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Contextual layer toggles (3D + plan) */}
+            {activeView !== "map" && (
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <Chip on={showSetbacks} onClick={() => setShowSetbacks((s) => !s)}>Setbacks</Chip>
+                <Chip on={showDimensions} onClick={() => setShowDimensions((s) => !s)}>Dimensions</Chip>
+                {activeView === "3d" && (
+                  <Chip on={showShadows} onClick={() => setShowShadows((s) => !s)}>Shadows</Chip>
+                )}
               </div>
-            ))}
+            )}
           </div>
 
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-paper-dim">Buildable area</span>
-              <span className="text-paper tabular-nums">{fmt(calc.buildableArea)} sq ft</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-paper-dim">Rear yard depth for ADU</span>
-              <span className="text-paper tabular-nums">{fmt(calc.aduD)} ft</span>
-            </div>
-            <div className="flex justify-between border-t border-stroke pt-2 mt-2">
-              <span className="text-paper font-medium">Largest ADU footprint</span>
-              <span className="font-display text-accent tabular-nums">
-                {fmt(calc.aduFootprint)} sq ft
-              </span>
-            </div>
-          </div>
-
-          {!fits && (
-            <p className="mt-4 text-xs text-amber-300 bg-amber-500/10 border border-amber-500/30 rounded-lg px-3 py-2">
-              With these numbers there's no rear-yard room left for a detached ADU. Try a smaller
-              home-depth value, a conversion, or check whether your setbacks qualify for a
-              reduction.
-            </p>
+          {/* Active view */}
+          {activeView === "3d" && (
+            <Suspense fallback={<ViewFallback label="Building 3D model…" />}>
+              <SiteModel3D
+                model={model}
+                showSetbacks={showSetbacks}
+                showDimensions={showDimensions}
+                showShadows={showShadows}
+              />
+            </Suspense>
           )}
+
+          {activeView === "plan" && (
+            <SitePlan2D model={model} showSetbacks={showSetbacks} showDimensions={showDimensions} />
+          )}
+
+          {activeView === "map" && coords && (
+            <Suspense fallback={<ViewFallback label="Loading satellite…" />}>
+              <LotMap
+                lat={coords.lat}
+                lng={coords.lng}
+                lotWidth={v.lotWidth}
+                lotDepth={v.lotDepth}
+                front={v.front}
+                rear={v.rear}
+                side={v.side}
+                houseDepth={v.houseDepth}
+              />
+            </Suspense>
+          )}
+
+          <p className="text-paper-dim text-[11px] leading-relaxed mt-3">
+            {activeView === "map"
+              ? "Aerial centered on your parcel. The outline is estimated from lot area, not a surveyed boundary — adjust the dimension fields to match your plat map."
+              : "A planning estimate from your inputs, not a survey or GIS record. Assumes a detached ADU in the rear yard. Drag the fields above to match your plat map."}
+          </p>
         </div>
 
-        {/* Site plan */}
-        <div className="justify-self-center">
-          <svg
-            width={w}
-            height={h}
-            viewBox={`0 0 ${w} ${h}`}
-            className="max-w-full h-auto rounded-xl bg-canvas border border-stroke"
-            role="img"
-            aria-label="Site plan showing lot, setbacks, existing home, and buildable ADU area"
-          >
-            {/* Lot */}
-            <rect
-              x={sx(0)} y={sy(0)}
-              width={v.lotWidth * scale} height={v.lotDepth * scale}
-              fill="none" stroke="currentColor" strokeWidth="1.5"
-              className="text-stroke"
-            />
-            {/* Buildable band (inside setbacks) */}
-            {calc.buildableW > 0 && calc.buildableD > 0 && (
-              <rect
-                x={sx(v.side)} y={sy(v.front)}
-                width={calc.buildableW * scale} height={calc.buildableD * scale}
-                fill="currentColor" fillOpacity="0.08"
-                stroke="currentColor" strokeWidth="1" strokeDasharray="4 3"
-                className="text-accent"
-              />
-            )}
-            {/* Existing home (front of buildable band) */}
-            {calc.buildableW > 0 && v.houseDepth > 0 && (
-              <rect
-                x={sx(v.side)} y={sy(v.front)}
-                width={calc.buildableW * scale}
-                height={Math.min(v.houseDepth, calc.buildableD) * scale}
-                fill="currentColor" fillOpacity="0.25"
-                className="text-paper-dim"
-              />
-            )}
-            {/* Largest ADU (rear yard) */}
-            {fits && (
-              <rect
-                x={sx(v.side)} y={sy(v.front + v.houseDepth)}
-                width={calc.buildableW * scale} height={calc.aduD * scale}
-                fill="currentColor" fillOpacity="0.85"
-                className="text-accent"
-              />
-            )}
-          </svg>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center mt-3 text-[11px] text-paper-dim">
-            <span className="inline-flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-sm bg-paper-dim/40" /> Existing home
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-sm bg-accent" /> ADU area
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-sm border border-dashed border-accent" /> Setback line
-            </span>
-          </div>
-        </div>
+        {/* Feasibility cards */}
+        <FeasibilityCards model={model} />
       </div>
 
       <p className="text-paper-dim text-[11px] leading-relaxed mt-6">
-        Planning estimate from your inputs, not a survey or GIS record. Assumes a detached ADU in
-        the rear yard. Confirm setbacks, lot-coverage limits, and max unit size with your
-        jurisdiction before design.
+        Confirm setbacks, lot-coverage limits, FAR, height, and max unit size with your jurisdiction
+        before design. Zoning-dependent figures show “verify your zone” until we can pull your
+        municipality’s code.
       </p>
     </div>
   );
 };
+
+const Chip = ({ on, onClick, children }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className={`px-2.5 py-1 rounded-md text-[11px] font-medium border transition-colors ${
+      on
+        ? "bg-accent/15 border-accent/40 text-accent"
+        : "bg-canvas border-stroke text-paper-dim hover:text-paper"
+    }`}
+  >
+    {children}
+  </button>
+);
+
+const ViewFallback = ({ label }) => (
+  <div className="h-[440px] lg:h-[560px] rounded-2xl border border-stroke bg-canvas flex items-center justify-center text-paper-dim text-sm">
+    {label}
+  </div>
+);
 
 export default BuildableEnvelope;

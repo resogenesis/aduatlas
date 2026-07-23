@@ -85,11 +85,14 @@ const Feasibility = () => {
         subtitle="Answer each question honestly — including the ones you're unsure about. Your score shows how build-ready your property is and exactly what's left to confirm."
       />
 
-      <section className="container mx-auto px-5 sm:px-8 py-12 sm:py-16 max-w-3xl">
-        <div className="mb-12">
+      {/* The model gets a wide container so the 3D view / site plan has room. */}
+      <div className="container mx-auto px-5 sm:px-8 pt-12 sm:pt-16">
+        <div className="max-w-6xl mx-auto">
           <BuildableEnvelope />
         </div>
+      </div>
 
+      <section className="container mx-auto px-5 sm:px-8 pb-12 sm:pb-16 pt-14 max-w-3xl">
         <h3 className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-1">
           Readiness checklist
         </h3>

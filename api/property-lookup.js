@@ -10,7 +10,7 @@
 //   RENTCAST_API_KEY        from https://app.rentcast.io (free tier ~50/mo)
 //
 // Query: GET /api/property-lookup?address=<full address>
-// Returns 200 { lotSize, buildingSize, yearBuilt, propertyType, source }
+// Returns 200 { lotSize, buildingSize, yearBuilt, propertyType, latitude, longitude, source }
 //   - lotSize / buildingSize in square feet (number) or null when unknown
 //   - 501 { error: "not-configured" } when no provider key is set (frontend
 //     then falls back to example data — the page still renders).
@@ -39,6 +39,9 @@ const PROVIDERS = {
         buildingSize: numberOrNull(rec.squareFootage),
         yearBuilt: numberOrNull(rec.yearBuilt),
         propertyType: rec.propertyType || null,
+        // Coordinates let the frontend center a satellite map on the parcel.
+        latitude: coordOrNull(rec.latitude),
+        longitude: coordOrNull(rec.longitude),
         source: "Public records · Rentcast",
       },
     };
@@ -48,6 +51,13 @@ const PROVIDERS = {
 const numberOrNull = (v) => {
   const n = Number(v);
   return Number.isFinite(n) && n > 0 ? n : null;
+};
+
+// Coordinates can legitimately be 0 or negative (W longitude), so only reject
+// non-finite / clearly-out-of-range values.
+const coordOrNull = (v) => {
+  const n = Number(v);
+  return Number.isFinite(n) && n !== 0 && Math.abs(n) <= 180 ? n : null;
 };
 
 export default async function handler(req, res) {
