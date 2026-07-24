@@ -169,7 +169,7 @@ const Dashboard = () => {
 };
 
 // Translate state into the 5-item Build Ready checklist.
-const buildReadyChecklist = ({ packet, score, courseProgress }) => {
+const buildReadyChecklist = ({ packet, courseProgress }) => {
   return [
     {
       key: "viability",
@@ -203,9 +203,9 @@ const buildReadyChecklist = ({ packet, score, courseProgress }) => {
       n: "4",
       label: "Financing path identified",
       done: Boolean(packet.budget) && courseProgress >= 50,
-      doneCopy: "Path mapped in course chapter 3.",
-      todoCopy: "Cover financing in Chapter 3: Budget & Site Prep.",
-      cta: { label: "Open chapter", to: "/course/c3" },
+      doneCopy: "Path mapped in the budgets module.",
+      todoCopy: "Cover financing in Module 5: Pre-Site Preparation & Budgets.",
+      cta: { label: "Open course", to: "/course" },
     },
     {
       key: "risks",
