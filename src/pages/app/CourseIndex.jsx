@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiCheck, FiClock, FiLock, FiHelpCircle } from "react-icons/fi";
+import { FiArrowRight, FiCheck, FiClock, FiLock, FiHelpCircle, FiPlay } from "react-icons/fi";
 import {
   modules,
   courseProgress,
@@ -28,6 +28,28 @@ const CourseIndex = () => {
           <p className="font-display text-paper text-4xl">{progress}%</p>
         </div>
       </div>
+
+      {/* Course introduction — course-level, outside the progress math */}
+      <Link
+        to="/course/intro"
+        className="group flex items-start gap-4 bg-accent/5 border border-accent/30 rounded-2xl p-5 sm:p-6 mb-5 hover:border-accent transition-colors"
+      >
+        <span className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center bg-accent text-accent-fg">
+          <FiPlay className="text-lg" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-accent text-[11px] font-medium tracking-[0.16em] uppercase">
+            Start here
+          </span>
+          <span className="block font-display text-paper text-xl sm:text-2xl leading-snug mt-0.5">
+            Course Introduction
+          </span>
+          <span className="block text-paper-dim text-sm leading-relaxed mt-1">
+            Why education comes first, the ADUAtlas framework, and what each module covers. ~6 min.
+          </span>
+        </span>
+        <FiArrowRight className="shrink-0 self-center text-paper-dim group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
+      </Link>
 
       <div className="space-y-5">
         {modules.map((m) => {

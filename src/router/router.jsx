@@ -42,6 +42,7 @@ import BuilderGate from "../components/gates/BuilderGate";
 
 import Dashboard from "../pages/app/Dashboard";
 import CourseIndex from "../pages/app/CourseIndex";
+import CourseIntro from "../pages/app/CourseIntro";
 import CourseChapter from "../pages/app/CourseChapter";
 import MyProperty from "../pages/app/MyProperty";
 import Settings from "../pages/app/Settings";
@@ -129,6 +130,7 @@ const router = createBrowserRouter([
 
       // Course
       { path: "course", element: <PaidGate><CourseIndex /></PaidGate> },
+      { path: "course/intro", element: <PaidGate><CourseIntro /></PaidGate> },
       { path: "course/:chapterId", element: <PaidGate><CourseChapter /></PaidGate> },
 
       // Project brief

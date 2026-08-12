@@ -44,40 +44,75 @@ export const modules = [
     "id": "m2",
     "n": 2,
     "title": "Understanding City & State ADU Regulations",
-    "blurb": "How state law, local zoning, and HOA rules shape what you can build — and the key regulations to check before you plan.",
-    "intro": "Before you fall in love with a floor plan, you need to understand the rules that govern your specific property. This module explains how state law, local zoning, and homeowner associations interact, then walks through the key regulations — setbacks, height, size, lot coverage, parking, and utilities — that determine what may realistically fit on your lot.",
+    "blurb": "How state building codes and local zoning work together — and the key regulations to verify before you plan.",
+    "intro": "Understanding ADU regulations is one of the biggest challenges homeowners face. Many people begin by comparing ADU designs, builders, and prices before they understand what they are legally allowed to build — which leads to unrealistic expectations, unnecessary expenses, and costly delays. The question isn't simply “Can I build an ADU?” The better question is: “What can I legally build on my property?”",
     "chapters": [
       {
         "id": "m2c1",
         "n": 1,
-        "title": "Why Location Determines What You Can Build",
-        "blurb": "State law sets the floor, local zoning fills in the details, and an HOA can add its own layer.",
+        "title": "Why ADU Regulations Matter",
+        "blurb": "The biggest mistake homeowners make is shopping for an ADU before knowing what they're legally allowed to build.",
         "minutes": 5
       },
       {
         "id": "m2c2",
         "n": 2,
-        "title": "Setbacks, Height Limits, and Lot Coverage",
-        "blurb": "The rules that govern where a structure can sit on your lot and how much of it can be built on.",
-        "minutes": 5
+        "title": "State Building Codes vs. Local Zoning",
+        "blurb": "The IRC sets minimum construction standards; your city decides what and where you can actually build.",
+        "minutes": 4
       },
       {
         "id": "m2c3",
         "n": 3,
-        "title": "Size Limits and Parking Requirements",
-        "blurb": "How big your ADU can be, and whether you'll need to provide parking.",
-        "minutes": 4
+        "title": "The Most Common ADU Regulations",
+        "blurb": "Fifteen regulations to check — and why a maximum on paper isn't a promise for your lot.",
+        "minutes": 6
       },
       {
         "id": "m2c4",
         "n": 4,
-        "title": "Utility Requirements",
-        "blurb": "How your ADU will connect to water, sewer, and power — and why it can affect cost and feasibility.",
+        "title": "Common Regulation Examples",
+        "blurb": "Typical ranges you may encounter — examples, not guarantees.",
+        "minutes": 5
+      },
+      {
+        "id": "m2c5",
+        "n": 5,
+        "title": "Why Homeowners Get Confused",
+        "blurb": "Why “Can I build an ADU?” has no simple yes-or-no answer.",
+        "minutes": 5
+      },
+      {
+        "id": "m2c6",
+        "n": 6,
+        "title": "Surveys, Permits, Timelines & Cost Estimates",
+        "blurb": "The planning phases, typical timelines, and what permitting really costs.",
+        "minutes": 6
+      },
+      {
+        "id": "m2c7",
+        "n": 7,
+        "title": "How Cities Guide Homeowners: A California Example",
+        "blurb": "What a typical city ADU process looks like — and why the information feels scattered.",
         "minutes": 4
       },
       {
+        "id": "m2c8",
+        "n": 8,
+        "title": "The ADUAtlas Property Feasibility Study",
+        "blurb": "Bridging the gap between the regulations and your specific property.",
+        "minutes": 4
+      },
+      {
+        "id": "m2c9",
+        "n": 9,
+        "title": "Module Summary",
+        "blurb": "What you should now understand before moving on to the 10-step process.",
+        "minutes": 3
+      },
+      {
         "id": "m2quiz",
-        "n": 5,
+        "n": 10,
         "kind": "quiz",
         "title": "Module 2 Quiz",
         "blurb": "Test your knowledge before moving on.",
@@ -88,48 +123,83 @@ export const modules = [
   {
     "id": "m3",
     "n": 3,
-    "title": "The 10-Step ADU Process",
-    "blurb": "A homeowner's roadmap for building an ADU the right way — as a process, not a single purchase.",
-    "intro": "Building an ADU is not a single purchase — it is a process. This module walks you through the ten steps homeowners follow to get the best results, moving from Learn to Verify to Review to Plan to Build to Occupy so you reach builders prepared and avoid costly surprises.",
+    "title": "The ADUAtlas 10-Step Process",
+    "blurb": "A logical roadmap from education and planning to construction and occupancy — each step builds on the one before it.",
+    "intro": "One of the best ways to ensure success with any big project is to have all the facts and understand the process before you begin. Many people start by calling builders, ordering surveys, or looking at ADU designs before they understand what their property can support and how much it will cost. Imagine discovering that your pre-site costs are $30,000 higher than expected, or that the largest ADU you can legally build is too small for your intended use. This module provides a simple 10-step roadmap designed to help you avoid costly mistakes — every city and every project is different, but most successful ADU projects follow a similar path. Think of ADUAtlas as your blueprint for a successful build: follow the process, do the right things before you build, and you'll save time, stress, and money.",
     "chapters": [
       {
         "id": "m3c1",
         "n": 1,
-        "title": "An ADU Is a Process, Not a Purchase",
-        "blurb": "Why the best outcomes come from following a sequence, not buying a product.",
+        "title": "Step 1 — Complete the ADUAtlas Course",
+        "blurb": "Education comes before money — understand the process before surveys, plans, or permits.",
         "minutes": 3
       },
       {
         "id": "m3c2",
         "n": 2,
-        "title": "Steps 01-03: Learn and Verify",
-        "blurb": "Educate yourself, run your feasibility study, and verify local rules before spending real money.",
-        "minutes": 5
+        "title": "Step 2 — Complete the Property Feasibility Study",
+        "blurb": "Determine what you can legally build before deciding what you'd like to build.",
+        "minutes": 3
       },
       {
         "id": "m3c3",
         "n": 3,
-        "title": "Steps 04-06: Review Your Options",
-        "blurb": "Explore ADU types, estimate your total budget, and match options to your property.",
-        "minutes": 5
+        "title": "Step 3 — Verify Your Local ADU Regulations",
+        "blurb": "Regulations vary by city, ZIP code, sometimes by address — and they change.",
+        "minutes": 3
       },
       {
         "id": "m3c4",
         "n": 4,
-        "title": "Steps 07-08: Plan Financing and Compare Builders",
-        "blurb": "Line up your financing and timeline, then request proposals from several builders.",
-        "minutes": 4
+        "title": "Step 4 — Establish a Realistic Budget",
+        "blurb": "Why move forward without a good estimate?",
+        "minutes": 3
       },
       {
         "id": "m3c5",
         "n": 5,
-        "title": "Steps 09-10: Build and Occupy",
-        "blurb": "Select the right builder, begin construction, and protect yourself at final inspection.",
+        "title": "Step 5 — Select an ADU Type",
+        "blurb": "Over 1,000 options — and the cheapest isn't always the best deal, or even legal.",
+        "minutes": 3
+      },
+      {
+        "id": "m3c6",
+        "n": 6,
+        "title": "Step 6 — Determine Whether a Survey Is Required",
+        "blurb": "Some cities require one, some don't — and survey types differ widely.",
+        "minutes": 3
+      },
+      {
+        "id": "m3c7",
+        "n": 7,
+        "title": "Step 7 — Develop a Site Plan",
+        "blurb": "Design the whole space — patio, garden, parking — around the legal boundaries.",
         "minutes": 4
       },
       {
+        "id": "m3c8",
+        "n": 8,
+        "title": "Step 8 — Select a Builder",
+        "blurb": "Compare experience, portfolio, references, warranty, and construction method.",
+        "minutes": 4
+      },
+      {
+        "id": "m3c9",
+        "n": 9,
+        "title": "Step 9 — Permits, Inspections & Approval",
+        "blurb": "Your city's permit application, fee schedule, and submittal checklists.",
+        "minutes": 3
+      },
+      {
+        "id": "m3c10",
+        "n": 10,
+        "title": "Step 10 — Construction, Final Inspection & Occupancy",
+        "blurb": "From site prep to Certificate of Occupancy.",
+        "minutes": 3
+      },
+      {
         "id": "m3quiz",
-        "n": 6,
+        "n": 11,
         "kind": "quiz",
         "title": "Module 3 Quiz",
         "blurb": "Test your knowledge before moving on.",
