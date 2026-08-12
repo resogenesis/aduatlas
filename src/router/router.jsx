@@ -27,9 +27,12 @@ import BuilderProfile from "../pages/BuilderProfile";
 import Feasibility from "../pages/Feasibility";
 import UtilityEstimator from "../pages/UtilityEstimator";
 import PacketHub from "../pages/tools/PacketHub";
-import BudgetWorksheet from "../pages/tools/BudgetWorksheet";
-import TimelineWorksheet from "../pages/tools/TimelineWorksheet";
-import BuilderQuestionnaire from "../pages/tools/BuilderQuestionnaire";
+import PreSiteEstimate from "../pages/tools/PreSiteEstimate";
+import PreSiteVerification from "../pages/tools/PreSiteVerification";
+import BuilderPrep from "../pages/tools/BuilderPrep";
+import TraditionalBuild from "../pages/tools/TraditionalBuild";
+import ModularPrefabEstimate from "../pages/tools/ModularPrefabEstimate";
+import TotalProjectCost from "../pages/tools/TotalProjectCost";
 import ReadyScore from "../pages/tools/ReadyScore";
 
 import BuilderDashboard from "../pages/builder/Dashboard";
@@ -142,14 +145,18 @@ const router = createBrowserRouter([
       { path: "feasibility", element: <PaidGate requireTier="report" requireFeasibility><Feasibility /></PaidGate> },
       { path: "utility-estimator", element: <PaidGate requireTier="report" requireFeasibility><UtilityEstimator /></PaidGate> },
 
-      // Report Packet — the four worksheets + hub. Tier-gated only (no
+      // Report Packet — the six Feasibility Study worksheets (from the
+      // ADUAtlas workbook) + Ready Score + hub. Tier-gated only (no
       // course-progress gate): these are planning documents a report buyer
       // should be able to fill from day one; the feasibility tool keeps its
       // 80%-progress gate above because its output depends on course inputs.
       { path: "packet", element: <PaidGate requireTier="report"><PacketHub /></PaidGate> },
-      { path: "packet/budget", element: <PaidGate requireTier="report"><BudgetWorksheet /></PaidGate> },
-      { path: "packet/timeline", element: <PaidGate requireTier="report"><TimelineWorksheet /></PaidGate> },
-      { path: "packet/questionnaire", element: <PaidGate requireTier="report"><BuilderQuestionnaire /></PaidGate> },
+      { path: "packet/pre-site-estimate", element: <PaidGate requireTier="report"><PreSiteEstimate /></PaidGate> },
+      { path: "packet/pre-site-verification", element: <PaidGate requireTier="report"><PreSiteVerification /></PaidGate> },
+      { path: "packet/builder-prep", element: <PaidGate requireTier="report"><BuilderPrep /></PaidGate> },
+      { path: "packet/traditional-build", element: <PaidGate requireTier="report"><TraditionalBuild /></PaidGate> },
+      { path: "packet/modular-prefab", element: <PaidGate requireTier="report"><ModularPrefabEstimate /></PaidGate> },
+      { path: "packet/total-cost", element: <PaidGate requireTier="report"><TotalProjectCost /></PaidGate> },
       { path: "packet/ready-score", element: <PaidGate requireTier="report"><ReadyScore /></PaidGate> },
       { path: "builders", element: <PaidGate requireTier="report" requireBuilders><BuilderListing /></PaidGate> },
       { path: "builders/:id", element: <PaidGate requireTier="report" requireBuilders><BuilderProfile /></PaidGate> },

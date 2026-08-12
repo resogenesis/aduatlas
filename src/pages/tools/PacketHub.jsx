@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiCheckCircle, FiClock, FiDollarSign, FiFileText, FiLayers, FiLock, FiMap, FiPhoneCall } from "react-icons/fi";
+import { FiArrowRight, FiCheckCircle, FiClipboard, FiDollarSign, FiFileText, FiGrid, FiLayers, FiLock, FiMap, FiPackage, FiPhoneCall } from "react-icons/fi";
 import { courseProgress, FEASIBILITY_UNLOCK_AT, isFeasibilityUnlocked, loadPacket } from "../../stores/courseStore";
 import { loadWorksheets } from "../../stores/worksheetStore";
 
-// Report Packet hub — one place for every $399 Feasibility Report
-// deliverable: the GIS/buildable-envelope diagram, the four worksheets
-// (budget, timelines, questionnaire, Ready Score — Module 9's packet), and
-// the utility-locate contact. Each worksheet is printable via Print/save-PDF.
+// Report Packet hub — every $399 Feasibility Report deliverable in one place:
+// the GIS/buildable-envelope diagram, the SIX planning worksheets (from the
+// ADUAtlas workbook), the ADU Ready Score, and the utility-locate contact.
+// Every worksheet is printable via Print / save-PDF.
 
 const PacketHub = () => {
   const ws = loadWorksheets();
@@ -14,60 +14,54 @@ const PacketHub = () => {
   const feasOpen = isFeasibilityUnlocked();
   const progress = courseProgress();
 
-  const started = (w) => Boolean(w && Object.keys(w).length);
-  const budgetStarted = started(ws.budget) && ws.budget.rows?.some((r) => r.low || r.high);
-  const timelineStarted = started(ws.timeline) && ws.timeline.phases?.some((p) => p.low || p.high);
-  const questionnaireStarted = started(ws.questionnaire) && Object.values(ws.questionnaire.answers || {}).some(Boolean);
+  const started = (key) => {
+    const v = ws[key]?.values || ws[key] || {};
+    return Object.values(v).some((x) => x !== "" && x != null && x !== false);
+  };
   const grade = ws.readyScore?.grade || null;
 
-  const cards = [
+  const worksheetCards = [
     {
-      to: "/feasibility",
-      Icon: FiMap,
-      title: "Property diagram & feasibility",
-      desc: "Your lot in 3D/2D/satellite: setbacks, buildable envelope, and the largest potential ADU footprint — plus the readiness checklist.",
-      status: feasOpen ? "Open" : `Unlocks at ${FEASIBILITY_UNLOCK_AT}% course progress (you're at ${progress}%)`,
-      locked: !feasOpen,
-    },
-    {
-      to: "/packet/budget",
+      to: "/packet/pre-site-estimate",
       Icon: FiDollarSign,
-      title: "Pre-site budget worksheet",
-      desc: "The dynamic spreadsheet: structure, foundation, utilities, site prep, permits — low/high ranges with live totals and site considerations.",
-      status: budgetStarted ? "In progress" : "Not started",
-      done: budgetStarted,
+      title: "1 · Pre-site estimate",
+      desc: "Utilities (distance, depth, fees, cost per foot) plus retaining walls, obstacles, foundation, and survey — with live totals.",
+      key: "preSiteEstimate",
     },
     {
-      to: "/packet/timeline",
-      Icon: FiClock,
-      title: "Project timelines worksheet",
-      desc: "Builder, permit, inspection, and city phases with your estimated ranges — ask your city, then capture what they tell you.",
-      status: timelineStarted ? "In progress" : "Not started",
-      done: timelineStarted,
+      to: "/packet/pre-site-verification",
+      Icon: FiClipboard,
+      title: "2 · Pre-site verification",
+      desc: "Eight steps — utility locate, connection charges, plumber estimates, city fees and timelines — that turn the study into verified numbers.",
+      key: "preSiteVerification",
     },
     {
-      to: "/packet/questionnaire",
+      to: "/packet/builder-prep",
       Icon: FiFileText,
-      title: "Builder questionnaire",
-      desc: "Pre-filled from your project brief: your answers to what builders ask, and the same question list for every builder you meet.",
-      status: questionnaireStarted ? "In progress" : "Pre-filled from your brief",
-      done: questionnaireStarted,
+      title: "3 · Builder preparation",
+      desc: "The same project information and the same questions for every builder or GC — pre-filled from your project brief.",
+      key: "builderPrep",
     },
     {
-      to: "/packet/ready-score",
-      Icon: FiCheckCircle,
-      title: "ADU Ready Score",
-      desc: "Twenty questions, graded A–F — preparedness, property flags, and budget flags, aligned with the course's NAPE evaluation.",
-      status: grade ? `Grade ${grade}` : "Not scored yet",
-      done: Boolean(grade),
+      to: "/packet/traditional-build",
+      Icon: FiGrid,
+      title: "4 · Traditional build comparison",
+      desc: "Three companies side by side across every cost category, from plans and permits to utilities and landscaping.",
+      key: "traditionalBuild",
     },
     {
-      to: "/utility-estimator",
+      to: "/packet/modular-prefab",
+      Icon: FiPackage,
+      title: "5 · Modular / prefab estimate",
+      desc: "Manufacturer vs. GC scope: documents to request, city approval verification, quote comparison, and who's responsible for what.",
+      key: "modularPrefab",
+    },
+    {
+      to: "/packet/total-cost",
       Icon: FiLayers,
-      title: "Utility & site-prep estimator",
-      desc: "Ballpark the utility and site-prep slice a structural quote leaves out, tuned to your property.",
-      status: feasOpen ? "Open" : `Unlocks at ${FEASIBILITY_UNLOCK_AT}% course progress`,
-      locked: !feasOpen,
+      title: "6 · Total ADU project cost",
+      desc: "The final rollup — verified costs plus your selected quote, estimated vs. final, timelines and notes.",
+      key: "totalProjectCost",
     },
   ];
 
@@ -83,8 +77,9 @@ const PacketHub = () => {
         {packet.address
           ? <>Everything for <span className="text-paper">{packet.address}</span> in one place.</>
           : "Every deliverable in one place."}{" "}
-        The worksheets pull from your project brief and save as you type — use Print / save PDF on
-        any of them to build the packet you hand to builders, suppliers, and city staff.
+        Six planning worksheets take you from pre-site estimate to a complete, comparable project
+        cost. They save as you type — use Print / save PDF on any of them to build the packet you
+        hand to builders, suppliers, and city staff.
       </p>
       <p className="text-paper-dim text-sm mb-10">
         <Link to="/my-property" className="text-accent hover:text-paper transition-colors">
@@ -92,32 +87,39 @@ const PacketHub = () => {
         </Link>
       </p>
 
+      {/* Diagram + Ready Score */}
+      <div className="grid sm:grid-cols-2 gap-4 mb-4">
+        <Card
+          to="/feasibility"
+          Icon={FiMap}
+          title="Property diagram & feasibility"
+          desc="Your lot in 3D/2D/satellite: setbacks, buildable envelope, and the largest potential ADU footprint — plus the readiness checklist."
+          status={feasOpen ? "Open" : `Unlocks at ${FEASIBILITY_UNLOCK_AT}% course progress (you're at ${progress}%)`}
+          locked={!feasOpen}
+        />
+        <Card
+          to="/packet/ready-score"
+          Icon={FiCheckCircle}
+          title="ADU Ready Score"
+          desc="Twenty questions, graded A–F — preparedness, property flags, and budget flags, aligned with the course's NAPE evaluation."
+          status={grade ? `Grade ${grade}` : "Not scored yet"}
+          done={Boolean(grade)}
+        />
+      </div>
+
+      {/* The six worksheets */}
+      <h2 className="font-display text-paper text-2xl sm:text-3xl mt-8 mb-4">The six planning worksheets</h2>
       <div className="grid sm:grid-cols-2 gap-4 mb-6">
-        {cards.map((c) => (
-          <Link
-            key={c.to + c.title}
+        {worksheetCards.map((c) => (
+          <Card
+            key={c.to}
             to={c.to}
-            className="group bg-surface-1-solid border border-stroke rounded-3xl p-6 sm:p-8 hover:border-accent transition-colors flex flex-col"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <c.Icon className="text-accent text-2xl" />
-              <span className={`inline-flex items-center gap-1.5 text-[0.65rem] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${
-                c.locked
-                  ? "text-paper-dim border-stroke"
-                  : c.done
-                    ? "text-accent border-accent/40 bg-accent/10"
-                    : "text-paper-dim border-stroke"
-              }`}>
-                {c.locked && <FiLock className="text-[0.6rem]" />}
-                {c.status}
-              </span>
-            </div>
-            <h3 className="font-display text-paper text-xl sm:text-2xl mb-2 leading-tight">{c.title}</h3>
-            <p className="text-paper-dim text-sm leading-relaxed grow mb-4">{c.desc}</p>
-            <span className="inline-flex items-center gap-2 text-accent text-sm font-semibold group-hover:gap-3 transition-all">
-              Open <FiArrowRight />
-            </span>
-          </Link>
+            Icon={c.Icon}
+            title={c.title}
+            desc={c.desc}
+            status={started(c.key) ? "In progress" : "Not started"}
+            done={started(c.key)}
+          />
         ))}
       </div>
 
@@ -145,8 +147,9 @@ const PacketHub = () => {
             <p className="text-paper-dim">
               811 marks public utilities up to the meter. Lines on your side of the meter — a sewer
               run to the street, power to a shed, irrigation — are found by a professional private
-              utility-locating service. Worth scheduling before you finalize ADU placement; note
-              what they find in your utility notes.
+              utility-locating service. Step 1 of the Pre-site Verification worksheet is exactly
+              this: have the connection points marked, record the distances, and your estimates
+              become real.
             </p>
           </div>
         </div>
@@ -154,5 +157,27 @@ const PacketHub = () => {
     </div>
   );
 };
+
+const Card = ({ to, Icon, title, desc, status, done, locked }) => (
+  <Link
+    to={to}
+    className="group bg-surface-1-solid border border-stroke rounded-3xl p-6 sm:p-8 hover:border-accent transition-colors flex flex-col"
+  >
+    <div className="flex items-center justify-between mb-4">
+      <Icon className="text-accent text-2xl" />
+      <span className={`inline-flex items-center gap-1.5 text-[0.65rem] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${
+        locked ? "text-paper-dim border-stroke" : done ? "text-accent border-accent/40 bg-accent/10" : "text-paper-dim border-stroke"
+      }`}>
+        {locked && <FiLock className="text-[0.6rem]" />}
+        {status}
+      </span>
+    </div>
+    <h3 className="font-display text-paper text-xl sm:text-2xl mb-2 leading-tight">{title}</h3>
+    <p className="text-paper-dim text-sm leading-relaxed grow mb-4">{desc}</p>
+    <span className="inline-flex items-center gap-2 text-accent text-sm font-semibold group-hover:gap-3 transition-all">
+      Open <FiArrowRight />
+    </span>
+  </Link>
+);
 
 export default PacketHub;
