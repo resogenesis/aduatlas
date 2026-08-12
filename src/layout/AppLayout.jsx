@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { NavLink, Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
-import { FiGrid, FiBookOpen, FiHome, FiTarget, FiUsers, FiSettings, FiLock, FiMenu, FiX, FiLogOut } from "react-icons/fi";
+import { FiGrid, FiBookOpen, FiFolder, FiHome, FiTarget, FiUsers, FiSettings, FiLock, FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import Logomark from "../components/brand/Logomark";
 import { isBuildersUnlocked, isFeasibilityUnlocked } from "../stores/courseStore";
+import { hasReportTier } from "../stores/paymentStore";
 import { currentUser, logout } from "../stores/authStore";
 
 const baseNav = [
@@ -12,6 +13,7 @@ const baseNav = [
 ];
 
 const gatedNav = [
+  { to: "/packet", label: "Report Packet", Icon: FiFolder, isLocked: () => !hasReportTier() },
   { to: "/feasibility", label: "Feasibility", Icon: FiTarget, isLocked: () => !isFeasibilityUnlocked() },
   { to: "/builders", label: "Builders", Icon: FiUsers, isLocked: () => !isBuildersUnlocked() },
 ];
@@ -88,7 +90,7 @@ const AppLayout = () => {
   return (
     <div className="min-h-screen bg-canvas">
       {/* Mobile top bar */}
-      <div className="lg:hidden sticky top-0 z-40 bg-canvas/85 backdrop-blur-md border-b border-stroke">
+      <div className="lg:hidden print:hidden sticky top-0 z-40 bg-canvas/85 backdrop-blur-md border-b border-stroke">
         <div className="flex items-center justify-between px-5 py-3">
           <Logomark className="h-7 text-paper" />
           <button

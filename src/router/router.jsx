@@ -26,6 +26,11 @@ import BuilderListing from "../pages/BuilderListing";
 import BuilderProfile from "../pages/BuilderProfile";
 import Feasibility from "../pages/Feasibility";
 import UtilityEstimator from "../pages/UtilityEstimator";
+import PacketHub from "../pages/tools/PacketHub";
+import BudgetWorksheet from "../pages/tools/BudgetWorksheet";
+import TimelineWorksheet from "../pages/tools/TimelineWorksheet";
+import BuilderQuestionnaire from "../pages/tools/BuilderQuestionnaire";
+import ReadyScore from "../pages/tools/ReadyScore";
 
 import BuilderDashboard from "../pages/builder/Dashboard";
 import BuilderLeads from "../pages/builder/Leads";
@@ -134,6 +139,16 @@ const router = createBrowserRouter([
       // the existing course-progress gates.
       { path: "feasibility", element: <PaidGate requireTier="report" requireFeasibility><Feasibility /></PaidGate> },
       { path: "utility-estimator", element: <PaidGate requireTier="report" requireFeasibility><UtilityEstimator /></PaidGate> },
+
+      // Report Packet — the four worksheets + hub. Tier-gated only (no
+      // course-progress gate): these are planning documents a report buyer
+      // should be able to fill from day one; the feasibility tool keeps its
+      // 80%-progress gate above because its output depends on course inputs.
+      { path: "packet", element: <PaidGate requireTier="report"><PacketHub /></PaidGate> },
+      { path: "packet/budget", element: <PaidGate requireTier="report"><BudgetWorksheet /></PaidGate> },
+      { path: "packet/timeline", element: <PaidGate requireTier="report"><TimelineWorksheet /></PaidGate> },
+      { path: "packet/questionnaire", element: <PaidGate requireTier="report"><BuilderQuestionnaire /></PaidGate> },
+      { path: "packet/ready-score", element: <PaidGate requireTier="report"><ReadyScore /></PaidGate> },
       { path: "builders", element: <PaidGate requireTier="report" requireBuilders><BuilderListing /></PaidGate> },
       { path: "builders/:id", element: <PaidGate requireTier="report" requireBuilders><BuilderProfile /></PaidGate> },
 

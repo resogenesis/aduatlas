@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiBookOpen, FiCheck, FiDownload, FiMapPin } from "react-icons/fi";
+import { FiArrowRight, FiBookOpen, FiCheck, FiMapPin } from "react-icons/fi";
 import { currentUser } from "../../stores/authStore";
 import { courseProgress, loadPacket, packetProgress } from "../../stores/courseStore";
 import { isComplete, loadAnswers } from "../../stores/quizStore";
@@ -131,12 +131,12 @@ const Dashboard = () => {
               >
                 Edit
               </Link>
-              <button
-                onClick={() => alert("INTEGRATION POINT: PDF generation pending.")}
+              <Link
+                to="/packet"
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-accent text-accent-fg font-semibold text-xs hover:bg-paper transition-colors"
               >
-                <FiDownload /> Download draft
-              </button>
+                Open report packet <FiArrowRight />
+              </Link>
             </div>
           </div>
           <div className="w-full h-2 bg-canvas border border-stroke rounded-full overflow-hidden mb-6">
