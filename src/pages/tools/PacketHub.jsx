@@ -100,8 +100,8 @@ const PacketHub = () => {
         <Card
           to="/packet/ready-score"
           Icon={FiCheckCircle}
-          title="ADU Ready Score"
-          desc="Twenty questions, graded A–F — preparedness, property flags, and budget flags, aligned with the course's NAPE evaluation."
+          title="ADU Ready Score (NAPE)"
+          desc="The official National ADU Property Evaluation: five weighted categories, 100 points, graded A–F — with automatic no-go detection."
           status={grade ? `Grade ${grade}` : "Not scored yet"}
           done={Boolean(grade)}
         />

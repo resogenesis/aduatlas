@@ -25,85 +25,117 @@ export const saveWorksheet = (key, data) => {
   return data;
 };
 
-// ── ADU Ready Score (NAPE-aligned) ──────────────────────────────────────────
-// 20 Yes/No questions in three groups. Preparedness questions auto-answer from
-// the project brief; property and budget flags come from Module 7 (NAPE):
-// property killers + budget killers. Phrased so "Yes" is always the favorable
-// answer. Every flag is a "verify with your local planning department" prompt,
-// never a verdict — outcomes vary by property and municipality.
 
-export const READY_SCORE_GROUPS = [
+// ── National ADU Property Evaluation (NAPE) ──────────────────────────────────
+// The official NAPE scoring system from Module 7: five weighted categories,
+// 100 possible points, answered Yes/No. Phrased so "Yes" is always favorable.
+// Grade F ("False Start") overrides the point score whenever an automatic
+// no-go condition (Module 7, Chapter 4) is answered No. An early planning
+// tool, not a permit approval — outcomes vary by property and municipality.
+
+export const NAPE_CATEGORIES = [
   {
-    id: "prep",
-    title: "Preparedness",
-    blurb: "Auto-checked from your project brief — fill My Property to improve these.",
+    id: "zoning",
+    title: "Zoning & legal feasibility",
+    points: 30,
     items: [
-      { id: "prep-address", q: "Property address on file", fromPacket: "address" },
-      { id: "prep-lot", q: "Approximate lot size known", fromPacket: "lotSize" },
-      { id: "prep-purpose", q: "Intended use defined", fromPacket: "purpose" },
-      { id: "prep-type", q: "Target ADU type selected", fromPacket: "aduType" },
-      { id: "prep-size", q: "Target ADU size chosen", fromPacket: "desiredSqft" },
-      { id: "prep-budget", q: "Budget range set", fromPacket: "budget" },
-      { id: "prep-timeline", q: "Timeline goal set", fromPacket: "timeline" },
+      { id: "z-permitted", q: "Is an ADU permitted by your local zoning?", noGo: true },
+      { id: "z-lot-size", q: "Does your lot meet the minimum lot size requirement?", noGo: true },
+      { id: "z-lot-dims", q: "Does your lot meet minimum width and depth requirements?", noGo: true },
+      { id: "z-max-size", q: "Can a worthwhile ADU comply with the maximum-size regulations?" },
+      { id: "z-height", q: "Can the ADU meet local height limits?" },
+      { id: "z-setbacks", q: "Do required setbacks leave a usable buildable area?", noGo: true },
+      { id: "z-percentage", q: "Does the ADU stay within any percentage-of-primary-home size limit?" },
+      { id: "z-hoa", q: "Have you reviewed HOA or deed restrictions — and none prohibit an ADU?", noGo: true },
+      { id: "z-historic", q: "Have you reviewed historic-district requirements — and none prohibit an ADU?", noGo: true },
+      { id: "z-separation", q: "Can the ADU meet the minimum separation distance from the primary residence?" },
     ],
   },
   {
-    id: "property",
-    title: "Property flags",
-    blurb: "The conditions that can stop or shrink a build (Module 7). Answer as far as you know today.",
+    id: "site",
+    title: "Lot & physical site conditions",
+    points: 25,
     items: [
-      { id: "prop-space", q: "Is there enough usable yard area for an ADU after setbacks and lot-coverage rules?" },
-      { id: "prop-access", q: "Can the property and build area be reached in a way your city would consider acceptable?" },
-      { id: "prop-easements", q: "Is the likely build area free of utility, drainage, or access easements?" },
-      { id: "prop-slope", q: "Is the site relatively flat, without steep slopes or difficult terrain?" },
-      { id: "prop-overlay", q: "Is the property outside flood zones, wetlands, or other environmental overlays?" },
-      { id: "prop-coverage", q: "Do existing structures leave room within what your city allows on the lot?" },
-      { id: "prop-utilities", q: "Are utility connections within reasonable reach, with capacity for a second dwelling?" },
+      { id: "s-slope", q: "Is the site free of significant slope or challenging topography?" },
+      { id: "s-overlay", q: "Is the property outside floodplains and environmental overlays?" },
+      { id: "s-trees", q: "Is the site free of protected trees or habitat conflicts?" },
+      { id: "s-easements", q: "Is the buildable area free of utility or drainage easements?", noGo: true },
+      { id: "s-area", q: "Is there adequate buildable backyard area?" },
     ],
   },
   {
-    id: "budget",
-    title: "Budget flags",
-    blurb: "Costs that don't stop a build on paper but can stop it in your bank account (Module 7).",
+    id: "utilities",
+    title: "Utilities & infrastructure",
+    points: 15,
     items: [
-      { id: "bud-utilities", q: "Can you rule out long utility extensions or a service-capacity upgrade?" },
-      { id: "bud-earthwork", q: "Can you rule out significant excavation, grading, or earthwork?" },
-      { id: "bud-retaining", q: "Can you rule out retaining walls or drainage systems required by the terrain?" },
-      { id: "bud-subsurface", q: "Can you rule out tree removal, rock, or subsurface surprises?" },
-      { id: "bud-engineering", q: "Can you rule out engineering or geotechnical studies triggered by slope or soils?" },
-      { id: "bud-fees", q: "Are local fees, connection charges, and permit costs accounted for in your budget?" },
+      { id: "u-access", q: "Is utility access available to the proposed site?" },
+      { id: "u-septic", q: "If on septic, is the system suitable for an additional dwelling? (Yes if not applicable)" },
+      { id: "u-connections", q: "Are water, sewer, and electrical connections feasible?" },
+    ],
+  },
+  {
+    id: "access",
+    title: "Site access & construction logistics",
+    points: 15,
+    items: [
+      { id: "a-emergency", q: "Is emergency access to the ADU achievable?" },
+      { id: "a-construction", q: "Is there backyard access for construction?" },
+      { id: "a-crane", q: "Is crane or delivery access available if needed?" },
+      { id: "a-overhead", q: "Is the site free of overhead utility conflicts?" },
+    ],
+  },
+  {
+    id: "financial",
+    title: "Market & financial practicality",
+    points: 15,
+    items: [
+      { id: "f-site-costs", q: "Are site preparation costs reasonable for your budget?" },
+      { id: "f-size", q: "Does the ADU size justify the investment?" },
+      { id: "f-financing", q: "Is financing available?" },
+      { id: "f-market", q: "Is there rental or resale potential?" },
+      { id: "f-practical", q: "Is the project financially practical overall?" },
     ],
   },
 ];
 
-export const READY_SCORE_TOTAL = READY_SCORE_GROUPS.reduce((n, g) => n + g.items.length, 0);
+export const NAPE_TOTAL_ITEMS = NAPE_CATEGORIES.reduce((n, c) => n + c.items.length, 0);
 
-// A–F on the count of favorable answers out of 20.
-export const gradeReadyScore = (yesCount) => {
-  if (yesCount >= 18) return "A";
-  if (yesCount >= 16) return "B";
-  if (yesCount >= 14) return "C";
-  if (yesCount >= 12) return "D";
-  return "F";
+// Points, grade, no-go flags, and per-category earned points from an
+// { itemId: true|false } answer map. Grade is null until every item is
+// answered; F overrides points whenever a no-go item is No.
+export const scoreNape = (answers) => {
+  let points = 0;
+  const perCategory = {};
+  const noGoFlags = [];
+  let answered = 0;
+  for (const cat of NAPE_CATEGORIES) {
+    const yes = cat.items.filter((it) => answers[it.id] === true).length;
+    const earned = (yes / cat.items.length) * cat.points;
+    perCategory[cat.id] = Math.round(earned * 10) / 10;
+    points += earned;
+    for (const it of cat.items) {
+      if (answers[it.id] !== undefined) answered++;
+      if (it.noGo && answers[it.id] === false) noGoFlags.push(it);
+    }
+  }
+  points = Math.round(points);
+  const complete = answered === NAPE_TOTAL_ITEMS;
+  let grade = null;
+  if (complete) {
+    if (noGoFlags.length) grade = "F";
+    else if (points >= 90) grade = "A";
+    else if (points >= 80) grade = "B";
+    else if (points >= 70) grade = "C";
+    else grade = "D";
+  }
+  return { points, perCategory, noGoFlags, answered, complete, grade };
 };
 
-// Module 7's three honest outcomes: each is a success when reached before
-// money is spent.
-export const readyScoreOutcome = (grade) => {
-  if (grade === "A" || grade === "B") {
-    return {
-      label: "Proceed",
-      note: "No major killers surfaced. Move ahead to the detailed (and more costly) verification steps — and confirm each remaining flag with your local planning department.",
-    };
-  }
-  if (grade === "C" || grade === "D") {
-    return {
-      label: "Adjust",
-      note: "Issues exist but may be workable — changing the ADU type, size, placement, or budget can resolve many flags. Verify each one with your local planning department before spending.",
-    };
-  }
-  return {
-    label: "Pause",
-    note: "Several flags together may be telling you this isn't the right project right now. That's a win when you learn it before a builder deposit — confirm the hard flags with your city before going further.",
-  };
+// Module 7, Chapter 8 — what each grade means.
+export const NAPE_GRADES = {
+  A: { label: "Excellent candidate", note: "No significant legal, physical, or financial obstacles have been identified. Proceed with confidence and begin preparing your detailed feasibility review." },
+  B: { label: "Good candidate", note: "The property appears suitable for an ADU, but several items require additional investigation before moving forward." },
+  C: { label: "Proceed with caution", note: "Several factors require additional research. Complete a detailed feasibility study before making major financial commitments." },
+  D: { label: "High-risk project", note: "Significant legal, physical, or financial obstacles have been identified. Carefully evaluate whether the project still makes financial sense." },
+  F: { label: "False start", note: "One or more major project killers have been identified. Sometimes the smartest financial decision is recognizing when a project should not move forward." },
 };

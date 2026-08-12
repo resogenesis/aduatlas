@@ -466,42 +466,70 @@ export const modules = [
   {
     "id": "m7",
     "n": 7,
-    "title": "False Starts",
-    "blurb": "Spot the project killers and budget killers that can stop an ADU before you spend money on surveys, engineering, permits, or builders.",
-    "intro": "Sometimes the smartest decision is knowing when to stop. This module introduces the National ADU Property Evaluation (NAPE), a simple Yes/No self-check designed to surface potential deal-breakers early — before you spend money on surveys, engineering, permits, or builder consultations. The goal is not to discourage you, but to help you build smart and avoid a costly false start.",
+    "title": "False Starts & NAPE",
+    "blurb": "Can I build an ADU? Identify no-go conditions, high-risk false starts, and budget killers — and score your property with NAPE.",
+    "intro": "Every homeowner wants to know whether an ADU can be built on their property. Unfortunately, many people spend thousands of dollars before discovering that zoning restrictions, utility limitations, easements, access issues, or site conditions make the project far more expensive than expected — or impossible to build. This module introduces the National ADU Property Evaluation (NAPE), an early screening tool designed to identify potential obstacles before significant financial commitments. It does not replace surveys, engineering, city approvals, or builder evaluations. Sometimes the result confirms you're on the right path; sometimes it identifies issues that require research; and sometimes it helps you avoid one of the most expensive mistakes of your life. Knowledge before construction is one of the most valuable investments you can make.",
     "tag": "NAPE",
     "chapters": [
       {
         "id": "m7c1",
         "n": 1,
-        "title": "What NAPE Is — and Why Stopping Can Be Smart",
-        "blurb": "The mindset behind knowing when to stop, and what NAPE is designed to do.",
-        "minutes": 4
+        "title": "Can I Build an ADU?",
+        "blurb": "Yes, not yet, or no — and why obstacles aren't always permanent.",
+        "minutes": 5
       },
       {
         "id": "m7c2",
         "n": 2,
-        "title": "Common Property Killers",
-        "blurb": "Physical and regulatory conditions that can make a property unbuildable — or much harder than expected.",
-        "minutes": 5
+        "title": "Why Projects Fail Before They Begin",
+        "blurb": "Owning a property doesn't automatically mean you can build on it.",
+        "minutes": 3
       },
       {
         "id": "m7c3",
         "n": 3,
-        "title": "Common Budget Killers",
-        "blurb": "The costs that don't stop a build on paper but can stop it in your bank account.",
-        "minutes": 4
+        "title": "What Is NAPE?",
+        "blurb": "A fast, nationwide Yes/No evaluation of a property's ADU potential.",
+        "minutes": 3
       },
       {
         "id": "m7c4",
         "n": 4,
-        "title": "How to Use the Yes/No Self-Evaluation",
-        "blurb": "Turning NAPE into a practical early-stage decision tool.",
+        "title": "Automatic No-Go Conditions",
+        "blurb": "The legal obstacles that stop projects — zoning, lot size, setbacks, easements.",
+        "minutes": 5
+      },
+      {
+        "id": "m7c5",
+        "n": 5,
+        "title": "High-Risk False Starts",
+        "blurb": "Slope, overlays, access, water service, septic — conditions that inflate costs.",
+        "minutes": 6
+      },
+      {
+        "id": "m7c6",
+        "n": 6,
+        "title": "Financial False Starts",
+        "blurb": "Legally buildable isn't the same as financially practical.",
+        "minutes": 4
+      },
+      {
+        "id": "m7c7",
+        "n": 7,
+        "title": "The NAPE Scoring System",
+        "blurb": "Five weighted categories, 100 possible points.",
+        "minutes": 4
+      },
+      {
+        "id": "m7c8",
+        "n": 8,
+        "title": "Understanding Your NAPE Score",
+        "blurb": "What grades A through F mean — and why No today isn't No forever.",
         "minutes": 4
       },
       {
         "id": "m7quiz",
-        "n": 5,
+        "n": 9,
         "kind": "quiz",
         "title": "Module 7 Quiz",
         "blurb": "Test your knowledge before moving on.",
@@ -637,65 +665,86 @@ export const modules = [
   {
     "id": "m10",
     "n": 10,
-    "title": "Moving Forward Prepared",
-    "blurb": "Organize everything you've learned to confidently meet builders, compare proposals, and move your ADU project forward.",
-    "intro": "Building an ADU is one of the largest investments many homeowners will ever make, and successful projects begin long before construction starts. This final module helps you organize your information, prepare for builder conversations, and move forward with confidence.",
+    "title": "From Vision to Reality",
+    "blurb": "Cedar Grove's lessons, the verification process, your real budget, and everything that carries your vision into a buildable plan.",
+    "intro": "Congratulations — you have completed the education. Building a detached ADU is not a simple transaction: there are property conditions, regulations, construction choices, utility requirements, pre-site expenses, and permitting procedures to consider. This final module moves you from education to verification: verify your utilities, refine your pre-site estimate, organize your total project budget, prepare for builder conversations, work with your city — and keep asking one final question: what else? Is there anything I am missing? The goal is not simply to build an ADU. The goal is to make the best decision for you, your property, your budget, and your vision. Remember the carpenter's rule: measure twice, cut once. For an ADU project, that means verify twice, build once.",
     "chapters": [
       {
         "id": "m10c1",
         "n": 1,
-        "title": "Where Do I Start?",
-        "blurb": "Gather everything into one organized project folder before contacting builders.",
-        "minutes": 4
+        "title": "Lessons I Learned from Cedar Grove",
+        "blurb": "A real story about committing to a vision before understanding the property.",
+        "minutes": 5
       },
       {
         "id": "m10c2",
         "n": 2,
-        "title": "Preparing to Meet with Builders",
-        "blurb": "Know your goals, style, budget, constraints, and timeline before the conversation.",
-        "minutes": 3
+        "title": "From Feasibility to Verification",
+        "blurb": "Verify the property, the regulations, the ADU, and the budget.",
+        "minutes": 5
       },
       {
         "id": "m10c3",
         "n": 3,
-        "title": "Questions Builders Will Ask You",
-        "blurb": "Anticipate the common questions so you can answer with confidence.",
-        "minutes": 3
+        "title": "Verifying Utilities & Connection Points",
+        "blurb": "Markers aren't connection points — capacity, ownership, and fees to confirm.",
+        "minutes": 6
       },
       {
         "id": "m10c4",
         "n": 4,
-        "title": "Questions You Should Ask Every Builder",
-        "blurb": "Ask each builder the same questions so you can compare answers fairly.",
-        "minutes": 4
+        "title": "Completing Your Pre-Site Estimate",
+        "blurb": "Every expense to consider — and why pre-site work can add 30–50% or more.",
+        "minutes": 6
       },
       {
         "id": "m10c5",
         "n": 5,
-        "title": "Understanding Your City's Building Department",
-        "blurb": "Learn how your city's permitting process works before construction begins.",
-        "minutes": 4
+        "title": "Building Your Realistic Total Budget",
+        "blurb": "Six steps: pre-site first, then what remains for the structure.",
+        "minutes": 5
       },
       {
         "id": "m10c6",
         "n": 6,
-        "title": "Hiring a Builder or Becoming Your Own General Contractor",
-        "blurb": "Weigh the responsibilities of managing your own project against hiring a pro.",
-        "minutes": 4
+        "title": "Preparing to Meet with Builders",
+        "blurb": "Your project folder, their questions, your questions, and comparing the same scope.",
+        "minutes": 6
       },
       {
         "id": "m10c7",
         "n": 7,
-        "title": "Your ADUAtlas Roadmap",
-        "blurb": "Everything you now understand, and the framework to carry forward.",
+        "title": "Working with Your City & Utility Providers",
+        "blurb": "Easements, planned infrastructure, and why the first No isn't always final.",
+        "minutes": 5
+      },
+      {
+        "id": "m10c8",
+        "n": 8,
+        "title": "Hiring a Builder or Being Your Own GC",
+        "blurb": "Two very different roles — choose the one that matches your capacity.",
+        "minutes": 4
+      },
+      {
+        "id": "m10c9",
+        "n": 9,
+        "title": "The ADUAtlas Promise & Your Next Steps",
+        "blurb": "One year of access, our information commitment, and your 10-step checklist.",
+        "minutes": 5
+      },
+      {
+        "id": "m10c10",
+        "n": 10,
+        "title": "Course Summary & Wrap-Up",
+        "blurb": "Everything you now understand — and the framework to carry forward.",
         "minutes": 4
       },
       {
         "id": "m10quiz",
-        "n": 8,
+        "n": 11,
         "kind": "quiz",
         "title": "Module 10 Quiz",
-        "blurb": "Test your knowledge before moving on.",
+        "blurb": "Test your knowledge one final time.",
         "minutes": 5
       }
     ]
