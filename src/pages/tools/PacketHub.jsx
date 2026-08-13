@@ -1,17 +1,20 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheckCircle, FiClipboard, FiDollarSign, FiFileText, FiGrid, FiLayers, FiLock, FiMap, FiPackage, FiPhoneCall } from "react-icons/fi";
 import { courseProgress, FEASIBILITY_UNLOCK_AT, isFeasibilityUnlocked, loadPacket } from "../../stores/courseStore";
+import { hasReportTier } from "../../stores/paymentStore";
 import { loadWorksheets } from "../../stores/worksheetStore";
 
-// Report Packet hub — every $399 Feasibility Report deliverable in one place:
-// the GIS/buildable-envelope diagram, the SIX planning worksheets (from the
-// ADUAtlas workbook), the ADU Ready Score, and the utility-locate contact.
-// Every worksheet is printable via Print / save-PDF.
+// Worksheets hub — the six workbook worksheets + NAPE ship with every paid
+// tier (self-serve). The $399 Feasibility Report tier adds the personalized
+// report, property diagram, and feasibility tools; for course-tier users
+// this page is also where the upgrade pitch lands, right when they're doing
+// the verification legwork by hand. Every worksheet prints via Print/save-PDF.
 
 const PacketHub = () => {
   const ws = loadWorksheets();
   const packet = loadPacket();
-  const feasOpen = isFeasibilityUnlocked();
+  const isReport = hasReportTier();
+  const feasOpen = isReport && isFeasibilityUnlocked();
   const progress = courseProgress();
 
   const started = (key) => {
@@ -68,10 +71,10 @@ const PacketHub = () => {
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-6xl mx-auto">
       <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
-        Property Feasibility Report
+        {isReport ? "Property Feasibility Report" : "Planning worksheets"}
       </p>
       <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
-        Your report packet.
+        {isReport ? "Your report packet." : "Your planning worksheets."}
       </h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-4">
         {packet.address
@@ -87,6 +90,30 @@ const PacketHub = () => {
         </Link>
       </p>
 
+      {/* Upgrade pitch for course-tier users: they own the worksheets; the
+          report applies their property + regulations for them. */}
+      {!isReport && (
+        <div className="bg-accent text-accent-fg rounded-3xl p-6 sm:p-8 mb-6">
+          <h2 className="font-display font-medium text-2xl sm:text-3xl leading-tight mb-2">
+            Want these filled in for your property?
+          </h2>
+          <p className="text-accent-fg/80 text-sm sm:text-base max-w-2xl mb-4">
+            These worksheets work — but the measuring, regulation-checking, and distance estimates
+            are yours to chase down. The Property Feasibility Report applies your local ADU
+            regulations to your parcel: property diagram, placement area, maximum footprint, and
+            approximate utility distances — so your worksheets start from your property's numbers.
+            Your $99 applies as a credit.
+          </p>
+          <Link
+            to="/unlock"
+            state={{ tier: "report" }}
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
+          >
+            Upgrade to the Feasibility Report <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+      )}
+
       {/* Diagram + Ready Score */}
       <div className="grid sm:grid-cols-2 gap-4 mb-4">
         <Card
@@ -94,7 +121,7 @@ const PacketHub = () => {
           Icon={FiMap}
           title="Property diagram & feasibility"
           desc="Your lot in 3D/2D/satellite: setbacks, buildable envelope, and the largest potential ADU footprint — plus the readiness checklist."
-          status={feasOpen ? "Open" : `Unlocks at ${FEASIBILITY_UNLOCK_AT}% course progress (you're at ${progress}%)`}
+          status={!isReport ? "Feasibility Report plan" : feasOpen ? "Open" : `Unlocks at ${FEASIBILITY_UNLOCK_AT}% course progress (you're at ${progress}%)`}
           locked={!feasOpen}
         />
         <Card

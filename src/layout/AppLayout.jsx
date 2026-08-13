@@ -13,9 +13,10 @@ const baseNav = [
 ];
 
 const gatedNav = [
-  { to: "/packet", label: "Report Packet", Icon: FiFolder, isLocked: () => !hasReportTier() },
-  { to: "/feasibility", label: "Feasibility", Icon: FiTarget, isLocked: () => !isFeasibilityUnlocked() },
-  { to: "/builders", label: "Builders", Icon: FiUsers, isLocked: () => !isBuildersUnlocked() },
+  // Worksheets + NAPE ship with every paid tier, so the packet is never locked.
+  { to: "/packet", label: "Worksheets", Icon: FiFolder, isLocked: () => false },
+  { to: "/feasibility", label: "Feasibility", Icon: FiTarget, isLocked: () => !hasReportTier() || !isFeasibilityUnlocked() },
+  { to: "/builders", label: "Builders", Icon: FiUsers, isLocked: () => !hasReportTier() || !isBuildersUnlocked() },
 ];
 
 const NavItem = ({ to, label, Icon, locked, onClick }) => (

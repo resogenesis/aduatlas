@@ -145,19 +145,20 @@ const router = createBrowserRouter([
       { path: "feasibility", element: <PaidGate requireTier="report" requireFeasibility><Feasibility /></PaidGate> },
       { path: "utility-estimator", element: <PaidGate requireTier="report" requireFeasibility><UtilityEstimator /></PaidGate> },
 
-      // Report Packet — the six Feasibility Study worksheets (from the
-      // ADUAtlas workbook) + Ready Score + hub. Tier-gated only (no
-      // course-progress gate): these are planning documents a report buyer
-      // should be able to fill from day one; the feasibility tool keeps its
-      // 80%-progress gate above because its output depends on course inputs.
-      { path: "packet", element: <PaidGate requireTier="report"><PacketHub /></PaidGate> },
-      { path: "packet/pre-site-estimate", element: <PaidGate requireTier="report"><PreSiteEstimate /></PaidGate> },
-      { path: "packet/pre-site-verification", element: <PaidGate requireTier="report"><PreSiteVerification /></PaidGate> },
-      { path: "packet/builder-prep", element: <PaidGate requireTier="report"><BuilderPrep /></PaidGate> },
-      { path: "packet/traditional-build", element: <PaidGate requireTier="report"><TraditionalBuild /></PaidGate> },
-      { path: "packet/modular-prefab", element: <PaidGate requireTier="report"><ModularPrefabEstimate /></PaidGate> },
-      { path: "packet/total-cost", element: <PaidGate requireTier="report"><TotalProjectCost /></PaidGate> },
-      { path: "packet/ready-score", element: <PaidGate requireTier="report"><ReadyScore /></PaidGate> },
+      // Planning worksheets + NAPE — included with ANY paid tier (the $99
+      // course includes the six workbook worksheets and the Ready Score in
+      // self-serve form; the teaser toward $399 is doing the verification
+      // legwork yourself). The $399 report tier adds the personalized
+      // report, property diagram, feasibility tools, and builder match —
+      // those keep requireTier="report" above.
+      { path: "packet", element: <PaidGate><PacketHub /></PaidGate> },
+      { path: "packet/pre-site-estimate", element: <PaidGate><PreSiteEstimate /></PaidGate> },
+      { path: "packet/pre-site-verification", element: <PaidGate><PreSiteVerification /></PaidGate> },
+      { path: "packet/builder-prep", element: <PaidGate><BuilderPrep /></PaidGate> },
+      { path: "packet/traditional-build", element: <PaidGate><TraditionalBuild /></PaidGate> },
+      { path: "packet/modular-prefab", element: <PaidGate><ModularPrefabEstimate /></PaidGate> },
+      { path: "packet/total-cost", element: <PaidGate><TotalProjectCost /></PaidGate> },
+      { path: "packet/ready-score", element: <PaidGate><ReadyScore /></PaidGate> },
       { path: "builders", element: <PaidGate requireTier="report" requireBuilders><BuilderListing /></PaidGate> },
       { path: "builders/:id", element: <PaidGate requireTier="report" requireBuilders><BuilderProfile /></PaidGate> },
 

@@ -11,6 +11,9 @@ const SUPPORT_EMAIL = "hello@aduatlas.com";
 
 // 3-tier ADU readiness ladder. Free Explorer / $99 Build Prepared / $399
 // Property Feasibility Report. Concierge stays in the sidebar (application-only).
+// Split: the $99 tier includes the six planning worksheets + NAPE in
+// self-serve form; the $399 tier personalizes them — report, diagram,
+// placement, and utility estimates applied to the buyer's property.
 
 const tiers = [
   {
@@ -19,13 +22,13 @@ const tiers = [
     price: "Free",
     pricePeriod: "",
     pitch: "Tier 1",
-    desc: "See if the ADU course is right for you. Just sign up at no cost.",
-    confidence: "Know your options before you spend a dollar.",
+    desc: "Start with the ADU Reality Check — discover what you already know, what you still need to learn, and what information you need about your property before moving forward. Just register, at no cost.",
+    confidence: "Sign up and explore your options.",
     bullets: [
-      "Property Snapshot",
-      "Reality Check Quiz (how much do you know?)",
+      "ADU Reality Check quiz, with answers explained",
+      "Property Snapshot — identify missing or unverified property information",
       "FAQ (answers to common ADU questions)",
-      "ADU Types, with descriptions and photos",
+      "ADU types, with descriptions and photos",
     ],
     cta: "Start free",
     ctaTo: "/property",
@@ -36,15 +39,16 @@ const tiers = [
     price: "$99",
     pricePeriod: "one time",
     pitch: "Tier 2",
-    desc: "The ADUAtlas course shows you what to know before spending significant time and money on an ADU — how the process works, how to avoid costly mistakes, and why a feasibility study matters.",
-    confidence: "Reduce costly mistakes and prepare with confidence.",
+    desc: "Learn the ADU process before spending significant time and money. The ADUAtlas Course teaches you the questions to ask, the information to verify, and the decisions you will need to make throughout the ADU process.",
+    confidence: "Learn the process and become ADU build-prepared.",
     bullets: [
       "Everything in Tier 1",
-      "The 10-module ADUAtlas course",
-      "Understand the full ADU process end to end",
-      "Learn what a realistic budget must include",
+      "The complete 10-module ADUAtlas course",
+      "The six planning worksheets — pre-site estimate, verification checklist, builder preparation, quote comparisons, and total project cost",
+      "ADU Ready Score — the National ADU Property Evaluation (NAPE) self-check",
+      "Questions to ask your city and questions to ask every builder",
       "Direct email support",
-      "$99 credit toward your Property Feasibility Report upgrade (valid within 90 days)",
+      "$99 credit toward the Property Feasibility Report (within 90 days)",
     ],
     highlight: false,
   },
@@ -54,17 +58,17 @@ const tiers = [
     price: "$399",
     pricePeriod: "one time",
     pitch: "Tier 3",
-    desc: "Everything in Tiers 1 & 2, plus four dynamic worksheets and a feasibility study — the information builders, suppliers, and city staff commonly need to move your ADU forward.",
-    confidence: "Find out what you can build, with a realistic preliminary estimate, before you talk to builders.",
+    desc: "Move from general ADU education to a personalized review of your property. The report combines your property information with the applicable ADU regulations — a survey shows what exists; ADUAtlas helps you understand what may be possible. It does not replace a survey, engineering, architectural plans, or city approval.",
+    confidence: "Understand your property. Review your options. Prepare to move forward.",
     bullets: [
-      "Everything in Tiers 1 & 2, including the 10-module course",
-      "One-page feasibility diagram — largest potential ADU footprint, up to 1,200 sq. ft.",
-      "GIS property snapshot overlaid with local ADU regs: primary structure, ADU placement, setbacks, approximate utilities (with legend)",
-      "Dynamic spreadsheet: pre-site cost estimates, utility connections, and site considerations",
-      "Pre-filled spreadsheet: estimated builder, permit, inspection, and city timelines",
-      "Pre-filled builder questionnaire to obtain accurate quotes",
+      "Everything in Tiers 1 & 2, including the course and worksheets",
+      "Personalized Property Feasibility Report",
+      "Property and site diagram with approximate utility locations and estimates",
+      "The ADU regulations applicable to your parcel",
+      "Potential ADU placement area and maximum potential footprint",
+      "Your six worksheets, personalized with your property's numbers",
+      "NAPE evaluation applied to your property",
       "Contact for a professional utility-locate service",
-      "National Property ADU Ready Score (A‑F), 20 questions derived from your packet, for homeowners and Realtors",
     ],
     highlight: true,
     badge: "Most popular",
@@ -159,10 +163,12 @@ const Unlock = () => {
             Sign Up
           </p>
           <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-            From ADU-curious <span className="italic">to build-ready.</span>
+            From ADU-curious <span className="italic">to build-prepared.</span>
           </h1>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed">
-            Pick the depth of preparation that matches where you are — exploring your options, getting serious about the course, or ready to talk to builders.
+            Building an ADU is a process, not just a purchase. ADUAtlas helps you understand the
+            process, evaluate your property, explore your options, and prepare for informed
+            conversations with your city and builders. Start where you are.
           </p>
         </div>
 

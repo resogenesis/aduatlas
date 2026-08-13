@@ -43,7 +43,7 @@ const PayPaywall = ({ location, chapterName }) => (
         This is part of the <span className="italic">paid system.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-        The 10-module ADUAtlas course unlocks with the $99 ADU Build Prepared plan. The Property Feasibility Report — feasibility tool, builder match, and GIS packet — is the $399 plan. 7 day full refund if it's not for you.
+        The $99 ADU Build Prepared plan unlocks the 10-module course, the six planning worksheets, and the ADU Ready Score. The $399 Property Feasibility Report adds a personalized report, property diagram, feasibility tools, and builder match. 7 day full refund if it's not for you.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
@@ -77,7 +77,7 @@ const TierUpgradePaywall = ({ location, chapterName }) => (
         This is part of the <span className="italic">Feasibility Report.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-        Your $99 plan unlocks the full 10-module course. The feasibility tool, builder match, and GIS packet are part of the $399 Property Feasibility Report. Your $99 applies as a credit toward it.
+        Your $99 plan includes the full course, the six planning worksheets, and the ADU Ready Score. The personalized report, property diagram, feasibility tools, and builder match are part of the $399 Property Feasibility Report. Your $99 applies as a credit toward it.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
@@ -88,10 +88,10 @@ const TierUpgradePaywall = ({ location, chapterName }) => (
           Upgrade to the Report <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>
         <Link
-          to="/course"
+          to="/packet"
           className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-stroke text-paper font-medium hover:border-paper-dim transition"
         >
-          Keep working the course
+          Keep working your worksheets
         </Link>
       </div>
     </div>
