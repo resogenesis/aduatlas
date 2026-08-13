@@ -34,6 +34,7 @@ import TraditionalBuild from "../pages/tools/TraditionalBuild";
 import ModularPrefabEstimate from "../pages/tools/ModularPrefabEstimate";
 import TotalProjectCost from "../pages/tools/TotalProjectCost";
 import ReadyScore from "../pages/tools/ReadyScore";
+import PropertyReport from "../pages/tools/PropertyReport";
 
 import BuilderDashboard from "../pages/builder/Dashboard";
 import BuilderLeads from "../pages/builder/Leads";
@@ -140,10 +141,13 @@ const router = createBrowserRouter([
       { path: "my-property", element: <PaidGate><MyProperty /></PaidGate> },
 
       // Gated tools — these are the $399 Feasibility Report deliverables, so
-      // they require the "report" tier (not just any paid purchase) on top of
-      // the existing course-progress gates.
-      { path: "feasibility", element: <PaidGate requireTier="report" requireFeasibility><Feasibility /></PaidGate> },
-      { path: "utility-estimator", element: <PaidGate requireTier="report" requireFeasibility><UtilityEstimator /></PaidGate> },
+      // they require the "report" tier (not just any paid purchase). No
+      // course-progress gate: the feasibility study stands on its own.
+      // Builder match keeps its progress gates below — course completion is
+      // the marketplace qualification.
+      { path: "feasibility", element: <PaidGate requireTier="report"><Feasibility /></PaidGate> },
+      { path: "utility-estimator", element: <PaidGate requireTier="report"><UtilityEstimator /></PaidGate> },
+      { path: "report", element: <PaidGate requireTier="report"><PropertyReport /></PaidGate> },
 
       // Planning worksheets + NAPE — included with ANY paid tier (the $99
       // course includes the six workbook worksheets and the Ready Score in

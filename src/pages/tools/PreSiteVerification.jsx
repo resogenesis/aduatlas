@@ -1,6 +1,7 @@
 import WorksheetBar from "../../components/tools/WorksheetBar";
 import { Disclaimer, NumCell, TextCell, WsHeader } from "../../components/tools/worksheetUi";
-import { money, num, usePersistedWorksheet } from "../../components/tools/worksheetKit";
+import { money, usePersistedWorksheet } from "../../components/tools/worksheetKit";
+import { VERIFICATION_SUMMARY, verificationTotal } from "./worksheetDefs";
 
 // Worksheet 2 of 6 — Pre-Site Verification Checklist (from the ADUAtlas
 // workbook). A few measurements and phone calls that turn the Feasibility
@@ -17,17 +18,10 @@ const STEPS = [
   { n: "8", item: "Use the completed information when speaking with builders.", who: "Builders / contractors", record: "Share verified distances, known fees, estimated pre-site costs, and timelines" },
 ];
 
-const SUMMARY = [
-  { key: "water-sewer", label: "Water / sewer connection estimate" },
-  { key: "electric", label: "Electric connection estimate" },
-  { key: "gas", label: "Gas connection estimate" },
-  { key: "city-fees", label: "City / permit fees" },
-  { key: "other", label: "Other known pre-site costs" },
-];
 
 const PreSiteVerification = () => {
   const [d, set, savedAt] = usePersistedWorksheet("preSiteVerification");
-  const total = SUMMARY.reduce((s, r) => s + num(d[`sum-${r.key}`]), 0);
+  const total = verificationTotal(d);
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto print-sheet">
@@ -67,7 +61,7 @@ const PreSiteVerification = () => {
       <div className="overflow-x-auto bg-surface-1-solid rounded-2xl border border-stroke mb-6">
         <table className="w-full text-sm">
           <tbody>
-            {SUMMARY.map((r) => (
+            {VERIFICATION_SUMMARY.map((r) => (
               <tr key={r.key} className="border-b border-stroke/60">
                 <td className="px-4 py-3 text-paper min-w-56">{r.label}</td>
                 <td className="px-3 py-3 w-36"><NumCell value={d[`sum-${r.key}`]} onChange={(v) => set(`sum-${r.key}`, v)} /></td>

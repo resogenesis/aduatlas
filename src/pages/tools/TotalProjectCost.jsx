@@ -1,24 +1,16 @@
 import WorksheetBar from "../../components/tools/WorksheetBar";
 import { Disclaimer, GroupRow, NumCell, TextCell, WsHeader } from "../../components/tools/worksheetUi";
-import { money, num, usePersistedWorksheet } from "../../components/tools/worksheetKit";
+import { money, usePersistedWorksheet } from "../../components/tools/worksheetKit";
+import { TPC_GROUPS, tpcTotals } from "./worksheetDefs";
 
 // Worksheet 5 of 6 — Total ADU Project Cost (from the ADUAtlas workbook).
 // The final rollup: verified costs + the selected quote → a realistic
 // estimated total. Estimated vs. final columns, timelines, notes.
 
-const GROUPS = [
-  { label: "ADU / construction", rows: ["Selected ADU / Base Unit OR Builder Construction Quote", "Options / Upgrades", "Assembly", "Delivery / Transportation", "Crane / Set, if applicable"] },
-  { label: "Pre-site", rows: ["Obstacle Removal", "Excavation / Grading", "Foundation", "Water Connection", "Sewer Connection", "Electric Connection", "Gas, if applicable", "Retaining Wall", "Access / Site Restoration / Landscape"] },
-  { label: "City / professional fees", rows: ["Permits / City Fees", "Design / Plans", "Survey / Plans", "Engineering", "Other Professional Fees"] },
-  { label: "Other known costs", rows: ["Taxes", "Contingency or Change Orders"] },
-];
-
-const ALL_ROWS = GROUPS.flatMap((g) => g.rows);
 
 const TotalProjectCost = () => {
   const [d, set, savedAt] = usePersistedWorksheet("totalProjectCost");
-  const estTotal = ALL_ROWS.reduce((s, r) => s + num(d[`${r}-est`]), 0);
-  const finalTotal = ALL_ROWS.reduce((s, r) => s + num(d[`${r}-final`]), 0);
+  const { est: estTotal, final: finalTotal } = tpcTotals(d);
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto print-sheet">
@@ -41,7 +33,7 @@ const TotalProjectCost = () => {
             </tr>
           </thead>
           <tbody>
-            {GROUPS.map((g) => (
+            {TPC_GROUPS.map((g) => (
               <Section key={g.label} group={g} d={d} set={set} />
             ))}
             <tr className="bg-accent/10">

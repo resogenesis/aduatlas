@@ -4,18 +4,19 @@ import { isPaid, getPaidTier, TIERS } from "../../stores/paymentStore";
 import { isBuildersUnlocked, isFeasibilityUnlocked, courseProgress, packetProgress } from "../../stores/courseStore";
 
 // Three layers:
-// 1. Paid gate (any /course/*, /dashboard, /my-property, plus report tools) —
+// 1. Paid gate (any /course/*, /dashboard, /my-property, worksheets) —
 //    must have purchased SOMETHING (isPaid()).
-// 2. Tier gate (requireTier="report") — the $399 Feasibility Report deliverables
-//    (feasibility tool, utility estimator, builder match, GIS packet) require the
-//    report tier; a $99 roadmap buyer must NOT reach them.
-// 3. Progress gate (requireFeasibility / requireBuilders) — course/packet
-//    thresholds, applied AFTER the buyer is entitled to the tool at all.
+// 2. Tier gate (requireTier="report") — the $399 Feasibility Report
+//    deliverables (report, feasibility tool, utility estimator, builder
+//    match) require the report tier; a $99 roadmap buyer must NOT reach them.
+// 3. Progress gate (requireBuilders) — builder match only: course completion
+//    + packet completion is the marketplace qualification. The feasibility
+//    study itself does NOT depend on course progress.
 //
 // NOTE: getPaidTier() is a client-side UX hint. The server must re-verify
 // `users.paid_tier` before generating any report-tier deliverable.
 
-const PaidGate = ({ children, chapterName, requireTier, requireFeasibility, requireBuilders }) => {
+const PaidGate = ({ children, chapterName, requireTier, requireBuilders }) => {
   const location = useLocation();
   if (!isPaid()) return <PayPaywall location={location} chapterName={chapterName} />;
 
@@ -25,9 +26,6 @@ const PaidGate = ({ children, chapterName, requireTier, requireFeasibility, requ
 
   if (requireBuilders && !isBuildersUnlocked()) {
     return <BuilderPaywall progress={courseProgress()} packetPercent={packetProgress().percent} feasOk={isFeasibilityUnlocked()} />;
-  }
-  if (requireFeasibility && !isFeasibilityUnlocked()) {
-    return <FeasibilityPaywall progress={courseProgress()} />;
   }
 
   return children;
@@ -94,31 +92,6 @@ const TierUpgradePaywall = ({ location, chapterName }) => (
           Keep working your worksheets
         </Link>
       </div>
-    </div>
-  </section>
-);
-
-const FeasibilityPaywall = ({ progress }) => (
-  <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
-    <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] uppercase mb-7">
-        <FiLock /> Feasibility · locked
-      </div>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-        Finish the course first.
-      </h1>
-      <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-3 max-w-xl mx-auto">
-        Feasibility unlocks at <span className="text-paper font-medium">80% course progress</span>. You're at <span className="text-accent">{progress}%</span>.
-      </p>
-      <p className="text-paper-dim text-sm leading-relaxed mb-10 max-w-xl mx-auto italic">
-        Each chapter sharpens your inputs. Running Feasibility before you've covered budget and regulations would give you a worse plan, not a faster one.
-      </p>
-      <Link
-        to="/course"
-        className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
-      >
-        Continue the course <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-      </Link>
     </div>
   </section>
 );

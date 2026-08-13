@@ -1,5 +1,7 @@
-import { lazy, Suspense, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { buildLotModel, DEFAULT_LOT_INPUT } from "./lotModel";
+import { loadPacket } from "../../stores/courseStore";
+import { loadLot, saveLot } from "../../stores/worksheetStore";
 import SitePlan2D from "./SitePlan2D";
 import FeasibilityCards from "./FeasibilityCards";
 
@@ -37,18 +39,34 @@ const VIEWS = [
 ];
 
 const BuildableEnvelope = () => {
-  const [v, setV] = useState(DEFAULT_LOT_INPUT);
+  // Hydrate from the saved lot state (builder_packet.lot) so the geometry the
+  // homeowner tuned here also powers their Property Report.
+  const saved = useMemo(() => loadLot(), []);
+  const [v, setV] = useState(saved?.input || DEFAULT_LOT_INPUT);
   // True while the current dimensions came from an area-derived lookup rather
   // than being entered/confirmed by the homeowner. Any manual edit clears it.
-  const [dimsEstimated, setDimsEstimated] = useState(false);
+  const [dimsEstimated, setDimsEstimated] = useState(Boolean(saved?.dimsEstimated));
   const set = (k, val) => {
     setV((s) => ({ ...s, [k]: Math.max(0, Number(val) || 0) }));
     setDimsEstimated(false);
   };
 
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(() => saved?.address || loadPacket().address || "");
   const [look, setLook] = useState({ status: "idle", msg: "", tone: "text-paper-dim" });
-  const [coords, setCoords] = useState(null);
+  const [coords, setCoords] = useState(saved?.coords || null);
+  // Snapshot of the last successful public-records lookup, kept for the report.
+  const [lookupData, setLookupData] = useState(saved?.lookup || null);
+
+  // Debounced persistence of the whole lot state.
+  const first = useRef(true);
+  useEffect(() => {
+    if (first.current) { first.current = false; return; }
+    const t = setTimeout(
+      () => saveLot({ input: v, dimsEstimated, coords, address, lookup: lookupData }),
+      800
+    );
+    return () => clearTimeout(t);
+  }, [v, dimsEstimated, coords, address, lookupData]);
 
   const [view, setView] = useState("3d");
   const [showSetbacks, setShowSetbacks] = useState(true);
@@ -62,6 +80,7 @@ const BuildableEnvelope = () => {
     const bld = Number(d.buildingSize) || 0;
     const lat = Number(d.latitude);
     const lng = Number(d.longitude);
+    setLookupData({ ...d, fetchedAt: new Date().toISOString() });
     setCoords(Number.isFinite(lat) && Number.isFinite(lng) && lat !== 0 ? { lat, lng } : null);
     setDimsEstimated(area > 0);
     setV((s) => {

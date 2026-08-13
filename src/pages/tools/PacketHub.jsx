@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheckCircle, FiClipboard, FiDollarSign, FiFileText, FiGrid, FiLayers, FiLock, FiMap, FiPackage, FiPhoneCall } from "react-icons/fi";
-import { courseProgress, FEASIBILITY_UNLOCK_AT, isFeasibilityUnlocked, loadPacket } from "../../stores/courseStore";
+import { loadPacket } from "../../stores/courseStore";
 import { hasReportTier } from "../../stores/paymentStore";
 import { loadWorksheets } from "../../stores/worksheetStore";
 
@@ -14,8 +14,6 @@ const PacketHub = () => {
   const ws = loadWorksheets();
   const packet = loadPacket();
   const isReport = hasReportTier();
-  const feasOpen = isReport && isFeasibilityUnlocked();
-  const progress = courseProgress();
 
   const started = (key) => {
     const v = ws[key]?.values || ws[key] || {};
@@ -114,15 +112,23 @@ const PacketHub = () => {
         </div>
       )}
 
-      {/* Diagram + Ready Score */}
+      {/* Report + diagram + Ready Score */}
       <div className="grid sm:grid-cols-2 gap-4 mb-4">
+        <Card
+          to="/report"
+          Icon={FiFileText}
+          title="Property Feasibility Report"
+          desc="Your personalized report: public-record snapshot, buildable envelope, NAPE results, budget summary, and your verification checklist — printable."
+          status={isReport ? "Open" : "Feasibility Report plan"}
+          locked={!isReport}
+        />
         <Card
           to="/feasibility"
           Icon={FiMap}
           title="Property diagram & feasibility"
           desc="Your lot in 3D/2D/satellite: setbacks, buildable envelope, and the largest potential ADU footprint — plus the readiness checklist."
-          status={!isReport ? "Feasibility Report plan" : feasOpen ? "Open" : `Unlocks at ${FEASIBILITY_UNLOCK_AT}% course progress (you're at ${progress}%)`}
-          locked={!feasOpen}
+          status={isReport ? "Open" : "Feasibility Report plan"}
+          locked={!isReport}
         />
         <Card
           to="/packet/ready-score"

@@ -1,22 +1,22 @@
 import WorksheetBar from "../../components/tools/WorksheetBar";
 import { Disclaimer, NumCell, TextCell, WsHeader } from "../../components/tools/worksheetUi";
-import { money, num, usePersistedWorksheet } from "../../components/tools/worksheetKit";
+import { money, usePersistedWorksheet } from "../../components/tools/worksheetKit";
 
 // Worksheet 1 of 6 — Pre-site Estimate (from the ADUAtlas workbook).
 // Utilities: estimated cost = distance × cost/LF + permit fee + connection
 // fee. Site items: qty × cost/unit + permit fee + connection fee + other.
 
-const UTILITIES = ["Water", "Sewer", "Electric", "Gas"];
-const ITEMS = ["Retaining Wall", "Obstacle", "Foundation", "Survey"];
-
-const utilCost = (d, u) =>
-  num(d[`${u}-dist`]) * num(d[`${u}-lf`]) + num(d[`${u}-permit`]) + num(d[`${u}-conn`]);
-const itemCost = (d, it) =>
-  num(d[`${it}-qty`]) * num(d[`${it}-unit-cost`]) + num(d[`${it}-permit`]) + num(d[`${it}-conn`]) + num(d[`${it}-other`]);
+import {
+  PRESITE_ITEMS as ITEMS,
+  PRESITE_UTILITIES as UTILITIES,
+  presiteItemCost as itemCost,
+  presiteTotal,
+  presiteUtilCost as utilCost,
+} from "./worksheetDefs";
 
 const PreSiteEstimate = () => {
   const [d, set, savedAt] = usePersistedWorksheet("preSiteEstimate");
-  const total = UTILITIES.reduce((s, u) => s + utilCost(d, u), 0) + ITEMS.reduce((s, it) => s + itemCost(d, it), 0);
+  const total = presiteTotal(d);
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto print-sheet">

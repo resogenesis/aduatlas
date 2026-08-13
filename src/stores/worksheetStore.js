@@ -139,3 +139,17 @@ export const NAPE_GRADES = {
   D: { label: "High-risk project", note: "Significant legal, physical, or financial obstacles have been identified. Carefully evaluate whether the project still makes financial sense." },
   F: { label: "False start", note: "One or more major project killers have been identified. Sometimes the smartest financial decision is recognizing when a project should not move forward." },
 };
+
+// ── Lot / envelope state ─────────────────────────────────────────────────────
+// The feasibility model's inputs + parcel-lookup snapshot, persisted under
+// builder_packet.lot so the Property Report renders the same geometry the
+// homeowner tuned in the Feasibility tool.
+export const loadLot = () => loadPacket().lot || null;
+
+export const saveLot = (lot) => {
+  const packet = loadPacket();
+  const next = { ...packet, lot };
+  savePacket(next);
+  saveBuilderPacket(next);
+  return lot;
+};
