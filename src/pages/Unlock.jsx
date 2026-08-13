@@ -243,6 +243,17 @@ const Unlock = () => {
                             </Link>
                           </>
                         )}
+                        {t.id === "report" && b.includes("Personalized Property Feasibility Report") && (
+                          <>
+                            {" "}
+                            <Link
+                              to="/feasibility-study"
+                              className="inline-flex items-center gap-1 py-1 -my-1 text-accent-fg underline underline-offset-2 hover:opacity-80 font-medium transition-opacity"
+                            >
+                              See what's included <FiArrowRight className="text-[0.65rem]" />
+                            </Link>
+                          </>
+                        )}
                       </span>
                     </li>
                   ))}

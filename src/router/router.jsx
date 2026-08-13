@@ -21,6 +21,7 @@ import Quiz from "../pages/Quiz";
 import KnowledgeCheck from "../pages/KnowledgeCheck";
 import Results from "../pages/Results";
 import Unlock from "../pages/Unlock";
+import FeasibilityStudy from "../pages/FeasibilityStudy";
 import Welcome from "../pages/Welcome";
 import BuilderListing from "../pages/BuilderListing";
 import BuilderProfile from "../pages/BuilderProfile";
@@ -79,6 +80,7 @@ const router = createBrowserRouter([
       { path: "knowledge-check", element: <KnowledgeCheck /> },
       { path: "results", element: <Results /> },
       { path: "unlock", element: <Unlock /> },
+      { path: "feasibility-study", element: <FeasibilityStudy /> },
       { path: "signup", element: <Unlock /> },
       { path: "welcome", element: <Welcome /> },
       { path: "about", element: <About /> },
