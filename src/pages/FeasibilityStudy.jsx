@@ -107,7 +107,7 @@ const FeasibilityStudy = () => (
         <div className="font-display text-accent text-5xl sm:text-6xl mb-2">$399</div>
         <p className="text-paper-dim text-sm mb-7">
           Includes the ADUAtlas Course, builder profile access, your personalized property drawing,
-          and six dynamic worksheets.
+          and six dynamic worksheets. One year of access — renew for $99/year.
         </p>
         <Cta>Get your Feasibility Study</Cta>
         <p className="text-paper-dim/70 text-xs mt-4">

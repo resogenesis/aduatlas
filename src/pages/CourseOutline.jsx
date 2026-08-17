@@ -241,7 +241,7 @@ const CourseOutline = () => {
           </div>
 
           <p className="text-paper-dim text-sm mt-8">
-            The 9-module ADUAtlas course. Your access never expires. Renew any year for $99 to refresh with the latest regulations, types, and costs.
+            The 9-module ADUAtlas course. Includes one year of access — renew for $99/year to keep your access and refresh with the latest regulations, types, and costs.
           </p>
         </div>
       </section>
