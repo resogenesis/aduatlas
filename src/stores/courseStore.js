@@ -28,7 +28,7 @@ export const modules = [
     blurb: "What an ADU is, the main types, and why homeowners build them.",
     intro:
       "Before comparing builders, selecting a design, or requesting estimates, it's important to understand what an ADU is, why it has become so popular, and how the industry has evolved. This module builds the foundation for the rest of the course.",
-    framework: "Learn → Verify → Review → Plan → Verify → Build → Occupy",
+    framework: "Learn → Verify → Review → Plan → Verify → Build",
     chapters: [
       { id: "m1c1", n: 1, title: "What Is an ADU?", blurb: "The legal definition and what every ADU must include.", minutes: 4 },
       { id: "m1c2", n: 2, title: "Common Names for an ADU", blurb: "Granny flat, casita, backyard cottage — one concept, many names.", minutes: 3 },

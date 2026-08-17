@@ -32,7 +32,7 @@ const modules = [
   {
     n: "03",
     title: "The 10-Step ADU Process",
-    desc: "Learn → Explore → Plan → Build, mapped end to end.",
+    desc: "Learn → Verify → Review → Plan → Verify → Build, mapped end to end.",
     topics: [
       "Step-by-step roadmap: education, feasibility, budgeting, ADU selection, survey, site plan, builder selection, permits, construction, final inspection",
     ],
