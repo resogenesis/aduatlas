@@ -43,7 +43,7 @@ const tiers = [
     confidence: "Learn the process and become ADU build-prepared.",
     bullets: [
       "Everything in Tier 1",
-      "The complete 10-module ADUAtlas course",
+      "The complete 9-module ADUAtlas course",
       "The six planning worksheets — pre-site estimate, verification checklist, builder preparation, quote comparisons, and total project cost",
       "ADU Ready Score — the National ADU Property Evaluation (NAPE) self-check",
       "Questions to ask your city and questions to ask every builder",
@@ -232,7 +232,7 @@ const Unlock = () => {
                       <FiCheck className={`shrink-0 mt-0.5 ${t.highlight ? "text-accent-fg" : "text-accent"}`} />
                       <span>
                         {b}
-                        {t.id === "roadmap" && b.includes("10-module") && (
+                        {t.id === "roadmap" && b.includes("9-module") && (
                           <>
                             {" "}
                             <Link

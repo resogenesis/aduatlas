@@ -41,7 +41,7 @@ const PayPaywall = ({ location, chapterName }) => (
         This is part of the <span className="italic">paid system.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-        The $99 ADU Build Prepared plan unlocks the 10-module course, the six planning worksheets, and the ADU Ready Score. The $399 Property Feasibility Report adds a personalized report, property diagram, feasibility tools, and builder match. 7 day full refund if it's not for you.
+        The $99 ADU Build Prepared plan unlocks the 9-module course, the six planning worksheets, and the ADU Ready Score. The $399 Property Feasibility Report adds a personalized report, property diagram, feasibility tools, and builder match. 7 day full refund if it's not for you.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link

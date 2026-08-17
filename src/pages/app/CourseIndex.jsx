@@ -20,7 +20,7 @@ const CourseIndex = () => {
             The Course
           </p>
           <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
-            Ten modules. <span className="italic text-paper-dim">One path.</span>
+            Nine modules. <span className="italic text-paper-dim">One path.</span>
           </h1>
         </div>
         <div className="text-right">

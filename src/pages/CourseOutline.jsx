@@ -189,7 +189,7 @@ const CourseOutline = () => {
             </div>
             <div className="bg-surface-1-solid p-6 sm:p-7">
               <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Length</p>
-              <p className="font-display text-paper text-3xl sm:text-4xl">10 modules</p>
+              <p className="font-display text-paper text-3xl sm:text-4xl">9 modules</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
                 2–3 hours total · 25–35 short videos, 3–7 minutes each.
               </p>
@@ -230,7 +230,7 @@ const CourseOutline = () => {
       <section className="py-16 sm:py-24 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
-            The 10 modules
+            The 9 modules
           </p>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-snug tracking-tight mb-10 max-w-2xl">
             What you'll learn.
@@ -241,7 +241,7 @@ const CourseOutline = () => {
           </div>
 
           <p className="text-paper-dim text-sm mt-8">
-            The 10-module ADUAtlas course. Your access never expires. Renew any year for $99 to refresh with the latest regulations, types, and costs.
+            The 9-module ADUAtlas course. Your access never expires. Renew any year for $99 to refresh with the latest regulations, types, and costs.
           </p>
         </div>
       </section>

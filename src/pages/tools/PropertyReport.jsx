@@ -303,7 +303,7 @@ const PropertyReport = () => {
         </ul>
       </Section>
 
-      <Section number="10" title="Recommended next steps" subtitle="From Module 10 — verify twice, build once.">
+      <Section number="10" title="Recommended next steps" subtitle="From the final module — verify twice, build once.">
         <ol className="space-y-2.5">
           {NEXT_STEPS.map((s, i) => (
             <li key={i} className="flex items-start gap-3 text-paper-dim text-sm leading-relaxed">

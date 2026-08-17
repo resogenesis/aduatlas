@@ -538,67 +538,8 @@ export const modules = [
     ]
   },
   {
-    "id": "m8",
-    "n": 8,
-    "title": "Builder Preparation",
-    "blurb": "Get organized before you talk to builders so proposals are accurate and easy to compare.",
-    "intro": "Speaking with builders is one of the most important steps in the ADU process — and one homeowners often rush into unprepared. This module helps you organize your project, understand the questions builders will ask, know the questions you should ask them, and compare proposals with confidence.",
-    "chapters": [
-      {
-        "id": "m8c1",
-        "n": 1,
-        "title": "Preparing to Meet with a Builder",
-        "blurb": "Why preparation comes before the first builder conversation.",
-        "minutes": 4
-      },
-      {
-        "id": "m8c2",
-        "n": 2,
-        "title": "Questions Your Builder Is Likely to Ask",
-        "blurb": "Have these answers ready so your project moves forward efficiently.",
-        "minutes": 4
-      },
-      {
-        "id": "m8c3",
-        "n": 3,
-        "title": "Questions Every Homeowner Should Ask a Builder",
-        "blurb": "Don't assume two proposals include the same services.",
-        "minutes": 5
-      },
-      {
-        "id": "m8c4",
-        "n": 4,
-        "title": "Questions for a Prefab, Modular, or Kit ADU Supplier",
-        "blurb": "Know exactly what's included before you buy a factory-built ADU.",
-        "minutes": 6
-      },
-      {
-        "id": "m8c5",
-        "n": 5,
-        "title": "Compare Bids Carefully",
-        "blurb": "The lowest price isn't always the best value.",
-        "minutes": 3
-      },
-      {
-        "id": "m8c6",
-        "n": 6,
-        "title": "ADUAtlas Guidance & Module Summary",
-        "blurb": "What these tools do, what they don't, and where you go next.",
-        "minutes": 4
-      },
-      {
-        "id": "m8quiz",
-        "n": 7,
-        "kind": "quiz",
-        "title": "Module 8 Quiz",
-        "blurb": "Test your knowledge before moving on.",
-        "minutes": 5
-      }
-    ]
-  },
-  {
     "id": "m9",
-    "n": 9,
+    "n": 8,
     "title": "Property Feasibility Report Packet",
     "blurb": "Verify what you can build, and where, before spending money — inside the ADUAtlas Property Feasibility Study.",
     "intro": "You've learned how detached ADUs work, how regulations shape your project, how to prepare your site, and how to build a preliminary budget. Now it's time to apply that knowledge to your specific property. This module walks through the ADUAtlas Property Feasibility Study — the packet that turns everything you've learned into a plan for your lot.",
@@ -656,7 +597,7 @@ export const modules = [
         "id": "m9quiz",
         "n": 8,
         "kind": "quiz",
-        "title": "Module 9 Quiz",
+        "title": "Module 8 Quiz",
         "blurb": "Test your knowledge before moving on.",
         "minutes": 5
       }
@@ -664,7 +605,7 @@ export const modules = [
   },
   {
     "id": "m10",
-    "n": 10,
+    "n": 9,
     "title": "From Vision to Reality",
     "blurb": "Cedar Grove's lessons, the verification process, your real budget, and everything that carries your vision into a buildable plan.",
     "intro": "Congratulations — you have completed the education. Building a detached ADU is not a simple transaction: there are property conditions, regulations, construction choices, utility requirements, pre-site expenses, and permitting procedures to consider. This final module moves you from education to verification: verify your utilities, refine your pre-site estimate, organize your total project budget, prepare for builder conversations, work with your city — and keep asking one final question: what else? Is there anything I am missing? The goal is not simply to build an ADU. The goal is to make the best decision for you, your property, your budget, and your vision. Remember the carpenter's rule: measure twice, cut once. For an ADU project, that means verify twice, build once.",
@@ -712,38 +653,45 @@ export const modules = [
         "minutes": 6
       },
       {
-        "id": "m10c7",
+        "id": "m8c4",
         "n": 7,
+        "title": "Questions for a Prefab, Modular, or Kit Supplier",
+        "blurb": "Know exactly what is included before you buy a factory-built ADU.",
+        "minutes": 6
+      },
+      {
+        "id": "m10c7",
+        "n": 8,
         "title": "Working with Your City & Utility Providers",
         "blurb": "Easements, planned infrastructure, and why the first No isn't always final.",
         "minutes": 5
       },
       {
         "id": "m10c8",
-        "n": 8,
+        "n": 9,
         "title": "Hiring a Builder or Being Your Own GC",
         "blurb": "Two very different roles — choose the one that matches your capacity.",
         "minutes": 4
       },
       {
         "id": "m10c9",
-        "n": 9,
+        "n": 10,
         "title": "The ADUAtlas Promise & Your Next Steps",
         "blurb": "One year of access, our information commitment, and your 10-step checklist.",
         "minutes": 5
       },
       {
         "id": "m10c10",
-        "n": 10,
+        "n": 11,
         "title": "Course Summary & Wrap-Up",
         "blurb": "Everything you now understand — and the framework to carry forward.",
         "minutes": 4
       },
       {
         "id": "m10quiz",
-        "n": 11,
+        "n": 12,
         "kind": "quiz",
-        "title": "Module 10 Quiz",
+        "title": "Module 9 Quiz",
         "blurb": "Test your knowledge one final time.",
         "minutes": 5
       }
