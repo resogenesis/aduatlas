@@ -2,8 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import AddressIntake from "./AddressIntake";
+import { useContentText } from "../../lib/content";
 
 const QuizHero = () => {
+  const eyebrow = useContentText("home.quizhero.eyebrow");
+  const headingPre = useContentText("home.quizhero.heading_pre");
+  const headingEmphasis = useContentText("home.quizhero.heading_emphasis");
+  const headingPost = useContentText("home.quizhero.heading_post");
+  const body = useContentText("home.quizhero.body");
+  const resultTitle = useContentText("home.quizhero.gauge_result_title");
+  const resultDesc = useContentText("home.quizhero.gauge_result_desc");
+
   // Animated sample readiness score: 0 → 47 with cubic ease-out.
   const [score, setScore] = useState(0);
   const target = 47;
@@ -38,7 +47,7 @@ const QuizHero = () => {
           <div className="inline-flex items-center gap-2 mb-7 sm:mb-8 animate-fade-up" style={{ animationDelay: "0ms" }}>
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
             <span className="text-paper-dim text-xs sm:text-sm font-medium tracking-[0.2em] uppercase">
-              ADUAtlas Pre-Construction Preparation for Homeowners
+              {eyebrow}
             </span>
           </div>
 
@@ -46,14 +55,14 @@ const QuizHero = () => {
             className="font-display font-medium text-paper text-[2.6rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.02] tracking-tight max-w-4xl animate-fade-up"
             style={{ animationDelay: "100ms" }}
           >
-            Find Out What You Can <span className="italic">Legally Build</span> on Your Property
+            {headingPre} <span className="italic">{headingEmphasis}</span> {headingPost}
           </h1>
 
           <p
             className="mt-7 sm:mt-9 text-paper-dim text-base sm:text-lg lg:text-xl max-w-xl leading-relaxed animate-fade-up"
             style={{ animationDelay: "240ms" }}
           >
-            Most homeowners underestimate the complexity of building an ADU and end up making mistakes that cost time and money. ADUAtlas gives homeowners the opportunity to learn the process and obtain property-specific information before making important decisions. Before investing in surveys, site plans, permits, or builder consultations, you need to understand your local ADU zoning regulations, pre-site costs, project timelines, and available ADU options.
+            {body}
           </p>
 
           <div className="mt-9 sm:mt-12 animate-fade-up" style={{ animationDelay: "380ms" }}>
@@ -112,9 +121,9 @@ const QuizHero = () => {
 
               <div className="relative mt-5 pt-5 border-t border-stroke">
                 <p className="text-paper-dim text-xs uppercase tracking-wider mb-1.5">Result</p>
-                <p className="text-paper font-display text-2xl">Foundational gaps</p>
+                <p className="text-paper font-display text-2xl">{resultTitle}</p>
                 <p className="text-paper-dim text-sm mt-1.5 leading-relaxed">
-                  Three things to fix before talking to a builder.
+                  {resultDesc}
                 </p>
               </div>
             </div>

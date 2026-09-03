@@ -1,114 +1,44 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiPlayCircle, FiFileText, FiHelpCircle, FiImage } from "react-icons/fi";
 import { useReveal } from "../hooks/useReveal";
+import { useContentText } from "../lib/content";
+import { COURSE_OUTLINE_MODULES_META } from "../lib/contentRegistry/courseOutline";
 
-const moduleIncludes = [
-  { Icon: FiPlayCircle, label: "Short video lessons (3–7 min each)" },
-  { Icon: FiFileText, label: "PDF lesson notes" },
-  { Icon: FiHelpCircle, label: "Short quiz at the end of each module" },
-  { Icon: FiImage, label: "Selected modules include photos and videos" },
-];
+// Icons + item order stay code-owned; every text leaf is admin-editable via
+// the courseoutline.* keys in src/lib/contentRegistry/courseOutline.js.
+const INCLUDE_ICONS = [FiPlayCircle, FiFileText, FiHelpCircle, FiImage];
+const MAX_TOPICS = 3;
 
-const modules = [
-  {
-    n: "01",
-    title: "ADU Basics",
-    desc: "What an ADU is, the main types, and why homeowners build them.",
-    topics: [
-      "What is an ADU? — definitions, detached vs. attached, JADUs, tiny homes vs. ADUs, common uses",
-      "Why homeowners build — family housing, aging parents, adult children, rental income, office & guest space",
-    ],
-  },
-  {
-    n: "02",
-    title: "Understanding City & State ADU Regulations",
-    desc: "The state, local, and HOA rules that decide what you can build.",
-    topics: [
-      "Why location matters — state rules vs. local zoning, city-specific regulations, HOA considerations",
-      "Key regulations — setbacks, height limits, size limits, lot coverage, parking, utility requirements",
-      "Why most homeowners get confused",
-    ],
-  },
-  {
-    n: "03",
-    title: "The 10-Step ADU Process",
-    desc: "Learn → Verify → Review → Plan → Verify → Build, mapped end to end.",
-    topics: [
-      "Step-by-step roadmap: education, feasibility, budgeting, ADU selection, survey, site plan, builder selection, permits, construction, final inspection",
-    ],
-  },
-  {
-    n: "04",
-    title: "Explore 25+ ADU Types & Construction Methods",
-    tag: "Extensive ADU photos & videos",
-    desc: "Every major build method and ADU style, compared on cost and value.",
-    topics: [
-      "Methods — stick-built, modular, prefab, panelized, SIP, manufactured",
-      "Specialty ADUs — container homes, cabin kits, bunkies, timber frame, A-frame, dome homes, Quonset huts",
-      "Cost comparison, pros and cons",
-    ],
-  },
-  {
-    n: "05",
-    title: "Pre-Site Preparation & Budgets",
-    tag: "Major value driver",
-    desc: "The pre-site costs most homeowners never hear about — until they do.",
-    topics: [
-      "Costs most homeowners miss or overlook — survey, site plan, utilities, excavation, concrete, retaining walls, tree removal, drainage",
-      "Real examples",
-    ],
-  },
-  {
-    n: "06",
-    title: "ADU FAQ",
-    desc: "Straight answers to the questions homeowners ask most.",
-    topics: [
-      "Common ADU questions, answered",
-    ],
-  },
-  {
-    n: "07",
-    title: "False Starts",
-    tag: "NAPE",
-    desc: "National ADU Property Evaluation — knowing when to stop before you spend.",
-    topics: [
-      "The National ADU Property Evaluation (NAPE)",
-      "If the pre-site worksheet shows it could cost $75k, would you still move forward?",
-    ],
-  },
-  {
-    n: "08",
-    title: "Builder Preparation",
-    desc: "Walk into builder conversations ready, not guessing.",
-    topics: [
-      "When to contact builders, questions to ask, red flags",
-      "How to compare quotes, and why builders need your property information",
-    ],
-    note: "Before requesting builder quotes, obtain your ADUAtlas Property Feasibility Study.",
-  },
-  {
-    n: "09",
-    title: "Property Feasibility Report Packet",
-    desc: "What the packet includes — and why it saves you time and money.",
-    topics: [
-      "GIS property diagram with local zoning applied — dimensions, existing footprint, overlays, setbacks, largest possible ADU placement",
-      "4 interactive worksheets — budget tools, timelines, permits, inspections",
-      "NAPE score, plus a utility professional contact to mark your utility access",
-    ],
-  },
-  {
-    n: "10",
-    title: "Moving Forward Prepared",
-    desc: "Put it all together and take the next step with confidence.",
-    topics: [
-      "Selecting an ADU, comparing builders from the ADUAtlas Professional Profiles, planning realistically",
-      "Next steps → Get your ADUAtlas Property Feasibility Study",
-    ],
-  },
-];
+const IncludeItem = ({ i }) => {
+  const Icon = INCLUDE_ICONS[i];
+  const label = useContentText(`courseoutline.include.${i}.label`);
+  return (
+    <div className="bg-surface-1-solid border border-stroke rounded-2xl p-5 sm:p-6 flex items-start gap-3">
+      <span className="text-accent text-xl mt-0.5 shrink-0" aria-hidden>
+        <Icon />
+      </span>
+      <p className="text-paper text-sm sm:text-base leading-snug">{label}</p>
+    </div>
+  );
+};
 
-const ModuleCard = ({ m, i }) => {
+// Every ModuleCard calls the same fixed set of hooks (title/desc/tag/note +
+// MAX_TOPICS topic slots) regardless of this module's actual field set —
+// unused slots have no registry entry and resolve to "", so hook call order
+// never varies per the rules of hooks.
+const ModuleCard = ({ meta, i }) => {
   const ref = useReveal(i * 50);
+  const title = useContentText(`courseoutline.module.${i}.title`);
+  const tag = useContentText(`courseoutline.module.${i}.tag`);
+  const desc = useContentText(`courseoutline.module.${i}.desc`);
+  const note = useContentText(`courseoutline.module.${i}.note`);
+  const allTopics = [
+    useContentText(`courseoutline.module.${i}.topic.0`),
+    useContentText(`courseoutline.module.${i}.topic.1`),
+    useContentText(`courseoutline.module.${i}.topic.2`),
+  ];
+  const topics = allTopics.slice(0, meta.topicCount);
+
   return (
     <div
       ref={ref}
@@ -116,29 +46,29 @@ const ModuleCard = ({ m, i }) => {
     >
       <div className="flex items-start justify-between gap-3 mb-3">
         <span className="font-display text-paper-dim text-2xl sm:text-3xl tabular-nums group-hover:text-accent transition-colors">
-          {m.n}
+          {meta.n}
         </span>
-        {m.tag && (
+        {meta.hasTag && (
           <span className="text-[10px] sm:text-xs font-medium tracking-wider uppercase text-accent border border-accent/40 rounded-full px-2.5 py-1">
-            {m.tag}
+            {tag}
           </span>
         )}
       </div>
-      <h3 className="font-display text-paper text-lg sm:text-xl leading-snug mb-2">{m.title}</h3>
-      <p className="text-paper-dim text-sm sm:text-base leading-relaxed">{m.desc}</p>
-      {m.topics && (
+      <h3 className="font-display text-paper text-lg sm:text-xl leading-snug mb-2">{title}</h3>
+      <p className="text-paper-dim text-sm sm:text-base leading-relaxed">{desc}</p>
+      {topics.length > 0 && (
         <ul className="mt-4 space-y-2">
-          {m.topics.map((t) => (
-            <li key={t} className="flex items-start gap-2 text-paper-dim/90 text-sm leading-relaxed">
+          {topics.map((t, j) => (
+            <li key={j} className="flex items-start gap-2 text-paper-dim/90 text-sm leading-relaxed">
               <FiCheck className="shrink-0 mt-0.5 text-accent" />
               <span>{t}</span>
             </li>
           ))}
         </ul>
       )}
-      {m.note && (
+      {meta.hasNote && (
         <p className="mt-4 text-sm italic text-accent/90 border-l-2 border-accent/40 pl-3">
-          {m.note}
+          {note}
         </p>
       )}
     </div>
@@ -151,6 +81,35 @@ const CourseOutline = () => {
   const ideaRef = useReveal(120);
   const ctaRef = useReveal(180);
 
+  const heroEyebrow = useContentText("courseoutline.hero.eyebrow");
+  const heroHeading = useContentText("courseoutline.hero.heading");
+  const heroBody = useContentText("courseoutline.hero.body");
+
+  const strip0Label = useContentText("courseoutline.strip.0.label");
+  const strip0Value = useContentText("courseoutline.strip.0.value");
+  const strip0Desc = useContentText("courseoutline.strip.0.desc");
+  const strip1Label = useContentText("courseoutline.strip.1.label");
+  const strip1Value = useContentText("courseoutline.strip.1.value");
+  const strip1Desc = useContentText("courseoutline.strip.1.desc");
+  const strip2Label = useContentText("courseoutline.strip.2.label");
+  const strip2Value = useContentText("courseoutline.strip.2.value");
+  const strip2Desc = useContentText("courseoutline.strip.2.desc");
+
+  const includesEyebrow = useContentText("courseoutline.includes.eyebrow");
+  const includesHeading = useContentText("courseoutline.includes.heading");
+  const includesNote = useContentText("courseoutline.includes.note");
+
+  const modulesEyebrow = useContentText("courseoutline.modules.eyebrow");
+  const modulesHeading = useContentText("courseoutline.modules.heading");
+  const modulesFootnote = useContentText("courseoutline.modules.footnote");
+
+  const ideaEyebrow = useContentText("courseoutline.idea.eyebrow");
+  const ideaBodyPre = useContentText("courseoutline.idea.body_pre");
+  const ideaBodyEmphasis = useContentText("courseoutline.idea.body_emphasis");
+  const ideaBodyPost = useContentText("courseoutline.idea.body_post");
+  const ctaButton = useContentText("courseoutline.cta.button");
+  const ctaNote = useContentText("courseoutline.cta.note");
+
   return (
     <div className="w-full bg-canvas">
       {/* HERO */}
@@ -158,13 +117,13 @@ const CourseOutline = () => {
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <div ref={headRef}>
             <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
-              ADUAtlas ADU Course
+              {heroEyebrow}
             </p>
             <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight max-w-3xl">
-              What does a homeowner need to know before spending money on an ADU?
+              {heroHeading}
             </h1>
             <p className="mt-6 text-paper-dim text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed">
-              The course won't make you an ADU expert. It will help you understand the process, avoid mistakes, and see why a feasibility study matters — for homeowners in the pre-construction planning phase, nationwide.
+              {heroBody}
             </p>
           </div>
 
@@ -174,24 +133,24 @@ const CourseOutline = () => {
             className="mt-10 sm:mt-12 grid sm:grid-cols-3 gap-px bg-stroke border border-stroke rounded-2xl overflow-hidden"
           >
             <div className="bg-surface-1-solid p-6 sm:p-7">
-              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Course fee</p>
-              <p className="font-display text-paper text-3xl sm:text-4xl">$99</p>
+              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">{strip0Label}</p>
+              <p className="font-display text-paper text-3xl sm:text-4xl">{strip0Value}</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
-                Your $99 is credited toward the $399 Property Feasibility Report when you upgrade within 90 days.
+                {strip0Desc}
               </p>
             </div>
             <div className="bg-surface-1-solid p-6 sm:p-7">
-              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Access</p>
-              <p className="font-display text-paper text-3xl sm:text-4xl">Forever</p>
+              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">{strip1Label}</p>
+              <p className="font-display text-paper text-3xl sm:text-4xl">{strip1Value}</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
-                Yours to keep. Renew the latest information any year for $99.
+                {strip1Desc}
               </p>
             </div>
             <div className="bg-surface-1-solid p-6 sm:p-7">
-              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Length</p>
-              <p className="font-display text-paper text-3xl sm:text-4xl">9 modules</p>
+              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">{strip2Label}</p>
+              <p className="font-display text-paper text-3xl sm:text-4xl">{strip2Value}</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
-                2–3 hours total · 25–35 short videos, 3–7 minutes each.
+                {strip2Desc}
               </p>
             </div>
           </div>
@@ -202,26 +161,16 @@ const CourseOutline = () => {
       <section className="py-16 sm:py-20 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
-            Each module includes
+            {includesEyebrow}
           </p>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-snug tracking-tight mb-10 max-w-2xl">
-            Short, structured, and built for retention.
+            {includesHeading}
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-            {moduleIncludes.map((inc) => (
-              <div
-                key={inc.label}
-                className="bg-surface-1-solid border border-stroke rounded-2xl p-5 sm:p-6 flex items-start gap-3"
-              >
-                <span className="text-accent text-xl mt-0.5 shrink-0" aria-hidden>
-                  <inc.Icon />
-                </span>
-                <p className="text-paper text-sm sm:text-base leading-snug">{inc.label}</p>
-              </div>
-            ))}
+            {INCLUDE_ICONS.map((_, i) => <IncludeItem key={i} i={i} />)}
           </div>
           <p className="text-paper-dim text-sm mt-6">
-            Module 4 includes extensive ADU photos and videos.
+            {includesNote}
           </p>
         </div>
       </section>
@@ -230,18 +179,18 @@ const CourseOutline = () => {
       <section className="py-16 sm:py-24 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
-            The 9 modules
+            {modulesEyebrow}
           </p>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-snug tracking-tight mb-10 max-w-2xl">
-            What you'll learn.
+            {modulesHeading}
           </h2>
 
           <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
-            {modules.map((m, i) => <ModuleCard key={m.n} m={m} i={i} />)}
+            {COURSE_OUTLINE_MODULES_META.map((meta, i) => <ModuleCard key={meta.n} meta={meta} i={i} />)}
           </div>
 
           <p className="text-paper-dim text-sm mt-8">
-            The 9-module ADUAtlas course. Includes one year of access — renew for $99/year to keep your access and refresh with the latest regulations, types, and costs.
+            {modulesFootnote}
           </p>
         </div>
       </section>
@@ -254,10 +203,10 @@ const CourseOutline = () => {
             className="bg-surface-1-solid border border-stroke rounded-2xl p-7 sm:p-10"
           >
             <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
-              The one idea this course reinforces
+              {ideaEyebrow}
             </p>
             <p className="font-display text-paper text-2xl sm:text-3xl leading-snug tracking-tight max-w-3xl">
-              Education tells you how the ADU process works. The Property Feasibility Study tells you how it applies to <span className="italic">your</span> property.
+              {ideaBodyPre} <span className="italic">{ideaBodyEmphasis}</span> {ideaBodyPost}
             </p>
           </div>
 
@@ -266,12 +215,12 @@ const CourseOutline = () => {
               to="/unlock"
               className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
             >
-              Start the ADU Course — $99
+              {ctaButton}
               <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <span className="text-paper-dim text-sm inline-flex items-center gap-2">
               <FiCheck className="text-accent" />
-              $99 credited toward your $399 Report when you upgrade within 90 days
+              {ctaNote}
             </span>
           </div>
         </div>

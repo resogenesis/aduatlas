@@ -9,9 +9,10 @@ import {
   markChapterComplete,
   unmarkChapter,
 } from "../../stores/courseStore";
-import { CHAPTER_CONTENT, MODULE_QUIZZES } from "../../stores/courseContent";
+import { MODULE_QUIZZES } from "../../stores/courseContent";
 import ModuleQuiz from "../../components/course/ModuleQuiz";
 import Sections from "../../components/course/Sections";
+import { useContentBlocks } from "../../lib/content";
 
 // Renders one chapter (or a module quiz) from the shared course structure.
 // Content sections come from courseContent, rendered by the shared Sections
@@ -21,6 +22,9 @@ const CourseChapter = () => {
   const { chapterId } = useParams();
   const navigate = useNavigate();
   const [completed, setCompleted] = useState(getCompletedChapters().has(chapterId));
+  // Called before the "chapter not found" early return below, per rules of
+  // hooks — harmless for an invalid chapterId, since it just falls back to [].
+  const sections = useContentBlocks(`course.chapter.${chapterId}`);
 
   const idx = chapters.findIndex((c) => c.id === chapterId);
   const chapter = chapterById(chapterId);
@@ -37,7 +41,6 @@ const CourseChapter = () => {
   const next = chapters[idx + 1];
   const prev = chapters[idx - 1];
   const isQuiz = chapter.kind === "quiz";
-  const sections = CHAPTER_CONTENT[chapterId] || [];
   const quiz = isQuiz ? MODULE_QUIZZES[chapter.moduleId] : null;
 
   // Position within the module's content chapters (quiz excluded from the count).
