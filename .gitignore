@@ -31,3 +31,4 @@ dist-ssr
 # Local-only spec doc
 SPEC.md
 .vercel
+supabase/.temp
