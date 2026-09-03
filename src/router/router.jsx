@@ -57,6 +57,7 @@ import AdminGate from "../components/gates/AdminGate";
 import AdminOverview from "../pages/admin/AdminOverview";
 import AdminUsers from "../pages/admin/AdminUsers";
 import AdminAdmins from "../pages/admin/AdminAdmins";
+import AdminContent from "../pages/admin/AdminContent";
 
 import PaidGate from "../components/gates/PaidGate";
 
@@ -108,6 +109,7 @@ const router = createBrowserRouter([
     element: <AdminGate><AdminLayout /></AdminGate>,
     children: [
       { index: true, element: <AdminOverview /> },
+      { path: "content", element: <AdminContent /> },
       { path: "users", element: <AdminUsers /> },
       { path: "admins", element: <AdminAdmins /> },
     ],

@@ -1,42 +1,16 @@
 import { FiMap, FiHome, FiDollarSign, FiCompass, FiClipboard, FiUsers } from "react-icons/fi";
 import { useReveal } from "../../hooks/useReveal";
+import { useContentText } from "../../lib/content";
 
-const items = [
-  {
-    Icon: FiMap,
-    title: "Understand local ADU regulations",
-    desc: "and how they pertain to your property.",
-  },
-  {
-    Icon: FiHome,
-    title: "Explore 30+ ADU types",
-    desc: "compare construction, design methods, and costs.",
-  },
-  {
-    Icon: FiDollarSign,
-    title: "Build a realistic total budget",
-    desc: "understand both pre-site and ADU structure cost.",
-  },
-  {
-    Icon: FiCompass,
-    title: "Follow the ADUAtlas 10-Step Guide",
-    desc: "the process to your property feasibility.",
-  },
-  {
-    Icon: FiClipboard,
-    title: "Obtain a realistic feasibility study",
-    desc: "for your property before you make any decisions.",
-  },
-  {
-    Icon: FiUsers,
-    title: "Be prepared to speak with builders",
-    desc: "about the specifics of your property, with a feasibility study that lets you get reasonable quotes that are easy to compare.",
-  },
-];
+// Icons + item order stay code-owned; title/desc text is admin-editable
+// (home.riskcallouts.item.{i}.title / .desc in the content registry).
+const ICONS = [FiMap, FiHome, FiDollarSign, FiCompass, FiClipboard, FiUsers];
 
-const ItemRow = ({ item, i }) => {
+const ItemRow = ({ i }) => {
   const ref = useReveal(i * 80);
-  const { Icon } = item;
+  const Icon = ICONS[i];
+  const title = useContentText(`home.riskcallouts.item.${i}.title`);
+  const desc = useContentText(`home.riskcallouts.item.${i}.desc`);
   return (
     <div
       ref={ref}
@@ -50,10 +24,10 @@ const ItemRow = ({ item, i }) => {
       </span>
       <div className="min-w-0">
         <h3 className="font-display font-medium text-paper text-lg sm:text-xl lg:text-2xl leading-snug">
-          {item.title}
+          {title}
         </h3>
         <p className="text-paper-dim text-base leading-relaxed mt-1.5 max-w-2xl">
-          {item.desc}
+          {desc}
         </p>
       </div>
     </div>
@@ -63,27 +37,38 @@ const ItemRow = ({ item, i }) => {
 const RiskCallouts = () => {
   const headRef = useReveal(0);
   const closeRef = useReveal(120);
+  const eyebrow = useContentText("home.riskcallouts.eyebrow");
+  const headingPre = useContentText("home.riskcallouts.heading_pre");
+  const headingEmphasis = useContentText("home.riskcallouts.heading_emphasis");
+  const intro = useContentText("home.riskcallouts.intro");
+  const closing = useContentText("home.riskcallouts.closing");
+
   return (
     <section className="bg-canvas py-24 sm:py-32">
       <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
         <div ref={headRef} className="mb-12 sm:mb-16 max-w-3xl">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
-            Where projects derail
+            {eyebrow}
           </p>
           <h2 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
-            Most homeowners are unprepared. <span className="italic">This is how projects go off track.</span>
+            {headingPre} <span className="italic">{headingEmphasis}</span>
           </h2>
           <p className="mt-7 text-paper-dim text-base sm:text-lg leading-relaxed">
-            Learn about the process and products before you waste any time or money.<br />ADUAtlas provides specific information on both.
+            {intro.split("\n").map((line, i) => (
+              <span key={i}>
+                {i > 0 && <br />}
+                {line}
+              </span>
+            ))}
           </p>
         </div>
 
         <div className="space-y-px">
-          {items.map((item, i) => <ItemRow key={i} item={item} i={i} />)}
+          {ICONS.map((_, i) => <ItemRow key={i} i={i} />)}
         </div>
 
         <p ref={closeRef} className="mt-12 sm:mt-14 text-paper text-lg sm:text-xl font-display leading-snug max-w-2xl">
-          Be prepared before speaking with builders, suppliers, or your city.
+          {closing}
         </p>
       </div>
     </section>
