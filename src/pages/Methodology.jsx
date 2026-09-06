@@ -3,6 +3,7 @@ import { FiAlertTriangle, FiArrowRight, FiCheck, FiHelpCircle, FiShield } from "
 import { useReveal } from "../hooks/useReveal";
 import { useContentText } from "../lib/content";
 import { METHODOLOGY_LEVELS_META } from "../lib/contentRegistry/methodology";
+import { AdminEditableSection } from "../lib/adminEditBridge";
 
 const ICONS = { FiCheck, FiHelpCircle, FiAlertTriangle };
 const SOURCE_COUNT = 5;
@@ -99,6 +100,10 @@ const Methodology = () => {
   return (
     <div className="bg-canvas">
       {/* Hero */}
+      <AdminEditableSection
+        keys={["methodology.hero.badge", "methodology.hero.heading_pre", "methodology.hero.heading_emphasis", "methodology.hero.body"]}
+        label="Hero"
+      >
       <section className="relative overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-12 border-b border-stroke">
         <div aria-hidden className="pointer-events-none absolute -top-24 right-0 w-[28rem] h-[28rem] rounded-full bg-accent/8 blur-3xl animate-drift-glow" />
 
@@ -123,10 +128,25 @@ const Methodology = () => {
           </p>
         </div>
       </section>
+      </AdminEditableSection>
 
       <div className="container mx-auto px-5 sm:px-8 max-w-4xl py-14 sm:py-20 space-y-6">
 
         {/* Confidence levels */}
+        <AdminEditableSection
+          keys={[
+            "methodology.levels.eyebrow",
+            "methodology.levels.heading",
+            ...METHODOLOGY_LEVELS_META.flatMap((_, i) => [
+              `methodology.level.${i}.label`,
+              `methodology.level.${i}.when`,
+              `methodology.level.${i}.example.0`,
+              `methodology.level.${i}.example.1`,
+              `methodology.level.${i}.example.2`,
+            ]),
+          ]}
+          label="Confidence levels"
+        >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
           <p className="text-accent text-xs uppercase tracking-[0.2em] mb-5">{levelsEyebrow}</p>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-9">
@@ -136,8 +156,21 @@ const Methodology = () => {
             {METHODOLOGY_LEVELS_META.map((meta, i) => <LevelRow key={i} meta={meta} i={i} />)}
           </div>
         </section>
+        </AdminEditableSection>
 
         {/* What raises a row */}
+        <AdminEditableSection
+          keys={[
+            "methodology.path.eyebrow",
+            "methodology.path.heading",
+            "methodology.path.body",
+            "methodology.path.example_label",
+            "methodology.path.example_row",
+            "methodology.path.example_confidence",
+            "methodology.path.example_quote",
+          ]}
+          label="What raises a row"
+        >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
           <p className="text-accent text-xs uppercase tracking-[0.2em] mb-5">{pathEyebrow}</p>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-5">
@@ -158,8 +191,23 @@ const Methodology = () => {
             </p>
           </div>
         </section>
+        </AdminEditableSection>
 
         {/* Data sources + cadence */}
+        <AdminEditableSection
+          keys={[
+            "methodology.sources.eyebrow",
+            "methodology.sources.heading",
+            "methodology.sources.footnote_1",
+            "methodology.sources.footnote_2",
+            ...Array.from({ length: SOURCE_COUNT }, (_, i) => [
+              `methodology.source.${i}.name`,
+              `methodology.source.${i}.cadence`,
+              `methodology.source.${i}.coverage`,
+            ]).flat(),
+          ]}
+          label="Data sources"
+        >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
           <p className="text-accent text-xs uppercase tracking-[0.2em] mb-5">{sourcesEyebrow}</p>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-7">
@@ -175,8 +223,20 @@ const Methodology = () => {
             {sourcesFootnote2}
           </p>
         </section>
+        </AdminEditableSection>
 
         {/* What we don't do */}
+        <AdminEditableSection
+          keys={[
+            "methodology.notdoing.badge",
+            "methodology.notdoing.heading_pre",
+            "methodology.notdoing.heading_emphasis",
+            "methodology.notdoing.body",
+            "methodology.notdoing.footnote",
+            ...Array.from({ length: NOT_DOING_COUNT }, (_, i) => `methodology.notdoing.item.${i}`),
+          ]}
+          label="What we don't do"
+        >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
           <div className="flex items-center gap-2 text-accent text-xs uppercase tracking-[0.2em] mb-5">
             <FiShield /> {notDoingBadge}
@@ -194,8 +254,10 @@ const Methodology = () => {
             {notDoingFootnote}
           </p>
         </section>
+        </AdminEditableSection>
 
         {/* CTA */}
+        <AdminEditableSection keys={["methodology.cta.heading", "methodology.cta.body", "methodology.cta.button"]} label="CTA">
         <section className="bg-accent text-accent-fg rounded-3xl p-8 sm:p-12 text-center">
           <h2 className="font-display font-medium text-3xl sm:text-4xl leading-tight mb-4">
             {ctaHeading}
@@ -210,6 +272,7 @@ const Methodology = () => {
             {ctaButton} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </section>
+        </AdminEditableSection>
       </div>
     </div>
   );

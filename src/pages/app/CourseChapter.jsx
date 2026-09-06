@@ -13,6 +13,7 @@ import { MODULE_QUIZZES } from "../../stores/courseContent";
 import ModuleQuiz from "../../components/course/ModuleQuiz";
 import Sections from "../../components/course/Sections";
 import { useContentBlocks } from "../../lib/content";
+import { AdminEditableSection } from "../../lib/adminEditBridge";
 
 // Renders one chapter (or a module quiz) from the shared course structure.
 // Content sections come from courseContent, rendered by the shared Sections
@@ -89,7 +90,9 @@ const CourseChapter = () => {
       {isQuiz && quiz ? (
         <ModuleQuiz quiz={quiz} completed={completed} onComplete={() => complete(false)} />
       ) : (
-        <Sections sections={sections} />
+        <AdminEditableSection keys={[`course.chapter.${chapterId}`]} label={chapter.title}>
+          <Sections sections={sections} />
+        </AdminEditableSection>
       )}
 
       {/* Footer actions */}

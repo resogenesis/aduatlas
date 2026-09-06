@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContentText, paragraphs } from "../lib/content";
 import { LEGAL_SECTIONS_META } from "../lib/contentRegistry/legal";
+import { AdminEditableSection } from "../lib/adminEditBridge";
 
 const TocLink = ({ id, labelKey }) => {
   const label = useContentText(labelKey);
@@ -38,6 +39,7 @@ const Section = ({ id, headingKey, bodyKey }) => {
   const heading = useContentText(headingKey);
   const body = useContentText(bodyKey);
   return (
+    <AdminEditableSection keys={[headingKey, bodyKey]} label={heading}>
     <section id={id} className="scroll-mt-20">
       <h2 className="font-display font-medium text-paper text-2xl sm:text-3xl tracking-tight mb-4">{heading}</h2>
       {paragraphs(body).map((chunk, i) => {
@@ -53,6 +55,7 @@ const Section = ({ id, headingKey, bodyKey }) => {
         return <p key={i} className={i > 0 ? "mt-3" : undefined}>{renderRich(chunk)}</p>;
       })}
     </section>
+    </AdminEditableSection>
   );
 };
 
@@ -75,6 +78,10 @@ const Legal = () => {
   return (
     <div className="bg-canvas">
       {/* Hero */}
+      <AdminEditableSection
+        keys={["legal.hero.badge", "legal.hero.heading_pre", "legal.hero.heading_emphasis", "legal.hero.body", "legal.last_updated"]}
+        label="Hero"
+      >
       <section className="relative overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-12 border-b border-stroke">
         <div aria-hidden className="pointer-events-none absolute -top-24 right-0 w-[28rem] h-[28rem] rounded-full bg-accent/8 blur-3xl animate-drift-glow" />
         <div className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
@@ -95,10 +102,12 @@ const Legal = () => {
           </p>
         </div>
       </section>
+      </AdminEditableSection>
 
       <div className="container mx-auto px-5 sm:px-8 max-w-4xl py-14 sm:py-20 grid lg:grid-cols-12 gap-10">
 
         {/* TOC */}
+        <AdminEditableSection keys={LEGAL_SECTIONS_META.map((s) => s.labelKey)} label="Table of contents">
         <aside className="lg:col-span-3 lg:sticky lg:top-24 self-start">
           <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-4">On this page</p>
           <ul className="space-y-2">
@@ -107,6 +116,7 @@ const Legal = () => {
             ))}
           </ul>
         </aside>
+        </AdminEditableSection>
 
         {/* Body */}
         <article className="lg:col-span-9 space-y-12 text-paper-dim text-base leading-relaxed">
@@ -120,6 +130,10 @@ const Legal = () => {
           <Section id="terms" headingKey="legal.section.terms.heading" bodyKey="legal.section.terms.body" />
           <Section id="refund" headingKey="legal.section.refund.heading" bodyKey="legal.section.refund.body" />
 
+          <AdminEditableSection
+            keys={["legal.section.contact.heading", "legal.contact.lead", "legal.support_email", "legal.contact.followup"]}
+            label="Contact"
+          >
           <section id="contact" className="scroll-mt-20">
             <h2 className="font-display font-medium text-paper text-2xl sm:text-3xl tracking-tight mb-4">{contactHeading}</h2>
             <p>
@@ -132,13 +146,16 @@ const Legal = () => {
               {contactFollowup}
             </p>
           </section>
+          </AdminEditableSection>
 
+          <AdminEditableSection keys={["legal.copyright", "legal.back_link_label"]} label="Footer">
           <div className="pt-8 border-t border-stroke flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
             <p className="text-paper-dim text-xs">{copyright}</p>
             <Link to="/" className="text-paper hover:text-accent text-sm transition-colors">
               {backLinkLabel}
             </Link>
           </div>
+          </AdminEditableSection>
         </article>
       </div>
     </div>

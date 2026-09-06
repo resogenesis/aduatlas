@@ -3,6 +3,7 @@ import { FiArrowRight, FiCheck, FiPlayCircle, FiFileText, FiHelpCircle, FiImage 
 import { useReveal } from "../hooks/useReveal";
 import { useContentText } from "../lib/content";
 import { COURSE_OUTLINE_MODULES_META } from "../lib/contentRegistry/courseOutline";
+import { AdminEditableSection } from "../lib/adminEditBridge";
 
 // Icons + item order stay code-owned; every text leaf is admin-editable via
 // the courseoutline.* keys in src/lib/contentRegistry/courseOutline.js.
@@ -39,7 +40,16 @@ const ModuleCard = ({ meta, i }) => {
   ];
   const topics = allTopics.slice(0, meta.topicCount);
 
+  const keys = [
+    `courseoutline.module.${i}.title`,
+    `courseoutline.module.${i}.desc`,
+    ...(meta.hasTag ? [`courseoutline.module.${i}.tag`] : []),
+    ...(meta.hasNote ? [`courseoutline.module.${i}.note`] : []),
+    ...Array.from({ length: meta.topicCount }, (_, j) => `courseoutline.module.${i}.topic.${j}`),
+  ];
+
   return (
+    <AdminEditableSection keys={keys} label={`Module ${i + 1}`}>
     <div
       ref={ref}
       className="group bg-surface-1-solid border border-stroke rounded-2xl p-6 sm:p-7 hover:border-accent/40 transition-colors"
@@ -72,6 +82,7 @@ const ModuleCard = ({ meta, i }) => {
         </p>
       )}
     </div>
+    </AdminEditableSection>
   );
 };
 
@@ -113,6 +124,23 @@ const CourseOutline = () => {
   return (
     <div className="w-full bg-canvas">
       {/* HERO */}
+      <AdminEditableSection
+        keys={[
+          "courseoutline.hero.eyebrow",
+          "courseoutline.hero.heading",
+          "courseoutline.hero.body",
+          "courseoutline.strip.0.label",
+          "courseoutline.strip.0.value",
+          "courseoutline.strip.0.desc",
+          "courseoutline.strip.1.label",
+          "courseoutline.strip.1.value",
+          "courseoutline.strip.1.desc",
+          "courseoutline.strip.2.label",
+          "courseoutline.strip.2.value",
+          "courseoutline.strip.2.desc",
+        ]}
+        label="Hero"
+      >
       <section className="pt-28 sm:pt-32 lg:pt-40 pb-14 sm:pb-20 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <div ref={headRef}>
@@ -156,8 +184,18 @@ const CourseOutline = () => {
           </div>
         </div>
       </section>
+      </AdminEditableSection>
 
       {/* WHAT EACH MODULE INCLUDES */}
+      <AdminEditableSection
+        keys={[
+          "courseoutline.includes.eyebrow",
+          "courseoutline.includes.heading",
+          "courseoutline.includes.note",
+          ...INCLUDE_ICONS.map((_, i) => `courseoutline.include.${i}.label`),
+        ]}
+        label="Each module includes"
+      >
       <section className="py-16 sm:py-20 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
@@ -174,8 +212,13 @@ const CourseOutline = () => {
           </p>
         </div>
       </section>
+      </AdminEditableSection>
 
       {/* MODULE LIST */}
+      <AdminEditableSection
+        keys={["courseoutline.modules.eyebrow", "courseoutline.modules.heading", "courseoutline.modules.footnote"]}
+        label="Module list header"
+      >
       <section className="py-16 sm:py-24 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
@@ -194,8 +237,20 @@ const CourseOutline = () => {
           </p>
         </div>
       </section>
+      </AdminEditableSection>
 
       {/* CORE IDEA + CTA */}
+      <AdminEditableSection
+        keys={[
+          "courseoutline.idea.eyebrow",
+          "courseoutline.idea.body_pre",
+          "courseoutline.idea.body_emphasis",
+          "courseoutline.idea.body_post",
+          "courseoutline.cta.button",
+          "courseoutline.cta.note",
+        ]}
+        label="Core idea + CTA"
+      >
       <section className="py-16 sm:py-24">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <div
@@ -225,6 +280,7 @@ const CourseOutline = () => {
           </div>
         </div>
       </section>
+      </AdminEditableSection>
     </div>
   );
 };

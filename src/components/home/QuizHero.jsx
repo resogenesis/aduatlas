@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import AddressIntake from "./AddressIntake";
 import { useContentText } from "../../lib/content";
+import { AdminEditableSection } from "../../lib/adminEditBridge";
 
 const QuizHero = () => {
   const eyebrow = useContentText("home.quizhero.eyebrow");
@@ -35,6 +36,18 @@ const QuizHero = () => {
   const offset = circumference - (score / 100) * circumference;
 
   return (
+    <AdminEditableSection
+      keys={[
+        "home.quizhero.eyebrow",
+        "home.quizhero.heading_pre",
+        "home.quizhero.heading_emphasis",
+        "home.quizhero.heading_post",
+        "home.quizhero.body",
+        "home.quizhero.gauge_result_title",
+        "home.quizhero.gauge_result_desc",
+      ]}
+      label="Hero"
+    >
     <section className="relative overflow-hidden bg-canvas pt-28 sm:pt-32 lg:pt-40 pb-20 sm:pb-24 lg:pb-32">
       {/* drifting glows */}
       <div aria-hidden className="pointer-events-none absolute -top-40 -right-40 w-[40rem] h-[40rem] rounded-full bg-accent/10 blur-3xl animate-drift-glow" />
@@ -132,6 +145,7 @@ const QuizHero = () => {
       </div>
 
     </section>
+    </AdminEditableSection>
   );
 };
 

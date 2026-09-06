@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FiArrowRight, FiBookOpen, FiClipboard, FiUsers } from "react-icons/fi";
 import { useContentText } from "../lib/content";
 import { HOW_TO_ADU_PILLARS_COUNT, HOW_TO_ADU_STEPS_COUNT } from "../lib/contentRegistry/howToAdu";
+import { AdminEditableSection } from "../lib/adminEditBridge";
 
 // Icons + step numbers stay code-owned; title/desc text is admin-editable.
 const PILLAR_ICONS = [FiBookOpen, FiClipboard, FiUsers];
@@ -63,6 +64,18 @@ const HowToAdu = () => {
   return (
     <div>
       {/* Hero */}
+      <AdminEditableSection
+        keys={[
+          "howtoadu.hero.eyebrow",
+          "howtoadu.hero.heading_pre",
+          "howtoadu.hero.heading_emphasis",
+          "howtoadu.hero.body_pre",
+          "howtoadu.hero.body_emphasis",
+          "howtoadu.hero.link_pillars",
+          "howtoadu.hero.link_steps",
+        ]}
+        label="Hero"
+      >
       <section className="relative overflow-hidden bg-canvas pt-24 sm:pt-28 pb-10 sm:pb-12 border-b border-stroke">
         <div aria-hidden className="pointer-events-none absolute -top-24 right-0 w-[28rem] h-[28rem] rounded-full bg-accent/8 blur-3xl animate-drift-glow" />
 
@@ -103,8 +116,18 @@ const HowToAdu = () => {
           </div>
         </div>
       </section>
+      </AdminEditableSection>
 
       {/* Pillars */}
+      <AdminEditableSection
+        keys={[
+          "howtoadu.pillars.eyebrow",
+          "howtoadu.pillars.heading",
+          "howtoadu.pillars.body",
+          ...Array.from({ length: HOW_TO_ADU_PILLARS_COUNT }, (_, i) => [`howtoadu.pillar.${i}.title`, `howtoadu.pillar.${i}.desc`]).flat(),
+        ]}
+        label="What ADUAtlas gives you"
+      >
       <section id="pillars" className="bg-canvas py-16 sm:py-20 border-t border-stroke scroll-mt-20">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
@@ -122,8 +145,17 @@ const HowToAdu = () => {
           </div>
         </div>
       </section>
+      </AdminEditableSection>
 
       {/* Steps */}
+      <AdminEditableSection
+        keys={[
+          "howtoadu.steps.eyebrow",
+          "howtoadu.steps.heading",
+          ...Array.from({ length: HOW_TO_ADU_STEPS_COUNT }, (_, i) => [`howtoadu.step.${i}.title`, `howtoadu.step.${i}.desc`]).flat(),
+        ]}
+        label="The 5 steps"
+      >
       <section id="steps" className="bg-canvas py-16 sm:py-24 border-t border-stroke scroll-mt-20">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
@@ -138,8 +170,13 @@ const HowToAdu = () => {
           </div>
         </div>
       </section>
+      </AdminEditableSection>
 
       {/* Closer */}
+      <AdminEditableSection
+        keys={["howtoadu.closer.heading", "howtoadu.closer.body", "howtoadu.closer.cta_primary", "howtoadu.closer.cta_secondary"]}
+        label="Closer"
+      >
       <section className="bg-canvas py-16 sm:py-24 border-t border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-3xl text-center">
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight mb-5">
@@ -165,6 +202,7 @@ const HowToAdu = () => {
           </div>
         </div>
       </section>
+      </AdminEditableSection>
     </div>
   );
 };

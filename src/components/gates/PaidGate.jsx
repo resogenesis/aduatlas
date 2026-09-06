@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FiArrowRight, FiLock } from "react-icons/fi";
 import { isPaid, getPaidTier, TIERS } from "../../stores/paymentStore";
 import { isBuildersUnlocked, isFeasibilityUnlocked, courseProgress, packetProgress } from "../../stores/courseStore";
+import { currentUser } from "../../stores/authStore";
 
 // Three layers:
 // 1. Paid gate (any /course/*, /dashboard, /my-property, worksheets) —
@@ -18,6 +19,10 @@ import { isBuildersUnlocked, isFeasibilityUnlocked, courseProgress, packetProgre
 
 const PaidGate = ({ children, chapterName, requireTier, requireBuilders }) => {
   const location = useLocation();
+  // Admins can always preview gated content (course chapters, report-tier
+  // tools) — needed so the visual content editor's iframe can render these
+  // pages for review/editing without also faking a purchase.
+  if (currentUser()?.role === "admin") return children;
   if (!isPaid()) return <PayPaywall location={location} chapterName={chapterName} />;
 
   if (requireTier === TIERS.REPORT && getPaidTier() !== TIERS.REPORT) {

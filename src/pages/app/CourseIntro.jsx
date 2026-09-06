@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FiArrowLeft, FiArrowRight, FiClock } from "react-icons/fi";
 import Sections from "../../components/course/Sections";
 import { useContentBlocks } from "../../lib/content";
+import { AdminEditableSection } from "../../lib/adminEditBridge";
 
 // Course-level introduction — the welcome that frames the whole course.
 // Not a module chapter: it carries no completion state and sits outside the
@@ -24,7 +25,9 @@ const CourseIntro = () => {
       <FiClock /> ~6 min
     </div>
 
-    <Sections sections={sections} />
+    <AdminEditableSection keys={["course.intro"]} label="Course Intro">
+      <Sections sections={sections} />
+    </AdminEditableSection>
 
     <div className="border-t border-stroke pt-8 mt-14 flex justify-end">
       <Link

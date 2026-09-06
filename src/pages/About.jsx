@@ -3,6 +3,7 @@ import { FiArrowRight } from "react-icons/fi";
 import { useReveal } from "../hooks/useReveal";
 import { useContentText, paragraphs } from "../lib/content";
 import { ABOUT_STATS_COUNT, ABOUT_CHAPTERS_COUNT } from "../lib/contentRegistry/about";
+import { AdminEditableSection } from "../lib/adminEditBridge";
 
 // Chapter numbers (01-05) are code-owned display labels, not content.
 const CHAPTER_N = ["01", "02", "03", "04", "05"];
@@ -26,6 +27,10 @@ const Chapter = ({ i, isLast }) => {
   const body = useContentText(`about.chapter.${i}.body`);
   const pullQuote = useContentText(`about.pullquote.${i}`);
   return (
+    <AdminEditableSection
+      keys={[`about.chapter.${i}.eyebrow`, `about.chapter.${i}.title`, `about.chapter.${i}.body`, `about.pullquote.${i}`]}
+      label={`Chapter ${i + 1}`}
+    >
     <article ref={ref} className="grid lg:grid-cols-12 gap-6 lg:gap-12 py-12 sm:py-16 border-t border-stroke">
       <div className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start">
         <span className="font-display text-accent text-5xl sm:text-6xl block mb-3">{CHAPTER_N[i]}</span>
@@ -45,6 +50,7 @@ const Chapter = ({ i, isLast }) => {
         )}
       </div>
     </article>
+    </AdminEditableSection>
   );
 };
 
@@ -65,6 +71,10 @@ const About = () => {
   return (
     <div className="bg-canvas">
       {/* Editorial hero */}
+      <AdminEditableSection
+        keys={["about.hero.eyebrow", "about.hero.heading_pre", "about.hero.heading_emphasis", "about.hero.body1", "about.hero.body2"]}
+        label="Hero"
+      >
       <section className="relative overflow-hidden pt-32 sm:pt-40 lg:pt-48 pb-16 sm:pb-20">
         <div aria-hidden className="pointer-events-none absolute -top-40 -right-40 w-[40rem] h-[40rem] rounded-full bg-accent/10 blur-3xl animate-drift-glow" />
         <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 w-[40rem] h-[40rem] rounded-full bg-accent/5 blur-3xl animate-drift-glow" style={{ animationDelay: "-7s" }} />
@@ -93,13 +103,19 @@ const About = () => {
           </p>
         </div>
       </section>
+      </AdminEditableSection>
 
       {/* Stat strip */}
+      <AdminEditableSection
+        keys={Array.from({ length: ABOUT_STATS_COUNT }, (_, i) => [`about.stat.${i}.n`, `about.stat.${i}.label`]).flat()}
+        label="Stats"
+      >
       <section className="container mx-auto px-5 sm:px-8 max-w-5xl pb-16">
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-stroke rounded-2xl overflow-hidden">
           {Array.from({ length: ABOUT_STATS_COUNT }, (_, i) => <Stat key={i} i={i} />)}
         </div>
       </section>
+      </AdminEditableSection>
 
       {/* Chapters */}
       <section className="container mx-auto px-5 sm:px-8 max-w-5xl">
@@ -109,6 +125,10 @@ const About = () => {
       </section>
 
       {/* Closing card */}
+      <AdminEditableSection
+        keys={["about.closing.eyebrow", "about.closing.heading", "about.closing.body", "about.closing.cta_primary", "about.closing.cta_secondary"]}
+        label="Closing"
+      >
       <section className="container mx-auto px-5 sm:px-8 max-w-4xl py-20 sm:py-28">
         <div ref={closingRef} className="bg-accent text-accent-fg rounded-3xl p-10 sm:p-14 text-center relative overflow-hidden">
           <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -139,6 +159,7 @@ const About = () => {
           </div>
         </div>
       </section>
+      </AdminEditableSection>
 
     </div>
   );

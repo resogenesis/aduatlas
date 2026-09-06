@@ -3,6 +3,20 @@ import { FiArrowRight, FiCheck } from "react-icons/fi";
 import { useReveal } from "../../hooks/useReveal";
 import { useContentText } from "../../lib/content";
 import { FUNNEL_STEPS_META } from "../../lib/contentRegistry/home";
+import { AdminEditableSection } from "../../lib/adminEditBridge";
+
+const EDIT_KEYS = [
+  "home.funnelsteps.heading",
+  "home.funnelsteps.cta_primary",
+  "home.funnelsteps.cta_secondary",
+  "home.funnelsteps.pricing_note",
+  ...FUNNEL_STEPS_META.flatMap((meta, i) => [
+    `home.funnelsteps.step.${i}.title`,
+    `home.funnelsteps.step.${i}.lede`,
+    `home.funnelsteps.step.${i}.intro`,
+    ...Array.from({ length: meta.bulletCount }, (_, j) => `home.funnelsteps.step.${i}.bullet.${j}`),
+  ]),
+];
 
 // Every StepCard calls the same fixed number of hooks (title/lede/intro + 7
 // bullet slots) regardless of this step's actual bullet count — unused slots
@@ -59,6 +73,7 @@ const FunnelSteps = () => {
   const pricingNote = useContentText("home.funnelsteps.pricing_note");
 
   return (
+    <AdminEditableSection keys={EDIT_KEYS} label="How ADUAtlas works">
     <section className="bg-canvas py-24 sm:py-32 border-t border-stroke">
       <div className="container mx-auto px-5 sm:px-8 max-w-6xl">
         <div ref={headRef} className="mb-14 sm:mb-20 max-w-2xl">
@@ -90,6 +105,7 @@ const FunnelSteps = () => {
         </div>
       </div>
     </section>
+    </AdminEditableSection>
   );
 };
 

@@ -2,6 +2,7 @@ import PageHeader from "../components/common/PageHeader";
 import PublicStubFooter from "../components/gates/PublicStubFooter";
 import { useContentText } from "../lib/content";
 import { STATE_NAMES_COUNT } from "../lib/contentRegistry/chooseState";
+import { AdminEditableSection } from "../lib/adminEditBridge";
 
 // One component per list item so its hook is called at a stable place per
 // item (not inside the .map() callback below) — same pattern as
@@ -26,11 +27,23 @@ const ChooseState = () => {
 
   return (
     <div>
-      <PageHeader
-        title={title}
-        subtitle={subtitle}
-      />
+      <AdminEditableSection keys={["choosestate.hero.title", "choosestate.hero.subtitle"]} label="Header">
+        <PageHeader
+          title={title}
+          subtitle={subtitle}
+        />
+      </AdminEditableSection>
 
+      <AdminEditableSection
+        keys={[
+          "choosestate.intro",
+          "choosestate.list_heading",
+          "choosestate.list_subheading",
+          "choosestate.closing",
+          ...Array.from({ length: STATE_NAMES_COUNT }, (_, i) => `choosestate.state.${i}`),
+        ]}
+        label="States list"
+      >
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 max-w-4xl">
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-8 text-center">
           {intro}
@@ -50,6 +63,7 @@ const ChooseState = () => {
           {closing}
         </p>
       </section>
+      </AdminEditableSection>
 
       <PublicStubFooter chapterName="Regulations · Chapter 4" />
     </div>

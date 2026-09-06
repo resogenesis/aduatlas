@@ -3,6 +3,7 @@ import PublicStubFooter from "../components/gates/PublicStubFooter";
 import heroImg from "../assets/home/hero_image.png";
 import { useContentText } from "../lib/content";
 import { ADU_TYPES_COUNT } from "../lib/contentRegistry/aduTypes";
+import { AdminEditableSection } from "../lib/adminEditBridge";
 
 // One component per list item so its hook is called at a stable place per
 // item (not inside the .map() callback below) — same pattern as
@@ -26,12 +27,23 @@ const AduTypes = () => {
 
   return (
     <div>
-      <PageHeader
-        title={title}
-        subtitle={subtitle}
-        bg={heroImg}
-      />
+      <AdminEditableSection keys={["adutypes.hero.title", "adutypes.hero.subtitle"]} label="Header">
+        <PageHeader
+          title={title}
+          subtitle={subtitle}
+          bg={heroImg}
+        />
+      </AdminEditableSection>
 
+      <AdminEditableSection
+        keys={[
+          "adutypes.intro",
+          "adutypes.list_heading",
+          "adutypes.closing",
+          ...Array.from({ length: ADU_TYPES_COUNT }, (_, i) => `adutypes.type.${i}`),
+        ]}
+        label="Types list"
+      >
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 max-w-4xl">
         <div className="text-center mb-10">
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
@@ -50,6 +62,7 @@ const AduTypes = () => {
           {closing}
         </p>
       </section>
+      </AdminEditableSection>
 
       <PublicStubFooter chapterName="Chapter 2" />
     </div>

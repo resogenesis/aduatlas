@@ -2,6 +2,7 @@ import Accordion from "../components/common/Accordion";
 import PublicStubFooter from "../components/gates/PublicStubFooter";
 import { useContentText } from "../lib/content";
 import { FAQ_ITEMS_COUNT } from "../lib/contentRegistry/faq";
+import { AdminEditableSection } from "../lib/adminEditBridge";
 
 // One component per item so its hooks are called at a stable place per item
 // (not inside a .map() callback) — same pattern as RiskCallouts.jsx.
@@ -28,6 +29,7 @@ const FAQ = () => {
 
   return (
     <div>
+      <AdminEditableSection keys={["faq.hero.eyebrow", "faq.hero.heading", "faq.hero.body"]} label="Hero">
       <section className="bg-canvas py-12 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 max-w-3xl text-center">
           <p className="text-accent font-semibold tracking-[0.2em] text-xs sm:text-sm mb-3 uppercase">
@@ -41,18 +43,26 @@ const FAQ = () => {
           </p>
         </div>
       </section>
+      </AdminEditableSection>
 
+      <AdminEditableSection
+        keys={Array.from({ length: FAQ_ITEMS_COUNT }, (_, i) => [`faq.item.${i}.question`, `faq.item.${i}.answer`]).flat()}
+        label="Questions"
+      >
       <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-3xl">
         <Accordion items={faqs} />
       </section>
+      </AdminEditableSection>
 
       <PublicStubFooter chapterName="Full answers · Chapter 4" />
 
+      <AdminEditableSection keys={["faq.footer_note"]} label="Disclaimer">
       <section className="container mx-auto px-5 sm:px-8 max-w-3xl pb-16">
         <p className="text-paper-dim/70 text-xs italic leading-relaxed text-center">
           {footerNote}
         </p>
       </section>
+      </AdminEditableSection>
     </div>
   );
 };

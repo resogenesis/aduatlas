@@ -1,6 +1,16 @@
 import { FiMap, FiHome, FiDollarSign, FiCompass, FiClipboard, FiUsers } from "react-icons/fi";
 import { useReveal } from "../../hooks/useReveal";
 import { useContentText } from "../../lib/content";
+import { AdminEditableSection } from "../../lib/adminEditBridge";
+
+const EDIT_KEYS = [
+  "home.riskcallouts.eyebrow",
+  "home.riskcallouts.heading_pre",
+  "home.riskcallouts.heading_emphasis",
+  "home.riskcallouts.intro",
+  "home.riskcallouts.closing",
+  ...[0, 1, 2, 3, 4, 5].flatMap((i) => [`home.riskcallouts.item.${i}.title`, `home.riskcallouts.item.${i}.desc`]),
+];
 
 // Icons + item order stay code-owned; title/desc text is admin-editable
 // (home.riskcallouts.item.{i}.title / .desc in the content registry).
@@ -44,6 +54,7 @@ const RiskCallouts = () => {
   const closing = useContentText("home.riskcallouts.closing");
 
   return (
+    <AdminEditableSection keys={EDIT_KEYS} label="Where projects derail">
     <section className="bg-canvas py-24 sm:py-32">
       <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
         <div ref={headRef} className="mb-12 sm:mb-16 max-w-3xl">
@@ -72,6 +83,7 @@ const RiskCallouts = () => {
         </p>
       </div>
     </section>
+    </AdminEditableSection>
   );
 };
 

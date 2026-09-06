@@ -4,10 +4,12 @@ import heroImg from "../assets/home/hero_image.png";
 import ContentImage from "../components/common/ContentImage";
 import { useContentText, paragraphs } from "../lib/content";
 import { VIDEOS_COUNT } from "../lib/contentRegistry/videos";
+import { AdminEditableSection } from "../lib/adminEditBridge";
 
 const VideoCard = ({ i }) => {
   const title = useContentText(`videos.card.${i}.title`);
   return (
+    <AdminEditableSection keys={[`videos.card.${i}.title`, `videos.card.${i}.image`]} label={`Card ${i + 1}`}>
     <div className="cursor-pointer">
       <div className="relative rounded-xl overflow-hidden group">
         <ContentImage
@@ -22,6 +24,7 @@ const VideoCard = ({ i }) => {
       </div>
       <h3 className="mt-3 font-semibold text-primary text-lg">{title}</h3>
     </div>
+    </AdminEditableSection>
   );
 };
 
@@ -31,15 +34,17 @@ const Videos = () => {
 
   return (
     <div>
-      <PageHeader
-        title={headerTitle}
-        bg={heroImg}
-      />
-      <section className="container mx-auto px-4 sm:px-6 py-12">
-        <div className="max-w-3xl mx-auto mb-10 space-y-4 text-secondary text-sm sm:text-base leading-relaxed">
-          {paragraphs(intro).map((p, i) => <p key={i}>{p}</p>)}
-        </div>
-      </section>
+      <AdminEditableSection keys={["videos.header.title", "videos.intro"]} label="Header">
+        <PageHeader
+          title={headerTitle}
+          bg={heroImg}
+        />
+        <section className="container mx-auto px-4 sm:px-6 py-12">
+          <div className="max-w-3xl mx-auto mb-10 space-y-4 text-secondary text-sm sm:text-base leading-relaxed">
+            {paragraphs(intro).map((p, i) => <p key={i}>{p}</p>)}
+          </div>
+        </section>
+      </AdminEditableSection>
       <section className="container mx-auto px-4 sm:px-6 pb-12">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {Array.from({ length: VIDEOS_COUNT }, (_, i) => <VideoCard key={i} i={i} />)}

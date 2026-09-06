@@ -9,6 +9,7 @@ import router from './router/router'
 import { RouterProvider } from 'react-router-dom'
 import { initAnalytics } from './lib/analytics'
 import { initAuth } from './stores/authStore'
+import { AdminEditModeProvider } from './lib/adminEditBridge'
 
 initAnalytics()
 
@@ -21,7 +22,9 @@ initAuth().finally(() => {
   createRoot(document.getElementById('root')).render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <AdminEditModeProvider>
+          <RouterProvider router={router} />
+        </AdminEditModeProvider>
       </QueryClientProvider>
     </StrictMode>,
   )

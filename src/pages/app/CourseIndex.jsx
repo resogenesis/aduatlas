@@ -7,6 +7,7 @@ import {
   getModuleProgress,
 } from "../../stores/courseStore";
 import { useContentText } from "../../lib/content";
+import { AdminEditableSection } from "../../lib/adminEditBridge";
 
 // One component per module row so its title/blurb hooks are called at a
 // stable place per module (not inside the modules.map() callback below).
@@ -22,6 +23,7 @@ const ModuleRow = ({ m, done }) => {
       }`}
     >
       {/* Module header */}
+      <AdminEditableSection keys={[`course.module.${m.id}.title`, `course.module.${m.id}.blurb`]} label={`Module ${m.n}`}>
       <div className="flex items-start gap-4 p-5 sm:p-6 border-b border-stroke/70">
         <span
           className={`shrink-0 w-11 h-11 rounded-xl flex items-center justify-center font-display text-lg ${
@@ -56,6 +58,7 @@ const ModuleRow = ({ m, done }) => {
           </span>
         )}
       </div>
+      </AdminEditableSection>
 
       {/* Chapter list */}
       {empty ? (
