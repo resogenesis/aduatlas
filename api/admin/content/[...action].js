@@ -173,6 +173,27 @@ const ROUTES = {
   "upload-image": { POST: uploadImage },
 };
 
+// Vercel's build for this project (framework "Other"/Vite, not Next.js)
+// mis-generates the catch-all rewrite for [...action].js — its route config
+// maps to a query param literally named "...action" instead of "action"
+// (confirmed via `vercel build` + inspecting .vercel/output/config.json), so
+// req.query.action is undefined in production. Work around it defensively:
+// first look for ANY query key ending in "action" (covers the mangled name
+// if Vercel ever fixes/changes it), then fall back to parsing the action
+// straight out of the URL path, which is correct regardless of how the
+// rewrite names its query param.
+const actionFromRequest = (req) => {
+  const keys = Object.keys(req.query || {});
+  const actionKey = keys.find((k) => /action$/i.test(k));
+  if (actionKey) {
+    const v = req.query[actionKey];
+    return Array.isArray(v) ? v[0] : v;
+  }
+  const pathname = (req.url || "").split("?")[0];
+  const segments = pathname.split("/").filter(Boolean);
+  return segments[segments.length - 1];
+};
+
 export default async function handler(req, res) {
   const ctx = await requireAdmin(req);
   if (!ctx) {
@@ -180,7 +201,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const action = Array.isArray(req.query?.action) ? req.query.action[0] : req.query?.action;
+  const action = actionFromRequest(req);
   const route = ROUTES[action];
   if (!route) {
     res.status(404).json({ error: "not found" });
