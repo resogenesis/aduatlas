@@ -152,7 +152,7 @@ const uploadImage = async (req, res, ctx) => {
   if (!match) return res.status(400).json({ error: "dataUrl must be a base64 image/png|jpeg|webp data URL" });
   const [, contentType, , base64] = match;
   const buffer = Buffer.from(base64, "base64");
-  if (buffer.length > MAX_IMAGE_BYTES) return res.status(400).json({ error: "image too large (max 8MB)" });
+  if (buffer.length > MAX_IMAGE_BYTES) return res.status(400).json({ error: "image too large (max 3MB)" });
 
   const ext = contentType.split("/")[1];
   const path = `${safeSegment(key)}/${Date.now()}-${safeSegment(filename) || "image"}.${ext}`;
