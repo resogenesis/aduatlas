@@ -69,7 +69,7 @@ const LiveCheck = () => {
 
   return (
     <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-      <div className="rounded-2xl bg-forest-deep/80 backdrop-blur-xl border border-white/10 text-white shadow-[0_24px_60px_-24px_rgba(0,0,0,0.6)] p-4 sm:p-5">
+      <div className="rounded-2xl bg-forest-deep/45 backdrop-blur-2xl border border-white/15 text-white shadow-[0_24px_60px_-24px_rgba(0,0,0,0.6)] p-4 sm:p-5">
         <div className="flex items-center justify-between gap-3 mb-3">
           <p className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium truncate">
             <FiMapPin className="text-gold shrink-0" aria-hidden />

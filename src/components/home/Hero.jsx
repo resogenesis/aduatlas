@@ -97,7 +97,7 @@ const Hero = () => {
           <div className="lg:col-span-6 relative animate-fade-up lg:-mr-8 xl:-mr-[calc((100vw-1280px)/2+1rem)]" style={{ animationDelay: "120ms" }}>
             <div className="relative rounded-[1.75rem] overflow-hidden aspect-[3/2] lg:aspect-auto lg:h-[34rem] xl:h-[38rem] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
               <img src={image.src} alt={image.alt} className="w-full h-full object-cover object-[55%_center] -scale-x-100" />
-              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-forest-deep/70 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-forest-deep/40 to-transparent" />
               <LiveCheck />
             </div>
           </div>
