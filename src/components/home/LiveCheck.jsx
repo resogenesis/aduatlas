@@ -81,21 +81,28 @@ const LiveCheck = () => {
           {current.rows.map((r, i) => {
             const visible = i < shown;
             return (
-              <li
-                key={`${sample}-${i}`}
-                className={`flex items-center gap-2.5 text-xs sm:text-[0.8rem] transition-all duration-500 ${
-                  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
-                }`}
-              >
+              <li key={`${sample}-${i}`} className="relative h-6 flex items-center">
                 <span
-                  className={`w-5 h-5 rounded-full inline-flex items-center justify-center shrink-0 ${
-                    r.ok ? "bg-white/15 text-gold" : "bg-gold/20 text-gold"
+                  className={`absolute inset-y-1.5 left-0 right-6 rounded bg-white/10 animate-pulse transition-opacity duration-300 ${
+                    visible ? "opacity-0" : "opacity-100"
+                  }`}
+                  aria-hidden
+                />
+                <span
+                  className={`flex items-center gap-2.5 text-xs sm:text-[0.8rem] w-full transition-all duration-500 ${
+                    visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
                   }`}
                 >
-                  {r.ok ? <FiCheck className="text-[0.7rem]" aria-hidden /> : <FiAlertCircle className="text-[0.7rem]" aria-hidden />}
+                  <span
+                    className={`w-5 h-5 rounded-full inline-flex items-center justify-center shrink-0 ${
+                      r.ok ? "bg-white/15 text-gold" : "bg-gold/20 text-gold"
+                    }`}
+                  >
+                    {r.ok ? <FiCheck className="text-[0.7rem]" aria-hidden /> : <FiAlertCircle className="text-[0.7rem]" aria-hidden />}
+                  </span>
+                  <span className="text-white/60 w-14 shrink-0">{r.label}</span>
+                  <span className="text-white truncate">{r.value}</span>
                 </span>
-                <span className="text-white/60 w-14 shrink-0">{r.label}</span>
-                <span className="text-white truncate">{r.value}</span>
               </li>
             );
           })}
