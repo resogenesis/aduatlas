@@ -38,6 +38,9 @@ export const homeHero = {
 // ── Pillars (four-up strip under the hero) ────────────────────────────────
 export const PILLARS_COUNT = 4;
 export const homePillars = {
+  "home.pillars.eyebrow": t("How it works eyebrow", "How ADUAtlas works"),
+  "home.pillars.heading": t("How it works heading (\\n = line break)", "From an address to a plan\nyou can act on."),
+  "home.pillars.body": t("How it works paragraph", "Every step is tied to your property, not a generic checklist."),
   "home.pillars.item.0.title": t("Pillar 1 title", "Learn\nthe basics"),
   "home.pillars.item.0.desc": t("Pillar 1 description", "Understand ADUs and what's possible on your property."),
   "home.pillars.item.1.title": t("Pillar 2 title", "Explore\nyour options"),
