@@ -91,7 +91,7 @@ const HowToAdu = () => {
             className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight animate-fade-up"
             style={{ animationDelay: "100ms" }}
           >
-            {heroHeadingPre} <span className="italic">{heroHeadingEmphasis}</span>
+            {heroHeadingPre} <span className="">{heroHeadingEmphasis}</span>
           </h1>
 
           <p

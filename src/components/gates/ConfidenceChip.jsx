@@ -51,7 +51,7 @@ export const ConfidenceRow = ({ point, onUpgrade }) => {
         </div>
         <div className="col-span-7 sm:col-span-4">
           <p className="text-paper text-sm sm:text-base">{value}</p>
-          {note && <p className="text-paper-dim text-xs mt-0.5 italic">{note}</p>}
+          {note && <p className="text-paper-dim text-xs mt-0.5">{note}</p>}
         </div>
         <div className="col-span-5 sm:col-span-2">
           <ConfidenceChip level={confidence} />

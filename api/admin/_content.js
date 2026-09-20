@@ -1,10 +1,10 @@
 // /api/admin/content/* — every content-management admin endpoint lives in
-// this one Vercel catch-all function (list, versions, save-draft, publish,
+// this module, dispatched by api/admin/[...action].js (list, versions, save-draft, publish,
 // rollback, upload-image) rather than one file each, to stay under the
 // Hobby plan's 12-serverless-function cap. Dispatches on the path segment
 // after /content/ (req.query.action[0]) + HTTP method. Same URLs, same
 // request/response shapes as if each were its own file — see src/lib/adminApi.js.
-import { requireAdmin, readBody } from "../../_admin.js";
+import { requireAdmin, readBody } from "../_admin.js";
 
 const TYPES = ["text", "image", "blocks"];
 const DATA_URL_RE = /^data:(image\/(png|jpeg|jpg|webp));base64,(.+)$/;

@@ -78,8 +78,7 @@ const KnowledgeCheck = () => {
                 >
                   <div className="flex items-start gap-3">
                     <span
-                      className={`shrink-0 mt-0.5 w-6 h-6 rounded-full flex items-center justify-center text-sm ${
-                        r.isCorrect
+                      className={`shrink-0 mt-0.5 w-6 h-6 rounded-full flex items-center justify-center text-sm ${ r.isCorrect
                           ? "bg-accent/20 text-accent"
                           : "bg-red-500/15 text-red-400"
                       }`}
@@ -94,7 +93,7 @@ const KnowledgeCheck = () => {
                         <span className="text-accent font-medium">Answer:</span>{" "}
                         {correctOpt?.label}
                       </p>
-                      <p className="text-paper-dim/80 text-sm leading-relaxed mt-1.5 italic">
+                      <p className="text-paper-dim/80 text-sm leading-relaxed mt-1.5">
                         {kq.explanation}
                       </p>
                     </div>
@@ -158,8 +157,7 @@ const KnowledgeCheck = () => {
                 <button
                   key={opt.value}
                   onClick={() => setValue(opt.value)}
-                  className={`text-left px-5 py-4 rounded-xl border transition-all ${
-                    selected
+                  className={`text-left px-5 py-4 rounded-xl border transition-all ${ selected
                       ? "border-accent bg-accent text-accent-fg"
                       : "border-stroke bg-canvas text-paper hover:border-paper-dim"
                   }`}
@@ -176,8 +174,7 @@ const KnowledgeCheck = () => {
             <button
               onClick={back}
               disabled={step === 0}
-              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition ${
-                step === 0 ? "text-stroke cursor-not-allowed" : "text-paper-dim hover:text-paper"
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition ${ step === 0 ? "text-stroke cursor-not-allowed" : "text-paper-dim hover:text-paper"
               }`}
             >
               <FiArrowLeft /> Back

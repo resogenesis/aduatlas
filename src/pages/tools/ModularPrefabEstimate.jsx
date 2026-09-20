@@ -224,7 +224,7 @@ const ModularPrefabEstimate = () => {
       </SectionCard>
 
       <SectionCard n="6" title="General contractor referrals" blurb="Request three licensed GCs from the manufacturer who have installed their homes in your area.">
-        <p className="text-paper-dim text-xs leading-relaxed mb-4 italic">
+        <p className="text-paper-dim text-xs leading-relaxed mb-4">
           "Please provide contact information for three licensed general contractors who have
           previously installed your homes in my state or service area and can provide a complete,
           itemized quote for delivery coordination, pre-site work, foundation, crane and set,

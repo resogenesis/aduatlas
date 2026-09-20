@@ -74,6 +74,9 @@ body {
 
 html, body { overflow-x: hidden; }
 
+/* No italics anywhere on the site (Richard, 2026-09-20). */
+em, i, .italic { font-style: normal; }
+
 ::selection {
   background: var(--color-accent);
   color: var(--color-accent-fg);

@@ -35,7 +35,7 @@ const Results = () => {
         <h1 className="font-display font-medium text-paper text-3xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-center mb-4">
           Your score: <span className="text-accent">{score}%</span>
           <br className="hidden sm:block" />
-          <span className="italic text-paper-dim">Here's what you're missing.</span>
+          <span className="text-paper-dim">Here's what you're missing.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg max-w-xl mx-auto text-center mb-12">
           You answered <span className="text-paper">{correctCount} of {total}</span> correctly. Below: what you missed, and what to do about it.

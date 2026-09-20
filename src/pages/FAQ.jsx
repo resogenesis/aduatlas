@@ -58,7 +58,7 @@ const FAQ = () => {
 
       <AdminEditableSection keys={["faq.footer_note"]} label="Disclaimer">
       <section className="container mx-auto px-5 sm:px-8 max-w-3xl pb-16">
-        <p className="text-paper-dim/70 text-xs italic leading-relaxed text-center">
+        <p className="text-paper-dim/70 text-xs leading-relaxed text-center">
           {footerNote}
         </p>
       </section>

@@ -49,7 +49,7 @@ const Row = ({ label, value, accent }) => (
 const Pending = ({ label }) => (
   <div className="flex items-center justify-between gap-3 py-0.5">
     <span className="text-paper-dim text-xs">{label}</span>
-    <span className="text-paper-dim/70 text-xs italic">Verify your zone</span>
+    <span className="text-paper-dim/70 text-xs">Verify your zone</span>
   </div>
 );
 

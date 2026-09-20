@@ -5,7 +5,7 @@ const PublicStubFooter = ({ chapterName }) => {
   return (
     <section className="bg-canvas py-20 sm:py-28 border-t border-stroke">
       <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
-        <p className="text-paper-dim italic text-sm sm:text-base leading-relaxed mb-9 max-w-lg mx-auto">
+        <p className="text-paper-dim text-sm sm:text-base leading-relaxed mb-9 max-w-lg mx-auto">
           We give you the awareness. The system gives you the answers. The feasibility tool gives you yours specifically.
         </p>
 

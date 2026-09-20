@@ -1,24 +1,28 @@
 import { useState } from "react";
 import { NavLink, Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
-import { FiGrid, FiBookOpen, FiFileText, FiFolder, FiHome, FiTarget, FiUsers, FiSettings, FiLock, FiMenu, FiX, FiLogOut } from "react-icons/fi";
+import { FiGrid, FiBookOpen, FiFileText, FiHome, FiMap, FiDollarSign, FiLayers, FiUsers, FiSettings, FiLock, FiMenu, FiX, FiLogOut, FiMessageCircle } from "react-icons/fi";
 import Logomark from "../components/brand/Logomark";
-import { hasReportTier } from "../stores/paymentStore";
+import { hasReportTier, hasTier, TIERS } from "../stores/paymentStore";
 import { currentUser, logout } from "../stores/authStore";
 
+// Property-centered portal (Phase 1 scope §3): Overview, Property, Learn,
+// Feasibility, Site Plan, Costs, ADU Options, Builders, Support.
 const baseNav = [
-  { to: "/dashboard", label: "Dashboard", Icon: FiGrid },
-  { to: "/course", label: "Course", Icon: FiBookOpen },
-  { to: "/my-property", label: "My Property", Icon: FiHome },
+  { to: "/dashboard", label: "Overview", Icon: FiGrid },
+  { to: "/my-property", label: "Property", Icon: FiHome },
+  { to: "/course", label: "Learn", Icon: FiBookOpen },
 ];
 
 const gatedNav = [
-  // Worksheets + NAPE ship with every paid plan, so the packet is never locked.
-  { to: "/packet", label: "Worksheets", Icon: FiFolder, isLocked: () => false },
-  // Feasibility + the study are Platinum deliverables with no course gate.
-  { to: "/feasibility", label: "Feasibility", Icon: FiTarget, isLocked: () => !hasReportTier() },
-  { to: "/report", label: "My Report", Icon: FiFileText, isLocked: () => !hasReportTier() },
-  // Builder profiles are included with Golden.
+  // Platinum deliverables: the study and its site plan.
+  { to: "/study", label: "Feasibility", Icon: FiFileText, isLocked: () => !hasReportTier() },
+  { to: "/site-plan", label: "Site Plan", Icon: FiMap, isLocked: () => !hasReportTier() },
+  // Included with every plan.
+  { to: "/costs", label: "Costs", Icon: FiDollarSign, isLocked: () => false },
+  { to: "/adu-options", label: "ADU Options", Icon: FiLayers, isLocked: () => false },
   { to: "/builders", label: "Builders", Icon: FiUsers, isLocked: () => false },
+  // Concierge only.
+  { to: "/support", label: "Support", Icon: FiMessageCircle, isLocked: () => !hasTier(TIERS.CONCIERGE) },
 ];
 
 const NavItem = ({ to, label, Icon, locked, onClick }) => (

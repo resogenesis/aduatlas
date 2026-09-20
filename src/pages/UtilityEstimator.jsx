@@ -106,7 +106,7 @@ const UtilityEstimator = () => {
 
         <p className="text-paper-dim text-xs leading-relaxed mt-5">
           Planning estimate only, not a quote. This is the site-prep and utility slice that sits
-          <em> on top of</em> a builder's structural price — the gap that surprises most homeowners.
+          <span className="font-semibold"> on top of</span> a builder's structural price — the gap that surprises most homeowners.
           Add it to your structural cost for a realistic all-in budget.
         </p>
       </section>

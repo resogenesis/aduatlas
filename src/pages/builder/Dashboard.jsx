@@ -24,7 +24,7 @@ const Dashboard = () => {
           Builder portal
         </p>
         <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
-          Welcome back, <span className="italic text-paper-dim">{user?.username || "builder"}.</span>
+          Welcome back, <span className="text-paper-dim">{user?.username || "builder"}.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg mt-3 max-w-2xl">
           Every homeowner here holds a paid plan, completed the course, and produced a builder ready packet. No tire kickers.

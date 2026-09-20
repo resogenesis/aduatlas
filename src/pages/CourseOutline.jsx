@@ -77,7 +77,7 @@ const ModuleCard = ({ meta, i }) => {
         </ul>
       )}
       {meta.hasNote && (
-        <p className="mt-4 text-sm italic text-accent/90 border-l-2 border-accent/40 pl-3">
+        <p className="mt-4 text-sm text-accent/90 border-l-2 border-accent/40 pl-3">
           {note}
         </p>
       )}
@@ -261,7 +261,7 @@ const CourseOutline = () => {
               {ideaEyebrow}
             </p>
             <p className="font-display text-paper text-2xl sm:text-3xl leading-snug tracking-tight max-w-3xl">
-              {ideaBodyPre} <span className="italic">{ideaBodyEmphasis}</span> {ideaBodyPost}
+              {ideaBodyPre} <span className="">{ideaBodyEmphasis}</span> {ideaBodyPost}
             </p>
           </div>
 

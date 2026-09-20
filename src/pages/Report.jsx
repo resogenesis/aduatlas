@@ -69,7 +69,7 @@ const Report = () => {
             Sample Property Feasibility Report
           </p>
           <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-            What you can build, <span className="italic">verified.</span>
+            What you can build, <span className="">verified.</span>
           </h1>
           <p className="text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed mb-7">
             This is what every paying customer receives. Real homeowners get this for their address, with their parcel data, their cost band, and their next steps.
@@ -127,8 +127,7 @@ const Report = () => {
           <ul className="space-y-4">
             {risks.map((r) => (
               <li key={r.title} className="flex items-start gap-4 py-4 border-b border-stroke last:border-b-0">
-                <span className={`shrink-0 mt-1 inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[0.65rem] font-semibold uppercase tracking-wider ${
-                  r.severity === "high" ? "bg-red-400/10 text-red-300 border-red-400/30" :
+                <span className={`shrink-0 mt-1 inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[0.65rem] font-semibold uppercase tracking-wider ${ r.severity === "high" ? "bg-red-400/10 text-red-300 border-red-400/30" :
                   r.severity === "med" ? "bg-yellow-400/10 text-yellow-300 border-yellow-400/30" :
                   "bg-paper-dim/10 text-paper-dim border-stroke"
                 }`}>

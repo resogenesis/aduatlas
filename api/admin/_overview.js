@@ -2,8 +2,9 @@
 // Admin-only (service role + requireAdmin). Revenue is derived from paid_tier
 // at list price; treat as a headline figure, not accounting truth.
 import { requireAdmin } from "../_admin.js";
+import { PLANS } from "../../src/lib/plans.js";
 
-const PRICES = { roadmap: 99, report: 399, concierge: 0 };
+const PRICES = Object.fromEntries(PLANS.map((p) => [p.id, p.priceCents / 100]));
 
 export default async function handler(req, res) {
   const ctx = await requireAdmin(req);

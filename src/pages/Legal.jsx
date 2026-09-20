@@ -92,7 +92,7 @@ const Legal = () => {
             </span>
           </div>
           <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
-            {heroHeadingPre} <span className="italic">{heroHeadingEmphasis}</span>
+            {heroHeadingPre} <span className="">{heroHeadingEmphasis}</span>
           </h1>
           <p className="mt-5 text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed">
             {heroBody}

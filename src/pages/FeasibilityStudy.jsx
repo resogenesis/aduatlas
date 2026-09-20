@@ -95,7 +95,7 @@ const FeasibilityStudy = () => (
           Tier 3 · Personalized
         </p>
         <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-          Personalized Property <span className="italic">Feasibility Study.</span>
+          Personalized Property <span className="">Feasibility Study.</span>
         </h1>
         <p className="text-paper-dim text-lg sm:text-xl mb-2">Understand what may be possible before you build.</p>
         <p className="text-paper-dim text-base max-w-2xl mx-auto leading-relaxed mb-7">
@@ -177,7 +177,7 @@ const FeasibilityStudy = () => (
     <section className="border-t border-stroke">
       <div className="container mx-auto px-5 sm:px-8 max-w-3xl py-16 sm:py-24 text-center">
         <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-tight mb-4">
-          Learn the process. Understand your property. <span className="italic">Prepare to move forward.</span>
+          Learn the process. Understand your property. <span className="">Prepare to move forward.</span>
         </h2>
         <p className="text-paper-dim text-base leading-relaxed max-w-2xl mx-auto mb-8">
           ADUAtlas does not try to make homeowners ADU experts. We provide the education,
@@ -185,7 +185,7 @@ const FeasibilityStudy = () => (
           ask better questions, and have informed conversations with their city and builders.
         </p>
         <Cta>Get your feasibility study with Platinum, $279</Cta>
-        <p className="text-paper-dim text-sm mt-6 italic">ADUAtlas builds better-prepared homeowners.</p>
+        <p className="text-paper-dim text-sm mt-6">ADUAtlas builds better-prepared homeowners.</p>
         <p className="text-paper-dim/70 text-xs leading-relaxed mt-6 max-w-2xl mx-auto">
           The Property Feasibility Study is a planning and educational tool. It is not a survey,
           permit, or guarantee of approval. Final requirements and approval must be verified with

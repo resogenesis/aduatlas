@@ -44,7 +44,7 @@ const Chapter = ({ i, isLast }) => {
           {paragraphs(body).map((p, j) => <p key={j}>{p}</p>)}
         </div>
         {!isLast && pullQuote && (
-          <p className="font-display italic text-accent text-2xl sm:text-3xl mt-10 leading-snug">
+          <p className="font-display text-accent text-2xl sm:text-3xl mt-10 leading-snug">
             {pullQuote}
           </p>
         )}
@@ -87,7 +87,7 @@ const About = () => {
             className="font-display font-medium text-paper text-[2.6rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.02] tracking-tight max-w-4xl animate-fade-up"
             style={{ animationDelay: "120ms" }}
           >
-            {heroHeadingPre} <span className="italic text-paper-dim">{heroHeadingEmphasis}</span>
+            {heroHeadingPre} <span className="text-paper-dim">{heroHeadingEmphasis}</span>
           </h1>
           <p
             className="mt-7 sm:mt-9 text-paper-dim text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed animate-fade-up"
@@ -140,7 +140,7 @@ const About = () => {
           <h2 className="relative font-display font-medium text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
             {closingHeading}
           </h2>
-          <p className="relative text-accent-fg/80 text-base sm:text-lg max-w-xl mx-auto mb-8 leading-relaxed italic">
+          <p className="relative text-accent-fg/80 text-base sm:text-lg max-w-xl mx-auto mb-8 leading-relaxed">
             {closingBody}
           </p>
           <div className="relative flex flex-col sm:flex-row gap-3 justify-center">

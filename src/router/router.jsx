@@ -58,6 +58,12 @@ import AdminOverview from "../pages/admin/AdminOverview";
 import AdminUsers from "../pages/admin/AdminUsers";
 import AdminAdmins from "../pages/admin/AdminAdmins";
 import AdminContent from "../pages/admin/AdminContent";
+import AdminStudies from "../pages/admin/AdminStudies";
+import Study from "../pages/app/Study";
+import SitePlan from "../pages/app/SitePlan";
+import Costs from "../pages/app/Costs";
+import AduOptions from "../pages/app/AduOptions";
+import Support from "../pages/app/Support";
 
 import PaidGate from "../components/gates/PaidGate";
 
@@ -110,6 +116,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <AdminOverview /> },
       { path: "content", element: <AdminContent /> },
+      { path: "studies", element: <AdminStudies /> },
       { path: "users", element: <AdminUsers /> },
       { path: "admins", element: <AdminAdmins /> },
     ],
@@ -143,6 +150,12 @@ const router = createBrowserRouter([
 
       // Project brief
       { path: "my-property", element: <PaidGate><MyProperty /></PaidGate> },
+      // Phase 1 portal areas
+      { path: "study", element: <PaidGate requireTier="report" chapterName="Feasibility study"><Study /></PaidGate> },
+      { path: "site-plan", element: <PaidGate requireTier="report" chapterName="Site plan"><SitePlan /></PaidGate> },
+      { path: "costs", element: <PaidGate><Costs /></PaidGate> },
+      { path: "adu-options", element: <PaidGate><AduOptions /></PaidGate> },
+      { path: "support", element: <PaidGate requireTier="concierge" chapterName="Concierge support"><Support /></PaidGate> },
 
       // Gated tools — these are the Platinum deliverables, so
       // they require the "report" tier (not just any paid purchase). No

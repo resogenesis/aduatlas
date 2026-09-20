@@ -118,7 +118,7 @@ const Methodology = () => {
             className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight max-w-3xl animate-fade-up"
             style={{ animationDelay: "100ms" }}
           >
-            {heroHeadingPre} <span className="italic">{heroHeadingEmphasis}</span>
+            {heroHeadingPre} <span className="">{heroHeadingEmphasis}</span>
           </h1>
           <p
             className="mt-5 text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed animate-fade-up"
@@ -186,7 +186,7 @@ const Methodology = () => {
               <span className="inline-block w-2 h-2 rounded-full bg-red-400 mx-2 align-middle" />
               <span className="text-red-300 text-xs uppercase tracking-wider">{pathExampleConfidence}</span>
             </p>
-            <p className="text-paper-dim text-sm leading-relaxed italic">
+            <p className="text-paper-dim text-sm leading-relaxed">
               "{pathExampleQuote}"
             </p>
           </div>
@@ -216,10 +216,10 @@ const Methodology = () => {
           <div className="grid sm:grid-cols-2 gap-px bg-stroke rounded-2xl overflow-hidden">
             {Array.from({ length: SOURCE_COUNT }, (_, i) => <SourceCard key={i} i={i} />)}
           </div>
-          <p className="text-paper-dim text-xs italic mt-6 leading-relaxed">
+          <p className="text-paper-dim text-xs mt-6 leading-relaxed">
             {sourcesFootnote1}
           </p>
-          <p className="text-paper-dim text-xs italic mt-3 leading-relaxed">
+          <p className="text-paper-dim text-xs mt-3 leading-relaxed">
             {sourcesFootnote2}
           </p>
         </section>
@@ -242,7 +242,7 @@ const Methodology = () => {
             <FiShield /> {notDoingBadge}
           </div>
           <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-5">
-            {notDoingHeadingPre} <span className="italic text-paper-dim">{notDoingHeadingEmphasis}</span>
+            {notDoingHeadingPre} <span className="text-paper-dim">{notDoingHeadingEmphasis}</span>
           </h2>
           <p className="text-paper-dim text-base leading-relaxed mb-7 max-w-2xl">
             {notDoingBody}
@@ -250,7 +250,7 @@ const Methodology = () => {
           <ul className="space-y-3">
             {Array.from({ length: NOT_DOING_COUNT }, (_, i) => <NotDoingItem key={i} i={i} />)}
           </ul>
-          <p className="text-paper-dim text-xs italic mt-7 leading-relaxed max-w-2xl">
+          <p className="text-paper-dim text-xs mt-7 leading-relaxed max-w-2xl">
             {notDoingFootnote}
           </p>
         </section>

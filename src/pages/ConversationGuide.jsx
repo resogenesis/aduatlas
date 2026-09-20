@@ -109,12 +109,12 @@ const ConversationGuide = () => {
           Builder Conversation Guide
         </p>
         <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-          Five conversations <span className="italic text-paper-dim">every builder should pass.</span>
+          Five conversations <span className="text-paper-dim">every builder should pass.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed max-w-2xl mb-3">
           Take this to every builder you talk to. Same questions, same scope. Bids become apples to apples instead of guesses.
         </p>
-        <p className="text-paper-dim/70 text-sm italic mb-12">
+        <p className="text-paper-dim/70 text-sm mb-12">
           Pulled from the Property Feasibility Report for {sampleAddress}. Lot-specific questions update with your address.
         </p>
 
@@ -146,7 +146,7 @@ const ConversationGuide = () => {
             <p className="text-paper-dim text-xs">
               ADUAtlas Builder Conversation Guide · {sampleAddress}
             </p>
-            <p className="text-paper-dim/70 text-[0.65rem] italic">
+            <p className="text-paper-dim/70 text-[0.65rem]">
               Generated as part of your Platinum feasibility study.
             </p>
           </div>

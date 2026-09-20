@@ -18,16 +18,14 @@ const ModuleRow = ({ m, done }) => {
   const empty = m.chapters.length === 0;
   return (
     <div
-      className={`bg-surface-1-solid border rounded-2xl overflow-hidden ${
-        prog.complete ? "border-accent/40" : "border-stroke"
+      className={`bg-surface-1-solid border rounded-2xl overflow-hidden ${ prog.complete ? "border-accent/40" : "border-stroke"
       }`}
     >
       {/* Module header */}
       <AdminEditableSection keys={[`course.module.${m.id}.title`, `course.module.${m.id}.blurb`]} label={`Module ${m.n}`}>
       <div className="flex items-start gap-4 p-5 sm:p-6 border-b border-stroke/70">
         <span
-          className={`shrink-0 w-11 h-11 rounded-xl flex items-center justify-center font-display text-lg ${
-            prog.complete
+          className={`shrink-0 w-11 h-11 rounded-xl flex items-center justify-center font-display text-lg ${ prog.complete
               ? "bg-accent text-accent-fg"
               : empty
               ? "bg-canvas border border-stroke text-paper-dim"
@@ -62,7 +60,7 @@ const ModuleRow = ({ m, done }) => {
 
       {/* Chapter list */}
       {empty ? (
-        <p className="px-5 sm:px-6 py-5 text-paper-dim/70 text-sm italic">
+        <p className="px-5 sm:px-6 py-5 text-paper-dim/70 text-sm">
           Content coming soon.
         </p>
       ) : (
@@ -77,8 +75,7 @@ const ModuleRow = ({ m, done }) => {
                   className="group flex items-center gap-3 px-5 sm:px-6 py-3.5 hover:bg-canvas/60 transition-colors"
                 >
                   <span
-                    className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[11px] ${
-                      isDone
+                    className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[11px] ${ isDone
                         ? "bg-accent text-accent-fg"
                         : "bg-canvas border border-stroke text-paper-dim"
                     }`}
@@ -117,7 +114,7 @@ const CourseIndex = () => {
             The Course
           </p>
           <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
-            Nine modules. <span className="italic text-paper-dim">One path.</span>
+            Nine modules. <span className="text-paper-dim">One path.</span>
           </h1>
         </div>
         <div className="text-right">

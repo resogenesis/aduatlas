@@ -61,7 +61,7 @@ const StatusTag = ({ status }) => {
   }
   if (status === "course") {
     return (
-      <span className="text-paper-dim/70 text-[0.65rem] italic">
+      <span className="text-paper-dim/70 text-[0.65rem]">
         Verified in the course
       </span>
     );
@@ -124,7 +124,7 @@ const Property = () => {
           Free Property Snapshot
         </p>
         <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-          What we know about your property <span className="italic text-paper-dim">— so far.</span>
+          What we know about your property <span className="text-paper-dim">— so far.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed mb-7">
           Most homeowners start researching ADUs without knowing which questions matter most. This
@@ -165,7 +165,7 @@ const Property = () => {
                   {r.source && <p className="text-paper-dim/60 text-[0.65rem] mt-0.5">{r.source}</p>}
                 </div>
                 <div className="col-span-7 sm:col-span-4">
-                  <p className={`text-sm sm:text-base ${r.status === "verified" ? "text-paper" : "text-paper-dim italic"}`}>
+                  <p className={`text-sm sm:text-base ${r.status === "verified" ? "text-paper" : "text-paper-dim "}`}>
                     {r.value || "Unknown"}
                     {r.note && <span className="text-paper-dim/50 not-italic"> {r.note}</span>}
                   </p>

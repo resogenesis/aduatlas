@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { FiArrowRight, FiLock } from "react-icons/fi";
 import { isPaid, hasTier, TIERS } from "../../stores/paymentStore";
+import { planById } from "../../lib/plans";
 import { isBuildersUnlocked, isFeasibilityUnlocked, courseProgress, packetProgress } from "../../stores/courseStore";
 import { currentUser } from "../../stores/authStore";
 
@@ -26,7 +27,7 @@ const PaidGate = ({ children, chapterName, requireTier, requireBuilders }) => {
   if (!isPaid()) return <PayPaywall location={location} chapterName={chapterName} />;
 
   if (requireTier && !hasTier(requireTier)) {
-    return <TierUpgradePaywall location={location} chapterName={chapterName} />;
+    return <TierUpgradePaywall location={location} chapterName={chapterName} requireTier={requireTier} />;
   }
 
   if (requireBuilders && !isBuildersUnlocked()) {
@@ -43,7 +44,7 @@ const PayPaywall = ({ location, chapterName }) => (
         <FiLock /> {chapterName ? `${chapterName} · locked` : "Locked"}
       </div>
       <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-        This is part of the <span className="italic">paid system.</span>
+        This is part of the <span className="">paid system.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
         Golden ($79) unlocks the full course, the planning worksheets, the ADU Ready Score, and builder profiles. Platinum ($279) adds a feasibility study and visual site plan prepared for your property. Concierge ($500) adds portal support and 60 minutes of private consultation. 7 day full refund if it's not for you.
@@ -70,25 +71,30 @@ const PayPaywall = ({ location, chapterName }) => (
 // Shown when a buyer IS paid but only holds Golden and is trying to reach a
 // Platinum deliverable. The $79 Golden purchase applies as a credit toward
 // Platinum (handled server-side at checkout), so the upgrade costs $200.
-const TierUpgradePaywall = ({ location, chapterName }) => (
+const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
+  const plan = planById(requireTier) || planById(TIERS.REPORT);
+  const isConcierge = plan.id === TIERS.CONCIERGE;
+  return (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
     <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
       <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] uppercase mb-7">
-        <FiLock /> {chapterName ? `${chapterName} · Platinum` : "Platinum"}
+        <FiLock /> {chapterName ? `${chapterName} · ${plan.name}` : plan.name}
       </div>
       <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-        This is part of <span className="italic">Platinum.</span>
+        This is part of <span>{plan.name}.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-        Golden includes the full course, the planning worksheets, the ADU Ready Score, and builder profiles. The feasibility study, visual site plan, and feasibility tools are part of Platinum. Your $79 applies as a credit, so the upgrade is $200.
+        {isConcierge
+          ? "Concierge adds portal support, personalized next-step guidance, builder-match assistance, and 60 minutes of private consultation. What you have already paid applies as a credit."
+          : "Golden includes the full course, the planning worksheets, the ADU Ready Score, and builder profiles. The feasibility study, visual site plan, and feasibility tools are part of Platinum. Your $79 applies as a credit, so the upgrade is $200."}
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
-          to="/unlock"
-          state={{ from: location.pathname, tier: "report" }}
+          to={`/unlock?tier=${plan.id}`}
+          state={{ from: location.pathname, tier: plan.id }}
           className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
         >
-          Upgrade to Platinum <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+          Upgrade to {plan.name} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>
         <Link
           to="/packet"
@@ -99,7 +105,8 @@ const TierUpgradePaywall = ({ location, chapterName }) => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 const BuilderPaywall = ({ progress, packetPercent, feasOk }) => (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
@@ -108,7 +115,7 @@ const BuilderPaywall = ({ progress, packetPercent, feasOk }) => (
         <FiLock /> Builders · locked
       </div>
       <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-        Builders only see <span className="italic">prepared homeowners.</span>
+        Builders only see <span className="">prepared homeowners.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
         Builders in our network only work with homeowners who've completed the system. That's why their quotes are accurate the first time. Finish your plan to unlock matches.
