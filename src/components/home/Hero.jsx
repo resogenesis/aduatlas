@@ -57,7 +57,7 @@ const Hero = () => {
         <Contours />
         <div className="container mx-auto px-5 sm:px-8 pt-10 pb-14 lg:pt-16 lg:pb-20 grid lg:grid-cols-12 gap-10 lg:gap-10 items-center relative">
           <div className="lg:col-span-6 animate-fade-up">
-            <h1 className="font-primary font-extrabold text-paper text-[2.75rem] sm:text-6xl lg:text-[4.25rem] leading-[0.98] tracking-[-0.03em] mb-6">
+            <h1 className="font-primary font-extrabold text-paper text-[2.75rem] sm:text-6xl lg:text-[4.75rem] xl:text-[5.5rem] leading-[0.96] tracking-[-0.035em] mb-7">
               {line1}
               {line2 && (
                 <>
@@ -69,15 +69,15 @@ const Hero = () => {
                 </>
               )}
             </h1>
-            <p className="text-paper-dim text-base sm:text-lg leading-relaxed max-w-md mb-8">{body}</p>
+            <p className="text-paper-dim text-lg sm:text-xl leading-relaxed max-w-lg mb-9">{body}</p>
             <AddressIntake cta={cta} placeholder={typed || placeholder} className="max-w-none" />
-            <p className="mt-3 inline-flex items-center gap-2 text-xs sm:text-sm text-paper-dim">
+            <p className="mt-4 inline-flex items-center gap-2 text-sm sm:text-base text-paper-dim">
               <FiCheck className="text-accent" aria-hidden /> {reassurance}
             </p>
           </div>
 
           <div className="lg:col-span-6 relative animate-fade-up lg:-mr-8 xl:-mr-[calc((100vw-1280px)/2+1rem)]" style={{ animationDelay: "120ms" }}>
-            <div className="relative rounded-[1.75rem] overflow-hidden aspect-[3/2] lg:aspect-auto lg:h-[34rem] xl:h-[38rem] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
+            <div className="relative rounded-[1.75rem] overflow-hidden aspect-[3/2] lg:aspect-auto lg:h-[32rem] xl:h-[34rem] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
               <img src={image.src} alt={image.alt} className="w-full h-full object-cover object-[55%_center] -scale-x-100" />
               <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-forest-deep/40 to-transparent" />
               <LiveCheck />
