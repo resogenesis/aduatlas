@@ -63,10 +63,10 @@ const Hero = () => {
             <p className="mt-3 inline-flex items-center gap-2 text-xs sm:text-sm text-paper-dim">
               <FiCheck className="text-accent" aria-hidden /> {reassurance}
             </p>
-            <p className="mt-6 text-xs sm:text-sm text-paper-dim tracking-wide">
+            <p className="mt-6 flex flex-wrap gap-x-4 gap-y-1 text-xs sm:text-sm text-paper-dim tracking-wide">
               {checks.map((c, i) => (
-                <span key={i}>
-                  {i > 0 && <span className="mx-2 text-stroke" aria-hidden>·</span>}
+                <span key={i} className="inline-flex items-center gap-4 whitespace-nowrap">
+                  {i > 0 && <span className="text-stroke" aria-hidden>·</span>}
                   {c}
                 </span>
               ))}
