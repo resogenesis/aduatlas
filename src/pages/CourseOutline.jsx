@@ -95,7 +95,7 @@ const CourseOutline = () => {
       </AdminEditableSection>
 
       <AdminEditableSection keys={["courseoutline.modules.heading"]} label="Module list heading">
-        <section className="container mx-auto px-5 sm:px-8 py-16 sm:py-20 max-w-5xl">
+        <section className="container mx-auto px-5 sm:px-8 py-16 sm:py-20 max-w-6xl">
           <h2 className="font-display text-paper text-3xl sm:text-4xl leading-[1.05] mb-8">{modulesHeading}</h2>
           <ol>
             {modules.map((m, i) => (
@@ -107,7 +107,7 @@ const CourseOutline = () => {
 
       <AdminEditableSection keys={["courseoutline.includes.heading", ...Array.from({ length: INCLUDES_COUNT }, (_, i) => `courseoutline.include.${i}.label`)]} label="Each module includes">
         <section className="bg-surface-1-solid border-y border-stroke">
-          <div className="container mx-auto px-5 sm:px-8 py-16 max-w-5xl">
+          <div className="container mx-auto px-5 sm:px-8 py-16 max-w-6xl">
             <h2 className="font-display text-paper text-3xl sm:text-4xl leading-[1.05] mb-8">{includesHeading}</h2>
             <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {includes.map((label, i) => {
@@ -125,7 +125,7 @@ const CourseOutline = () => {
       </AdminEditableSection>
 
       <AdminEditableSection keys={["courseoutline.cta.heading", "courseoutline.cta.body", "courseoutline.cta.button"]} label="Closing call to action">
-        <section className="container mx-auto px-5 sm:px-8 py-16 sm:py-20 max-w-5xl">
+        <section className="container mx-auto px-5 sm:px-8 py-16 sm:py-20 max-w-6xl">
           <div className="bg-forest-deep text-white rounded-3xl p-8 sm:p-12 grid lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8">
               <h2 className="font-display text-3xl sm:text-4xl leading-[1.05] mb-3">{ctaHeading}</h2>
