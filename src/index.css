@@ -16,9 +16,41 @@
   --color-accent-fg: #0E0F0C;
   --color-accent-dim: #98B83A;
 
+  /* Phase 1 light system additions (used by the public marketing site) */
+  --color-forest: #2E5E44;
+  --color-forest-deep: #1F4432;
+  --color-mist: #F4F6F2;
+  --color-gold: #B8892E;
+  --font-script: "Caveat", cursive;
+
   /* legacy tokens kept so older components still render until refactored */
   --color-primary: #1e1e1e;
   --color-secondary: #5f6f6a;
+}
+
+/* Phase 1 public-site theme: light, clean, forest-green accent. Scoped so the
+   homeowner portal, builder portal and admin console keep the dark canvas
+   until they are redesigned. Every token-driven utility (bg-canvas,
+   text-paper, bg-accent, border-stroke ...) re-skins automatically inside
+   this scope. */
+.theme-light {
+  --color-canvas: #FFFFFF;
+  --color-paper: #17201B;
+  --color-paper-dim: #5B6660;
+  --color-surface-1-solid: #F4F6F2;
+  --color-surface-2: #E9EEE8;
+  --color-stroke: #E1E6E0;
+  --color-accent: #2E5E44;
+  --color-accent-fg: #FFFFFF;
+  --color-accent-dim: #24493A;
+  background: var(--color-canvas);
+  color: var(--color-paper);
+}
+.theme-light ::selection { background: #2E5E44; color: #fff; }
+.theme-light :focus-visible { outline-color: #2E5E44; }
+
+@utility font-script {
+  font-family: var(--font-script);
 }
 
 body {

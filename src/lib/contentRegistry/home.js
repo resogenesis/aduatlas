@@ -1,91 +1,131 @@
-// Editable content for Home.jsx + its components (QuizHero, RiskCallouts,
-// FunnelSteps). Icons and layout stay code-owned — only wording/CTAs are
-// registered here. See src/lib/contentRegistry/index.js for the pattern this
-// follows across every page.
+// Editable content for the Phase 1 homepage (src/pages/Home.jsx and
+// src/components/home/*). Layout, icons and section order are code-owned;
+// only wording, CTAs and photos are registered here. Defaults are the copy
+// from the approved homepage mock (2026-09-20). See contentRegistry/index.js
+// for the pattern.
+import heroImg from "../../assets/home/hero_image.png";
+import familyImg from "../../assets/home/choose_img2.png";
+import incomeImg from "../../assets/home/choose_img3.png";
+import communityImg from "../../assets/home/container_img.png";
+
 const PAGE = "Home";
+const t = (label, def) => ({ page: PAGE, label, type: "text", default: def });
+const img = (label, src, alt) => ({ page: PAGE, label, type: "image", default: { src, alt } });
 
-// ── QuizHero ──────────────────────────────────────────────────────────────
-export const homeQuizHero = {
-  "home.quizhero.eyebrow": { page: PAGE, label: "Hero eyebrow", type: "text", default: "ADUAtlas Pre-Construction Preparation for Homeowners" },
-  "home.quizhero.heading_pre": { page: PAGE, label: "Hero heading (before emphasis)", type: "text", default: "Find Out What You Can" },
-  "home.quizhero.heading_emphasis": { page: PAGE, label: "Hero heading (emphasized)", type: "text", default: "Legally Build" },
-  "home.quizhero.heading_post": { page: PAGE, label: "Hero heading (after emphasis)", type: "text", default: "on Your Property" },
-  "home.quizhero.body": {
-    page: PAGE, label: "Hero paragraph", type: "text",
-    default: "Most homeowners underestimate the complexity of building an ADU and end up making mistakes that cost time and money. ADUAtlas gives homeowners the opportunity to learn the process and obtain property-specific information before making important decisions. Before investing in surveys, site plans, permits, or builder consultations, you need to understand your local ADU zoning regulations, pre-site costs, project timelines, and available ADU options.",
-  },
-  "home.quizhero.gauge_result_title": { page: PAGE, label: "Sample-score card result title", type: "text", default: "Foundational gaps" },
-  "home.quizhero.gauge_result_desc": { page: PAGE, label: "Sample-score card result description", type: "text", default: "Three things to fix before talking to a builder." },
+// ── Hero ──────────────────────────────────────────────────────────────────
+export const HERO_CHECKS_COUNT = 4;
+export const HERO_CARD_ITEMS_COUNT = 4;
+export const homeHero = {
+  "home.hero.eyebrow": t("Hero eyebrow", "Plan smarter. Build brighter."),
+  "home.hero.heading": t("Hero heading (\\n = line break)", "Your ADU\nStarts Here."),
+  "home.hero.body": t("Hero paragraph", "Get the data, guidance, and builder connections you need to turn your property's potential into reality."),
+  "home.hero.cta": t("Hero button", "Explore My Property"),
+  "home.hero.placeholder": t("Address field placeholder", "Enter your property address"),
+  "home.hero.check.0": t("Hero checkmark 1", "Zoning & lot analysis"),
+  "home.hero.check.1": t("Hero checkmark 2", "Estimated costs"),
+  "home.hero.check.2": t("Hero checkmark 3", "Design options"),
+  "home.hero.check.3": t("Hero checkmark 4", "Matched builders"),
+  "home.hero.script": t("Handwritten line over the photo", "More Homes\nA Brighter Tomorrow."),
+  "home.hero.card.title": t("Floating card title", "Turn your property into opportunity."),
+  "home.hero.card.item.0": t("Floating card item 1", "Generate income"),
+  "home.hero.card.item.1": t("Floating card item 2", "Add flexible living space"),
+  "home.hero.card.item.2": t("Floating card item 3", "Increase property value"),
+  "home.hero.card.item.3": t("Floating card item 4", "Support stronger communities"),
+  "home.hero.image": img("Hero photo", heroImg, "A finished backyard ADU at dusk with its lights on"),
 };
 
-// ── RiskCallouts ──────────────────────────────────────────────────────────
-// Icons stay in the component, keyed by the same index as these titles/descs.
-export const RISK_ITEMS_COUNT = 6;
-
-export const homeRiskCallouts = {
-  "home.riskcallouts.eyebrow": { page: PAGE, label: "Section eyebrow", type: "text", default: "Where projects derail" },
-  "home.riskcallouts.heading_pre": { page: PAGE, label: "Heading (first sentence)", type: "text", default: "Most homeowners are unprepared." },
-  "home.riskcallouts.heading_emphasis": { page: PAGE, label: "Heading (emphasized sentence)", type: "text", default: "This is how projects go off track." },
-  "home.riskcallouts.intro": {
-    page: PAGE, label: "Intro line (single \\n = line break)", type: "text",
-    default: "Learn about the process and products before you waste any time or money.\nADUAtlas provides specific information on both.",
-  },
-  "home.riskcallouts.item.0.title": { page: PAGE, label: "Item 1 title", type: "text", default: "Understand local ADU regulations" },
-  "home.riskcallouts.item.0.desc": { page: PAGE, label: "Item 1 description", type: "text", default: "and how they pertain to your property." },
-  "home.riskcallouts.item.1.title": { page: PAGE, label: "Item 2 title", type: "text", default: "Explore 30+ ADU types" },
-  "home.riskcallouts.item.1.desc": { page: PAGE, label: "Item 2 description", type: "text", default: "compare construction, design methods, and costs." },
-  "home.riskcallouts.item.2.title": { page: PAGE, label: "Item 3 title", type: "text", default: "Build a realistic total budget" },
-  "home.riskcallouts.item.2.desc": { page: PAGE, label: "Item 3 description", type: "text", default: "understand both pre-site and ADU structure cost." },
-  "home.riskcallouts.item.3.title": { page: PAGE, label: "Item 4 title", type: "text", default: "Follow the ADUAtlas 10-Step Guide" },
-  "home.riskcallouts.item.3.desc": { page: PAGE, label: "Item 4 description", type: "text", default: "the process to your property feasibility." },
-  "home.riskcallouts.item.4.title": { page: PAGE, label: "Item 5 title", type: "text", default: "Obtain a realistic feasibility study" },
-  "home.riskcallouts.item.4.desc": { page: PAGE, label: "Item 5 description", type: "text", default: "for your property before you make any decisions." },
-  "home.riskcallouts.item.5.title": { page: PAGE, label: "Item 6 title", type: "text", default: "Be prepared to speak with builders" },
-  "home.riskcallouts.item.5.desc": { page: PAGE, label: "Item 6 description", type: "text", default: "about the specifics of your property, with a feasibility study that lets you get reasonable quotes that are easy to compare." },
-  "home.riskcallouts.closing": { page: PAGE, label: "Closing line", type: "text", default: "Be prepared before speaking with builders, suppliers, or your city." },
+// ── Pillars (four-up strip under the hero) ────────────────────────────────
+export const PILLARS_COUNT = 4;
+export const homePillars = {
+  "home.pillars.item.0.title": t("Pillar 1 title", "Learn\nthe basics"),
+  "home.pillars.item.0.desc": t("Pillar 1 description", "Understand ADUs and what's possible on your property."),
+  "home.pillars.item.1.title": t("Pillar 2 title", "Explore\nyour options"),
+  "home.pillars.item.1.desc": t("Pillar 2 description", "See designs, costs, and zoning insights."),
+  "home.pillars.item.2.title": t("Pillar 3 title", "Get matched\nwith builders"),
+  "home.pillars.item.2.desc": t("Pillar 3 description", "Connect with vetted builders in your area."),
+  "home.pillars.item.3.title": t("Pillar 4 title", "Build with\nconfidence"),
+  "home.pillars.item.3.desc": t("Pillar 4 description", "Bring your ADU to life with the right plan and partners."),
 };
 
-// ── FunnelSteps ───────────────────────────────────────────────────────────
-// Structure (how many bullets each step has) stays code-owned. A step with
-// no "intro" registry entry just resolves to "" and the line is hidden.
-export const FUNNEL_STEPS_META = [
-  { n: "01", bulletCount: 4 },
-  { n: "02", bulletCount: 7 },
-  { n: "03", bulletCount: 5 },
-];
-
-export const homeFunnelSteps = {
-  "home.funnelsteps.heading": { page: PAGE, label: "Section heading", type: "text", default: "How ADUAtlas works." },
-
-  "home.funnelsteps.step.0.title": { page: PAGE, label: "Step 1 title", type: "text", default: "Learn before you build" },
-  "home.funnelsteps.step.0.lede": { page: PAGE, label: "Step 1 lede", type: "text", default: "Take the How to ADU Course." },
-  "home.funnelsteps.step.0.intro": { page: PAGE, label: "Step 1 intro line", type: "text", default: "You will learn:" },
-  "home.funnelsteps.step.0.bullet.0": { page: PAGE, label: "Step 1 bullet 1", type: "text", default: "City, county, and ZIP-level ADU regulations" },
-  "home.funnelsteps.step.0.bullet.1": { page: PAGE, label: "Step 1 bullet 2", type: "text", default: "25+ ADU types, construction methods, and a video library" },
-  "home.funnelsteps.step.0.bullet.2": { page: PAGE, label: "Step 1 bullet 3", type: "text", default: "Budget planning and timelines, including pre-site and utility costs" },
-  "home.funnelsteps.step.0.bullet.3": { page: PAGE, label: "Step 1 bullet 4", type: "text", default: "Common homeowner mistakes in the FAQ chapter" },
-
-  "home.funnelsteps.step.1.title": { page: PAGE, label: "Step 2 title", type: "text", default: "Get a Property Feasibility Report" },
-  "home.funnelsteps.step.1.lede": { page: PAGE, label: "Step 2 lede", type: "text", default: "The study provides information builders need to discuss your project. It includes — but is not limited to — the following:" },
-  "home.funnelsteps.step.1.bullet.0": { page: PAGE, label: "Step 2 bullet 1", type: "text", default: "Existing structure placement" },
-  "home.funnelsteps.step.1.bullet.1": { page: PAGE, label: "Step 2 bullet 2", type: "text", default: "Lot dimensions" },
-  "home.funnelsteps.step.1.bullet.2": { page: PAGE, label: "Step 2 bullet 3", type: "text", default: "Local ADU zoning overlays" },
-  "home.funnelsteps.step.1.bullet.3": { page: PAGE, label: "Step 2 bullet 4", type: "text", default: "Setback requirements" },
-  "home.funnelsteps.step.1.bullet.4": { page: PAGE, label: "Step 2 bullet 5", type: "text", default: "Potential ADU placement" },
-  "home.funnelsteps.step.1.bullet.5": { page: PAGE, label: "Step 2 bullet 6", type: "text", default: "Interactive pre-site budget worksheet" },
-  "home.funnelsteps.step.1.bullet.6": { page: PAGE, label: "Step 2 bullet 7", type: "text", default: "Pre-site planning considerations" },
-
-  "home.funnelsteps.step.2.title": { page: PAGE, label: "Step 3 title", type: "text", default: "Move forward prepared" },
-  "home.funnelsteps.step.2.lede": { page: PAGE, label: "Step 3 lede", type: "text", default: "After completing the course and receiving your Property Feasibility Report, you will be better prepared to discuss your project with builders." },
-  "home.funnelsteps.step.2.bullet.0": { page: PAGE, label: "Step 3 bullet 1", type: "text", default: "Compare builder quotes more effectively" },
-  "home.funnelsteps.step.2.bullet.1": { page: PAGE, label: "Step 3 bullet 2", type: "text", default: "Understand potential project costs" },
-  "home.funnelsteps.step.2.bullet.2": { page: PAGE, label: "Step 3 bullet 3", type: "text", default: "Evaluate ADU options" },
-  "home.funnelsteps.step.2.bullet.3": { page: PAGE, label: "Step 3 bullet 4", type: "text", default: "Plan for pre-site requirements" },
-  "home.funnelsteps.step.2.bullet.4": { page: PAGE, label: "Step 3 bullet 5", type: "text", default: "Make informed decisions before construction begins" },
-
-  "home.funnelsteps.cta_primary": { page: PAGE, label: "Primary CTA button", type: "text", default: "Start the ADU Course" },
-  "home.funnelsteps.cta_secondary": { page: PAGE, label: "Secondary CTA link", type: "text", default: "See full course outline" },
-  "home.funnelsteps.pricing_note": { page: PAGE, label: "Pricing note", type: "text", default: "$99 · Lifetime access · $99 credited toward the $399 Report when you upgrade within 90 days" },
+// ── What's possible (text + three photo cards) ────────────────────────────
+export const POSSIBLE_CARDS_COUNT = 3;
+export const homePossible = {
+  "home.possible.eyebrow": t("Section eyebrow", "Real data. Real possibilities."),
+  "home.possible.heading": t("Section heading (\\n = line break)", "See What's Possible\non Your Property."),
+  "home.possible.body": t("Section paragraph", "Every property is unique. ADUAtlas gives you the knowledge, tools, and connections to make the most of yours, whether you're building for family, for income, or for the future."),
+  "home.possible.cta": t("Section button", "Check My Property"),
+  "home.possible.card.0.eyebrow": t("Card 1 eyebrow", "For family"),
+  "home.possible.card.0.title": t("Card 1 title", "More Space\nfor What Matters"),
+  "home.possible.card.0.desc": t("Card 1 description", "Create flexible living for family, friends, or caregivers."),
+  "home.possible.card.0.image": img("Card 1 photo", familyImg, "A compact green ADU with sliding glass doors"),
+  "home.possible.card.1.eyebrow": t("Card 2 eyebrow", "For income"),
+  "home.possible.card.1.title": t("Card 2 title", "Generate\nRental Revenue"),
+  "home.possible.card.1.desc": t("Card 2 description", "Turn your property into a long-term asset."),
+  "home.possible.card.1.image": img("Card 2 photo", incomeImg, "A prefab ADU module being lowered into place by crane"),
+  "home.possible.card.2.eyebrow": t("Card 3 eyebrow", "For community"),
+  "home.possible.card.2.title": t("Card 3 title", "Stronger\nNeighborhoods"),
+  "home.possible.card.2.desc": t("Card 3 description", "Thoughtful ADUs create more housing and stronger communities."),
+  "home.possible.card.2.image": img("Card 3 photo", communityImg, "A modular unit arriving on site"),
 };
 
-export const HOME_CONTENT = { ...homeQuizHero, ...homeRiskCallouts, ...homeFunnelSteps };
+// ── Stats band ────────────────────────────────────────────────────────────
+// PLACEHOLDER FIGURES from the mock. Replace with real numbers before any
+// public deploy; publishing unverifiable claims is a trust problem for a
+// product whose pitch is honest numbers.
+export const STATS_COUNT = 3;
+export const homeStats = {
+  "home.stats.eyebrow": t("Stats eyebrow", "A growing movement"),
+  "home.stats.heading": t("Stats heading (\\n = line break)", "Smaller Footprints.\nBigger Opportunities."),
+  "home.stats.item.0.value": t("Stat 1 value", "50K+"),
+  "home.stats.item.0.label": t("Stat 1 label", "Properties analyzed"),
+  "home.stats.item.1.value": t("Stat 2 value", "8K+"),
+  "home.stats.item.1.label": t("Stat 2 label", "Homeowners guided"),
+  "home.stats.item.2.value": t("Stat 3 value", "1,200+"),
+  "home.stats.item.2.label": t("Stat 3 label", "Builders in our network"),
+  "home.stats.map_label": t("Map label", "Communities\nnationwide"),
+};
+
+// ── Mission band ──────────────────────────────────────────────────────────
+export const homeMission = {
+  "home.mission.eyebrow": t("Mission eyebrow", "Built for a brighter tomorrow"),
+  "home.mission.heading": t("Mission heading", "More Homes. Stronger Communities."),
+  "home.mission.body": t("Mission paragraph", "ADUs create housing, support families, and increase opportunity. We're here to make it easier for homeowners, builders, and communities to bring them to life."),
+  "home.mission.cta": t("Mission button", "About Our Mission"),
+  "home.mission.image": img("Mission background photo", heroImg, "Aerial view of a residential neighborhood"),
+};
+
+// ── Testimonials ──────────────────────────────────────────────────────────
+// PLACEHOLDER QUOTES from the mock. Swap for real customer words (with
+// permission) before any public deploy.
+export const TESTIMONIALS_COUNT = 3;
+export const homeTestimonials = {
+  "home.testimonials.eyebrow": t("Testimonials eyebrow", "What homeowners are saying"),
+  "home.testimonials.heading": t("Testimonials heading", "Real People. Real Progress."),
+  "home.testimonials.link": t("Testimonials link", "See More Stories"),
+  "home.testimonials.item.0.quote": t("Quote 1", "ADUAtlas made it easy to understand what was possible on my property. The report was super helpful and connected me with an amazing builder."),
+  "home.testimonials.item.0.name": t("Quote 1 name", "Sarah M."),
+  "home.testimonials.item.0.place": t("Quote 1 place", "Austin, TX"),
+  "home.testimonials.item.1.quote": t("Quote 2", "I had no idea where to start. ADUAtlas gave me clarity, options, and a builder I could trust. We're now breaking ground!"),
+  "home.testimonials.item.1.name": t("Quote 2 name", "James T."),
+  "home.testimonials.item.1.place": t("Quote 2 place", "San Diego, CA"),
+  "home.testimonials.item.2.quote": t("Quote 3", "A must-use for any homeowner considering an ADU. The insights and resources saved me months of research."),
+  "home.testimonials.item.2.name": t("Quote 3 name", "Priya K."),
+  "home.testimonials.item.2.place": t("Quote 3 place", "Denver, CO"),
+};
+
+// ── Closing CTA band ──────────────────────────────────────────────────────
+export const homeCta = {
+  "home.cta.heading": t("Closing heading", "Your property has potential."),
+  "home.cta.body": t("Closing line", "Discover what's possible with ADUAtlas."),
+  "home.cta.button": t("Closing button", "Get Started"),
+};
+
+export const HOME_CONTENT = {
+  ...homeHero,
+  ...homePillars,
+  ...homePossible,
+  ...homeStats,
+  ...homeMission,
+  ...homeTestimonials,
+  ...homeCta,
+};

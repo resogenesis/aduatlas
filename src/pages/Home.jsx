@@ -1,15 +1,23 @@
-import FunnelSteps from "../components/home/FunnelSteps";
-import QuizHero from "../components/home/QuizHero";
-import RiskCallouts from "../components/home/RiskCallouts";
+import Hero from "../components/home/Hero";
+import Pillars from "../components/home/Pillars";
+import Possible from "../components/home/Possible";
+import Stats from "../components/home/Stats";
+import Mission from "../components/home/Mission";
+import Testimonials from "../components/home/Testimonials";
+import ClosingCta from "../components/home/ClosingCta";
 
-const Home = () => {
-    return (
-        <div className="w-full">
-            <QuizHero />
-            <RiskCallouts />
-            <FunnelSteps />
-        </div>
-    );
-};
+// Phase 1 homepage: concise value proposition, property-address CTA, how it
+// works, what is possible, proof, mission, and a final address CTA.
+const Home = () => (
+  <div className="w-full">
+    <Hero />
+    <Pillars />
+    <Possible />
+    <Stats />
+    <Mission />
+    <Testimonials />
+    <ClosingCta />
+  </div>
+);
 
 export default Home;
