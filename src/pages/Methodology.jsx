@@ -105,12 +105,10 @@ const Methodology = () => {
         label="Hero"
       >
       <section className="relative overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-12 border-b border-stroke">
-        <div aria-hidden className="pointer-events-none absolute -top-24 right-0 w-[28rem] h-[28rem] rounded-full bg-accent/8 blur-3xl animate-drift-glow" />
-
-        <div ref={heroRef} className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
+<div ref={heroRef} className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
           <div className="inline-flex items-center gap-2 mb-4 animate-fade-up">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
-            <span className="text-paper-dim text-xs font-medium tracking-[0.2em]">
+            <span className="text-paper-dim text-xs font-medium">
               {heroBadge}
             </span>
           </div>
@@ -148,7 +146,7 @@ const Methodology = () => {
           label="Confidence levels"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-accent text-xs tracking-[0.2em] mb-5">{levelsEyebrow}</p>
+          <p className="text-accent text-xs mb-5">{levelsEyebrow}</p>
           <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-9">
             {levelsHeading}
           </h2>
@@ -172,7 +170,7 @@ const Methodology = () => {
           label="What raises a row"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-accent text-xs tracking-[0.2em] mb-5">{pathEyebrow}</p>
+          <p className="text-accent text-xs mb-5">{pathEyebrow}</p>
           <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-5">
             {pathHeading}
           </h2>
@@ -180,7 +178,7 @@ const Methodology = () => {
             {pathBody}
           </p>
           <div className="bg-canvas border border-stroke rounded-2xl p-6">
-            <p className="text-paper-dim text-[0.65rem] font-semibold tracking-[0.2em] mb-2">{pathExampleLabel}</p>
+            <p className="text-paper-dim text-[0.65rem] font-semibold mb-2">{pathExampleLabel}</p>
             <p className="text-paper text-sm sm:text-base mb-2">
               <span className="text-paper-dim">{pathExampleRow}</span>
               <span className="inline-block w-2 h-2 rounded-full bg-red-400 mx-2 align-middle" />
@@ -209,7 +207,7 @@ const Methodology = () => {
           label="Data sources"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-accent text-xs tracking-[0.2em] mb-5">{sourcesEyebrow}</p>
+          <p className="text-accent text-xs mb-5">{sourcesEyebrow}</p>
           <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-7">
             {sourcesHeading}
           </h2>
@@ -238,7 +236,7 @@ const Methodology = () => {
           label="What we don't do"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <div className="flex items-center gap-2 text-accent text-xs tracking-[0.2em] mb-5">
+          <div className="flex items-center gap-2 text-accent text-xs mb-5">
             <FiShield /> {notDoingBadge}
           </div>
           <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-5">
@@ -267,7 +265,7 @@ const Methodology = () => {
           </p>
           <Link
             to="/"
-            className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
+            className="group inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
           >
             {ctaButton} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>

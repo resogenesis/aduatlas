@@ -43,7 +43,7 @@ const tiers = [
 const Billing = () => {
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto">
-      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Billing</p>
+      <p className="text-accent text-xs font-medium mb-3">Billing</p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-3">
         Plan & invoices.
       </h1>
@@ -53,7 +53,7 @@ const Billing = () => {
 
       {/* Current plan card */}
       <div className="bg-accent text-accent-fg rounded-3xl p-7 sm:p-10 mb-10">
-        <div className="flex items-center gap-2 text-accent-fg/70 text-xs font-medium tracking-[0.2em] mb-3">
+        <div className="flex items-center gap-2 text-accent-fg/70 text-xs font-medium mb-3">
           <FiZap /> Current plan
         </div>
         <h2 className="font-display text-3xl sm:text-4xl mb-2">Pilot · Free</h2>
@@ -62,14 +62,14 @@ const Billing = () => {
         </p>
         <button
           onClick={() => alert("INTEGRATION POINT (Stripe): open billing portal / change plan.")}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
         >
           <FiCreditCard /> Manage billing
         </button>
       </div>
 
       {/* Plans */}
-      <p className="text-paper-dim text-xs tracking-[0.2em] mb-5">Plans after pilot</p>
+      <p className="text-paper-dim text-xs mb-5">Plans after pilot</p>
       <div className="grid lg:grid-cols-3 gap-5">
         {tiers.map((t) => (
           <div
@@ -77,7 +77,7 @@ const Billing = () => {
             className={`rounded-3xl p-7 border ${ t.badge ?"bg-surface-1-solid border-accent":"bg-surface-1-solid border-stroke"}`}
           >
             <div className="flex items-center justify-between mb-5">
-              <p className="text-paper text-xs tracking-[0.15em]">{t.name}</p>
+              <p className="text-paper text-xs">{t.name}</p>
               {t.badge && (
                 <span className="text-[0.65rem] font-semibold bg-accent text-accent-fg rounded-full px-2 py-0.5">
                   {t.badge}
@@ -102,7 +102,7 @@ const Billing = () => {
 
       {/* Invoices placeholder */}
       <div className="mt-10 bg-surface-1-solid border border-stroke rounded-2xl p-6 sm:p-8">
-        <p className="text-paper-dim text-xs tracking-[0.2em] mb-3">Invoices</p>
+        <p className="text-paper-dim text-xs mb-3">Invoices</p>
         <p className="text-paper-dim text-sm">
           No invoices yet. They'll appear here once you switch to a paid plan.
         </p>

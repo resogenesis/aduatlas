@@ -54,7 +54,7 @@ const LeadDetail = () => {
       {/* Header */}
       <div className="grid lg:grid-cols-12 gap-6 mb-10">
         <div className="lg:col-span-8">
-          <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
+          <p className="text-accent text-xs font-medium mb-3">
             Lead {lead.id} · {STATUS_LABEL[lead.status]}
           </p>
           <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-3">
@@ -66,7 +66,7 @@ const LeadDetail = () => {
         </div>
 
         <div className="lg:col-span-4 bg-accent text-accent-fg rounded-2xl p-5 sm:p-6">
-          <p className="text-accent-fg/70 text-xs tracking-[0.2em] mb-1">Readiness</p>
+          <p className="text-accent-fg/70 text-xs mb-1">Readiness</p>
           <div className="flex items-baseline gap-3">
             <span className="font-display text-5xl">{lead.score}</span>
             <span className="text-accent-fg/70 text-sm">/ 100 · {lead.band}</span>
@@ -80,7 +80,7 @@ const LeadDetail = () => {
 
       {/* Project brief */}
       <div className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-10 mb-6">
-        <p className="text-paper-dim text-xs tracking-[0.2em] mb-5">Project brief</p>
+        <p className="text-paper-dim text-xs mb-5">Project brief</p>
         <div className="grid sm:grid-cols-2 gap-x-10 gap-y-5">
           <BriefRow label="Purpose" value={lead.purpose} />
           <BriefRow label="Timeline" value={lead.timeline} />
@@ -91,7 +91,7 @@ const LeadDetail = () => {
         </div>
         {lead.notes && (
           <div className="mt-7 pt-7 border-t border-stroke">
-            <p className="text-paper-dim text-xs tracking-[0.2em] mb-2">Homeowner notes</p>
+            <p className="text-paper-dim text-xs mb-2">Homeowner notes</p>
             <p className="text-paper text-sm sm:text-base leading-relaxed">{lead.notes}</p>
           </div>
         )}
@@ -99,7 +99,7 @@ const LeadDetail = () => {
 
       {/* Actions */}
       <div className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-10">
-        <p className="text-paper-dim text-xs tracking-[0.2em] mb-3">Take action</p>
+        <p className="text-paper-dim text-xs mb-3">Take action</p>
         <h2 className="font-display text-paper text-2xl sm:text-3xl leading-snug mb-3">
           {lead.status === "claimed" ? "You've claimed this lead." : "Ready to respond?"}
         </h2>
@@ -113,7 +113,7 @@ const LeadDetail = () => {
           {lead.status !== "claimed" && (
             <button
               onClick={handleClaim}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
             >
               <FiCheckCircle /> Claim lead
             </button>
@@ -121,21 +121,21 @@ const LeadDetail = () => {
           {lead.status === "claimed" && (
             <button
               onClick={() => alert("INTEGRATION POINT (Resend): open compose modal to contact the homeowner.")}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
             >
               <FiMail /> Contact homeowner
             </button>
           )}
           <button
             onClick={handleDownload}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-stroke text-paper hover:border-paper-dim transition font-medium"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-stroke text-paper hover:border-accent transition font-medium"
           >
             <FiDownload /> Download packet (PDF)
           </button>
           {lead.status !== "claimed" && (
             <button
               onClick={handlePass}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-stroke text-paper-dim hover:text-paper hover:border-paper-dim transition text-sm"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-stroke text-paper-dim hover:text-paper hover:border-accent transition text-sm"
             >
               <FiX /> Pass on this lead
             </button>
@@ -160,7 +160,7 @@ const Row = ({ label, value }) => (
 
 const BriefRow = ({ label, value }) => (
   <div>
-    <p className="text-paper-dim text-xs tracking-[0.15em] mb-1">{label}</p>
+    <p className="text-paper-dim text-xs mb-1">{label}</p>
     <p className="text-paper text-sm sm:text-base">{value}</p>
   </div>
 );

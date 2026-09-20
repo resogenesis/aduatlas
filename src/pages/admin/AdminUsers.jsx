@@ -39,7 +39,7 @@ const AdminUsers = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto">
-      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Admin</p>
+      <p className="text-accent text-xs font-medium mb-3">Admin</p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
         Users
       </h1>
@@ -59,7 +59,7 @@ const AdminUsers = () => {
         <div className="overflow-x-auto bg-surface-1-solid border border-stroke rounded-2xl">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-paper-dim text-xs tracking-[0.15em] border-b border-stroke">
+              <tr className="text-paper-dim text-xs border-b border-stroke">
                 <th className="px-4 py-3 text-left font-medium">Email</th>
                 <th className="px-4 py-3 text-left font-medium">Role</th>
                 <th className="px-4 py-3 text-left font-medium">Paid tier</th>

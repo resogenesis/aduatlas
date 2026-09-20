@@ -8,7 +8,7 @@ export const FormField = ({ label, type = "text", placeholder, required, hint, n
   const controlledProps = onChange ? { value: value ?? "", onChange } : {};
   return (
     <div className="mb-5">
-      <label className="block text-paper text-xs font-medium tracking-[0.15em] mb-2">
+      <label className="block text-paper text-xs font-medium mb-2">
         {label}{required && " *"}
       </label>
       <div className="relative">
@@ -39,7 +39,7 @@ export const FormField = ({ label, type = "text", placeholder, required, hint, n
 export const PrimaryButton = ({ children, className = "", ...rest }) => (
   <button
     {...rest}
-    className={`w-full cursor-pointer py-3.5 px-5 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors ${className}`}
+    className={`w-full cursor-pointer py-3.5 px-5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors ${className}`}
   >
     {children}
   </button>
@@ -48,7 +48,7 @@ export const PrimaryButton = ({ children, className = "", ...rest }) => (
 export const SecondaryButton = ({ children, className = "", ...rest }) => (
   <button
     {...rest}
-    className={`w-full cursor-pointer py-3.5 px-5 rounded-full border border-stroke text-paper font-medium text-sm hover:border-paper-dim transition ${className}`}
+    className={`w-full cursor-pointer py-3.5 px-5 rounded-xl border border-stroke text-paper font-medium text-sm hover:border-accent transition ${className}`}
   >
     {children}
   </button>

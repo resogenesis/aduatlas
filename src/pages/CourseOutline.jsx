@@ -144,7 +144,7 @@ const CourseOutline = () => {
       <section className="pt-28 sm:pt-32 lg:pt-40 pb-14 sm:pb-20 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <div ref={headRef}>
-            <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
+            <p className="text-accent text-xs sm:text-sm font-medium mb-4">
               {heroEyebrow}
             </p>
             <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight max-w-3xl">
@@ -161,21 +161,21 @@ const CourseOutline = () => {
             className="mt-10 sm:mt-12 grid sm:grid-cols-3 gap-px bg-stroke border border-stroke rounded-2xl overflow-hidden"
           >
             <div className="bg-surface-1-solid p-6 sm:p-7">
-              <p className="text-paper-dim text-xs tracking-[0.2em] mb-2">{strip0Label}</p>
+              <p className="text-paper-dim text-xs mb-2">{strip0Label}</p>
               <p className="font-display text-paper text-3xl sm:text-4xl">{strip0Value}</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
                 {strip0Desc}
               </p>
             </div>
             <div className="bg-surface-1-solid p-6 sm:p-7">
-              <p className="text-paper-dim text-xs tracking-[0.2em] mb-2">{strip1Label}</p>
+              <p className="text-paper-dim text-xs mb-2">{strip1Label}</p>
               <p className="font-display text-paper text-3xl sm:text-4xl">{strip1Value}</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
                 {strip1Desc}
               </p>
             </div>
             <div className="bg-surface-1-solid p-6 sm:p-7">
-              <p className="text-paper-dim text-xs tracking-[0.2em] mb-2">{strip2Label}</p>
+              <p className="text-paper-dim text-xs mb-2">{strip2Label}</p>
               <p className="font-display text-paper text-3xl sm:text-4xl">{strip2Value}</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
                 {strip2Desc}
@@ -198,7 +198,7 @@ const CourseOutline = () => {
       >
       <section className="py-16 sm:py-20 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
+          <p className="text-accent text-xs sm:text-sm font-medium mb-4">
             {includesEyebrow}
           </p>
           <h2 className="font-display text-paper text-3xl sm:text-4xl leading-snug tracking-tight mb-10 max-w-2xl">
@@ -221,7 +221,7 @@ const CourseOutline = () => {
       >
       <section className="py-16 sm:py-24 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
+          <p className="text-accent text-xs sm:text-sm font-medium mb-4">
             {modulesEyebrow}
           </p>
           <h2 className="font-display text-paper text-3xl sm:text-4xl leading-snug tracking-tight mb-10 max-w-2xl">
@@ -257,7 +257,7 @@ const CourseOutline = () => {
             ref={ideaRef}
             className="bg-surface-1-solid border border-stroke rounded-2xl p-7 sm:p-10"
           >
-            <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
+            <p className="text-accent text-xs sm:text-sm font-medium mb-4">
               {ideaEyebrow}
             </p>
             <p className="font-display text-paper text-2xl sm:text-3xl leading-snug tracking-tight max-w-3xl">
@@ -268,7 +268,7 @@ const CourseOutline = () => {
           <div ref={ctaRef} className="mt-12 sm:mt-16 flex flex-col sm:flex-row items-start sm:items-center gap-5">
             <Link
               to="/unlock"
-              className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+              className="group inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
             >
               {ctaButton}
               <FiArrowRight className="group-hover:translate-x-1 transition-transform" />

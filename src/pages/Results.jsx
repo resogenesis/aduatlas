@@ -29,7 +29,7 @@ const Results = () => {
     <div className="min-h-[80vh] bg-canvas py-16 sm:py-24">
       <div className="container mx-auto px-5 sm:px-8 max-w-3xl">
 
-        <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-5 text-center">
+        <p className="text-accent text-xs sm:text-sm font-medium mb-5 text-center">
           Reality Check Results
         </p>
         <h1 className="font-display text-paper text-3xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-center mb-4">
@@ -55,12 +55,12 @@ const Results = () => {
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="font-display text-paper text-6xl leading-none">{score}</span>
-                <span className="text-paper-dim text-xs tracking-[0.2em] mt-2">/ 100</span>
+                <span className="text-paper-dim text-xs mt-2">/ 100</span>
               </div>
             </div>
 
             <div className="flex-1 text-center sm:text-left">
-              <p className="text-paper-dim text-xs tracking-[0.2em] mb-2">Result</p>
+              <p className="text-paper-dim text-xs mb-2">Result</p>
               <h2 className="font-display text-paper text-3xl sm:text-4xl mb-4">
                 {band}
               </h2>
@@ -88,7 +88,7 @@ const Results = () => {
         </div>
 
         <div className="bg-accent text-accent-fg rounded-3xl p-8 sm:p-12">
-          <div className="inline-flex items-center gap-2 mb-4 text-xs font-semibold tracking-[0.2em]">
+          <div className="inline-flex items-center gap-2 mb-4 text-xs font-semibold">
             <FiLock /> Locked
           </div>
           <h3 className="font-display text-3xl sm:text-4xl leading-tight mb-4">
@@ -117,7 +117,7 @@ const Results = () => {
           <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
             <Link
               to="/unlock"
-              className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
+              className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
             >
               Start with Golden, $79 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>

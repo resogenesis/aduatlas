@@ -185,7 +185,7 @@ const Detail = ({ study, onClose, onChanged }) => {
               {error}
             </p>
           )}
-          <button onClick={save} disabled={busy === "save"} className="px-5 py-2.5 rounded-xl bg-accent text-accent-fg text-sm font-semibold hover:bg-paper transition-colors disabled:opacity-60">
+          <button onClick={save} disabled={busy === "save"} className="px-5 py-2.5 rounded-xl bg-accent text-accent-fg text-sm font-semibold hover:bg-accent-dim transition-colors disabled:opacity-60">
             {busy === "save" ? "Saving…" : "Save review"}
           </button>
         </section>
@@ -239,12 +239,12 @@ const AdminStudies = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-8 sm:py-10">
       <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
         <div>
-          <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Admin</p>
+          <p className="text-accent text-xs font-medium mb-3">Admin</p>
           <h1 className="font-primary font-extrabold tracking-tight text-paper text-4xl sm:text-5xl leading-[1.05]">Feasibility studies</h1>
         </div>
         <div className="flex items-center gap-2">
           {["open", "ready", "all"].map((f) => (
-            <button key={f} onClick={() => setFilter(f)} className={`px-3 py-1.5 rounded-full text-xs font-medium ${filter === f ?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper border border-stroke"}`}>
+            <button key={f} onClick={() => setFilter(f)} className={`px-3 py-1.5 rounded-xl text-xs font-medium ${filter === f ?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper border border-stroke"}`}>
               {f === "open" ? "Open" : f === "ready" ? "Ready" : "All"}
             </button>
           ))}

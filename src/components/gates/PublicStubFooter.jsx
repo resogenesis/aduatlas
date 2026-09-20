@@ -10,25 +10,25 @@ const PublicStubFooter = ({ chapterName }) => {
         </p>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-accent/10 text-accent text-xs font-medium mb-6">
             <FiLock /> {chapterName ? `${chapterName} · locked` : "Locked"}
           </div>
           <h3 className="font-display text-paper text-2xl sm:text-3xl leading-snug tracking-tight mb-4">
             The full step by step is inside the ADU system.
           </h3>
           <p className="text-paper-dim text-sm sm:text-base leading-relaxed mb-8 max-w-md mx-auto">
-            Start with the 2 minute Reality Check. Find out exactly where you stand, then unlock the full plan if it's right for you.
+            Start with a free property check. See what public records say about your lot, then choose the plan that fits.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              to="/quiz"
-              className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+              to="/property"
+              className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
             >
-              Start the Reality Check <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              Check my property <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               to="/unlock"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-stroke text-paper font-medium hover:border-paper-dim transition"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition"
             >
               See plans from $79
             </Link>

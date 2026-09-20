@@ -66,7 +66,7 @@ const CourseChapter = () => {
         <FiArrowLeft /> Back to course
       </Link>
 
-      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
+      <p className="text-accent text-xs font-medium mb-3">
         Module {chapter.moduleN} · {chapter.moduleTitle}
         {!isQuiz && (
           <span className="text-paper-dim"> · Chapter {contentPos} of {contentChapters.length}</span>
@@ -101,7 +101,7 @@ const CourseChapter = () => {
           {prev && (
             <Link
               to={`/course/${prev.id}`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-stroke text-paper-dim hover:text-paper hover:border-paper-dim transition text-sm font-medium"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-stroke text-paper-dim hover:text-paper hover:border-accent transition text-sm font-medium"
             >
               <FiArrowLeft /> Previous
             </Link>
@@ -116,7 +116,7 @@ const CourseChapter = () => {
               <Link
                 to={completed ? `/course/${next.id}` : "#"}
                 onClick={(e) => !completed && e.preventDefault()}
-                className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-colors ${ completed ?"bg-accent text-accent-fg hover:bg-paper":"border border-stroke text-paper-dim/50 cursor-not-allowed"}`}
+                className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-colors ${ completed ?"bg-accent text-accent-fg hover:bg-accent-dim":"border border-stroke text-paper-dim/50 cursor-not-allowed"}`}
               >
                 Next <FiArrowRight />
               </Link>
@@ -125,14 +125,14 @@ const CourseChapter = () => {
             <>
               <button
                 onClick={handleUnmark}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-stroke text-paper-dim hover:text-paper hover:border-paper-dim transition text-sm font-medium"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-stroke text-paper-dim hover:text-paper hover:border-accent transition text-sm font-medium"
               >
                 Mark as not done
               </button>
               {next && (
                 <Link
                   to={`/course/${next.id}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors"
                 >
                   Next <FiArrowRight />
                 </Link>
@@ -141,7 +141,7 @@ const CourseChapter = () => {
           ) : (
             <button
               onClick={() => complete(true)}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
             >
               <FiCheck /> Mark complete
               {next ? " & continue" : ""}

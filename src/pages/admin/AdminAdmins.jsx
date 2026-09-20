@@ -39,7 +39,7 @@ const AdminAdmins = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-2xl mx-auto">
-      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Admin</p>
+      <p className="text-accent text-xs font-medium mb-3">Admin</p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
         Admins
       </h1>
@@ -85,13 +85,13 @@ const AdminAdmins = () => {
         <button
           type="submit"
           disabled={busy}
-          className="mt-5 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors disabled:opacity-50"
+          className="mt-5 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors disabled:opacity-50"
         >
           {busy ? "Creating…" : "Create admin"}
         </button>
       </form>
 
-      <h2 className="text-paper text-xs tracking-[0.2em] mb-4">Current admins</h2>
+      <h2 className="text-paper text-xs mb-4">Current admins</h2>
       {!admins && !error && <p className="text-paper-dim">Loading…</p>}
       {admins && (
         <div className="bg-surface-1-solid border border-stroke rounded-2xl divide-y divide-stroke/60">

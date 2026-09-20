@@ -142,7 +142,7 @@ const PropertyReport = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto print-sheet">
       <WorksheetBar savedAt={null} />
 
-      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
+      <p className="text-accent text-xs font-medium mb-3">
         Property Feasibility Report
       </p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
@@ -244,7 +244,7 @@ const PropertyReport = () => {
         ) : (
           <div className="text-center py-8">
             <p className="text-paper-dim text-sm mb-4">No lot geometry yet — set up your property in the Feasibility tool and it appears here.</p>
-            <Link to="/feasibility" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors">
+            <Link to="/feasibility" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors">
               Open the Feasibility tool <FiArrowRight />
             </Link>
           </div>
@@ -277,7 +277,7 @@ const PropertyReport = () => {
         ) : (
           <div className="text-center py-8">
             <p className="text-paper-dim text-sm mb-4">Not scored yet.</p>
-            <Link to="/packet/ready-score" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors">
+            <Link to="/packet/ready-score" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors">
               Take the NAPE evaluation <FiArrowRight />
             </Link>
           </div>

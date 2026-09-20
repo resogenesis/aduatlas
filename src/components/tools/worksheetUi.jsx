@@ -25,7 +25,7 @@ export const TextCell = ({ value, onChange, placeholder = "", w = "w-full" }) =>
 
 export const WsHeader = ({ kicker = "Feasibility Report · Worksheet", title, children }) => (
   <>
-    <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">{kicker}</p>
+    <p className="text-accent text-xs font-medium mb-3">{kicker}</p>
     <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-4">
       {title}
     </h1>
@@ -35,7 +35,7 @@ export const WsHeader = ({ kicker = "Feasibility Report · Worksheet", title, ch
 
 export const GroupRow = ({ label, cols = 1 }) => (
   <tr className="bg-canvas/60">
-    <td colSpan={cols} className="px-4 py-2.5 text-accent text-xs font-semibold tracking-[0.14em]">
+    <td colSpan={cols} className="px-4 py-2.5 text-accent text-xs font-semibold">
       {label}
     </td>
   </tr>

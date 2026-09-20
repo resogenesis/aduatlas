@@ -40,7 +40,7 @@ const PaidGate = ({ children, chapterName, requireTier, requireBuilders }) => {
 const PayPaywall = ({ location, chapterName }) => (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
     <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] mb-7">
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-accent/10 text-accent text-xs font-medium mb-7">
         <FiLock /> {chapterName ? `${chapterName} · locked` : "Locked"}
       </div>
       <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
@@ -53,13 +53,13 @@ const PayPaywall = ({ location, chapterName }) => (
         <Link
           to="/unlock"
           state={{ from: location.pathname }}
-          className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+          className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
         >
           See plans <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>
         <Link
           to="/property"
-          className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-stroke text-paper font-medium hover:border-paper-dim transition"
+          className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition"
         >
           Check my property first
         </Link>
@@ -77,7 +77,7 @@ const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
   return (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
     <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] mb-7">
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-accent/10 text-accent text-xs font-medium mb-7">
         <FiLock /> {chapterName ? `${chapterName} · ${plan.name}` : plan.name}
       </div>
       <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
@@ -92,13 +92,13 @@ const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
         <Link
           to={`/unlock?tier=${plan.id}`}
           state={{ from: location.pathname, tier: plan.id }}
-          className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+          className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
         >
           Upgrade to {plan.name} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>
         <Link
           to="/packet"
-          className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-stroke text-paper font-medium hover:border-paper-dim transition"
+          className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition"
         >
           Keep working your worksheets
         </Link>
@@ -111,7 +111,7 @@ const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
 const BuilderPaywall = ({ progress, packetPercent, feasOk }) => (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
     <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] mb-7">
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-accent/10 text-accent text-xs font-medium mb-7">
         <FiLock /> Builders · locked
       </div>
       <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
@@ -132,13 +132,13 @@ const BuilderPaywall = ({ progress, packetPercent, feasOk }) => (
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
           to="/course"
-          className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+          className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
         >
           Continue the course
         </Link>
         <Link
           to="/my-property"
-          className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-stroke text-paper font-medium hover:border-paper-dim transition"
+          className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition"
         >
           Complete property brief
         </Link>

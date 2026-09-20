@@ -33,7 +33,7 @@ const TraditionalBuild = () => {
       <div className="overflow-x-auto bg-surface-1-solid rounded-2xl border border-stroke mb-6">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-paper-dim text-xs tracking-[0.12em] border-b border-stroke">
+            <tr className="text-paper-dim text-xs border-b border-stroke">
               <th className="px-4 py-4 text-left font-medium min-w-52">Cost / information</th>
               {COMPANIES.map((c) => (
                 <th key={c} className="px-3 py-3 text-left font-medium min-w-36">

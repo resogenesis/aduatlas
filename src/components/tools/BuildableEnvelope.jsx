@@ -140,7 +140,7 @@ const BuildableEnvelope = () => {
 
       {/* Address auto-fill */}
       <div className="mb-6">
-        <label className="block text-paper-dim text-[11px] font-medium tracking-[0.12em] mb-1.5">
+        <label className="block text-paper-dim text-[11px] font-medium mb-1.5">
           Auto-fill from address
         </label>
         <div className="flex gap-2">
@@ -155,7 +155,7 @@ const BuildableEnvelope = () => {
             type="button"
             onClick={lookup}
             disabled={look.status === "loading" || !address.trim()}
-            className="shrink-0 px-4 py-2 rounded-lg bg-accent text-accent-fg text-sm font-semibold hover:bg-paper transition-colors disabled:opacity-50"
+            className="shrink-0 px-4 py-2 rounded-lg bg-accent text-accent-fg text-sm font-semibold hover:bg-accent-dim transition-colors disabled:opacity-50"
           >
             {look.status === "loading" ? "Looking…" : "Look up"}
           </button>
@@ -167,7 +167,7 @@ const BuildableEnvelope = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
         {NUM_FIELDS.map((f) => (
           <div key={f.key}>
-            <label className="block text-paper-dim text-[11px] font-medium tracking-[0.12em] mb-1.5">
+            <label className="block text-paper-dim text-[11px] font-medium mb-1.5">
               {f.label}
             </label>
             <div className="flex items-center gap-1.5">

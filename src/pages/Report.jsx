@@ -65,7 +65,7 @@ const Report = () => {
           <div className="flex items-center gap-2 text-paper-dim text-sm mb-4">
             <FiMapPin /> {sampleAddress}
           </div>
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
+          <p className="text-accent text-xs sm:text-sm font-medium mb-4">
             Sample Property Feasibility Report
           </p>
           <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
@@ -78,13 +78,13 @@ const Report = () => {
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               to="/unlock"
-              className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+              className="group inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
             >
               Get my feasibility study with Platinum, $279 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <button
               onClick={() => alert("INTEGRATION POINT: server-side PDF generation pending.")}
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-stroke text-paper hover:border-paper-dim transition font-medium"
+              className="inline-flex items-center gap-2 px-7 py-4 rounded-xl border border-stroke text-paper hover:border-accent transition font-medium"
             >
               <FiDownload /> Download sample (PDF)
             </button>
@@ -183,7 +183,7 @@ const Report = () => {
               </p>
               <button
                 onClick={() => alert("INTEGRATION POINT: PDF generation pending.")}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors"
               >
                 <FiDownload /> Download Feasibility Packet
               </button>
@@ -217,7 +217,7 @@ const Report = () => {
           </p>
           <Link
             to="/unlock"
-            className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
+            className="group inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
           >
             Sign Up <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>

@@ -41,7 +41,7 @@ export const ConfidenceRow = ({ point, onUpgrade }) => {
     <div className="border-b border-stroke last:border-b-0">
       <div className="grid grid-cols-12 gap-3 sm:gap-4 items-center py-4">
         <div className="col-span-12 sm:col-span-4">
-          <p className="text-paper-dim text-xs tracking-[0.15em] mb-1">{label}</p>
+          <p className="text-paper-dim text-xs mb-1">{label}</p>
           {source && (
             <p className="text-paper-dim/60 text-[0.65rem]">
               {source}
@@ -87,14 +87,14 @@ export const ConfidenceRow = ({ point, onUpgrade }) => {
 
       {hasExpander && open && (
         <div className="bg-canvas/40 -mx-3 sm:-mx-4 px-4 sm:px-6 py-5 mb-1 rounded-2xl border border-stroke">
-          <p className="text-paper-dim text-[0.65rem] font-semibold tracking-[0.2em] mb-2">
+          <p className="text-paper-dim text-[0.65rem] font-semibold mb-2">
             What would raise this to high confidence
           </p>
           <p className="text-paper text-sm leading-relaxed mb-4">{toGreen}</p>
           {unlocksAt && (
             <Link
               to="/unlock"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-accent text-accent-fg text-xs font-semibold hover:bg-paper transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-accent text-accent-fg text-xs font-semibold hover:bg-accent-dim transition-colors"
             >
               Resolved in {TIER_LABEL[unlocksAt]} <FiArrowUpRight />
             </Link>

@@ -15,7 +15,7 @@ const CourseIntro = () => {
       <FiArrowLeft /> Back to course
     </Link>
 
-    <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
+    <p className="text-accent text-xs font-medium mb-3">
       Start here
     </p>
     <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
@@ -32,7 +32,7 @@ const CourseIntro = () => {
     <div className="border-t border-stroke pt-8 mt-14 flex justify-end">
       <Link
         to="/course/m1c1"
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
       >
         Begin Module 1 <FiArrowRight />
       </Link>

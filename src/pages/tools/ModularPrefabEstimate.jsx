@@ -234,7 +234,7 @@ const ModularPrefabEstimate = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-paper-dim text-xs tracking-[0.12em] border-b border-stroke">
+              <tr className="text-paper-dim text-xs border-b border-stroke">
                 <th className="px-2 py-3 text-left font-medium min-w-40" />
                 {GCS.map((g) => <th key={g} className="px-2 py-3 text-left font-medium">GC {g + 1}</th>)}
               </tr>
@@ -257,7 +257,7 @@ const ModularPrefabEstimate = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-paper-dim text-xs tracking-[0.12em] border-b border-stroke">
+              <tr className="text-paper-dim text-xs border-b border-stroke">
                 <th className="px-2 py-3 text-left font-medium min-w-48" />
                 {GCS.map((g) => (
                   <th key={g} className="px-2 py-3 text-right font-medium">{d[`s6-Company-${g}`] || `GC ${g + 1}`}</th>
@@ -314,7 +314,7 @@ const ModularPrefabEstimate = () => {
         <div className="overflow-x-auto mb-4">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-paper-dim text-xs tracking-[0.12em] border-b border-stroke">
+              <tr className="text-paper-dim text-xs border-b border-stroke">
                 <th className="px-2 py-3 text-left font-medium min-w-48" />
                 {GCS.map((g) => (
                   <th key={g} className="px-2 py-3 text-right font-medium">{d[`s6-Company-${g}`] || `GC ${g + 1}`}</th>

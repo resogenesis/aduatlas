@@ -27,7 +27,7 @@ const Profile = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-4xl mx-auto">
-      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Profile</p>
+      <p className="text-accent text-xs font-medium mb-3">Profile</p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-3">
         Your company profile.
       </h1>
@@ -76,7 +76,7 @@ const Profile = () => {
                   key={t}
                   type="button"
                   onClick={() => toggleType(t)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium border transition ${ active ?"bg-accent text-accent-fg border-accent":"bg-canvas text-paper-dim border-stroke hover:border-paper-dim hover:text-paper"}`}
+                  className={`px-4 py-2 rounded-xl text-sm font-medium border transition ${ active ?"bg-accent text-accent-fg border-accent":"bg-canvas text-paper-dim border-stroke hover:border-accent hover:text-paper"}`}
                 >
                   {active && <FiCheck className="inline -mt-0.5 mr-1" />} {t}
                 </button>
@@ -88,7 +88,7 @@ const Profile = () => {
         {/* About */}
         <Section title="About">
           <div>
-            <label className="block text-paper text-xs font-medium tracking-[0.15em] mb-2">
+            <label className="block text-paper text-xs font-medium mb-2">
               Short bio
             </label>
             <textarea
@@ -105,7 +105,7 @@ const Profile = () => {
         <div className="flex items-center gap-4 pt-2">
           <button
             type="submit"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
           >
             <FiSave /> Save profile
           </button>
@@ -122,14 +122,14 @@ const Profile = () => {
 
 const Section = ({ title, children }) => (
   <div className="bg-surface-1-solid border border-stroke rounded-2xl p-6 sm:p-8">
-    <p className="text-paper-dim text-xs tracking-[0.2em] mb-5">{title}</p>
+    <p className="text-paper-dim text-xs mb-5">{title}</p>
     {children}
   </div>
 );
 
 const Field = ({ label, value, onChange, placeholder, type = "text", hint }) => (
   <div>
-    <label className="block text-paper text-xs font-medium tracking-[0.15em] mb-2">
+    <label className="block text-paper text-xs font-medium mb-2">
       {label}
     </label>
     <input

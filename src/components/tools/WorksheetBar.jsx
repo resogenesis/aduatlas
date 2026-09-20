@@ -21,7 +21,7 @@ const WorksheetBar = ({ savedAt }) => (
       <button
         type="button"
         onClick={() => window.print()}
-        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-stroke text-paper hover:border-accent hover:text-accent transition text-sm font-medium"
+        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-stroke text-paper hover:border-accent hover:text-accent transition text-sm font-medium"
       >
         <FiPrinter /> Print / save PDF
       </button>

@@ -2,20 +2,17 @@ import Logomark from "../brand/Logomark";
 
 const AuthCard = ({ title, subtitle, children, footer, eyebrow }) => {
   return (
-    <section className="relative min-h-[calc(100vh-100px)] bg-canvas py-16 sm:py-24 px-5 sm:px-8 overflow-hidden">
-      {/* ambient blobs */}
-      <div aria-hidden className="pointer-events-none absolute -top-40 -right-40 w-[36rem] h-[36rem] rounded-full bg-accent/8 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 w-[36rem] h-[36rem] rounded-full bg-accent/4 blur-3xl" />
+    <section className="relative min-h-[calc(100vh-100px)] bg-surface-1-solid py-16 sm:py-24 px-5 sm:px-8">
 
       <div className="relative max-w-md mx-auto">
         <div className="flex justify-center mb-8 text-paper">
           <Logomark className="h-7" />
         </div>
 
-        <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-10">
+        <div className="bg-canvas border border-stroke rounded-3xl p-8 sm:p-10 shadow-[0_30px_60px_-40px_rgba(23,32,27,0.35)]">
           <div className="text-center mb-8">
             {eyebrow && (
-              <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
+              <p className="text-accent text-xs font-medium mb-3">
                 {eyebrow}
               </p>
             )}

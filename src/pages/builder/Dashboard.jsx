@@ -20,7 +20,7 @@ const Dashboard = () => {
 
       {/* Welcome strip */}
       <div className="mb-10">
-        <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
+        <p className="text-accent text-xs font-medium mb-3">
           Builder portal
         </p>
         <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
@@ -35,7 +35,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-stroke rounded-2xl overflow-hidden mb-10">
         {cards.map(({ label, value, Icon, hi }) => (
           <div key={label} className={`bg-surface-1-solid p-5 sm:p-7 ${hi ?"lg:bg-accent":""}`}>
-            <div className={`flex items-center gap-2 text-xs tracking-[0.15em] mb-3 ${hi ?"text-accent-fg/70":"text-paper-dim"}`}>
+            <div className={`flex items-center gap-2 text-xs mb-3 ${hi ?"text-accent-fg/70":"text-paper-dim"}`}>
               <Icon /> {label}
             </div>
             <p className={`font-display text-4xl sm:text-5xl ${hi ?"text-accent-fg lg:text-accent-fg":"text-paper"}`}>
@@ -49,14 +49,14 @@ const Dashboard = () => {
       <div className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-10 mb-6">
         <div className="flex items-end justify-between mb-7 flex-wrap gap-3">
           <div>
-            <p className="text-paper-dim text-xs tracking-[0.2em] mb-2">Recent leads</p>
+            <p className="text-paper-dim text-xs mb-2">Recent leads</p>
             <h2 className="font-display text-paper text-2xl sm:text-3xl">
               Your inbox
             </h2>
           </div>
           <Link
             to="/builder/leads"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-fg font-semibold text-sm hover:bg-paper transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors"
           >
             View all leads <FiArrowRight />
           </Link>
@@ -96,7 +96,7 @@ const Dashboard = () => {
 
       {/* Coming soon callout */}
       <div className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-10">
-        <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
+        <p className="text-accent text-xs font-medium mb-3">
           What's next
         </p>
         <h2 className="font-display text-paper text-xl sm:text-2xl leading-snug mb-3">

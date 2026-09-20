@@ -83,11 +83,10 @@ const Legal = () => {
         label="Hero"
       >
       <section className="relative overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-12 border-b border-stroke">
-        <div aria-hidden className="pointer-events-none absolute -top-24 right-0 w-[28rem] h-[28rem] rounded-full bg-accent/8 blur-3xl animate-drift-glow" />
-        <div className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
+<div className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
           <div className="inline-flex items-center gap-2 mb-4">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
-            <span className="text-paper-dim text-xs font-medium tracking-[0.2em]">
+            <span className="text-paper-dim text-xs font-medium">
               {heroBadge}
             </span>
           </div>
@@ -97,7 +96,7 @@ const Legal = () => {
           <p className="mt-5 text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed">
             {heroBody}
           </p>
-          <p className="mt-4 text-paper-dim/70 text-xs tracking-[0.15em]">
+          <p className="mt-4 text-paper-dim/70 text-xs">
             Last updated · {lastUpdated}
           </p>
         </div>
@@ -109,7 +108,7 @@ const Legal = () => {
         {/* TOC */}
         <AdminEditableSection keys={LEGAL_SECTIONS_META.map((s) => s.labelKey)} label="Table of contents">
         <aside className="lg:col-span-3 lg:sticky lg:top-24 self-start">
-          <p className="text-paper-dim text-xs tracking-[0.2em] mb-4">On this page</p>
+          <p className="text-paper-dim text-xs mb-4">On this page</p>
           <ul className="space-y-2">
             {LEGAL_SECTIONS_META.map((s) => (
               <TocLink key={s.id} id={s.id} labelKey={s.labelKey} />

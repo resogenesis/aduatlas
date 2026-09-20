@@ -43,7 +43,7 @@ const SidebarContents = ({ onLinkClick }) => {
         <NavLink to="/admin" onClick={onLinkClick} className="text-paper hover:text-accent transition-colors inline-block mb-3">
           <Logomark className="h-7" />
         </NavLink>
-        <p className="text-paper-dim text-[0.65rem] tracking-[0.2em]">Admin console</p>
+        <p className="text-paper-dim text-[0.65rem]">Admin console</p>
       </div>
 
       <nav className="flex-1 px-3 py-6 space-y-1">

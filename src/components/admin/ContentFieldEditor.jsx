@@ -200,7 +200,7 @@ const ContentFieldEditor = ({ contentKey, meta, dbRow, onSaved }) => {
   return (
     <div className="py-5 border-t border-stroke first:border-t-0">
       <div className="flex items-center justify-between gap-3 mb-2">
-        <label className="text-paper text-xs font-medium tracking-[0.1em]">{meta.label}</label>
+        <label className="text-paper text-xs font-medium">{meta.label}</label>
         <div className="flex items-center gap-2">
           {hasUnpublishedDraft && <span className="text-xs text-amber-700">Unpublished edit</span>}
           {isLive && <span className="text-xs text-paper-dim/70">Live</span>}
@@ -223,7 +223,7 @@ const ContentFieldEditor = ({ contentKey, meta, dbRow, onSaved }) => {
             <img src={value.url} alt={value.alt || ""} className="w-32 h-24 object-cover rounded-lg border border-stroke shrink-0" />
           )}
           <div className="flex-1 space-y-2">
-            <label className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-stroke text-paper-dim text-xs cursor-pointer hover:text-paper hover:border-paper-dim transition">
+            <label className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-stroke text-paper-dim text-xs cursor-pointer hover:text-paper hover:border-accent transition">
               <FiUpload /> {uploading ? "Uploading…" : "Replace image"}
               <input
                 type="file"

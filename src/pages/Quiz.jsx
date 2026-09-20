@@ -150,7 +150,7 @@ const Quiz = () => {
     <div className="min-h-[80vh] bg-canvas py-16 sm:py-20">
       <div className="container mx-auto px-5 sm:px-8 max-w-2xl">
         <div className="mb-8">
-          <div className="flex items-center justify-between text-xs tracking-[0.2em] text-paper-dim mb-3">
+          <div className="flex items-center justify-between text-xs text-paper-dim mb-3">
             <span>Q {step + 1} / {questions.length}</span>
             <span>{Math.round(progress)}%</span>
           </div>
@@ -172,7 +172,7 @@ const Quiz = () => {
                 <button
                   key={opt.value}
                   onClick={() => setValue(opt.value)}
-                  className={`text-left px-5 py-4 rounded-xl border transition-all ${ selected ?"border-accent bg-accent text-accent-fg":"border-stroke bg-canvas text-paper hover:border-paper-dim"}`}
+                  className={`text-left px-5 py-4 rounded-xl border transition-all ${ selected ?"border-accent bg-accent text-accent-fg":"border-stroke bg-canvas text-paper hover:border-accent"}`}
                 >
                   {opt.label}
                 </button>
@@ -186,14 +186,14 @@ const Quiz = () => {
             <button
               onClick={back}
               disabled={step === 0}
-              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition ${ step === 0 ?"text-stroke cursor-not-allowed":"text-paper-dim hover:text-paper"}`}
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition ${ step === 0 ?"text-stroke cursor-not-allowed":"text-paper-dim hover:text-paper"}`}
             >
               <FiArrowLeft /> Back
             </button>
 
             <button
               onClick={next}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
             >
               {step === questions.length - 1 ? "See My Results" : "Next"} <FiArrowRight />
             </button>

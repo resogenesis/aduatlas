@@ -15,7 +15,7 @@ const Stat = ({ i }) => {
   return (
     <div ref={ref} className="px-5 sm:px-7 py-7 bg-surface-1-solid">
       <p className="font-display text-paper text-3xl sm:text-4xl mb-2">{n}</p>
-      <p className="text-paper-dim text-xs tracking-[0.15em] leading-relaxed">{label}</p>
+      <p className="text-paper-dim text-xs leading-relaxed">{label}</p>
     </div>
   );
 };
@@ -34,7 +34,7 @@ const Chapter = ({ i, isLast }) => {
     <article ref={ref} className="grid lg:grid-cols-12 gap-6 lg:gap-12 py-12 sm:py-16 border-t border-stroke">
       <div className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start">
         <span className="font-display text-accent text-5xl sm:text-6xl block mb-3">{CHAPTER_N[i]}</span>
-        <p className="text-paper-dim text-xs font-medium tracking-[0.2em]">{eyebrow}</p>
+        <p className="text-paper-dim text-xs font-medium">{eyebrow}</p>
       </div>
       <div className="lg:col-span-8">
         <h2 className="font-display text-paper text-3xl sm:text-4xl lg:text-5xl leading-[1.1] tracking-tight mb-6">
@@ -76,11 +76,10 @@ const About = () => {
         label="Hero"
       >
       <section className="relative overflow-hidden pt-32 sm:pt-40 lg:pt-48 pb-16 sm:pb-20">
-        <div aria-hidden className="pointer-events-none absolute -top-40 -right-40 w-[40rem] h-[40rem] rounded-full bg-accent/10 blur-3xl animate-drift-glow" />
-        <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 w-[40rem] h-[40rem] rounded-full bg-accent/5 blur-3xl animate-drift-glow" style={{ animationDelay: "-7s" }} />
+<div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 w-[40rem] h-[40rem] animate-drift-glow" style={{ animationDelay: "-7s" }} />
 
         <div ref={heroRef} className="relative container mx-auto px-5 sm:px-8 max-w-5xl">
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-5 animate-fade-up" style={{ animationDelay: "0ms" }}>
+          <p className="text-accent text-xs sm:text-sm font-medium mb-5 animate-fade-up" style={{ animationDelay: "0ms" }}>
             {heroEyebrow}
           </p>
           <h1
@@ -132,9 +131,8 @@ const About = () => {
       <section className="container mx-auto px-5 sm:px-8 max-w-4xl py-20 sm:py-28">
         <div ref={closingRef} className="bg-accent text-accent-fg rounded-3xl p-10 sm:p-14 text-center relative overflow-hidden">
           <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-canvas/10 blur-3xl" />
           </div>
-          <p className="relative text-accent-fg/70 text-xs font-medium tracking-[0.2em] mb-5">
+          <p className="relative text-accent-fg/70 text-xs font-medium mb-5">
             {closingEyebrow}
           </p>
           <h2 className="relative font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
@@ -146,13 +144,13 @@ const About = () => {
           <div className="relative flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/"
-              className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
+              className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
             >
               {closingCtaPrimary} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               to="/unlock"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-accent-fg/20 text-accent-fg font-medium hover:border-accent-fg/60 transition"
+              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-accent-fg/20 text-accent-fg font-medium hover:border-accent-fg/60 transition"
             >
               {closingCtaSecondary}
             </Link>

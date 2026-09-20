@@ -88,7 +88,7 @@ const ModuleQuiz = ({ quiz, onComplete, completed }) => {
           type="button"
           onClick={submit}
           disabled={!answeredAll}
-          className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {answeredAll ? "Submit answers" : `Answer all ${total} to submit`}
         </button>
@@ -96,7 +96,7 @@ const ModuleQuiz = ({ quiz, onComplete, completed }) => {
         <div className="mt-8 bg-surface-1-solid border border-stroke rounded-2xl p-5 sm:p-6">
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div>
-              <p className="text-paper-dim text-xs tracking-[0.16em] mb-1">Your score</p>
+              <p className="text-paper-dim text-xs mb-1">Your score</p>
               <p className="font-display text-paper text-3xl">
                 {score}
                 <span className="text-paper-dim text-xl"> / {total}</span>
@@ -108,14 +108,14 @@ const ModuleQuiz = ({ quiz, onComplete, completed }) => {
             <button
               type="button"
               onClick={retake}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-stroke text-paper-dim hover:text-paper hover:border-paper-dim transition text-sm font-medium"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-stroke text-paper-dim hover:text-paper hover:border-accent transition text-sm font-medium"
             >
               <FiRefreshCw /> Retake
             </button>
           </div>
           {quiz.takeaway && (
             <div className="mt-5 pt-5 border-t border-stroke">
-              <p className="text-accent text-xs font-medium tracking-[0.16em] mb-2">
+              <p className="text-accent text-xs font-medium mb-2">
                 Key takeaway
               </p>
               <p className="text-paper-dim text-sm leading-relaxed">{quiz.takeaway}</p>

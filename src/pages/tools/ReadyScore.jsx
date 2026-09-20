@@ -51,7 +51,7 @@ const ReadyScore = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto print-sheet">
       <WorksheetBar savedAt={savedAt} />
 
-      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
+      <p className="text-accent text-xs font-medium mb-3">
         Feasibility Report · NAPE
       </p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-4">
@@ -70,7 +70,7 @@ const ReadyScore = () => {
           {NAPE_CATEGORIES.map((cat) => (
             <div key={cat.id} className="mb-8">
               <div className="flex items-baseline justify-between gap-3 mb-4">
-                <h3 className="text-accent text-xs font-medium tracking-[0.2em]">{cat.title}</h3>
+                <h3 className="text-accent text-xs font-medium">{cat.title}</h3>
                 <span className="text-paper-dim text-xs tabular-nums">
                   {result.perCategory[cat.id]} / {cat.points} pts
                 </span>
@@ -98,7 +98,7 @@ const ReadyScore = () => {
                             key={opt.label}
                             type="button"
                             onClick={() => setAnswers((a) => ({ ...a, [it.id]: opt.v }))}
-                            className={`px-4 py-1.5 text-xs font-semibold rounded-full border transition-colors ${ val === opt.v ? opt.on :"bg-canvas border-stroke text-paper-dim hover:text-paper hover:border-paper-dim"}`}
+                            className={`px-4 py-1.5 text-xs font-semibold rounded-xl border transition-colors ${ val === opt.v ? opt.on :"bg-canvas border-stroke text-paper-dim hover:text-paper hover:border-accent"}`}
                           >
                             {opt.label}
                           </button>
@@ -115,7 +115,7 @@ const ReadyScore = () => {
         {/* Score card */}
         <div className="lg:sticky lg:top-8 self-start">
           <div className="bg-surface-1-solid rounded-3xl border border-stroke p-7 sm:p-8 text-center mb-4">
-            <h3 className="text-paper text-xs tracking-[0.2em] mb-2">NAPE Score</h3>
+            <h3 className="text-paper text-xs mb-2">NAPE Score</h3>
             <div className={`font-display text-7xl my-2 ${result.complete ? GRADE_TONES[result.grade] :"text-paper-dim/40"}`}>
               {result.complete ? result.grade : "–"}
             </div>
@@ -131,7 +131,7 @@ const ReadyScore = () => {
             <button
               type="button"
               onClick={() => setAnswers({})}
-              className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-stroke text-paper-dim hover:text-paper hover:border-paper-dim transition text-xs font-medium print:hidden"
+              className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-stroke text-paper-dim hover:text-paper hover:border-accent transition text-xs font-medium print:hidden"
             >
               <FiRefreshCcw /> Start over
             </button>

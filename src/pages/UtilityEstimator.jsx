@@ -43,7 +43,7 @@ const UtilityEstimator = () => {
         <div className="overflow-x-auto bg-surface-1-solid rounded-2xl border border-stroke">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-paper-dim text-xs tracking-[0.15em] border-b border-stroke">
+              <tr className="text-paper-dim text-xs border-b border-stroke">
                 <th className="px-4 py-4 text-left font-medium">Line item</th>
                 <th className="px-4 py-4 text-right font-medium">Rate</th>
                 <th className="px-4 py-4 text-right font-medium">Qty</th>

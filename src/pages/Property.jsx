@@ -120,7 +120,7 @@ const Property = () => {
         <div className="flex items-center gap-2 text-paper-dim text-sm mb-4">
           <FiMapPin /> {q || "No address provided"}
         </div>
-        <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
+        <p className="text-accent text-xs font-medium mb-3">
           Free Property Snapshot
         </p>
         <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
@@ -198,7 +198,7 @@ const Property = () => {
 
         {/* Upgrade */}
         <div className="mt-10 bg-accent text-accent-fg rounded-3xl p-8 sm:p-12">
-          <p className="text-accent-fg/70 text-xs font-medium tracking-[0.2em] mb-3">
+          <p className="text-accent-fg/70 text-xs font-medium mb-3">
             Remove the uncertainty
           </p>
           <h2 className="font-display text-3xl sm:text-4xl leading-tight mb-4">
@@ -218,7 +218,7 @@ const Property = () => {
           <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
             <Link
               to="/unlock"
-              className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
+              className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
             >
               Sign Up <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -231,7 +231,7 @@ const Property = () => {
         <p className="text-center text-xs text-paper-dim mt-10">
           <Link to="/" className="hover:text-paper transition">Try another address</Link>
           <span className="mx-2">·</span>
-          <Link to="/quiz" className="hover:text-paper transition">New to ADUs? Take the Reality Check</Link>
+          <Link to="/how-to-adu" className="hover:text-paper transition">New to ADUs? See how it works</Link>
         </p>
       </section>
     </div>

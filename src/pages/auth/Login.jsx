@@ -79,7 +79,7 @@ const Login = () => {
       </form>
 
       <div className="mt-7 pt-6 border-t border-stroke">
-        <p className="text-paper-dim text-xs tracking-[0.15em] mb-3">Demo accounts</p>
+        <p className="text-paper-dim text-xs mb-3">Demo accounts</p>
         <div className="grid gap-2">
           {DEMO_ACCOUNTS.map((acc) => (
             <button

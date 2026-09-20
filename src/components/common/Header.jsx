@@ -107,7 +107,7 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
-            <p className="text-paper-dim text-[0.65rem] font-semibold tracking-[0.24em] pt-4 pb-1">Resources</p>
+            <p className="text-paper-dim text-[0.65rem] font-semibold pt-4 pb-1">Resources</p>
             {resources.map((r) => (
               <Link key={r.path} to={r.path} className="text-paper-dim text-sm py-2" onClick={close}>
                 {r.name}

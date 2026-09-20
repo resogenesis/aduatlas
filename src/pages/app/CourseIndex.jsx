@@ -30,7 +30,7 @@ const ModuleRow = ({ m, done }) => {
         </span>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <p className="text-paper-dim text-[11px] font-medium tracking-[0.16em]">
+            <p className="text-paper-dim text-[11px] font-medium">
               Module {m.n}
             </p>
             {m.tag && (
@@ -101,7 +101,7 @@ const CourseIndex = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-4xl mx-auto">
       <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
         <div>
-          <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
+          <p className="text-accent text-xs font-medium mb-3">
             The Course
           </p>
           <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
@@ -109,7 +109,7 @@ const CourseIndex = () => {
           </h1>
         </div>
         <div className="text-right">
-          <p className="text-paper-dim text-xs tracking-[0.2em] mb-1">Progress</p>
+          <p className="text-paper-dim text-xs mb-1">Progress</p>
           <p className="font-display text-paper text-4xl">{progress}%</p>
         </div>
       </div>
@@ -123,7 +123,7 @@ const CourseIndex = () => {
           <FiPlay className="text-lg" />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block text-accent text-[11px] font-medium tracking-[0.16em]">
+          <span className="block text-accent text-[11px] font-medium">
             Start here
           </span>
           <span className="block font-display text-paper text-xl sm:text-2xl leading-snug mt-0.5">

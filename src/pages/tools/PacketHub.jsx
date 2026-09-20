@@ -68,7 +68,7 @@ const PacketHub = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-6xl mx-auto">
-      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
+      <p className="text-accent text-xs font-medium mb-3">
         {isReport ? "Property Feasibility Report" : "Planning worksheets"}
       </p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
@@ -105,7 +105,7 @@ const PacketHub = () => {
           <Link
             to="/unlock"
             state={{ tier: "report" }}
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
           >
             Upgrade to the Feasibility Report <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>

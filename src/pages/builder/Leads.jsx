@@ -40,7 +40,7 @@ const Leads = () => {
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-6xl mx-auto">
 
-      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Leads</p>
+      <p className="text-accent text-xs font-medium mb-3">Leads</p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-3">
         Qualified Builder Packets.
       </h1>
@@ -55,7 +55,7 @@ const Leads = () => {
             <button
               key={f.id}
               onClick={() => setFilter(f.id)}
-              className={`px-4 py-2 rounded-full text-xs font-medium transition cursor-pointer ${ filter === f.id ?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper"}`}
+              className={`px-4 py-2 rounded-xl text-xs font-medium transition cursor-pointer ${ filter === f.id ?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper"}`}
             >
               {f.label}
             </button>

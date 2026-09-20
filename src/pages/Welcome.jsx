@@ -123,13 +123,13 @@ const Welcome = () => {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/unlock"
-                className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+                className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
               >
                 See plans <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/login"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-stroke text-paper font-medium hover:border-paper-dim transition"
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition"
               >
                 Log in to your account
               </Link>
@@ -160,7 +160,7 @@ const Welcome = () => {
         </p>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-10 text-left mb-10">
-          <h3 className="text-paper text-xs tracking-[0.2em] mb-6">Your next 3 steps</h3>
+          <h3 className="text-paper text-xs mb-6">Your next 3 steps</h3>
           <ol className="space-y-6">
             {[
               { n: "01", t: "Start Module 1: How to ADU", d: "Process, timelines, and the foundation everything else builds on." },
@@ -182,7 +182,7 @@ const Welcome = () => {
 
         <Link
           to="/dashboard"
-          className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
+          className="group inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
         >
           Go to dashboard <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>

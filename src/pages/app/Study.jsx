@@ -208,7 +208,7 @@ const Study = () => {
                 <input ref={fileRef} type="file" multiple accept="image/*,application/pdf" onChange={onFiles} className="hidden" disabled={uploading} />
               </label>
               {(intake.files || []).map((f) => (
-                <span key={f.path} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-canvas border border-stroke text-xs text-paper-dim">
+                <span key={f.path} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-canvas border border-stroke text-xs text-paper-dim">
                   <FiPaperclip /> {f.name}
                 </span>
               ))}
