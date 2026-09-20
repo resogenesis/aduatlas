@@ -8,8 +8,10 @@ const t = (label, def) => ({ page: PAGE, label, type: "text", default: def });
 export const INCLUDES_COUNT = 4;
 
 export const COURSE_OUTLINE_CONTENT = {
-  "courseoutline.hero.heading": t("Heading", "Learn the ADU process before you spend a dollar on it."),
-  "courseoutline.hero.body": t("Paragraph", "Nine short modules on what an ADU is, what your city and state allow, what it really costs, and how to talk to builders. Written by people who have built them, for homeowners deciding whether to."),
+  // New field names on purpose: the earlier header copy published under
+  // courseoutline.hero.* was several paragraphs long; this page stays short.
+  "courseoutline.header.title": t("Heading", "Learn the ADU process before you spend on it."),
+  "courseoutline.header.body": t("One-line description", "Nine short modules on what an ADU is, what your city allows, what it really costs, and how to talk to builders."),
 
   "courseoutline.includes.heading": t("Includes heading", "Short, structured, and yours to keep."),
   "courseoutline.include.0.label": t("Includes item 1", "Short written lessons, most under six minutes"),

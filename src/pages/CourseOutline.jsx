@@ -58,8 +58,8 @@ const ModuleRow = ({ m, i, open, onToggle }) => {
 
 const CourseOutline = () => {
   const [open, setOpen] = useState(0);
-  const heading = useContentText("courseoutline.hero.heading");
-  const body = useContentText("courseoutline.hero.body");
+  const heading = useContentText("courseoutline.header.title");
+  const body = useContentText("courseoutline.header.body");
   const includesHeading = useContentText("courseoutline.includes.heading");
   const includes = [
     useContentText("courseoutline.include.0.label"),
@@ -76,18 +76,18 @@ const CourseOutline = () => {
 
   return (
     <div className="w-full bg-canvas">
-      <AdminEditableSection keys={["courseoutline.hero.heading", "courseoutline.hero.body"]} label="Course header">
+      <AdminEditableSection keys={["courseoutline.header.title", "courseoutline.header.body"]} label="Course header">
         <PageHeader title={heading} subtitle={body}>
-          <dl className="flex flex-wrap gap-x-10 gap-y-4">
+          <dl className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-stroke border border-stroke rounded-2xl overflow-hidden max-w-3xl">
             {[
-              [modules.length, "modules"],
-              [totalLessons, "short lessons"],
-              [`About ${totalHours}`, "hours total"],
-              ["Included", `with Golden, ${formatPrice(golden.priceCents)}`],
+              [modules.length, "Modules"],
+              [totalLessons, "Short lessons"],
+              [`~${totalHours} hrs`, "Total time"],
+              [formatPrice(golden.priceCents), "With Golden"],
             ].map(([v, l]) => (
-              <div key={l}>
-                <dt className="font-display text-paper text-3xl leading-none">{v}</dt>
-                <dd className="text-paper-dim text-sm mt-1">{l}</dd>
+              <div key={l} className="bg-canvas px-5 py-4">
+                <dt className="font-display text-paper text-2xl sm:text-3xl leading-none">{v}</dt>
+                <dd className="text-paper-dim text-sm mt-1.5">{l}</dd>
               </div>
             ))}
           </dl>
