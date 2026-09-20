@@ -14,7 +14,6 @@ const t = (label, def) => ({ page: PAGE, label, type: "text", default: def });
 const img = (label, src, alt) => ({ page: PAGE, label, type: "image", default: { src, alt } });
 
 // ── Hero ──────────────────────────────────────────────────────────────────
-export const HERO_CHECKS_COUNT = 4;
 export const HERO_CARD_ITEMS_COUNT = 3;
 export const homeHero = {
   "home.hero.heading": t("Hero heading (\\n = line break)", "Your ADU\nStarts Here."),
@@ -22,10 +21,6 @@ export const homeHero = {
   "home.hero.cta": t("Hero button", "Check My Property"),
   "home.hero.placeholder": t("Address field placeholder", "Enter your property address"),
   "home.hero.reassurance": t("Line under the address box", "No credit card required"),
-  "home.hero.check.0": t("Hero benefit 1", "Know what may fit"),
-  "home.hero.check.1": t("Hero benefit 2", "Understand costs"),
-  "home.hero.check.2": t("Hero benefit 3", "Explore your options"),
-  "home.hero.check.3": t("Hero benefit 4", "Find builders"),
   "home.hero.card.eyebrow": t("Floating card eyebrow", "Why an ADU"),
   "home.hero.card.title": t("Floating card title", "Turn your property into opportunity."),
   "home.hero.card.item.0": t("Floating card item 1", "Create flexible living space"),

@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { FiCheck } from "react-icons/fi";
 import { useContentImage, useContentText } from "../../lib/content";
-import { HERO_CHECKS_COUNT } from "../../lib/contentRegistry/home";
 import { AdminEditableSection } from "../../lib/adminEditBridge";
 import AddressIntake from "./AddressIntake";
 import LiveCheck from "./LiveCheck";
@@ -13,7 +12,6 @@ const EDIT_KEYS = [
   "home.hero.cta",
   "home.hero.placeholder",
   "home.hero.reassurance",
-  ...Array.from({ length: HERO_CHECKS_COUNT }, (_, i) => `home.hero.check.${i}`),
   "home.hero.image",
 ];
 
@@ -48,12 +46,6 @@ const Hero = () => {
   const cta = useContentText("home.hero.cta");
   const placeholder = useContentText("home.hero.placeholder");
   const reassurance = useContentText("home.hero.reassurance");
-  const checks = [
-    useContentText("home.hero.check.0"),
-    useContentText("home.hero.check.1"),
-    useContentText("home.hero.check.2"),
-    useContentText("home.hero.check.3"),
-  ];
   const image = useContentImage("home.hero.image");
   const samples = useMemo(() => SAMPLE_ADDRESSES, []);
   const typed = useTypewriter(samples);
@@ -82,13 +74,6 @@ const Hero = () => {
             <p className="mt-3 inline-flex items-center gap-2 text-xs sm:text-sm text-paper-dim">
               <FiCheck className="text-accent" aria-hidden /> {reassurance}
             </p>
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {checks.map((c, i) => (
-                <li key={i} className="px-3 py-1.5 rounded-full border border-stroke bg-canvas text-xs font-medium text-paper-dim">
-                  {c}
-                </li>
-              ))}
-            </ul>
           </div>
 
           <div className="lg:col-span-6 relative animate-fade-up lg:-mr-8 xl:-mr-[calc((100vw-1280px)/2+1rem)]" style={{ animationDelay: "120ms" }}>
