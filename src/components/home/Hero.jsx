@@ -1,6 +1,6 @@
-import { FiCheck, FiDollarSign, FiHome, FiLayers, FiTrendingUp } from "react-icons/fi";
+import { FiCheck } from "react-icons/fi";
 import { useContentImage, useContentText } from "../../lib/content";
-import { HERO_CARD_ITEMS_COUNT, HERO_CHECKS_COUNT } from "../../lib/contentRegistry/home";
+import { HERO_CHECKS_COUNT } from "../../lib/contentRegistry/home";
 import { AdminEditableSection } from "../../lib/adminEditBridge";
 import AddressIntake from "./AddressIntake";
 
@@ -12,13 +12,8 @@ const EDIT_KEYS = [
   "home.hero.placeholder",
   "home.hero.reassurance",
   ...Array.from({ length: HERO_CHECKS_COUNT }, (_, i) => `home.hero.check.${i}`),
-  "home.hero.card.eyebrow",
-  "home.hero.card.title",
-  ...Array.from({ length: HERO_CARD_ITEMS_COUNT }, (_, i) => `home.hero.card.item.${i}`),
   "home.hero.image",
 ];
-
-const CARD_ICONS = [FiLayers, FiDollarSign, FiTrendingUp];
 
 const Lines = ({ text }) =>
   text.split("\n").map((line, i, arr) => (
@@ -40,13 +35,6 @@ const Hero = () => {
     useContentText("home.hero.check.1"),
     useContentText("home.hero.check.2"),
     useContentText("home.hero.check.3"),
-  ];
-  const cardEyebrow = useContentText("home.hero.card.eyebrow");
-  const cardTitle = useContentText("home.hero.card.title");
-  const cardItems = [
-    useContentText("home.hero.card.item.0"),
-    useContentText("home.hero.card.item.1"),
-    useContentText("home.hero.card.item.2"),
   ];
   const image = useContentImage("home.hero.image");
 
@@ -79,23 +67,6 @@ const Hero = () => {
           <div className="lg:col-span-7 relative animate-fade-up lg:-mr-8 xl:-mr-[calc((100vw-1280px)/2+2rem)]" style={{ animationDelay: "120ms" }}>
             <div className="rounded-[2rem] lg:rounded-r-none overflow-hidden aspect-[3/2] lg:aspect-auto lg:h-[34rem] xl:h-[38rem] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
               <img src={image.src} alt={image.alt} className="w-full h-full object-cover object-[55%_center] -scale-x-100" />
-            </div>
-            <div className="bg-white/70 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_24px_60px_-24px_rgba(23,32,27,0.45)] p-6 w-[min(100%,19.5rem)] mt-5 lg:mt-0 lg:absolute lg:bottom-8 lg:right-8">
-              <p className="text-accent text-[0.65rem] font-semibold tracking-[0.24em] uppercase mb-2">{cardEyebrow}</p>
-              <p className="font-semibold text-paper text-[1.05rem] leading-snug mb-3">{cardTitle}</p>
-              <ul className="divide-y divide-paper/10">
-                {cardItems.map((item, i) => {
-                  const Icon = CARD_ICONS[i] || FiHome;
-                  return (
-                    <li key={i} className="flex items-center gap-3 py-2.5 text-sm font-medium text-paper">
-                      <span className="w-8 h-8 rounded-lg bg-white/80 text-accent inline-flex items-center justify-center shrink-0">
-                        <Icon className="text-[0.95rem]" aria-hidden />
-                      </span>
-                      {item}
-                    </li>
-                  );
-                })}
-              </ul>
             </div>
           </div>
         </div>
