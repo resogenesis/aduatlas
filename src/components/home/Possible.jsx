@@ -46,7 +46,7 @@ const Possible = () => {
     <AdminEditableSection keys={EDIT_KEYS} label="What's possible">
       <section className="bg-surface-1-solid">
         <div className="container mx-auto px-5 sm:px-8 py-16 lg:py-24 grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          <div ref={ref} className="lg:col-span-5 lg:sticky lg:top-28">
+          <div ref={ref} className="lg:col-span-5">
             <h2 className="font-primary font-extrabold tracking-[-0.025em] text-paper text-4xl sm:text-5xl leading-[1.02] mb-5">{heading}</h2>
             <p className="text-paper-dim text-base leading-relaxed mb-8 max-w-md">{body}</p>
             <Link
