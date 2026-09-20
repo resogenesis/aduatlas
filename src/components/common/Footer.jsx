@@ -39,7 +39,7 @@ const Footer = () => (
       <div className="grid grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 mb-14">
         <div className="col-span-2 lg:col-span-5">
           <Link to="/" className="text-paper inline-block mb-5" aria-label="ADUAtlas home">
-            <Logomark className="h-8" />
+            <Logomark className="h-9" />
           </Link>
           <p className="text-paper-dim text-sm leading-relaxed max-w-sm mb-6">
             Understand what can be built on your property, learn the process, and connect with the right builders before you commit.
