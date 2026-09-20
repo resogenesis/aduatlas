@@ -1,9 +1,9 @@
 // ADUAtlas logomark: the production mark (outlined rounded square, "A",
 // corner dot, "atlas." wordmark) recolored for the Phase 1 light system.
 // Outline, A and wordmark follow currentColor so the same component works on
-// light and dark surfaces; the dot and the period carry the brand accents.
+// light and dark surfaces; the dot is gold and the period takes the theme accent
+// (forest on the public site, lime in the dark portal).
 const DOT = "#B8892E"; // gold
-const PERIOD = "#2E5E44"; // forest
 
 const Logomark = ({ className = "h-7", textClassName = "", markOnly = false }) => (
   <span className={`inline-flex items-center gap-1.5 ${className}`}>
@@ -14,7 +14,7 @@ const Logomark = ({ className = "h-7", textClassName = "", markOnly = false }) =
     </svg>
     {!markOnly && (
       <span className={`font-display text-[1.15rem] tracking-tight ${textClassName}`}>
-        atlas<span style={{ color: PERIOD }}>.</span>
+        atlas<span className="text-accent">.</span>
       </span>
     )}
   </span>
