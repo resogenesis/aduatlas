@@ -8,7 +8,6 @@ import LiveCheck from "./LiveCheck";
 import { useTypewriter } from "./useTypewriter";
 
 const EDIT_KEYS = [
-  "home.hero.eyebrow",
   "home.hero.heading",
   "home.hero.body",
   "home.hero.cta",
@@ -44,7 +43,6 @@ const Contours = () => (
 );
 
 const Hero = () => {
-  const eyebrow = useContentText("home.hero.eyebrow");
   const heading = useContentText("home.hero.heading");
   const body = useContentText("home.hero.body");
   const cta = useContentText("home.hero.cta");
@@ -67,7 +65,6 @@ const Hero = () => {
         <Contours />
         <div className="container mx-auto px-5 sm:px-8 pt-10 pb-14 lg:pt-16 lg:pb-20 grid lg:grid-cols-12 gap-10 lg:gap-10 items-center relative">
           <div className="lg:col-span-6 animate-fade-up">
-            <p className="text-accent text-[0.7rem] font-semibold tracking-[0.28em] uppercase mb-5">{eyebrow}</p>
             <h1 className="font-primary font-extrabold text-paper text-[2.75rem] sm:text-6xl lg:text-[4.25rem] leading-[0.98] tracking-[-0.03em] mb-6">
               {line1}
               {line2 && (

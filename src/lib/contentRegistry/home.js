@@ -17,7 +17,6 @@ const img = (label, src, alt) => ({ page: PAGE, label, type: "image", default: {
 export const HERO_CHECKS_COUNT = 4;
 export const HERO_CARD_ITEMS_COUNT = 3;
 export const homeHero = {
-  "home.hero.eyebrow": t("Hero eyebrow", "Plan smarter. Build brighter."),
   "home.hero.heading": t("Hero heading (\\n = line break)", "Your ADU\nStarts Here."),
   "home.hero.body": t("Hero paragraph", "Find out what you can build, what it may cost, and what to do next."),
   "home.hero.cta": t("Hero button", "Check My Property"),
