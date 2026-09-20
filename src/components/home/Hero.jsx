@@ -1,4 +1,4 @@
-import { FiCheck, FiDollarSign, FiHome, FiLayers, FiTrendingUp, FiUsers } from "react-icons/fi";
+import { FiCheck, FiDollarSign, FiHome, FiLayers, FiTrendingUp } from "react-icons/fi";
 import { useContentImage, useContentText } from "../../lib/content";
 import { HERO_CARD_ITEMS_COUNT, HERO_CHECKS_COUNT } from "../../lib/contentRegistry/home";
 import { AdminEditableSection } from "../../lib/adminEditBridge";
@@ -10,14 +10,14 @@ const EDIT_KEYS = [
   "home.hero.body",
   "home.hero.cta",
   "home.hero.placeholder",
+  "home.hero.reassurance",
   ...Array.from({ length: HERO_CHECKS_COUNT }, (_, i) => `home.hero.check.${i}`),
-  "home.hero.script",
   "home.hero.card.title",
   ...Array.from({ length: HERO_CARD_ITEMS_COUNT }, (_, i) => `home.hero.card.item.${i}`),
   "home.hero.image",
 ];
 
-const CARD_ICONS = [FiDollarSign, FiLayers, FiTrendingUp, FiUsers];
+const CARD_ICONS = [FiLayers, FiDollarSign, FiTrendingUp];
 
 const Lines = ({ text }) =>
   text.split("\n").map((line, i, arr) => (
@@ -33,19 +33,18 @@ const Hero = () => {
   const body = useContentText("home.hero.body");
   const cta = useContentText("home.hero.cta");
   const placeholder = useContentText("home.hero.placeholder");
+  const reassurance = useContentText("home.hero.reassurance");
   const checks = [
     useContentText("home.hero.check.0"),
     useContentText("home.hero.check.1"),
     useContentText("home.hero.check.2"),
     useContentText("home.hero.check.3"),
   ];
-  const script = useContentText("home.hero.script");
   const cardTitle = useContentText("home.hero.card.title");
   const cardItems = [
     useContentText("home.hero.card.item.0"),
     useContentText("home.hero.card.item.1"),
     useContentText("home.hero.card.item.2"),
-    useContentText("home.hero.card.item.3"),
   ];
   const image = useContentImage("home.hero.image");
 
@@ -61,20 +60,21 @@ const Hero = () => {
             </h1>
             <p className="text-paper-dim text-base sm:text-lg leading-relaxed max-w-md mb-8">{body}</p>
             <AddressIntake cta={cta} placeholder={placeholder} className="max-w-lg" />
-            <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+            <p className="mt-3 inline-flex items-center gap-2 text-xs sm:text-sm text-paper-dim">
+              <FiCheck className="text-accent" aria-hidden /> {reassurance}
+            </p>
+            <p className="mt-6 text-xs sm:text-sm text-paper-dim tracking-wide">
               {checks.map((c, i) => (
-                <li key={i} className="inline-flex items-center gap-2 text-xs sm:text-sm text-paper-dim">
-                  <FiCheck className="text-accent" aria-hidden /> {c}
-                </li>
+                <span key={i}>
+                  {i > 0 && <span className="mx-2.5 text-stroke" aria-hidden>·</span>}
+                  {c}
+                </span>
               ))}
-            </ul>
+            </p>
           </div>
 
           {/* Photo */}
-          <div className="lg:col-span-6 relative animate-fade-up pt-12 sm:pt-14" style={{ animationDelay: "120ms" }}>
-            <p className="font-script text-gold text-3xl sm:text-[2.6rem] leading-[0.95] absolute top-0 left-2 sm:left-4 -rotate-6 z-10 [text-shadow:0_1px_0_rgba(255,255,255,0.9),0_2px_10px_rgba(255,255,255,0.7)]">
-              <Lines text={script} />
-            </p>
+          <div className="lg:col-span-6 relative animate-fade-up" style={{ animationDelay: "120ms" }}>
             <div className="rounded-[2rem] overflow-hidden aspect-[3/2] lg:aspect-[4/3] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
               <img src={image.src} alt={image.alt} className="w-full h-full object-cover" />
             </div>

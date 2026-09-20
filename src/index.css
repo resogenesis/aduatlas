@@ -21,6 +21,7 @@
   --color-forest-deep: #1F4432;
   --color-mist: #F4F6F2;
   --color-gold: #B8892E;
+  --color-atlas-blue: #2B5C8A;
   --font-script: "Caveat", cursive;
 
   /* legacy tokens kept so older components still render until refactored */

@@ -15,23 +15,22 @@ const img = (label, src, alt) => ({ page: PAGE, label, type: "image", default: {
 
 // ── Hero ──────────────────────────────────────────────────────────────────
 export const HERO_CHECKS_COUNT = 4;
-export const HERO_CARD_ITEMS_COUNT = 4;
+export const HERO_CARD_ITEMS_COUNT = 3;
 export const homeHero = {
   "home.hero.eyebrow": t("Hero eyebrow", "Plan smarter. Build brighter."),
   "home.hero.heading": t("Hero heading (\\n = line break)", "Your ADU\nStarts Here."),
-  "home.hero.body": t("Hero paragraph", "Get the data, guidance, and builder connections you need to turn your property's potential into reality."),
-  "home.hero.cta": t("Hero button", "Explore My Property"),
+  "home.hero.body": t("Hero paragraph", "Find out what you can build, what it may cost, and what to do next."),
+  "home.hero.cta": t("Hero button", "Check My Property"),
   "home.hero.placeholder": t("Address field placeholder", "Enter your property address"),
-  "home.hero.check.0": t("Hero checkmark 1", "Zoning & lot analysis"),
-  "home.hero.check.1": t("Hero checkmark 2", "Estimated costs"),
-  "home.hero.check.2": t("Hero checkmark 3", "Design options"),
-  "home.hero.check.3": t("Hero checkmark 4", "Matched builders"),
-  "home.hero.script": t("Handwritten line over the photo", "More Homes\nA Brighter Tomorrow."),
+  "home.hero.reassurance": t("Line under the address box", "No credit card required"),
+  "home.hero.check.0": t("Hero benefit 1", "Know what may fit"),
+  "home.hero.check.1": t("Hero benefit 2", "Understand costs"),
+  "home.hero.check.2": t("Hero benefit 3", "Explore your options"),
+  "home.hero.check.3": t("Hero benefit 4", "Find builders"),
   "home.hero.card.title": t("Floating card title", "Turn your property into opportunity."),
-  "home.hero.card.item.0": t("Floating card item 1", "Generate income"),
-  "home.hero.card.item.1": t("Floating card item 2", "Add flexible living space"),
-  "home.hero.card.item.2": t("Floating card item 3", "Increase property value"),
-  "home.hero.card.item.3": t("Floating card item 4", "Support stronger communities"),
+  "home.hero.card.item.0": t("Floating card item 1", "Create flexible living space"),
+  "home.hero.card.item.1": t("Floating card item 2", "Generate rental income"),
+  "home.hero.card.item.2": t("Floating card item 3", "Increase your property's potential"),
   "home.hero.image": img("Hero photo", heroImg, "A modern wood-clad backyard ADU with sliding glass doors and a deck at golden hour"),
 };
 

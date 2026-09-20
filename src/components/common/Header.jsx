@@ -67,7 +67,7 @@ const Header = () => {
     <header className="w-full sticky top-0 z-50 bg-canvas/90 backdrop-blur-md border-b border-stroke">
       <div className="container mx-auto px-5 sm:px-8 flex items-center justify-between py-3 lg:py-3.5">
         <Link to="/" className="text-paper hover:opacity-80 transition-opacity" aria-label="ADUAtlas home">
-          <Logomark className="h-9" />
+          <Logomark className="h-8" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8" aria-label="Primary">
