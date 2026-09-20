@@ -8,6 +8,7 @@ const sections = [
     links: [
       { name: "Property Check", path: "/property" },
       { name: "How It Works", path: "/how-to-adu" },
+      { name: "Course", path: "/course-outline" },
       { name: "Plans & Pricing", path: "/unlock" },
       { name: "Find a Builder", path: "/builders" },
     ],
@@ -15,12 +16,9 @@ const sections = [
   {
     title: "Resources",
     links: [
-      { name: "How to ADU", path: "/how-to-adu" },
       { name: "ADU Types", path: "/adu-types" },
-      { name: "Course Outline", path: "/course-outline" },
-      { name: "Videos", path: "/videos" },
-      { name: "By State", path: "/choose-your-state" },
       { name: "FAQ", path: "/faq" },
+      { name: "By State", path: "/choose-your-state" },
     ],
   },
   {

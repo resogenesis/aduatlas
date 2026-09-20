@@ -1,21 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { FiChevronDown, FiMenu, FiSearch, FiX } from "react-icons/fi";
+import { FiChevronDown, FiMenu, FiX } from "react-icons/fi";
 import Logomark from "../brand/Logomark";
 
+// Phase 1 public pages (scope §2): How It Works, Course, Pricing, Find a
+// Builder, Resources. Property Check is the primary action. About, By State
+// and Videos live in the footer only.
 const navLinks = [
   { name: "How It Works", path: "/how-to-adu" },
+  { name: "Course", path: "/course-outline" },
   { name: "Plans & Pricing", path: "/unlock" },
   { name: "Find a Builder", path: "/builders" },
-  { name: "About", path: "/about" },
 ];
 
 const resources = [
-  { name: "How to ADU", path: "/how-to-adu" },
   { name: "ADU Types", path: "/adu-types" },
-  { name: "Course Outline", path: "/course-outline" },
-  { name: "Videos", path: "/videos" },
-  { name: "By State", path: "/choose-your-state" },
   { name: "FAQ", path: "/faq" },
 ];
 
@@ -71,26 +70,20 @@ const Header = () => {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8" aria-label="Primary">
-          {navLinks.slice(0, 3).map((link) => (
+          {navLinks.map((link) => (
             <NavLink key={link.path} to={link.path} className={linkClass}>
               {link.name}
             </NavLink>
           ))}
           <ResourcesMenu />
-          <NavLink to="/about" className={linkClass}>
-            About
-          </NavLink>
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <Link to="/property" className="p-2 text-paper-dim hover:text-paper transition-colors" aria-label="Check a property address">
-            <FiSearch className="text-lg" />
-          </Link>
           <Link to="/login" className="px-4 py-2.5 rounded-xl border border-stroke text-sm font-semibold text-paper hover:bg-surface-1-solid transition-colors">
             Sign In
           </Link>
-          <Link to="/signup" className="px-5 py-2.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors">
-            Get Started
+          <Link to="/property" className="px-5 py-2.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors">
+            Check My Property
           </Link>
         </div>
 
@@ -117,8 +110,8 @@ const Header = () => {
               <Link to="/login" className="px-5 py-3 rounded-xl border border-stroke text-paper font-semibold text-sm text-center" onClick={close}>
                 Sign In
               </Link>
-              <Link to="/signup" className="px-5 py-3 rounded-xl bg-accent text-accent-fg font-semibold text-sm text-center" onClick={close}>
-                Get Started
+              <Link to="/property" className="px-5 py-3 rounded-xl bg-accent text-accent-fg font-semibold text-sm text-center" onClick={close}>
+                Check My Property
               </Link>
             </div>
           </nav>
