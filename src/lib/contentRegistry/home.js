@@ -35,22 +35,6 @@ export const homeHero = {
   "home.hero.image": img("Hero photo", heroImg, "A modern wood-clad backyard ADU with sliding glass doors and a deck at golden hour"),
 };
 
-// ── Pillars (four-up strip under the hero) ────────────────────────────────
-export const PILLARS_COUNT = 4;
-export const homePillars = {
-  "home.pillars.eyebrow": t("How it works eyebrow", "How ADUAtlas works"),
-  "home.pillars.heading": t("How it works heading (\\n = line break)", "From an address to a plan\nyou can act on."),
-  "home.pillars.body": t("How it works paragraph", "Every step is tied to your property, not a generic checklist."),
-  "home.pillars.item.0.title": t("Pillar 1 title", "Learn\nthe basics"),
-  "home.pillars.item.0.desc": t("Pillar 1 description", "Understand ADUs and what's possible on your property."),
-  "home.pillars.item.1.title": t("Pillar 2 title", "Explore\nyour options"),
-  "home.pillars.item.1.desc": t("Pillar 2 description", "See designs, costs, and zoning insights."),
-  "home.pillars.item.2.title": t("Pillar 3 title", "Get matched\nwith builders"),
-  "home.pillars.item.2.desc": t("Pillar 3 description", "Connect with vetted builders in your area."),
-  "home.pillars.item.3.title": t("Pillar 4 title", "Build with\nconfidence"),
-  "home.pillars.item.3.desc": t("Pillar 4 description", "Bring your ADU to life with the right plan and partners."),
-};
-
 // ── What's possible (text + three photo cards) ────────────────────────────
 export const POSSIBLE_CARDS_COUNT = 3;
 export const homePossible = {
@@ -159,7 +143,6 @@ export const homeCta = {
 
 export const HOME_CONTENT = {
   ...homeHero,
-  ...homePillars,
   ...homePossible,
   ...homePlans,
   ...homeBuilders,
