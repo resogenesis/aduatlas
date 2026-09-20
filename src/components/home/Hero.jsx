@@ -80,15 +80,15 @@ const Hero = () => {
             <div className="rounded-[2rem] lg:rounded-r-none overflow-hidden aspect-[3/2] lg:aspect-auto lg:h-[34rem] xl:h-[38rem] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
               <img src={image.src} alt={image.alt} className="w-full h-full object-cover object-[55%_center] -scale-x-100" />
             </div>
-            <div className="bg-canvas/95 backdrop-blur-md rounded-2xl border border-white/70 shadow-[0_24px_60px_-24px_rgba(23,32,27,0.45)] p-6 w-[min(100%,19.5rem)] mt-5 lg:mt-0 lg:absolute lg:bottom-8 lg:right-8">
+            <div className="bg-white/70 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_24px_60px_-24px_rgba(23,32,27,0.45)] p-6 w-[min(100%,19.5rem)] mt-5 lg:mt-0 lg:absolute lg:bottom-8 lg:right-8">
               <p className="text-accent text-[0.65rem] font-semibold tracking-[0.24em] uppercase mb-2">{cardEyebrow}</p>
               <p className="font-semibold text-paper text-[1.05rem] leading-snug mb-3">{cardTitle}</p>
-              <ul className="divide-y divide-stroke">
+              <ul className="divide-y divide-paper/10">
                 {cardItems.map((item, i) => {
                   const Icon = CARD_ICONS[i] || FiHome;
                   return (
                     <li key={i} className="flex items-center gap-3 py-2.5 text-sm font-medium text-paper">
-                      <span className="w-8 h-8 rounded-lg bg-accent/10 text-accent inline-flex items-center justify-center shrink-0">
+                      <span className="w-8 h-8 rounded-lg bg-white/80 text-accent inline-flex items-center justify-center shrink-0">
                         <Icon className="text-[0.95rem]" aria-hidden />
                       </span>
                       {item}
