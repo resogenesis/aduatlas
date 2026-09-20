@@ -27,6 +27,7 @@ export const homeHero = {
   "home.hero.check.1": t("Hero benefit 2", "Understand costs"),
   "home.hero.check.2": t("Hero benefit 3", "Explore your options"),
   "home.hero.check.3": t("Hero benefit 4", "Find builders"),
+  "home.hero.card.eyebrow": t("Floating card eyebrow", "Why an ADU"),
   "home.hero.card.title": t("Floating card title", "Turn your property into opportunity."),
   "home.hero.card.item.0": t("Floating card item 1", "Create flexible living space"),
   "home.hero.card.item.1": t("Floating card item 2", "Generate rental income"),
@@ -68,21 +69,54 @@ export const homePossible = {
   "home.possible.card.2.image": img("Card 3 photo", communityImg, "A modular unit arriving on site"),
 };
 
-// ── Stats band ────────────────────────────────────────────────────────────
-// PLACEHOLDER FIGURES from the mock. Replace with real numbers before any
-// public deploy; publishing unverifiable claims is a trust problem for a
-// product whose pitch is honest numbers.
-export const STATS_COUNT = 3;
-export const homeStats = {
-  "home.stats.eyebrow": t("Stats eyebrow", "A growing movement"),
-  "home.stats.heading": t("Stats heading (\\n = line break)", "Smaller Footprints.\nBigger Opportunities."),
-  "home.stats.item.0.value": t("Stat 1 value", "50K+"),
-  "home.stats.item.0.label": t("Stat 1 label", "Properties analyzed"),
-  "home.stats.item.1.value": t("Stat 2 value", "8K+"),
-  "home.stats.item.1.label": t("Stat 2 label", "Homeowners guided"),
-  "home.stats.item.2.value": t("Stat 3 value", "1,200+"),
-  "home.stats.item.2.label": t("Stat 3 label", "Builders in our network"),
-  "home.stats.map_label": t("Map label", "Communities\nnationwide"),
+// ── Plans (Golden / Platinum / Concierge, from the Phase 1 scope) ─────────
+// Prices and bullets here are marketing copy. The checkout still resolves
+// prices server-side from Stripe; keep both in step when repricing.
+export const PLANS_COUNT = 3;
+export const PLAN_BULLETS_COUNT = 4;
+export const homePlans = {
+  "home.plans.eyebrow": t("Plans eyebrow", "Plans"),
+  "home.plans.heading": t("Plans heading (\\n = line break)", "Teach me. Analyze my property.\nHelp me move forward."),
+  "home.plans.body": t("Plans paragraph", "Start with the course, add a property-specific feasibility study, or bring in a concierge for the next steps."),
+  "home.plans.cta": t("Plans link", "Compare all plans"),
+  "home.plans.item.0.name": t("Plan 1 name", "Golden"),
+  "home.plans.item.0.price": t("Plan 1 price", "$79"),
+  "home.plans.item.0.tagline": t("Plan 1 tagline", "Education + builder access"),
+  "home.plans.item.0.bullet.0": t("Plan 1 bullet 1", "The full ADU course"),
+  "home.plans.item.0.bullet.1": t("Plan 1 bullet 2", "State and city learning resources"),
+  "home.plans.item.0.bullet.2": t("Plan 1 bullet 3", "Homeowner preparation tools"),
+  "home.plans.item.0.bullet.3": t("Plan 1 bullet 4", "Builder profile access for one year"),
+  "home.plans.item.1.name": t("Plan 2 name", "Platinum"),
+  "home.plans.item.1.price": t("Plan 2 price", "$279"),
+  "home.plans.item.1.tagline": t("Plan 2 tagline", "Property analysis"),
+  "home.plans.item.1.bullet.0": t("Plan 2 bullet 1", "Everything in Golden"),
+  "home.plans.item.1.bullet.1": t("Plan 2 bullet 2", "Property-specific feasibility study"),
+  "home.plans.item.1.bullet.2": t("Plan 2 bullet 3", "ADUAtlas visual site plan"),
+  "home.plans.item.1.bullet.3": t("Plan 2 bullet 4", "Pre-site and utility cost guidance"),
+  "home.plans.item.2.name": t("Plan 3 name", "Concierge"),
+  "home.plans.item.2.price": t("Plan 3 price", "$500"),
+  "home.plans.item.2.tagline": t("Plan 3 tagline", "Guidance + support"),
+  "home.plans.item.2.bullet.0": t("Plan 3 bullet 1", "Everything in Platinum"),
+  "home.plans.item.2.bullet.1": t("Plan 3 bullet 2", "Personalized next-step guidance"),
+  "home.plans.item.2.bullet.2": t("Plan 3 bullet 3", "Builder-match assistance"),
+  "home.plans.item.2.bullet.3": t("Plan 3 bullet 4", "60 minutes of private ADU consultation"),
+  "home.plans.featured_label": t("Featured plan label", "Most popular"),
+  "home.plans.footnote": t("Plans footnote", "Golden applies as a credit toward Platinum. All plans include one year of access."),
+};
+
+// ── Builder teaser ────────────────────────────────────────────────────────
+export const BUILDER_POINTS_COUNT = 3;
+export const homeBuilders = {
+  "home.builders.eyebrow": t("Builder eyebrow", "Find a builder"),
+  "home.builders.heading": t("Builder heading (\\n = line break)", "Builders who work with\nprepared homeowners."),
+  "home.builders.body": t("Builder paragraph", "Browse ADU builders by state and service area, see what they specialize in, and request an introduction when you are ready."),
+  "home.builders.cta": t("Builder button", "Find a Builder"),
+  "home.builders.point.0.title": t("Builder point 1 title", "Organized by area"),
+  "home.builders.point.0.desc": t("Builder point 1 description", "Search by state, city, or ZIP to see who serves your property."),
+  "home.builders.point.1.title": t("Builder point 2 title", "Clear specialties"),
+  "home.builders.point.1.desc": t("Builder point 2 description", "Detached, attached, conversion, prefab, or factory-built."),
+  "home.builders.point.2.title": t("Builder point 3 title", "Introductions on your terms"),
+  "home.builders.point.2.desc": t("Builder point 3 description", "Save builders and request contact when your plan is ready."),
 };
 
 // ── Mission band ──────────────────────────────────────────────────────────
@@ -124,7 +158,8 @@ export const HOME_CONTENT = {
   ...homeHero,
   ...homePillars,
   ...homePossible,
-  ...homeStats,
+  ...homePlans,
+  ...homeBuilders,
   ...homeMission,
   ...homeTestimonials,
   ...homeCta,
