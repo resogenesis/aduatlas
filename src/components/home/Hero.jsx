@@ -53,7 +53,7 @@ const Hero = () => {
       <section className="bg-surface-1-solid">
         <div className="container mx-auto px-5 sm:px-8 pt-10 pb-14 lg:pt-14 lg:pb-20 grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Copy */}
-          <div className="lg:col-span-6 animate-fade-up">
+          <div className="lg:col-span-5 animate-fade-up">
             <p className="text-paper-dim text-[0.7rem] font-semibold tracking-[0.28em] uppercase mb-5">{eyebrow}</p>
             <h1 className="font-primary font-extrabold text-paper text-[2.75rem] sm:text-6xl lg:text-[4.25rem] leading-[0.98] tracking-[-0.03em] mb-6">
               <Lines text={heading} />
@@ -66,7 +66,7 @@ const Hero = () => {
             <p className="mt-6 text-xs sm:text-sm text-paper-dim tracking-wide">
               {checks.map((c, i) => (
                 <span key={i}>
-                  {i > 0 && <span className="mx-2.5 text-stroke" aria-hidden>·</span>}
+                  {i > 0 && <span className="mx-2 text-stroke" aria-hidden>·</span>}
                   {c}
                 </span>
               ))}
@@ -74,11 +74,11 @@ const Hero = () => {
           </div>
 
           {/* Photo */}
-          <div className="lg:col-span-6 relative animate-fade-up" style={{ animationDelay: "120ms" }}>
-            <div className="rounded-[2rem] overflow-hidden aspect-[3/2] lg:aspect-[4/3] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
-              <img src={image.src} alt={image.alt} className="w-full h-full object-cover" />
+          <div className="lg:col-span-7 relative animate-fade-up lg:-mr-8 xl:-mr-[calc((100vw-1280px)/2+2rem)]" style={{ animationDelay: "120ms" }}>
+            <div className="rounded-[2rem] lg:rounded-r-none overflow-hidden aspect-[3/2] lg:aspect-auto lg:h-[34rem] xl:h-[38rem] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
+              <img src={image.src} alt={image.alt} className="w-full h-full object-cover object-[60%_center]" />
             </div>
-            <div className="bg-canvas rounded-2xl shadow-[0_20px_50px_-20px_rgba(23,32,27,0.35)] border border-stroke p-5 sm:p-6 w-[min(100%,19rem)] mt-5 lg:mt-0 lg:absolute lg:-bottom-8 lg:-right-4">
+            <div className="bg-canvas rounded-2xl shadow-[0_20px_50px_-20px_rgba(23,32,27,0.35)] border border-stroke p-5 sm:p-6 w-[min(100%,19rem)] mt-5 lg:mt-0 lg:absolute lg:bottom-8 lg:right-8">
               <p className="font-semibold text-paper text-base leading-snug mb-4">{cardTitle}</p>
               <ul className="space-y-2.5">
                 {cardItems.map((item, i) => {
