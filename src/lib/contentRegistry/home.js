@@ -102,24 +102,6 @@ export const homeMission = {
   "home.mission.image": img("Mission background photo", missionImg, "Aerial view of a residential neighborhood"),
 };
 
-// ── Testimonials ──────────────────────────────────────────────────────────
-// PLACEHOLDER QUOTES from the mock. Swap for real customer words (with
-// permission) before any public deploy.
-export const TESTIMONIALS_COUNT = 3;
-export const homeTestimonials = {
-  "home.testimonials.heading": t("Testimonials heading", "Real People. Real Progress."),
-  "home.testimonials.link": t("Testimonials link", "See More Stories"),
-  "home.testimonials.item.0.quote": t("Quote 1", "ADUAtlas made it easy to understand what was possible on my property. The report was super helpful and connected me with an amazing builder."),
-  "home.testimonials.item.0.name": t("Quote 1 name", "Sarah M."),
-  "home.testimonials.item.0.place": t("Quote 1 place", "Austin, TX"),
-  "home.testimonials.item.1.quote": t("Quote 2", "I had no idea where to start. ADUAtlas gave me clarity, options, and a builder I could trust. We're now breaking ground!"),
-  "home.testimonials.item.1.name": t("Quote 2 name", "James T."),
-  "home.testimonials.item.1.place": t("Quote 2 place", "San Diego, CA"),
-  "home.testimonials.item.2.quote": t("Quote 3", "A must-use for any homeowner considering an ADU. The insights and resources saved me months of research."),
-  "home.testimonials.item.2.name": t("Quote 3 name", "Priya K."),
-  "home.testimonials.item.2.place": t("Quote 3 place", "Denver, CO"),
-};
-
 // ── Closing CTA band ──────────────────────────────────────────────────────
 export const homeCta = {
   "home.cta.heading": t("Closing heading", "Your property has potential."),
@@ -133,6 +115,5 @@ export const HOME_CONTENT = {
   ...homePlans,
   ...homeBuilders,
   ...homeMission,
-  ...homeTestimonials,
   ...homeCta,
 };

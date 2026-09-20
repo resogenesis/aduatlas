@@ -1,40 +1,40 @@
 import { useEffect, useState } from "react";
 import { FiCheck, FiAlertCircle, FiMapPin } from "react-icons/fi";
 
-// A looping sample "property check" that runs over the bottom of the hero
-// photo: rows appear one at a time, a result lands, then the next sample
-// address starts. Every figure here is illustrative and labeled as a sample;
-// the real check runs on /property.
+// A looping sample of the FREE property check over the bottom of the hero
+// photo: public-record facts appear one at a time, unknowns are flagged, and
+// the closing line points to the paid feasibility study. Figures are
+// illustrative and labeled as a sample; the real check runs on /property.
 const SAMPLES = [
   {
     address: "1247 Mulberry Ln, Pasadena, CA",
     rows: [
-      { ok: true, label: "Zoning", value: "ADU permitted on this lot" },
-      { ok: true, label: "Size", value: "Up to 1,000 sq ft detached" },
-      { ok: true, label: "Setbacks", value: "4 ft side and rear" },
-      { ok: false, label: "Utilities", value: "Sewer distance to verify" },
+      { ok: true, label: "Lot", value: "7,200 sq ft, public record" },
+      { ok: true, label: "Home", value: "1,640 sq ft, built 1962" },
+      { ok: true, label: "Type", value: "Single-family residential" },
+      { ok: false, label: "Zoning", value: "Confirm with the city" },
     ],
-    result: "Likely feasible",
+    result: "Ready for a feasibility study",
   },
   {
     address: "88 Ocean View Dr, San Diego, CA",
     rows: [
-      { ok: true, label: "Zoning", value: "ADU and JADU permitted" },
-      { ok: true, label: "Size", value: "Garage conversion or 800 sq ft new" },
+      { ok: true, label: "Lot", value: "5,400 sq ft, public record" },
+      { ok: true, label: "Home", value: "1,210 sq ft, built 1978" },
+      { ok: true, label: "Garage", value: "Detached, 2-car" },
       { ok: false, label: "Slope", value: "Grade change to verify" },
-      { ok: true, label: "Parking", value: "No replacement required" },
     ],
-    result: "Possible with verification",
+    result: "Ready for a feasibility study",
   },
   {
     address: "512 Elmwood Ave, Sacramento, CA",
     rows: [
-      { ok: true, label: "Zoning", value: "Detached ADU permitted" },
-      { ok: true, label: "Size", value: "Up to 1,200 sq ft" },
-      { ok: true, label: "Height", value: "16 ft, 18 ft near transit" },
-      { ok: true, label: "Utilities", value: "Water and sewer at rear" },
+      { ok: true, label: "Lot", value: "9,100 sq ft, public record" },
+      { ok: true, label: "Home", value: "1,880 sq ft, built 1955" },
+      { ok: true, label: "Type", value: "Single-family residential" },
+      { ok: false, label: "Utilities", value: "Sewer distance to verify" },
     ],
-    result: "Likely feasible",
+    result: "Ready for a feasibility study",
   },
 ];
 
@@ -75,7 +75,7 @@ const LiveCheck = () => {
             <FiMapPin className="text-gold shrink-0" aria-hidden />
             <span className="truncate">{current.address}</span>
           </p>
-          <span className="shrink-0 text-[0.6rem] font-semibold tracking-[0.2em] uppercase text-white/50">Sample check</span>
+          <span className="shrink-0 text-[0.65rem] font-medium text-white/50">Sample</span>
         </div>
         <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-1.5">
           {current.rows.map((r, i) => {
@@ -116,7 +116,7 @@ const LiveCheck = () => {
             <span className="w-2 h-2 rounded-full bg-gold" aria-hidden />
             {current.result}
           </span>
-          <span className="text-[0.7rem] text-white/60">Verify with your city before you spend</span>
+          <span className="text-[0.7rem] text-white/60">Full study and site plan with Platinum</span>
         </div>
       </div>
     </div>
