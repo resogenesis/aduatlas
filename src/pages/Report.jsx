@@ -65,10 +65,10 @@ const Report = () => {
           <div className="flex items-center gap-2 text-paper-dim text-sm mb-4">
             <FiMapPin /> {sampleAddress}
           </div>
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
+          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
             Sample Property Feasibility Report
           </p>
-          <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+          <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
             What you can build, <span className="">verified.</span>
           </h1>
           <p className="text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed mb-7">
@@ -127,10 +127,7 @@ const Report = () => {
           <ul className="space-y-4">
             {risks.map((r) => (
               <li key={r.title} className="flex items-start gap-4 py-4 border-b border-stroke last:border-b-0">
-                <span className={`shrink-0 mt-1 inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[0.65rem] font-semibold uppercase tracking-wider ${ r.severity === "high" ? "bg-red-400/10 text-red-700 border-red-600/30" :
-                  r.severity === "med" ? "bg-yellow-400/10 text-yellow-700 border-yellow-600/30" :
-                  "bg-paper-dim/10 text-paper-dim border-stroke"
-                }`}>
+                <span className={`shrink-0 mt-1 inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[0.65rem] font-semibold ${ r.severity ==="high"?"bg-red-400/10 text-red-700 border-red-600/30": r.severity ==="med"?"bg-yellow-400/10 text-yellow-700 border-yellow-600/30":"bg-paper-dim/10 text-paper-dim border-stroke"}`}>
                   <FiAlertTriangle className="text-xs" />
                   {r.severity.toUpperCase()}
                 </span>
@@ -212,7 +209,7 @@ const Report = () => {
 
         {/* Final CTA */}
         <div className="bg-accent text-accent-fg rounded-3xl p-8 sm:p-12 text-center">
-          <h2 className="font-display font-medium text-3xl sm:text-4xl leading-tight mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl leading-tight mb-4">
             Get this for your address.
           </h2>
           <p className="text-accent-fg/80 text-base sm:text-lg max-w-xl mx-auto mb-7">

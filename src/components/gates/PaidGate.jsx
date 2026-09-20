@@ -40,10 +40,10 @@ const PaidGate = ({ children, chapterName, requireTier, requireBuilders }) => {
 const PayPaywall = ({ location, chapterName }) => (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
     <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] uppercase mb-7">
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] mb-7">
         <FiLock /> {chapterName ? `${chapterName} · locked` : "Locked"}
       </div>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+      <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
         This is part of the <span className="">paid system.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
@@ -77,10 +77,10 @@ const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
   return (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
     <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] uppercase mb-7">
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] mb-7">
         <FiLock /> {chapterName ? `${chapterName} · ${plan.name}` : plan.name}
       </div>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+      <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
         This is part of <span>{plan.name}.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
@@ -111,10 +111,10 @@ const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
 const BuilderPaywall = ({ progress, packetPercent, feasOk }) => (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
     <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] uppercase mb-7">
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] mb-7">
         <FiLock /> Builders · locked
       </div>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+      <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
         Builders only see <span className="">prepared homeowners.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">

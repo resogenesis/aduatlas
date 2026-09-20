@@ -56,7 +56,7 @@ const Deliverable = ({ label, path }) => {
       target="_blank"
       rel="noreferrer"
       aria-disabled={!url}
-      className={`flex items-center justify-between gap-3 px-5 py-4 rounded-2xl border border-stroke bg-canvas hover:border-accent transition ${url ? "" : "opacity-60 pointer-events-none"}`}
+      className={`flex items-center justify-between gap-3 px-5 py-4 rounded-2xl border border-stroke bg-canvas hover:border-accent transition ${url ?"":"opacity-60 pointer-events-none"}`}
     >
       <span className="inline-flex items-center gap-3 text-paper font-medium">
         <FiFileText className="text-accent" /> {label}
@@ -149,7 +149,7 @@ const Study = () => {
                 const done = status.step >= i + 1;
                 return (
                   <li key={label} className="flex items-center gap-2 text-sm">
-                    <span className={`w-7 h-7 rounded-full inline-flex items-center justify-center ${done ? "bg-accent text-accent-fg" : "border border-stroke text-paper-dim"}`}>
+                    <span className={`w-7 h-7 rounded-full inline-flex items-center justify-center ${done ?"bg-accent text-accent-fg":"border border-stroke text-paper-dim"}`}>
                       {done ? <FiCheck /> : i + 1}
                     </span>
                     <span className={done ? "text-paper font-medium" : "text-paper-dim"}>{label}</span>

@@ -105,10 +105,10 @@ const ConversationGuide = () => {
 
       {/* Document */}
       <article className="container mx-auto px-5 sm:px-8 max-w-3xl py-12 sm:py-16">
-        <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
+        <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
           Builder Conversation Guide
         </p>
-        <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+        <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
           Five conversations <span className="text-paper-dim">every builder should pass.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed max-w-2xl mb-3">
@@ -124,7 +124,7 @@ const ConversationGuide = () => {
               <div className="flex items-baseline gap-5 mb-5">
                 <span className="font-display text-accent text-3xl sm:text-4xl">{s.n}</span>
                 <div>
-                  <p className="text-paper-dim text-xs font-medium tracking-[0.2em] uppercase mb-1">{s.eyebrow}</p>
+                  <p className="text-paper-dim text-xs font-medium tracking-[0.2em] mb-1">{s.eyebrow}</p>
                   <h2 className="font-display text-paper text-2xl sm:text-3xl leading-snug">{s.title}</h2>
                 </div>
               </div>
@@ -154,7 +154,7 @@ const ConversationGuide = () => {
 
         {/* CTA — hidden on print */}
         <div className="print:hidden mt-12 bg-accent text-accent-fg rounded-3xl p-8 sm:p-10 text-center">
-          <h2 className="font-display font-medium text-2xl sm:text-3xl leading-tight mb-3">
+          <h2 className="font-display text-2xl sm:text-3xl leading-tight mb-3">
             Want this for your address?
           </h2>
           <p className="text-accent-fg/80 text-sm sm:text-base mb-6 max-w-xl mx-auto">

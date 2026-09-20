@@ -41,13 +41,13 @@ const Section = ({ id, headingKey, bodyKey }) => {
   return (
     <AdminEditableSection keys={[headingKey, bodyKey]} label={heading}>
     <section id={id} className="scroll-mt-20">
-      <h2 className="font-display font-medium text-paper text-2xl sm:text-3xl tracking-tight mb-4">{heading}</h2>
+      <h2 className="font-display text-paper text-2xl sm:text-3xl tracking-tight mb-4">{heading}</h2>
       {paragraphs(body).map((chunk, i) => {
         const lines = chunk.split("\n").filter(Boolean);
         const isList = lines.length > 0 && lines.every((l) => l.startsWith("- "));
         if (isList) {
           return (
-            <ul key={i} className={`space-y-3 list-disc pl-5${i > 0 ? " mt-3" : ""}`}>
+            <ul key={i} className={`space-y-3 list-disc pl-5${i > 0 ?"mt-3":""}`}>
               {lines.map((l, j) => <li key={j}>{renderRich(l.slice(2))}</li>)}
             </ul>
           );
@@ -87,17 +87,17 @@ const Legal = () => {
         <div className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
           <div className="inline-flex items-center gap-2 mb-4">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
-            <span className="text-paper-dim text-xs font-medium tracking-[0.2em] uppercase">
+            <span className="text-paper-dim text-xs font-medium tracking-[0.2em]">
               {heroBadge}
             </span>
           </div>
-          <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+          <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
             {heroHeadingPre} <span className="">{heroHeadingEmphasis}</span>
           </h1>
           <p className="mt-5 text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed">
             {heroBody}
           </p>
-          <p className="mt-4 text-paper-dim/70 text-xs uppercase tracking-[0.15em]">
+          <p className="mt-4 text-paper-dim/70 text-xs tracking-[0.15em]">
             Last updated · {lastUpdated}
           </p>
         </div>
@@ -109,7 +109,7 @@ const Legal = () => {
         {/* TOC */}
         <AdminEditableSection keys={LEGAL_SECTIONS_META.map((s) => s.labelKey)} label="Table of contents">
         <aside className="lg:col-span-3 lg:sticky lg:top-24 self-start">
-          <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-4">On this page</p>
+          <p className="text-paper-dim text-xs tracking-[0.2em] mb-4">On this page</p>
           <ul className="space-y-2">
             {LEGAL_SECTIONS_META.map((s) => (
               <TocLink key={s.id} id={s.id} labelKey={s.labelKey} />
@@ -135,7 +135,7 @@ const Legal = () => {
             label="Contact"
           >
           <section id="contact" className="scroll-mt-20">
-            <h2 className="font-display font-medium text-paper text-2xl sm:text-3xl tracking-tight mb-4">{contactHeading}</h2>
+            <h2 className="font-display text-paper text-2xl sm:text-3xl tracking-tight mb-4">{contactHeading}</h2>
             <p>
               {contactLead}{" "}
               <a href={`mailto:${supportEmail}`} className="text-accent hover:text-paper transition-colors">

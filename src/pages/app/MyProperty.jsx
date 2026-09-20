@@ -61,10 +61,10 @@ const MyProperty = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-4xl mx-auto">
-      <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
+      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
         My Property
       </p>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
+      <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
         Your project brief.
       </h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-10">
@@ -75,7 +75,7 @@ const MyProperty = () => {
       <div className="mb-10 bg-surface-1-solid border border-stroke rounded-2xl p-5 sm:p-6">
         <div className="flex items-end justify-between mb-3 flex-wrap gap-2">
           <div>
-            <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-1">Feasibility Packet</p>
+            <p className="text-paper-dim text-xs tracking-[0.2em] mb-1">Feasibility Packet</p>
             <p className="font-display text-paper text-2xl">{progress.percent}% complete</p>
           </div>
           <p className="text-paper-dim text-xs">{progress.filled} of {progress.total} fields</p>
@@ -89,7 +89,7 @@ const MyProperty = () => {
         <div className="grid sm:grid-cols-2 gap-5">
           {fields.filter((f) => f.type !== "textarea").map((f) => (
             <div key={f.key} className={f.short ? "" : "sm:col-span-2"}>
-              <label className="block text-paper text-xs font-medium tracking-[0.15em] uppercase mb-2">
+              <label className="block text-paper text-xs font-medium tracking-[0.15em] mb-2">
                 {f.label}
               </label>
               <input
@@ -105,7 +105,7 @@ const MyProperty = () => {
 
         {fields.filter((f) => f.type === "textarea").map((f) => (
           <div key={f.key}>
-            <label className="block text-paper text-xs font-medium tracking-[0.15em] uppercase mb-2">
+            <label className="block text-paper text-xs font-medium tracking-[0.15em] mb-2">
               {f.label}
             </label>
             <textarea

@@ -6,7 +6,7 @@ const money = (n) => `$${Number(n || 0).toLocaleString()}`;
 
 const Stat = ({ Icon, label, value, sub }) => (
   <div className="bg-surface-1-solid border border-stroke rounded-2xl p-5 sm:p-6">
-    <div className="flex items-center gap-2 text-paper-dim text-xs uppercase tracking-[0.15em] mb-3">
+    <div className="flex items-center gap-2 text-paper-dim text-xs tracking-[0.15em] mb-3">
       <Icon className="text-accent" /> {label}
     </div>
     <p className="font-display text-paper text-3xl sm:text-4xl">{value}</p>
@@ -24,8 +24,8 @@ const AdminOverview = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto">
-      <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">Admin</p>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-10">
+      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Admin</p>
+      <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-10">
         Overview
       </h1>
 
@@ -46,11 +46,11 @@ const AdminOverview = () => {
             <Stat Icon={FiInbox} label="Leads" value={data.leads} sub="top-of-funnel captures" />
           </div>
 
-          <h2 className="text-paper text-xs uppercase tracking-[0.2em] mb-4">Recent signups</h2>
+          <h2 className="text-paper text-xs tracking-[0.2em] mb-4">Recent signups</h2>
           <div className="overflow-x-auto bg-surface-1-solid border border-stroke rounded-2xl">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-paper-dim text-xs uppercase tracking-[0.15em] border-b border-stroke">
+                <tr className="text-paper-dim text-xs tracking-[0.15em] border-b border-stroke">
                   <th className="px-4 py-3 text-left font-medium">Email</th>
                   <th className="px-4 py-3 text-left font-medium">Role</th>
                   <th className="px-4 py-3 text-left font-medium">Tier</th>

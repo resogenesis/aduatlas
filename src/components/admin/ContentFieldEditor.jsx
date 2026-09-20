@@ -95,7 +95,7 @@ const BlockEditor = ({ block, onChange }) => {
   if (block.remember !== undefined) {
     return (
       <div className="rounded-lg border border-stroke p-3">
-        <p className="text-[0.65rem] uppercase tracking-wider text-paper-dim mb-1.5">Remember callout</p>
+        <p className="text-[0.65rem] text-paper-dim mb-1.5">Remember callout</p>
         <textarea
           className={`${inputClass} min-h-[4.5rem]`}
           value={block.remember}
@@ -200,7 +200,7 @@ const ContentFieldEditor = ({ contentKey, meta, dbRow, onSaved }) => {
   return (
     <div className="py-5 border-t border-stroke first:border-t-0">
       <div className="flex items-center justify-between gap-3 mb-2">
-        <label className="text-paper text-xs font-medium tracking-[0.1em] uppercase">{meta.label}</label>
+        <label className="text-paper text-xs font-medium tracking-[0.1em]">{meta.label}</label>
         <div className="flex items-center gap-2">
           {hasUnpublishedDraft && <span className="text-xs text-amber-700">Unpublished edit</span>}
           {isLive && <span className="text-xs text-paper-dim/70">Live</span>}
@@ -210,7 +210,7 @@ const ContentFieldEditor = ({ contentKey, meta, dbRow, onSaved }) => {
 
       {meta.type === "text" && (
         <textarea
-          className={`${inputClass} ${(value || "").length > 120 ? "min-h-[7rem]" : "min-h-[2.75rem]"}`}
+          className={`${inputClass} ${(value ||"").length > 120 ?"min-h-[7rem]":"min-h-[2.75rem]"}`}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onBlur={() => commit(value)}

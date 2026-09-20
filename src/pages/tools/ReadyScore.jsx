@@ -51,10 +51,10 @@ const ReadyScore = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto print-sheet">
       <WorksheetBar savedAt={savedAt} />
 
-      <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
+      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
         Feasibility Report · NAPE
       </p>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-4">
+      <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-4">
         National ADU Property Evaluation.
       </h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-8">
@@ -70,7 +70,7 @@ const ReadyScore = () => {
           {NAPE_CATEGORIES.map((cat) => (
             <div key={cat.id} className="mb-8">
               <div className="flex items-baseline justify-between gap-3 mb-4">
-                <h3 className="text-accent text-xs font-medium tracking-[0.2em] uppercase">{cat.title}</h3>
+                <h3 className="text-accent text-xs font-medium tracking-[0.2em]">{cat.title}</h3>
                 <span className="text-paper-dim text-xs tabular-nums">
                   {result.perCategory[cat.id]} / {cat.points} pts
                 </span>
@@ -86,7 +86,7 @@ const ReadyScore = () => {
                       <p className="text-sm text-paper leading-relaxed">
                         {it.q}
                         {it.noGo && (
-                          <span className="ml-2 inline-flex items-center gap-1 text-[0.6rem] font-semibold uppercase tracking-wider text-red-700/80">
+                          <span className="ml-2 inline-flex items-center gap-1 text-[0.6rem] font-semibold text-red-700/80">
                             <FiAlertTriangle className="text-[0.6rem]" /> no-go if No
                           </span>
                         )}
@@ -98,11 +98,7 @@ const ReadyScore = () => {
                             key={opt.label}
                             type="button"
                             onClick={() => setAnswers((a) => ({ ...a, [it.id]: opt.v }))}
-                            className={`px-4 py-1.5 text-xs font-semibold rounded-full border transition-colors ${
-                              val === opt.v
-                                ? opt.on
-                                : "bg-canvas border-stroke text-paper-dim hover:text-paper hover:border-paper-dim"
-                            }`}
+                            className={`px-4 py-1.5 text-xs font-semibold rounded-full border transition-colors ${ val === opt.v ? opt.on :"bg-canvas border-stroke text-paper-dim hover:text-paper hover:border-paper-dim"}`}
                           >
                             {opt.label}
                           </button>
@@ -119,8 +115,8 @@ const ReadyScore = () => {
         {/* Score card */}
         <div className="lg:sticky lg:top-8 self-start">
           <div className="bg-surface-1-solid rounded-3xl border border-stroke p-7 sm:p-8 text-center mb-4">
-            <h3 className="text-paper text-xs uppercase tracking-[0.2em] mb-2">NAPE Score</h3>
-            <div className={`font-display text-7xl my-2 ${result.complete ? GRADE_TONES[result.grade] : "text-paper-dim/40"}`}>
+            <h3 className="text-paper text-xs tracking-[0.2em] mb-2">NAPE Score</h3>
+            <div className={`font-display text-7xl my-2 ${result.complete ? GRADE_TONES[result.grade] :"text-paper-dim/40"}`}>
               {result.complete ? result.grade : "–"}
             </div>
             <p className="font-display text-paper text-2xl mb-1">

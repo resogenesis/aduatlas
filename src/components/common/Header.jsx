@@ -44,7 +44,7 @@ const ResourcesMenu = () => {
         aria-haspopup="menu"
         className="inline-flex items-center gap-1 text-sm font-medium text-paper-dim hover:text-paper transition-colors"
       >
-        Resources <FiChevronDown className={`text-xs transition-transform ${open ? "rotate-180" : ""}`} />
+        Resources <FiChevronDown className={`text-xs transition-transform ${open ?"rotate-180":""}`} />
       </button>
       {open && (
         <div role="menu" className="absolute left-0 top-full mt-3 w-52 bg-canvas border border-stroke rounded-xl shadow-[0_20px_40px_-20px_rgba(23,32,27,0.35)] p-2 z-50">
@@ -107,7 +107,7 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
-            <p className="text-paper-dim text-[0.65rem] font-semibold tracking-[0.24em] uppercase pt-4 pb-1">Resources</p>
+            <p className="text-paper-dim text-[0.65rem] font-semibold tracking-[0.24em] pt-4 pb-1">Resources</p>
             {resources.map((r) => (
               <Link key={r.path} to={r.path} className="text-paper-dim text-sm py-2" onClick={close}>
                 {r.name}

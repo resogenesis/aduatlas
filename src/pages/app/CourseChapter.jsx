@@ -66,13 +66,13 @@ const CourseChapter = () => {
         <FiArrowLeft /> Back to course
       </Link>
 
-      <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
+      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
         Module {chapter.moduleN} · {chapter.moduleTitle}
         {!isQuiz && (
           <span className="text-paper-dim"> · Chapter {contentPos} of {contentChapters.length}</span>
         )}
       </p>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
+      <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
         {chapter.title}
       </h1>
       <div className="flex items-center gap-2 text-paper-dim text-sm mb-12">
@@ -116,11 +116,7 @@ const CourseChapter = () => {
               <Link
                 to={completed ? `/course/${next.id}` : "#"}
                 onClick={(e) => !completed && e.preventDefault()}
-                className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-colors ${
-                  completed
-                    ? "bg-accent text-accent-fg hover:bg-paper"
-                    : "border border-stroke text-paper-dim/50 cursor-not-allowed"
-                }`}
+                className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-colors ${ completed ?"bg-accent text-accent-fg hover:bg-paper":"border border-stroke text-paper-dim/50 cursor-not-allowed"}`}
               >
                 Next <FiArrowRight />
               </Link>

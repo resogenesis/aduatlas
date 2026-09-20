@@ -8,7 +8,7 @@ export const FormField = ({ label, type = "text", placeholder, required, hint, n
   const controlledProps = onChange ? { value: value ?? "", onChange } : {};
   return (
     <div className="mb-5">
-      <label className="block text-paper text-xs font-medium tracking-[0.15em] uppercase mb-2">
+      <label className="block text-paper text-xs font-medium tracking-[0.15em] mb-2">
         {label}{required && " *"}
       </label>
       <div className="relative">

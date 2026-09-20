@@ -39,8 +39,8 @@ const AdminAdmins = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-2xl mx-auto">
-      <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">Admin</p>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
+      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Admin</p>
+      <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
         Admins
       </h1>
       <p className="text-paper-dim text-sm mb-8">
@@ -91,7 +91,7 @@ const AdminAdmins = () => {
         </button>
       </form>
 
-      <h2 className="text-paper text-xs uppercase tracking-[0.2em] mb-4">Current admins</h2>
+      <h2 className="text-paper text-xs tracking-[0.2em] mb-4">Current admins</h2>
       {!admins && !error && <p className="text-paper-dim">Loading…</p>}
       {admins && (
         <div className="bg-surface-1-solid border border-stroke rounded-2xl divide-y divide-stroke/60">

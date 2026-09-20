@@ -134,7 +134,7 @@ const SectionCard = ({ n, title, blurb, children, defaultOpen = false }) => {
         <span className="text-paper-dim text-sm self-center">{open ? "−" : "+"}</span>
       </button>
       {/* Print shows everything; screen honors the toggle */}
-      <div className={`${open ? "block" : "hidden"} print:block px-5 pb-5`}>
+      <div className={`${open ?"block":"hidden"} print:block px-5 pb-5`}>
         <p className="hidden print:block font-display text-paper text-lg mb-3">{n}. {title}</p>
         {children}
       </div>
@@ -234,7 +234,7 @@ const ModularPrefabEstimate = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-paper-dim text-xs uppercase tracking-[0.12em] border-b border-stroke">
+              <tr className="text-paper-dim text-xs tracking-[0.12em] border-b border-stroke">
                 <th className="px-2 py-3 text-left font-medium min-w-40" />
                 {GCS.map((g) => <th key={g} className="px-2 py-3 text-left font-medium">GC {g + 1}</th>)}
               </tr>
@@ -257,7 +257,7 @@ const ModularPrefabEstimate = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-paper-dim text-xs uppercase tracking-[0.12em] border-b border-stroke">
+              <tr className="text-paper-dim text-xs tracking-[0.12em] border-b border-stroke">
                 <th className="px-2 py-3 text-left font-medium min-w-48" />
                 {GCS.map((g) => (
                   <th key={g} className="px-2 py-3 text-right font-medium">{d[`s6-Company-${g}`] || `GC ${g + 1}`}</th>
@@ -314,7 +314,7 @@ const ModularPrefabEstimate = () => {
         <div className="overflow-x-auto mb-4">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-paper-dim text-xs uppercase tracking-[0.12em] border-b border-stroke">
+              <tr className="text-paper-dim text-xs tracking-[0.12em] border-b border-stroke">
                 <th className="px-2 py-3 text-left font-medium min-w-48" />
                 {GCS.map((g) => (
                   <th key={g} className="px-2 py-3 text-right font-medium">{d[`s6-Company-${g}`] || `GC ${g + 1}`}</th>

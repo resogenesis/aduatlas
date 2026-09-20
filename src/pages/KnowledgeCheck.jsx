@@ -56,10 +56,10 @@ const KnowledgeCheck = () => {
     return (
       <div className="min-h-[80vh] bg-canvas py-16 sm:py-24">
         <div className="container mx-auto px-5 sm:px-8 max-w-2xl">
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-5 text-center">
+          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-5 text-center">
             Your Knowledge Check
           </p>
-          <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-center mb-4">
+          <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-center mb-4">
             You scored <span className="text-accent">{graded.correct}/{graded.total}</span>
           </h1>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed text-center max-w-xl mx-auto mb-12">
@@ -78,10 +78,7 @@ const KnowledgeCheck = () => {
                 >
                   <div className="flex items-start gap-3">
                     <span
-                      className={`shrink-0 mt-0.5 w-6 h-6 rounded-full flex items-center justify-center text-sm ${ r.isCorrect
-                          ? "bg-accent/20 text-accent"
-                          : "bg-red-500/15 text-red-700"
-                      }`}
+                      className={`shrink-0 mt-0.5 w-6 h-6 rounded-full flex items-center justify-center text-sm ${ r.isCorrect ?"bg-accent/20 text-accent":"bg-red-500/15 text-red-700"}`}
                     >
                       {r.isCorrect ? <FiCheck /> : <FiX />}
                     </span>
@@ -104,7 +101,7 @@ const KnowledgeCheck = () => {
           </div>
 
           <div className="bg-accent text-accent-fg rounded-3xl p-8 sm:p-10 text-center">
-            <h2 className="font-display font-medium text-2xl sm:text-3xl leading-tight mb-3">
+            <h2 className="font-display text-2xl sm:text-3xl leading-tight mb-3">
               Close the gaps before you spend a dollar.
             </h2>
             <p className="text-accent-fg/80 text-sm sm:text-base mb-7 max-w-xl mx-auto">
@@ -133,7 +130,7 @@ const KnowledgeCheck = () => {
     <div className="min-h-[80vh] bg-canvas py-16 sm:py-20">
       <div className="container mx-auto px-5 sm:px-8 max-w-2xl">
         <div className="mb-8">
-          <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-paper-dim mb-3">
+          <div className="flex items-center justify-between text-xs tracking-[0.2em] text-paper-dim mb-3">
             <span>Q {step + 1} / {knowledgeQuestions.length}</span>
             <span>{Math.round(progress)}%</span>
           </div>
@@ -143,10 +140,10 @@ const KnowledgeCheck = () => {
         </div>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-12">
-          <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-4">
+          <p className="text-accent text-xs font-medium tracking-[0.2em] mb-4">
             Knowledge Check
           </p>
-          <h2 className="font-display font-medium text-paper text-2xl sm:text-3xl leading-snug tracking-tight mb-7">
+          <h2 className="font-display text-paper text-2xl sm:text-3xl leading-snug tracking-tight mb-7">
             {q.label}
           </h2>
 
@@ -157,10 +154,7 @@ const KnowledgeCheck = () => {
                 <button
                   key={opt.value}
                   onClick={() => setValue(opt.value)}
-                  className={`text-left px-5 py-4 rounded-xl border transition-all ${ selected
-                      ? "border-accent bg-accent text-accent-fg"
-                      : "border-stroke bg-canvas text-paper hover:border-paper-dim"
-                  }`}
+                  className={`text-left px-5 py-4 rounded-xl border transition-all ${ selected ?"border-accent bg-accent text-accent-fg":"border-stroke bg-canvas text-paper hover:border-paper-dim"}`}
                 >
                   {opt.label}
                 </button>
@@ -174,8 +168,7 @@ const KnowledgeCheck = () => {
             <button
               onClick={back}
               disabled={step === 0}
-              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition ${ step === 0 ? "text-stroke cursor-not-allowed" : "text-paper-dim hover:text-paper"
-              }`}
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition ${ step === 0 ?"text-stroke cursor-not-allowed":"text-paper-dim hover:text-paper"}`}
             >
               <FiArrowLeft /> Back
             </button>

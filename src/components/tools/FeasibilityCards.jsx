@@ -15,13 +15,13 @@ const fmt = (n) => Math.round(n).toLocaleString();
 const Tag = ({ prov }) => {
   if (prov === "estimated")
     return (
-      <span className="text-[9px] font-semibold uppercase tracking-wider text-amber-700/90 bg-amber-500/10 border border-amber-500/25 rounded px-1.5 py-0.5">
+      <span className="text-[9px] font-semibold text-amber-700/90 bg-amber-500/10 border border-amber-500/25 rounded px-1.5 py-0.5">
         Estimated
       </span>
     );
   if (prov === "measured")
     return (
-      <span className="text-[9px] font-semibold uppercase tracking-wider text-accent/90 bg-accent/10 border border-accent/25 rounded px-1.5 py-0.5">
+      <span className="text-[9px] font-semibold text-accent/90 bg-accent/10 border border-accent/25 rounded px-1.5 py-0.5">
         From your inputs
       </span>
     );
@@ -41,7 +41,7 @@ const Card = ({ title, prov, children }) => (
 const Row = ({ label, value, accent }) => (
   <div className="flex items-baseline justify-between gap-3 py-0.5">
     <span className="text-paper-dim text-xs">{label}</span>
-    <span className={`tabular-nums text-sm ${accent ? "text-accent font-semibold" : "text-paper"}`}>{value}</span>
+    <span className={`tabular-nums text-sm ${accent ?"text-accent font-semibold":"text-paper"}`}>{value}</span>
   </div>
 );
 

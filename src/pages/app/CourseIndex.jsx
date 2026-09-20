@@ -18,29 +18,23 @@ const ModuleRow = ({ m, done }) => {
   const empty = m.chapters.length === 0;
   return (
     <div
-      className={`bg-surface-1-solid border rounded-2xl overflow-hidden ${ prog.complete ? "border-accent/40" : "border-stroke"
-      }`}
+      className={`bg-surface-1-solid border rounded-2xl overflow-hidden ${ prog.complete ?"border-accent/40":"border-stroke"}`}
     >
       {/* Module header */}
       <AdminEditableSection keys={[`course.module.${m.id}.title`, `course.module.${m.id}.blurb`]} label={`Module ${m.n}`}>
       <div className="flex items-start gap-4 p-5 sm:p-6 border-b border-stroke/70">
         <span
-          className={`shrink-0 w-11 h-11 rounded-xl flex items-center justify-center font-display text-lg ${ prog.complete
-              ? "bg-accent text-accent-fg"
-              : empty
-              ? "bg-canvas border border-stroke text-paper-dim"
-              : "bg-canvas border border-stroke text-paper"
-          }`}
+          className={`shrink-0 w-11 h-11 rounded-xl flex items-center justify-center font-display text-lg ${ prog.complete ?"bg-accent text-accent-fg": empty ?"bg-canvas border border-stroke text-paper-dim":"bg-canvas border border-stroke text-paper"}`}
         >
           {prog.complete ? <FiCheck /> : empty ? <FiLock className="text-sm" /> : m.n}
         </span>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <p className="text-paper-dim text-[11px] font-medium tracking-[0.16em] uppercase">
+            <p className="text-paper-dim text-[11px] font-medium tracking-[0.16em]">
               Module {m.n}
             </p>
             {m.tag && (
-              <span className="text-[10px] font-medium tracking-wider uppercase text-accent border border-accent/40 rounded-full px-2 py-0.5">
+              <span className="text-[10px] font-medium text-accent border border-accent/40 rounded-full px-2 py-0.5">
                 {m.tag}
               </span>
             )}
@@ -75,10 +69,7 @@ const ModuleRow = ({ m, done }) => {
                   className="group flex items-center gap-3 px-5 sm:px-6 py-3.5 hover:bg-canvas/60 transition-colors"
                 >
                   <span
-                    className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[11px] ${ isDone
-                        ? "bg-accent text-accent-fg"
-                        : "bg-canvas border border-stroke text-paper-dim"
-                    }`}
+                    className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[11px] ${ isDone ?"bg-accent text-accent-fg":"bg-canvas border border-stroke text-paper-dim"}`}
                   >
                     {isDone ? <FiCheck /> : isQuiz ? <FiHelpCircle className="text-xs" /> : c.n}
                   </span>
@@ -110,15 +101,15 @@ const CourseIndex = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-4xl mx-auto">
       <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
         <div>
-          <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
+          <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
             The Course
           </p>
-          <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+          <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
             Nine modules. <span className="text-paper-dim">One path.</span>
           </h1>
         </div>
         <div className="text-right">
-          <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-1">Progress</p>
+          <p className="text-paper-dim text-xs tracking-[0.2em] mb-1">Progress</p>
           <p className="font-display text-paper text-4xl">{progress}%</p>
         </div>
       </div>
@@ -132,7 +123,7 @@ const CourseIndex = () => {
           <FiPlay className="text-lg" />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block text-accent text-[11px] font-medium tracking-[0.16em] uppercase">
+          <span className="block text-accent text-[11px] font-medium tracking-[0.16em]">
             Start here
           </span>
           <span className="block font-display text-paper text-xl sm:text-2xl leading-snug mt-0.5">

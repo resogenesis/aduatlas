@@ -34,7 +34,7 @@ const Step = ({ i }) => {
         </span>
       </div>
       <div className="col-span-12 sm:col-span-10">
-        <h3 className="font-display font-medium text-paper text-lg sm:text-xl lg:text-2xl leading-snug mb-2">
+        <h3 className="font-display text-paper text-lg sm:text-xl lg:text-2xl leading-snug mb-2">
           {title}
         </h3>
         <p className="text-paper-dim text-base leading-relaxed max-w-2xl">{desc}</p>
@@ -82,13 +82,13 @@ const HowToAdu = () => {
         <div className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
           <div className="inline-flex items-center gap-2 mb-4 animate-fade-up" style={{ animationDelay: "0ms" }}>
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
-            <span className="text-paper-dim text-xs font-medium tracking-[0.2em] uppercase">
+            <span className="text-paper-dim text-xs font-medium tracking-[0.2em]">
               {heroEyebrow}
             </span>
           </div>
 
           <h1
-            className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight animate-fade-up"
+            className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight animate-fade-up"
             style={{ animationDelay: "100ms" }}
           >
             {heroHeadingPre} <span className="">{heroHeadingEmphasis}</span>
@@ -130,10 +130,10 @@ const HowToAdu = () => {
       >
       <section id="pillars" className="bg-canvas py-16 sm:py-20 border-t border-stroke scroll-mt-20">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
+          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
             {pillarsEyebrow}
           </p>
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight max-w-3xl">
+          <h2 className="font-display text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight max-w-3xl">
             {pillarsHeading}
           </h2>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed mt-5 max-w-2xl">
@@ -158,10 +158,10 @@ const HowToAdu = () => {
       >
       <section id="steps" className="bg-canvas py-16 sm:py-24 border-t border-stroke scroll-mt-20">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
+          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
             {stepsEyebrow}
           </p>
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight max-w-2xl mb-10 sm:mb-12">
+          <h2 className="font-display text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight max-w-2xl mb-10 sm:mb-12">
             {stepsHeading}
           </h2>
 
@@ -179,7 +179,7 @@ const HowToAdu = () => {
       >
       <section className="bg-canvas py-16 sm:py-24 border-t border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-3xl text-center">
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight mb-5">
+          <h2 className="font-display text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight mb-5">
             {closerHeading}
           </h2>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-9">

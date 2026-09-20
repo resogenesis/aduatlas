@@ -93,8 +93,8 @@ const AdminContent = () => {
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-8 sm:py-10 h-screen flex flex-col">
       <div className="mb-6">
-        <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">Admin</p>
-        <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
+        <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Admin</p>
+        <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
           Content
         </h1>
         <p className="text-paper-dim text-sm max-w-2xl">
@@ -115,9 +115,7 @@ const AdminContent = () => {
             <button
               key={p}
               onClick={() => (p === "Course" ? pickPage("Course", "/course") : pickPage(p, PAGE_ROUTES[p]))}
-              className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                p === activePage ? "bg-accent text-accent-fg" : "text-paper-dim hover:text-paper hover:bg-surface-1-solid"
-              }`}
+              className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${ p === activePage ?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper hover:bg-surface-1-solid"}`}
             >
               {p}
             </button>
@@ -133,7 +131,7 @@ const AdminContent = () => {
               </button>
               {courseModules.map((m) => (
                 <div key={m.id}>
-                  <p className="text-[0.65rem] uppercase tracking-wider text-paper-dim/70 mb-1">{m.title}</p>
+                  <p className="text-[0.65rem] text-paper-dim/70 mb-1">{m.title}</p>
                   <div className="space-y-1">
                     {m.chapters.map((c) => (
                       <button

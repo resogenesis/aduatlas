@@ -91,10 +91,10 @@ const FeasibilityStudy = () => (
     {/* Hero */}
     <section className="border-b border-stroke">
       <div className="container mx-auto px-5 sm:px-8 max-w-4xl py-16 sm:py-24 text-center">
-        <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-5">
+        <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-5">
           Tier 3 · Personalized
         </p>
-        <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+        <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
           Personalized Property <span className="">Feasibility Study.</span>
         </h1>
         <p className="text-paper-dim text-lg sm:text-xl mb-2">Understand what may be possible before you build.</p>
@@ -128,7 +128,7 @@ const FeasibilityStudy = () => (
           </p>
         </div>
         <div>
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-tight mb-4">
+          <h2 className="font-display text-paper text-3xl sm:text-4xl leading-tight mb-4">
             Your personalized property drawing.
           </h2>
           <p className="text-paper-dim text-base leading-relaxed mb-6">
@@ -156,7 +156,7 @@ const FeasibilityStudy = () => (
     {/* Six worksheets */}
     <section className="border-t border-stroke">
       <div className="container mx-auto px-5 sm:px-8 max-w-6xl py-14 sm:py-20">
-        <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-tight text-center mb-10">
+        <h2 className="font-display text-paper text-3xl sm:text-4xl leading-tight text-center mb-10">
           Six dynamic worksheets.
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -176,7 +176,7 @@ const FeasibilityStudy = () => (
     {/* Closing CTA */}
     <section className="border-t border-stroke">
       <div className="container mx-auto px-5 sm:px-8 max-w-3xl py-16 sm:py-24 text-center">
-        <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-tight mb-4">
+        <h2 className="font-display text-paper text-3xl sm:text-4xl leading-tight mb-4">
           Learn the process. Understand your property. <span className="">Prepare to move forward.</span>
         </h2>
         <p className="text-paper-dim text-base leading-relaxed max-w-2xl mx-auto mb-8">

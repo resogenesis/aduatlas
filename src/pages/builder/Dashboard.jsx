@@ -20,10 +20,10 @@ const Dashboard = () => {
 
       {/* Welcome strip */}
       <div className="mb-10">
-        <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
+        <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
           Builder portal
         </p>
-        <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+        <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
           Welcome back, <span className="text-paper-dim">{user?.username || "builder"}.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg mt-3 max-w-2xl">
@@ -34,11 +34,11 @@ const Dashboard = () => {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-stroke rounded-2xl overflow-hidden mb-10">
         {cards.map(({ label, value, Icon, hi }) => (
-          <div key={label} className={`bg-surface-1-solid p-5 sm:p-7 ${hi ? "lg:bg-accent" : ""}`}>
-            <div className={`flex items-center gap-2 text-xs uppercase tracking-[0.15em] mb-3 ${hi ? "text-accent-fg/70" : "text-paper-dim"}`}>
+          <div key={label} className={`bg-surface-1-solid p-5 sm:p-7 ${hi ?"lg:bg-accent":""}`}>
+            <div className={`flex items-center gap-2 text-xs tracking-[0.15em] mb-3 ${hi ?"text-accent-fg/70":"text-paper-dim"}`}>
               <Icon /> {label}
             </div>
-            <p className={`font-display text-4xl sm:text-5xl ${hi ? "text-accent-fg lg:text-accent-fg" : "text-paper"}`}>
+            <p className={`font-display text-4xl sm:text-5xl ${hi ?"text-accent-fg lg:text-accent-fg":"text-paper"}`}>
               {value}
             </p>
           </div>
@@ -49,8 +49,8 @@ const Dashboard = () => {
       <div className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-10 mb-6">
         <div className="flex items-end justify-between mb-7 flex-wrap gap-3">
           <div>
-            <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Recent leads</p>
-            <h2 className="font-display font-medium text-paper text-2xl sm:text-3xl">
+            <p className="text-paper-dim text-xs tracking-[0.2em] mb-2">Recent leads</p>
+            <h2 className="font-display text-paper text-2xl sm:text-3xl">
               Your inbox
             </h2>
           </div>
@@ -76,7 +76,7 @@ const Dashboard = () => {
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="font-display text-paper text-base sm:text-lg">{lead.homeowner}</h3>
                   {lead.status === "new" && (
-                    <span className="text-[0.65rem] font-semibold bg-accent text-accent-fg rounded-full px-2 py-0.5 uppercase tracking-wider">
+                    <span className="text-[0.65rem] font-semibold bg-accent text-accent-fg rounded-full px-2 py-0.5">
                       New
                     </span>
                   )}
@@ -96,10 +96,10 @@ const Dashboard = () => {
 
       {/* Coming soon callout */}
       <div className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-10">
-        <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
+        <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
           What's next
         </p>
-        <h2 className="font-display font-medium text-paper text-xl sm:text-2xl leading-snug mb-3">
+        <h2 className="font-display text-paper text-xl sm:text-2xl leading-snug mb-3">
           Per-lead pricing rolls out after the pilot.
         </h2>
         <p className="text-paper-dim text-sm sm:text-base leading-relaxed max-w-2xl">

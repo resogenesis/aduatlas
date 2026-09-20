@@ -10,10 +10,10 @@ const PublicStubFooter = ({ chapterName }) => {
         </p>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] uppercase mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium tracking-[0.2em] mb-6">
             <FiLock /> {chapterName ? `${chapterName} · locked` : "Locked"}
           </div>
-          <h3 className="font-display font-medium text-paper text-2xl sm:text-3xl leading-snug tracking-tight mb-4">
+          <h3 className="font-display text-paper text-2xl sm:text-3xl leading-snug tracking-tight mb-4">
             The full step by step is inside the ADU system.
           </h3>
           <p className="text-paper-dim text-sm sm:text-base leading-relaxed mb-8 max-w-md mx-auto">

@@ -26,7 +26,7 @@ const STATUS = {
 };
 
 const Badge = ({ status }) => (
-  <span className={`inline-block shrink-0 text-[0.6rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border ${STATUS[status].cls}`}>
+  <span className={`inline-block shrink-0 text-[0.6rem] font-semibold px-2 py-0.5 rounded-full border ${STATUS[status].cls}`}>
     {STATUS[status].label}
   </span>
 );
@@ -142,10 +142,10 @@ const PropertyReport = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto print-sheet">
       <WorksheetBar savedAt={null} />
 
-      <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
+      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
         Property Feasibility Report
       </p>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
+      <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
         {addr || "Your property."}
       </h1>
       <p className="text-paper-dim text-sm mb-2">Generated {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
@@ -255,7 +255,7 @@ const PropertyReport = () => {
         {nape.answered > 0 ? (
           <>
             <div className="flex items-baseline gap-4 mb-4">
-              <span className={`font-display text-5xl ${nape.grade === "F" ? "text-red-700" : "text-accent"}`}>
+              <span className={`font-display text-5xl ${nape.grade ==="F"?"text-red-700":"text-accent"}`}>
                 {nape.complete ? nape.grade : "–"}
               </span>
               <span className="text-paper text-lg">{nape.points}/100 points</span>

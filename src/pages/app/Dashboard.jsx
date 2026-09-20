@@ -87,12 +87,12 @@ const Dashboard = () => {
           <ol>
             {steps.map((s, i) => (
               <li key={s.key} className="flex items-center gap-4 py-4 border-t border-stroke first:border-t-0">
-                <span className={`shrink-0 w-8 h-8 rounded-full inline-flex items-center justify-center text-sm ${s.done ? "bg-accent text-accent-fg" : i === nextIndex ? "border-2 border-accent text-accent font-semibold" : "border border-stroke text-paper-dim"}`}>
+                <span className={`shrink-0 w-8 h-8 rounded-full inline-flex items-center justify-center text-sm ${s.done ?"bg-accent text-accent-fg": i === nextIndex ?"border-2 border-accent text-accent font-semibold":"border border-stroke text-paper-dim"}`}>
                   {s.done ? <FiCheck /> : i + 1}
                 </span>
-                <span className={`flex-1 text-sm sm:text-base ${s.done ? "text-paper-dim line-through" : "text-paper"}`}>{s.label}</span>
+                <span className={`flex-1 text-sm sm:text-base ${s.done ?"text-paper-dim line-through":"text-paper"}`}>{s.label}</span>
                 {!s.done && (
-                  <Link to={s.to} className={`shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition ${i === nextIndex ? "bg-accent text-accent-fg hover:bg-accent-dim" : "border border-stroke text-paper-dim hover:text-paper"}`}>
+                  <Link to={s.to} className={`shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition ${i === nextIndex ?"bg-accent text-accent-fg hover:bg-accent-dim":"border border-stroke text-paper-dim hover:text-paper"}`}>
                     {s.cta} <FiArrowRight />
                   </Link>
                 )}

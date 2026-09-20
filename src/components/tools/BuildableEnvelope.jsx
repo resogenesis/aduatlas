@@ -140,7 +140,7 @@ const BuildableEnvelope = () => {
 
       {/* Address auto-fill */}
       <div className="mb-6">
-        <label className="block text-paper-dim text-[11px] font-medium tracking-[0.12em] uppercase mb-1.5">
+        <label className="block text-paper-dim text-[11px] font-medium tracking-[0.12em] mb-1.5">
           Auto-fill from address
         </label>
         <div className="flex gap-2">
@@ -167,7 +167,7 @@ const BuildableEnvelope = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
         {NUM_FIELDS.map((f) => (
           <div key={f.key}>
-            <label className="block text-paper-dim text-[11px] font-medium tracking-[0.12em] uppercase mb-1.5">
+            <label className="block text-paper-dim text-[11px] font-medium tracking-[0.12em] mb-1.5">
               {f.label}
             </label>
             <div className="flex items-center gap-1.5">
@@ -200,13 +200,7 @@ const BuildableEnvelope = () => {
                     disabled={disabled}
                     onClick={() => setView(tab.key)}
                     title={disabled ? "Look up an address to enable satellite" : undefined}
-                    className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
-                      on
-                        ? "bg-accent text-accent-fg"
-                        : disabled
-                        ? "text-paper-dim/40 cursor-not-allowed"
-                        : "text-paper-dim hover:text-paper"
-                    }`}
+                    className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${ on ?"bg-accent text-accent-fg": disabled ?"text-paper-dim/40 cursor-not-allowed":"text-paper-dim hover:text-paper"}`}
                   >
                     {tab.label}
                   </button>
@@ -281,11 +275,7 @@ const Chip = ({ on, onClick, children }) => (
   <button
     type="button"
     onClick={onClick}
-    className={`px-2.5 py-1 rounded-md text-[11px] font-medium border transition-colors ${
-      on
-        ? "bg-accent/15 border-accent/40 text-accent"
-        : "bg-canvas border-stroke text-paper-dim hover:text-paper"
-    }`}
+    className={`px-2.5 py-1 rounded-md text-[11px] font-medium border transition-colors ${ on ?"bg-accent/15 border-accent/40 text-accent":"bg-canvas border-stroke text-paper-dim hover:text-paper"}`}
   >
     {children}
   </button>

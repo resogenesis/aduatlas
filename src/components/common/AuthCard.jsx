@@ -15,11 +15,11 @@ const AuthCard = ({ title, subtitle, children, footer, eyebrow }) => {
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-10">
           <div className="text-center mb-8">
             {eyebrow && (
-              <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
+              <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
                 {eyebrow}
               </p>
             )}
-            <h1 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-tight tracking-tight">
+            <h1 className="font-display text-paper text-3xl sm:text-4xl leading-tight tracking-tight">
               {title}
             </h1>
             {subtitle && <p className="mt-3 text-paper-dim text-sm sm:text-base leading-relaxed">{subtitle}</p>}

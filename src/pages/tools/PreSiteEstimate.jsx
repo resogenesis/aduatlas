@@ -31,7 +31,7 @@ const PreSiteEstimate = () => {
       <div className="overflow-x-auto bg-surface-1-solid rounded-2xl border border-stroke mb-10">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-paper-dim text-xs uppercase tracking-[0.12em] border-b border-stroke">
+            <tr className="text-paper-dim text-xs tracking-[0.12em] border-b border-stroke">
               <th className="px-4 py-4 text-left font-medium">Utility</th>
               <th className="px-3 py-4 text-right font-medium">Distance (LF)</th>
               <th className="px-3 py-4 text-right font-medium">Depth (ft)</th>
@@ -63,7 +63,7 @@ const PreSiteEstimate = () => {
       <div className="overflow-x-auto bg-surface-1-solid rounded-2xl border border-stroke mb-6">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-paper-dim text-xs uppercase tracking-[0.12em] border-b border-stroke">
+            <tr className="text-paper-dim text-xs tracking-[0.12em] border-b border-stroke">
               <th className="px-4 py-4 text-left font-medium">Item</th>
               <th className="px-3 py-4 text-right font-medium">Quantity</th>
               <th className="px-3 py-4 text-left font-medium">Unit</th>

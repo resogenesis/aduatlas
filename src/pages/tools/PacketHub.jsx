@@ -68,10 +68,10 @@ const PacketHub = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-6xl mx-auto">
-      <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
+      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
         {isReport ? "Property Feasibility Report" : "Planning worksheets"}
       </p>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
+      <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
         {isReport ? "Your report packet." : "Your planning worksheets."}
       </h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-4">
@@ -92,7 +92,7 @@ const PacketHub = () => {
           report applies their property + regulations for them. */}
       {!isReport && (
         <div className="bg-accent text-accent-fg rounded-3xl p-6 sm:p-8 mb-6">
-          <h2 className="font-display font-medium text-2xl sm:text-3xl leading-tight mb-2">
+          <h2 className="font-display text-2xl sm:text-3xl leading-tight mb-2">
             Want these filled in for your property?
           </h2>
           <p className="text-accent-fg/80 text-sm sm:text-base max-w-2xl mb-4">
@@ -198,9 +198,7 @@ const Card = ({ to, Icon, title, desc, status, done, locked }) => (
   >
     <div className="flex items-center justify-between mb-4">
       <Icon className="text-accent text-2xl" />
-      <span className={`inline-flex items-center gap-1.5 text-[0.65rem] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${
-        locked ? "text-paper-dim border-stroke" : done ? "text-accent border-accent/40 bg-accent/10" : "text-paper-dim border-stroke"
-      }`}>
+      <span className={`inline-flex items-center gap-1.5 text-[0.65rem] font-semibold px-2.5 py-1 rounded-full border ${ locked ?"text-paper-dim border-stroke": done ?"text-accent border-accent/40 bg-accent/10":"text-paper-dim border-stroke"}`}>
         {locked && <FiLock className="text-[0.6rem]" />}
         {status}
       </span>

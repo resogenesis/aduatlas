@@ -52,9 +52,9 @@ const Support = () => {
           <ul className="space-y-3 flex-1 mb-5 max-h-[50vh] overflow-y-auto pr-1">
             {messages.length === 0 && <li className="text-paper-dim text-sm">No messages yet. Ask your first question below.</li>}
             {messages.map((m) => (
-              <li key={m.id} className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${m.author === "homeowner" ? "ml-auto bg-accent text-accent-fg" : "bg-canvas border border-stroke text-paper"}`}>
+              <li key={m.id} className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${m.author ==="homeowner"?"ml-auto bg-accent text-accent-fg":"bg-canvas border border-stroke text-paper"}`}>
                 <p className="whitespace-pre-line">{m.body}</p>
-                <p className={`mt-1 text-[0.65rem] ${m.author === "homeowner" ? "text-accent-fg/70" : "text-paper-dim"}`}>
+                <p className={`mt-1 text-[0.65rem] ${m.author ==="homeowner"?"text-accent-fg/70":"text-paper-dim"}`}>
                   {m.author === "homeowner" ? "You" : "ADUAtlas"} · {new Date(m.created_at).toLocaleString()}
                 </p>
               </li>

@@ -40,8 +40,8 @@ const Leads = () => {
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-6xl mx-auto">
 
-      <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">Leads</p>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-3">
+      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Leads</p>
+      <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-3">
         Qualified Builder Packets.
       </h1>
       <p className="text-paper-dim text-base sm:text-lg mb-10 max-w-2xl">
@@ -55,9 +55,7 @@ const Leads = () => {
             <button
               key={f.id}
               onClick={() => setFilter(f.id)}
-              className={`px-4 py-2 rounded-full text-xs font-medium tracking-wider uppercase transition cursor-pointer ${
-                filter === f.id ? "bg-accent text-accent-fg" : "text-paper-dim hover:text-paper"
-              }`}
+              className={`px-4 py-2 rounded-full text-xs font-medium transition cursor-pointer ${ filter === f.id ?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper"}`}
             >
               {f.label}
             </button>
@@ -102,7 +100,7 @@ const Leads = () => {
                   <div className="col-span-7 sm:col-span-4 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       <h3 className="font-display text-paper text-base">{lead.homeowner}</h3>
-                      <span className={`text-[0.65rem] font-semibold rounded-full px-2 py-0.5 uppercase tracking-wider ${badge.className}`}>
+                      <span className={`text-[0.65rem] font-semibold rounded-full px-2 py-0.5 ${badge.className}`}>
                         {badge.text}
                       </span>
                     </div>

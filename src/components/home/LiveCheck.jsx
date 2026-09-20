@@ -83,20 +83,14 @@ const LiveCheck = () => {
             return (
               <li key={`${sample}-${i}`} className="relative h-6 flex items-center">
                 <span
-                  className={`absolute inset-y-1.5 left-0 right-6 rounded bg-white/10 animate-pulse transition-opacity duration-300 ${
-                    visible ? "opacity-0" : "opacity-100"
-                  }`}
+                  className={`absolute inset-y-1.5 left-0 right-6 rounded bg-white/10 animate-pulse transition-opacity duration-300 ${ visible ?"opacity-0":"opacity-100"}`}
                   aria-hidden
                 />
                 <span
-                  className={`flex items-center gap-2.5 text-xs sm:text-[0.8rem] w-full transition-all duration-500 ${
-                    visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
-                  }`}
+                  className={`flex items-center gap-2.5 text-xs sm:text-[0.8rem] w-full transition-all duration-500 ${ visible ?"opacity-100 translate-y-0":"opacity-0 translate-y-1"}`}
                 >
                   <span
-                    className={`w-5 h-5 rounded-full inline-flex items-center justify-center shrink-0 ${
-                      r.ok ? "bg-white/15 text-gold" : "bg-gold/20 text-gold"
-                    }`}
+                    className={`w-5 h-5 rounded-full inline-flex items-center justify-center shrink-0 ${ r.ok ?"bg-white/15 text-gold":"bg-gold/20 text-gold"}`}
                   >
                     {r.ok ? <FiCheck className="text-[0.7rem]" aria-hidden /> : <FiAlertCircle className="text-[0.7rem]" aria-hidden />}
                   </span>
@@ -108,9 +102,7 @@ const LiveCheck = () => {
           })}
         </ul>
         <div
-          className={`mt-3 pt-3 border-t border-white/10 flex items-center justify-between gap-3 transition-all duration-500 ${
-            done ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
-          }`}
+          className={`mt-3 pt-3 border-t border-white/10 flex items-center justify-between gap-3 transition-all duration-500 ${ done ?"opacity-100 translate-y-0":"opacity-0 translate-y-1"}`}
         >
           <span className="inline-flex items-center gap-2 text-sm font-semibold">
             <span className="w-2 h-2 rounded-full bg-gold" aria-hidden />

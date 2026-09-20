@@ -195,7 +195,7 @@ const Detail = ({ study, onClose, onChanged }) => {
           <ul className="space-y-2 mb-4 max-h-64 overflow-y-auto">
             {messages.length === 0 && <li className="text-paper-dim text-sm">No messages.</li>}
             {messages.map((m) => (
-              <li key={m.id} className={`max-w-[85%] rounded-xl px-3 py-2 text-sm ${m.author === "admin" ? "ml-auto bg-accent/15 text-paper" : "bg-surface-1-solid text-paper"}`}>
+              <li key={m.id} className={`max-w-[85%] rounded-xl px-3 py-2 text-sm ${m.author ==="admin"?"ml-auto bg-accent/15 text-paper":"bg-surface-1-solid text-paper"}`}>
                 <p className="whitespace-pre-line">{m.body}</p>
                 <p className="text-[0.65rem] text-paper-dim mt-1">{m.author} · {new Date(m.created_at).toLocaleString()}</p>
               </li>
@@ -239,12 +239,12 @@ const AdminStudies = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-8 sm:py-10">
       <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
         <div>
-          <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">Admin</p>
+          <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Admin</p>
           <h1 className="font-primary font-extrabold tracking-tight text-paper text-4xl sm:text-5xl leading-[1.05]">Feasibility studies</h1>
         </div>
         <div className="flex items-center gap-2">
           {["open", "ready", "all"].map((f) => (
-            <button key={f} onClick={() => setFilter(f)} className={`px-3 py-1.5 rounded-full text-xs font-medium ${filter === f ? "bg-accent text-accent-fg" : "text-paper-dim hover:text-paper border border-stroke"}`}>
+            <button key={f} onClick={() => setFilter(f)} className={`px-3 py-1.5 rounded-full text-xs font-medium ${filter === f ?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper border border-stroke"}`}>
               {f === "open" ? "Open" : f === "ready" ? "Ready" : "All"}
             </button>
           ))}

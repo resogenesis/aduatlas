@@ -15,7 +15,7 @@ const Stat = ({ i }) => {
   return (
     <div ref={ref} className="px-5 sm:px-7 py-7 bg-surface-1-solid">
       <p className="font-display text-paper text-3xl sm:text-4xl mb-2">{n}</p>
-      <p className="text-paper-dim text-xs uppercase tracking-[0.15em] leading-relaxed">{label}</p>
+      <p className="text-paper-dim text-xs tracking-[0.15em] leading-relaxed">{label}</p>
     </div>
   );
 };
@@ -34,10 +34,10 @@ const Chapter = ({ i, isLast }) => {
     <article ref={ref} className="grid lg:grid-cols-12 gap-6 lg:gap-12 py-12 sm:py-16 border-t border-stroke">
       <div className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start">
         <span className="font-display text-accent text-5xl sm:text-6xl block mb-3">{CHAPTER_N[i]}</span>
-        <p className="text-paper-dim text-xs font-medium tracking-[0.2em] uppercase">{eyebrow}</p>
+        <p className="text-paper-dim text-xs font-medium tracking-[0.2em]">{eyebrow}</p>
       </div>
       <div className="lg:col-span-8">
-        <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl lg:text-5xl leading-[1.1] tracking-tight mb-6">
+        <h2 className="font-display text-paper text-3xl sm:text-4xl lg:text-5xl leading-[1.1] tracking-tight mb-6">
           {title}
         </h2>
         <div className="space-y-5 text-paper-dim text-base sm:text-lg leading-relaxed">
@@ -80,11 +80,11 @@ const About = () => {
         <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 w-[40rem] h-[40rem] rounded-full bg-accent/5 blur-3xl animate-drift-glow" style={{ animationDelay: "-7s" }} />
 
         <div ref={heroRef} className="relative container mx-auto px-5 sm:px-8 max-w-5xl">
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-5 animate-fade-up" style={{ animationDelay: "0ms" }}>
+          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-5 animate-fade-up" style={{ animationDelay: "0ms" }}>
             {heroEyebrow}
           </p>
           <h1
-            className="font-display font-medium text-paper text-[2.6rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.02] tracking-tight max-w-4xl animate-fade-up"
+            className="font-display text-paper text-[2.6rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.02] tracking-tight max-w-4xl animate-fade-up"
             style={{ animationDelay: "120ms" }}
           >
             {heroHeadingPre} <span className="text-paper-dim">{heroHeadingEmphasis}</span>
@@ -134,10 +134,10 @@ const About = () => {
           <div aria-hidden className="pointer-events-none absolute inset-0">
             <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-canvas/10 blur-3xl" />
           </div>
-          <p className="relative text-accent-fg/70 text-xs font-medium tracking-[0.2em] uppercase mb-5">
+          <p className="relative text-accent-fg/70 text-xs font-medium tracking-[0.2em] mb-5">
             {closingEyebrow}
           </p>
-          <h2 className="relative font-display font-medium text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+          <h2 className="relative font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
             {closingHeading}
           </h2>
           <p className="relative text-accent-fg/80 text-base sm:text-lg max-w-xl mx-auto mb-8 leading-relaxed">

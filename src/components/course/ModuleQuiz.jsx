@@ -65,9 +65,7 @@ const ModuleQuiz = ({ quiz, onComplete, completed }) => {
                       type="button"
                       disabled={submitted}
                       onClick={() => setPicked((p) => ({ ...p, [i]: oi }))}
-                      className={`flex items-center justify-between gap-3 text-left text-sm px-4 py-2.5 rounded-lg border transition-colors ${cls} ${
-                        submitted ? "cursor-default" : ""
-                      }`}
+                      className={`flex items-center justify-between gap-3 text-left text-sm px-4 py-2.5 rounded-lg border transition-colors ${cls} ${ submitted ?"cursor-default":""}`}
                     >
                       <span>
                         <span className="text-paper-dim/60 mr-2">
@@ -98,7 +96,7 @@ const ModuleQuiz = ({ quiz, onComplete, completed }) => {
         <div className="mt-8 bg-surface-1-solid border border-stroke rounded-2xl p-5 sm:p-6">
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div>
-              <p className="text-paper-dim text-xs uppercase tracking-[0.16em] mb-1">Your score</p>
+              <p className="text-paper-dim text-xs tracking-[0.16em] mb-1">Your score</p>
               <p className="font-display text-paper text-3xl">
                 {score}
                 <span className="text-paper-dim text-xl"> / {total}</span>
@@ -117,7 +115,7 @@ const ModuleQuiz = ({ quiz, onComplete, completed }) => {
           </div>
           {quiz.takeaway && (
             <div className="mt-5 pt-5 border-t border-stroke">
-              <p className="text-accent text-xs font-medium tracking-[0.16em] uppercase mb-2">
+              <p className="text-accent text-xs font-medium tracking-[0.16em] mb-2">
                 Key takeaway
               </p>
               <p className="text-paper-dim text-sm leading-relaxed">{quiz.takeaway}</p>

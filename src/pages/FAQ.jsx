@@ -32,7 +32,7 @@ const FAQ = () => {
       <AdminEditableSection keys={["faq.hero.eyebrow", "faq.hero.heading", "faq.hero.body"]} label="Hero">
       <section className="bg-canvas py-12 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 max-w-3xl text-center">
-          <p className="text-accent font-semibold tracking-[0.2em] text-xs sm:text-sm mb-3 uppercase">
+          <p className="text-accent font-semibold tracking-[0.2em] text-xs sm:text-sm mb-3">
             {eyebrow}
           </p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-paper leading-tight">

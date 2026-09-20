@@ -29,10 +29,10 @@ const Results = () => {
     <div className="min-h-[80vh] bg-canvas py-16 sm:py-24">
       <div className="container mx-auto px-5 sm:px-8 max-w-3xl">
 
-        <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-5 text-center">
+        <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-5 text-center">
           Reality Check Results
         </p>
-        <h1 className="font-display font-medium text-paper text-3xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-center mb-4">
+        <h1 className="font-display text-paper text-3xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-center mb-4">
           Your score: <span className="text-accent">{score}%</span>
           <br className="hidden sm:block" />
           <span className="text-paper-dim">Here's what you're missing.</span>
@@ -54,14 +54,14 @@ const Results = () => {
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="font-display font-medium text-paper text-6xl leading-none">{score}</span>
-                <span className="text-paper-dim text-xs uppercase tracking-[0.2em] mt-2">/ 100</span>
+                <span className="font-display text-paper text-6xl leading-none">{score}</span>
+                <span className="text-paper-dim text-xs tracking-[0.2em] mt-2">/ 100</span>
               </div>
             </div>
 
             <div className="flex-1 text-center sm:text-left">
-              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">Result</p>
-              <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl mb-4">
+              <p className="text-paper-dim text-xs tracking-[0.2em] mb-2">Result</p>
+              <h2 className="font-display text-paper text-3xl sm:text-4xl mb-4">
                 {band}
               </h2>
               <p className="text-paper-dim text-sm sm:text-base leading-relaxed">
@@ -72,7 +72,7 @@ const Results = () => {
         </div>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-12 mb-6">
-          <h3 className="font-display font-medium text-paper text-xl sm:text-2xl mb-6">
+          <h3 className="font-display text-paper text-xl sm:text-2xl mb-6">
             What we found about your situation
           </h3>
           <ul className="space-y-5">
@@ -88,10 +88,10 @@ const Results = () => {
         </div>
 
         <div className="bg-accent text-accent-fg rounded-3xl p-8 sm:p-12">
-          <div className="inline-flex items-center gap-2 mb-4 text-xs font-semibold tracking-[0.2em] uppercase">
+          <div className="inline-flex items-center gap-2 mb-4 text-xs font-semibold tracking-[0.2em]">
             <FiLock /> Locked
           </div>
-          <h3 className="font-display font-medium text-3xl sm:text-4xl leading-tight mb-4">
+          <h3 className="font-display text-3xl sm:text-4xl leading-tight mb-4">
             Sign Up for ADU Build Prepared.
           </h3>
           <p className="text-accent-fg/80 mb-7 text-sm sm:text-base leading-relaxed max-w-xl">

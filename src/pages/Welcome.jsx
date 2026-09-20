@@ -111,7 +111,7 @@ const Welcome = () => {
           <div className="w-20 h-20 mx-auto rounded-full bg-surface-1-solid border border-stroke flex items-center justify-center mb-7">
             <FiInfo className="text-paper-dim text-4xl" />
           </div>
-          <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+          <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
             {status === "checking" ? "Confirming your purchase…" : "No active purchase found."}
           </h1>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
@@ -150,7 +150,7 @@ const Welcome = () => {
           <FiCheckCircle className="text-accent text-4xl" />
         </div>
 
-        <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+        <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
           You're in.
         </h1>
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-12 max-w-xl mx-auto">
@@ -160,7 +160,7 @@ const Welcome = () => {
         </p>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-10 text-left mb-10">
-          <h3 className="text-paper text-xs uppercase tracking-[0.2em] mb-6">Your next 3 steps</h3>
+          <h3 className="text-paper text-xs tracking-[0.2em] mb-6">Your next 3 steps</h3>
           <ol className="space-y-6">
             {[
               { n: "01", t: "Start Module 1: How to ADU", d: "Process, timelines, and the foundation everything else builds on." },

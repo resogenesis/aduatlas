@@ -42,10 +42,10 @@ const PreSiteVerification = () => {
               <div className="flex-1 min-w-0">
                 <p className="text-paper text-sm font-medium leading-relaxed">{s.item}</p>
                 <p className="text-paper-dim text-xs mt-1">
-                  <span className="text-paper-dim/70 uppercase tracking-wider text-[0.65rem]">Contact:</span> {s.who}
+                  <span className="text-paper-dim/70 text-[0.65rem]">Contact:</span> {s.who}
                 </p>
                 <p className="text-paper-dim text-xs mt-0.5">
-                  <span className="text-paper-dim/70 uppercase tracking-wider text-[0.65rem]">Record:</span> {s.record}
+                  <span className="text-paper-dim/70 text-[0.65rem]">Record:</span> {s.record}
                 </p>
                 <div className="grid sm:grid-cols-[10rem_1fr] gap-3 mt-3">
                   <TextCell placeholder="Date completed" value={d[`step${s.n}-date`]} onChange={(v) => set(`step${s.n}-date`, v)} />

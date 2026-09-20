@@ -93,7 +93,7 @@ const Feasibility = () => {
       </div>
 
       <section className="container mx-auto px-5 sm:px-8 pb-12 sm:pb-16 pt-14 max-w-3xl">
-        <h3 className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-1">
+        <h3 className="text-accent text-xs font-medium tracking-[0.2em] mb-1">
           Readiness checklist
         </h3>
         <p className="text-paper-dim text-sm mb-6">
@@ -102,7 +102,7 @@ const Feasibility = () => {
 
         {groups.map((group, gi) => (
           <div key={group.title} className="mb-10">
-            <h3 className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-4">
+            <h3 className="text-accent text-xs font-medium tracking-[0.2em] mb-4">
               {group.title}
             </h3>
             <div className="flex flex-col gap-3">
@@ -120,11 +120,7 @@ const Feasibility = () => {
                         <button
                           key={opt.value}
                           onClick={() => setAnswers((a) => ({ ...a, [key]: opt.value }))}
-                          className={`px-4 py-1.5 text-xs font-semibold rounded-full border transition-colors ${
-                            current === opt.value
-                              ? opt.on
-                              : "bg-canvas border-stroke text-paper-dim hover:text-paper hover:border-paper-dim"
-                          }`}
+                          className={`px-4 py-1.5 text-xs font-semibold rounded-full border transition-colors ${ current === opt.value ? opt.on :"bg-canvas border-stroke text-paper-dim hover:text-paper hover:border-paper-dim"}`}
                         >
                           {opt.label}
                         </button>
@@ -139,7 +135,7 @@ const Feasibility = () => {
 
         {/* Score card */}
         <div className="bg-surface-1-solid rounded-3xl border border-stroke p-8 sm:p-10 text-center">
-          <h3 className="text-paper text-xs uppercase tracking-[0.2em] mb-2">
+          <h3 className="text-paper text-xs tracking-[0.2em] mb-2">
             Your Feasibility Score
           </h3>
           <div className="font-display text-accent text-6xl my-3">
@@ -158,7 +154,7 @@ const Feasibility = () => {
         </div>
 
         {/* Interpretation */}
-        <h4 className="mt-10 mb-3 text-paper text-xs uppercase tracking-[0.2em]">
+        <h4 className="mt-10 mb-3 text-paper text-xs tracking-[0.2em]">
           What the score means
         </h4>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs mb-6">

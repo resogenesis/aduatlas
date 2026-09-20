@@ -39,8 +39,8 @@ const AdminUsers = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto">
-      <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">Admin</p>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
+      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Admin</p>
+      <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
         Users
       </h1>
       <p className="text-paper-dim text-sm mb-8">
@@ -59,7 +59,7 @@ const AdminUsers = () => {
         <div className="overflow-x-auto bg-surface-1-solid border border-stroke rounded-2xl">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-paper-dim text-xs uppercase tracking-[0.15em] border-b border-stroke">
+              <tr className="text-paper-dim text-xs tracking-[0.15em] border-b border-stroke">
                 <th className="px-4 py-3 text-left font-medium">Email</th>
                 <th className="px-4 py-3 text-left font-medium">Role</th>
                 <th className="px-4 py-3 text-left font-medium">Paid tier</th>
@@ -68,7 +68,7 @@ const AdminUsers = () => {
             </thead>
             <tbody>
               {users.map((u) => (
-                <tr key={u.id} className={`border-b border-stroke/60 last:border-0 ${busy === u.id ? "opacity-50" : ""}`}>
+                <tr key={u.id} className={`border-b border-stroke/60 last:border-0 ${busy === u.id ?"opacity-50":""}`}>
                   <td className="px-4 py-3 text-paper">{u.email}</td>
                   <td className="px-4 py-3">
                     <select

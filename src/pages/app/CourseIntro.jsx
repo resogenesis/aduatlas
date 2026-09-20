@@ -15,10 +15,10 @@ const CourseIntro = () => {
       <FiArrowLeft /> Back to course
     </Link>
 
-    <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
+    <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
       Start here
     </p>
-    <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
+    <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
       Welcome to ADUAtlas.
     </h1>
     <div className="flex items-center gap-2 text-paper-dim text-sm mb-12">

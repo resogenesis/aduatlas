@@ -59,7 +59,7 @@ const ModuleCard = ({ meta, i }) => {
           {meta.n}
         </span>
         {meta.hasTag && (
-          <span className="text-[10px] sm:text-xs font-medium tracking-wider uppercase text-accent border border-accent/40 rounded-full px-2.5 py-1">
+          <span className="text-[10px] sm:text-xs font-medium text-accent border border-accent/40 rounded-full px-2.5 py-1">
             {tag}
           </span>
         )}
@@ -144,10 +144,10 @@ const CourseOutline = () => {
       <section className="pt-28 sm:pt-32 lg:pt-40 pb-14 sm:pb-20 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
           <div ref={headRef}>
-            <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
+            <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
               {heroEyebrow}
             </p>
-            <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight max-w-3xl">
+            <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight max-w-3xl">
               {heroHeading}
             </h1>
             <p className="mt-6 text-paper-dim text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed">
@@ -161,21 +161,21 @@ const CourseOutline = () => {
             className="mt-10 sm:mt-12 grid sm:grid-cols-3 gap-px bg-stroke border border-stroke rounded-2xl overflow-hidden"
           >
             <div className="bg-surface-1-solid p-6 sm:p-7">
-              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">{strip0Label}</p>
+              <p className="text-paper-dim text-xs tracking-[0.2em] mb-2">{strip0Label}</p>
               <p className="font-display text-paper text-3xl sm:text-4xl">{strip0Value}</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
                 {strip0Desc}
               </p>
             </div>
             <div className="bg-surface-1-solid p-6 sm:p-7">
-              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">{strip1Label}</p>
+              <p className="text-paper-dim text-xs tracking-[0.2em] mb-2">{strip1Label}</p>
               <p className="font-display text-paper text-3xl sm:text-4xl">{strip1Value}</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
                 {strip1Desc}
               </p>
             </div>
             <div className="bg-surface-1-solid p-6 sm:p-7">
-              <p className="text-paper-dim text-xs uppercase tracking-[0.2em] mb-2">{strip2Label}</p>
+              <p className="text-paper-dim text-xs tracking-[0.2em] mb-2">{strip2Label}</p>
               <p className="font-display text-paper text-3xl sm:text-4xl">{strip2Value}</p>
               <p className="text-paper-dim text-sm mt-2 leading-snug">
                 {strip2Desc}
@@ -198,10 +198,10 @@ const CourseOutline = () => {
       >
       <section className="py-16 sm:py-20 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
+          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
             {includesEyebrow}
           </p>
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-snug tracking-tight mb-10 max-w-2xl">
+          <h2 className="font-display text-paper text-3xl sm:text-4xl leading-snug tracking-tight mb-10 max-w-2xl">
             {includesHeading}
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
@@ -221,10 +221,10 @@ const CourseOutline = () => {
       >
       <section className="py-16 sm:py-24 border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
-          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
+          <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
             {modulesEyebrow}
           </p>
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl leading-snug tracking-tight mb-10 max-w-2xl">
+          <h2 className="font-display text-paper text-3xl sm:text-4xl leading-snug tracking-tight mb-10 max-w-2xl">
             {modulesHeading}
           </h2>
 
@@ -257,7 +257,7 @@ const CourseOutline = () => {
             ref={ideaRef}
             className="bg-surface-1-solid border border-stroke rounded-2xl p-7 sm:p-10"
           >
-            <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
+            <p className="text-accent text-xs sm:text-sm font-medium tracking-[0.2em] mb-4">
               {ideaEyebrow}
             </p>
             <p className="font-display text-paper text-2xl sm:text-3xl leading-snug tracking-tight max-w-3xl">

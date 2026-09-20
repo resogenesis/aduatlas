@@ -39,9 +39,7 @@ const PlanCard = ({ i, featuredLabel }) => {
   return (
     <li
       ref={ref}
-      className={`relative rounded-[1.5rem] p-7 sm:p-8 flex flex-col ${
-        featured ? "bg-forest-deep text-white shadow-[0_40px_80px_-40px_rgba(31,68,50,0.7)] lg:-my-4" : "bg-canvas border border-stroke"
-      }`}
+      className={`relative rounded-[1.5rem] p-7 sm:p-8 flex flex-col ${ featured ?"bg-forest-deep text-white shadow-[0_40px_80px_-40px_rgba(31,68,50,0.7)] lg:-my-4":"bg-canvas border border-stroke"}`}
     >
       <div className="flex items-center justify-between mb-6">
         <p className={`text-base font-semibold ${ink}`}>{name}</p>
@@ -52,15 +50,13 @@ const PlanCard = ({ i, featuredLabel }) => {
       <ul className="space-y-3 flex-1">
         {bullets.map((b, j) => (
           <li key={j} className={`flex items-start gap-2.5 text-sm leading-snug ${ink}`}>
-            <FiCheck className={`mt-0.5 shrink-0 ${featured ? "text-gold" : "text-accent"}`} aria-hidden /> {b}
+            <FiCheck className={`mt-0.5 shrink-0 ${featured ?"text-gold":"text-accent"}`} aria-hidden /> {b}
           </li>
         ))}
       </ul>
       <Link
         to={`/unlock?tier=${PLAN_TIER_PARAM[i]}`}
-        className={`mt-8 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-colors ${
-          featured ? "bg-white text-forest-deep hover:bg-mist" : "border border-stroke text-paper hover:bg-surface-1-solid"
-        }`}
+        className={`mt-8 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-colors ${ featured ?"bg-white text-forest-deep hover:bg-mist":"border border-stroke text-paper hover:bg-surface-1-solid"}`}
       >
         Choose {name}
       </Link>

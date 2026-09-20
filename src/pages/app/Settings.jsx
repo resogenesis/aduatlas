@@ -27,8 +27,8 @@ const Settings = () => {
   const planLabel = plan ? `${plan.name} · ${formatPrice(plan.priceCents)} (one time)` : "No plan yet";
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-3xl mx-auto">
-      <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">Settings</p>
-      <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-12">
+      <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">Settings</p>
+      <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-12">
         Your account.
       </h1>
 
@@ -96,7 +96,7 @@ const Settings = () => {
 
 const Section = ({ icon: Icon, title, children }) => (
   <div className="bg-surface-1-solid border border-stroke rounded-2xl p-6 sm:p-8 mb-5">
-    <div className="flex items-center gap-2 text-paper-dim text-xs uppercase tracking-[0.2em] mb-5">
+    <div className="flex items-center gap-2 text-paper-dim text-xs tracking-[0.2em] mb-5">
       <Icon /> {title}
     </div>
     {children}

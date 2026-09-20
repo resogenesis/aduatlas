@@ -54,7 +54,7 @@ const upgradeIncludes = [
 const StatusTag = ({ status }) => {
   if (status === "verified") {
     return (
-      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/30 bg-accent/15 text-accent text-[0.65rem] font-semibold uppercase tracking-wider">
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/30 bg-accent/15 text-accent text-[0.65rem] font-semibold">
         <FiCheck className="text-xs" /> Verified
       </span>
     );
@@ -67,7 +67,7 @@ const StatusTag = ({ status }) => {
     );
   }
   return (
-    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full border border-yellow-600/30 bg-yellow-400/10 text-yellow-700 text-[0.65rem] font-semibold uppercase tracking-wider">
+    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full border border-yellow-600/30 bg-yellow-400/10 text-yellow-700 text-[0.65rem] font-semibold">
       TBD
     </span>
   );
@@ -120,10 +120,10 @@ const Property = () => {
         <div className="flex items-center gap-2 text-paper-dim text-sm mb-4">
           <FiMapPin /> {q || "No address provided"}
         </div>
-        <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">
+        <p className="text-accent text-xs font-medium tracking-[0.2em] mb-3">
           Free Property Snapshot
         </p>
-        <h1 className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
+        <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
           What we know about your property <span className="text-paper-dim">— so far.</span>
         </h1>
         <p className="text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed mb-7">
@@ -165,7 +165,7 @@ const Property = () => {
                   {r.source && <p className="text-paper-dim/60 text-[0.65rem] mt-0.5">{r.source}</p>}
                 </div>
                 <div className="col-span-7 sm:col-span-4">
-                  <p className={`text-sm sm:text-base ${r.status === "verified" ? "text-paper" : "text-paper-dim "}`}>
+                  <p className={`text-sm sm:text-base ${r.status ==="verified"?"text-paper":"text-paper-dim"}`}>
                     {r.value || "Unknown"}
                     {r.note && <span className="text-paper-dim/50 not-italic"> {r.note}</span>}
                   </p>
@@ -180,7 +180,7 @@ const Property = () => {
 
         {/* Why so many unknowns */}
         <div className="mt-10 bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-10">
-          <h2 className="font-display font-medium text-paper text-2xl sm:text-3xl leading-tight mb-4">
+          <h2 className="font-display text-paper text-2xl sm:text-3xl leading-tight mb-4">
             Why so many unknowns?
           </h2>
           <p className="text-paper-dim text-sm sm:text-base leading-relaxed mb-6 max-w-2xl">
@@ -198,10 +198,10 @@ const Property = () => {
 
         {/* Upgrade */}
         <div className="mt-10 bg-accent text-accent-fg rounded-3xl p-8 sm:p-12">
-          <p className="text-accent-fg/70 text-xs font-medium tracking-[0.2em] uppercase mb-3">
+          <p className="text-accent-fg/70 text-xs font-medium tracking-[0.2em] mb-3">
             Remove the uncertainty
           </p>
-          <h2 className="font-display font-medium text-3xl sm:text-4xl leading-tight mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl leading-tight mb-4">
             Upgrade to a Property Feasibility Report
           </h2>
           <p className="text-accent-fg/80 text-sm sm:text-base mb-7 max-w-xl leading-relaxed">

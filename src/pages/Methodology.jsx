@@ -21,7 +21,7 @@ const LevelRow = ({ meta, i }) => {
   return (
     <div className="grid sm:grid-cols-12 gap-4 sm:gap-7 py-5 border-t border-stroke first:border-t-0 first:pt-0">
       <div className="sm:col-span-3">
-        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-semibold uppercase tracking-wider ${meta.pillClass}`}>
+        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-semibold ${meta.pillClass}`}>
           <Icon className="text-xs" /> {label}
         </span>
       </div>
@@ -110,12 +110,12 @@ const Methodology = () => {
         <div ref={heroRef} className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
           <div className="inline-flex items-center gap-2 mb-4 animate-fade-up">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
-            <span className="text-paper-dim text-xs font-medium tracking-[0.2em] uppercase">
+            <span className="text-paper-dim text-xs font-medium tracking-[0.2em]">
               {heroBadge}
             </span>
           </div>
           <h1
-            className="font-display font-medium text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight max-w-3xl animate-fade-up"
+            className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight max-w-3xl animate-fade-up"
             style={{ animationDelay: "100ms" }}
           >
             {heroHeadingPre} <span className="">{heroHeadingEmphasis}</span>
@@ -148,8 +148,8 @@ const Methodology = () => {
           label="Confidence levels"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-accent text-xs uppercase tracking-[0.2em] mb-5">{levelsEyebrow}</p>
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-9">
+          <p className="text-accent text-xs tracking-[0.2em] mb-5">{levelsEyebrow}</p>
+          <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-9">
             {levelsHeading}
           </h2>
           <div className="space-y-7">
@@ -172,19 +172,19 @@ const Methodology = () => {
           label="What raises a row"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-accent text-xs uppercase tracking-[0.2em] mb-5">{pathEyebrow}</p>
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-5">
+          <p className="text-accent text-xs tracking-[0.2em] mb-5">{pathEyebrow}</p>
+          <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-5">
             {pathHeading}
           </h2>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-7 max-w-2xl">
             {pathBody}
           </p>
           <div className="bg-canvas border border-stroke rounded-2xl p-6">
-            <p className="text-paper-dim text-[0.65rem] font-semibold tracking-[0.2em] uppercase mb-2">{pathExampleLabel}</p>
+            <p className="text-paper-dim text-[0.65rem] font-semibold tracking-[0.2em] mb-2">{pathExampleLabel}</p>
             <p className="text-paper text-sm sm:text-base mb-2">
               <span className="text-paper-dim">{pathExampleRow}</span>
               <span className="inline-block w-2 h-2 rounded-full bg-red-400 mx-2 align-middle" />
-              <span className="text-red-700 text-xs uppercase tracking-wider">{pathExampleConfidence}</span>
+              <span className="text-red-700 text-xs">{pathExampleConfidence}</span>
             </p>
             <p className="text-paper-dim text-sm leading-relaxed">
               "{pathExampleQuote}"
@@ -209,8 +209,8 @@ const Methodology = () => {
           label="Data sources"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-accent text-xs uppercase tracking-[0.2em] mb-5">{sourcesEyebrow}</p>
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-7">
+          <p className="text-accent text-xs tracking-[0.2em] mb-5">{sourcesEyebrow}</p>
+          <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-7">
             {sourcesHeading}
           </h2>
           <div className="grid sm:grid-cols-2 gap-px bg-stroke rounded-2xl overflow-hidden">
@@ -238,10 +238,10 @@ const Methodology = () => {
           label="What we don't do"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <div className="flex items-center gap-2 text-accent text-xs uppercase tracking-[0.2em] mb-5">
+          <div className="flex items-center gap-2 text-accent text-xs tracking-[0.2em] mb-5">
             <FiShield /> {notDoingBadge}
           </div>
-          <h2 className="font-display font-medium text-paper text-3xl sm:text-4xl tracking-tight mb-5">
+          <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-5">
             {notDoingHeadingPre} <span className="text-paper-dim">{notDoingHeadingEmphasis}</span>
           </h2>
           <p className="text-paper-dim text-base leading-relaxed mb-7 max-w-2xl">
@@ -259,7 +259,7 @@ const Methodology = () => {
         {/* CTA */}
         <AdminEditableSection keys={["methodology.cta.heading", "methodology.cta.body", "methodology.cta.button"]} label="CTA">
         <section className="bg-accent text-accent-fg rounded-3xl p-8 sm:p-12 text-center">
-          <h2 className="font-display font-medium text-3xl sm:text-4xl leading-tight mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl leading-tight mb-4">
             {ctaHeading}
           </h2>
           <p className="text-accent-fg/80 text-base sm:text-lg max-w-xl mx-auto mb-7">

@@ -58,22 +58,14 @@ const Signup = () => {
         <button
           type="button"
           onClick={() => setRole("homeowner")}
-          className={`py-2.5 rounded-full text-xs font-medium tracking-[0.05em] uppercase transition cursor-pointer ${
-            role === "homeowner"
-              ? "bg-accent text-accent-fg"
-              : "text-paper-dim hover:text-paper"
-          }`}
+          className={`py-2.5 rounded-full text-xs font-medium tracking-[0.05em] transition cursor-pointer ${ role ==="homeowner"?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper"}`}
         >
           Homeowner
         </button>
         <button
           type="button"
           onClick={() => setRole("pro")}
-          className={`py-2.5 rounded-full text-xs font-medium tracking-[0.05em] uppercase transition cursor-pointer ${
-            role === "pro"
-              ? "bg-accent text-accent-fg"
-              : "text-paper-dim hover:text-paper"
-          }`}
+          className={`py-2.5 rounded-full text-xs font-medium tracking-[0.05em] transition cursor-pointer ${ role ==="pro"?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper"}`}
         >
           Builder / Pro
         </button>

@@ -36,9 +36,7 @@ const AddressIntake = ({ size = "lg", cta = "Check My Property", placeholder = "
       onChange={(e) => setValue(e.target.value)}
       placeholder={placeholder}
       aria-label="Property address"
-      className={`flex-1 min-w-0 bg-transparent text-paper placeholder:text-paper-dim/70 focus:outline-none ${
-        isLg ? "py-3 text-sm sm:text-base" : "py-2.5 text-sm"
-      }`}
+      className={`flex-1 min-w-0 bg-transparent text-paper placeholder:text-paper-dim/70 focus:outline-none ${ isLg ?"py-3 text-sm sm:text-base":"py-2.5 text-sm"}`}
     />
   );
 
@@ -71,19 +69,15 @@ const AddressIntake = ({ size = "lg", cta = "Check My Property", placeholder = "
   return (
     <form onSubmit={submit} className={`w-full ${className}`}>
       <div
-        className={`flex items-stretch gap-2 bg-canvas border border-stroke rounded-2xl shadow-[0_10px_30px_-12px_rgba(23,32,27,0.18)] focus-within:border-accent transition ${
-          isLg ? "p-2" : "p-1.5"
-        }`}
+        className={`flex items-stretch gap-2 bg-canvas border border-stroke rounded-2xl shadow-[0_10px_30px_-12px_rgba(23,32,27,0.18)] focus-within:border-accent transition ${ isLg ?"p-2":"p-1.5"}`}
       >
-        <span className={`flex items-center pl-3 sm:pl-4 text-paper-dim ${isLg ? "text-lg" : "text-base"}`}>
+        <span className={`flex items-center pl-3 sm:pl-4 text-paper-dim ${isLg ?"text-lg":"text-base"}`}>
           <FiMapPin />
         </span>
         {wrappedInput}
         <button
           type="submit"
-          className={`group inline-flex items-center gap-2 rounded-xl font-semibold transition-colors shrink-0 ${
-            buttonClassName || "bg-accent text-accent-fg hover:bg-accent-dim"
-          } ${isLg ? "px-4 sm:px-5 py-3 text-sm" : "px-4 py-2.5 text-sm"}`}
+          className={`group inline-flex items-center gap-2 rounded-xl font-semibold transition-colors shrink-0 ${ buttonClassName ||"bg-accent text-accent-fg hover:bg-accent-dim"} ${isLg ?"px-4 sm:px-5 py-3 text-sm":"px-4 py-2.5 text-sm"}`}
         >
           {cta}
           <FiArrowRight className="group-hover:translate-x-1 transition-transform" />

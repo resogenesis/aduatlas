@@ -110,9 +110,7 @@ const Unlock = () => {
             return (
               <li
                 key={p.id}
-                className={`relative rounded-[1.5rem] p-7 sm:p-8 flex flex-col transition-shadow ${
-                  featured ? "bg-forest-deep text-white shadow-[0_40px_80px_-40px_rgba(31,68,50,0.7)]" : "bg-canvas border border-stroke"
-                } ${isSelected ? (featured ? "ring-2 ring-gold" : "ring-2 ring-accent") : ""}`}
+                className={`relative rounded-[1.5rem] p-7 sm:p-8 flex flex-col transition-shadow ${ featured ?"bg-forest-deep text-white shadow-[0_40px_80px_-40px_rgba(31,68,50,0.7)]":"bg-canvas border border-stroke"} ${isSelected ? (featured ?"ring-2 ring-gold":"ring-2 ring-accent") :""}`}
               >
                 <div className="flex items-center justify-between mb-6">
                   <p className={`text-base font-semibold ${ink}`}>{p.name}</p>
@@ -129,12 +127,12 @@ const Unlock = () => {
                 <ul className="space-y-3 flex-1">
                   {p.bullets.map((b) => (
                     <li key={b} className={`flex items-start gap-2.5 text-sm leading-snug ${ink}`}>
-                      <FiCheck className={`mt-0.5 shrink-0 ${featured ? "text-gold" : "text-accent"}`} aria-hidden /> {b}
+                      <FiCheck className={`mt-0.5 shrink-0 ${featured ?"text-gold":"text-accent"}`} aria-hidden /> {b}
                     </li>
                   ))}
                 </ul>
                 {p.id === PLAN_IDS.GOLDEN && (
-                  <Link to="/course-outline" className={`mt-4 inline-flex items-center gap-1 text-sm font-medium ${featured ? "text-white" : "text-accent"} hover:underline underline-offset-4`}>
+                  <Link to="/course-outline" className={`mt-4 inline-flex items-center gap-1 text-sm font-medium ${featured ?"text-white":"text-accent"} hover:underline underline-offset-4`}>
                     See the course outline <FiArrowRight className="text-xs" />
                   </Link>
                 )}
@@ -147,9 +145,7 @@ const Unlock = () => {
                   type="button"
                   onClick={() => selectTier(p.id)}
                   aria-pressed={isSelected}
-                  className={`mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-colors ${
-                    featured ? "bg-white text-forest-deep hover:bg-mist" : "bg-accent text-accent-fg hover:bg-accent-dim"
-                  }`}
+                  className={`mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-colors ${ featured ?"bg-white text-forest-deep hover:bg-mist":"bg-accent text-accent-fg hover:bg-accent-dim"}`}
                 >
                   {isSelected ? "Selected, continue below" : `Choose ${p.name}`} <FiArrowRight />
                 </button>
