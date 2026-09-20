@@ -1,4 +1,3 @@
-import { FaLeaf } from "react-icons/fa6";
 import { useReveal } from "../../hooks/useReveal";
 import { useContentText } from "../../lib/content";
 import { AdminEditableSection } from "../../lib/adminEditBridge";
@@ -6,6 +5,7 @@ import AddressIntake from "./AddressIntake";
 
 const EDIT_KEYS = ["home.cta.heading", "home.cta.body", "home.cta.button", "home.hero.placeholder"];
 
+// Forest band to close: one line, one address box.
 const ClosingCta = () => {
   const ref = useReveal();
   const heading = useContentText("home.cta.heading");
@@ -15,21 +15,14 @@ const ClosingCta = () => {
 
   return (
     <AdminEditableSection keys={EDIT_KEYS} label="Closing call to action">
-      <section className="bg-canvas">
-        <div className="container mx-auto px-5 sm:px-8 pb-16 lg:pb-20">
-          <div ref={ref} className="bg-surface-2 rounded-3xl px-6 sm:px-10 py-8 grid lg:grid-cols-12 gap-6 items-center">
-            <div className="lg:col-span-5 flex items-center gap-4">
-              <span className="text-accent text-3xl shrink-0" aria-hidden>
-                <FaLeaf />
-              </span>
-              <div>
-                <p className="font-semibold text-paper text-xl leading-tight">{heading}</p>
-                <p className="text-paper-dim text-sm mt-1">{body}</p>
-              </div>
-            </div>
-            <div className="lg:col-span-7">
-              <AddressIntake size="sm" cta={button} placeholder={placeholder} />
-            </div>
+      <section className="bg-accent text-white">
+        <div ref={ref} className="container mx-auto px-5 sm:px-8 py-16 lg:py-20 grid lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-5">
+            <p className="font-display font-medium text-3xl sm:text-4xl leading-[1.05] mb-2">{heading}</p>
+            <p className="text-white/75 text-base">{body}</p>
+          </div>
+          <div className="lg:col-span-7">
+            <AddressIntake cta={button} placeholder={placeholder} buttonClassName="bg-forest-deep text-white hover:bg-paper hover:text-white" />
           </div>
         </div>
       </section>

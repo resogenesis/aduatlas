@@ -13,7 +13,7 @@ import { EV, track } from "../../lib/analytics";
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
-const AddressIntake = ({ size = "lg", cta = "Explore My Property", placeholder = "Enter your property address", className = "" }) => {
+const AddressIntake = ({ size = "lg", cta = "Check My Property", placeholder = "Enter your property address", className = "", buttonClassName = "" }) => {
   const navigate = useNavigate();
   const [value, setValue] = useState("");
 
@@ -81,9 +81,9 @@ const AddressIntake = ({ size = "lg", cta = "Explore My Property", placeholder =
         {wrappedInput}
         <button
           type="submit"
-          className={`group inline-flex items-center gap-2 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors shrink-0 ${
-            isLg ? "px-4 sm:px-5 py-3 text-sm" : "px-4 py-2.5 text-sm"
-          }`}
+          className={`group inline-flex items-center gap-2 rounded-xl font-semibold transition-colors shrink-0 ${
+            buttonClassName || "bg-accent text-accent-fg hover:bg-accent-dim"
+          } ${isLg ? "px-4 sm:px-5 py-3 text-sm" : "px-4 py-2.5 text-sm"}`}
         >
           {cta}
           <FiArrowRight className="group-hover:translate-x-1 transition-transform" />

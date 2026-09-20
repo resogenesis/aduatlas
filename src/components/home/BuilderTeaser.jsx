@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiMapPin, FiTool, FiUserCheck } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 import { useReveal } from "../../hooks/useReveal";
 import { useContentText } from "../../lib/content";
 import { BUILDER_POINTS_COUNT } from "../../lib/contentRegistry/home";
@@ -12,58 +12,47 @@ const EDIT_KEYS = [
   "home.builders.cta",
   ...Array.from({ length: BUILDER_POINTS_COUNT }, (_, i) => [`home.builders.point.${i}.title`, `home.builders.point.${i}.desc`]).flat(),
 ];
-const ICONS = [FiMapPin, FiTool, FiUserCheck];
 
 const Point = ({ i }) => {
   const ref = useReveal(120 + i * 90);
   const title = useContentText(`home.builders.point.${i}.title`);
   const desc = useContentText(`home.builders.point.${i}.desc`);
-  const Icon = ICONS[i];
   return (
-    <li ref={ref} className="flex items-start gap-4">
-      <span className="w-11 h-11 rounded-xl bg-canvas border border-stroke text-accent inline-flex items-center justify-center shrink-0 text-lg">
-        <Icon aria-hidden />
-      </span>
+    <li ref={ref} className="grid grid-cols-[2.5rem_1fr] gap-4 py-5 border-t border-white/15 last:border-b">
+      <span className="font-display text-gold text-xl leading-none pt-0.5">{String(i + 1).padStart(2, "0")}</span>
       <div>
-        <h3 className="font-semibold text-paper text-base leading-tight mb-1">{title}</h3>
-        <p className="text-paper-dim text-sm leading-relaxed">{desc}</p>
+        <h3 className="font-semibold text-white text-base leading-tight mb-1">{title}</h3>
+        <p className="text-white/70 text-sm leading-relaxed">{desc}</p>
       </div>
     </li>
   );
 };
 
+// Deep-green band: the builder promise, with the three points as a numbered
+// list on the right.
 const BuilderTeaser = () => {
   const ref = useReveal();
   const eyebrow = useContentText("home.builders.eyebrow");
-  const heading = useContentText("home.builders.heading");
+  const heading = useContentText("home.builders.heading").replace("\n", " ");
   const body = useContentText("home.builders.body");
   const cta = useContentText("home.builders.cta");
-  const [h1, h2] = heading.split("\n");
 
   return (
     <AdminEditableSection keys={EDIT_KEYS} label="Find a builder">
-      <section className="bg-surface-1-solid border-y border-stroke">
-        <div className="container mx-auto px-5 sm:px-8 py-16 lg:py-20 grid lg:grid-cols-12 gap-10 items-center">
+      <section className="bg-forest-deep text-white">
+        <div className="container mx-auto px-5 sm:px-8 py-16 lg:py-24 grid lg:grid-cols-12 gap-12 items-center">
           <div ref={ref} className="lg:col-span-5">
-            <p className="text-paper-dim text-[0.7rem] font-semibold tracking-[0.28em] uppercase mb-4">{eyebrow}</p>
-            <h2 className="font-primary font-extrabold text-paper text-3xl sm:text-4xl lg:text-[2.6rem] leading-[1.05] tracking-[-0.025em] mb-4">
-              {h1}
-              {h2 && (
-                <>
-                  <br />
-                  {h2}
-                </>
-              )}
-            </h2>
-            <p className="text-paper-dim text-base leading-relaxed mb-8">{body}</p>
+            <p className="text-gold text-[0.7rem] font-semibold tracking-[0.28em] uppercase mb-4">{eyebrow}</p>
+            <h2 className="font-display font-medium text-4xl sm:text-5xl leading-[1.02] mb-5">{heading}</h2>
+            <p className="text-white/75 text-base leading-relaxed mb-8 max-w-md">{body}</p>
             <Link
               to="/builders"
-              className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors"
+              className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-forest-deep font-semibold text-sm hover:bg-mist transition-colors"
             >
               {cta} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-          <ul className="lg:col-span-6 lg:col-start-7 space-y-6">
+          <ul className="lg:col-span-6 lg:col-start-7">
             {Array.from({ length: BUILDER_POINTS_COUNT }, (_, i) => (
               <Point key={i} i={i} />
             ))}

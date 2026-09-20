@@ -35,32 +35,32 @@ const PlanCard = ({ i, featuredLabel }) => {
     useContentText(`home.plans.item.${i}.bullet.3`),
   ];
   const featured = i === FEATURED_INDEX;
+  const dim = featured ? "text-white/70" : "text-paper-dim";
+  const ink = featured ? "text-white" : "text-paper";
   return (
     <li
       ref={ref}
-      className={`relative rounded-2xl border p-6 sm:p-7 flex flex-col bg-canvas ${
-        featured ? "border-accent shadow-[0_24px_50px_-30px_rgba(46,94,68,0.45)]" : "border-stroke"
+      className={`relative rounded-[1.5rem] p-7 sm:p-8 flex flex-col ${
+        featured ? "bg-forest-deep text-white shadow-[0_40px_80px_-40px_rgba(31,68,50,0.7)] lg:-my-4" : "bg-canvas border border-stroke"
       }`}
     >
-      {featured && (
-        <span className="absolute -top-3 left-6 px-3 py-1 rounded-full bg-accent text-accent-fg text-[0.65rem] font-semibold tracking-[0.18em] uppercase">
-          {featuredLabel}
-        </span>
-      )}
-      <p className="text-paper-dim text-[0.7rem] font-semibold tracking-[0.24em] uppercase mb-3">{name}</p>
-      <p className="font-primary font-extrabold text-paper text-4xl tracking-tight leading-none mb-1.5">{price}</p>
-      <p className="text-paper-dim text-sm mb-6">{tagline}</p>
-      <ul className="space-y-2.5 flex-1">
+      <div className="flex items-center justify-between mb-6">
+        <p className={`text-[0.7rem] font-semibold tracking-[0.24em] uppercase ${dim}`}>{name}</p>
+        {featured && <span className="px-2.5 py-1 rounded-full bg-gold/90 text-forest-deep text-[0.6rem] font-semibold tracking-[0.18em] uppercase">{featuredLabel}</span>}
+      </div>
+      <p className={`font-display font-medium text-5xl leading-none mb-2 ${ink}`}>{price}</p>
+      <p className={`text-sm mb-7 ${dim}`}>{tagline}</p>
+      <ul className="space-y-3 flex-1">
         {bullets.map((b, j) => (
-          <li key={j} className="flex items-start gap-2.5 text-sm text-paper leading-snug">
-            <FiCheck className="text-accent mt-0.5 shrink-0" aria-hidden /> {b}
+          <li key={j} className={`flex items-start gap-2.5 text-sm leading-snug ${ink}`}>
+            <FiCheck className={`mt-0.5 shrink-0 ${featured ? "text-gold" : "text-accent"}`} aria-hidden /> {b}
           </li>
         ))}
       </ul>
       <Link
         to={`/unlock?tier=${PLAN_TIER_PARAM[i]}`}
-        className={`mt-7 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-colors ${
-          featured ? "bg-accent text-accent-fg hover:bg-accent-dim" : "border border-stroke text-paper hover:bg-surface-1-solid"
+        className={`mt-8 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-colors ${
+          featured ? "bg-white text-forest-deep hover:bg-mist" : "border border-stroke text-paper hover:bg-surface-1-solid"
         }`}
       >
         Choose {name}
@@ -72,36 +72,29 @@ const PlanCard = ({ i, featuredLabel }) => {
 const Plans = () => {
   const ref = useReveal();
   const eyebrow = useContentText("home.plans.eyebrow");
-  const heading = useContentText("home.plans.heading");
+  const heading = useContentText("home.plans.heading").replace("\n", " ");
   const body = useContentText("home.plans.body");
   const cta = useContentText("home.plans.cta");
   const featuredLabel = useContentText("home.plans.featured_label");
   const footnote = useContentText("home.plans.footnote");
-  const [h1, h2] = heading.split("\n");
 
   return (
     <AdminEditableSection keys={EDIT_KEYS} label="Plans">
       <section className="bg-canvas">
-        <div className="container mx-auto px-5 sm:px-8 py-16 lg:py-24">
-          <div ref={ref} className="max-w-2xl mb-10 lg:mb-12">
-            <p className="text-paper-dim text-[0.7rem] font-semibold tracking-[0.28em] uppercase mb-4">{eyebrow}</p>
-            <h2 className="font-primary font-extrabold text-paper text-3xl sm:text-4xl lg:text-[2.6rem] leading-[1.05] tracking-[-0.025em] mb-4">
-              {h1}
-              {h2 && (
-                <>
-                  <br />
-                  {h2}
-                </>
-              )}
-            </h2>
-            <p className="text-paper-dim text-base leading-relaxed">{body}</p>
+        <div className="container mx-auto px-5 sm:px-8 py-16 lg:py-28">
+          <div ref={ref} className="grid lg:grid-cols-12 gap-6 items-end mb-12 lg:mb-16">
+            <div className="lg:col-span-7">
+              <p className="text-accent text-[0.7rem] font-semibold tracking-[0.28em] uppercase mb-4">{eyebrow}</p>
+              <h2 className="font-display font-medium text-paper text-4xl sm:text-5xl leading-[1.02]">{heading}</h2>
+            </div>
+            <p className="lg:col-span-5 text-paper-dim text-base leading-relaxed">{body}</p>
           </div>
-          <ul className="grid md:grid-cols-3 gap-5 lg:gap-6 items-stretch">
+          <ul className="grid md:grid-cols-3 gap-5 lg:gap-6 items-stretch lg:py-4">
             {Array.from({ length: PLANS_COUNT }, (_, i) => (
               <PlanCard key={i} i={i} featuredLabel={featuredLabel} />
             ))}
           </ul>
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-stroke pt-6">
             <p className="text-paper-dim text-xs sm:text-sm">{footnote}</p>
             <Link to="/unlock" className="group inline-flex items-center gap-2 text-sm font-medium text-paper hover:text-accent transition-colors">
               {cta} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />

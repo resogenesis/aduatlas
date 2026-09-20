@@ -3,12 +3,12 @@ import Pillars from "../components/home/Pillars";
 import Possible from "../components/home/Possible";
 import Plans from "../components/home/Plans";
 import BuilderTeaser from "../components/home/BuilderTeaser";
-import Mission from "../components/home/Mission";
 import Testimonials from "../components/home/Testimonials";
+import Mission from "../components/home/Mission";
 import ClosingCta from "../components/home/ClosingCta";
 
-// Phase 1 homepage: value proposition, property-address CTA, how it works,
-// what is possible, plans, builder access, mission, proof, final address CTA.
+// Phase 1 homepage: photo-first hero with the address box, numbered journey,
+// what is possible, plans, builder access, proof, mission, final address CTA.
 const Home = () => (
   <div className="w-full">
     <Hero />
@@ -16,8 +16,8 @@ const Home = () => (
     <Possible />
     <Plans />
     <BuilderTeaser />
-    <Mission />
     <Testimonials />
+    <Mission />
     <ClosingCta />
   </div>
 );
