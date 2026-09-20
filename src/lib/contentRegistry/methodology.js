@@ -6,8 +6,8 @@ const PAGE = "Methodology";
 // text entries below. Every level currently has exactly 3 examples.
 export const METHODOLOGY_LEVELS_META = [
   { iconName: "FiCheck", pillClass: "bg-accent/15 text-accent border-accent/30" },
-  { iconName: "FiHelpCircle", pillClass: "bg-yellow-400/10 text-yellow-300 border-yellow-400/30" },
-  { iconName: "FiAlertTriangle", pillClass: "bg-red-400/10 text-red-300 border-red-400/30" },
+  { iconName: "FiHelpCircle", pillClass: "bg-yellow-400/10 text-yellow-700 border-yellow-600/30" },
+  { iconName: "FiAlertTriangle", pillClass: "bg-red-400/10 text-red-700 border-red-600/30" },
 ];
 
 export const METHODOLOGY_CONTENT = {

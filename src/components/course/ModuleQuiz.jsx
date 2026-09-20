@@ -51,8 +51,8 @@ const ModuleQuiz = ({ quiz, onComplete, completed }) => {
                       cls = "border-accent/60 bg-accent/10 text-paper";
                       mark = <FiCheck className="text-accent shrink-0" />;
                     } else if (isChosen) {
-                      cls = "border-red-400/50 bg-red-500/10 text-paper";
-                      mark = <FiX className="text-red-300 shrink-0" />;
+                      cls = "border-red-600/50 bg-red-500/10 text-paper";
+                      mark = <FiX className="text-red-700 shrink-0" />;
                     } else {
                       cls = "border-stroke bg-canvas text-paper-dim/70";
                     }

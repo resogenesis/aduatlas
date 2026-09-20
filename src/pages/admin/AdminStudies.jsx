@@ -8,10 +8,10 @@ import { INTAKE_FIELDS } from "../../lib/studyIntake";
 // plan, and mark it ready.
 const STATUS_LABEL = { submitted: "Submitted", in_review: "In review", needs_info: "Needs info", ready: "Ready" };
 const STATUS_TONE = {
-  submitted: "bg-amber-500/15 text-amber-300",
-  in_review: "bg-sky-500/15 text-sky-300",
-  needs_info: "bg-red-500/15 text-red-300",
-  ready: "bg-accent/20 text-accent",
+  submitted: "bg-amber-500/15 text-amber-700",
+  in_review: "bg-sky-500/15 text-sky-700",
+  needs_info: "bg-red-500/15 text-red-700",
+  ready: "bg-accent/15 text-accent",
 };
 
 const readAsDataUrl = (file) =>
@@ -181,7 +181,7 @@ const Detail = ({ study, onClose, onChanged }) => {
             </div>
           </div>
           {error && (
-            <p role="alert" className="text-sm text-red-300">
+            <p role="alert" className="text-sm text-red-700">
               {error}
             </p>
           )}
@@ -254,7 +254,7 @@ const AdminStudies = () => {
         </div>
       </div>
 
-      {error && <p className="mb-6 text-sm text-red-300 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">{error}</p>}
+      {error && <p className="mb-6 text-sm text-red-700 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">{error}</p>}
       {items === null && !error && <p className="text-paper-dim text-sm">Loading…</p>}
       {items && visible.length === 0 && <p className="text-paper-dim text-sm">Nothing here.</p>}
 

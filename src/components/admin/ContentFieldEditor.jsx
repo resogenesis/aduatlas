@@ -27,7 +27,7 @@ const toPayload = (meta, value) => {
 const StatusPill = ({ status }) => {
   if (status === "saving") return <span className="text-xs text-paper-dim">Saving…</span>;
   if (status === "saved") return <span className="text-xs text-accent">Draft saved</span>;
-  if (status === "error") return <span className="text-xs text-red-300">Save failed</span>;
+  if (status === "error") return <span className="text-xs text-red-700">Save failed</span>;
   return null;
 };
 
@@ -202,7 +202,7 @@ const ContentFieldEditor = ({ contentKey, meta, dbRow, onSaved }) => {
       <div className="flex items-center justify-between gap-3 mb-2">
         <label className="text-paper text-xs font-medium tracking-[0.1em] uppercase">{meta.label}</label>
         <div className="flex items-center gap-2">
-          {hasUnpublishedDraft && <span className="text-xs text-amber-300">Unpublished edit</span>}
+          {hasUnpublishedDraft && <span className="text-xs text-amber-700">Unpublished edit</span>}
           {isLive && <span className="text-xs text-paper-dim/70">Live</span>}
           <StatusPill status={status} />
         </div>

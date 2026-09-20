@@ -20,9 +20,9 @@ import {
 const GRADE_TONES = {
   A: "text-accent",
   B: "text-accent",
-  C: "text-amber-300",
-  D: "text-orange-300",
-  F: "text-red-300",
+  C: "text-amber-700",
+  D: "text-orange-700",
+  F: "text-red-700",
 };
 
 const ReadyScore = () => {
@@ -86,14 +86,14 @@ const ReadyScore = () => {
                       <p className="text-sm text-paper leading-relaxed">
                         {it.q}
                         {it.noGo && (
-                          <span className="ml-2 inline-flex items-center gap-1 text-[0.6rem] font-semibold uppercase tracking-wider text-red-300/80">
+                          <span className="ml-2 inline-flex items-center gap-1 text-[0.6rem] font-semibold uppercase tracking-wider text-red-700/80">
                             <FiAlertTriangle className="text-[0.6rem]" /> no-go if No
                           </span>
                         )}
                       </p>
                       <div className="flex gap-2">
                         {[{ v: true, label: "Yes", on: "bg-accent text-accent-fg border-accent" },
-                          { v: false, label: "No", on: "bg-red-500/15 text-red-300 border-red-500/40" }].map((opt) => (
+                          { v: false, label: "No", on: "bg-red-500/15 text-red-700 border-red-500/40" }].map((opt) => (
                           <button
                             key={opt.label}
                             type="button"
@@ -150,7 +150,7 @@ const ReadyScore = () => {
 
           {result.noGoFlags.length > 0 && (
             <div className="bg-red-500/5 rounded-2xl border border-red-500/30 p-5 text-sm">
-              <p className="text-red-300 font-semibold mb-2 flex items-center gap-2">
+              <p className="text-red-700 font-semibold mb-2 flex items-center gap-2">
                 <FiAlertTriangle /> No-go conditions flagged
               </p>
               <ul className="space-y-1.5">

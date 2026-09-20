@@ -101,15 +101,15 @@ const BuildableEnvelope = () => {
     try {
       const r = await fetch(`/api/property-lookup?address=${encodeURIComponent(a)}`);
       if (r.status === 501) {
-        setLook({ status: "idle", msg: "Address lookup isn't enabled yet — enter your dimensions below.", tone: "text-amber-300" });
+        setLook({ status: "idle", msg: "Address lookup isn't enabled yet — enter your dimensions below.", tone: "text-amber-700" });
         return;
       }
       if (r.status === 404) {
-        setLook({ status: "idle", msg: "No public record found for that address. Enter dimensions manually.", tone: "text-amber-300" });
+        setLook({ status: "idle", msg: "No public record found for that address. Enter dimensions manually.", tone: "text-amber-700" });
         return;
       }
       if (!r.ok) {
-        setLook({ status: "idle", msg: "Lookup failed. Enter your dimensions manually.", tone: "text-red-300" });
+        setLook({ status: "idle", msg: "Lookup failed. Enter your dimensions manually.", tone: "text-red-700" });
         return;
       }
       const d = await r.json();
@@ -123,7 +123,7 @@ const BuildableEnvelope = () => {
         tone: "text-accent",
       });
     } catch {
-      setLook({ status: "idle", msg: "Lookup failed. Enter your dimensions manually.", tone: "text-red-300" });
+      setLook({ status: "idle", msg: "Lookup failed. Enter your dimensions manually.", tone: "text-red-700" });
     }
   };
 

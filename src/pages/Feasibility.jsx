@@ -54,14 +54,14 @@ const totalQuestions = groups.reduce((n, g) => n + g.items.length, 0);
 const OPTIONS = [
   { value: "yes", label: "Yes", on: "bg-accent text-accent-fg border-accent" },
   { value: "unsure", label: "Unsure", on: "bg-paper-dim/20 text-paper border-paper-dim/40" },
-  { value: "no", label: "No", on: "bg-red-500/15 text-red-300 border-red-500/40" },
+  { value: "no", label: "No", on: "bg-red-500/15 text-red-700 border-red-500/40" },
 ];
 
 const interpret = (score) => {
   if (score >= 80) return { label: "HIGH READY", tone: "bg-accent/15 text-accent border-accent/30", note: "Most indicators favor an ADU. Move to design and a builder packet." };
-  if (score >= 55) return { label: "MID READY", tone: "bg-amber-500/15 text-amber-300 border-amber-500/30", note: "Promising, but several items need confirmation before you commit." };
-  if (score >= 30) return { label: "LOW READY", tone: "bg-orange-500/15 text-orange-300 border-orange-500/30", note: "Real obstacles here. Confirm the No answers with your city before spending." };
-  return { label: "NEEDS REVIEW", tone: "bg-red-500/15 text-red-300 border-red-500/30", note: "Unlikely without a variance or redesign. Start with a planner consult." };
+  if (score >= 55) return { label: "MID READY", tone: "bg-amber-500/15 text-amber-700 border-amber-500/30", note: "Promising, but several items need confirmation before you commit." };
+  if (score >= 30) return { label: "LOW READY", tone: "bg-orange-500/15 text-orange-700 border-orange-500/30", note: "Real obstacles here. Confirm the No answers with your city before spending." };
+  return { label: "NEEDS REVIEW", tone: "bg-red-500/15 text-red-700 border-red-500/30", note: "Unlikely without a variance or redesign. Start with a planner consult." };
 };
 
 const Feasibility = () => {
@@ -164,9 +164,9 @@ const Feasibility = () => {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs mb-6">
           {[
             { lbl: "HIGH READY", range: "80–100", tone: "bg-accent/15 text-accent border-accent/30" },
-            { lbl: "MID READY", range: "55–79", tone: "bg-amber-500/15 text-amber-300 border-amber-500/30" },
-            { lbl: "LOW READY", range: "30–54", tone: "bg-orange-500/15 text-orange-300 border-orange-500/30" },
-            { lbl: "NEEDS REVIEW", range: "0–29", tone: "bg-red-500/15 text-red-300 border-red-500/30" },
+            { lbl: "MID READY", range: "55–79", tone: "bg-amber-500/15 text-amber-700 border-amber-500/30" },
+            { lbl: "LOW READY", range: "30–54", tone: "bg-orange-500/15 text-orange-700 border-orange-500/30" },
+            { lbl: "NEEDS REVIEW", range: "0–29", tone: "bg-red-500/15 text-red-700 border-red-500/30" },
           ].map((r) => (
             <div key={r.lbl} className={`rounded-xl border px-3 py-2.5 font-semibold text-center ${r.tone}`}>
               {r.lbl}

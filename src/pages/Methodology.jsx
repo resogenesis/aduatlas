@@ -184,7 +184,7 @@ const Methodology = () => {
             <p className="text-paper text-sm sm:text-base mb-2">
               <span className="text-paper-dim">{pathExampleRow}</span>
               <span className="inline-block w-2 h-2 rounded-full bg-red-400 mx-2 align-middle" />
-              <span className="text-red-300 text-xs uppercase tracking-wider">{pathExampleConfidence}</span>
+              <span className="text-red-700 text-xs uppercase tracking-wider">{pathExampleConfidence}</span>
             </p>
             <p className="text-paper-dim text-sm leading-relaxed">
               "{pathExampleQuote}"

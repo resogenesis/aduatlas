@@ -15,7 +15,7 @@ const fmt = (n) => Math.round(n).toLocaleString();
 const Tag = ({ prov }) => {
   if (prov === "estimated")
     return (
-      <span className="text-[9px] font-semibold uppercase tracking-wider text-amber-300/90 bg-amber-500/10 border border-amber-500/25 rounded px-1.5 py-0.5">
+      <span className="text-[9px] font-semibold uppercase tracking-wider text-amber-700/90 bg-amber-500/10 border border-amber-500/25 rounded px-1.5 py-0.5">
         Estimated
       </span>
     );
@@ -97,7 +97,7 @@ const FeasibilityCards = ({ model }) => {
             <Pending label="Meets setbacks" />
           </>
         ) : (
-          <p className="text-amber-300 text-xs leading-relaxed">
+          <p className="text-amber-700 text-xs leading-relaxed">
             No rear-yard room left for a detached ADU with these numbers. Try a smaller home depth,
             a conversion, or check for a setback reduction.
           </p>

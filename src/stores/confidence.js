@@ -27,14 +27,14 @@ export const CONFIDENCE_META = {
   medium: {
     label: "Medium",
     dot: "#F1C04E",
-    chip: "bg-yellow-400/10 text-yellow-300 border-yellow-400/30",
+    chip: "bg-yellow-400/10 text-yellow-700 border-yellow-600/30",
     description: "Modeled from public data and standard assumptions. Verify before construction.",
     canUpgrade: true,
   },
   low: {
     label: "Low",
     dot: "#F87171",
-    chip: "bg-red-400/10 text-red-300 border-red-400/30",
+    chip: "bg-red-400/10 text-red-700 border-red-600/30",
     description: "Requires on-site verification or city confirmation.",
     canUpgrade: true,
   },

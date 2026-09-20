@@ -184,7 +184,7 @@ const Quiz = () => {
             })}
           </div>
 
-          {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
+          {error && <p className="mt-4 text-sm text-red-700">{error}</p>}
 
           <div className="flex items-center justify-between mt-10">
             <button

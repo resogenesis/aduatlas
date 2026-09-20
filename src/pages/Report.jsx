@@ -127,8 +127,8 @@ const Report = () => {
           <ul className="space-y-4">
             {risks.map((r) => (
               <li key={r.title} className="flex items-start gap-4 py-4 border-b border-stroke last:border-b-0">
-                <span className={`shrink-0 mt-1 inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[0.65rem] font-semibold uppercase tracking-wider ${ r.severity === "high" ? "bg-red-400/10 text-red-300 border-red-400/30" :
-                  r.severity === "med" ? "bg-yellow-400/10 text-yellow-300 border-yellow-400/30" :
+                <span className={`shrink-0 mt-1 inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[0.65rem] font-semibold uppercase tracking-wider ${ r.severity === "high" ? "bg-red-400/10 text-red-700 border-red-600/30" :
+                  r.severity === "med" ? "bg-yellow-400/10 text-yellow-700 border-yellow-600/30" :
                   "bg-paper-dim/10 text-paper-dim border-stroke"
                 }`}>
                   <FiAlertTriangle className="text-xs" />

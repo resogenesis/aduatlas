@@ -67,7 +67,7 @@ const StatusTag = ({ status }) => {
     );
   }
   return (
-    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full border border-yellow-400/30 bg-yellow-400/10 text-yellow-300 text-[0.65rem] font-semibold uppercase tracking-wider">
+    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full border border-yellow-600/30 bg-yellow-400/10 text-yellow-700 text-[0.65rem] font-semibold uppercase tracking-wider">
       TBD
     </span>
   );

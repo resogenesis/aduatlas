@@ -80,7 +80,7 @@ const KnowledgeCheck = () => {
                     <span
                       className={`shrink-0 mt-0.5 w-6 h-6 rounded-full flex items-center justify-center text-sm ${ r.isCorrect
                           ? "bg-accent/20 text-accent"
-                          : "bg-red-500/15 text-red-400"
+                          : "bg-red-500/15 text-red-700"
                       }`}
                     >
                       {r.isCorrect ? <FiCheck /> : <FiX />}
@@ -168,7 +168,7 @@ const KnowledgeCheck = () => {
             })}
           </div>
 
-          {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
+          {error && <p className="mt-4 text-sm text-red-700">{error}</p>}
 
           <div className="flex items-center justify-between mt-10">
             <button

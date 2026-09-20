@@ -83,7 +83,7 @@ const BuilderLayout = () => {
   const close = () => setMobileOpen(false);
 
   return (
-    <div className="min-h-screen bg-canvas">
+    <div className="theme-light min-h-screen bg-canvas">
       <div className="lg:hidden sticky top-0 z-40 bg-canvas/85 backdrop-blur-md border-b border-stroke">
         <div className="flex items-center justify-between px-5 py-3">
           <Logomark className="h-7 text-paper" />

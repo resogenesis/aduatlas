@@ -21,7 +21,7 @@ import { presiteTotal, tpcTotals, verificationTotal } from "./worksheetDefs";
 
 const STATUS = {
   verified: { label: "Verified", cls: "text-accent border-accent/40 bg-accent/10" },
-  estimated: { label: "Estimated", cls: "text-amber-300 border-amber-500/40 bg-amber-500/10" },
+  estimated: { label: "Estimated", cls: "text-amber-700 border-amber-500/40 bg-amber-500/10" },
   verify: { label: "Verification required", cls: "text-paper-dim border-stroke bg-canvas" },
 };
 
@@ -96,9 +96,9 @@ const NEXT_STEPS = [
 const RESULTS = {
   likely: { label: "Likely Feasible", tone: "bg-accent/10 border-accent/40 text-accent", Icon: FiCheckCircle,
     note: "Based on available data and your NAPE answers, no major obstacle has been identified. This remains a preliminary analysis — complete the verification items below before spending significant money." },
-  possible: { label: "Possible with Verification", tone: "bg-amber-500/10 border-amber-500/40 text-amber-300", Icon: FiHelpCircle,
+  possible: { label: "Possible with Verification", tone: "bg-amber-500/10 border-amber-500/40 text-amber-700", Icon: FiHelpCircle,
     note: "Key information is missing or several factors need research. Work through the verification items below with your city and utility providers before making major commitments." },
-  nogo: { label: "Potential No-Go", tone: "bg-red-500/10 border-red-500/40 text-red-300", Icon: FiAlertTriangle,
+  nogo: { label: "Potential No-Go", tone: "bg-red-500/10 border-red-500/40 text-red-700", Icon: FiAlertTriangle,
     note: "One or more automatic no-go conditions were identified in your NAPE evaluation. Verify each flagged condition with your local planning department — a No today is not always a No forever." },
 };
 
@@ -255,7 +255,7 @@ const PropertyReport = () => {
         {nape.answered > 0 ? (
           <>
             <div className="flex items-baseline gap-4 mb-4">
-              <span className={`font-display text-5xl ${nape.grade === "F" ? "text-red-300" : "text-accent"}`}>
+              <span className={`font-display text-5xl ${nape.grade === "F" ? "text-red-700" : "text-accent"}`}>
                 {nape.complete ? nape.grade : "–"}
               </span>
               <span className="text-paper text-lg">{nape.points}/100 points</span>
@@ -268,7 +268,7 @@ const PropertyReport = () => {
               <Row key={cat.id} label={cat.title} value={`${nape.perCategory[cat.id]} / ${cat.points} pts`} status="estimated" />
             ))}
             {nape.noGoFlags.length > 0 && (
-              <p className="text-red-300 text-sm leading-relaxed mt-4">
+              <p className="text-red-700 text-sm leading-relaxed mt-4">
                 <FiAlertTriangle className="inline mr-1.5" />
                 No-go conditions flagged: {nape.noGoFlags.map((f) => f.q).join(" · ")}
               </p>
@@ -297,7 +297,7 @@ const PropertyReport = () => {
         <ul className="space-y-2">
           {missing.map((m, i) => (
             <li key={i} className="flex items-start gap-2.5 text-paper-dim text-sm leading-relaxed">
-              <FiHelpCircle className="shrink-0 mt-0.5 text-amber-300" /> {m}
+              <FiHelpCircle className="shrink-0 mt-0.5 text-amber-700" /> {m}
             </li>
           ))}
         </ul>

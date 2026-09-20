@@ -67,9 +67,12 @@ body {
   max-width: 1280px;
 }
 
+/* Headline utility. One typeface site-wide, one heading weight, tight
+   tracking, so legacy pages match the homepage without per-file edits. */
 @utility font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  font-weight: 800;
+  letter-spacing: -0.025em;
 }
 
 html, body { overflow-x: hidden; }
