@@ -2,7 +2,9 @@
 
 @theme {
   --font-primary: "Inter", sans-serif;
-  --font-display: "Fraunces", "Inter", serif;
+  /* One typeface site-wide. font-display is kept as an alias so older
+     components need no edits; it resolves to Inter. */
+  --font-display: "Inter", sans-serif;
 
   /* 2026 redesign palette — dark canvas, lime accent */
   --color-canvas: #0E0F0C;        /* near-black background */
@@ -22,7 +24,6 @@
   --color-mist: #F4F6F2;
   --color-gold: #B8892E;
   --color-atlas-blue: #2B5C8A;
-  --font-script: "Caveat", cursive;
 
   /* legacy tokens kept so older components still render until refactored */
   --color-primary: #1e1e1e;
@@ -50,9 +51,6 @@
 .theme-light ::selection { background: #2E5E44; color: #fff; }
 .theme-light :focus-visible { outline-color: #2E5E44; }
 
-@utility font-script {
-  font-family: var(--font-script);
-}
 
 body {
   margin: 0;
