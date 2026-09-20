@@ -33,7 +33,7 @@ const Row = ({ i }) => {
       </div>
       <div>
         <p className="text-accent text-[0.65rem] font-semibold tracking-[0.24em] uppercase mb-1.5">{eyebrow}</p>
-        <h3 className="font-display font-medium text-paper text-2xl leading-tight mb-1.5">{title}</h3>
+        <h3 className="font-primary font-extrabold tracking-[-0.025em] text-paper text-2xl leading-tight mb-1.5">{title}</h3>
         <p className="text-paper-dim text-sm leading-relaxed">{desc}</p>
       </div>
     </li>
@@ -53,7 +53,7 @@ const Possible = () => {
         <div className="container mx-auto px-5 sm:px-8 py-16 lg:py-24 grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div ref={ref} className="lg:col-span-5 lg:sticky lg:top-28">
             <p className="text-accent text-[0.7rem] font-semibold tracking-[0.28em] uppercase mb-4">{eyebrow}</p>
-            <h2 className="font-display font-medium text-paper text-4xl sm:text-5xl leading-[1.02] mb-5">{heading}</h2>
+            <h2 className="font-primary font-extrabold tracking-[-0.025em] text-paper text-4xl sm:text-5xl leading-[1.02] mb-5">{heading}</h2>
             <p className="text-paper-dim text-base leading-relaxed mb-8 max-w-md">{body}</p>
             <Link
               to="/property"

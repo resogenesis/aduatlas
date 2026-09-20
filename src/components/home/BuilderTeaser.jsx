@@ -19,7 +19,7 @@ const Point = ({ i }) => {
   const desc = useContentText(`home.builders.point.${i}.desc`);
   return (
     <li ref={ref} className="grid grid-cols-[2.5rem_1fr] gap-4 py-5 border-t border-white/15 last:border-b">
-      <span className="font-display text-gold text-xl leading-none pt-0.5">{String(i + 1).padStart(2, "0")}</span>
+      <span className="font-primary font-extrabold text-gold text-lg leading-none pt-0.5">{String(i + 1).padStart(2, "0")}</span>
       <div>
         <h3 className="font-semibold text-white text-base leading-tight mb-1">{title}</h3>
         <p className="text-white/70 text-sm leading-relaxed">{desc}</p>
@@ -43,7 +43,7 @@ const BuilderTeaser = () => {
         <div className="container mx-auto px-5 sm:px-8 py-16 lg:py-24 grid lg:grid-cols-12 gap-12 items-center">
           <div ref={ref} className="lg:col-span-5">
             <p className="text-gold text-[0.7rem] font-semibold tracking-[0.28em] uppercase mb-4">{eyebrow}</p>
-            <h2 className="font-display font-medium text-4xl sm:text-5xl leading-[1.02] mb-5">{heading}</h2>
+            <h2 className="font-primary font-extrabold tracking-[-0.025em] text-4xl sm:text-5xl leading-[1.02] mb-5">{heading}</h2>
             <p className="text-white/75 text-base leading-relaxed mb-8 max-w-md">{body}</p>
             <Link
               to="/builders"

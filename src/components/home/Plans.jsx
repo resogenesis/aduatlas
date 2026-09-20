@@ -48,7 +48,7 @@ const PlanCard = ({ i, featuredLabel }) => {
         <p className={`text-[0.7rem] font-semibold tracking-[0.24em] uppercase ${dim}`}>{name}</p>
         {featured && <span className="px-2.5 py-1 rounded-full bg-gold/90 text-forest-deep text-[0.6rem] font-semibold tracking-[0.18em] uppercase">{featuredLabel}</span>}
       </div>
-      <p className={`font-display font-medium text-5xl leading-none mb-2 ${ink}`}>{price}</p>
+      <p className={`font-primary font-extrabold tracking-[-0.025em] text-5xl leading-none mb-2 ${ink}`}>{price}</p>
       <p className={`text-sm mb-7 ${dim}`}>{tagline}</p>
       <ul className="space-y-3 flex-1">
         {bullets.map((b, j) => (
@@ -85,7 +85,7 @@ const Plans = () => {
           <div ref={ref} className="grid lg:grid-cols-12 gap-6 items-end mb-12 lg:mb-16">
             <div className="lg:col-span-7">
               <p className="text-accent text-[0.7rem] font-semibold tracking-[0.28em] uppercase mb-4">{eyebrow}</p>
-              <h2 className="font-display font-medium text-paper text-4xl sm:text-5xl leading-[1.02]">{heading}</h2>
+              <h2 className="font-primary font-extrabold tracking-[-0.025em] text-paper text-4xl sm:text-5xl leading-[1.02]">{heading}</h2>
             </div>
             <p className="lg:col-span-5 text-paper-dim text-base leading-relaxed">{body}</p>
           </div>

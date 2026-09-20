@@ -14,7 +14,7 @@ const Step = ({ i }) => {
   return (
     <li ref={ref} className="relative pt-8">
       <span className="absolute top-0 left-0 w-2.5 h-2.5 -translate-y-1/2 rounded-full bg-accent" aria-hidden />
-      <p className="font-display text-accent text-3xl leading-none mb-4">{String(i + 1).padStart(2, "0")}</p>
+      <p className="font-primary font-extrabold text-accent text-3xl leading-none tracking-tight mb-4">{String(i + 1).padStart(2, "0")}</p>
       <h3 className="font-semibold text-paper text-lg leading-tight mb-2">{title}</h3>
       <p className="text-paper-dim text-sm leading-relaxed max-w-[16rem]">{desc}</p>
     </li>
