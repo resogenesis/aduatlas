@@ -5,9 +5,9 @@
 // for the pattern.
 import heroImg from "../../assets/home/hero_adu.jpg";
 import missionImg from "../../assets/home/hero_image.png";
-import familyImg from "../../assets/home/choose_img2.png";
-import incomeImg from "../../assets/home/choose_img3.png";
-import communityImg from "../../assets/home/container_img.png";
+import familyImg from "../../assets/home/possible_family.jpg";
+import incomeImg from "../../assets/home/choose_img2.png";
+import communityImg from "../../assets/home/possible_community.jpg";
 
 const PAGE = "Home";
 const t = (label, def) => ({ page: PAGE, label, type: "text", default: def });
@@ -44,15 +44,15 @@ export const homePossible = {
   "home.possible.card.0.eyebrow": t("Card 1 eyebrow", "For family"),
   "home.possible.card.0.title": t("Card 1 title", "More Space\nfor What Matters"),
   "home.possible.card.0.desc": t("Card 1 description", "Create flexible living for family, friends, or caregivers."),
-  "home.possible.card.0.image": img("Card 1 photo", familyImg, "A compact green ADU with sliding glass doors"),
+  "home.possible.card.0.image": img("Card 1 photo", familyImg, "A warmly lit ADU living room seen through open glass doors"),
   "home.possible.card.1.eyebrow": t("Card 2 eyebrow", "For income"),
   "home.possible.card.1.title": t("Card 2 title", "Generate\nRental Revenue"),
   "home.possible.card.1.desc": t("Card 2 description", "Turn your property into a long-term asset."),
-  "home.possible.card.1.image": img("Card 2 photo", incomeImg, "A prefab ADU module being lowered into place by crane"),
+  "home.possible.card.1.image": img("Card 2 photo", incomeImg, "A finished detached ADU with its own entrance"),
   "home.possible.card.2.eyebrow": t("Card 3 eyebrow", "For community"),
   "home.possible.card.2.title": t("Card 3 title", "Stronger\nNeighborhoods"),
   "home.possible.card.2.desc": t("Card 3 description", "Thoughtful ADUs create more housing and stronger communities."),
-  "home.possible.card.2.image": img("Card 3 photo", communityImg, "A modular unit arriving on site"),
+  "home.possible.card.2.image": img("Card 3 photo", communityImg, "A backyard ADU beside the neighboring homes"),
 };
 
 // ── Plans (Golden / Platinum / Concierge, from the Phase 1 scope) ─────────
