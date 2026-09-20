@@ -6,7 +6,6 @@ import { BUILDER_POINTS_COUNT } from "../../lib/contentRegistry/home";
 import { AdminEditableSection } from "../../lib/adminEditBridge";
 
 const EDIT_KEYS = [
-  "home.builders.eyebrow",
   "home.builders.heading",
   "home.builders.body",
   "home.builders.cta",
@@ -32,7 +31,6 @@ const Point = ({ i }) => {
 // list on the right.
 const BuilderTeaser = () => {
   const ref = useReveal();
-  const eyebrow = useContentText("home.builders.eyebrow");
   const heading = useContentText("home.builders.heading").replace("\n", " ");
   const body = useContentText("home.builders.body");
   const cta = useContentText("home.builders.cta");
@@ -42,7 +40,6 @@ const BuilderTeaser = () => {
       <section className="bg-forest-deep text-white">
         <div className="container mx-auto px-5 sm:px-8 py-16 lg:py-24 grid lg:grid-cols-12 gap-12 items-center">
           <div ref={ref} className="lg:col-span-5">
-            <p className="text-gold text-[0.7rem] font-semibold tracking-[0.28em] uppercase mb-4">{eyebrow}</p>
             <h2 className="font-primary font-extrabold tracking-[-0.025em] text-4xl sm:text-5xl leading-[1.02] mb-5">{heading}</h2>
             <p className="text-white/75 text-base leading-relaxed mb-8 max-w-md">{body}</p>
             <Link

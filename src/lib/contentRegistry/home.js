@@ -37,19 +37,15 @@ export const homeHero = {
 // ── What's possible (text + three photo cards) ────────────────────────────
 export const POSSIBLE_CARDS_COUNT = 3;
 export const homePossible = {
-  "home.possible.eyebrow": t("Section eyebrow", "Real data. Real possibilities."),
   "home.possible.heading": t("Section heading (\\n = line break)", "See What's Possible\non Your Property."),
   "home.possible.body": t("Section paragraph", "Every property is unique. ADUAtlas gives you the knowledge, tools, and connections to make the most of yours, whether you're building for family, for income, or for the future."),
   "home.possible.cta": t("Section button", "Check My Property"),
-  "home.possible.card.0.eyebrow": t("Card 1 eyebrow", "For family"),
   "home.possible.card.0.title": t("Card 1 title", "More Space\nfor What Matters"),
   "home.possible.card.0.desc": t("Card 1 description", "Create flexible living for family, friends, or caregivers."),
   "home.possible.card.0.image": img("Card 1 photo", familyImg, "A warmly lit ADU living room seen through open glass doors"),
-  "home.possible.card.1.eyebrow": t("Card 2 eyebrow", "For income"),
   "home.possible.card.1.title": t("Card 2 title", "Generate\nRental Revenue"),
   "home.possible.card.1.desc": t("Card 2 description", "Turn your property into a long-term asset."),
   "home.possible.card.1.image": img("Card 2 photo", incomeImg, "A finished detached ADU with its own entrance"),
-  "home.possible.card.2.eyebrow": t("Card 3 eyebrow", "For community"),
   "home.possible.card.2.title": t("Card 3 title", "Stronger\nNeighborhoods"),
   "home.possible.card.2.desc": t("Card 3 description", "Thoughtful ADUs create more housing and stronger communities."),
   "home.possible.card.2.image": img("Card 3 photo", communityImg, "A backyard ADU beside the neighboring homes"),
@@ -61,7 +57,6 @@ export const homePossible = {
 export const PLANS_COUNT = 3;
 export const PLAN_BULLETS_COUNT = 4;
 export const homePlans = {
-  "home.plans.eyebrow": t("Plans eyebrow", "Plans"),
   "home.plans.heading": t("Plans heading (\\n = line break)", "Teach me. Analyze my property.\nHelp me move forward."),
   "home.plans.body": t("Plans paragraph", "Start with the course, add a property-specific feasibility study, or bring in a concierge for the next steps."),
   "home.plans.cta": t("Plans link", "Compare all plans"),
@@ -93,7 +88,6 @@ export const homePlans = {
 // ── Builder teaser ────────────────────────────────────────────────────────
 export const BUILDER_POINTS_COUNT = 3;
 export const homeBuilders = {
-  "home.builders.eyebrow": t("Builder eyebrow", "Find a builder"),
   "home.builders.heading": t("Builder heading (\\n = line break)", "Builders who work with\nprepared homeowners."),
   "home.builders.body": t("Builder paragraph", "Browse ADU builders by state and service area, see what they specialize in, and request an introduction when you are ready."),
   "home.builders.cta": t("Builder button", "Find a Builder"),
@@ -107,7 +101,6 @@ export const homeBuilders = {
 
 // ── Mission band ──────────────────────────────────────────────────────────
 export const homeMission = {
-  "home.mission.eyebrow": t("Mission eyebrow", "Built for a brighter tomorrow"),
   "home.mission.heading": t("Mission heading", "More Homes. Stronger Communities."),
   "home.mission.body": t("Mission paragraph", "ADUs create housing, support families, and increase opportunity. We're here to make it easier for homeowners, builders, and communities to bring them to life."),
   "home.mission.cta": t("Mission button", "About Our Mission"),
@@ -119,7 +112,6 @@ export const homeMission = {
 // permission) before any public deploy.
 export const TESTIMONIALS_COUNT = 3;
 export const homeTestimonials = {
-  "home.testimonials.eyebrow": t("Testimonials eyebrow", "What homeowners are saying"),
   "home.testimonials.heading": t("Testimonials heading", "Real People. Real Progress."),
   "home.testimonials.link": t("Testimonials link", "See More Stories"),
   "home.testimonials.item.0.quote": t("Quote 1", "ADUAtlas made it easy to understand what was possible on my property. The report was super helpful and connected me with an amazing builder."),

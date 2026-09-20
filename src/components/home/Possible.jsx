@@ -6,23 +6,20 @@ import { POSSIBLE_CARDS_COUNT } from "../../lib/contentRegistry/home";
 import { AdminEditableSection } from "../../lib/adminEditBridge";
 
 const EDIT_KEYS = [
-  "home.possible.eyebrow",
   "home.possible.heading",
   "home.possible.body",
   "home.possible.cta",
   ...Array.from({ length: POSSIBLE_CARDS_COUNT }, (_, i) => [
-    `home.possible.card.${i}.eyebrow`,
     `home.possible.card.${i}.title`,
     `home.possible.card.${i}.desc`,
     `home.possible.card.${i}.image`,
   ]).flat(),
 ];
 
-// Editorial rows instead of cards: a square photo, an eyebrow, a title and a
+// Editorial rows instead of cards: a square photo, a title and a
 // line of copy, separated by hairlines.
 const Row = ({ i }) => {
   const ref = useReveal(120 + i * 100);
-  const eyebrow = useContentText(`home.possible.card.${i}.eyebrow`);
   const title = useContentText(`home.possible.card.${i}.title`).replace("\n", " ");
   const desc = useContentText(`home.possible.card.${i}.desc`);
   const image = useContentImage(`home.possible.card.${i}.image`);
@@ -32,7 +29,6 @@ const Row = ({ i }) => {
         <img src={image.src} alt={image.alt} className="w-full h-full object-cover" />
       </div>
       <div>
-        <p className="text-accent text-[0.65rem] font-semibold tracking-[0.24em] uppercase mb-1.5">{eyebrow}</p>
         <h3 className="font-primary font-extrabold tracking-[-0.025em] text-paper text-2xl leading-tight mb-1.5">{title}</h3>
         <p className="text-paper-dim text-sm leading-relaxed">{desc}</p>
       </div>
@@ -42,7 +38,6 @@ const Row = ({ i }) => {
 
 const Possible = () => {
   const ref = useReveal();
-  const eyebrow = useContentText("home.possible.eyebrow");
   const heading = useContentText("home.possible.heading").replace("\n", " ");
   const body = useContentText("home.possible.body");
   const cta = useContentText("home.possible.cta");
@@ -52,7 +47,6 @@ const Possible = () => {
       <section className="bg-surface-1-solid">
         <div className="container mx-auto px-5 sm:px-8 py-16 lg:py-24 grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div ref={ref} className="lg:col-span-5 lg:sticky lg:top-28">
-            <p className="text-accent text-[0.7rem] font-semibold tracking-[0.28em] uppercase mb-4">{eyebrow}</p>
             <h2 className="font-primary font-extrabold tracking-[-0.025em] text-paper text-4xl sm:text-5xl leading-[1.02] mb-5">{heading}</h2>
             <p className="text-paper-dim text-base leading-relaxed mb-8 max-w-md">{body}</p>
             <Link
