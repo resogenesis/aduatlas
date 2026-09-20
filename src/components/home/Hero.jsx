@@ -76,9 +76,9 @@ const Hero = () => {
           {/* Photo */}
           <div className="lg:col-span-7 relative animate-fade-up lg:-mr-8 xl:-mr-[calc((100vw-1280px)/2+2rem)]" style={{ animationDelay: "120ms" }}>
             <div className="rounded-[2rem] lg:rounded-r-none overflow-hidden aspect-[3/2] lg:aspect-auto lg:h-[34rem] xl:h-[38rem] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
-              <img src={image.src} alt={image.alt} className="w-full h-full object-cover object-[60%_center]" />
+              <img src={image.src} alt={image.alt} className="w-full h-full object-cover object-[45%_center]" />
             </div>
-            <div className="bg-canvas rounded-2xl shadow-[0_20px_50px_-20px_rgba(23,32,27,0.35)] border border-stroke p-5 sm:p-6 w-[min(100%,19rem)] mt-5 lg:mt-0 lg:absolute lg:bottom-8 lg:right-8">
+            <div className="bg-canvas rounded-2xl shadow-[0_20px_50px_-20px_rgba(23,32,27,0.35)] border border-stroke p-5 sm:p-6 w-[min(100%,19rem)] mt-5 lg:mt-0 lg:absolute lg:bottom-8 lg:left-6">
               <p className="font-semibold text-paper text-base leading-snug mb-4">{cardTitle}</p>
               <ul className="space-y-2.5">
                 {cardItems.map((item, i) => {
