@@ -8,7 +8,7 @@ import Header from "../components/common/Header";
 const RootLayout = () => (
   <div className="theme-light min-h-screen flex flex-col">
     <Header />
-    <main className="w-full flex-1 overflow-x-hidden">
+    <main className="w-full flex-1 overflow-x-clip">
       <Outlet />
     </main>
     <Footer />
