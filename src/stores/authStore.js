@@ -77,7 +77,6 @@ export const currentUser = () => {
 export const routeForUser = (user) => {
   if (!user) return "/";
   if (user.role === "admin") return "/admin";
-  if (user.role === "pro") return "/builder";
   if (user.paid) return "/dashboard";
   return "/unlock";
 };

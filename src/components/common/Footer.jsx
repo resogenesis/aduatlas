@@ -10,7 +10,7 @@ const sections = [
       { name: "How It Works", path: "/how-to-adu" },
       { name: "Course", path: "/course-outline" },
       { name: "Plans & Pricing", path: "/unlock" },
-      { name: "Find a Builder", path: "/builders" },
+      { name: "Find a Builder", path: "/find-a-builder" },
     ],
   },
   {

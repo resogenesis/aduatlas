@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layout/RootLayout";
 import AppLayout from "../layout/AppLayout";
-import BuilderLayout from "../layout/BuilderLayout";
 
 import Home from "../pages/Home";
 import About from "../pages/About";
@@ -18,6 +17,8 @@ import FeasibilityStudy from "../pages/FeasibilityStudy";
 import Welcome from "../pages/Welcome";
 import BuilderListing from "../pages/BuilderListing";
 import BuilderProfile from "../pages/BuilderProfile";
+import FindBuilder from "../pages/FindBuilder";
+import AdminBuilders from "../pages/admin/AdminBuilders";
 import Feasibility from "../pages/Feasibility";
 import UtilityEstimator from "../pages/UtilityEstimator";
 import PacketHub from "../pages/tools/PacketHub";
@@ -30,13 +31,6 @@ import TotalProjectCost from "../pages/tools/TotalProjectCost";
 import ReadyScore from "../pages/tools/ReadyScore";
 import PropertyReport from "../pages/tools/PropertyReport";
 
-import BuilderDashboard from "../pages/builder/Dashboard";
-import BuilderLeads from "../pages/builder/Leads";
-import BuilderLeadDetail from "../pages/builder/LeadDetail";
-import BuilderProfilePage from "../pages/builder/Profile";
-import BuilderBilling from "../pages/builder/Billing";
-import BuilderSettings from "../pages/builder/Settings";
-import BuilderGate from "../components/gates/BuilderGate";
 
 import Dashboard from "../pages/app/Dashboard";
 import CourseIndex from "../pages/app/CourseIndex";
@@ -72,6 +66,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "property", element: <Property /> },
+      { path: "find-a-builder", element: <FindBuilder /> },
       { path: "methodology", element: <Methodology /> },
       { path: "unlock", element: <Unlock /> },
       { path: "feasibility-study", element: <FeasibilityStudy /> },
@@ -102,24 +97,12 @@ const router = createBrowserRouter([
       { index: true, element: <AdminOverview /> },
       { path: "content", element: <AdminContent /> },
       { path: "studies", element: <AdminStudies /> },
+      { path: "builders", element: <AdminBuilders /> },
       { path: "users", element: <AdminUsers /> },
       { path: "admins", element: <AdminAdmins /> },
     ],
   },
 
-  // ─── Builder portal (sidebar layout, role-gated) ─────────────────
-  {
-    path: "/builder",
-    element: <BuilderGate><BuilderLayout /></BuilderGate>,
-    children: [
-      { index: true, element: <BuilderDashboard /> },
-      { path: "leads", element: <BuilderLeads /> },
-      { path: "leads/:id", element: <BuilderLeadDetail /> },
-      { path: "profile", element: <BuilderProfilePage /> },
-      { path: "billing", element: <BuilderBilling /> },
-      { path: "settings", element: <BuilderSettings /> },
-    ],
-  },
 
   // ─── Logged-in homeowner app (sidebar layout) ────────────────────
   {

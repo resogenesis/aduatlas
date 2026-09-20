@@ -2,16 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthCard from "../../components/common/AuthCard";
 import { FormField, PrimaryButton } from "../../components/common/FormField";
-import { routeForUser, signup } from "../../stores/authStore";
+import { signup } from "../../stores/authStore";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [role, setRole] = useState("homeowner");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const isPro = role === "pro";
 
   const [notice, setNotice] = useState("");
 
@@ -21,7 +18,7 @@ const Signup = () => {
     setNotice("");
     // Real Supabase Auth when configured; mock otherwise. Email is the
     // identity — display name derives from it in the auth store.
-    const res = await signup({ email, password, role });
+    const res = await signup({ email, password, role: "homeowner" });
     if (!res.ok) {
       setError(res.error);
       return;
@@ -31,20 +28,15 @@ const Signup = () => {
       setNotice("Check your email to confirm your account, then log in.");
       return;
     }
-    // New homeowners take the 10-question knowledge check first (funnels into
-    // the course); builders/pros go straight to their portal.
-    if (res.user.role === "pro") {
-      navigate(routeForUser(res.user), { replace: true });
-    } else {
-      navigate("/unlock", { replace: true });
-    }
+    // Account created: choose a plan next (Phase 1 funnel).
+    navigate("/unlock", { replace: true });
   };
 
   return (
     <AuthCard
       eyebrow="Create account"
       title="Start your ADU plan."
-      subtitle="One account. Lifetime access to your course, worksheets, and feasibility study."
+      subtitle="One account for your course, worksheets, feasibility study, and builder introductions."
       footer={
         <>
           Already a member?{" "}
@@ -54,23 +46,6 @@ const Signup = () => {
         </>
       }
     >
-      <div className="grid grid-cols-2 gap-1 p-1 bg-canvas border border-stroke rounded-full mb-7">
-        <button
-          type="button"
-          onClick={() => setRole("homeowner")}
-          className={`py-2.5 rounded-full text-xs font-medium transition cursor-pointer ${ role ==="homeowner"?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper"}`}
-        >
-          Homeowner
-        </button>
-        <button
-          type="button"
-          onClick={() => setRole("pro")}
-          className={`py-2.5 rounded-full text-xs font-medium transition cursor-pointer ${ role ==="pro"?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper"}`}
-        >
-          Builder / Pro
-        </button>
-      </div>
-
       <form onSubmit={handleSubmit}>
         <FormField
           label="Email"
@@ -102,7 +77,7 @@ const Signup = () => {
         )}
 
         <PrimaryButton type="submit">
-          {isPro ? "Sign up as Builder" : "Sign up as Homeowner"}
+          Create my account
         </PrimaryButton>
       </form>
     </AuthCard>

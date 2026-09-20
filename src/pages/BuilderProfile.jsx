@@ -1,83 +1,198 @@
-import { useParams, Link } from "react-router-dom";
-import { FiPlay, FiMapPin, FiCheck } from "react-icons/fi";
-import img1 from "../assets/home/choose_img1.png";
-import img2 from "../assets/home/choose_img2.png";
-import img3 from "../assets/home/choose_img3.png";
-import img4 from "../assets/home/container_img.png";
-import img5 from "../assets/home/how_it_works.png";
-import img6 from "../assets/home/hero_image.png";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { FiArrowLeft, FiBookmark, FiCheck, FiExternalLink, FiGlobe, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
+import { APPROACH_LABELS, SERVICE_TYPE_LABELS, SPECIALTY_LABELS, fetchBuilder, fetchMyIntros, fetchSaved, publicUrl, requestIntro, toggleSaved } from "../lib/builders";
 
-const gallery = [img1, img2, img3, img4, img5, img6, img1, img2, img3, img4, img5, img6];
+// Builder profile: description, service area, specialties, up to 3 photos and
+// 2 videos, the website and one extra link, save, and request an introduction.
+
+const embedUrl = (url = "") => {
+  const yt = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([\w-]{6,})/);
+  if (yt) return `https://www.youtube.com/embed/${yt[1]}`;
+  const vm = url.match(/vimeo\.com\/(\d+)/);
+  if (vm) return `https://player.vimeo.com/video/${vm[1]}`;
+  return null;
+};
 
 const BuilderProfile = () => {
-  const { id } = useParams();
+  const { id: slug } = useParams();
+  const [b, setB] = useState(undefined);
+  const [saved, setSaved] = useState(false);
+  const [intro, setIntro] = useState(null);
+  const [asking, setAsking] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchBuilder(slug).then(async (r) => {
+      if (cancelled) return;
+      const builder = r.ok ? r.builder : null;
+      setB(builder);
+      if (!builder) return;
+      const [savedSet, intros] = await Promise.all([fetchSaved(), fetchMyIntros()]);
+      if (cancelled) return;
+      setSaved(savedSet.has(builder.id));
+      setIntro(intros.find((i) => i.builder_id === builder.id) || null);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+
+  if (b === undefined) return <div className="px-5 sm:px-8 lg:px-12 py-14 text-paper-dim text-sm">Loading…</div>;
+  if (!b)
+    return (
+      <div className="px-5 sm:px-8 lg:px-12 py-14 max-w-3xl mx-auto">
+        <p className="text-paper mb-4">That builder is not available.</p>
+        <Link to="/builders" className="text-accent text-sm font-medium inline-flex items-center gap-1">
+          <FiArrowLeft /> Back to builders
+        </Link>
+      </div>
+    );
+
+  const logo = publicUrl(b.logo_path);
+  const photos = (b.photos || []).map(publicUrl).filter(Boolean);
+  const videos = (b.videos || []).map(embedUrl).filter(Boolean);
+
+  const onSave = async () => {
+    const r = await toggleSaved(b.id, saved);
+    if (r.ok) setSaved(r.saved);
+  };
+  const sendIntro = async (e) => {
+    e.preventDefault();
+    setError("");
+    const r = await requestIntro(b.id, message);
+    if (!r.ok) {
+      setError(r.error === "already-requested" ? "You already requested an introduction to this builder." : r.error === "not-signed-in" ? "Sign in to request an introduction." : `Could not send: ${r.error}`);
+      return;
+    }
+    setIntro(r.intro);
+    setAsking(false);
+  };
+
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-10">
-      <Link to="/builders" className="text-sm text-[#2F5D50] font-semibold">← Back to directory</Link>
+    <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-6xl mx-auto">
+      <Link to="/builders" className="inline-flex items-center gap-1 text-sm text-paper-dim hover:text-paper mb-6">
+        <FiArrowLeft /> Back to builders
+      </Link>
 
-      <div className="grid lg:grid-cols-[320px_1fr] gap-8 mt-4">
-        <aside className="bg-white rounded-2xl border border-gray-200 p-5">
-          <img src={img1} alt="" className="w-full h-40 rounded-xl object-cover mb-4" />
-          <h2 className="text-xl font-semibold text-primary">Pacific ADU Builders</h2>
-          <p className="text-sm text-gray-500 inline-flex items-center gap-1 mt-1"><FiMapPin /> Austin, TX</p>
+      <div className="grid lg:grid-cols-[22rem_1fr] gap-8 items-start">
+        <aside className="bg-canvas border border-stroke rounded-3xl p-6 lg:sticky lg:top-8">
+          {logo ? <img src={logo} alt={`${b.name} logo`} className="h-16 w-auto object-contain mb-4" /> : <div className="h-16 w-16 rounded-2xl bg-surface-1-solid mb-4" />}
+          <h1 className="font-display text-paper text-2xl leading-tight mb-1">{b.name}</h1>
+          <p className="text-paper-dim text-sm inline-flex items-center gap-1.5 mb-5">
+            <FiMapPin /> {[...(b.cities || []).slice(0, 3), b.state].filter(Boolean).join(", ")}
+          </p>
 
-          <div className="flex gap-2 mt-4">
-            <button className="flex-1 py-2 rounded-md bg-[#2F5D50] text-white text-sm font-semibold">Contact</button>
-            <button className="flex-1 py-2 rounded-md border border-gray-300 text-sm">Save</button>
+          <div className="flex gap-2 mb-6">
+            {intro ? (
+              <span className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-surface-1-solid text-paper text-sm font-medium">
+                <FiCheck className="text-accent" /> Introduction {intro.status === "sent" ? "sent" : intro.status === "declined" ? "not available" : "requested"}
+              </span>
+            ) : (
+              <button type="button" onClick={() => setAsking(true)} className="flex-1 px-4 py-3 rounded-xl bg-accent text-accent-fg text-sm font-semibold hover:bg-accent-dim transition-colors">
+                Request introduction
+              </button>
+            )}
+            <button type="button" onClick={onSave} aria-pressed={saved} className={`px-4 py-3 rounded-xl border text-sm font-medium transition inline-flex items-center gap-2 ${saved ? "bg-accent text-accent-fg border-accent" : "border-stroke text-paper hover:border-accent"}`}>
+              <FiBookmark className={saved ? "fill-current" : ""} /> {saved ? "Saved" : "Save"}
+            </button>
           </div>
 
-          <div className="mt-6 space-y-3 text-sm">
+          <dl className="space-y-4 text-sm">
             <div>
-              <h4 className="font-semibold text-primary mb-1">ADU Types</h4>
-              <p className="text-secondary">Detached, Prefab, Two-Bedroom</p>
+              <dt className="text-paper-dim mb-1">ADU types</dt>
+              <dd className="text-paper">{(b.specialties || []).map((s) => SPECIALTY_LABELS[s] || s).join(", ") || "Not listed"}</dd>
             </div>
             <div>
-              <h4 className="font-semibold text-primary mb-1">Size Range</h4>
-              <p className="text-secondary">400–1,200 sqft</p>
+              <dt className="text-paper-dim mb-1">Services</dt>
+              <dd className="text-paper">{(b.service_types || []).map((s) => SERVICE_TYPE_LABELS[s] || s).join(", ") || "Not listed"}</dd>
             </div>
             <div>
-              <h4 className="font-semibold text-primary mb-1">Pricing Range</h4>
-              <p className="text-secondary">$90,000 – $350,000</p>
+              <dt className="text-paper-dim mb-1">Approach</dt>
+              <dd className="text-paper">{APPROACH_LABELS[b.build_approach]}</dd>
             </div>
-          </div>
+            {(b.cities || []).length > 0 && (
+              <div>
+                <dt className="text-paper-dim mb-1">Areas served</dt>
+                <dd className="text-paper">{b.cities.join(", ")}</dd>
+              </div>
+            )}
+          </dl>
 
-          <div className="mt-5 p-3 rounded-lg bg-[#2F5D50] text-white text-sm">
-            <p className="font-semibold mb-1">Talk to this builder</p>
-            <p className="text-white/80 text-xs">Profile ID: {id}</p>
+          <div className="mt-6 pt-5 border-t border-stroke space-y-2 text-sm">
+            {b.website && (
+              <a href={b.website} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-accent hover:underline underline-offset-2">
+                <FiGlobe /> Website
+              </a>
+            )}
+            {b.external_link && (
+              <a href={b.external_link} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-accent hover:underline underline-offset-2">
+                <FiExternalLink /> More from this builder
+              </a>
+            )}
+            {b.contact_email && (
+              <a href={`mailto:${b.contact_email}`} className="flex items-center gap-2 text-paper-dim hover:text-paper">
+                <FiMail /> {b.contact_email}
+              </a>
+            )}
+            {b.contact_phone && (
+              <a href={`tel:${b.contact_phone}`} className="flex items-center gap-2 text-paper-dim hover:text-paper">
+                <FiPhone /> {b.contact_phone}
+              </a>
+            )}
           </div>
         </aside>
 
-        <section className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-8">
-          <h3 className="text-xl font-semibold text-primary mb-3">About</h3>
-          <p className="text-secondary text-sm leading-relaxed">
-            Pacific ADU Builders designs and constructs detached and prefab ADUs across the Southwest. With more than 12 years of experience navigating local zoning and permitting, our team delivers move in ready units on schedule and on budget.
-          </p>
-
-          <h3 className="text-xl font-semibold text-primary mt-6 mb-3">Services Offered</h3>
-          <div className="grid sm:grid-cols-2 gap-2">
-            {["Feasibility Report", "Permitting", "Site Prep", "Construction", "Finish Work", "Post build Warranty"].map((s) => (
-              <div key={s} className="text-sm inline-flex items-center gap-2"><FiCheck className="text-[#2F5D50]" /> {s}</div>
-            ))}
-          </div>
-
-          <h3 className="text-xl font-semibold text-primary mt-6 mb-3">Service Area</h3>
-          <p className="text-secondary text-sm">California, Oregon, Washington, Texas, Colorado, Florida (+)</p>
-
-          <h3 className="text-xl font-semibold text-primary mt-8 mb-3">Project Gallery</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {gallery.map((g, i) => (
-              <div key={i} className="relative rounded-xl overflow-hidden">
-                <img src={g} alt="" className="w-full h-36 object-cover" />
-                <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                  <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center">
-                    <FiPlay className="text-[#2F5D50] ml-0.5" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <main className="space-y-8">
+          {photos.length > 0 && (
+            <div className={`grid gap-3 ${photos.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}>
+              {photos.map((src, i) => (
+                <img key={src} src={src} alt={`${b.name} project ${i + 1}`} className={`w-full rounded-2xl object-cover ${i === 0 && photos.length === 3 ? "col-span-2 aspect-[16/9]" : "aspect-[4/3]"}`} />
+              ))}
+            </div>
+          )}
+          {b.description && (
+            <section className="bg-canvas border border-stroke rounded-3xl p-7">
+              <h2 className="font-display text-paper text-xl mb-3">About {b.name}</h2>
+              <p className="text-paper-dim text-sm sm:text-base leading-relaxed whitespace-pre-line">{b.description}</p>
+            </section>
+          )}
+          {videos.length > 0 && (
+            <section className="grid md:grid-cols-2 gap-4">
+              {videos.map((src) => (
+                <iframe key={src} src={src} title={`${b.name} video`} className="w-full aspect-video rounded-2xl bg-black" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              ))}
+            </section>
+          )}
+          {photos.length === 0 && !b.description && videos.length === 0 && <p className="text-paper-dim text-sm">This profile is being completed.</p>}
+        </main>
       </div>
+
+      {asking && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-paper/40 backdrop-blur-sm" onClick={() => setAsking(false)} />
+          <form onSubmit={sendIntro} className="relative w-full max-w-lg bg-canvas border border-stroke rounded-3xl p-7">
+            <h2 className="font-display text-paper text-2xl mb-2">Request an introduction</h2>
+            <p className="text-paper-dim text-sm mb-5">ADUAtlas will introduce you to {b.name} and share your project brief. Add anything you want them to know.</p>
+            <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={4} placeholder="Optional message" className="w-full px-4 py-3 bg-surface-1-solid border border-stroke rounded-xl text-paper focus:outline-none focus:ring-2 focus:ring-accent mb-4" />
+            {error && (
+              <p role="alert" className="text-sm text-red-700 mb-3">
+                {error}
+              </p>
+            )}
+            <div className="flex gap-3">
+              <button type="submit" className="px-5 py-3 rounded-xl bg-accent text-accent-fg text-sm font-semibold hover:bg-accent-dim">
+                Send request
+              </button>
+              <button type="button" onClick={() => setAsking(false)} className="px-5 py-3 rounded-xl border border-stroke text-paper text-sm font-medium">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

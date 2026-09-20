@@ -4,6 +4,7 @@
 //   users, create-admin, update-user, overview        (api/admin/_*.js)
 //   content/<action>                                   (api/admin/_content.js)
 //   studies/<action>                                   (api/admin/_studies.js)
+//   builders/<action>                                  (api/admin/_builders.js)
 // Each module re-checks requireAdmin, so nothing here is trusted on its own.
 //
 // Vercel's Vite build mangles the catch-all query param name, so the path is
@@ -14,6 +15,7 @@ import updateUser from "./_update_user.js";
 import overview from "./_overview.js";
 import content from "./_content.js";
 import studies from "./_studies.js";
+import builders from "./_builders.js";
 
 const segmentsAfterAdmin = (req) => {
   const pathname = (req.url || "").split("?")[0];
@@ -37,6 +39,8 @@ export default async function handler(req, res) {
       return content(req, res);
     case "studies":
       return studies(req, res);
+    case "builders":
+      return builders(req, res);
     default:
       res.status(404).json({ error: "not found" });
   }

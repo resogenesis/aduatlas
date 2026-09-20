@@ -43,7 +43,7 @@ const BuilderTeaser = () => {
             <h2 className="font-primary font-extrabold tracking-[-0.025em] text-4xl sm:text-5xl leading-[1.02] mb-5">{heading}</h2>
             <p className="text-white/75 text-base leading-relaxed mb-8 max-w-md">{body}</p>
             <Link
-              to="/builders"
+              to="/find-a-builder"
               className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-forest-deep font-semibold text-sm hover:bg-mist transition-colors"
             >
               {cta} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
