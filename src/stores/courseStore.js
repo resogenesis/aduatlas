@@ -10,7 +10,6 @@
 // `users.completed_chapters` (jsonb) and `users.builder_packet` (jsonb). Chapter
 // ids are stable strings ("m1c1", "m1quiz") so stored progress survives.
 
-import { loadAnswers } from "./quizStore";
 
 const COMPLETED_KEY = "aduatlas.course.completed";
 const PACKET_KEY = "aduatlas.packet";
@@ -801,16 +800,13 @@ const writePacket = (p) => {
 };
 
 export const loadPacket = () => {
-  // Merge quiz answers in as defaults so the packet picks up what's already
-  // known from the funnel.
-  const quiz = loadAnswers();
   const own = readPacket();
   return {
-    zip: quiz.zip || "",
-    lotSize: quiz.lotSize || "",
-    budget: quiz.budget || "",
-    purpose: quiz.purpose || "",
-    timeline: quiz.timeline || "",
+    zip: "",
+    lotSize: "",
+    budget: "",
+    purpose: "",
+    timeline: "",
     address: "",
     aduType: "",
     desiredSqft: "",

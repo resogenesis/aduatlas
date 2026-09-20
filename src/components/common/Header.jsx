@@ -4,8 +4,8 @@ import { FiChevronDown, FiMenu, FiX } from "react-icons/fi";
 import Logomark from "../brand/Logomark";
 
 // Phase 1 public pages (scope §2): How It Works, Course, Pricing, Find a
-// Builder, Resources. Property Check is the primary action. About, By State
-// and Videos live in the footer only.
+// Builder, Resources. Property Check is the primary action. About lives in
+// the footer only.
 const navLinks = [
   { name: "How It Works", path: "/how-to-adu" },
   { name: "Course", path: "/course-outline" },

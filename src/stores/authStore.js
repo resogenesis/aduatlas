@@ -79,7 +79,7 @@ export const routeForUser = (user) => {
   if (user.role === "admin") return "/admin";
   if (user.role === "pro") return "/builder";
   if (user.paid) return "/dashboard";
-  return "/quiz";
+  return "/unlock";
 };
 
 // ── Supabase-backed path ─────────────────────────────────────────────────────

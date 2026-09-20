@@ -16,11 +16,9 @@ const PAGE_ROUTES = {
   Home: "/",
   About: "/about",
   AduTypes: "/adu-types",
-  ChooseState: "/choose-your-state",
   "How to ADU": "/how-to-adu",
   FAQ: "/faq",
   "Course Outline": "/course-outline",
-  Videos: "/videos",
   Methodology: "/methodology",
   Legal: "/legal",
 };

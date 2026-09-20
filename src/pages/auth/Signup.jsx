@@ -36,7 +36,7 @@ const Signup = () => {
     if (res.user.role === "pro") {
       navigate(routeForUser(res.user), { replace: true });
     } else {
-      navigate("/knowledge-check", { replace: true });
+      navigate("/unlock", { replace: true });
     }
   };
 

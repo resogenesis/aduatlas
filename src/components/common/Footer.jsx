@@ -18,7 +18,6 @@ const sections = [
     links: [
       { name: "ADU Types", path: "/adu-types" },
       { name: "FAQ", path: "/faq" },
-      { name: "By State", path: "/choose-your-state" },
     ],
   },
   {

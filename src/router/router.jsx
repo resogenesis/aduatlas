@@ -8,16 +8,11 @@ import About from "../pages/About";
 import HowToAdu from "../pages/HowToAdu";
 import FAQ from "../pages/FAQ";
 import AduTypes from "../pages/AduTypes";
-import ChooseState from "../pages/ChooseState";
-import Videos from "../pages/Videos";
 import Pricing from "../pages/Pricing";
 import CourseOutline from "../pages/CourseOutline";
 import Legal from "../pages/Legal";
 import Property from "../pages/Property";
 import Methodology from "../pages/Methodology";
-import Quiz from "../pages/Quiz";
-import KnowledgeCheck from "../pages/KnowledgeCheck";
-import Results from "../pages/Results";
 import Unlock from "../pages/Unlock";
 import FeasibilityStudy from "../pages/FeasibilityStudy";
 import Welcome from "../pages/Welcome";
@@ -78,9 +73,6 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "property", element: <Property /> },
       { path: "methodology", element: <Methodology /> },
-      { path: "quiz", element: <Quiz /> },
-      { path: "knowledge-check", element: <KnowledgeCheck /> },
-      { path: "results", element: <Results /> },
       { path: "unlock", element: <Unlock /> },
       { path: "feasibility-study", element: <FeasibilityStudy /> },
       { path: "signup", element: <Unlock /> },
@@ -91,8 +83,6 @@ const router = createBrowserRouter([
       { path: "how-to-adu", element: <HowToAdu /> },
       { path: "faq", element: <FAQ /> },
       { path: "adu-types", element: <AduTypes /> },
-      { path: "choose-your-state", element: <ChooseState /> },
-      { path: "videos", element: <Videos /> },
       { path: "pricing", element: <Pricing /> },
       { path: "course-outline", element: <CourseOutline /> },
       { path: "legal", element: <Legal /> },

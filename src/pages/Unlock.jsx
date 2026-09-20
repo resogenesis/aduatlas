@@ -5,7 +5,6 @@ import { captureLead } from "../lib/supabase";
 import { startCheckout, checkoutEnabled } from "../lib/checkout";
 import { sendEmail, TEMPLATES } from "../lib/email";
 import { EV, identify, track } from "../lib/analytics";
-import { loadAnswers } from "../stores/quizStore";
 import { CONCIERGE_BOUNDARY, PLANS, PLAN_IDS, formatPrice, planById, upgradeCreditCents } from "../lib/plans";
 import { getPaidTier, isPaid } from "../stores/paymentStore";
 
@@ -48,8 +47,7 @@ const Unlock = () => {
       setEmailError("Enter a valid email address.");
       return;
     }
-    const quizAnswers = loadAnswers();
-    const res = await captureLead({ email, source: "unlock", quizAnswers });
+    const res = await captureLead({ email, source: "unlock" });
     if (res && res.ok === false && res.error !== "supabase-disabled") {
       setEmailError("We couldn't save your email. Please try again.");
       track(EV.EMAIL_CAPTURE_FAILED, { tier: selectedTier });
@@ -69,8 +67,7 @@ const Unlock = () => {
     setLoading(true);
     setCheckoutError("");
     track(EV.CHECKOUT_STARTED, { tier: selectedTier });
-    const quizAnswers = loadAnswers();
-    const res = await startCheckout({ tier: selectedTier, email, quizAnswers });
+    const res = await startCheckout({ tier: selectedTier, email });
     if (!res.ok) {
       setLoading(false);
       console.error("Checkout failed:", res.error);

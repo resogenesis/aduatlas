@@ -22,8 +22,6 @@ import { ABOUT_CONTENT } from "./about";
 import { HOW_TO_ADU_CONTENT } from "./howToAdu";
 import { FAQ_CONTENT } from "./faq";
 import { ADU_TYPES_CONTENT } from "./aduTypes";
-import { CHOOSE_STATE_CONTENT } from "./chooseState";
-import { VIDEOS_CONTENT } from "./videos";
 import { COURSE_OUTLINE_CONTENT } from "./courseOutline";
 import { LEGAL_CONTENT } from "./legal";
 import { METHODOLOGY_CONTENT } from "./methodology";
@@ -35,8 +33,6 @@ export const CONTENT = {
   ...HOW_TO_ADU_CONTENT,
   ...FAQ_CONTENT,
   ...ADU_TYPES_CONTENT,
-  ...CHOOSE_STATE_CONTENT,
-  ...VIDEOS_CONTENT,
   ...COURSE_OUTLINE_CONTENT,
   ...LEGAL_CONTENT,
   ...METHODOLOGY_CONTENT,
