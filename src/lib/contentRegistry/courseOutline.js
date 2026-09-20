@@ -28,8 +28,8 @@ export const COURSE_OUTLINE_CONTENT = {
 
   // ── Price / access strip ──
   "courseoutline.strip.0.label": { page: PAGE, label: "Strip card 1 label", type: "text", default: "Course fee" },
-  "courseoutline.strip.0.value": { page: PAGE, label: "Strip card 1 value", type: "text", default: "$99" },
-  "courseoutline.strip.0.desc": { page: PAGE, label: "Strip card 1 description", type: "text", default: "Your $99 is credited toward the $399 Property Feasibility Report when you upgrade within 90 days." },
+  "courseoutline.strip.0.value": { page: PAGE, label: "Strip card 1 value", type: "text", default: "$79" },
+  "courseoutline.strip.0.desc": { page: PAGE, label: "Strip card 1 description", type: "text", default: "Your $79 is credited toward Platinum ($279) when you upgrade." },
   "courseoutline.strip.1.label": { page: PAGE, label: "Strip card 2 label", type: "text", default: "Access" },
   "courseoutline.strip.1.value": { page: PAGE, label: "Strip card 2 value", type: "text", default: "Forever" },
   "courseoutline.strip.1.desc": { page: PAGE, label: "Strip card 2 description", type: "text", default: "Yours to keep. Renew the latest information any year for $99." },
@@ -112,6 +112,6 @@ export const COURSE_OUTLINE_CONTENT = {
   "courseoutline.idea.body_pre": { page: PAGE, label: "Core idea (before emphasis)", type: "text", default: "Education tells you how the ADU process works. The Property Feasibility Study tells you how it applies to" },
   "courseoutline.idea.body_emphasis": { page: PAGE, label: "Core idea (emphasized word)", type: "text", default: "your" },
   "courseoutline.idea.body_post": { page: PAGE, label: "Core idea (after emphasis)", type: "text", default: "property." },
-  "courseoutline.cta.button": { page: PAGE, label: "CTA button", type: "text", default: "Start the ADU Course — $99" },
-  "courseoutline.cta.note": { page: PAGE, label: "CTA note", type: "text", default: "$99 credited toward your $399 Report when you upgrade within 90 days" },
+  "courseoutline.cta.button": { page: PAGE, label: "CTA button", type: "text", default: "Start with Golden, $79" },
+  "courseoutline.cta.note": { page: PAGE, label: "CTA note", type: "text", default: "Your $79 is credited when you upgrade to Platinum" },
 };

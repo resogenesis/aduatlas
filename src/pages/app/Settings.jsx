@@ -1,3 +1,5 @@
+import { getPaidTier } from "../../stores/paymentStore";
+import { planById, formatPrice } from "../../lib/plans";
 import { useNavigate } from "react-router-dom";
 import { FiCreditCard, FiLogOut, FiMail, FiRotateCcw, FiShield, FiUser } from "react-icons/fi";
 import { currentUser, logout } from "../../stores/authStore";
@@ -21,6 +23,8 @@ const Settings = () => {
     alert("Refund request received. Our team will email you within 1 business day.");
   };
 
+  const plan = planById(getPaidTier());
+  const planLabel = plan ? `${plan.name} · ${formatPrice(plan.priceCents)} (one time)` : "No plan yet";
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-3xl mx-auto">
       <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-3">Settings</p>
@@ -49,7 +53,7 @@ const Settings = () => {
 
       {/* Billing */}
       <Section icon={FiCreditCard} title="Billing">
-        <Row label="Plan" value="ADUAtlas Paid Access · $99 (one time)" />
+        <Row label="Plan" value={planLabel} />
         <Row label="Payment status" value={user?.paid ? "Paid" : "Unpaid"} />
         <Row label="Receipt" value="Available after purchase" action={{
           label: "Email receipt",

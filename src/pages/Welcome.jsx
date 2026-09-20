@@ -22,8 +22,7 @@ import { sendEmail, TEMPLATES } from "../lib/email";
 
 const VERIFY_ENDPOINT = import.meta.env.VITE_VERIFY_ENDPOINT || "";
 
-const normalizeTier = (raw) =>
-  raw === TIERS.REPORT ? TIERS.REPORT : raw === TIERS.ROADMAP ? TIERS.ROADMAP : null;
+const normalizeTier = (raw) => (Object.values(TIERS).includes(raw) ? raw : null);
 
 // states: "checking" | "granted" | "none"
 const Welcome = () => {
@@ -141,7 +140,7 @@ const Welcome = () => {
     );
   }
 
-  const hasReport = grantedTier === TIERS.REPORT;
+  const hasReport = grantedTier === TIERS.REPORT || grantedTier === TIERS.CONCIERGE;
 
   return (
     <div className="min-h-[80vh] bg-canvas py-16 sm:py-24">
@@ -156,8 +155,8 @@ const Welcome = () => {
         </h1>
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-12 max-w-xl mx-auto">
           {hasReport
-            ? "Confirmation is on its way to your email. Start with Module 1. Work through the 9-module ADUAtlas course, then unlock your personalized Property Feasibility Report and Feasibility Packet."
-            : "Confirmation is on its way to your email. Start with Module 1 and work through the 9-module ADUAtlas course. Your purchase includes the course; the Property Feasibility Report is available as an upgrade."}
+            ? "Confirmation is on its way to your email. Start with Module 1 and work through the ADUAtlas course while we prepare your feasibility study and site plan."
+            : "Confirmation is on its way to your email. Start with Module 1 and work through the ADUAtlas course. Golden includes the course, worksheets, and builder profiles; the feasibility study is available as an upgrade to Platinum."}
         </p>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-10 text-left mb-10">
@@ -167,8 +166,8 @@ const Welcome = () => {
               { n: "01", t: "Start Module 1: How to ADU", d: "Process, timelines, and the foundation everything else builds on." },
               { n: "02", t: "Work through the 9 modules", d: "Each module has worksheets pre-filled from your quiz answers." },
               hasReport
-                ? { n: "03", t: "Unlock your Property Feasibility Report", d: "The final modules generate your GIS site plan, refined feasibility score, and Feasibility Packet." }
-                : { n: "03", t: "Add the Property Feasibility Report", d: "Upgrade any time to unlock the GIS site plan, feasibility score, and builder match." },
+                ? { n: "03", t: "Receive your feasibility study", d: "Submit your property details; your study and visual site plan appear in your portal when ready." }
+                : { n: "03", t: "Add the feasibility study", d: "Upgrade to Platinum any time; your $79 applies as a credit." },
             ].map((s) => (
               <li key={s.n} className="flex items-start gap-5">
                 <span className="font-display text-accent text-2xl leading-none w-8 shrink-0">{s.n}</span>

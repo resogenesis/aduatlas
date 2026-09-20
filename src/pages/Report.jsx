@@ -4,7 +4,7 @@ import { ConfidenceRow, ConfidenceSummary } from "../components/gates/Confidence
 import { CONFIDENCE, datapoint } from "../stores/confidence";
 
 // Sample Property Feasibility Report. Shows the 7-section deliverable a homeowner
-// gets at the $399 tier. All data is mock and labeled 'Sample report'.
+// gets with Platinum. All data is mock and labeled 'Sample report'.
 
 const sampleAddress = "1247 Mulberry Lane, Pasadena CA 91103";
 
@@ -80,7 +80,7 @@ const Report = () => {
               to="/unlock"
               className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-accent-fg font-semibold hover:bg-paper transition-colors"
             >
-              Get my Property Feasibility Report · $399 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              Get my feasibility study with Platinum, $279 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <button
               onClick={() => alert("INTEGRATION POINT: server-side PDF generation pending.")}
@@ -217,7 +217,7 @@ const Report = () => {
             Get this for your address.
           </h2>
           <p className="text-accent-fg/80 text-base sm:text-lg max-w-xl mx-auto mb-7">
-            $399. One time. 7 day full refund. Replaces a $500+ official survey and weeks of builder back and forth.
+            $279. One time. 7 day full refund. Replaces a $500+ official survey and weeks of builder back and forth.
           </p>
           <Link
             to="/unlock"

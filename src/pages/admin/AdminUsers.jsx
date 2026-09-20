@@ -4,9 +4,9 @@ import { adminGet, adminPost } from "../../lib/adminApi";
 const ROLES = ["homeowner", "pro", "admin"];
 const TIERS = [
   { value: "", label: "— unpaid —" },
-  { value: "roadmap", label: "roadmap ($99)" },
-  { value: "report", label: "report ($399)" },
-  { value: "concierge", label: "concierge" },
+  { value: "roadmap", label: "Golden ($79)" },
+  { value: "report", label: "Platinum ($279)" },
+  { value: "concierge", label: "Concierge ($500)" },
 ];
 
 const AdminUsers = () => {

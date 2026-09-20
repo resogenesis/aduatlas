@@ -144,7 +144,7 @@ const router = createBrowserRouter([
       // Project brief
       { path: "my-property", element: <PaidGate><MyProperty /></PaidGate> },
 
-      // Gated tools — these are the $399 Feasibility Report deliverables, so
+      // Gated tools — these are the Platinum deliverables, so
       // they require the "report" tier (not just any paid purchase). No
       // course-progress gate: the feasibility study stands on its own.
       // Builder match keeps its progress gates below — course completion is
@@ -153,10 +153,10 @@ const router = createBrowserRouter([
       { path: "utility-estimator", element: <PaidGate requireTier="report"><UtilityEstimator /></PaidGate> },
       { path: "report", element: <PaidGate requireTier="report"><PropertyReport /></PaidGate> },
 
-      // Planning worksheets + NAPE — included with ANY paid tier (the $99
+      // Planning worksheets + NAPE — included with ANY paid plan (Golden
       // course includes the six workbook worksheets and the Ready Score in
-      // self-serve form; the teaser toward $399 is doing the verification
-      // legwork yourself). The $399 report tier adds the personalized
+      // self-serve form; the teaser toward Platinum is doing the verification
+      // legwork yourself). Platinum adds the personalized
       // report, property diagram, feasibility tools, and builder match —
       // those keep requireTier="report" above.
       { path: "packet", element: <PaidGate><PacketHub /></PaidGate> },
@@ -167,8 +167,8 @@ const router = createBrowserRouter([
       { path: "packet/modular-prefab", element: <PaidGate><ModularPrefabEstimate /></PaidGate> },
       { path: "packet/total-cost", element: <PaidGate><TotalProjectCost /></PaidGate> },
       { path: "packet/ready-score", element: <PaidGate><ReadyScore /></PaidGate> },
-      { path: "builders", element: <PaidGate requireTier="report" requireBuilders><BuilderListing /></PaidGate> },
-      { path: "builders/:id", element: <PaidGate requireTier="report" requireBuilders><BuilderProfile /></PaidGate> },
+      { path: "builders", element: <PaidGate><BuilderListing /></PaidGate> },
+      { path: "builders/:id", element: <PaidGate><BuilderProfile /></PaidGate> },
 
       // Settings
       { path: "settings", element: <Settings /> },

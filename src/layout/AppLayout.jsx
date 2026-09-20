@@ -2,7 +2,6 @@ import { useState } from "react";
 import { NavLink, Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
 import { FiGrid, FiBookOpen, FiFileText, FiFolder, FiHome, FiTarget, FiUsers, FiSettings, FiLock, FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import Logomark from "../components/brand/Logomark";
-import { isBuildersUnlocked } from "../stores/courseStore";
 import { hasReportTier } from "../stores/paymentStore";
 import { currentUser, logout } from "../stores/authStore";
 
@@ -13,13 +12,13 @@ const baseNav = [
 ];
 
 const gatedNav = [
-  // Worksheets + NAPE ship with every paid tier, so the packet is never locked.
+  // Worksheets + NAPE ship with every paid plan, so the packet is never locked.
   { to: "/packet", label: "Worksheets", Icon: FiFolder, isLocked: () => false },
-  // Feasibility + the report are report-tier deliverables with no course
-  // gate; builder match keeps its progress qualification.
+  // Feasibility + the study are Platinum deliverables with no course gate.
   { to: "/feasibility", label: "Feasibility", Icon: FiTarget, isLocked: () => !hasReportTier() },
   { to: "/report", label: "My Report", Icon: FiFileText, isLocked: () => !hasReportTier() },
-  { to: "/builders", label: "Builders", Icon: FiUsers, isLocked: () => !hasReportTier() || !isBuildersUnlocked() },
+  // Builder profiles are included with Golden.
+  { to: "/builders", label: "Builders", Icon: FiUsers, isLocked: () => false },
 ];
 
 const NavItem = ({ to, label, Icon, locked, onClick }) => (

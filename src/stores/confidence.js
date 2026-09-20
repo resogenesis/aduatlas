@@ -43,8 +43,8 @@ export const CONFIDENCE_META = {
 // Tier levels. Aligned with pricing.
 export const TIER = {
   FREE: "free",          // exploration
-  ROADMAP: "roadmap",    // $99
-  REPORT: "report",      // $399 — verifies medium/low rows
+  ROADMAP: "roadmap",    // Golden, $79
+  REPORT: "report",      // Platinum, $279 — verifies medium/low rows
   CONCIERGE: "concierge",
 };
 

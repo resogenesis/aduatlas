@@ -1,4 +1,4 @@
-// Worksheet state for the $399 Property Feasibility Report packet.
+// Worksheet state for the Feasibility Report packet (worksheets ship with every plan).
 //
 // Data model: worksheets live INSIDE the builder packet (users.builder_packet
 // jsonb) under a single `worksheets` key, so they ride the existing

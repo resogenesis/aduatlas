@@ -30,7 +30,7 @@ const PublicStubFooter = ({ chapterName }) => {
               to="/unlock"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-stroke text-paper font-medium hover:border-paper-dim transition"
             >
-              See What's Inside ($99)
+              See plans from $79
             </Link>
           </div>
         </div>

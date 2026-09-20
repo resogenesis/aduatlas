@@ -104,7 +104,7 @@ const Results = () => {
               "Personalized ADU education course based on your Reality Check Score",
               "City and ZIP-specific ADU regulations",
               "Direct email support",
-              "Your $99 credited toward the $399 Property Feasibility Report when you upgrade within 90 days",
+              "Your $79 credited toward Platinum when you upgrade",
               "7 day full refund, no questions asked",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
@@ -119,7 +119,7 @@ const Results = () => {
               to="/unlock"
               className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
             >
-              Sign Up for $99 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              Start with Golden, $79 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <span className="text-accent-fg/70 text-sm">One time · Lifetime access · 7 day refund</span>
           </div>

@@ -147,7 +147,7 @@ const ConversationGuide = () => {
               ADUAtlas Builder Conversation Guide · {sampleAddress}
             </p>
             <p className="text-paper-dim/70 text-[0.65rem] italic">
-              Generated as part of your $399 Property Feasibility Report.
+              Generated as part of your Platinum feasibility study.
             </p>
           </div>
         </div>
@@ -158,7 +158,7 @@ const ConversationGuide = () => {
             Want this for your address?
           </h2>
           <p className="text-accent-fg/80 text-sm sm:text-base mb-6 max-w-xl mx-auto">
-            The Conversation Guide is generated automatically with every $399 Property Feasibility Report, with questions tuned to your lot's actual risks.
+            The Conversation Guide is included with every Platinum feasibility studt, with questions tuned to your lot's actual risks.
           </p>
           <Link
             to="/unlock"

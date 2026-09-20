@@ -56,6 +56,6 @@ export const HOW_TO_ADU_CONTENT = {
     page: PAGE, label: "Closer paragraph", type: "text",
     default: "A builder can manage the construction process, but homeowners still need to understand the project, costs, and options. The more prepared you are before construction begins, the fewer surprises you will face later.",
   },
-  "howtoadu.closer.cta_primary": { page: PAGE, label: "Primary CTA button", type: "text", default: "Start the ADU Course — $99" },
+  "howtoadu.closer.cta_primary": { page: PAGE, label: "Primary CTA button", type: "text", default: "Start with Golden, $79" },
   "howtoadu.closer.cta_secondary": { page: PAGE, label: "Secondary CTA button", type: "text", default: "See the course outline" },
 };

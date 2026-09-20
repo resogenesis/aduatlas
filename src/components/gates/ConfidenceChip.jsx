@@ -10,9 +10,9 @@ const ICON = {
 };
 
 const TIER_LABEL = {
-  [TIER.ROADMAP]: "Build Prepared ($99)",
-  [TIER.REPORT]: "Property Feasibility Report ($399)",
-  [TIER.CONCIERGE]: "Concierge",
+  [TIER.ROADMAP]: "Golden ($79)",
+  [TIER.REPORT]: "Platinum ($279)",
+  [TIER.CONCIERGE]: "Concierge ($500)",
 };
 
 export const ConfidenceChip = ({ level, className = "" }) => {

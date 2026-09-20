@@ -1,40 +1,44 @@
-// Vercel-style serverless function: creates a Stripe Checkout Session
-// for the requested tier and returns { url } for the frontend to redirect to.
+// Vercel-style serverless function: creates a Stripe Checkout Session for
+// the requested plan and returns { url } for the frontend to redirect to.
 //
 // Required env (server-side, never VITE_-prefixed):
 //   STRIPE_SECRET_KEY
-//   STRIPE_PRICE_ROADMAP   (price_... for $99 Build Prepared course)
-//   STRIPE_PRICE_REPORT    (price_... for $399 Feasibility Report)
-//   APP_BASE_URL           (e.g. https://aduatlas.com)
+//   STRIPE_PRICE_ROADMAP     (price_... for Golden, $79)
+//   STRIPE_PRICE_REPORT      (price_... for Platinum, $279)
+//   STRIPE_PRICE_CONCIERGE   (price_... for Concierge, $500)
+//   APP_BASE_URL             (e.g. https://aduatlas.com)
 //
-// Optional env (for the "$99 credit toward the Report" promotion):
-//   STRIPE_COUPON_ROADMAP_CREDIT  (coupon id giving $99 off the $399 Report)
-//   SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY  (to look up prior roadmap buyers)
+// Optional env (for upgrade credits):
+//   SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY  (to look up the buyer's current plan)
 //
 // Body shape (POST JSON):
 //   { tier: "roadmap" | "report" | "concierge", email?: string, quizAnswers?: object }
 //
-// Concierge is application-only — this endpoint declines self-serve checkout
-// and returns a 400 with a hint for the frontend to surface a Calendly link.
+// Upgrade credit: what the buyer already paid comes off the next plan up
+// (Golden -> Platinum pays $200; Platinum -> Concierge pays $221). The credit
+// is applied as a one-off Stripe coupon created for this session. Any missing
+// config or lookup failure falls back to full price without throwing.
 //
 // SECURITY: price ids are resolved server-side from env. We never trust a
-// client-supplied amount.
+// client-supplied amount. Plan ids/prices come from src/lib/plans.js so the
+// pricing page and the checkout can never disagree.
 
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
+import { PLANS, planById, upgradeCreditCents } from "../src/lib/plans.js";
 
 const TIER_TO_PRICE = {
   roadmap: process.env.STRIPE_PRICE_ROADMAP,
   report: process.env.STRIPE_PRICE_REPORT,
+  concierge: process.env.STRIPE_PRICE_CONCIERGE,
 };
 
-// Best-effort lookup: has this email already purchased the $99 roadmap tier?
-// Returns true only on a confident yes; any missing config / error / miss
-// returns false so checkout falls back to full price WITHOUT throwing.
-const alreadyBoughtRoadmap = async (email) => {
+// Best-effort lookup of the plan this email already owns (paid, not
+// refunded). Returns null on any miss/error so checkout proceeds at full price.
+const ownedPlanFor = async (email) => {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!email || !url || !key) return false;
+  if (!email || !url || !key) return null;
   try {
     const supabase = createClient(url, key);
     const { data, error } = await supabase
@@ -42,11 +46,10 @@ const alreadyBoughtRoadmap = async (email) => {
       .select("paid_tier, paid_at, refunded_at")
       .eq("email", email.toLowerCase())
       .maybeSingle();
-    if (error || !data) return false;
-    // Only credit a real, non-refunded roadmap purchase.
-    return data.paid_tier === "roadmap" && Boolean(data.paid_at) && !data.refunded_at;
+    if (error || !data || !data.paid_at || data.refunded_at) return null;
+    return planById(data.paid_tier)?.id || null;
   } catch {
-    return false;
+    return null;
   }
 };
 
@@ -57,15 +60,10 @@ export default async function handler(req, res) {
   }
 
   const { tier, email, quizAnswers } = req.body || {};
-
-  if (tier === "concierge") {
-    res.status(400).json({ error: "concierge-not-self-serve" });
-    return;
-  }
-
-  const priceId = TIER_TO_PRICE[tier];
-  if (!priceId) {
-    res.status(400).json({ error: `unknown tier: ${tier}` });
+  const plan = planById(tier);
+  const priceId = plan ? TIER_TO_PRICE[plan.id] : null;
+  if (!plan || !priceId) {
+    res.status(400).json({ error: `unknown or unconfigured tier: ${tier}` });
     return;
   }
 
@@ -78,15 +76,22 @@ export default async function handler(req, res) {
   const baseUrl = process.env.APP_BASE_URL || `https://${req.headers.host}`;
 
   try {
-    // "$99 Build Prepared credit toward the Report": when buying the $399
-    // report tier, apply a $99 discount coupon IF (a) this buyer already owns
-    // the roadmap tier and (b) a coupon id is configured. If either is missing,
-    // we silently fall back to full price (no throw) — the credit is a perk, not
-    // a hard dependency of checkout.
     let discounts;
-    if (tier === "report" && process.env.STRIPE_COUPON_ROADMAP_CREDIT) {
-      if (await alreadyBoughtRoadmap(email)) {
-        discounts = [{ coupon: process.env.STRIPE_COUPON_ROADMAP_CREDIT }];
+    let creditCents = 0;
+    const owned = await ownedPlanFor(email);
+    if (owned) {
+      creditCents = upgradeCreditCents(owned, plan.id);
+      if (creditCents > 0) {
+        const ownedName = planById(owned)?.name || "previous plan";
+        const coupon = await stripe.coupons.create({
+          amount_off: creditCents,
+          currency: "usd",
+          duration: "once",
+          max_redemptions: 1,
+          name: `${ownedName} credit toward ${plan.name}`,
+          metadata: { email: email.toLowerCase(), from_tier: owned, to_tier: plan.id },
+        });
+        discounts = [{ coupon: coupon.id }];
       }
     }
 
@@ -95,18 +100,20 @@ export default async function handler(req, res) {
       payment_method_types: ["card"],
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: email || undefined,
-      // Append &tier so /welcome can read the purchased tier alongside the
+      // Append &tier so /welcome can read the purchased plan alongside the
       // server-verified session_id.
-      success_url: `${baseUrl}/welcome?session_id={CHECKOUT_SESSION_ID}&tier=${encodeURIComponent(tier)}`,
-      cancel_url: `${baseUrl}/unlock`,
+      success_url: `${baseUrl}/welcome?session_id={CHECKOUT_SESSION_ID}&tier=${encodeURIComponent(plan.id)}`,
+      cancel_url: `${baseUrl}/unlock?tier=${encodeURIComponent(plan.id)}`,
       ...(discounts ? { discounts } : {}),
       metadata: {
-        tier,
-        quiz_answers: quizAnswers ? JSON.stringify(quizAnswers).slice(0, 480) : "",
+        tier: plan.id,
+        upgraded_from: owned && creditCents > 0 ? owned : "",
+        credit_cents: String(creditCents),
+        quiz_answers: quizAnswers ? JSON.stringify(quizAnswers).slice(0, 400) : "",
       },
     });
 
-    res.status(200).json({ url: session.url });
+    res.status(200).json({ url: session.url, plans: PLANS.map((p) => p.id) });
   } catch (err) {
     res.status(500).json({ error: err.message || "stripe error" });
   }

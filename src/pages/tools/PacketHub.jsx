@@ -5,7 +5,7 @@ import { hasReportTier } from "../../stores/paymentStore";
 import { loadWorksheets } from "../../stores/worksheetStore";
 
 // Worksheets hub — the six workbook worksheets + NAPE ship with every paid
-// tier (self-serve). The $399 Feasibility Report tier adds the personalized
+// tier (self-serve). Platinum adds the personalized
 // report, property diagram, and feasibility tools; for course-tier users
 // this page is also where the upgrade pitch lands, right when they're doing
 // the verification legwork by hand. Every worksheet prints via Print/save-PDF.
@@ -100,7 +100,7 @@ const PacketHub = () => {
             are yours to chase down. The Property Feasibility Report applies your local ADU
             regulations to your parcel: property diagram, placement area, maximum footprint, and
             approximate utility distances — so your worksheets start from your property's numbers.
-            Your $99 applies as a credit.
+            Your $79 applies as a credit, so the upgrade is $200.
           </p>
           <Link
             to="/unlock"

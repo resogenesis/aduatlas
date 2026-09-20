@@ -104,14 +104,14 @@ const FeasibilityStudy = () => (
           the applicable ADU regulations to help you understand whether an ADU may be allowed — and
           the largest ADU that may be permitted.
         </p>
-        <div className="font-display text-accent text-5xl sm:text-6xl mb-2">$399</div>
+        <div className="font-display text-accent text-5xl sm:text-6xl mb-2">$279</div>
         <p className="text-paper-dim text-sm mb-7">
           Includes the ADUAtlas Course, builder profile access, your personalized property drawing,
           and six dynamic worksheets. One year of access — renew for $99/year.
         </p>
         <Cta>Get your Feasibility Study</Cta>
         <p className="text-paper-dim/70 text-xs mt-4">
-          Purchased the $99 course within the last 90 days? Your $99 credit may be applied to this purchase.
+          Already have Golden? Your $79 is credited, so the upgrade is $200. Details may be applied to this purchase.
         </p>
       </div>
     </section>
@@ -184,7 +184,7 @@ const FeasibilityStudy = () => (
           personalized information, and planning tools homeowners need to understand the process,
           ask better questions, and have informed conversations with their city and builders.
         </p>
-        <Cta>Get your personalized Feasibility Study — $399</Cta>
+        <Cta>Get your feasibility study with Platinum, $279</Cta>
         <p className="text-paper-dim text-sm mt-6 italic">ADUAtlas builds better-prepared homeowners.</p>
         <p className="text-paper-dim/70 text-xs leading-relaxed mt-6 max-w-2xl mx-auto">
           The Property Feasibility Study is a planning and educational tool. It is not a survey,
