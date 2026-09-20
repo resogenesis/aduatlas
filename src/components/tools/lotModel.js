@@ -26,7 +26,7 @@ const rectArea = (r) => (r ? r.w * r.d : 0);
 //   "measured"  — came straight from a value the homeowner confirmed
 //   "estimated" — we derived it (from area, from an assumption about placement)
 //   "unknown"   — needs zoning / survey data we don't have (Phase 2)
-export const PROVENANCE = {
+const PROVENANCE = {
   measured: "measured",
   estimated: "estimated",
   unknown: "unknown",

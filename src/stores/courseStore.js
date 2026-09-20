@@ -749,10 +749,6 @@ export const courseProgress = () => {
   return Math.round((doneCount / chapters.length) * 100);
 };
 
-export const nextChapter = () => {
-  const done = getCompletedChapters();
-  return chapters.find((c) => !done.has(c.id)) || null;
-};
 
 // Per-module completion, for the module list + progress rings.
 export const getModuleProgress = (moduleId) => {
@@ -858,8 +854,3 @@ export const packetProgress = () => {
     fields: PACKET_FIELDS.map((f) => ({ ...f, done: Boolean(String(p[f.key] || "").trim()) })),
   };
 };
-
-// Gates
-export const FEASIBILITY_UNLOCK_AT = 80; // % course progress
-export const isFeasibilityUnlocked = () => courseProgress() >= FEASIBILITY_UNLOCK_AT;
-export const isBuildersUnlocked = () => isFeasibilityUnlocked() && packetProgress().percent >= 75;

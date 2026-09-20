@@ -13,7 +13,7 @@ const PROFILE_KEY = "aduatlas.builder.profile";
 // Realistic-looking but fully fake. Each represents a homeowner who paid,
 // completed the course, ran feasibility, and submitted their packet.
 
-export const mockLeads = [
+const mockLeads = [
   {
     id: "L-1042",
     homeowner: "S. Martinez",
@@ -167,7 +167,7 @@ const writeStatuses = (s) => {
   window.localStorage.setItem(STATUS_KEY, JSON.stringify(s));
 };
 
-export const getLeadStatus = (id) => readStatuses()[id] || "new";
+const getLeadStatus = (id) => readStatuses()[id] || "new";
 
 export const setLeadStatus = (id, status) => {
   const all = readStatuses();

@@ -3,7 +3,6 @@ const PAGE = "About";
 
 export const ABOUT_STATS_COUNT = 6;
 export const ABOUT_CHAPTERS_COUNT = 5;
-export const ABOUT_PULLQUOTES_COUNT = 4;
 
 const STAT_DEFAULTS = [
   { n: "1908", label: "Year Sears sold its first kit home" },

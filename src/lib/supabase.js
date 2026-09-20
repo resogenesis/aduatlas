@@ -36,20 +36,6 @@ export const captureLead = async ({ email, source = "unlock", quizAnswers = null
   return { ok: true, leadId: data };
 };
 
-// ── Quiz answers ────────────────────────────────────────────────────────────
-// Persist anonymous quiz answers tied to an email (when known) for funnel
-// analytics. Merged into the same `leads` row via capture_lead (which COALESCEs
-// quiz_answers, so this never wipes an existing capture).
-export const saveQuizAnswers = async ({ email, answers }) => {
-  if (!supabase || !email) return { ok: false, error: "no-email-or-supabase" };
-  const { error } = await supabase.rpc("capture_lead", {
-    p_email: email.trim().toLowerCase(),
-    p_source: "quiz",
-    p_quiz_answers: answers,
-  });
-  if (error) return { ok: false, error: error.message };
-  return { ok: true };
-};
 
 // ── Builder packet (owned app data) ──────────────────────────────────────────
 // `users.builder_packet` is a jsonb column the signed-in user may read/write on

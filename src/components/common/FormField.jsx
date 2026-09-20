@@ -44,12 +44,3 @@ export const PrimaryButton = ({ children, className = "", ...rest }) => (
     {children}
   </button>
 );
-
-export const SecondaryButton = ({ children, className = "", ...rest }) => (
-  <button
-    {...rest}
-    className={`w-full cursor-pointer py-3.5 px-5 rounded-xl border border-stroke text-paper font-medium text-sm hover:border-accent transition ${className}`}
-  >
-    {children}
-  </button>
-);

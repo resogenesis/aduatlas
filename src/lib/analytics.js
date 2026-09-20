@@ -8,9 +8,8 @@ import posthog from "posthog-js";
 
 const key = import.meta.env.VITE_POSTHOG_KEY;
 const host = import.meta.env.VITE_POSTHOG_HOST || "https://us.i.posthog.com";
-
-export const analyticsEnabled = Boolean(key);
 let initialized = false;
+
 
 export const initAnalytics = () => {
   if (initialized || !key) return;

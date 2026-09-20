@@ -14,9 +14,7 @@ import Pricing from "../pages/Pricing";
 import CourseOutline from "../pages/CourseOutline";
 import Legal from "../pages/Legal";
 import Property from "../pages/Property";
-// import Report from "../pages/Report";
 import Methodology from "../pages/Methodology";
-// import ConversationGuide from "../pages/ConversationGuide";
 import Quiz from "../pages/Quiz";
 import KnowledgeCheck from "../pages/KnowledgeCheck";
 import Results from "../pages/Results";
@@ -79,9 +77,6 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "property", element: <Property /> },
-      // Sample report + conversation guide commented out for now.
-      // { path: "report/sample", element: <Report /> },
-      // { path: "report/sample/conversation-guide", element: <ConversationGuide /> },
       { path: "methodology", element: <Methodology /> },
       { path: "quiz", element: <Quiz /> },
       { path: "knowledge-check", element: <KnowledgeCheck /> },

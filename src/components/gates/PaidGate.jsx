@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router-dom";
 import { FiArrowRight, FiLock } from "react-icons/fi";
 import { isPaid, hasTier, TIERS } from "../../stores/paymentStore";
 import { planById } from "../../lib/plans";
-import { isBuildersUnlocked, isFeasibilityUnlocked, courseProgress, packetProgress } from "../../stores/courseStore";
 import { currentUser } from "../../stores/authStore";
 
 // Three layers:
@@ -12,13 +11,13 @@ import { currentUser } from "../../stores/authStore";
 // 2. Tier gate (requireTier="report") — the Platinum deliverables (feasibility
 //    study, site plan, feasibility tools) require Platinum or Concierge; a
 //    Golden buyer must NOT reach them.
-// 3. Progress gate (requireBuilders) — property-aware builder matching only;
-//    not used for the directory itself.
+// Property-aware builder matching (Platinum+) will get its own gate when it
+// ships; the directory itself needs only a paid plan.
 //
 // NOTE: getPaidTier() is a client-side UX hint. The server must re-verify
 // `users.paid_tier` before generating any report-tier deliverable.
 
-const PaidGate = ({ children, chapterName, requireTier, requireBuilders }) => {
+const PaidGate = ({ children, chapterName, requireTier }) => {
   const location = useLocation();
   // Admins can always preview gated content (course chapters, report-tier
   // tools) — needed so the visual content editor's iframe can render these
@@ -30,9 +29,6 @@ const PaidGate = ({ children, chapterName, requireTier, requireBuilders }) => {
     return <TierUpgradePaywall location={location} chapterName={chapterName} requireTier={requireTier} />;
   }
 
-  if (requireBuilders && !isBuildersUnlocked()) {
-    return <BuilderPaywall progress={courseProgress()} packetPercent={packetProgress().percent} feasOk={isFeasibilityUnlocked()} />;
-  }
 
   return children;
 };
@@ -107,51 +103,5 @@ const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
   </section>
   );
 };
-
-const BuilderPaywall = ({ progress, packetPercent, feasOk }) => (
-  <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
-    <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-accent/10 text-accent text-xs font-medium mb-7">
-        <FiLock /> Builders · locked
-      </div>
-      <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-        Builders only see <span className="">prepared homeowners.</span>
-      </h1>
-      <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
-        Builders in our network only work with homeowners who've completed the system. That's why their quotes are accurate the first time. Finish your plan to unlock matches.
-      </p>
-
-      <div className="bg-surface-1-solid border border-stroke rounded-2xl p-5 sm:p-6 mb-8 text-left max-w-md mx-auto">
-        <div className="space-y-3">
-          <Row label="Course progress" value={`${progress}%`} done={progress >= 80} />
-          <Row label="Feasibility study" value={feasOk ? "Run" : "Not run"} done={feasOk} />
-          <Row label="Feasibility packet" value={`${packetPercent}%`} done={packetPercent >= 75} />
-        </div>
-      </div>
-
-      <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Link
-          to="/course"
-          className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
-        >
-          Continue the course
-        </Link>
-        <Link
-          to="/my-property"
-          className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition"
-        >
-          Complete property brief
-        </Link>
-      </div>
-    </div>
-  </section>
-);
-
-const Row = ({ label, value, done }) => (
-  <div className="flex items-center justify-between gap-3 text-sm">
-    <span className="text-paper-dim">{label}</span>
-    <span className={done ? "text-accent font-medium" : "text-paper"}>{value}</span>
-  </div>
-);
 
 export default PaidGate;

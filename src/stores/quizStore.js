@@ -29,10 +29,6 @@ export const saveAnswers = (answers) => {
   window.sessionStorage.setItem(KEY, JSON.stringify(answers));
 };
 
-export const clearAnswers = () => {
-  if (typeof window === "undefined") return;
-  window.sessionStorage.removeItem(KEY);
-};
 
 export const isComplete = (a) =>
   Boolean(a.q1 && a.q2 && a.q3 && a.q4 && a.q5 && a.q6 && a.q7);

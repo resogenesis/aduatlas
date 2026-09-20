@@ -14,24 +14,18 @@ const t = (label, def) => ({ page: PAGE, label, type: "text", default: def });
 const img = (label, src, alt) => ({ page: PAGE, label, type: "image", default: { src, alt } });
 
 // ── Hero ──────────────────────────────────────────────────────────────────
-export const HERO_CARD_ITEMS_COUNT = 3;
-export const homeHero = {
+const homeHero = {
   "home.hero.heading": t("Hero heading (\\n = line break)", "Your ADU\nStarts Here."),
   "home.hero.body": t("Hero paragraph", "Find out what you can build, what it may cost, and what to do next."),
   "home.hero.cta": t("Hero button", "Check My Property"),
   "home.hero.placeholder": t("Address field placeholder", "Enter your property address"),
   "home.hero.reassurance": t("Line under the address box", "No credit card required"),
-  "home.hero.card.eyebrow": t("Floating card eyebrow", "Why an ADU"),
-  "home.hero.card.title": t("Floating card title", "Turn your property into opportunity."),
-  "home.hero.card.item.0": t("Floating card item 1", "Create flexible living space"),
-  "home.hero.card.item.1": t("Floating card item 2", "Generate rental income"),
-  "home.hero.card.item.2": t("Floating card item 3", "Increase your property's potential"),
   "home.hero.image": img("Hero photo", heroImg, "A modern wood-clad backyard ADU with sliding glass doors and a deck at golden hour"),
 };
 
 // ── What's possible (text + three photo cards) ────────────────────────────
 export const POSSIBLE_CARDS_COUNT = 3;
-export const homePossible = {
+const homePossible = {
   "home.possible.heading": t("Section heading (\\n = line break)", "See What's Possible\non Your Property."),
   "home.possible.body": t("Section paragraph", "Every property is unique. ADUAtlas gives you the knowledge, tools, and connections to make the most of yours, whether you're building for family, for income, or for the future."),
   "home.possible.cta": t("Section button", "Check My Property"),
@@ -51,7 +45,7 @@ export const homePossible = {
 // prices server-side from Stripe; keep both in step when repricing.
 export const PLANS_COUNT = 3;
 export const PLAN_BULLETS_COUNT = 4;
-export const homePlans = {
+const homePlans = {
   "home.plans.heading": t("Plans heading (\\n = line break)", "Teach me. Analyze my property.\nHelp me move forward."),
   "home.plans.body": t("Plans paragraph", "Start with the course, add a property-specific feasibility study, or bring in a concierge for the next steps."),
   "home.plans.cta": t("Plans link", "Compare all plans"),
@@ -82,7 +76,7 @@ export const homePlans = {
 
 // ── Builder teaser ────────────────────────────────────────────────────────
 export const BUILDER_POINTS_COUNT = 3;
-export const homeBuilders = {
+const homeBuilders = {
   "home.builders.heading": t("Builder heading (\\n = line break)", "Builders who work with\nprepared homeowners."),
   "home.builders.body": t("Builder paragraph", "Browse ADU builders by state and service area, see what they specialize in, and request an introduction when you are ready."),
   "home.builders.cta": t("Builder button", "Find a Builder"),
@@ -95,7 +89,7 @@ export const homeBuilders = {
 };
 
 // ── Mission band ──────────────────────────────────────────────────────────
-export const homeMission = {
+const homeMission = {
   "home.mission.heading": t("Mission heading", "More Homes. Stronger Communities."),
   "home.mission.body": t("Mission paragraph", "ADUs create housing, support families, and increase opportunity. We're here to make it easier for homeowners, builders, and communities to bring them to life."),
   "home.mission.cta": t("Mission button", "About Our Mission"),
@@ -103,7 +97,7 @@ export const homeMission = {
 };
 
 // ── Closing CTA band ──────────────────────────────────────────────────────
-export const homeCta = {
+const homeCta = {
   "home.cta.heading": t("Closing heading", "Your property has potential."),
   "home.cta.body": t("Closing line", "Discover what's possible with ADUAtlas."),
   "home.cta.button": t("Closing button", "Get Started"),

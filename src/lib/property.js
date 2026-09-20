@@ -11,7 +11,7 @@ const endpoint = import.meta.env.VITE_PROPERTY_LOOKUP_ENDPOINT || "/api/property
 
 // Whether a real lookup should even be attempted. We gate on an explicit flag
 // so local dev (no backend) skips the fetch and shows example data instantly.
-export const propertyLookupEnabled = Boolean(import.meta.env.VITE_PROPERTY_LOOKUP_ENDPOINT);
+const propertyLookupEnabled = Boolean(import.meta.env.VITE_PROPERTY_LOOKUP_ENDPOINT);
 
 export const lookupProperty = async (address) => {
   const q = (address || "").trim();

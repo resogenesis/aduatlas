@@ -33,7 +33,7 @@ export const TPC_GROUPS = [
   { label: "City / professional fees", rows: ["Permits / City Fees", "Design / Plans", "Survey / Plans", "Engineering", "Other Professional Fees"] },
   { label: "Other known costs", rows: ["Taxes", "Contingency or Change Orders"] },
 ];
-export const TPC_ROWS = TPC_GROUPS.flatMap((g) => g.rows);
+const TPC_ROWS = TPC_GROUPS.flatMap((g) => g.rows);
 export const tpcTotals = (d) => ({
   est: TPC_ROWS.reduce((s, r) => s + num(d[`${r}-est`]), 0),
   final: TPC_ROWS.reduce((s, r) => s + num(d[`${r}-final`]), 0),
