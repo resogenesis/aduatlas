@@ -75,7 +75,7 @@ const Hero = () => {
             <p className="font-script text-gold text-3xl sm:text-[2.6rem] leading-[0.95] absolute top-0 left-2 sm:left-4 -rotate-6 z-10 [text-shadow:0_1px_0_rgba(255,255,255,0.9),0_2px_10px_rgba(255,255,255,0.7)]">
               <Lines text={script} />
             </p>
-            <div className="rounded-[2rem] overflow-hidden aspect-[16/11] lg:aspect-[5/4] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
+            <div className="rounded-[2rem] overflow-hidden aspect-[3/2] lg:aspect-[4/3] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
               <img src={image.src} alt={image.alt} className="w-full h-full object-cover" />
             </div>
             <div className="bg-canvas rounded-2xl shadow-[0_20px_50px_-20px_rgba(23,32,27,0.35)] border border-stroke p-5 sm:p-6 w-[min(100%,19rem)] mt-5 lg:mt-0 lg:absolute lg:-bottom-8 lg:-right-4">

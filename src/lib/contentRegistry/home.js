@@ -3,7 +3,8 @@
 // only wording, CTAs and photos are registered here. Defaults are the copy
 // from the approved homepage mock (2026-09-20). See contentRegistry/index.js
 // for the pattern.
-import heroImg from "../../assets/home/hero_image.png";
+import heroImg from "../../assets/home/hero_adu.jpg";
+import missionImg from "../../assets/home/hero_image.png";
 import familyImg from "../../assets/home/choose_img2.png";
 import incomeImg from "../../assets/home/choose_img3.png";
 import communityImg from "../../assets/home/container_img.png";
@@ -31,7 +32,7 @@ export const homeHero = {
   "home.hero.card.item.1": t("Floating card item 2", "Add flexible living space"),
   "home.hero.card.item.2": t("Floating card item 3", "Increase property value"),
   "home.hero.card.item.3": t("Floating card item 4", "Support stronger communities"),
-  "home.hero.image": img("Hero photo", heroImg, "A finished backyard ADU at dusk with its lights on"),
+  "home.hero.image": img("Hero photo", heroImg, "A modern wood-clad backyard ADU with sliding glass doors and a deck at golden hour"),
 };
 
 // ── Pillars (four-up strip under the hero) ────────────────────────────────
@@ -91,7 +92,7 @@ export const homeMission = {
   "home.mission.heading": t("Mission heading", "More Homes. Stronger Communities."),
   "home.mission.body": t("Mission paragraph", "ADUs create housing, support families, and increase opportunity. We're here to make it easier for homeowners, builders, and communities to bring them to life."),
   "home.mission.cta": t("Mission button", "About Our Mission"),
-  "home.mission.image": img("Mission background photo", heroImg, "Aerial view of a residential neighborhood"),
+  "home.mission.image": img("Mission background photo", missionImg, "Aerial view of a residential neighborhood"),
 };
 
 // ── Testimonials ──────────────────────────────────────────────────────────
