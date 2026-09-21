@@ -77,7 +77,7 @@ const HowToAdu = () => {
         label="Hero"
       >
       <section className="relative overflow-hidden bg-canvas pt-16 sm:pt-20 lg:pt-24 pb-10 sm:pb-12 border-b border-stroke">
-<div className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
+<div className="relative container mx-auto px-5 sm:px-8 max-w-6xl">
           <div className="inline-flex items-center gap-2 mb-4 animate-fade-up" style={{ animationDelay: "0ms" }}>
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
             <span className="text-paper-dim text-xs font-medium">
