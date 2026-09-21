@@ -9,6 +9,11 @@ import { useAutoReveal } from "../hooks/useAutoReveal";
 // to the Phase 1 light system (see index.css); the portal and admin layouts
 // use the same theme. Each route change fades the page in, and sections
 // reveal as they scroll into view.
+// CSS animations do not advance in background tabs, so an entry animation
+// that starts at opacity 0 would leave a hidden page for screenshots, tab
+// previews and crawlers. Only animate when the tab is actually visible.
+const canAnimate = () => typeof document !== "undefined" && document.visibilityState === "visible";
+
 const RootLayout = () => {
   usePageTitle();
   const { pathname } = useLocation();
@@ -17,7 +22,7 @@ const RootLayout = () => {
   return (
     <div className="theme-light min-h-screen flex flex-col">
       <Header />
-      <main ref={mainRef} key={pathname} className="w-full flex-1 overflow-x-clip page-enter">
+      <main ref={mainRef} key={pathname} className={`w-full flex-1 overflow-x-clip ${canAnimate() ? "page-enter" : ""}`}>
         <Outlet />
       </main>
       <Footer />
