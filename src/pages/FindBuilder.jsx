@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiMapPin } from "react-icons/fi";
+import { FiArrowRight, FiMapPin, FiTool, FiUserCheck } from "react-icons/fi";
+
+const POINT_ICONS = [FiMapPin, FiTool, FiUserCheck];
 import PageHeader from "../components/common/PageHeader";
 import { SPECIALTY_LABELS, fetchFeaturedBuilders, publicUrl } from "../lib/builders";
 import { isPaid } from "../stores/paymentStore";
@@ -33,15 +35,20 @@ const FindBuilder = () => {
         </div>
       </PageHeader>
 
-      <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y max-w-6xl">
+      <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y">
         <ul className="grid md:grid-cols-3 gap-6">
-          {POINTS.map((p, i) => (
-            <li key={p.title} className="bg-canvas border border-stroke rounded-3xl p-7 lift">
-              <p className="font-display text-accent text-2xl mb-3">{String(i + 1).padStart(2, "0")}</p>
-              <h2 className="font-display text-paper text-xl mb-2">{p.title}</h2>
-              <p className="text-paper-dim text-sm leading-relaxed">{p.desc}</p>
-            </li>
-          ))}
+          {POINTS.map((p, i) => {
+            const Icon = POINT_ICONS[i];
+            return (
+              <li key={p.title} className="bg-canvas border border-stroke rounded-3xl p-7 lift">
+                <span className="w-11 h-11 rounded-xl bg-accent/10 text-accent inline-flex items-center justify-center text-xl mb-4">
+                  <Icon aria-hidden />
+                </span>
+                <h2 className="font-display text-paper text-xl mb-2">{p.title}</h2>
+                <p className="text-paper-dim text-sm leading-relaxed">{p.desc}</p>
+              </li>
+            );
+          })}
         </ul>
       </section>
 

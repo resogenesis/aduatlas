@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowRight, FiMapPin, FiTool, FiUserCheck } from "react-icons/fi";
+
+const POINT_ICONS = [FiMapPin, FiTool, FiUserCheck];
 import { useReveal } from "../../hooks/useReveal";
 import { useContentText } from "../../lib/content";
 import { BUILDER_POINTS_COUNT } from "../../lib/contentRegistry/home";
@@ -16,9 +18,12 @@ const Point = ({ i }) => {
   const ref = useReveal(120 + i * 90);
   const title = useContentText(`home.builders.point.${i}.title`);
   const desc = useContentText(`home.builders.point.${i}.desc`);
+  const Icon = POINT_ICONS[i];
   return (
-    <li ref={ref} className="grid grid-cols-[2.5rem_1fr] gap-4 py-5 border-t border-white/15 last:border-b">
-      <span className="font-primary font-extrabold text-gold text-lg leading-none pt-0.5">{String(i + 1).padStart(2, "0")}</span>
+    <li ref={ref} className="grid grid-cols-[3rem_1fr] gap-4 py-5 border-t border-white/15 last:border-b">
+      <span className="w-11 h-11 rounded-xl bg-white/10 text-gold inline-flex items-center justify-center text-xl">
+        <Icon aria-hidden />
+      </span>
       <div>
         <h3 className="font-semibold text-white text-base leading-tight mb-1">{title}</h3>
         <p className="text-white/70 text-sm leading-relaxed">{desc}</p>
