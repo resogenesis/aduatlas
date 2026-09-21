@@ -26,8 +26,8 @@ const homeHero = {
 // ── What's possible (text + three photo cards) ────────────────────────────
 export const POSSIBLE_CARDS_COUNT = 3;
 const homePossible = {
-  "home.possible.heading": t("Section heading (\\n = line break)", "See What's Possible\non Your Property."),
-  "home.possible.body": t("Section paragraph", "Every property is unique. ADUAtlas gives you the knowledge, tools, and connections to make the most of yours, whether you're building for family, for income, or for the future."),
+  "home.possible.heading": t("Section heading (\\n = line break)", "What fits your property?"),
+  "home.possible.body": t("Section paragraph", "Every lot is different. ADUAtlas shows what yours may support, for family, for income, or for the future."),
   "home.possible.cta": t("Section button", "Check My Property"),
   "home.possible.card.0.title": t("Card 1 title", "More Space\nfor What Matters"),
   "home.possible.card.0.desc": t("Card 1 description", "Create flexible living for family, friends, or caregivers."),
@@ -46,8 +46,8 @@ const homePossible = {
 export const PLANS_COUNT = 3;
 export const PLAN_BULLETS_COUNT = 4;
 const homePlans = {
-  "home.plans.heading": t("Plans heading (\\n = line break)", "Teach me. Analyze my property.\nHelp me move forward."),
-  "home.plans.body": t("Plans paragraph", "Start with the course, add a property-specific feasibility study, or bring in a concierge for the next steps."),
+  "home.plans.heading": t("Plans heading (\\n = line break)", "Pick your plan."),
+  "home.plans.body": t("Plans paragraph", "Start with the course. Add a study of your property. Bring in a concierge when you want a guide."),
   "home.plans.cta": t("Plans link", "Compare all plans"),
   "home.plans.item.0.name": t("Plan 1 name", "Golden"),
   "home.plans.item.0.price": t("Plan 1 price", "$79"),
@@ -77,8 +77,8 @@ const homePlans = {
 // ── Builder teaser ────────────────────────────────────────────────────────
 export const BUILDER_POINTS_COUNT = 3;
 const homeBuilders = {
-  "home.builders.heading": t("Builder heading (\\n = line break)", "Builders who work with\nprepared homeowners."),
-  "home.builders.body": t("Builder paragraph", "Browse ADU builders by state and service area, see what they specialize in, and request an introduction when you are ready."),
+  "home.builders.heading": t("Builder heading (\\n = line break)", "Find your builder."),
+  "home.builders.body": t("Builder paragraph", "Builders by state and service area. Save the ones you like and request an introduction when you are ready."),
   "home.builders.cta": t("Builder button", "Find a Builder"),
   "home.builders.point.0.title": t("Builder point 1 title", "Organized by area"),
   "home.builders.point.0.desc": t("Builder point 1 description", "Search by state, city, or ZIP to see who serves your property."),
@@ -99,7 +99,7 @@ const homeMission = {
 // ── Closing CTA band ──────────────────────────────────────────────────────
 const homeCta = {
   "home.cta.heading": t("Closing heading", "Your property has potential."),
-  "home.cta.body": t("Closing line", "Discover what's possible with ADUAtlas."),
+  "home.cta.body": t("Closing line", "See what it may support."),
   "home.cta.button": t("Closing button", "Get Started"),
 };
 

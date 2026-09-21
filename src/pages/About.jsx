@@ -57,12 +57,10 @@ const Chapter = ({ i, isLast }) => {
 const About = () => {
   const heroRef = useReveal(0);
   const closingRef = useReveal(0);
-  const heroEyebrow = useContentText("about.hero.eyebrow");
   const heroHeadingPre = useContentText("about.hero.heading_pre");
   const heroHeadingEmphasis = useContentText("about.hero.heading_emphasis");
   const heroBody1 = useContentText("about.hero.body1");
   const heroBody2 = useContentText("about.hero.body2");
-  const closingEyebrow = useContentText("about.closing.eyebrow");
   const closingHeading = useContentText("about.closing.heading");
   const closingBody = useContentText("about.closing.body");
   const closingCtaPrimary = useContentText("about.closing.cta_primary");
@@ -79,9 +77,6 @@ const About = () => {
 <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 w-[40rem] h-[40rem] animate-drift-glow" style={{ animationDelay: "-7s" }} />
 
         <div ref={heroRef} className="relative container mx-auto px-5 sm:px-8 max-w-6xl">
-          <p className="text-accent text-xs sm:text-sm font-medium mb-5 animate-fade-up" style={{ animationDelay: "0ms" }}>
-            {heroEyebrow}
-          </p>
           <h1
             className="font-display text-paper text-[2.6rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.02] tracking-tight max-w-4xl animate-fade-up"
             style={{ animationDelay: "120ms" }}
@@ -132,9 +127,6 @@ const About = () => {
         <div ref={closingRef} className="bg-accent text-accent-fg rounded-3xl p-10 sm:p-14 text-center relative overflow-hidden">
           <div aria-hidden className="pointer-events-none absolute inset-0">
           </div>
-          <p className="relative text-accent-fg/70 text-xs font-medium mb-5">
-            {closingEyebrow}
-          </p>
           <h2 className="relative font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
             {closingHeading}
           </h2>

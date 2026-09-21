@@ -15,9 +15,6 @@ const CourseIntro = () => {
       <FiArrowLeft /> Back to course
     </Link>
 
-    <p className="text-accent text-xs font-medium mb-3">
-      Start here
-    </p>
     <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
       Welcome to ADUAtlas.
     </h1>

@@ -1,6 +1,6 @@
 import Logomark from "../brand/Logomark";
 
-const AuthCard = ({ title, subtitle, children, footer, eyebrow }) => {
+const AuthCard = ({ title, subtitle, children, footer }) => {
   return (
     <section className="relative min-h-[calc(100vh-100px)] bg-surface-1-solid py-16 sm:py-24 px-5 sm:px-8">
 
@@ -11,11 +11,6 @@ const AuthCard = ({ title, subtitle, children, footer, eyebrow }) => {
 
         <div className="bg-canvas border border-stroke rounded-3xl p-8 sm:p-10 shadow-[0_30px_60px_-40px_rgba(23,32,27,0.35)]">
           <div className="text-center mb-8">
-            {eyebrow && (
-              <p className="text-accent text-xs font-medium mb-3">
-                {eyebrow}
-              </p>
-            )}
             <h1 className="font-display text-paper text-3xl sm:text-4xl leading-tight tracking-tight">
               {title}
             </h1>

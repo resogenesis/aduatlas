@@ -34,7 +34,6 @@ const Signup = () => {
 
   return (
     <AuthCard
-      eyebrow="Create account"
       title="Start your ADU plan."
       subtitle="One account for your course, worksheets, feasibility study, and builder introductions."
       footer={

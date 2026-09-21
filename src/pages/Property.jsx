@@ -120,9 +120,6 @@ const Property = () => {
         <div className="flex items-center gap-2 text-paper-dim text-sm mb-4">
           <FiMapPin /> {q || "No address provided"}
         </div>
-        <p className="text-accent text-xs font-medium mb-3">
-          Free Property Snapshot
-        </p>
         <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
           What we know about your property <span className="text-paper-dim">— so far.</span>
         </h1>
@@ -198,15 +195,9 @@ const Property = () => {
 
         {/* Upgrade */}
         <div className="mt-10 bg-accent text-accent-fg rounded-3xl p-8 sm:p-12">
-          <p className="text-accent-fg/70 text-xs font-medium mb-3">
-            Remove the uncertainty
-          </p>
           <h2 className="font-display text-3xl sm:text-4xl leading-tight mb-4">
             Get your feasibility study
           </h2>
-          <p className="text-accent-fg/80 text-sm sm:text-base mb-7 max-w-xl leading-relaxed">
-            Receive a property-specific analysis including:
-          </p>
           <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-9 text-sm">
             {upgradeIncludes.map((item) => (
               <li key={item} className="flex items-start gap-2">

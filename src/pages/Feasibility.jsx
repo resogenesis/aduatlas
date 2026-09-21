@@ -93,7 +93,7 @@ const Feasibility = () => {
       </div>
 
       <section className="container mx-auto px-5 sm:px-8 max-w-6xl pb-12 sm:pb-16 pt-14 max-w-3xl">
-        <h3 className="text-accent text-xs font-medium mb-1">
+        <h3 className="text-paper text-sm font-semibold mb-1">
           Readiness checklist
         </h3>
         <p className="text-paper-dim text-sm mb-6">
@@ -102,7 +102,7 @@ const Feasibility = () => {
 
         {groups.map((group, gi) => (
           <div key={group.title} className="mb-10">
-            <h3 className="text-accent text-xs font-medium mb-4">
+            <h3 className="text-paper text-sm font-semibold mb-4">
               {group.title}
             </h3>
             <div className="flex flex-col gap-3">

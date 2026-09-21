@@ -66,17 +66,13 @@ const CourseChapter = () => {
         <FiArrowLeft /> Back to course
       </Link>
 
-      <p className="text-accent text-xs font-medium mb-3">
-        Module {chapter.moduleN} · {chapter.moduleTitle}
-        {!isQuiz && (
-          <span className="text-paper-dim"> · Chapter {contentPos} of {contentChapters.length}</span>
-        )}
-      </p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
         {chapter.title}
       </h1>
       <div className="flex items-center gap-2 text-paper-dim text-sm mb-12">
         <FiClock /> ~{chapter.minutes} min
+        <span aria-hidden>·</span>
+        <span>{contentPos}</span>
         {completed && (
           <>
             <span className="mx-1.5">·</span>

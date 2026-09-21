@@ -10,10 +10,10 @@ export const INCLUDES_COUNT = 4;
 export const COURSE_OUTLINE_CONTENT = {
   // New field names on purpose: the earlier header copy published under
   // courseoutline.hero.* was several paragraphs long; this page stays short.
-  "courseoutline.header.title": t("Heading", "Learn the ADU process before you spend on it."),
-  "courseoutline.header.body": t("One-line description", "Nine short modules on what an ADU is, what your city allows, what it really costs, and how to talk to builders."),
+  "courseoutline.header.title": t("Heading", "Learn before you build."),
+  "courseoutline.header.body": t("One-line description", "Nine short modules: what an ADU is, what your city allows, what it costs, how to talk to builders."),
 
-  "courseoutline.includes.heading": t("Includes heading", "Short, structured, and yours to keep."),
+  "courseoutline.includes.heading": t("Includes heading", "Short and yours to keep."),
   "courseoutline.include.0.label": t("Includes item 1", "Short written lessons, most under six minutes"),
   "courseoutline.include.1.label": t("Includes item 2", "A knowledge check at the end of every module"),
   "courseoutline.include.2.label": t("Includes item 3", "Progress saved to your account, on any device"),

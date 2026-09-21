@@ -61,9 +61,6 @@ const MyProperty = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-4xl mx-auto">
-      <p className="text-accent text-xs font-medium mb-3">
-        My Property
-      </p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
         Your project brief.
       </h1>

@@ -39,7 +39,6 @@ const AdminUsers = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto">
-      <p className="text-accent text-xs font-medium mb-3">Admin</p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
         Users
       </h1>

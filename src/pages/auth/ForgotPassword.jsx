@@ -6,7 +6,6 @@ import { FormField, PrimaryButton } from "../../components/common/FormField";
 const ForgotPassword = () => {
   return (
     <AuthCard
-      eyebrow="Forgot password"
       title="We'll send a magic link."
       subtitle="Enter your email and we'll send a one-click sign-in link. No password reset needed."
       footer={

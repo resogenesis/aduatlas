@@ -30,7 +30,7 @@ export const HOW_TO_ADU_CONTENT = {
   "howtoadu.hero.link_steps": { page: PAGE, label: "Hero link: jump to steps", type: "text", default: "The 5 steps" },
 
   "howtoadu.pillars.eyebrow": { page: PAGE, label: "Pillars section eyebrow", type: "text", default: "What ADUAtlas gives you" },
-  "howtoadu.pillars.heading": { page: PAGE, label: "Pillars section heading", type: "text", default: "How ADUAtlas prepares homeowners before they build." },
+  "howtoadu.pillars.heading": { page: PAGE, label: "Pillars section heading", type: "text", default: "How ADUAtlas prepares you." },
   "howtoadu.pillars.body": {
     page: PAGE, label: "Pillars section paragraph", type: "text",
     default: "An ADU course, a feasibility study for your property, and access to builder profiles, including national and local builders and suppliers, for less than the cost of a typical survey.",
@@ -43,7 +43,7 @@ export const HOW_TO_ADU_CONTENT = {
   ),
 
   "howtoadu.steps.eyebrow": { page: PAGE, label: "Steps section eyebrow", type: "text", default: "The 5 steps" },
-  "howtoadu.steps.heading": { page: PAGE, label: "Steps section heading", type: "text", default: "From property unknown to project ready." },
+  "howtoadu.steps.heading": { page: PAGE, label: "Steps section heading", type: "text", default: "Five steps to project ready." },
   ...Object.fromEntries(
     STEP_DEFAULTS.flatMap((s, i) => [
       [`howtoadu.step.${i}.title`, { page: PAGE, label: `Step ${i + 1} title`, type: "text", default: s.title }],

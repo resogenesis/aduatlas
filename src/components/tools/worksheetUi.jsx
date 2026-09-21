@@ -23,9 +23,8 @@ export const TextCell = ({ value, onChange, placeholder = "", w = "w-full" }) =>
   />
 );
 
-export const WsHeader = ({ kicker = "Feasibility Report · Worksheet", title, children }) => (
+export const WsHeader = ({ title, children }) => (
   <>
-    <p className="text-accent text-xs font-medium mb-3">{kicker}</p>
     <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-4">
       {title}
     </h1>

@@ -91,7 +91,6 @@ const AdminContent = () => {
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-8 sm:py-10 h-screen flex flex-col">
       <div className="mb-6">
-        <p className="text-accent text-xs font-medium mb-3">Admin</p>
         <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
           Content
         </h1>

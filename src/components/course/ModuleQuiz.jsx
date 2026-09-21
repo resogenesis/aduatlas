@@ -115,9 +115,7 @@ const ModuleQuiz = ({ quiz, onComplete, completed }) => {
           </div>
           {quiz.takeaway && (
             <div className="mt-5 pt-5 border-t border-stroke">
-              <p className="text-accent text-xs font-medium mb-2">
-                Key takeaway
-              </p>
+              <p className="text-paper text-sm font-semibold mb-1">Key takeaway</p>
               <p className="text-paper-dim text-sm leading-relaxed">{quiz.takeaway}</p>
             </div>
           )}

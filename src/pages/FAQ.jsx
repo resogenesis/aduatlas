@@ -12,7 +12,6 @@ const useFaqItem = (i) => ({
 });
 
 const FAQ = () => {
-  const eyebrow = useContentText("faq.hero.eyebrow");
   const heading = useContentText("faq.hero.heading");
   const body = useContentText("faq.hero.body");
   const footerNote = useContentText("faq.footer_note");
@@ -32,9 +31,6 @@ const FAQ = () => {
       <AdminEditableSection keys={["faq.hero.eyebrow", "faq.hero.heading", "faq.hero.body"]} label="Hero">
       <section className="bg-canvas section-y">
         <div className="container mx-auto px-4 sm:px-6 max-w-3xl text-center">
-          <p className="text-accent font-semibold text-xs sm:text-sm mb-3">
-            {eyebrow}
-          </p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-paper leading-tight">
             {heading}
           </h1>

@@ -51,9 +51,6 @@ const ReadyScore = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-5xl mx-auto print-sheet">
       <WorksheetBar savedAt={savedAt} />
 
-      <p className="text-accent text-xs font-medium mb-3">
-        Feasibility Report · NAPE
-      </p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-4">
         National ADU Property Evaluation.
       </h1>
@@ -70,7 +67,7 @@ const ReadyScore = () => {
           {NAPE_CATEGORIES.map((cat) => (
             <div key={cat.id} className="mb-8">
               <div className="flex items-baseline justify-between gap-3 mb-4">
-                <h3 className="text-accent text-xs font-medium">{cat.title}</h3>
+                <h3 className="text-paper text-sm font-semibold">{cat.title}</h3>
                 <span className="text-paper-dim text-xs tabular-nums">
                   {result.perCategory[cat.id]} / {cat.points} pts
                 </span>

@@ -44,17 +44,14 @@ const Step = ({ i }) => {
 };
 
 const HowToAdu = () => {
-  const heroEyebrow = useContentText("howtoadu.hero.eyebrow");
   const heroHeadingPre = useContentText("howtoadu.hero.heading_pre");
   const heroHeadingEmphasis = useContentText("howtoadu.hero.heading_emphasis");
   const heroBodyPre = useContentText("howtoadu.hero.body_pre");
   const heroBodyEmphasis = useContentText("howtoadu.hero.body_emphasis");
   const heroLinkPillars = useContentText("howtoadu.hero.link_pillars");
   const heroLinkSteps = useContentText("howtoadu.hero.link_steps");
-  const pillarsEyebrow = useContentText("howtoadu.pillars.eyebrow");
   const pillarsHeading = useContentText("howtoadu.pillars.heading");
   const pillarsBody = useContentText("howtoadu.pillars.body");
-  const stepsEyebrow = useContentText("howtoadu.steps.eyebrow");
   const stepsHeading = useContentText("howtoadu.steps.heading");
   const closerHeading = useContentText("howtoadu.closer.heading");
   const closerBody = useContentText("howtoadu.closer.body");
@@ -78,12 +75,6 @@ const HowToAdu = () => {
       >
       <section className="relative overflow-hidden bg-canvas pt-16 sm:pt-20 lg:pt-24 pb-10 sm:pb-12 border-b border-stroke">
 <div className="relative container mx-auto px-5 sm:px-8 max-w-6xl">
-          <div className="inline-flex items-center gap-2 mb-4 animate-fade-up" style={{ animationDelay: "0ms" }}>
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
-            <span className="text-paper-dim text-xs font-medium">
-              {heroEyebrow}
-            </span>
-          </div>
 
           <h1
             className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight animate-fade-up"
@@ -128,9 +119,6 @@ const HowToAdu = () => {
       >
       <section id="pillars" className="bg-canvas section-y border-t border-stroke scroll-mt-20">
         <div className="container mx-auto px-5 sm:px-8 max-w-6xl">
-          <p className="text-accent text-xs sm:text-sm font-medium mb-4">
-            {pillarsEyebrow}
-          </p>
           <h2 className="font-display text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight max-w-3xl">
             {pillarsHeading}
           </h2>
@@ -156,9 +144,6 @@ const HowToAdu = () => {
       >
       <section id="steps" className="bg-canvas section-y border-t border-stroke scroll-mt-20">
         <div className="container mx-auto px-5 sm:px-8 max-w-6xl">
-          <p className="text-accent text-xs sm:text-sm font-medium mb-4">
-            {stepsEyebrow}
-          </p>
           <h2 className="font-display text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight max-w-2xl mb-10 sm:mb-12">
             {stepsHeading}
           </h2>

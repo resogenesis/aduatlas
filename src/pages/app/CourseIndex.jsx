@@ -101,9 +101,6 @@ const CourseIndex = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-4xl mx-auto">
       <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
         <div>
-          <p className="text-accent text-xs font-medium mb-3">
-            The Course
-          </p>
           <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
             Nine modules. <span className="text-paper-dim">One path.</span>
           </h1>

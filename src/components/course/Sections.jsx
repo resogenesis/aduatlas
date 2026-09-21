@@ -15,9 +15,7 @@ const Sections = ({ sections }) => (
             key={i}
             className="bg-accent/5 border-l-2 border-accent rounded-r-xl px-5 py-4"
           >
-            <p className="text-accent text-xs font-semibold mb-1.5">
-              Remember
-            </p>
+            <p className="text-paper text-sm font-semibold mb-1">Remember</p>
             <p className="text-paper text-base leading-relaxed">{s.remember}</p>
           </aside>
         );

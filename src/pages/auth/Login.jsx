@@ -30,7 +30,6 @@ const Login = () => {
 
   return (
     <AuthCard
-      eyebrow="Welcome back"
       title="Pick up where you left off."
       subtitle="Log in to access your course, worksheets, and feasibility study."
       footer={

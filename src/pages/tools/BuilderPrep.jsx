@@ -117,7 +117,6 @@ const BuilderPrep = () => {
       </div>
 
       <div className="bg-accent/5 border-l-2 border-accent rounded-r-xl px-5 py-4 mb-4">
-        <p className="text-accent text-xs font-semibold mb-1.5">Compare before you select</p>
         <p className="text-paper text-sm leading-relaxed">
           Give the same project information to each builder or GC and ask the same questions.
           Compare the total project cost, what is included, what is excluded, the proposed

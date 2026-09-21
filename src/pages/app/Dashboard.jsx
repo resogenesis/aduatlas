@@ -54,11 +54,6 @@ const Dashboard = () => {
             <FiMapPin /> Your property
           </p>
           <h2 className="font-primary font-extrabold tracking-tight text-3xl sm:text-4xl leading-tight mb-3">{packet.address || "No address yet"}</h2>
-          <p className="text-accent-fg/85 text-sm sm:text-base mb-6 max-w-xl">
-            {packet.address
-              ? [packet.aduType, packet.desiredSqft ? `${packet.desiredSqft} sq ft target` : null, packet.budget].filter(Boolean).join(" · ") || "Add your project goals to round out the brief."
-              : "Everything in your portal revolves around your property. Add the address and your goals to begin."}
-          </p>
           <Link to="/my-property" className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors">
             {packet.address ? "Edit property" : "Add property"} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>

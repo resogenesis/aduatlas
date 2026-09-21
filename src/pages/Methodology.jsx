@@ -71,10 +71,8 @@ const Methodology = () => {
   const heroHeadingEmphasis = useContentText("methodology.hero.heading_emphasis");
   const heroBody = useContentText("methodology.hero.body");
 
-  const levelsEyebrow = useContentText("methodology.levels.eyebrow");
   const levelsHeading = useContentText("methodology.levels.heading");
 
-  const pathEyebrow = useContentText("methodology.path.eyebrow");
   const pathHeading = useContentText("methodology.path.heading");
   const pathBody = useContentText("methodology.path.body");
   const pathExampleLabel = useContentText("methodology.path.example_label");
@@ -82,12 +80,10 @@ const Methodology = () => {
   const pathExampleConfidence = useContentText("methodology.path.example_confidence");
   const pathExampleQuote = useContentText("methodology.path.example_quote");
 
-  const sourcesEyebrow = useContentText("methodology.sources.eyebrow");
   const sourcesHeading = useContentText("methodology.sources.heading");
   const sourcesFootnote1 = useContentText("methodology.sources.footnote_1");
   const sourcesFootnote2 = useContentText("methodology.sources.footnote_2");
 
-  const notDoingBadge = useContentText("methodology.notdoing.badge");
   const notDoingHeadingPre = useContentText("methodology.notdoing.heading_pre");
   const notDoingHeadingEmphasis = useContentText("methodology.notdoing.heading_emphasis");
   const notDoingBody = useContentText("methodology.notdoing.body");
@@ -146,7 +142,6 @@ const Methodology = () => {
           label="Confidence levels"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-accent text-xs mb-5">{levelsEyebrow}</p>
           <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-9">
             {levelsHeading}
           </h2>
@@ -170,7 +165,6 @@ const Methodology = () => {
           label="What raises a row"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-accent text-xs mb-5">{pathEyebrow}</p>
           <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-5">
             {pathHeading}
           </h2>
@@ -207,7 +201,6 @@ const Methodology = () => {
           label="Data sources"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <p className="text-accent text-xs mb-5">{sourcesEyebrow}</p>
           <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-7">
             {sourcesHeading}
           </h2>
@@ -236,9 +229,6 @@ const Methodology = () => {
           label="What we don't do"
         >
         <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-12">
-          <div className="flex items-center gap-2 text-accent text-xs mb-5">
-            <FiShield /> {notDoingBadge}
-          </div>
           <h2 className="font-display text-paper text-3xl sm:text-4xl tracking-tight mb-5">
             {notDoingHeadingPre} <span className="text-paper-dim">{notDoingHeadingEmphasis}</span>
           </h2>

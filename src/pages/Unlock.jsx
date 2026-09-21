@@ -90,10 +90,10 @@ const Unlock = () => {
       <div className="container mx-auto px-5 sm:px-8 max-w-6xl">
         <div className="max-w-3xl mb-12">
           <h1 className="font-primary font-extrabold tracking-[-0.025em] text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.02] mb-5">
-            Teach me. Analyze my property. Help me move forward.
+            Plans and pricing.
           </h1>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed">
-            Start with the course, add a feasibility study and site plan prepared for your property, or bring in a concierge for the next steps. Every plan includes one year of access and a 7-day full refund.
+            Every plan includes one year of access and a 7-day full refund.
           </p>
         </div>
 

@@ -239,7 +239,6 @@ const AdminStudies = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-8 sm:py-10">
       <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
         <div>
-          <p className="text-accent text-xs font-medium mb-3">Admin</p>
           <h1 className="font-primary font-extrabold tracking-tight text-paper text-4xl sm:text-5xl leading-[1.05]">Feasibility studies</h1>
         </div>
         <div className="flex items-center gap-2">
