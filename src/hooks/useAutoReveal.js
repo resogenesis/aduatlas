@@ -28,6 +28,19 @@ export const useAutoReveal = (ref) => {
       { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
     );
     sections.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    // Safety net: background tabs, print, and some embedded views never fire
+    // intersection callbacks. Reveal everything after a moment regardless, and
+    // whenever the tab becomes visible.
+    const revealAll = () => sections.forEach((el) => el.setAttribute("data-reveal", "on"));
+    const timer = window.setTimeout(revealAll, 1200);
+    const onVisible = () => {
+      if (document.visibilityState === "visible") revealAll();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      io.disconnect();
+      window.clearTimeout(timer);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, [ref, pathname]);
 };

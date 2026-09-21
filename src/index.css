@@ -75,7 +75,6 @@ body {
   letter-spacing: -0.025em;
 }
 
-html { scroll-behavior: smooth; }
 html, body { overflow-x: hidden; }
 
 /* No italics anywhere on the site (Richard, 2026-09-20). */
@@ -224,7 +223,6 @@ em, i, .italic { font-style: normal; }
 .hdr[data-scrolled="true"] { box-shadow: 0 8px 24px -20px rgba(23, 32, 27, 0.35); }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
   .page-enter, .animate-fade-up, .animate-float-soft, .animate-pulse-soft { animation: none !important; }
   .lift, .lift:hover, .press, .press:active { transform: none; transition: none; }

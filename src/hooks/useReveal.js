@@ -20,7 +20,12 @@ export const useReveal = (delay = 0) => {
       { threshold: 0.15 }
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    // Safety net for tabs that never report intersection (background/print).
+    const timer = window.setTimeout(() => el.setAttribute("data-reveal", "on"), 1500);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timer);
+    };
   }, [delay]);
   return ref;
 };
