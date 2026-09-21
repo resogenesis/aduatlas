@@ -44,7 +44,7 @@ const AduTypes = () => {
         ]}
         label="Types list"
       >
-      <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 max-w-4xl">
+      <section className="container mx-auto px-4 sm:px-6 section-y max-w-4xl">
         <div className="text-center mb-10">
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
             {intro}

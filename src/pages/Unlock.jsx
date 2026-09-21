@@ -107,7 +107,7 @@ const Unlock = () => {
             return (
               <li
                 key={p.id}
-                className={`relative rounded-[1.5rem] p-7 sm:p-8 flex flex-col transition-shadow ${ featured ?"bg-forest-deep text-white shadow-[0_40px_80px_-40px_rgba(31,68,50,0.7)]":"bg-canvas border border-stroke"} ${isSelected ? (featured ?"ring-2 ring-gold":"ring-2 ring-accent") :""}`}
+                className={`lift relative rounded-[1.5rem] p-7 sm:p-8 flex flex-col ${ featured ?"bg-forest-deep text-white shadow-[0_40px_80px_-40px_rgba(31,68,50,0.7)]":"bg-canvas border border-stroke"} ${isSelected ? (featured ?"ring-2 ring-gold":"ring-2 ring-accent") :""}`}
               >
                 <div className="flex items-center justify-between mb-6">
                   <p className={`text-base font-semibold ${ink}`}>{p.name}</p>
@@ -195,7 +195,7 @@ const Unlock = () => {
                   aria-describedby={emailError ? "unlock-email-error" : undefined}
                   className="flex-1 px-5 py-4 bg-canvas border border-stroke rounded-xl text-paper placeholder:text-paper-dim/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:border-accent transition"
                 />
-                <button type="submit" className="px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors">
+                <button type="submit" className="px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors press">
                   Continue
                 </button>
               </div>
@@ -218,7 +218,7 @@ const Unlock = () => {
                   <button
                     onClick={handleCheckout}
                     disabled={loading}
-                    className="w-full inline-flex items-center justify-center gap-2 px-7 py-5 rounded-xl bg-accent text-accent-fg text-lg font-semibold hover:bg-accent-dim transition-colors disabled:opacity-60"
+                    className="w-full inline-flex items-center justify-center gap-2 px-7 py-5 rounded-xl bg-accent text-accent-fg text-lg font-semibold hover:bg-accent-dim transition-colors disabled:opacity-60 press"
                   >
                     <FiLock /> {loading ? "Redirecting…" : `Pay ${formatPrice(dueCents)}`}
                   </button>

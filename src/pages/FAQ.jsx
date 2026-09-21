@@ -30,7 +30,7 @@ const FAQ = () => {
   return (
     <div>
       <AdminEditableSection keys={["faq.hero.eyebrow", "faq.hero.heading", "faq.hero.body"]} label="Hero">
-      <section className="bg-canvas py-12 sm:py-16">
+      <section className="bg-canvas section-y">
         <div className="container mx-auto px-4 sm:px-6 max-w-3xl text-center">
           <p className="text-accent font-semibold text-xs sm:text-sm mb-3">
             {eyebrow}
@@ -49,7 +49,7 @@ const FAQ = () => {
         keys={Array.from({ length: FAQ_ITEMS_COUNT }, (_, i) => [`faq.item.${i}.question`, `faq.item.${i}.answer`]).flat()}
         label="Questions"
       >
-      <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-3xl">
+      <section className="container mx-auto px-4 sm:px-6 section-y max-w-3xl">
         <Accordion items={faqs} />
       </section>
       </AdminEditableSection>

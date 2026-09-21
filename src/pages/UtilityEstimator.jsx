@@ -39,7 +39,7 @@ const UtilityEstimator = () => {
         subtitle="Ballpark the costs a structural quote leaves out. Adjust each rate and quantity to your property — the total updates live."
       />
 
-      <section className="container mx-auto px-5 sm:px-8 py-12 sm:py-16 max-w-3xl">
+      <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y max-w-3xl">
         <div className="overflow-x-auto bg-surface-1-solid rounded-2xl border border-stroke">
           <table className="w-full text-sm">
             <thead>

@@ -24,7 +24,7 @@ const ModuleRow = ({ m, i, open, onToggle }) => {
   const list = lessons(m);
   return (
     <AdminEditableSection keys={[`courseoutline.module.${m.id}.desc`]} label={`Module ${i + 1}`}>
-      <li className="border-t border-stroke last:border-b">
+      <li className="border-t border-stroke last:border-b transition-colors hover:bg-surface-1-solid/60 -mx-4 px-4 rounded-xl">
         <button type="button" onClick={onToggle} aria-expanded={open} className="w-full grid grid-cols-[3rem_1fr_auto] sm:grid-cols-[4rem_1fr_9rem_2rem] gap-4 items-start text-left py-6">
           <span className="font-display text-accent text-2xl leading-none">{String(i + 1).padStart(2, "0")}</span>
           <span>
@@ -38,8 +38,8 @@ const ModuleRow = ({ m, i, open, onToggle }) => {
           </span>
           <FiChevronDown className={`text-paper-dim mt-1.5 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
         </button>
-        {open && (
-          <ol className="pb-6 pl-12 sm:pl-16 grid sm:grid-cols-2 gap-x-8 gap-y-2">
+        <div className="acc" data-open={open}>
+          <ol className="pb-6 pl-12 sm:pl-16 grid sm:grid-cols-2 gap-x-8 gap-y-2" aria-hidden={!open}>
             {list.map((c) => (
               <li key={c.id} className="text-sm text-paper flex items-baseline gap-2">
                 <span className="text-paper-dim tabular-nums w-5 shrink-0">{c.n}.</span>
@@ -50,7 +50,7 @@ const ModuleRow = ({ m, i, open, onToggle }) => {
               </li>
             ))}
           </ol>
-        )}
+        </div>
       </li>
     </AdminEditableSection>
   );
@@ -95,7 +95,7 @@ const CourseOutline = () => {
       </AdminEditableSection>
 
       <AdminEditableSection keys={["courseoutline.modules.heading"]} label="Module list heading">
-        <section className="container mx-auto px-5 sm:px-8 py-16 sm:py-20 max-w-6xl">
+        <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y max-w-6xl">
           <h2 className="font-display text-paper text-3xl sm:text-4xl leading-[1.05] mb-8">{modulesHeading}</h2>
           <ol>
             {modules.map((m, i) => (
@@ -107,13 +107,13 @@ const CourseOutline = () => {
 
       <AdminEditableSection keys={["courseoutline.includes.heading", ...Array.from({ length: INCLUDES_COUNT }, (_, i) => `courseoutline.include.${i}.label`)]} label="Each module includes">
         <section className="bg-surface-1-solid border-y border-stroke">
-          <div className="container mx-auto px-5 sm:px-8 py-16 max-w-6xl">
+          <div className="container mx-auto px-5 sm:px-8 max-w-6xl py-16 max-w-6xl">
             <h2 className="font-display text-paper text-3xl sm:text-4xl leading-[1.05] mb-8">{includesHeading}</h2>
             <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {includes.map((label, i) => {
                 const Icon = INCLUDE_ICONS[i];
                 return (
-                  <li key={i} className="bg-canvas border border-stroke rounded-2xl p-6 flex items-start gap-3">
+                  <li key={i} className="bg-canvas border border-stroke rounded-2xl p-6 flex items-start gap-3 lift">
                     <Icon className="text-accent text-xl mt-0.5 shrink-0" aria-hidden />
                     <p className="text-paper text-sm sm:text-base leading-snug">{label}</p>
                   </li>
@@ -125,14 +125,14 @@ const CourseOutline = () => {
       </AdminEditableSection>
 
       <AdminEditableSection keys={["courseoutline.cta.heading", "courseoutline.cta.body", "courseoutline.cta.button"]} label="Closing call to action">
-        <section className="container mx-auto px-5 sm:px-8 py-16 sm:py-20 max-w-6xl">
+        <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y max-w-6xl">
           <div className="bg-forest-deep text-white rounded-3xl p-8 sm:p-12 grid lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8">
               <h2 className="font-display text-3xl sm:text-4xl leading-[1.05] mb-3">{ctaHeading}</h2>
               <p className="text-white/80 text-base sm:text-lg leading-relaxed">{ctaBody}</p>
             </div>
             <div className="lg:col-span-4 lg:justify-self-end flex flex-wrap gap-3">
-              <Link to={paid ? "/course" : "/unlock?tier=roadmap"} className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-forest-deep font-semibold text-sm hover:bg-mist transition-colors">
+              <Link to={paid ? "/course" : "/unlock?tier=roadmap"} className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-forest-deep font-semibold text-sm hover:bg-mist transition-colors press">
                 {paid ? "Open the course" : ctaButton} <FiArrowRight />
               </Link>
             </div>

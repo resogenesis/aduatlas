@@ -59,10 +59,17 @@ const ResourcesMenu = () => {
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   const close = () => setMobileOpen(false);
 
   return (
-    <header className="w-full sticky top-0 z-50 bg-canvas/90 backdrop-blur-md border-b border-stroke">
+    <header data-scrolled={scrolled} className="hdr w-full sticky top-0 z-50 bg-canvas/90 backdrop-blur-md border-b border-stroke">
       <div className="container mx-auto px-5 sm:px-8 flex items-center justify-between py-3 lg:py-3.5">
         <Link to="/" className="text-paper hover:opacity-80 transition-opacity" aria-label="ADUAtlas home">
           <Logomark className="h-9" />

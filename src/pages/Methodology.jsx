@@ -104,7 +104,7 @@ const Methodology = () => {
         keys={["methodology.hero.badge", "methodology.hero.heading_pre", "methodology.hero.heading_emphasis", "methodology.hero.body"]}
         label="Hero"
       >
-      <section className="relative overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-12 border-b border-stroke">
+      <section className="relative overflow-hidden pt-16 sm:pt-20 lg:pt-24 pb-10 sm:pb-12 border-b border-stroke">
 <div ref={heroRef} className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
           <div className="inline-flex items-center gap-2 mb-4 animate-fade-up">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />

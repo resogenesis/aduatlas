@@ -86,13 +86,13 @@ const Feasibility = () => {
       />
 
       {/* The model gets a wide container so the 3D view / site plan has room. */}
-      <div className="container mx-auto px-5 sm:px-8 pt-12 sm:pt-16">
+      <div className="container mx-auto px-5 sm:px-8 max-w-6xl pt-12 sm:pt-16">
         <div className="max-w-6xl mx-auto">
           <BuildableEnvelope />
         </div>
       </div>
 
-      <section className="container mx-auto px-5 sm:px-8 pb-12 sm:pb-16 pt-14 max-w-3xl">
+      <section className="container mx-auto px-5 sm:px-8 max-w-6xl pb-12 sm:pb-16 pt-14 max-w-3xl">
         <h3 className="text-accent text-xs font-medium mb-1">
           Readiness checklist
         </h3>
@@ -147,7 +147,7 @@ const Feasibility = () => {
           </p>
           <button
             onClick={reset}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-stroke text-paper-dim hover:text-paper hover:border-accent transition text-sm font-medium"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-stroke text-paper-dim hover:text-paper hover:border-accent transition text-sm font-medium press"
           >
             <FiRefreshCcw /> Start over
           </button>

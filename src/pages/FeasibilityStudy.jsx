@@ -28,7 +28,7 @@ const Cta = ({ children, className = "" }) => (
     to="/unlock"
     state={{ tier: "report" }}
     onClick={() => track(EV.TIER_SELECTED, { tier: "report", source: "feasibility-study-page" })}
-    className={`group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors ${className}`}
+    className={`group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors ${className} press`}
   >
     {children} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
   </Link>
@@ -117,7 +117,7 @@ const FeasibilityStudy = () => (
     </section>
 
     {/* Drawing */}
-    <section className="container mx-auto px-5 sm:px-8 max-w-6xl py-14 sm:py-20">
+    <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y">
       <div className="grid lg:grid-cols-2 gap-10 items-center">
         <div>
           <div className="bg-surface-1-solid border border-stroke rounded-3xl p-4 sm:p-6">

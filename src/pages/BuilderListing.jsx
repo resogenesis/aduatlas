@@ -16,7 +16,7 @@ const Card = ({ b, saved, onSave }) => {
   const logo = publicUrl(b.logo_path);
   const photo = publicUrl((b.photos || [])[0]);
   return (
-    <li className="bg-canvas border border-stroke rounded-3xl overflow-hidden flex flex-col">
+    <li className="bg-canvas border border-stroke rounded-3xl overflow-hidden flex flex-col lift">
       <Link to={`/builders/${b.slug}`} className="block aspect-[16/9] bg-surface-1-solid overflow-hidden">
         {photo ? <img src={photo} alt="" className="w-full h-full object-cover" /> : logo ? <img src={logo} alt="" className="w-full h-full object-contain p-8" /> : <div className="w-full h-full flex items-center justify-center text-paper-dim text-sm">No photo yet</div>}
       </Link>

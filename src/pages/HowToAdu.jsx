@@ -76,7 +76,7 @@ const HowToAdu = () => {
         ]}
         label="Hero"
       >
-      <section className="relative overflow-hidden bg-canvas pt-24 sm:pt-28 pb-10 sm:pb-12 border-b border-stroke">
+      <section className="relative overflow-hidden bg-canvas pt-16 sm:pt-20 lg:pt-24 pb-10 sm:pb-12 border-b border-stroke">
 <div className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
           <div className="inline-flex items-center gap-2 mb-4 animate-fade-up" style={{ animationDelay: "0ms" }}>
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
@@ -126,8 +126,8 @@ const HowToAdu = () => {
         ]}
         label="What ADUAtlas gives you"
       >
-      <section id="pillars" className="bg-canvas py-16 sm:py-20 border-t border-stroke scroll-mt-20">
-        <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
+      <section id="pillars" className="bg-canvas section-y border-t border-stroke scroll-mt-20">
+        <div className="container mx-auto px-5 sm:px-8 max-w-6xl">
           <p className="text-accent text-xs sm:text-sm font-medium mb-4">
             {pillarsEyebrow}
           </p>
@@ -154,8 +154,8 @@ const HowToAdu = () => {
         ]}
         label="The 5 steps"
       >
-      <section id="steps" className="bg-canvas py-16 sm:py-24 border-t border-stroke scroll-mt-20">
-        <div className="container mx-auto px-5 sm:px-8 max-w-5xl">
+      <section id="steps" className="bg-canvas section-y border-t border-stroke scroll-mt-20">
+        <div className="container mx-auto px-5 sm:px-8 max-w-6xl">
           <p className="text-accent text-xs sm:text-sm font-medium mb-4">
             {stepsEyebrow}
           </p>
@@ -175,7 +175,7 @@ const HowToAdu = () => {
         keys={["howtoadu.closer.heading", "howtoadu.closer.body", "howtoadu.closer.cta_primary", "howtoadu.closer.cta_secondary"]}
         label="Closer"
       >
-      <section className="bg-canvas py-16 sm:py-24 border-t border-stroke">
+      <section className="bg-canvas section-y border-t border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-3xl text-center">
           <h2 className="font-display text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight mb-5">
             {closerHeading}
@@ -186,14 +186,14 @@ const HowToAdu = () => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/unlock"
-              className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
+              className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors press"
             >
               {closerCtaPrimary}
               <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               to="/course-outline"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition press"
             >
               {closerCtaSecondary}
             </Link>

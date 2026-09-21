@@ -123,13 +123,13 @@ const Welcome = () => {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/unlock"
-                className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
+                className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors press"
               >
                 See plans <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/login"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition"
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition press"
               >
                 Log in to your account
               </Link>
@@ -182,7 +182,7 @@ const Welcome = () => {
 
         <Link
           to="/dashboard"
-          className="group inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors"
+          className="group inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors press"
         >
           Go to dashboard <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>

@@ -39,7 +39,7 @@ const PlanCard = ({ i, featuredLabel }) => {
   return (
     <li
       ref={ref}
-      className={`relative rounded-[1.5rem] p-7 sm:p-8 flex flex-col ${ featured ?"bg-forest-deep text-white shadow-[0_40px_80px_-40px_rgba(31,68,50,0.7)] lg:-my-4":"bg-canvas border border-stroke"}`}
+      className={`lift relative rounded-[1.5rem] p-7 sm:p-8 flex flex-col ${ featured ?"bg-forest-deep text-white shadow-[0_40px_80px_-40px_rgba(31,68,50,0.7)] lg:-my-4":"bg-canvas border border-stroke"}`}
     >
       <div className="flex items-center justify-between mb-6">
         <p className={`text-base font-semibold ${ink}`}>{name}</p>
@@ -75,7 +75,7 @@ const Plans = () => {
   return (
     <AdminEditableSection keys={EDIT_KEYS} label="Plans">
       <section className="bg-canvas">
-        <div className="container mx-auto px-5 sm:px-8 py-16 lg:py-28">
+        <div className="container mx-auto px-5 sm:px-8 max-w-6xl section-y">
           <div ref={ref} className="grid lg:grid-cols-12 gap-6 items-end mb-12 lg:mb-16">
             <div className="lg:col-span-7">
               <h2 className="font-primary font-extrabold tracking-[-0.025em] text-paper text-4xl sm:text-5xl leading-[1.02]">{heading}</h2>

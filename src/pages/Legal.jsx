@@ -82,7 +82,7 @@ const Legal = () => {
         keys={["legal.hero.badge", "legal.hero.heading_pre", "legal.hero.heading_emphasis", "legal.hero.body", "legal.last_updated"]}
         label="Hero"
       >
-      <section className="relative overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-12 border-b border-stroke">
+      <section className="relative overflow-hidden pt-16 sm:pt-20 lg:pt-24 pb-10 sm:pb-12 border-b border-stroke">
 <div className="relative container mx-auto px-5 sm:px-8 max-w-4xl">
           <div className="inline-flex items-center gap-2 mb-4">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />

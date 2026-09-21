@@ -55,7 +55,7 @@ const Hero = () => {
     <AdminEditableSection keys={EDIT_KEYS} label="Hero">
       <section className="bg-surface-1-solid relative overflow-hidden">
         <Contours />
-        <div className="container mx-auto px-5 sm:px-8 pt-10 pb-14 lg:pt-16 lg:pb-20 grid lg:grid-cols-12 gap-10 lg:gap-10 items-center relative">
+        <div className="container mx-auto px-5 sm:px-8 max-w-6xl pt-10 pb-14 sm:pt-14 sm:pb-16 lg:pt-16 lg:pb-20 grid lg:grid-cols-12 gap-10 lg:gap-10 items-center relative">
           <div className="lg:col-span-6 animate-fade-up">
             <h1 className="font-primary font-extrabold text-paper text-[2.75rem] sm:text-6xl lg:text-[4.75rem] xl:text-[5.5rem] leading-[0.96] tracking-[-0.035em] mb-7">
               {line1}

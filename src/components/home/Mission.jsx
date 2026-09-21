@@ -17,7 +17,7 @@ const Mission = () => {
   return (
     <AdminEditableSection keys={EDIT_KEYS} label="Mission">
       <section className="bg-surface-1-solid">
-        <div ref={ref} className="container mx-auto px-5 sm:px-8 py-16 lg:py-24 text-center max-w-3xl">
+        <div ref={ref} className="container mx-auto px-5 sm:px-8 max-w-6xl section-y text-center max-w-3xl">
           <h2 className="font-primary font-extrabold tracking-[-0.025em] text-paper text-4xl sm:text-5xl leading-[1.02] mb-5">{heading}</h2>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-8">{body}</p>
           <Link to="/about" className="group inline-flex items-center gap-2 text-sm font-semibold text-paper hover:text-accent transition-colors">

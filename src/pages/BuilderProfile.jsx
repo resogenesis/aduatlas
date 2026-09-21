@@ -91,7 +91,7 @@ const BuilderProfile = () => {
                 <FiCheck className="text-accent" /> Introduction {intro.status === "sent" ? "sent" : intro.status === "declined" ? "not available" : "requested"}
               </span>
             ) : (
-              <button type="button" onClick={() => setAsking(true)} className="flex-1 px-4 py-3 rounded-xl bg-accent text-accent-fg text-sm font-semibold hover:bg-accent-dim transition-colors">
+              <button type="button" onClick={() => setAsking(true)} className="flex-1 px-4 py-3 rounded-xl bg-accent text-accent-fg text-sm font-semibold hover:bg-accent-dim transition-colors press">
                 Request introduction
               </button>
             )}
@@ -183,10 +183,10 @@ const BuilderProfile = () => {
               </p>
             )}
             <div className="flex gap-3">
-              <button type="submit" className="px-5 py-3 rounded-xl bg-accent text-accent-fg text-sm font-semibold hover:bg-accent-dim">
+              <button type="submit" className="px-5 py-3 rounded-xl bg-accent text-accent-fg text-sm font-semibold hover:bg-accent-dim press">
                 Send request
               </button>
-              <button type="button" onClick={() => setAsking(false)} className="px-5 py-3 rounded-xl border border-stroke text-paper text-sm font-medium">
+              <button type="button" onClick={() => setAsking(false)} className="px-5 py-3 rounded-xl border border-stroke text-paper text-sm font-medium press">
                 Cancel
               </button>
             </div>

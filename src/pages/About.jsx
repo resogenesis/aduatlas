@@ -75,10 +75,10 @@ const About = () => {
         keys={["about.hero.eyebrow", "about.hero.heading_pre", "about.hero.heading_emphasis", "about.hero.body1", "about.hero.body2"]}
         label="Hero"
       >
-      <section className="relative overflow-hidden pt-32 sm:pt-40 lg:pt-48 pb-16 sm:pb-20">
+      <section className="relative overflow-hidden pt-16 sm:pt-20 lg:pt-24 pb-16 sm:pb-20">
 <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 w-[40rem] h-[40rem] animate-drift-glow" style={{ animationDelay: "-7s" }} />
 
-        <div ref={heroRef} className="relative container mx-auto px-5 sm:px-8 max-w-5xl">
+        <div ref={heroRef} className="relative container mx-auto px-5 sm:px-8 max-w-6xl">
           <p className="text-accent text-xs sm:text-sm font-medium mb-5 animate-fade-up" style={{ animationDelay: "0ms" }}>
             {heroEyebrow}
           </p>
@@ -109,7 +109,7 @@ const About = () => {
         keys={Array.from({ length: ABOUT_STATS_COUNT }, (_, i) => [`about.stat.${i}.n`, `about.stat.${i}.label`]).flat()}
         label="Stats"
       >
-      <section className="container mx-auto px-5 sm:px-8 max-w-5xl pb-16">
+      <section className="container mx-auto px-5 sm:px-8 max-w-6xl pb-16">
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-stroke rounded-2xl overflow-hidden">
           {Array.from({ length: ABOUT_STATS_COUNT }, (_, i) => <Stat key={i} i={i} />)}
         </div>
@@ -117,7 +117,7 @@ const About = () => {
       </AdminEditableSection>
 
       {/* Chapters */}
-      <section className="container mx-auto px-5 sm:px-8 max-w-5xl">
+      <section className="container mx-auto px-5 sm:px-8 max-w-6xl">
         {Array.from({ length: ABOUT_CHAPTERS_COUNT }, (_, i) => (
           <Chapter key={i} i={i} isLast={i === ABOUT_CHAPTERS_COUNT - 1} />
         ))}
@@ -128,7 +128,7 @@ const About = () => {
         keys={["about.closing.eyebrow", "about.closing.heading", "about.closing.body", "about.closing.cta_primary", "about.closing.cta_secondary"]}
         label="Closing"
       >
-      <section className="container mx-auto px-5 sm:px-8 max-w-4xl py-20 sm:py-28">
+      <section className="container mx-auto px-5 sm:px-8 max-w-4xl section-y">
         <div ref={closingRef} className="bg-accent text-accent-fg rounded-3xl p-10 sm:p-14 text-center relative overflow-hidden">
           <div aria-hidden className="pointer-events-none absolute inset-0">
           </div>
