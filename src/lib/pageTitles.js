@@ -2,7 +2,7 @@
 // name the page instead of repeating the site tagline everywhere.
 const SITE = "ADUAtlas";
 const TITLES = [
-  ["/", "Your ADU Starts Here"],
+  ["/", "Your ADU or Tiny Home Starts Here"],
   ["/property", "Check my property"],
   ["/find-a-builder", "Find a builder"],
   ["/how-to-adu", "How it works"],
