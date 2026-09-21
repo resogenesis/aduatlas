@@ -10,7 +10,12 @@ export const useAutoReveal = (ref) => {
   useEffect(() => {
     const root = ref.current;
     if (!root || typeof IntersectionObserver === "undefined") return undefined;
-    const sections = Array.from(root.querySelectorAll("section")).filter((el) => !el.closest("[data-reveal]") && !el.querySelector("[data-reveal]"));
+    // Skip sections that manage their own reveal (an ancestor or a child
+    // carries data-reveal). Check the PARENT, not the element: on a re-run the
+    // section itself already carries the attribute we set last time.
+    const sections = Array.from(root.querySelectorAll("section")).filter(
+      (el) => !(el.parentElement && el.parentElement.closest("[data-reveal]")) && !el.querySelector("[data-reveal]")
+    );
     if (!sections.length) return undefined;
     sections.forEach((el, i) => {
       el.setAttribute("data-reveal", "off");
@@ -41,6 +46,11 @@ export const useAutoReveal = (ref) => {
       io.disconnect();
       window.clearTimeout(timer);
       document.removeEventListener("visibilitychange", onVisible);
+      // Leave the DOM clean for the next run (route change or dev re-mount).
+      sections.forEach((el) => {
+        el.removeAttribute("data-reveal");
+        el.style.removeProperty("--reveal-delay");
+      });
     };
   }, [ref, pathname]);
 };
