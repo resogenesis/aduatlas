@@ -1,24 +1,27 @@
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiBookOpen, FiClipboard, FiUsers } from "react-icons/fi";
-import { useContentText } from "../lib/content";
-import { HOW_TO_ADU_PILLARS_COUNT, HOW_TO_ADU_STEPS_COUNT } from "../lib/contentRegistry/howToAdu";
+import { FiArrowRight, FiBookOpen, FiMap, FiUsers } from "react-icons/fi";
+import PageHeader from "../components/common/PageHeader";
+import SitePlanArt from "../components/common/SitePlanArt";
+import CostsArt from "../components/common/CostsArt";
+import { useContentImage, useContentText } from "../lib/content";
+import { HOW_PILLARS_COUNT, HOW_STEPS_COUNT } from "../lib/contentRegistry/howToAdu";
 import { AdminEditableSection } from "../lib/adminEditBridge";
 
-// Icons + step numbers stay code-owned; title/desc text is admin-editable.
-const PILLAR_ICONS = [FiBookOpen, FiClipboard, FiUsers];
-const STEP_N = ["01", "02", "03", "04", "05"];
+// How It Works (Phase 1 scope §2): the journey in five steps, each with a
+// picture, alternating sides. Steps 3 and 4 use drawn illustrations so the
+// page never promises a photo of a deliverable that does not exist yet.
 
-const Pillar = ({ i }) => {
-  const Icon = PILLAR_ICONS[i];
-  const title = useContentText(`howtoadu.pillar.${i}.title`);
-  const desc = useContentText(`howtoadu.pillar.${i}.desc`);
+const PILLAR_ICONS = [FiBookOpen, FiMap, FiUsers];
+const STEP_LINKS = ["/property", "/course-outline", "/unlock?tier=report", "/course-outline", "/find-a-builder"];
+const STEP_LINK_LABELS = ["Check my property", "See the course", "See Platinum", "See the course", "About builders"];
+
+const StepImage = ({ i }) => {
+  const image = useContentImage(`howtoadu.step.${i}.image`);
+  if (i === 2) return <div className="rounded-3xl border border-stroke overflow-hidden shadow-[0_30px_60px_-40px_rgba(23,32,27,0.35)]"><SitePlanArt /></div>;
+  if (i === 3) return <CostsArt className="max-w-md mx-auto lg:mx-0" />;
   return (
-    <div className="bg-surface-1-solid border border-stroke rounded-2xl p-6 sm:p-7 hover:border-accent/40 transition-colors">
-      <span className="text-accent text-2xl block mb-4" aria-hidden>
-        <Icon />
-      </span>
-      <h3 className="font-display text-paper text-lg sm:text-xl leading-snug mb-2">{title}</h3>
-      <p className="text-paper-dim text-sm sm:text-base leading-relaxed">{desc}</p>
+    <div className="rounded-3xl overflow-hidden aspect-[4/3] shadow-[0_30px_60px_-40px_rgba(23,32,27,0.35)]">
+      <img src={image.src} alt={image.alt} className="w-full h-full object-cover" />
     </div>
   );
 };
@@ -26,165 +29,103 @@ const Pillar = ({ i }) => {
 const Step = ({ i }) => {
   const title = useContentText(`howtoadu.step.${i}.title`);
   const desc = useContentText(`howtoadu.step.${i}.desc`);
+  const flip = i % 2 === 1;
+  const keys = [`howtoadu.step.${i}.title`, `howtoadu.step.${i}.desc`, ...(i === 2 || i === 3 ? [] : [`howtoadu.step.${i}.image`])];
   return (
-    <div className="grid grid-cols-12 gap-3 sm:gap-7 py-6 sm:py-7 border-t border-stroke last:border-b">
-      <div className="col-span-12 sm:col-span-2">
-        <span className="font-display text-paper-dim text-2xl sm:text-3xl tabular-nums">
-          {STEP_N[i]}
-        </span>
-      </div>
-      <div className="col-span-12 sm:col-span-10">
-        <h3 className="font-display text-paper text-lg sm:text-xl lg:text-2xl leading-snug mb-2">
-          {title}
-        </h3>
-        <p className="text-paper-dim text-base leading-relaxed max-w-2xl">{desc}</p>
-      </div>
-    </div>
+    <AdminEditableSection keys={keys} label={`Step ${i + 1}`}>
+      <li className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-center py-12 lg:py-16 border-t border-stroke first:border-t-0">
+        <div className={`lg:col-span-5 ${flip ? "lg:order-2" : ""}`}>
+          <p className="font-display text-gold text-3xl leading-none mb-4">{String(i + 1).padStart(2, "0")}</p>
+          <h2 className="font-display text-paper text-3xl sm:text-4xl leading-[1.05] mb-4">{title}</h2>
+          <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-6">{desc}</p>
+          <Link to={STEP_LINKS[i]} className="group inline-flex items-center gap-2 text-accent font-medium">
+            {STEP_LINK_LABELS[i]} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+        <div className={`lg:col-span-7 ${flip ? "lg:order-1" : ""}`}>
+          <StepImage i={i} />
+        </div>
+      </li>
+    </AdminEditableSection>
+  );
+};
+
+const Pillar = ({ i }) => {
+  const Icon = PILLAR_ICONS[i];
+  const title = useContentText(`howtoadu.pillar.${i}.title`);
+  const desc = useContentText(`howtoadu.pillar.${i}.desc`);
+  return (
+    <li className="lift bg-canvas border border-stroke rounded-3xl p-7">
+      <span className="w-11 h-11 rounded-xl bg-accent/10 text-accent inline-flex items-center justify-center text-xl mb-5">
+        <Icon aria-hidden />
+      </span>
+      <h3 className="font-display text-paper text-xl mb-2">{title}</h3>
+      <p className="text-paper-dim text-sm leading-relaxed">{desc}</p>
+    </li>
   );
 };
 
 const HowToAdu = () => {
-  const heroHeadingPre = useContentText("howtoadu.hero.heading_pre");
-  const heroHeadingEmphasis = useContentText("howtoadu.hero.heading_emphasis");
-  const heroBodyPre = useContentText("howtoadu.hero.body_pre");
-  const heroBodyEmphasis = useContentText("howtoadu.hero.body_emphasis");
-  const heroLinkPillars = useContentText("howtoadu.hero.link_pillars");
-  const heroLinkSteps = useContentText("howtoadu.hero.link_steps");
+  const title = useContentText("howtoadu.header.title");
+  const body = useContentText("howtoadu.header.body");
   const pillarsHeading = useContentText("howtoadu.pillars.heading");
-  const pillarsBody = useContentText("howtoadu.pillars.body");
-  const stepsHeading = useContentText("howtoadu.steps.heading");
   const closerHeading = useContentText("howtoadu.closer.heading");
   const closerBody = useContentText("howtoadu.closer.body");
-  const closerCtaPrimary = useContentText("howtoadu.closer.cta_primary");
-  const closerCtaSecondary = useContentText("howtoadu.closer.cta_secondary");
+  const ctaPrimary = useContentText("howtoadu.closer.cta_primary");
+  const ctaSecondary = useContentText("howtoadu.closer.cta_secondary");
 
   return (
-    <div>
-      {/* Hero */}
-      <AdminEditableSection
-        keys={[
-          "howtoadu.hero.eyebrow",
-          "howtoadu.hero.heading_pre",
-          "howtoadu.hero.heading_emphasis",
-          "howtoadu.hero.body_pre",
-          "howtoadu.hero.body_emphasis",
-          "howtoadu.hero.link_pillars",
-          "howtoadu.hero.link_steps",
-        ]}
-        label="Hero"
-      >
-      <section className="relative overflow-hidden bg-canvas pt-16 sm:pt-20 lg:pt-24 pb-10 sm:pb-12 border-b border-stroke">
-<div className="relative container mx-auto px-5 sm:px-8 max-w-6xl">
-
-          <h1
-            className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight animate-fade-up"
-            style={{ animationDelay: "100ms" }}
-          >
-            {heroHeadingPre} <span className="">{heroHeadingEmphasis}</span>
-          </h1>
-
-          <p
-            className="mt-4 sm:mt-5 text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed animate-fade-up"
-            style={{ animationDelay: "240ms" }}
-          >
-            {heroBodyPre}{" "}
-            <span className="text-paper">{heroBodyEmphasis}</span>
-          </p>
-
-          <div
-            className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm animate-fade-up"
-            style={{ animationDelay: "380ms" }}
-          >
-            <a href="#pillars" className="inline-flex items-center gap-1.5 text-paper hover:text-accent transition-colors">
-              {heroLinkPillars} <FiArrowRight className="text-xs" />
-            </a>
-            <span className="text-paper-dim/40">·</span>
-            <a href="#steps" className="inline-flex items-center gap-1.5 text-paper-dim hover:text-paper transition-colors">
-              {heroLinkSteps}
-            </a>
-          </div>
-        </div>
-      </section>
+    <div className="w-full bg-canvas">
+      <AdminEditableSection keys={["howtoadu.header.title", "howtoadu.header.body"]} label="Header">
+        <PageHeader title={title} subtitle={body}>
+          <ol className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-paper-dim">
+            {["Check", "Learn", "Study", "Costs", "Builders"].map((s, i) => (
+              <li key={s} className="inline-flex items-center gap-2">
+                <span className="font-display text-gold">{String(i + 1).padStart(2, "0")}</span> {s}
+              </li>
+            ))}
+          </ol>
+        </PageHeader>
       </AdminEditableSection>
 
-      {/* Pillars */}
-      <AdminEditableSection
-        keys={[
-          "howtoadu.pillars.eyebrow",
-          "howtoadu.pillars.heading",
-          "howtoadu.pillars.body",
-          ...Array.from({ length: HOW_TO_ADU_PILLARS_COUNT }, (_, i) => [`howtoadu.pillar.${i}.title`, `howtoadu.pillar.${i}.desc`]).flat(),
-        ]}
-        label="What ADUAtlas gives you"
-      >
-      <section id="pillars" className="bg-canvas section-y border-t border-stroke scroll-mt-20">
-        <div className="container mx-auto px-5 sm:px-8 max-w-6xl">
-          <h2 className="font-display text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight max-w-3xl">
-            {pillarsHeading}
-          </h2>
-          <p className="text-paper-dim text-base sm:text-lg leading-relaxed mt-5 max-w-2xl">
-            {pillarsBody}
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-4 sm:gap-5 mt-10 sm:mt-12">
-            {Array.from({ length: HOW_TO_ADU_PILLARS_COUNT }, (_, i) => <Pillar key={i} i={i} />)}
-          </div>
-        </div>
+      <section className="container mx-auto px-5 sm:px-8 max-w-6xl py-6 lg:py-10">
+        <ol>
+          {Array.from({ length: HOW_STEPS_COUNT }, (_, i) => (
+            <Step key={i} i={i} />
+          ))}
+        </ol>
       </section>
+
+      <AdminEditableSection keys={["howtoadu.pillars.heading", ...Array.from({ length: HOW_PILLARS_COUNT }, (_, i) => [`howtoadu.pillar.${i}.title`, `howtoadu.pillar.${i}.desc`]).flat()]} label="What you get">
+        <section className="bg-surface-1-solid border-y border-stroke">
+          <div className="container mx-auto px-5 sm:px-8 max-w-6xl section-y">
+            <h2 className="font-display text-paper text-3xl sm:text-4xl leading-[1.05] mb-8">{pillarsHeading}</h2>
+            <ul className="grid md:grid-cols-3 gap-5">
+              {Array.from({ length: HOW_PILLARS_COUNT }, (_, i) => (
+                <Pillar key={i} i={i} />
+              ))}
+            </ul>
+          </div>
+        </section>
       </AdminEditableSection>
 
-      {/* Steps */}
-      <AdminEditableSection
-        keys={[
-          "howtoadu.steps.eyebrow",
-          "howtoadu.steps.heading",
-          ...Array.from({ length: HOW_TO_ADU_STEPS_COUNT }, (_, i) => [`howtoadu.step.${i}.title`, `howtoadu.step.${i}.desc`]).flat(),
-        ]}
-        label="The 5 steps"
-      >
-      <section id="steps" className="bg-canvas section-y border-t border-stroke scroll-mt-20">
-        <div className="container mx-auto px-5 sm:px-8 max-w-6xl">
-          <h2 className="font-display text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight max-w-2xl mb-10 sm:mb-12">
-            {stepsHeading}
-          </h2>
-
-          <div className="space-y-px">
-            {Array.from({ length: HOW_TO_ADU_STEPS_COUNT }, (_, i) => <Step key={i} i={i} />)}
+      <AdminEditableSection keys={["howtoadu.closer.heading", "howtoadu.closer.body", "howtoadu.closer.cta_primary", "howtoadu.closer.cta_secondary"]} label="Closer">
+        <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y">
+          <div className="bg-forest-deep text-white rounded-3xl p-8 sm:p-12 grid lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7">
+              <h2 className="font-display text-3xl sm:text-4xl leading-[1.05] mb-3">{closerHeading}</h2>
+              <p className="text-white/80 text-base sm:text-lg leading-relaxed">{closerBody}</p>
+            </div>
+            <div className="lg:col-span-5 lg:justify-self-end flex flex-wrap gap-3">
+              <Link to="/property" className="press inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-forest-deep font-semibold text-sm hover:bg-mist transition-colors">
+                {ctaPrimary} <FiArrowRight />
+              </Link>
+              <Link to="/unlock" className="press inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/30 text-white font-medium text-sm hover:bg-white/10 transition-colors">
+                {ctaSecondary}
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
-      </AdminEditableSection>
-
-      {/* Closer */}
-      <AdminEditableSection
-        keys={["howtoadu.closer.heading", "howtoadu.closer.body", "howtoadu.closer.cta_primary", "howtoadu.closer.cta_secondary"]}
-        label="Closer"
-      >
-      <section className="bg-canvas section-y border-t border-stroke">
-        <div className="container mx-auto px-5 sm:px-8 max-w-3xl text-center">
-          <h2 className="font-display text-paper text-3xl sm:text-4xl lg:text-5xl leading-snug tracking-tight mb-5">
-            {closerHeading}
-          </h2>
-          <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-9">
-            {closerBody}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/unlock"
-              className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors press"
-            >
-              {closerCtaPrimary}
-              <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              to="/course-outline"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition press"
-            >
-              {closerCtaSecondary}
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
       </AdminEditableSection>
     </div>
   );
