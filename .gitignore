@@ -32,3 +32,7 @@ dist-ssr
 SPEC.md
 .vercel
 supabase/.temp
+
+# Design originals (multi-MB PNGs). Web-ready copies live in src/assets.
+design/photos/
+design/mocks/
