@@ -4,9 +4,9 @@
 // from the approved homepage mock (2026-09-20). See contentRegistry/index.js
 // for the pattern.
 import heroImg from "../../assets/home/hero_adu.jpg";
-import missionImg from "../../assets/home/hero_image.png";
+import missionImg from "../../assets/home/mission_bg.jpg";
 import familyImg from "../../assets/home/possible_family.jpg";
-import incomeImg from "../../assets/home/choose_img2.png";
+import incomeImg from "../../assets/home/possible_income.jpg";
 import communityImg from "../../assets/home/possible_community.jpg";
 
 const PAGE = "Home";
@@ -45,13 +45,13 @@ const homePossible = {
   "home.possible.cta": t("Section button", "Check My Property"),
   "home.possible.card.0.title": t("Card 1 title", "More Space\nfor What Matters"),
   "home.possible.card.0.desc": t("Card 1 description", "Create flexible living for family, friends, or caregivers."),
-  "home.possible.card.0.image": img("Card 1 photo", familyImg, "A warmly lit ADU living room seen through open glass doors"),
+  "home.possible.card.0.image": img("Card 1 photo", familyImg, "A grandparent and child reading in a warmly lit ADU living room, seen through open glass doors"),
   "home.possible.card.1.title": t("Card 2 title", "Generate\nRental Revenue"),
   "home.possible.card.1.desc": t("Card 2 description", "Turn your property into a long-term asset."),
-  "home.possible.card.1.image": img("Card 2 photo", incomeImg, "A finished detached ADU with its own entrance"),
+  "home.possible.card.1.image": img("Card 2 photo", incomeImg, "A compact detached ADU with its own front door, house number, and mailbox"),
   "home.possible.card.2.title": t("Card 3 title", "Stronger\nNeighborhoods"),
   "home.possible.card.2.desc": t("Card 3 description", "Thoughtful ADUs create more housing and stronger communities."),
-  "home.possible.card.2.image": img("Card 3 photo", communityImg, "A backyard ADU beside the neighboring homes"),
+  "home.possible.card.2.image": img("Card 3 photo", communityImg, "Elevated view of a leafy neighborhood with small ADUs behind the homes at golden hour"),
 };
 
 // ── Plans (Golden / Platinum / Concierge, from the Phase 1 scope) ─────────
@@ -107,7 +107,7 @@ const homeMission = {
   "home.mission.heading": t("Mission heading", "More Homes. Stronger Communities."),
   "home.mission.body": t("Mission paragraph", "ADUs create housing, support families, and increase opportunity. We're here to make it easier for homeowners, builders, and communities to bring them to life."),
   "home.mission.cta": t("Mission button", "About Our Mission"),
-  "home.mission.image": img("Mission background photo", missionImg, "Aerial view of a residential neighborhood"),
+  "home.mission.image": img("Mission background photo", missionImg, "Aerial view of a tree-lined neighborhood at dusk with porch lights on"),
 };
 
 // ── Closing CTA band ──────────────────────────────────────────────────────
