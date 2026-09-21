@@ -18,7 +18,7 @@ const FAQ_DEFAULTS = [
   },
   {
     q: "Are you prepared to speak with a builder?",
-    a: "You need a defined scope of work, knowledge of ADUs and the one you want, the build process, and a realistic budget, including ADU legal placement, size and style, pre-site estimates, surveys, cost of permits, inspections, and a site plan / Property Feasibility Report. Without all this information, getting an accurate estimate is not possible. An average survey can run $500 to $2,500, and that will not include your city zoning regulations like placement with setbacks, or utility connections, among other pre-site costs. Save yourself a lot of time and money by being prepared with the ADUAtlas Property Feasibility Report tailored to your property and your city's ADU regulations.",
+    a: "You need a defined scope of work, knowledge of ADUs and the one you want, the build process, and a realistic budget, including ADU legal placement, size and style, pre-site estimates, surveys, cost of permits, inspections, and a site plan / feasibility study. Without all this information, getting an accurate estimate is not possible. An average survey can run $500 to $2,500, and that will not include your city zoning regulations like placement with setbacks, or utility connections, among other pre-site costs. Save yourself a lot of time and money by being prepared with the ADUAtlas feasibility study tailored to your property and your city's ADU regulations.",
   },
   {
     q: "Do you know the difference between state and city ADU rules?",

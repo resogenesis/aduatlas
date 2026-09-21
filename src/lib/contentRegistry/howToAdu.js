@@ -8,15 +8,15 @@ export const HOW_TO_ADU_STEPS_COUNT = 5;
 
 const PILLAR_DEFAULTS = [
   { title: "An ADU Course", desc: "Learn the process and the products before you spend." },
-  { title: "A Personalized Property Feasibility Report", desc: "Your lot, your zoning, your buildable area." },
-  { title: "Professional Profiles", desc: "National and local builders and suppliers, for less than the cost of a typical survey." },
+  { title: "A feasibility study for your property", desc: "Your lot, your zoning, your likely ADU placement, drawn as a site plan." },
+  { title: "Builder profiles", desc: "ADU builders organized by state and service area, with introductions when you are ready." },
 ];
 
 const STEP_DEFAULTS = [
   { title: "Understand Your Property", desc: "Access your property's zoning regulations, setbacks, buildable area, and site considerations." },
   { title: "Explore Your ADU Options", desc: "Compare 25+ ADU types, construction methods, costs, and benefits." },
   { title: "Estimate Costs and Timelines", desc: "Understand pre-site costs, permits, inspections, utility connections, and realistic project timelines." },
-  { title: "Obtain a Property Feasibility Report", desc: "Use GIS property data and zoning overlays to understand what may realistically fit on your property." },
+  { title: "Get your feasibility study", desc: "A study and visual site plan prepared for your property, showing what may realistically fit." },
   { title: "Compare Builders With Confidence", desc: "Use property-specific information to evaluate builder proposals and make informed decisions." },
 ];
 
@@ -33,7 +33,7 @@ export const HOW_TO_ADU_CONTENT = {
   "howtoadu.pillars.heading": { page: PAGE, label: "Pillars section heading", type: "text", default: "How ADUAtlas prepares homeowners before they build." },
   "howtoadu.pillars.body": {
     page: PAGE, label: "Pillars section paragraph", type: "text",
-    default: "An ADU Course, a personalized Property Feasibility Report, and access to professional profiles, including national and local builders and suppliers, for less than the cost of a typical survey.",
+    default: "An ADU course, a feasibility study for your property, and access to builder profiles, including national and local builders and suppliers, for less than the cost of a typical survey.",
   },
   ...Object.fromEntries(
     PILLAR_DEFAULTS.flatMap((p, i) => [

@@ -81,5 +81,5 @@ export const ABOUT_CONTENT = {
   "about.closing.heading": { page: PAGE, label: "Closing heading", type: "text", default: "Save you time. Reduce confusion. Help you make informed decisions." },
   "about.closing.body": { page: PAGE, label: "Closing tagline", type: "text", default: "To build or not to build, that is thy question." },
   "about.closing.cta_primary": { page: PAGE, label: "Primary CTA button", type: "text", default: "Property Snapshot" },
-  "about.closing.cta_secondary": { page: PAGE, label: "Secondary CTA button", type: "text", default: "Sign Up" },
+  "about.closing.cta_secondary": { page: PAGE, label: "Secondary CTA button", type: "text", default: "See plans" },
 };

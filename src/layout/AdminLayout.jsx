@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
 import { FiBarChart2, FiUsers, FiShield, FiFileText, FiClipboard, FiTool, FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import Logomark from "../components/brand/Logomark";
+import { usePageTitle } from "../hooks/usePageTitle";
 import { currentUser, logout } from "../stores/authStore";
 
 const nav = [
@@ -73,6 +74,7 @@ const SidebarContents = ({ onLinkClick }) => {
 };
 
 const AdminLayout = () => {
+  usePageTitle();
   const [mobileOpen, setMobileOpen] = useState(false);
   const close = () => setMobileOpen(false);
 

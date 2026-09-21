@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
 import { track, EV } from "../lib/analytics";
 
-// Tier 3 purchase page — "Personalized Property Feasibility Study".
+// Platinum explainer page for the feasibility study.
 // Public marketing page built from the approved purchase-page copy. The CTA
-// deep-links to /unlock with the report tier preselected.
+// deep-links to /unlock with Platinum preselected.
 
 const DRAWING_FEATURES = [
   "Property dimensions",
@@ -92,7 +92,7 @@ const FeasibilityStudy = () => (
     <section className="border-b border-stroke">
       <div className="container mx-auto px-5 sm:px-8 max-w-4xl py-16 sm:py-24 text-center">
         <p className="text-accent text-xs sm:text-sm font-medium mb-5">
-          Tier 3 · Personalized
+          Platinum · Prepared for your property
         </p>
         <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
           Personalized Property <span className="">Feasibility Study.</span>

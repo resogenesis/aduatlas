@@ -539,7 +539,7 @@ export const modules = [
   {
     "id": "m9",
     "n": 8,
-    "title": "Property Feasibility Report Packet",
+    "title": "Your Feasibility Study and Site Plan",
     "blurb": "Verify what you can build, and where, before spending money — inside the ADUAtlas Property Feasibility Study.",
     "intro": "You've learned how detached ADUs work, how regulations shape your project, how to prepare your site, and how to build a preliminary budget. Now it's time to apply that knowledge to your specific property. This module walks through the ADUAtlas Property Feasibility Study — the packet that turns everything you've learned into a plan for your lot.",
     "chapters": [
@@ -560,7 +560,7 @@ export const modules = [
       {
         "id": "m9c3",
         "n": 3,
-        "title": "Your GIS Property Diagram",
+        "title": "Your Visual Site Plan",
         "blurb": "See your lot, your rules, and your options in one picture.",
         "minutes": 3
       },

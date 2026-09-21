@@ -6,15 +6,15 @@ import { lookupProperty } from "../lib/property";
 
 // Free instant property snapshot. Shows the handful of facts public records
 // can verify, and makes every ADU-determining question visibly "TBD" — each
-// resolved by the paid Property Feasibility Report. This is the top of the
+// resolved by the Platinum feasibility study. This is the top of the
 // funnel: honest about what's unknown, pointed at the upgrade.
 
 // Each row: what we can/can't tell from records alone.
 //   verified — confirmed from authoritative public data
-//   tbd      — resolved by the Property Feasibility Report
+//   tbd      — resolved by the feasibility study
 //   course   — homeowner verifies it themselves, guided by the course
 // Rows public records can't resolve on their own — each verified by the
-// paid Property Feasibility Report.
+// Platinum feasibility study.
 const reviewRows = [
   { label: "Detached ADU Permitted", source: "Requires zoning review", status: "tbd" },
   { label: "Maximum ADU Size", source: "Requires zoning and lot coverage analysis", status: "tbd" },
@@ -46,7 +46,7 @@ const upgradeIncludes = [
   "Maximum ADU size estimate",
   "Utility access review",
   "Site preparation cost estimate",
-  "Property Feasibility Report Score",
+  "Feasibility result",
   "Timeline and budget guidance",
   "Builder-ready property summary",
 ];
@@ -149,10 +149,10 @@ const Property = () => {
       <section className="container mx-auto px-5 sm:px-8 max-w-4xl pb-16">
         <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
           <p className="text-paper text-sm font-medium">
-            The Property Feasibility Report verifies every item below.
+            The Platinum feasibility study verifies every item below.
           </p>
           <p className="text-paper-dim/70 text-xs">
-            TBD = resolved by the Property Feasibility Report
+            TBD = answered in your feasibility study
           </p>
         </div>
 
@@ -202,7 +202,7 @@ const Property = () => {
             Remove the uncertainty
           </p>
           <h2 className="font-display text-3xl sm:text-4xl leading-tight mb-4">
-            Upgrade to a Property Feasibility Report
+            Get your feasibility study
           </h2>
           <p className="text-accent-fg/80 text-sm sm:text-base mb-7 max-w-xl leading-relaxed">
             Receive a property-specific analysis including:
@@ -220,7 +220,7 @@ const Property = () => {
               to="/unlock"
               className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
             >
-              Sign Up <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              See plans <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <span className="text-accent-fg/70 text-sm">
               Get answers before spending money on surveys, plans, or builders.

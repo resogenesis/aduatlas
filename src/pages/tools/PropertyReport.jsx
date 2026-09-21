@@ -9,7 +9,7 @@ import { loadLot, loadWorksheets, NAPE_CATEGORIES, NAPE_GRADES, scoreNape } from
 import { money } from "../../components/tools/worksheetKit";
 import { presiteTotal, tpcTotals, verificationTotal } from "./worksheetDefs";
 
-// Property Feasibility Report — assembled per the ADUAtlas Feasibility Study
+// Feasibility study report — assembled per the ADUAtlas Feasibility Study
 // Tool spec. Every value carries one of three statuses:
 //   verified  — from public records or a source the homeowner confirmed
 //   estimated — derived (e.g. dimensions from lot area, largest-fit footprint)
@@ -143,7 +143,7 @@ const PropertyReport = () => {
       <WorksheetBar savedAt={null} />
 
       <p className="text-accent text-xs font-medium mb-3">
-        Property Feasibility Report
+        Feasibility study
       </p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] tracking-tight mb-3">
         {addr || "Your property."}

@@ -69,7 +69,7 @@ const PacketHub = () => {
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-6xl mx-auto">
       <p className="text-accent text-xs font-medium mb-3">
-        {isReport ? "Property Feasibility Report" : "Planning worksheets"}
+        {isReport ? "Feasibility study" : "Planning worksheets"}
       </p>
       <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
         {isReport ? "Your report packet." : "Your planning worksheets."}
@@ -97,7 +97,7 @@ const PacketHub = () => {
           </h2>
           <p className="text-accent-fg/80 text-sm sm:text-base max-w-2xl mb-4">
             These worksheets work — but the measuring, regulation-checking, and distance estimates
-            are yours to chase down. The Property Feasibility Report applies your local ADU
+            are yours to chase down. The Platinum feasibility study applies your local ADU
             regulations to your parcel: property diagram, placement area, maximum footprint, and
             approximate utility distances — so your worksheets start from your property's numbers.
             Your $79 applies as a credit, so the upgrade is $200.
@@ -117,7 +117,7 @@ const PacketHub = () => {
         <Card
           to="/report"
           Icon={FiFileText}
-          title="Property Feasibility Report"
+          title="Feasibility study"
           desc="Your personalized report: public-record snapshot, buildable envelope, NAPE results, budget summary, and your verification checklist — printable."
           status={isReport ? "Open" : "Feasibility Report plan"}
           locked={!isReport}

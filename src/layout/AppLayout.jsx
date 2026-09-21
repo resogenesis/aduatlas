@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
 import { FiGrid, FiBookOpen, FiFileText, FiHome, FiMap, FiDollarSign, FiLayers, FiUsers, FiSettings, FiLock, FiMenu, FiX, FiLogOut, FiMessageCircle } from "react-icons/fi";
 import Logomark from "../components/brand/Logomark";
+import { usePageTitle } from "../hooks/usePageTitle";
 import { hasReportTier, hasTier, TIERS } from "../stores/paymentStore";
 import { currentUser, logout } from "../stores/authStore";
 
@@ -91,6 +92,7 @@ const SidebarContents = ({ onLinkClick }) => {
 };
 
 const AppLayout = () => {
+  usePageTitle();
   const [mobileOpen, setMobileOpen] = useState(false);
   const close = () => setMobileOpen(false);
 

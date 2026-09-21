@@ -68,14 +68,14 @@ const MyProperty = () => {
         Your project brief.
       </h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-10">
-        These are the same questions every builder asks. Fill them in once and they flow into your Property Feasibility Report, Feasibility Packet, and quotes (apples to apples).
+        These are the same questions every builder asks. Fill them in once and they flow into your feasibility study, your worksheets, and your builder introductions.
       </p>
 
       {/* Progress bar */}
       <div className="mb-10 bg-surface-1-solid border border-stroke rounded-2xl p-5 sm:p-6">
         <div className="flex items-end justify-between mb-3 flex-wrap gap-2">
           <div>
-            <p className="text-paper-dim text-xs mb-1">Feasibility Packet</p>
+            <p className="text-paper-dim text-xs mb-1">Project brief</p>
             <p className="font-display text-paper text-2xl">{progress.percent}% complete</p>
           </div>
           <p className="text-paper-dim text-xs">{progress.filled} of {progress.total} fields</p>
