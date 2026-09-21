@@ -3,6 +3,8 @@ import { FiArrowRight, FiBookOpen, FiMap, FiUsers } from "react-icons/fi";
 import PageHeader from "../components/common/PageHeader";
 import SitePlanArt from "../components/common/SitePlanArt";
 import CostsArt from "../components/common/CostsArt";
+import JourneyTrail from "../components/common/JourneyTrail";
+import { TRAIL } from "../lib/journeyTrail";
 import { useContentImage, useContentText } from "../lib/content";
 import { HOW_PILLARS_COUNT, HOW_STEPS_COUNT } from "../lib/contentRegistry/howToAdu";
 import { AdminEditableSection } from "../lib/adminEditBridge";
@@ -12,6 +14,10 @@ import { AdminEditableSection } from "../lib/adminEditBridge";
 // page never promises a photo of a deliverable that does not exist yet.
 
 const PILLAR_ICONS = [FiBookOpen, FiMap, FiUsers];
+const StepIcon = ({ i }) => {
+  const Icon = TRAIL[i].Icon;
+  return <Icon aria-hidden />;
+};
 const STEP_LINKS = ["/property", "/course-outline", "/unlock?tier=report", "/course-outline", "/find-a-builder"];
 const STEP_LINK_LABELS = ["Check my property", "See the course", "See Platinum", "See the course", "About builders"];
 
@@ -33,9 +39,14 @@ const Step = ({ i }) => {
   const keys = [`howtoadu.step.${i}.title`, `howtoadu.step.${i}.desc`, ...(i === 2 || i === 3 ? [] : [`howtoadu.step.${i}.image`])];
   return (
     <AdminEditableSection keys={keys} label={`Step ${i + 1}`}>
-      <li className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-center py-12 lg:py-16 border-t border-stroke first:border-t-0">
+      <li id={`step-${TRAIL[i].id}`} className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-center py-12 lg:py-16 border-t border-stroke first:border-t-0 scroll-mt-24">
         <div className={`lg:col-span-5 ${flip ? "lg:order-2" : ""}`}>
-          <p className="font-display text-gold text-3xl leading-none mb-4">{String(i + 1).padStart(2, "0")}</p>
+          <p className="inline-flex items-center gap-3 mb-4">
+            <span className="w-10 h-10 rounded-full bg-accent text-accent-fg inline-flex items-center justify-center text-lg">
+              <StepIcon i={i} />
+            </span>
+            <span className="text-paper-dim text-sm">Step {i + 1} of {HOW_STEPS_COUNT}</span>
+          </p>
           <h2 className="font-display text-paper text-3xl sm:text-4xl leading-[1.05] mb-4">{title}</h2>
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-6">{desc}</p>
           <Link to={STEP_LINKS[i]} className="group inline-flex items-center gap-2 text-accent font-medium">
@@ -78,13 +89,7 @@ const HowToAdu = () => {
     <div className="w-full bg-canvas">
       <AdminEditableSection keys={["howtoadu.header.title", "howtoadu.header.body"]} label="Header">
         <PageHeader title={title} subtitle={body}>
-          <ol className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-paper-dim">
-            {["Check", "Learn", "Study", "Costs", "Builders"].map((s, i) => (
-              <li key={s} className="inline-flex items-center gap-2">
-                <span className="font-display text-gold">{String(i + 1).padStart(2, "0")}</span> {s}
-              </li>
-            ))}
-          </ol>
+          <JourneyTrail />
         </PageHeader>
       </AdminEditableSection>
 
