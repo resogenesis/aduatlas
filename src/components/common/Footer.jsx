@@ -1,4 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FiArrowRight, FiCheck } from "react-icons/fi";
+import { captureLead } from "../../lib/supabase";
 import { FaXTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import Logomark from "../brand/Logomark";
 
@@ -29,6 +32,45 @@ const sections = [
   },
 ];
 
+// Email capture for launch updates; writes to the leads table via the same
+// RPC the pricing page uses (source "footer").
+const Updates = () => {
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState("idle"); // idle | saving | done | error
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setState("error");
+      return;
+    }
+    setState("saving");
+    const r = await captureLead({ email, source: "footer" });
+    setState(r && r.ok === false && r.error !== "supabase-disabled" ? "error" : "done");
+  };
+  if (state === "done")
+    return (
+      <p className="inline-flex items-center gap-2 text-sm text-paper">
+        <FiCheck className="text-accent" /> You're on the list.
+      </p>
+    );
+  return (
+    <form onSubmit={submit} className="flex gap-2 max-w-sm">
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="you@email.com"
+        aria-label="Email for ADU updates"
+        aria-invalid={state === "error"}
+        className="flex-1 min-w-0 px-4 py-2.5 bg-canvas border border-stroke rounded-xl text-paper text-sm placeholder:text-paper-dim/60 focus:outline-none focus:ring-2 focus:ring-accent"
+      />
+      <button type="submit" disabled={state === "saving"} className="press px-4 py-2.5 rounded-xl bg-accent text-accent-fg text-sm font-semibold hover:bg-accent-dim disabled:opacity-60" aria-label="Subscribe">
+        <FiArrowRight />
+      </button>
+    </form>
+  );
+};
+
 const Footer = () => (
   <footer className="bg-surface-1-solid border-t border-stroke pt-16 pb-8">
     <div className="container mx-auto px-5 sm:px-8">
@@ -40,6 +82,10 @@ const Footer = () => (
           <p className="text-paper-dim text-sm leading-relaxed max-w-sm mb-6">
             Understand what can be built on your property, learn the process, and connect with the right builders before you commit.
           </p>
+          <p className="text-paper text-sm font-semibold mb-2">ADU rules, costs, and tips, once a month.</p>
+          <div className="mb-6">
+            <Updates />
+          </div>
           <div className="flex gap-2">
             {[
               { Icon: FaXTwitter, label: "X" },

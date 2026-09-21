@@ -23,6 +23,20 @@ const homeHero = {
   "home.hero.image": img("Hero photo", heroImg, "A modern wood-clad backyard ADU with sliding glass doors and a deck at golden hour"),
 };
 
+// ── Stage selector (borrowed pattern: route the visitor by where they are) ─
+export const STAGES_COUNT = 4;
+export const homeStages = {
+  "home.stages.heading": t("Stage heading", "Where are you in your ADU journey?"),
+  "home.stages.item.0.title": t("Stage 1 title", "Just exploring"),
+  "home.stages.item.0.desc": t("Stage 1 description", "Learn what an ADU is and whether one makes sense for you."),
+  "home.stages.item.1.title": t("Stage 2 title", "Checking my property"),
+  "home.stages.item.1.desc": t("Stage 2 description", "See what public records say about your lot, free."),
+  "home.stages.item.2.title": t("Stage 3 title", "Planning and budgeting"),
+  "home.stages.item.2.desc": t("Stage 3 description", "Get a feasibility study and site plan for your property."),
+  "home.stages.item.3.title": t("Stage 4 title", "Ready for builders"),
+  "home.stages.item.3.desc": t("Stage 4 description", "Find builders who serve your area and request introductions."),
+};
+
 // ── What's possible (text + three photo cards) ────────────────────────────
 export const POSSIBLE_CARDS_COUNT = 3;
 const homePossible = {
@@ -105,6 +119,7 @@ const homeCta = {
 
 export const HOME_CONTENT = {
   ...homeHero,
+  ...homeStages,
   ...homePossible,
   ...homePlans,
   ...homeBuilders,
