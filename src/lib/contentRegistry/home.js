@@ -37,6 +37,19 @@ export const homeStages = {
   "home.stages.item.3.desc": t("Stage 4 description", "Find builders who serve your area and request introductions."),
 };
 
+// ── Where projects go wrong (Amy's core argument, kept from the live site) ─
+export const PROBLEMS_COUNT = 3;
+export const homeProblems = {
+  "home.problems.heading": t("Problems heading", "Costly mistakes start before construction."),
+  "home.problems.body": t("Problems paragraph", "It's usually not the build. It's what happens before it. ADUAtlas helps you catch these early."),
+  "home.problems.item.0.title": t("Problem 1 title", "Buying plans your city won't approve"),
+  "home.problems.item.0.desc": t("Problem 1 description", "Setbacks, height, size and parking rules decide what fits. Learn yours before you pay for drawings."),
+  "home.problems.item.1.title": t("Problem 2 title", "A $30,000 utility hookup you learn about after you commit"),
+  "home.problems.item.1.desc": t("Problem 2 description", "Sewer, water and electric connections are the costs almost every free tool leaves out. We put them first."),
+  "home.problems.item.2.title": t("Problem 3 title", "Talking to builders before you know your property"),
+  "home.problems.item.2.desc": t("Problem 3 description", "Without a site plan and a budget, quotes can't be compared. Walk in prepared and get real numbers."),
+};
+
 // ── What's possible (text + three photo cards) ────────────────────────────
 export const POSSIBLE_CARDS_COUNT = 3;
 const homePossible = {
@@ -120,6 +133,7 @@ const homeCta = {
 export const HOME_CONTENT = {
   ...homeHero,
   ...homeStages,
+  ...homeProblems,
   ...homePossible,
   ...homePlans,
   ...homeBuilders,

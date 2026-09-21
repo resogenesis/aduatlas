@@ -1,5 +1,6 @@
 import Hero from "../components/home/Hero";
 import Stages from "../components/home/Stages";
+import Problems from "../components/home/Problems";
 import Possible from "../components/home/Possible";
 import Plans from "../components/home/Plans";
 import BuilderTeaser from "../components/home/BuilderTeaser";
@@ -12,6 +13,7 @@ const Home = () => (
   <div className="w-full">
     <Hero />
     <Stages />
+    <Problems />
     <Possible />
     <Plans />
     <BuilderTeaser />
