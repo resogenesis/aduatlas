@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiMapPin } from "react-icons/fi";
 import { EV, track } from "../lib/analytics";
 import { lookupProperty } from "../lib/property";
+import AddressIntake from "../components/home/AddressIntake";
 
 // Free instant property snapshot. Shows the handful of facts public records
 // can verify, and makes every ADU-determining question visibly "TBD" — each
@@ -117,12 +118,19 @@ const Property = () => {
     <div className="bg-canvas min-h-[80vh]">
       <section className="container mx-auto px-5 sm:px-8 max-w-4xl pt-16 sm:pt-20 pb-10">
         {/* Header */}
-        <div className="flex items-center gap-2 text-paper-dim text-sm mb-4">
-          <FiMapPin /> {q || "No address provided"}
-        </div>
         <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5">
-          What we know about your property <span className="text-paper-dim">— so far.</span>
+          {q ? "What we know about your property, so far." : "Check your property."}
         </h1>
+        {q ? (
+          <p className="inline-flex items-center gap-2 text-paper text-base sm:text-lg font-medium mb-6">
+            <FiMapPin className="text-accent" /> {q}
+          </p>
+        ) : (
+          <div className="mb-8">
+            <AddressIntake className="max-w-xl" />
+            <p className="text-paper-dim text-sm mt-3">Free. No account needed. The rows below show an example until you enter an address.</p>
+          </div>
+        )}
         <p className="text-paper-dim text-base sm:text-lg max-w-2xl leading-relaxed mb-7">
           Most homeowners start researching ADUs without knowing which questions matter most. This
           free snapshot provides a starting point, but many of the answers that determine whether

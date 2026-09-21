@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiLock } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 
-const PublicStubFooter = ({ chapterName }) => {
+const PublicStubFooter = () => {
   return (
     <section className="bg-canvas section-y border-t border-stroke">
       <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
@@ -10,9 +10,6 @@ const PublicStubFooter = ({ chapterName }) => {
         </p>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-accent/10 text-accent text-xs font-medium mb-6 press">
-            <FiLock /> {chapterName ? `${chapterName} · locked` : "Locked"}
-          </div>
           <h3 className="font-display text-paper text-2xl sm:text-3xl leading-snug tracking-tight mb-4">
             The full step by step is inside the ADU system.
           </h3>
