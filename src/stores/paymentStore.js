@@ -27,7 +27,7 @@ export const isPaid = () => {
 
 // Synchronous tier read for render-time gating. Returns the persisted tier id
 // or null when there's no recorded purchase. A paid-but-tierless flag (legacy
-// demo accounts) falls back to the highest tier; every real purchase writes an
+// purchases made before tiers were recorded) falls back to the highest tier; every real purchase writes an
 // explicit tier, so a Golden buyer reads back "roadmap" and stays gated.
 export const getPaidTier = () => {
   if (typeof window === "undefined") return null;

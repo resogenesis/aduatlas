@@ -9,10 +9,6 @@
 //   signup/logout await hydration before they navigate, so the post-action
 //   render always reads fresh state. paid state is sourced from `users.paid_at`
 //   (server truth) — the localStorage flag stays a UX cache only.
-//
-// Demo accounts (always work, any env — remove the UI before prod if undesired):
-//   Homeowner (paid):  demo@aduatlas.com / demo1234
-//   Builder:           builder@aduatlas.com / demo1234
 
 import { supabase } from "../lib/supabase";
 import { setPaid } from "./paymentStore";
@@ -20,26 +16,6 @@ import { mergeServerProgress } from "./courseStore";
 
 const USERS_KEY = "aduatlas.mock.users";
 const SESSION_KEY = "aduatlas.mock.session";
-
-const DEMO_HOMEOWNER = {
-  id: "demo-homeowner",
-  email: "demo@aduatlas.com",
-  password: "demo1234",
-  username: "Demo Homeowner",
-  role: "homeowner",
-  paid: true,
-};
-
-const DEMO_BUILDER = {
-  id: "demo-builder",
-  email: "builder@aduatlas.com",
-  password: "demo1234",
-  username: "Demo Builder",
-  role: "pro",
-  paid: false,
-};
-
-const DEMOS = [DEMO_HOMEOWNER, DEMO_BUILDER];
 
 const readUsers = () => {
   try {
@@ -153,14 +129,6 @@ export const login = async ({ email, password }) => {
   const e = (email || "").trim().toLowerCase();
   const pw = password || "";
 
-  // Demo accounts short-circuit (work in any env for testing).
-  const demo = DEMOS.find((d) => d.email === e && d.password === pw);
-  if (demo) {
-    writeSession(demo);
-    if (demo.paid) setPaid(true);
-    return { ok: true, user: demo };
-  }
-
   if (supabase) {
     const { data, error } = await supabase.auth.signInWithPassword({ email: e, password: pw });
     if (error) return { ok: false, error: error.message || "Email or password is incorrect." };
@@ -238,7 +206,3 @@ export const logout = async () => {
   }
 };
 
-export const DEMO_ACCOUNTS = [
-  { label: "Homeowner (paid)", email: "demo@aduatlas.com", password: "demo1234" },
-  { label: "Builder", email: "builder@aduatlas.com", password: "demo1234" },
-];

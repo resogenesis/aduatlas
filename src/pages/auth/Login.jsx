@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthCard from "../../components/common/AuthCard";
 import { FormField, PrimaryButton } from "../../components/common/FormField";
-import { DEMO_ACCOUNTS, login, routeForUser } from "../../stores/authStore";
+import { login, routeForUser } from "../../stores/authStore";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,11 +22,6 @@ const Login = () => {
     navigate(routeForUser(res.user), { replace: true });
   };
 
-  const fillDemo = (account) => {
-    setEmail(account.email);
-    setPassword(account.password);
-    setError("");
-  };
 
   return (
     <AuthCard
@@ -77,27 +72,6 @@ const Login = () => {
         <PrimaryButton type="submit">Log in</PrimaryButton>
       </form>
 
-      <div className="mt-7 pt-6 border-t border-stroke">
-        <p className="text-paper-dim text-xs mb-3">Demo accounts</p>
-        <div className="grid gap-2">
-          {DEMO_ACCOUNTS.map((acc) => (
-            <button
-              key={acc.email}
-              type="button"
-              onClick={() => fillDemo(acc)}
-              className="text-left flex items-center justify-between gap-3 px-4 py-3 rounded-xl border border-stroke hover:border-accent transition group"
-            >
-              <span className="flex flex-col">
-                <span className="text-paper text-sm font-medium">{acc.label}</span>
-                <span className="text-paper-dim text-xs">{acc.email}</span>
-              </span>
-              <span className="text-accent text-xs font-medium opacity-0 group-hover:opacity-100 transition">
-                Fill →
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
     </AuthCard>
   );
 };
