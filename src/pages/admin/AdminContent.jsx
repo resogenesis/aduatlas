@@ -12,15 +12,10 @@ import { CONTENT } from "../../lib/contentRegistry";
 import { modules as courseModules } from "../../stores/courseStore";
 import ContentFieldEditor from "../../components/admin/ContentFieldEditor";
 
+// Only the course is admin-editable for now (Richard, 2026-09-21); the public
+// site pages are code-owned. See contentRegistry/editable.js.
 const PAGE_ROUTES = {
-  Home: "/",
-  About: "/about",
-  AduTypes: "/adu-types",
-  "How to ADU": "/how-to-adu",
-  FAQ: "/faq",
-  "Course Outline": "/course-outline",
-  Methodology: "/methodology",
-  Legal: "/legal",
+  Course: "/course",
 };
 
 const withEditParam = (path) => `${path}${path.includes("?") ? "&" : "?"}__admin_edit=1`;
@@ -28,8 +23,8 @@ const withEditParam = (path) => `${path}${path.includes("?") ? "&" : "?"}__admin
 const AdminContent = () => {
   const [rows, setRows] = useState(null);
   const [error, setError] = useState("");
-  const [activePage, setActivePage] = useState("Home");
-  const [iframePath, setIframePath] = useState(PAGE_ROUTES.Home);
+  const [activePage, setActivePage] = useState("Course");
+  const [iframePath, setIframePath] = useState(PAGE_ROUTES.Course);
   const [reloadNonce, setReloadNonce] = useState(0);
   const [activeSection, setActiveSection] = useState(null); // { keys, label } | null
   const [publishing, setPublishing] = useState(false);
@@ -62,7 +57,7 @@ const AdminContent = () => {
     return m;
   }, [rows]);
 
-  const pages = useMemo(() => Object.keys(PAGE_ROUTES).concat(["Course"]), []);
+  const pages = useMemo(() => Object.keys(PAGE_ROUTES), []);
 
   const pickPage = (page, path) => {
     setActivePage(page);
@@ -111,7 +106,7 @@ const AdminContent = () => {
           {pages.map((p) => (
             <button
               key={p}
-              onClick={() => (p === "Course" ? pickPage("Course", "/course") : pickPage(p, PAGE_ROUTES[p]))}
+              onClick={() => pickPage(p, PAGE_ROUTES[p])}
               className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${ p === activePage ?"bg-accent text-accent-fg":"text-paper-dim hover:text-paper hover:bg-surface-1-solid"}`}
             >
               {p}

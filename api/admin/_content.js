@@ -5,6 +5,10 @@
 // after /content/ (req.query.action[0]) + HTTP method. Same URLs, same
 // request/response shapes as if each were its own file — see src/lib/adminApi.js.
 import { requireAdmin, readBody } from "../_admin.js";
+import { isAdminEditable } from "../../src/lib/contentRegistry/editable.js";
+
+const notEditable = (res, key) =>
+  res.status(403).json({ error: `"${key}" is not admin-editable right now (course content only)` });
 
 const TYPES = ["text", "image", "blocks"];
 const DATA_URL_RE = /^data:(image\/(png|jpeg|jpg|webp));base64,(.+)$/;
@@ -42,6 +46,7 @@ const versions = async (req, res, ctx) => {
 const saveDraft = async (req, res, ctx) => {
   const { key, type, page, label, value } = readBody(req);
   if (!key || typeof key !== "string") return res.status(400).json({ error: "key required" });
+  if (!isAdminEditable(key)) return notEditable(res, key);
   if (!TYPES.includes(type)) return res.status(400).json({ error: "invalid type" });
   if (value === undefined) return res.status(400).json({ error: "value required" });
 
@@ -67,6 +72,8 @@ const saveDraft = async (req, res, ctx) => {
 const publish = async (req, res, ctx) => {
   const { keys } = readBody(req);
   if (!Array.isArray(keys) || !keys.length) return res.status(400).json({ error: "keys required" });
+  const blocked = keys.find((k) => !isAdminEditable(k));
+  if (blocked) return notEditable(res, blocked);
 
   const now = new Date().toISOString();
   const published = [];
@@ -107,6 +114,7 @@ const publish = async (req, res, ctx) => {
 const rollback = async (req, res, ctx) => {
   const { key, versionId } = readBody(req);
   if (!key || !versionId) return res.status(400).json({ error: "key and versionId required" });
+  if (!isAdminEditable(key)) return notEditable(res, key);
 
   const { data: version, error: versionErr } = await ctx.svc
     .from("site_content_versions")
@@ -147,6 +155,7 @@ const rollback = async (req, res, ctx) => {
 const uploadImage = async (req, res, ctx) => {
   const { key, dataUrl, filename } = readBody(req);
   if (!key || typeof key !== "string") return res.status(400).json({ error: "key required" });
+  if (!isAdminEditable(key)) return notEditable(res, key);
 
   const match = typeof dataUrl === "string" ? dataUrl.match(DATA_URL_RE) : null;
   if (!match) return res.status(400).json({ error: "dataUrl must be a base64 image/png|jpeg|webp data URL" });

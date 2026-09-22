@@ -8,6 +8,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase, supabaseEnabled } from "./supabase";
 import { CONTENT } from "./contentRegistry";
+import { isAdminEditable } from "./contentRegistry/editable";
 
 const fetchPublishedContent = async () => {
   if (!supabaseEnabled) return {};
@@ -29,9 +30,14 @@ export const useSiteContent = () =>
 
 // text: published value shape is { text: "..." }. May contain "\n\n" to
 // separate paragraphs for fields that render as multiple <p> tags.
+// Published overrides only apply to keys the admin editor is allowed to change
+// (see contentRegistry/editable.js); everything else renders its code default
+// even if an older published row exists for it.
+const publishedEntry = (data, key) => (isAdminEditable(key) ? data?.[key] : undefined);
+
 export const useContentText = (key) => {
   const { data } = useSiteContent();
-  const entry = data?.[key];
+  const entry = publishedEntry(data, key);
   const text = entry?.type === "text" ? entry.value?.text : undefined;
   if (typeof text === "string" && text.length) return text;
   return CONTENT[key]?.default ?? "";
@@ -47,7 +53,7 @@ export const paragraphs = (text) => (text || "").split(/\n{2,}/).filter(Boolean)
 // registry default — only the string leaves inside each block can differ.
 export const useContentBlocks = (key) => {
   const { data } = useSiteContent();
-  const entry = data?.[key];
+  const entry = publishedEntry(data, key);
   const blocks = entry?.type === "blocks" ? entry.value : undefined;
   return Array.isArray(blocks) && blocks.length ? blocks : CONTENT[key]?.default ?? [];
 };
@@ -55,7 +61,7 @@ export const useContentBlocks = (key) => {
 // image: published value shape is { url, alt }.
 export const useContentImage = (key) => {
   const { data } = useSiteContent();
-  const entry = data?.[key];
+  const entry = publishedEntry(data, key);
   const image = entry?.type === "image" ? entry.value : undefined;
   const fallback = CONTENT[key]?.default;
   if (image?.url) return { src: image.url, alt: image.alt || fallback?.alt || "" };
