@@ -52,5 +52,5 @@ export const titleFor = (pathname) => {
 export const applyTitle = (pathname) => {
   if (typeof document === "undefined") return;
   const t = titleFor(pathname);
-  document.title = pathname === "/" ? `${SITE} — ${t}` : t ? `${t} · ${SITE}` : SITE;
+  document.title = pathname === "/" ? `${SITE}: ${t}` : t ? `${t} · ${SITE}` : SITE;
 };
