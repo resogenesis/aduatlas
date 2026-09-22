@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { FiChevronDown, FiMenu, FiX } from "react-icons/fi";
 import Logomark from "../brand/Logomark";
 
-// Public nav: Home, How It Works, Course, Pricing, Resources. Property Check is the
+// Public nav: Home, How It Works, Course, Pricing, For Builders, Resources. Property Check is the
 // primary action. Builders live in the portal (Builders tab); About is in the
 // footer only.
 const navLinks = [
@@ -11,6 +11,7 @@ const navLinks = [
   { name: "How It Works", path: "/how-to-adu" },
   { name: "Course", path: "/course-outline" },
   { name: "Plans & Pricing", path: "/unlock" },
+  { name: "For Builders", path: "/for-builders" },
 ];
 
 const resources = [

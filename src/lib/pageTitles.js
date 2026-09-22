@@ -5,6 +5,7 @@ const TITLES = [
   ["/", "Your ADU or Tiny Home Starts Here"],
   ["/property", "Check my property"],
   ["/find-a-builder", "Find a builder"],
+  ["/for-builders", "For builders"],
   ["/how-to-adu", "How it works"],
   ["/course-outline", "The ADUAtlas course"],
   ["/unlock", "Plans and pricing"],

@@ -18,6 +18,7 @@ import Welcome from "../pages/Welcome";
 import BuilderListing from "../pages/BuilderListing";
 import BuilderProfile from "../pages/BuilderProfile";
 import FindBuilder from "../pages/FindBuilder";
+import ForBuilders from "../pages/ForBuilders";
 import AdminBuilders from "../pages/admin/AdminBuilders";
 import Feasibility from "../pages/Feasibility";
 import UtilityEstimator from "../pages/UtilityEstimator";
@@ -67,6 +68,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "property", element: <Property /> },
       { path: "find-a-builder", element: <FindBuilder /> },
+      { path: "for-builders", element: <ForBuilders /> },
       { path: "methodology", element: <Methodology /> },
       { path: "unlock", element: <Unlock /> },
       { path: "feasibility-study", element: <FeasibilityStudy /> },
