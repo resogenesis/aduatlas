@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import RootLayout from "../layout/RootLayout";
 import AppLayout from "../layout/AppLayout";
 
@@ -10,7 +10,6 @@ import AduTypes from "../pages/AduTypes";
 import Pricing from "../pages/Pricing";
 import CourseOutline from "../pages/CourseOutline";
 import Legal from "../pages/Legal";
-import Property from "../pages/Property";
 import Methodology from "../pages/Methodology";
 import Unlock from "../pages/Unlock";
 import FeasibilityStudy from "../pages/FeasibilityStudy";
@@ -66,7 +65,9 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <Home /> },
-      { path: "property", element: <Property /> },
+      // Phase 1 has no public property-address step; old links land on
+      // the packages.
+      { path: "property", element: <Navigate to="/unlock" replace /> },
       { path: "find-a-builder", element: <FindBuilder /> },
       { path: "for-builders", element: <ForBuilders /> },
       { path: "methodology", element: <Methodology /> },
@@ -136,20 +137,18 @@ const router = createBrowserRouter([
       { path: "utility-estimator", element: <PaidGate requireTier="report"><UtilityEstimator /></PaidGate> },
       { path: "report", element: <PaidGate requireTier="report"><PropertyReport /></PaidGate> },
 
-      // Planning worksheets + NAPE — included with ANY paid plan (Golden
-      // course includes the six workbook worksheets and the Ready Score in
-      // self-serve form; the teaser toward Platinum is doing the verification
-      // legwork yourself). Platinum adds the personalized
-      // report, property diagram, feasibility tools, and builder match —
-      // those keep requireTier="report" above.
-      { path: "packet", element: <PaidGate><PacketHub /></PaidGate> },
-      { path: "packet/pre-site-estimate", element: <PaidGate><PreSiteEstimate /></PaidGate> },
-      { path: "packet/pre-site-verification", element: <PaidGate><PreSiteVerification /></PaidGate> },
-      { path: "packet/builder-prep", element: <PaidGate><BuilderPrep /></PaidGate> },
-      { path: "packet/traditional-build", element: <PaidGate><TraditionalBuild /></PaidGate> },
-      { path: "packet/modular-prefab", element: <PaidGate><ModularPrefabEstimate /></PaidGate> },
-      { path: "packet/total-cost", element: <PaidGate><TotalProjectCost /></PaidGate> },
-      { path: "packet/ready-score", element: <PaidGate><ReadyScore /></PaidGate> },
+      // Preparation worksheets + the ADU Ready Score (NAPE) are Platinum and
+      // Concierge deliverables (Richard and Amy call, 2026-09-24), so every
+      // /packet/* route requires the "report" tier. A Golden buyer lands on
+      // the tier paywall, not the worksheets.
+      { path: "packet", element: <PaidGate requireTier="report" chapterName="Worksheets"><PacketHub /></PaidGate> },
+      { path: "packet/pre-site-estimate", element: <PaidGate requireTier="report" chapterName="Worksheets"><PreSiteEstimate /></PaidGate> },
+      { path: "packet/pre-site-verification", element: <PaidGate requireTier="report" chapterName="Worksheets"><PreSiteVerification /></PaidGate> },
+      { path: "packet/builder-prep", element: <PaidGate requireTier="report" chapterName="Worksheets"><BuilderPrep /></PaidGate> },
+      { path: "packet/traditional-build", element: <PaidGate requireTier="report" chapterName="Worksheets"><TraditionalBuild /></PaidGate> },
+      { path: "packet/modular-prefab", element: <PaidGate requireTier="report" chapterName="Worksheets"><ModularPrefabEstimate /></PaidGate> },
+      { path: "packet/total-cost", element: <PaidGate requireTier="report" chapterName="Worksheets"><TotalProjectCost /></PaidGate> },
+      { path: "packet/ready-score", element: <PaidGate requireTier="report" chapterName="Worksheets"><ReadyScore /></PaidGate> },
       { path: "builders", element: <PaidGate><BuilderListing /></PaidGate> },
       { path: "builders/:id", element: <PaidGate><BuilderProfile /></PaidGate> },
 

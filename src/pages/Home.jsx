@@ -7,8 +7,8 @@ import BuilderTeaser from "../components/home/BuilderTeaser";
 import Mission from "../components/home/Mission";
 import ClosingCta from "../components/home/ClosingCta";
 
-// Phase 1 homepage: hero with the address box and live sample check,
-// what is possible, plans, builder access, mission, final address CTA.
+// Phase 1 homepage: hero with one button to the packages, stages, problems,
+// what is possible, plans, builder access, mission, closing package CTA.
 const Home = () => (
   <div className="w-full">
     <Hero />

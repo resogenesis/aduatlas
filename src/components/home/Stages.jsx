@@ -9,7 +9,7 @@ import { AdminEditableSection } from "../../lib/adminEditBridge";
 // site that serves that stage, so a visitor self-selects instead of reading.
 const STAGES = [
   { Icon: FiBookOpen, to: "/course-outline" },
-  { Icon: FiHome, to: "/property" },
+  { Icon: FiHome, to: "/unlock?tier=report" },
   { Icon: FiMap, to: "/unlock?tier=report" },
   { Icon: FiUsers, to: "/find-a-builder" },
 ];

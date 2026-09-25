@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiLock, FiShield } from "react-icons/fi";
 import { captureLead } from "../lib/supabase";
 import { startCheckout, checkoutEnabled } from "../lib/checkout";
+import { getReferralCode } from "../lib/referral";
 import { sendEmail, TEMPLATES } from "../lib/email";
 import { EV, identify, track } from "../lib/analytics";
 import { CONCIERGE_BOUNDARY, PLANS, PLAN_IDS, formatPrice, planById, upgradeCreditCents } from "../lib/plans";
@@ -47,7 +48,7 @@ const Unlock = () => {
       setEmailError("Enter a valid email address.");
       return;
     }
-    const res = await captureLead({ email, source: "unlock" });
+    const res = await captureLead({ email, source: "unlock", referralCode: getReferralCode() });
     if (res && res.ok === false && res.error !== "supabase-disabled") {
       setEmailError("We couldn't save your email. Please try again.");
       track(EV.EMAIL_CAPTURE_FAILED, { tier: selectedTier });
@@ -67,7 +68,7 @@ const Unlock = () => {
     setLoading(true);
     setCheckoutError("");
     track(EV.CHECKOUT_STARTED, { tier: selectedTier });
-    const res = await startCheckout({ tier: selectedTier, email });
+    const res = await startCheckout({ tier: selectedTier, email, referralCode: getReferralCode() });
     if (!res.ok) {
       setLoading(false);
       console.error("Checkout failed:", res.error);

@@ -5,12 +5,14 @@ import { planById } from "../../lib/plans";
 import { currentUser } from "../../stores/authStore";
 
 // Three layers:
-// 1. Paid gate (any /course/*, /dashboard, /my-property, worksheets,
-//    builder directory) — must have purchased SOMETHING (isPaid()). Golden
+// 1. Paid gate (any /course/*, /dashboard, /my-property, /costs, /adu-options,
+//    builder directory): must have purchased SOMETHING (isPaid()). Golden
 //    includes builder profile access.
-// 2. Tier gate (requireTier="report") — the Platinum deliverables (feasibility
-//    study, site plan, feasibility tools) require Platinum or Concierge; a
-//    Golden buyer must NOT reach them.
+// 2. Tier gate (requireTier="report"): the Platinum deliverables (feasibility
+//    study, site plan, feasibility tools) AND the preparation worksheets with
+//    the ADU Ready Score (/packet/*) require Platinum or Concierge. A Golden
+//    buyer must NOT reach them (Richard and Amy call, 2026-09-24).
+// 3. Tier gate (requireTier="concierge"): written portal support.
 // Property-aware builder matching (Platinum+) will get its own gate when it
 // ships; the directory itself needs only a paid plan.
 //
@@ -43,7 +45,7 @@ const PayPaywall = ({ location, chapterName }) => (
         This is part of the <span className="">paid system.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-        Golden ($79) unlocks the full course, the planning worksheets, the ADU Ready Score, and builder profiles. Platinum ($279) adds a feasibility study and visual site plan prepared for your property. Concierge ($500) adds portal support and 60 minutes of private consultation. 7 day full refund if it's not for you.
+        Golden ($79) unlocks the full course with state and city resources, plus builder profiles. Platinum ($279) adds the preparation worksheets and ADU Ready Score, plus a feasibility study and a site plan in two versions prepared for your property. Concierge ($500) adds written support through the portal and 60 minutes of private consultation. 7 day full refund if it's not for you.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
@@ -53,20 +55,16 @@ const PayPaywall = ({ location, chapterName }) => (
         >
           See plans <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>
-        <Link
-          to="/property"
-          className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition"
-        >
-          Check my property first
-        </Link>
       </div>
     </div>
   </section>
 );
 
-// Shown when a buyer IS paid but only holds Golden and is trying to reach a
-// Platinum deliverable. The $79 Golden purchase applies as a credit toward
-// Platinum (handled server-side at checkout), so the upgrade costs $200.
+// Shown when a buyer IS paid but holds a lower tier than the page needs: a
+// Golden buyer reaching the worksheets or a Platinum deliverable, or a
+// Platinum buyer reaching Concierge support. The $79 Golden purchase applies
+// as a credit toward Platinum (handled server-side at checkout), so that
+// upgrade costs $200.
 const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
   const plan = planById(requireTier) || planById(TIERS.REPORT);
   const isConcierge = plan.id === TIERS.CONCIERGE;
@@ -81,8 +79,8 @@ const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
         {isConcierge
-          ? "Concierge adds portal support, personalized next-step guidance, builder-match assistance, and 60 minutes of private consultation. What you have already paid applies as a credit."
-          : "Golden includes the full course, the planning worksheets, the ADU Ready Score, and builder profiles. The feasibility study, visual site plan, and feasibility tools are part of Platinum. Your $79 applies as a credit, so the upgrade is $200."}
+          ? "Concierge adds written support through the portal, personalized next-step guidance, builder-match assistance, and 60 minutes of private consultation. What you have already paid applies as a credit."
+          : "Golden includes the full course with state and city resources, plus builder profiles. The preparation worksheets, the ADU Ready Score, the feasibility study, and the site plan in two versions are part of Platinum. Your $79 applies as a credit, so the upgrade is $200."}
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
@@ -93,10 +91,10 @@ const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
           Upgrade to {plan.name} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Link>
         <Link
-          to="/packet"
+          to="/course"
           className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-stroke text-paper font-medium hover:border-accent transition"
         >
-          Keep working your worksheets
+          Back to the course
         </Link>
       </div>
     </div>

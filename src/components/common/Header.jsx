@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { FiChevronDown, FiMenu, FiX } from "react-icons/fi";
 import Logomark from "../brand/Logomark";
 
-// Public nav: Home, How It Works, Course, Pricing, For Builders, Resources. Property Check is the
+// Public nav: Home, How It Works, Course, Pricing, For Builders, Resources. See Packages is the
 // primary action. Builders live in the portal (Builders tab); About is in the
 // footer only.
 const navLinks = [
@@ -90,8 +90,8 @@ const Header = () => {
           <Link to="/login" className="px-4 py-2.5 rounded-xl border border-stroke text-sm font-semibold text-paper hover:bg-surface-1-solid transition-colors">
             Sign In
           </Link>
-          <Link to="/property" className="px-5 py-2.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors">
-            Check My Property
+          <Link to="/unlock" className="px-5 py-2.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors">
+            See Packages
           </Link>
         </div>
 
@@ -118,8 +118,8 @@ const Header = () => {
               <Link to="/login" className="px-5 py-3 rounded-xl border border-stroke text-paper font-semibold text-sm text-center" onClick={close}>
                 Sign In
               </Link>
-              <Link to="/property" className="px-5 py-3 rounded-xl bg-accent text-accent-fg font-semibold text-sm text-center" onClick={close}>
-                Check My Property
+              <Link to="/unlock" className="px-5 py-3 rounded-xl bg-accent text-accent-fg font-semibold text-sm text-center" onClick={close}>
+                See Packages
               </Link>
             </div>
           </nav>

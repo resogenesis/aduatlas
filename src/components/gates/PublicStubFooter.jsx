@@ -14,14 +14,14 @@ const PublicStubFooter = () => {
             The full step by step is inside the ADU system.
           </h3>
           <p className="text-paper-dim text-sm sm:text-base leading-relaxed mb-8 max-w-md mx-auto">
-            Start with a free property check. See what public records say about your lot, then choose the plan that fits.
+            Choose the package that fits your project. The course and your portal take it from there.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              to="/property"
+              to="/unlock"
               className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold hover:bg-accent-dim transition-colors press"
             >
-              Check my property <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              See packages <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               to="/unlock"

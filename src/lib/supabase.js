@@ -8,8 +8,10 @@
 //
 // Schema: see supabase/migrations/0001_init.sql (version-controlled).
 // `leads` is PII-protected — no direct anon table access — so lead writes go
-// through the security-definer RPC `capture_lead(p_email, p_source, p_quiz_answers)`
-// rather than a direct .from("leads").upsert().
+// through the security-definer RPC
+// `capture_lead(p_email, p_source, p_quiz_answers, p_referral_code)` rather
+// than a direct .from("leads").upsert(). p_referral_code arrived with
+// migration 0005 (builder referral attribution).
 
 import { createClient } from "@supabase/supabase-js";
 
@@ -23,15 +25,26 @@ export const supabase = supabaseEnabled
   : null;
 
 // ── Leads ───────────────────────────────────────────────────────────────────
-// Insert/merge a lead (email + quiz answers) when a homeowner submits the email
-// gate on /unlock. Idempotent on (email) — handled server-side by capture_lead.
-export const captureLead = async ({ email, source = "unlock", quizAnswers = null }) => {
+// Insert/merge a lead (email + quiz answers, plus the builder referral code
+// when this browser holds one) when a homeowner submits the email gate on
+// /unlock. Idempotent on (email) — handled server-side by capture_lead.
+export const captureLead = async ({ email, source = "unlock", quizAnswers = null, referralCode = null }) => {
   if (!supabase) return { ok: false, error: "supabase-disabled" };
-  const { data, error } = await supabase.rpc("capture_lead", {
+  const base = {
     p_email: email.trim().toLowerCase(),
     p_source: source,
     p_quiz_answers: quizAnswers,
-  });
+  };
+  // First attempt carries the referral code when this browser holds one.
+  let { data, error } = await supabase.rpc("capture_lead", referralCode ? { ...base, p_referral_code: referralCode } : base);
+  // If the frontend is deployed before migration 0005 lands, PostgREST has no
+  // four-argument capture_lead and reports no matching function. Rather than
+  // hard-block every referred visitor at the email gate, retry once with the
+  // older three-argument signature. The lead still lands; only the referral
+  // attribution is lost for that submit.
+  if (error && referralCode) {
+    ({ data, error } = await supabase.rpc("capture_lead", base));
+  }
   if (error) return { ok: false, error: error.message };
   return { ok: true, leadId: data };
 };

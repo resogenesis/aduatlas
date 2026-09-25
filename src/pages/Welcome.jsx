@@ -117,7 +117,7 @@ const Welcome = () => {
           <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
             {status === "checking"
               ? "Hang tight while we confirm your payment."
-              : "We couldn't find a completed checkout for this visit. If you just paid, check your email for the confirmation link — or head back to pick your plan."}
+              : "We couldn't find a completed checkout for this visit. If you just paid, check your email for the confirmation link, or head back to pick your plan."}
           </p>
           {status === "none" && (
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -155,8 +155,8 @@ const Welcome = () => {
         </h1>
         <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-12 max-w-xl mx-auto">
           {hasReport
-            ? "Confirmation is on its way to your email. Start with Module 1 and work through the ADUAtlas course while we prepare your feasibility study and site plan."
-            : "Confirmation is on its way to your email. Start with Module 1 and work through the ADUAtlas course. Golden includes the course, worksheets, and builder profiles; the feasibility study is available as an upgrade to Platinum."}
+            ? "Confirmation is on its way to your email. Start with Module 1 and work through the ADUAtlas course while we prepare your feasibility study and your site plan in two versions."
+            : "Confirmation is on its way to your email. Start with Module 1 and work through the ADUAtlas course. Golden includes the course with state and city resources, plus builder profiles. The preparation worksheets, the ADU Ready Score, the feasibility study, and the site plan in two versions are part of Platinum."}
         </p>
 
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-8 sm:p-10 text-left mb-10">
@@ -164,9 +164,11 @@ const Welcome = () => {
           <ol className="space-y-6">
             {[
               { n: "01", t: "Start Module 1: How to ADU", d: "Process, timelines, and the foundation everything else builds on." },
-              { n: "02", t: "Work through the 9 modules", d: "Each module has worksheets pre-filled from your quiz answers." },
               hasReport
-                ? { n: "03", t: "Receive your feasibility study", d: "Submit your property details; your study and visual site plan appear in your portal when ready." }
+                ? { n: "02", t: "Work through the 9 modules", d: "Each module has worksheets pre-filled from your quiz answers." }
+                : { n: "02", t: "Work through the 9 modules", d: "Short lessons with state and city resources, plus a knowledge check at the end of each one." },
+              hasReport
+                ? { n: "03", t: "Receive your feasibility study", d: "Submit your property details; your feasibility study and your site plan in two versions appear in your portal when ready." }
                 : { n: "03", t: "Add the feasibility study", d: "Upgrade to Platinum any time; your $79 applies as a credit." },
             ].map((s) => (
               <li key={s.n} className="flex items-start gap-5">

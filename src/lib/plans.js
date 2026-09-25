@@ -6,6 +6,14 @@
 // Prices here drive the pricing page copy and the upgrade-credit math in
 // api/create-checkout.js. The Stripe Price objects (STRIPE_PRICE_*) must be
 // kept in step with these amounts.
+//
+// Entitlements (Richard and Amy call, 2026-09-24): the preparation worksheets
+// and the ADU Ready Score belong to Platinum and Concierge, not Golden, so the
+// /packet/* routes carry requireTier="report". The builder directory is in
+// every plan. Property information is gathered inside the feasibility and
+// site-plan process, so there is no separate "property review" line. The
+// site plan is one service delivered in two versions. The homepage cards in
+// contentRegistry/home.js condense this copy; keep them in step.
 
 export const PLAN_IDS = { GOLDEN: "roadmap", PLATINUM: "report", CONCIERGE: "concierge" };
 
@@ -20,7 +28,6 @@ export const PLANS = [
     bullets: [
       "The complete ADUAtlas course",
       "State and city learning resources",
-      "Homeowner preparation tools and worksheets",
       "Builder profile access for one year",
     ],
   },
@@ -30,11 +37,16 @@ export const PLANS = [
     name: "Platinum",
     priceCents: 27900,
     tagline: "Property analysis",
-    summary: "Everything in Golden, plus a feasibility study and visual site plan prepared for your property.",
+    summary: "Everything in Golden, plus a feasibility study and a site plan in two versions, both prepared for your property.",
+    // "Pre-site and utility cost guidance" stays: the utility estimator and the
+    // study's budget summary are not worksheets, and the utility hookup is the
+    // homepage's second "where projects go wrong" argument.
     bullets: [
       "Everything in Golden",
-      "Property-specific feasibility study",
-      "ADUAtlas visual site plan",
+      "Preparation worksheets and ADU Ready Score",
+      "Feasibility study for your property",
+      "Site plan, version one: what could fit",
+      "Site plan, version two: the arrangement you want",
       "Zoning and property constraints",
       "ADU size and type guidance",
       "Pre-site and utility cost guidance",
@@ -49,9 +61,11 @@ export const PLANS = [
     priceCents: 50000,
     tagline: "Guidance + support",
     summary: "Everything in Platinum, plus a person to help you interpret your materials and take the next steps.",
+    // Written-support duration and exchange limits are unresolved; do not add
+    // a number to the portal line until Richard and Amy settle it.
     bullets: [
       "Everything in Platinum",
-      "Online support through the ADUAtlas portal",
+      "Written support through the ADUAtlas portal",
       "Personalized next-step guidance",
       "Builder-match assistance",
       "60 minutes of private ADU consultation, as one call or two 30-minute calls",

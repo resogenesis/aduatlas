@@ -98,17 +98,17 @@ const FeasibilityStudy = () => (
         <p className="text-paper-dim text-base max-w-2xl mx-auto leading-relaxed mb-7">
           Before you choose an ADU or ask a builder for an estimate, you need to understand what may
           legally fit on your property. Your personalized study applies your property dimensions and
-          the applicable ADU regulations to help you understand whether an ADU may be allowed — and
+          the applicable ADU regulations to help you understand whether an ADU may be allowed and
           the largest ADU that may be permitted.
         </p>
         <div className="font-display text-accent text-5xl sm:text-6xl mb-2">$279</div>
         <p className="text-paper-dim text-sm mb-7">
           Includes the ADUAtlas Course, builder profile access, your personalized property drawing,
-          and six dynamic worksheets. One year of access — renew for $99/year.
+          and six dynamic worksheets. Access lasts one year.
         </p>
         <Cta>Get your Feasibility Study</Cta>
         <p className="text-paper-dim/70 text-xs mt-4">
-          Already have Golden? Your $79 is credited, so the upgrade is $200. Details may be applied to this purchase.
+          Already have Golden? Your $79 is credited, so the upgrade is $200.
         </p>
       </div>
     </section>
@@ -130,7 +130,7 @@ const FeasibilityStudy = () => (
           </h2>
           <p className="text-paper-dim text-base leading-relaxed mb-6">
             You will receive a drawing like this one, customized with your property dimensions and
-            applicable ADU regulations — your lot, the location of your main house, a compass, a
+            applicable ADU regulations: your lot, the location of your main house, a compass, a
             legend of required setbacks and other requirements, and the largest ADU that may be
             allowed on your property.
           </p>
@@ -143,7 +143,7 @@ const FeasibilityStudy = () => (
           </ul>
           <p className="text-paper-dim text-sm leading-relaxed">
             After a utility professional marks your utilities, you can add their locations to the
-            drawing and estimate the distance between the utilities and the proposed ADU — the
+            drawing and estimate the distance between the utilities and the proposed ADU, the
             measurements that make your pre-site estimate realistic.
           </p>
         </div>

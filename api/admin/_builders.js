@@ -8,6 +8,12 @@
 //   POST builders/delete   { id }         hard delete (cascades saves + intros)
 //   GET  builders/intros                  intro requests with homeowner + builder
 //   POST builders/intro-update { id, status?, admin_note? }
+//   GET  builders/referrals               per-builder referral attribution (leads, paid)
+//
+// Referral attribution (migration 0005): every builder gets a unique
+// referral_code at creation, printed as https://aduatlas.com/?ref=<code>.
+// Attribution only. No payout or commission logic lives in this API.
+import { randomBytes } from "node:crypto";
 import { requireAdmin, readBody } from "../_admin.js";
 
 const BUCKET = "builders";
@@ -19,6 +25,14 @@ const SERVICE_TYPES = ["design_build", "general_contractor", "prefab_manufacture
 const APPROACH = ["custom", "prefab", "both"];
 const INTRO_STATUS = ["requested", "sent", "declined"];
 
+// Referral codes: 8 chars, uppercase, no 0/O/1/I (mirrors the check constraint
+// in supabase/migrations/0005_builder_referrals.sql). 32 symbols divide a byte
+// evenly, so `byte % 32` is unbiased.
+const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+const REFERRAL_TRIES = 5;
+const genReferralCode = () => Array.from(randomBytes(8), (b) => CODE_ALPHABET[b % 32]).join("");
+const isCodeCollision = (error) => error?.code === "23505" && /referral_code/.test(error.message || "");
+
 const slugify = (s) =>
   (s || "")
     .toLowerCase()
@@ -27,6 +41,37 @@ const slugify = (s) =>
     .slice(0, 60);
 const strList = (v, allow) => (Array.isArray(v) ? v.map((x) => String(x).trim()).filter(Boolean).filter((x) => !allow || allow.includes(x)) : []);
 const safe = (s) => (s || "").replace(/[^a-zA-Z0-9._-]/g, "-").slice(0, 80);
+
+// Create with a fresh referral code; retry only when that code collides.
+const insertBuilder = async (ctx, row) => {
+  let result;
+  for (let i = 0; i < REFERRAL_TRIES; i++) {
+    result = await ctx.svc.from("builders").insert({ ...row, referral_code: genReferralCode() }).select().maybeSingle();
+    if (!isCodeCollision(result.error)) break;
+  }
+  return result;
+};
+
+// Profiles created before migration 0005 may have no code; give them one on
+// their next save. An existing code is never touched (builders print the link).
+const backfillReferralCode = async (ctx, builder) => {
+  if (!builder || builder.referral_code) return builder;
+  for (let i = 0; i < REFERRAL_TRIES; i++) {
+    const { data, error } = await ctx.svc
+      .from("builders")
+      .update({ referral_code: genReferralCode() })
+      .eq("id", builder.id)
+      .is("referral_code", null)
+      .select()
+      .maybeSingle();
+    if (!error) return data || builder;
+    if (!isCodeCollision(error)) {
+      console.error("referral_code backfill error:", error.message);
+      return builder;
+    }
+  }
+  return builder;
+};
 
 const list = async (req, res, ctx) => {
   const { data, error } = await ctx.svc.from("builders").select("*").order("name");
@@ -55,10 +100,12 @@ const save = async (req, res, ctx) => {
     active: b.active !== false,
     featured: Boolean(b.featured),
   };
-  const q = b.id ? ctx.svc.from("builders").update(row).eq("id", b.id) : ctx.svc.from("builders").insert(row);
-  const { data, error } = await q.select().maybeSingle();
+  // UPDATE never carries referral_code, so an existing code is left alone.
+  const { data, error } = b.id
+    ? await ctx.svc.from("builders").update(row).eq("id", b.id).select().maybeSingle()
+    : await insertBuilder(ctx, row);
   if (error) return res.status(500).json({ error: error.message });
-  res.status(200).json({ ok: true, builder: data });
+  res.status(200).json({ ok: true, builder: await backfillReferralCode(ctx, data) });
 };
 
 const upload = async (req, res, ctx) => {
@@ -140,6 +187,15 @@ const introUpdate = async (req, res, ctx) => {
   res.status(200).json({ ok: true, intro: data });
 };
 
+// Attribution only: how many leads and paid buyers each builder's link brought
+// in (referral_stats() in migration 0005). No payout or commission math here;
+// the ~5% discussed on the call is not finalized.
+const referrals = async (req, res, ctx) => {
+  const { data, error } = await ctx.svc.rpc("referral_stats");
+  if (error) return res.status(500).json({ error: error.message });
+  res.status(200).json({ items: data || [] });
+};
+
 const ROUTES = {
   list: { GET: list },
   save: { POST: save },
@@ -148,6 +204,7 @@ const ROUTES = {
   delete: { POST: del },
   intros: { GET: intros },
   "intro-update": { POST: introUpdate },
+  referrals: { GET: referrals },
 };
 
 export default async function handler(req, res) {

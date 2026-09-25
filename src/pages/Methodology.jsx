@@ -254,7 +254,7 @@ const Methodology = () => {
             {ctaBody}
           </p>
           <Link
-            to="/"
+            to="/unlock"
             className="group inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
           >
             {ctaButton} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />

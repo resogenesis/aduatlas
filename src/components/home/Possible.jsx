@@ -50,7 +50,7 @@ const Possible = () => {
             <h2 className="font-primary font-extrabold tracking-[-0.025em] text-paper text-4xl sm:text-5xl leading-[1.02] mb-5">{heading}</h2>
             <p className="text-paper-dim text-base leading-relaxed mb-8 max-w-md">{body}</p>
             <Link
-              to="/property"
+              to="/unlock"
               className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors press"
             >
               {cta} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />

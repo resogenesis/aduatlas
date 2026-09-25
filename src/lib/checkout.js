@@ -17,7 +17,9 @@
 const endpoint = import.meta.env.VITE_CHECKOUT_ENDPOINT || "/api/create-checkout";
 export const checkoutEnabled = Boolean(import.meta.env.VITE_CHECKOUT_ENDPOINT);
 
-export const startCheckout = async ({ tier, email, quizAnswers = null }) => {
+// referralCode: the builder referral code this browser holds (src/lib/referral.js),
+// forwarded so the server can put it in the Stripe session metadata.
+export const startCheckout = async ({ tier, email, quizAnswers = null, referralCode = null }) => {
   if (!checkoutEnabled) {
     // Mock fallback: return a known path the caller can redirect to. We pass
     // the selected tier and an explicit `mock=1` marker so /welcome only grants
@@ -30,7 +32,7 @@ export const startCheckout = async ({ tier, email, quizAnswers = null }) => {
     const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ tier, email, quizAnswers }),
+      body: JSON.stringify({ tier, email, quizAnswers, referralCode }),
     });
     if (!res.ok) {
       const text = await res.text();

@@ -103,7 +103,7 @@ export const METHODOLOGY_CONTENT = {
   },
 
   // ── CTA ──
-  "methodology.cta.heading": { page: PAGE, label: "CTA heading", type: "text", default: "Now go check your property." },
-  "methodology.cta.body": { page: PAGE, label: "CTA paragraph", type: "text", default: "Honest output. Source dated. Confidence labeled. Free to start." },
-  "methodology.cta.button": { page: PAGE, label: "CTA button", type: "text", default: "Property Snapshot" },
+  "methodology.cta.heading": { page: PAGE, label: "CTA heading", type: "text", default: "Now choose your package." },
+  "methodology.cta.body": { page: PAGE, label: "CTA paragraph", type: "text", default: "Every result shows where it came from, when the source was dated, and how confident we are in it." },
+  "methodology.cta.button": { page: PAGE, label: "CTA button", type: "text", default: "See the packages" },
 };

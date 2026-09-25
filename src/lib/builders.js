@@ -35,18 +35,30 @@ const myAppUserId = async () => {
   return data?.id || null;
 };
 
+// Columns a homeowner may read. This is the column-level SELECT grant from
+// supabase/migrations/0005_builder_referrals.sql, verbatim: referral_code is
+// deliberately absent, and Postgres rejects `select *` under column-level
+// privileges, so both reads below must name their columns. Naming them also
+// works under the older whole-table grant, so this is safe to ship first.
+const HOMEOWNER_BUILDER_COLUMNS = [
+  "id", "slug", "name", "description", "logo_path", "website", "external_link",
+  "contact_email", "contact_phone", "state", "cities", "service_zips", "specialties",
+  "service_types", "build_approach", "photos", "videos", "active", "featured",
+  "created_at", "updated_at",
+].join(", ");
+
 // Directory. Filtering by state/city/ZIP/specialty happens client-side on the
 // (small) active set so the search box feels instant.
 export const fetchBuilders = async () => {
   if (!supabaseEnabled) return { ok: false, error: "supabase-disabled", items: [] };
-  const { data, error } = await supabase.from("builders").select("*").eq("active", true).order("featured", { ascending: false }).order("name");
+  const { data, error } = await supabase.from("builders").select(HOMEOWNER_BUILDER_COLUMNS).eq("active", true).order("featured", { ascending: false }).order("name");
   if (error) return { ok: false, error: error.message, items: [] };
   return { ok: true, items: data || [] };
 };
 
 export const fetchBuilder = async (slug) => {
   if (!supabaseEnabled) return { ok: false, error: "supabase-disabled" };
-  const { data, error } = await supabase.from("builders").select("*").eq("slug", slug).maybeSingle();
+  const { data, error } = await supabase.from("builders").select(HOMEOWNER_BUILDER_COLUMNS).eq("slug", slug).maybeSingle();
   if (error) return { ok: false, error: error.message };
   return { ok: true, builder: data || null };
 };

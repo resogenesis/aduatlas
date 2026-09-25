@@ -9,7 +9,6 @@ const sections = [
   {
     title: "Product",
     links: [
-      { name: "Property Check", path: "/property" },
       { name: "How It Works", path: "/how-to-adu" },
       { name: "Course", path: "/course-outline" },
       { name: "Plans & Pricing", path: "/unlock" },

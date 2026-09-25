@@ -15,10 +15,10 @@ export const HOW_PILLARS_COUNT = 3;
 
 export const HOW_TO_ADU_CONTENT = {
   "howtoadu.header.title": t("Heading", "How it works."),
-  "howtoadu.header.body": t("One-line description", "Five steps from an address to a plan you can act on."),
+  "howtoadu.header.body": t("One-line description", "Five steps from choosing a package to a plan you can act on."),
 
-  "howtoadu.step.0.title": t("Step 1 title", "Check your property"),
-  "howtoadu.step.0.desc": t("Step 1 description", "Enter your address. We pull what public records say about your lot and home, flag what needs confirming, and show you where you stand. Free, no account needed."),
+  "howtoadu.step.0.title": t("Step 1 title", "Choose your package"),
+  "howtoadu.step.0.desc": t("Step 1 description", "Pick Golden for the course and builder access, Platinum for a feasibility study and a site plan in two versions, or Concierge for guidance on top. Pay and create your account. The course opens right away."),
   "howtoadu.step.0.image": img("Step 1 photo", checkImg, "An empty suburban backyard seen from the porch, lawn, fence, and detached garage"),
   "howtoadu.step.1.title": t("Step 2 title", "Learn the process"),
   "howtoadu.step.1.desc": t("Step 2 description", "Nine short modules on what your city allows, what it really costs, and how to talk to builders. Included with every plan, yours for a year."),
@@ -41,6 +41,6 @@ export const HOW_TO_ADU_CONTENT = {
 
   "howtoadu.closer.heading": t("Closer heading", "Learn before you build."),
   "howtoadu.closer.body": t("Closer paragraph", "The more you know before construction begins, the fewer surprises later."),
-  "howtoadu.closer.cta_primary": t("Primary button", "Check my property"),
+  "howtoadu.closer.cta_primary": t("Primary button", "See the packages"),
   "howtoadu.closer.cta_secondary": t("Secondary button", "See plans"),
 };

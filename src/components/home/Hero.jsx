@@ -1,22 +1,15 @@
-import { useMemo } from "react";
-import { FiCheck } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { FiArrowRight, FiCheck } from "react-icons/fi";
 import { useContentImage, useContentText } from "../../lib/content";
 import { AdminEditableSection } from "../../lib/adminEditBridge";
-import AddressIntake from "./AddressIntake";
-import LiveCheck from "./LiveCheck";
-import { useTypewriter } from "./useTypewriter";
 
 const EDIT_KEYS = [
   "home.hero.heading",
   "home.hero.body",
   "home.hero.cta",
-  "home.hero.placeholder",
   "home.hero.reassurance",
   "home.hero.image",
 ];
-
-// Sample addresses typed into the empty field so a visitor sees what to enter.
-const SAMPLE_ADDRESSES = ["1247 Mulberry Ln, Pasadena, CA", "88 Ocean View Dr, San Diego, CA", "512 Elmwood Ave, Sacramento, CA"];
 
 // Hand-drawn gold underline for the second headline line.
 const Underline = () => (
@@ -40,15 +33,14 @@ const Contours = () => (
   </svg>
 );
 
+// Hero: heading, one line of copy, one button to the packages. Phase 1 has no
+// public property-address step; the journey starts at the package choice.
 const Hero = () => {
   const heading = useContentText("home.hero.heading");
   const body = useContentText("home.hero.body");
   const cta = useContentText("home.hero.cta");
-  const placeholder = useContentText("home.hero.placeholder");
   const reassurance = useContentText("home.hero.reassurance");
   const image = useContentImage("home.hero.image");
-  const samples = useMemo(() => SAMPLE_ADDRESSES, []);
-  const typed = useTypewriter(samples);
   const [line1, line2] = heading.split("\n");
 
   return (
@@ -70,8 +62,13 @@ const Hero = () => {
               )}
             </h1>
             <p className="text-paper-dim text-lg sm:text-xl leading-relaxed max-w-lg mb-9">{body}</p>
-            <AddressIntake cta={cta} placeholder={typed || placeholder} className="max-w-none" />
-            <p className="mt-4 inline-flex items-center gap-2 text-sm sm:text-base text-paper-dim">
+            <Link
+              to="/unlock"
+              className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors press"
+            >
+              {cta} <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <p className="mt-4 flex items-center gap-2 text-sm sm:text-base text-paper-dim">
               <FiCheck className="text-accent" aria-hidden /> {reassurance}
             </p>
           </div>
@@ -80,7 +77,6 @@ const Hero = () => {
             <div className="relative rounded-[1.75rem] overflow-hidden aspect-[3/2] lg:aspect-auto lg:h-[32rem] xl:h-[34rem] shadow-[0_30px_60px_-30px_rgba(23,32,27,0.35)]">
               <img src={image.src} alt={image.alt} className="w-full h-full object-cover object-[55%_center] -scale-x-100" />
               <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-forest-deep/40 to-transparent" />
-              <LiveCheck />
             </div>
           </div>
         </div>

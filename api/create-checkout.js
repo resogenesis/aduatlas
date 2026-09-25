@@ -12,7 +12,13 @@
 //   SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY  (to look up the buyer's current plan)
 //
 // Body shape (POST JSON):
-//   { tier: "roadmap" | "report" | "concierge", email?: string, quizAnswers?: object }
+//   { tier: "roadmap" | "report" | "concierge", email?: string, quizAnswers?: object,
+//     referralCode?: string }
+//
+// referralCode is the builder referral code the browser holds
+// (src/lib/referral.js). It is format-checked and copied into the session
+// metadata so the webhook can attribute the buyer; it never affects price,
+// access or anything else.
 //
 // Upgrade credit: what the buyer already paid comes off the next plan up
 // (Golden -> Platinum pays $200; Platinum -> Concierge pays $221). The credit
@@ -31,6 +37,13 @@ const TIER_TO_PRICE = {
   roadmap: process.env.STRIPE_PRICE_ROADMAP,
   report: process.env.STRIPE_PRICE_REPORT,
   concierge: process.env.STRIPE_PRICE_CONCIERGE,
+};
+
+// Same shape as the check constraint on builders.referral_code (0005).
+const REFERRAL_RE = /^[A-HJ-NP-Z2-9]{8}$/;
+const normalizeReferral = (v) => {
+  const code = typeof v === "string" ? v.trim().toUpperCase() : "";
+  return REFERRAL_RE.test(code) ? code : "";
 };
 
 // Best-effort lookup of the plan this email already owns (paid, not
@@ -59,7 +72,8 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { tier, email, quizAnswers } = req.body || {};
+  const { tier, email, quizAnswers, referralCode } = req.body || {};
+  const referral = normalizeReferral(referralCode);
   const plan = planById(tier);
   const priceId = plan ? TIER_TO_PRICE[plan.id] : null;
   if (!plan || !priceId) {
@@ -110,6 +124,7 @@ export default async function handler(req, res) {
         upgraded_from: owned && creditCents > 0 ? owned : "",
         credit_cents: String(creditCents),
         quiz_answers: quizAnswers ? JSON.stringify(quizAnswers).slice(0, 400) : "",
+        referral_code: referral,
       },
     });
 

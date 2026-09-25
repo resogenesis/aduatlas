@@ -3,7 +3,6 @@
 const SITE = "ADUAtlas";
 const TITLES = [
   ["/", "Your ADU or Tiny Home Starts Here"],
-  ["/property", "Check my property"],
   ["/find-a-builder", "Find a builder"],
   ["/for-builders", "For builders"],
   ["/how-to-adu", "How it works"],

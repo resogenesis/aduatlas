@@ -1,9 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
-import { FiExternalLink, FiPlus, FiRefreshCw, FiTrash2, FiUpload, FiX } from "react-icons/fi";
+import { FiCopy, FiExternalLink, FiPlus, FiRefreshCw, FiTrash2, FiUpload, FiX } from "react-icons/fi";
 import { adminGet, adminPost } from "../../lib/adminApi";
 import { APPROACH_LABELS, SERVICE_TYPE_LABELS, SPECIALTY_LABELS, publicUrl } from "../../lib/builders";
 
 // Builder database management + introduction requests (Phase 1 scope §7).
+// Listings are free in Phase 1. Each saved builder has a referral link
+// (https://aduatlas.com/?ref=<code>); the list shows how many leads and paid
+// buyers arrived through it. Attribution only, no commission figures here.
+const REFERRAL_BASE = "https://aduatlas.com/?ref=";
 const readAsDataUrl = (file) =>
   new Promise((resolve, reject) => {
     const r = new FileReader();
@@ -41,7 +45,19 @@ const Drawer = ({ builder, onClose, onChanged }) => {
   const [f, setF] = useState(() => (builder ? { ...builder, cities: csv(builder.cities), service_zips: csv(builder.service_zips), videos: (builder.videos || []).join("\n") } : EMPTY));
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
   const set = (k, v) => setF((p) => ({ ...p, [k]: v }));
+  const referralLink = f.referral_code ? `${REFERRAL_BASE}${f.referral_code}` : "";
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(referralLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setError("Copy failed. Select the link and copy it by hand.");
+    }
+  };
 
   const save = async () => {
     setBusy("save");
@@ -180,6 +196,23 @@ const Drawer = ({ builder, onClose, onChanged }) => {
           </div>
 
           {f.id && (
+            <div className="pt-5 border-t border-stroke">
+              <p className="text-paper-dim text-xs mb-2">Referral link</p>
+              {referralLink ? (
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input readOnly value={referralLink} onFocus={(e) => e.target.select()} aria-label="Referral link" className="flex-1 bg-canvas border border-stroke rounded-lg px-3 py-2 text-paper font-mono text-sm" />
+                  <button type="button" onClick={copyLink} className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-stroke text-sm text-paper hover:border-accent whitespace-nowrap">
+                    <FiCopy /> {copied ? "Copied" : "Copy"}
+                  </button>
+                </div>
+              ) : (
+                <p className="text-paper-dim text-sm">Save changes to generate this builder's link.</p>
+              )}
+              <p className="text-paper-dim text-xs mt-2">Homeowners who arrive through this link are attributed to {f.name} when they leave an email or pay.</p>
+            </div>
+          )}
+
+          {f.id && (
             <div className="pt-5 border-t border-stroke space-y-4">
               <div>
                 <p className="text-paper-dim text-xs mb-2">Logo</p>
@@ -224,6 +257,7 @@ const AdminBuilders = () => {
   const [tab, setTab] = useState("builders");
   const [items, setItems] = useState(null);
   const [intros, setIntros] = useState(null);
+  const [stats, setStats] = useState({}); // builder_id -> referral_stats row
   const [error, setError] = useState("");
   const [active, setActive] = useState(null); // builder | "new" | null
   const [q, setQ] = useState("");
@@ -233,6 +267,11 @@ const AdminBuilders = () => {
       .then(([b, i]) => {
         setItems(b.items);
         setIntros(i.items);
+        // Referral counts are a nice-to-have: if the endpoint is not available
+        // yet (migration 0005 not applied) the column just shows a dash.
+        return adminGet("builders/referrals")
+          .then((r) => setStats(Object.fromEntries((r.items || []).map((row) => [row.builder_id, row]))))
+          .catch(() => setStats({}));
       })
       .catch((e) => setError(e.message));
   useEffect(() => {
@@ -295,6 +334,7 @@ const AdminBuilders = () => {
                     <th className="px-4 py-3">Area</th>
                     <th className="px-4 py-3">Specialties</th>
                     <th className="px-4 py-3">Status</th>
+                    <th className="px-4 py-3">Referrals</th>
                     <th className="px-4 py-3">Media</th>
                   </tr>
                 </thead>
@@ -305,6 +345,7 @@ const AdminBuilders = () => {
                       <td className="px-4 py-3 text-paper-dim">{[...(b.cities || []).slice(0, 2), b.state].join(", ")}</td>
                       <td className="px-4 py-3 text-paper-dim">{(b.specialties || []).map((s) => SPECIALTY_LABELS[s]).join(", ") || "—"}</td>
                       <td className="px-4 py-3 text-paper-dim">{b.active ? (b.featured ? "Active · featured" : "Active") : "Hidden"}</td>
+                      <td className="px-4 py-3 text-paper-dim whitespace-nowrap">{stats[b.id] ? `${stats[b.id].leads_count} leads · ${stats[b.id].paid_count} paid` : "—"}</td>
                       <td className="px-4 py-3 text-paper-dim">{[(b.logo_path && "logo"), (b.photos || []).length ? `${b.photos.length} photo${b.photos.length > 1 ? "s" : ""}` : null, (b.videos || []).length ? `${b.videos.length} video${b.videos.length > 1 ? "s" : ""}` : null].filter(Boolean).join(" · ") || "—"}</td>
                     </tr>
                   ))}

@@ -15,8 +15,8 @@ const KEY = "aduatlas.mock.paid";
 const TIER_KEY = "aduatlas.mock.tier";
 
 // Tier ids, lowest -> highest entitlement. Ids are the users.paid_tier values.
-//   roadmap   -> Golden ($79): course, resources, worksheets, builder profiles
-//   report    -> Platinum ($279): Golden + feasibility study + site plan
+//   roadmap   -> Golden ($79): course, resources, builder profiles
+//   report    -> Platinum ($279): Golden + worksheets + Ready Score + feasibility study + site plan
 //   concierge -> Concierge ($500): Platinum + portal support + consultation
 export const TIERS = { ROADMAP: PLAN_IDS.GOLDEN, REPORT: PLAN_IDS.PLATINUM, CONCIERGE: PLAN_IDS.CONCIERGE };
 

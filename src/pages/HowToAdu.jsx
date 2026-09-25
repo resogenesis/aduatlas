@@ -18,8 +18,8 @@ const StepIcon = ({ i }) => {
   const Icon = TRAIL[i].Icon;
   return <Icon aria-hidden />;
 };
-const STEP_LINKS = ["/property", "/course-outline", "/unlock?tier=report", "/course-outline", "/find-a-builder"];
-const STEP_LINK_LABELS = ["Check my property", "See the course", "See Platinum", "See the course", "About builders"];
+const STEP_LINKS = ["/unlock", "/course-outline", "/unlock?tier=report", "/course-outline", "/find-a-builder"];
+const STEP_LINK_LABELS = ["See packages", "See the course", "See Platinum", "See the course", "About builders"];
 
 const StepImage = ({ i }) => {
   const image = useContentImage(`howtoadu.step.${i}.image`);
@@ -122,7 +122,7 @@ const HowToAdu = () => {
               <p className="text-white/80 text-base sm:text-lg leading-relaxed">{closerBody}</p>
             </div>
             <div className="lg:col-span-5 lg:justify-self-end flex flex-wrap gap-3">
-              <Link to="/property" className="press inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-forest-deep font-semibold text-sm hover:bg-mist transition-colors">
+              <Link to="/unlock" className="press inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-forest-deep font-semibold text-sm hover:bg-mist transition-colors">
                 {ctaPrimary} <FiArrowRight />
               </Link>
               <Link to="/unlock" className="press inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/30 text-white font-medium text-sm hover:bg-white/10 transition-colors">

@@ -2,7 +2,10 @@
 // payment state into Supabase.
 //
 // Handled events:
-//   checkout.session.completed → set users.paid_at + paid_tier
+//   checkout.session.completed → set users.paid_at + paid_tier; when the
+//                                 session metadata carries a builder
+//                                 referral_code, also stamp
+//                                 users.referred_by_builder_id (first touch)
 //   charge.refunded            → clear users.paid_at (set refunded_at) so the
 //                                 "paid_at non-null AND not refunded" rule holds
 //
@@ -65,6 +68,71 @@ const markEventProcessed = async (supabase, event) => {
   }
 };
 
+// Builder referral attribution (migration 0005). Resolution order:
+//   (a) session.metadata.referral_code, format-checked by create-checkout, when
+//       it resolves to an ACTIVE builder;
+//   (b) otherwise the most recent lead row for this email. A homeowner who
+//       left an email through a referred visit but checked out from another
+//       device (or with cleared storage) carries no code in the session, and
+//       the lead row already holds the builder capture_lead resolved.
+// The result is written to the buyer's row once. The UPDATE is guarded by
+// "referred_by_builder_id is null", so a Stripe retry, a second purchase or an
+// upgrade never re-attributes anyone. Attribution only: no payout or
+// commission logic. Every failure is logged and swallowed so the webhook
+// still acknowledges the payment.
+const REFERRAL_RE = /^[A-HJ-NP-Z2-9]{8}$/;
+
+// (a) session metadata code -> { builderId, code } or null.
+const resolveFromCode = async (supabase, rawCode) => {
+  const code = typeof rawCode === "string" ? rawCode.trim().toUpperCase() : "";
+  if (!code || !REFERRAL_RE.test(code)) return null;
+  const { data: builder, error } = await supabase
+    .from("builders")
+    .select("id")
+    .eq("referral_code", code)
+    .eq("active", true)
+    .maybeSingle();
+  if (error) {
+    console.error("referral builder lookup error:", error.message);
+    return null;
+  }
+  return builder ? { builderId: builder.id, code } : null;
+};
+
+// (b) latest lead row for this email -> { builderId, code } or null.
+const resolveFromLead = async (supabase, email) => {
+  const { data: lead, error } = await supabase
+    .from("leads")
+    .select("referred_by_builder_id, referral_code")
+    .eq("email", email)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) {
+    console.error("referral lead lookup error:", error.message);
+    return null;
+  }
+  if (!lead?.referred_by_builder_id) return null;
+  return { builderId: lead.referred_by_builder_id, code: lead.referral_code || null };
+};
+
+const attributeReferral = async (supabase, email, rawCode) => {
+  if (!supabase || !email) return;
+  try {
+    const normalizedEmail = email.toLowerCase();
+    const resolved = (await resolveFromCode(supabase, rawCode)) || (await resolveFromLead(supabase, normalizedEmail));
+    if (!resolved) return;
+    const { error } = await supabase
+      .from("users")
+      .update({ referred_by_builder_id: resolved.builderId, referral_code: resolved.code, referred_at: new Date().toISOString() })
+      .eq("email", normalizedEmail)
+      .is("referred_by_builder_id", null);
+    if (error) console.error("referral attribution error:", error.message);
+  } catch (err) {
+    console.error("referral attribution threw:", err.message);
+  }
+};
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
@@ -110,6 +178,7 @@ export default async function handler(req, res) {
             { onConflict: "email" }
           );
         if (error) console.error("supabase upsert error:", error.message);
+        await attributeReferral(supabase, email, session.metadata?.referral_code);
       }
     } else if (event.type === "charge.refunded") {
       // A refund (full or partial) revokes access: clear paid_at and stamp

@@ -17,9 +17,8 @@ const img = (label, src, alt) => ({ page: PAGE, label, type: "image", default: {
 const homeHero = {
   "home.hero.heading": t("Hero heading (\\n = line break)", "Your ADU\nStarts Here."),
   "home.hero.body": t("Hero paragraph", "Find out what you can build, what it may cost, and what to do next."),
-  "home.hero.cta": t("Hero button", "Check My Property"),
-  "home.hero.placeholder": t("Address field placeholder", "Enter your property address"),
-  "home.hero.reassurance": t("Line under the address box", "No credit card required"),
+  "home.hero.cta": t("Hero button", "See the packages"),
+  "home.hero.reassurance": t("Line under the hero button", "7-day full refund on every package"),
   "home.hero.image": img("Hero photo", heroImg, "A modern wood-clad backyard ADU with sliding glass doors and a deck at golden hour"),
 };
 
@@ -29,10 +28,10 @@ export const homeStages = {
   "home.stages.heading": t("Stage heading", "Where are you in your ADU journey?"),
   "home.stages.item.0.title": t("Stage 1 title", "Just exploring"),
   "home.stages.item.0.desc": t("Stage 1 description", "Learn what an ADU is and whether one makes sense for you."),
-  "home.stages.item.1.title": t("Stage 2 title", "Checking my property"),
-  "home.stages.item.1.desc": t("Stage 2 description", "See what public records say about your lot, free."),
+  "home.stages.item.1.title": t("Stage 2 title", "Understanding my property"),
+  "home.stages.item.1.desc": t("Stage 2 description", "Learn what your lot allows before you spend on drawings or quotes."),
   "home.stages.item.2.title": t("Stage 3 title", "Planning and budgeting"),
-  "home.stages.item.2.desc": t("Stage 3 description", "Get a feasibility study and site plan for your property."),
+  "home.stages.item.2.desc": t("Stage 3 description", "Get a feasibility study for your property, plus a site plan showing what could fit and the arrangement you want."),
   "home.stages.item.3.title": t("Stage 4 title", "Ready for builders"),
   "home.stages.item.3.desc": t("Stage 4 description", "Find builders who serve your area and request introductions."),
 };
@@ -55,7 +54,7 @@ export const POSSIBLE_CARDS_COUNT = 3;
 const homePossible = {
   "home.possible.heading": t("Section heading (\\n = line break)", "What fits your property?"),
   "home.possible.body": t("Section paragraph", "Every lot is different. ADUAtlas shows what yours may support, for family, for income, or for the future."),
-  "home.possible.cta": t("Section button", "Check My Property"),
+  "home.possible.cta": t("Section button", "See the packages"),
   "home.possible.card.0.title": t("Card 1 title", "More Space\nfor What Matters"),
   "home.possible.card.0.desc": t("Card 1 description", "Create flexible living for family, friends, or caregivers."),
   "home.possible.card.0.image": img("Card 1 photo", familyImg, "A grandparent and child reading in a warmly lit ADU living room, seen through open glass doors"),
@@ -68,8 +67,11 @@ const homePossible = {
 };
 
 // ── Plans (Golden / Platinum / Concierge, from the Phase 1 scope) ─────────
-// Prices and bullets here are marketing copy. The checkout still resolves
-// prices server-side from Stripe; keep both in step when repricing.
+// Prices and bullets here are marketing copy that condenses src/lib/plans.js
+// (the source of truth) to four lines per card; nothing here may promise
+// what plans.js does not. The checkout still resolves prices server-side
+// from Stripe; keep both in step when repricing. Plans.jsx renders exactly
+// PLAN_BULLETS_COUNT bullets per card, so every slot needs a real line.
 export const PLANS_COUNT = 3;
 export const PLAN_BULLETS_COUNT = 4;
 const homePlans = {
@@ -81,24 +83,24 @@ const homePlans = {
   "home.plans.item.0.tagline": t("Plan 1 tagline", "Education + builder access"),
   "home.plans.item.0.bullet.0": t("Plan 1 bullet 1", "The full ADU course"),
   "home.plans.item.0.bullet.1": t("Plan 1 bullet 2", "State and city learning resources"),
-  "home.plans.item.0.bullet.2": t("Plan 1 bullet 3", "Homeowner preparation tools"),
-  "home.plans.item.0.bullet.3": t("Plan 1 bullet 4", "Builder profile access for one year"),
+  "home.plans.item.0.bullet.2": t("Plan 1 bullet 3", "Builder profile access for one year"),
+  "home.plans.item.0.bullet.3": t("Plan 1 bullet 4", "Your $79 counts toward Platinum if you upgrade"),
   "home.plans.item.1.name": t("Plan 2 name", "Platinum"),
   "home.plans.item.1.price": t("Plan 2 price", "$279"),
   "home.plans.item.1.tagline": t("Plan 2 tagline", "Property analysis"),
   "home.plans.item.1.bullet.0": t("Plan 2 bullet 1", "Everything in Golden"),
-  "home.plans.item.1.bullet.1": t("Plan 2 bullet 2", "Property-specific feasibility study"),
-  "home.plans.item.1.bullet.2": t("Plan 2 bullet 3", "ADUAtlas visual site plan"),
-  "home.plans.item.1.bullet.3": t("Plan 2 bullet 4", "Pre-site and utility cost guidance"),
+  "home.plans.item.1.bullet.1": t("Plan 2 bullet 2", "Preparation worksheets and ADU Ready Score"),
+  "home.plans.item.1.bullet.2": t("Plan 2 bullet 3", "Feasibility study for your property"),
+  "home.plans.item.1.bullet.3": t("Plan 2 bullet 4", "Site plan in two versions: what could fit, and what you want"),
   "home.plans.item.2.name": t("Plan 3 name", "Concierge"),
   "home.plans.item.2.price": t("Plan 3 price", "$500"),
   "home.plans.item.2.tagline": t("Plan 3 tagline", "Guidance + support"),
   "home.plans.item.2.bullet.0": t("Plan 3 bullet 1", "Everything in Platinum"),
-  "home.plans.item.2.bullet.1": t("Plan 3 bullet 2", "Personalized next-step guidance"),
+  "home.plans.item.2.bullet.1": t("Plan 3 bullet 2", "Written support through the ADUAtlas portal"),
   "home.plans.item.2.bullet.2": t("Plan 3 bullet 3", "Builder-match assistance"),
   "home.plans.item.2.bullet.3": t("Plan 3 bullet 4", "60 minutes of private ADU consultation"),
   "home.plans.featured_label": t("Featured plan label", "Most popular"),
-  "home.plans.footnote": t("Plans footnote", "Golden applies as a credit toward Platinum. All plans include one year of access."),
+  "home.plans.footnote": t("Plans footnote", "All plans include one year of access and a 7-day full refund."),
 };
 
 // ── Builder teaser ────────────────────────────────────────────────────────
@@ -127,7 +129,7 @@ const homeMission = {
 const homeCta = {
   "home.cta.heading": t("Closing heading", "Your property has potential."),
   "home.cta.body": t("Closing line", "See what it may support."),
-  "home.cta.button": t("Closing button", "Get Started"),
+  "home.cta.button": t("Closing button", "Choose a package"),
 };
 
 export const HOME_CONTENT = {

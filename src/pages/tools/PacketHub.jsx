@@ -1,19 +1,18 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheckCircle, FiClipboard, FiDollarSign, FiFileText, FiGrid, FiLayers, FiLock, FiMap, FiPackage, FiPhoneCall } from "react-icons/fi";
 import { loadPacket } from "../../stores/courseStore";
-import { hasReportTier } from "../../stores/paymentStore";
 import { loadWorksheets } from "../../stores/worksheetStore";
 
-// Worksheets hub — the six workbook worksheets + NAPE ship with every paid
-// tier (self-serve). Platinum adds the personalized
-// report, property diagram, and feasibility tools; for course-tier users
-// this page is also where the upgrade pitch lands, right when they're doing
-// the verification legwork by hand. Every worksheet prints via Print/save-PDF.
+// Worksheets hub: the six workbook worksheets, the ADU Ready Score (NAPE),
+// and the doors into the feasibility study and property diagram. All of it
+// is Platinum and Concierge (Richard and Amy call, 2026-09-24); the router
+// gates every /packet/* route with requireTier="report", so a Golden buyer
+// never reaches this page and there is no upgrade pitch here. Every
+// worksheet prints via Print/save-PDF.
 
 const PacketHub = () => {
   const ws = loadWorksheets();
   const packet = loadPacket();
-  const isReport = hasReportTier();
 
   const started = (key) => {
     const v = ws[key]?.values || ws[key] || {};
@@ -69,7 +68,7 @@ const PacketHub = () => {
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-6xl mx-auto">
       <h1 className="font-display text-paper text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-4">
-        {isReport ? "Your report packet." : "Your planning worksheets."}
+        Your report packet.
       </h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-4">
         {packet.address
@@ -85,23 +84,6 @@ const PacketHub = () => {
         </Link>
       </p>
 
-      {/* Upgrade pitch for course-tier users: they own the worksheets; the
-          report applies their property + regulations for them. */}
-      {!isReport && (
-        <div className="bg-accent text-accent-fg rounded-3xl p-6 sm:p-8 mb-6">
-          <h2 className="font-display text-2xl sm:text-3xl leading-tight mb-2">
-            Want these filled in for your property?
-          </h2>
-          <Link
-            to="/unlock"
-            state={{ tier: "report" }}
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-canvas text-paper font-semibold hover:bg-surface-1-solid transition-colors"
-          >
-            Upgrade to the Feasibility Report <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-      )}
-
       {/* Report + diagram + Ready Score */}
       <div className="grid sm:grid-cols-2 gap-4 mb-4">
         <Card
@@ -109,16 +91,14 @@ const PacketHub = () => {
           Icon={FiFileText}
           title="Feasibility study"
           desc="Your personalized report: public-record snapshot, buildable envelope, NAPE results, budget summary, and your verification checklist — printable."
-          status={isReport ? "Open" : "Feasibility Report plan"}
-          locked={!isReport}
+          status="Open"
         />
         <Card
           to="/feasibility"
           Icon={FiMap}
           title="Property diagram & feasibility"
           desc="Your lot in 3D/2D/satellite: setbacks, buildable envelope, and the largest potential ADU footprint — plus the readiness checklist."
-          status={isReport ? "Open" : "Feasibility Report plan"}
-          locked={!isReport}
+          status="Open"
         />
         <Card
           to="/packet/ready-score"

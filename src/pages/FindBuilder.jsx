@@ -29,9 +29,6 @@ const FindBuilder = () => {
           <Link to={paid ? "/builders" : "/unlock"} className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors press">
             {paid ? "Open the directory" : "See plans"} <FiArrowRight />
           </Link>
-          <Link to="/property" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-stroke text-paper font-medium text-sm hover:border-accent transition press">
-            Check my property first
-          </Link>
         </div>
       </PageHeader>
 

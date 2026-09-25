@@ -13,8 +13,8 @@ const Costs = () => {
   const platinum = hasReportTier();
 
   const tiles = [
-    { label: "Pre-site estimate", value: presite ? money(presite) : "Not started", to: "/packet/pre-site-estimate", desc: "Utilities, site work, and fees before the structure." },
-    { label: "Total project cost", value: tpc?.estimated ? money(tpc.estimated) : "Not started", to: "/packet/total-cost", desc: "Estimated versus final, rolled up from your worksheets." },
+    { label: "Pre-site estimate", value: platinum ? (presite ? money(presite) : "Not started") : "Platinum", to: platinum ? "/packet/pre-site-estimate" : "/unlock?tier=report", desc: "Utilities, site work, and fees before the structure.", locked: !platinum },
+    { label: "Total project cost", value: platinum ? (tpc?.estimated ? money(tpc.estimated) : "Not started") : "Platinum", to: platinum ? "/packet/total-cost" : "/unlock?tier=report", desc: "Estimated versus final, rolled up from your worksheets.", locked: !platinum },
     { label: "Utility hookup estimate", value: platinum ? "Open" : "Platinum", to: platinum ? "/utility-estimator" : "/unlock?tier=report", desc: "Water, sewer, and electric connection costs for your lot.", locked: !platinum },
   ];
 
@@ -39,10 +39,15 @@ const Costs = () => {
         ))}
       </div>
       <div className="bg-canvas border border-stroke rounded-3xl p-7">
-        <h2 className="font-primary font-extrabold tracking-tight text-paper text-xl mb-2">All worksheets</h2>
-        <p className="text-paper-dim text-sm mb-4">Pre-site verification, builder preparation, traditional build quotes, modular and prefab estimate, and the ADU Ready Score.</p>
-        <Link to="/packet" className="inline-flex items-center gap-2 text-accent text-sm font-medium">
-          Open the worksheets <FiArrowRight />
+        <h2 className="font-primary font-extrabold tracking-tight text-paper text-xl mb-2 inline-flex items-center gap-2">
+          {!platinum && <FiLock className="text-sm" />} All worksheets
+        </h2>
+        <p className="text-paper-dim text-sm mb-4">
+          Pre-site verification, builder preparation, traditional build quotes, modular and prefab estimate, and the ADU Ready Score.
+          {!platinum && " Included with Platinum."}
+        </p>
+        <Link to={platinum ? "/packet" : "/unlock?tier=report"} className="inline-flex items-center gap-2 text-accent text-sm font-medium">
+          {platinum ? "Open the worksheets" : "Upgrade to Platinum"} <FiArrowRight />
         </Link>
       </div>
     </div>

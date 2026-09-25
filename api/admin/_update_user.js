@@ -44,6 +44,26 @@ export default async function handler(req, res) {
     patch.paid_tier = paid_tier;
   }
   if (paid === true) {
+    // A paid row with no paid_tier is ambiguous (the client falls back to the
+    // highest tier), so refuse to create one: the tier must come from this
+    // request or already be on the row.
+    let tier = paid_tier;
+    if (tier === undefined) {
+      const { data: existing, error: readError } = await ctx.svc
+        .from("users")
+        .select("paid_tier")
+        .eq("id", id)
+        .maybeSingle();
+      if (readError) {
+        res.status(500).json({ error: readError.message });
+        return;
+      }
+      tier = existing?.paid_tier ?? null;
+    }
+    if (!tier) {
+      res.status(400).json({ error: "paid_tier required when marking a user paid" });
+      return;
+    }
     patch.paid_at = new Date().toISOString();
     patch.refunded_at = null;
   } else if (paid === false) {

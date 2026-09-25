@@ -6,8 +6,8 @@ import { STUDY_STATUS, fetchMyStudy, signedUrl, submitIntake, uploadIntakeFile }
 import { supabaseEnabled } from "../../lib/supabase";
 import { INTAKE_FIELDS } from "../../lib/studyIntake";
 
-// Feasibility study: property intake, then status until the report and site
-// plan are delivered. Platinum and Concierge only (route is gated).
+// Feasibility study: property intake, then status until the report and the
+// site plan in two versions are delivered. Platinum and Concierge only (route is gated).
 
 
 const emptyIntake = () => {
@@ -130,7 +130,7 @@ const Study = () => {
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-4xl mx-auto">
       <h1 className="font-primary font-extrabold tracking-tight text-paper text-4xl sm:text-5xl leading-[1.05] mb-3">Feasibility study</h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-10">
-        Tell us about your property. We prepare a feasibility study and a visual site plan for it and deliver both here.
+        Tell us about your property. We prepare a feasibility study and a site plan in two versions, what could fit and the arrangement you want, and deliver them here.
       </p>
 
       {!supabaseEnabled && (
@@ -168,7 +168,7 @@ const Study = () => {
             {study.status === "ready" && (
               <div className="grid sm:grid-cols-2 gap-3 mb-5">
                 {study.report_path && <Deliverable label="Feasibility study (PDF)" path={study.report_path} />}
-                {study.site_plan_path && <Deliverable label="Visual site plan" path={study.site_plan_path} />}
+                {study.site_plan_path && <Deliverable label="Site plan in two versions" path={study.site_plan_path} />}
               </div>
             )}
             <div className="flex flex-wrap gap-3">
@@ -179,7 +179,7 @@ const Study = () => {
               )}
               {study.status === "ready" && (
                 <Link to="/site-plan" className="px-5 py-2.5 rounded-xl bg-accent text-accent-fg text-sm font-semibold hover:bg-accent-dim transition-colors">
-                  Open the site plan
+                  Open the site plan in two versions
                 </Link>
               )}
             </div>
