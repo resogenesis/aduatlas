@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import RootLayout from "../layout/RootLayout";
 import AppLayout from "../layout/AppLayout";
+import BuilderLayout, { BuilderRedirect } from "../layout/BuilderLayout";
 
 import Home from "../pages/Home";
 import About from "../pages/About";
@@ -19,6 +20,8 @@ import BuilderProfile from "../pages/BuilderProfile";
 import FindBuilder from "../pages/FindBuilder";
 import ForBuilders from "../pages/ForBuilders";
 import AdminBuilders from "../pages/admin/AdminBuilders";
+import BuilderDashboard from "../pages/builder/BuilderDashboard";
+import BuilderProfileEdit from "../pages/builder/BuilderProfileEdit";
 import Feasibility from "../pages/Feasibility";
 import UtilityEstimator from "../pages/UtilityEstimator";
 import PacketHub from "../pages/tools/PacketHub";
@@ -88,7 +91,21 @@ const router = createBrowserRouter([
       // Auth
       { path: "login", element: <Login /> },
       { path: "create-account", element: <Signup /> },
+      // Builder signup: same card, role "pro", lands in the builder portal.
+      { path: "builders/join", element: <Signup role="pro" /> },
       { path: "forgot-password", element: <ForgotPassword /> },
+    ],
+  },
+
+  // ─── Builder portal (role-gated: pro only) ───────────────────────
+  // The builder's own profile and aggregate referral counts. Nothing under
+  // /builder shows a homeowner's name, email, phone, address or project.
+  {
+    path: "/builder",
+    element: <BuilderLayout />,
+    children: [
+      { index: true, element: <BuilderDashboard /> },
+      { path: "profile", element: <BuilderProfileEdit /> },
     ],
   },
 
@@ -108,9 +125,11 @@ const router = createBrowserRouter([
 
 
   // ─── Logged-in homeowner app (sidebar layout) ────────────────────
+  // A builder (role "pro") never sees the homeowner app: BuilderRedirect
+  // sends them to /builder from any of these routes.
   {
     path: "/",
-    element: <AppLayout />,
+    element: <BuilderRedirect><AppLayout /></BuilderRedirect>,
     children: [
       { path: "dashboard", element: <PaidGate><Dashboard /></PaidGate> },
 

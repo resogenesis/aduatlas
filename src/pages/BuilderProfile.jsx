@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { FiArrowLeft, FiBookmark, FiCheck, FiExternalLink, FiGlobe, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
-import { APPROACH_LABELS, SERVICE_TYPE_LABELS, SPECIALTY_LABELS, fetchBuilder, fetchMyIntros, fetchSaved, publicUrl, requestIntro, toggleSaved } from "../lib/builders";
+import { FiArrowLeft, FiAward, FiBookmark, FiCheck, FiExternalLink, FiGlobe, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
+import { APPROACH_LABELS, BUILD_METHOD_LABELS, SERVICE_TYPE_LABELS, SPECIALTY_LABELS, TURNKEY_HELP, fetchBuilder, fetchMyIntros, fetchSaved, logBuilderEvent, publicUrl, requestIntro, toggleSaved } from "../lib/builders";
 
-// Builder profile: description, service area, specialties, up to 3 photos and
-// 2 videos, the website and one extra link, save, and request an introduction.
+// Builder profile: description, service area, specialties, build methods,
+// turnkey, licensed states, up to 3 photos and 2 videos, the website and one
+// extra link, save, and request an introduction.
+//
+// Opening this page records a builder_profile_viewed event for the builder
+// (one per homeowner per day, counted only; the builder never learns who).
+// Requesting an introduction records builder_contacted inside requestIntro.
 
 const embedUrl = (url = "") => {
   const yt = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([\w-]{6,})/);
@@ -30,6 +35,7 @@ const BuilderProfile = () => {
       const builder = r.ok ? r.builder : null;
       setB(builder);
       if (!builder) return;
+      logBuilderEvent(builder.id, "builder_profile_viewed");
       const [savedSet, intros] = await Promise.all([fetchSaved(), fetchMyIntros()]);
       if (cancelled) return;
       setSaved(savedSet.has(builder.id));
@@ -81,9 +87,19 @@ const BuilderProfile = () => {
         <aside className="bg-canvas border border-stroke rounded-3xl p-6 lg:sticky lg:top-8">
           {logo ? <img src={logo} alt={`${b.name} logo`} className="h-16 w-auto object-contain mb-4" /> : <div className="h-16 w-16 rounded-2xl bg-surface-1-solid mb-4" />}
           <h1 className="font-display text-paper text-2xl leading-tight mb-1">{b.name}</h1>
-          <p className="text-paper-dim text-sm inline-flex items-center gap-1.5 mb-5">
+          <p className="text-paper-dim text-sm inline-flex items-center gap-1.5 mb-3">
             <FiMapPin /> {[...(b.cities || []).slice(0, 3), b.state].filter(Boolean).join(", ")}
           </p>
+          {(b.turnkey || (b.licensed_states || []).length > 0) && (
+            <div className="flex flex-wrap gap-1.5 mb-5">
+              {b.turnkey && <span title={TURNKEY_HELP} className="px-2.5 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium">Turnkey</span>}
+              {(b.licensed_states || []).length > 0 && (
+                <span className="px-2.5 py-1 rounded-full bg-surface-1-solid text-xs text-paper-dim inline-flex items-center gap-1">
+                  <FiAward aria-hidden /> Licensed in {b.licensed_states.join(", ")}
+                </span>
+              )}
+            </div>
+          )}
 
           <div className="flex gap-2 mb-6">
             {intro ? (
@@ -110,13 +126,21 @@ const BuilderProfile = () => {
               <dd className="text-paper">{(b.service_types || []).map((s) => SERVICE_TYPE_LABELS[s] || s).join(", ") || "Not listed"}</dd>
             </div>
             <div>
-              <dt className="text-paper-dim mb-1">Approach</dt>
-              <dd className="text-paper">{APPROACH_LABELS[b.build_approach]}</dd>
+              <dt className="text-paper-dim mb-1">Build methods</dt>
+              <dd className="text-paper">{(b.build_methods || []).map((m) => BUILD_METHOD_LABELS?.[m] || m).join(", ") || APPROACH_LABELS[b.build_approach] || "Not listed"}</dd>
             </div>
-            {(b.cities || []).length > 0 && (
+            <div>
+              <dt className="text-paper-dim mb-1">Turnkey</dt>
+              <dd className="text-paper">{b.turnkey ? "Yes, this builder can take a project from design through the build." : "No, ask this builder about the scope they take on."}</dd>
+            </div>
+            <div>
+              <dt className="text-paper-dim mb-1">Licensed in</dt>
+              <dd className="text-paper">{(b.licensed_states || []).join(", ") || "Not listed"}</dd>
+            </div>
+            {((b.cities || []).length > 0 || (b.service_states || []).length > 0) && (
               <div>
                 <dt className="text-paper-dim mb-1">Areas served</dt>
-                <dd className="text-paper">{b.cities.join(", ")}</dd>
+                <dd className="text-paper">{[...(b.cities || []), ...(b.service_states || []).filter((s) => s !== b.state)].join(", ")}</dd>
               </div>
             )}
           </dl>

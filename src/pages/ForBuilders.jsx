@@ -1,44 +1,57 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiCheckCircle, FiMapPin, FiUserCheck, FiImage, FiTag } from "react-icons/fi";
+import { FiArrowRight, FiCheckCircle, FiMapPin, FiUserCheck, FiImage, FiTag, FiShield } from "react-icons/fi";
 import PageHeader from "../components/common/PageHeader";
 import { FormField, PrimaryButton } from "../components/common/FormField";
 import { captureLead } from "../lib/supabase";
 
-// Public page for builders (Richard, 2026-09-22): what ADUAtlas does for them
-// and how to get listed. Phase 1 keeps the directory free and ADUAtlas-managed
-// (scope §5), so the ask is a short interest form, not self-service signup.
+// Public page for builders. Since the 2026-09-24 call a builder creates their
+// own account (/builders/join), completes the company profile, and ADUAtlas
+// approves it and generates the referral link. The interest form stays as
+// the second option for a builder who would rather have ADUAtlas set the
+// profile up for them.
+//
+// Principle stated on this page on purpose: ADUAtlas helps the homeowner find
+// the right builder. It does not sell access to homeowner lists.
 
 const HELP = [
   {
     Icon: FiUserCheck,
     title: "Homeowners who have done the homework",
-    desc: "Everyone in the directory has taken the ADUAtlas course. Platinum and Concierge homeowners arrive with a feasibility study and a site plan for their property.",
+    desc: "Homeowners reach the directory through an ADUAtlas plan, which includes the course. Platinum and Concierge homeowners also have a feasibility study and a site plan for their property.",
   },
   {
     Icon: FiMapPin,
     title: "Listed where you actually work",
-    desc: "Your profile is organized by state and the cities you serve, so homeowners nearby find you first.",
+    desc: "Your profile is organized by the states and cities you serve and the states where you are licensed, so a homeowner filtering by area can find you.",
   },
   {
     Icon: FiCheckCircle,
     title: "Introductions, not cold leads",
-    desc: "Homeowners save the builders they like and request an introduction when their plan is ready. You hear from people who already know their lot and budget.",
+    desc: "Homeowners save the builders they like and request an introduction when their plan is ready. When an introduction reaches you, it comes from someone who already knows their lot and budget.",
   },
   {
     Icon: FiTag,
-    title: "Free to be listed",
-    desc: "There is no fee to be in the directory while we grow it. ADUAtlas sets up your profile for you.",
+    title: "Free to start",
+    desc: "Your first 90 days in the directory are free, and you are never charged per lead. Membership terms come with your approval.",
   },
 ];
 
+const STEPS = [
+  { title: "Create your builder account", desc: "It takes a minute, and your account is separate from the homeowner side of ADUAtlas." },
+  { title: "Complete your company profile", desc: "Tell homeowners your service area, licensed states, ADU types and build methods, and whether you take projects turnkey." },
+  { title: "ADUAtlas reviews and approves it", desc: "We check the business details, then your listing goes live in the directory." },
+  { title: "Share your referral link", desc: "Every approved profile gets a unique link. Your dashboard shows the visits, sign ups, purchases and dollars that came through it." },
+];
+
 const PROFILE = [
-  "Company name, logo and website",
-  "Cities and states you serve",
-  "ADU types you build: detached, attached, conversions, prefab, two-story",
-  "Custom, prefab or both",
+  "Company name, logo and short bio",
+  "Business city and state, website and one outside link",
+  "States and cities you serve, and the states where you are licensed",
+  "The ADU types you build, including detached units, conversions and prefab",
+  "Your build methods, such as site built, modular or kit",
+  "Whether you take projects turnkey, from design through the build",
   "Up to three project photos and two videos",
-  "One outside link, such as a portfolio or reviews page",
 ];
 
 const ForBuilders = () => {
@@ -67,12 +80,17 @@ const ForBuilders = () => {
         title="Built for builders too."
         subtitle="ADUAtlas prepares homeowners before they call a builder. When they are ready, they look for you in our directory."
       >
-        <a
-          href="#get-listed"
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors"
-        >
-          Get listed <FiArrowRight />
-        </a>
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+          <Link
+            to="/builders/join"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors"
+          >
+            Create your builder account <FiArrowRight />
+          </Link>
+          <a href="#get-listed" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-stroke text-paper font-medium text-sm hover:border-accent transition-colors">
+            Or send us your details
+          </a>
+        </div>
       </PageHeader>
 
       <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y">
@@ -91,32 +109,76 @@ const ForBuilders = () => {
       </section>
 
       <section className="bg-surface-1-solid border-y border-stroke">
+        <div className="container mx-auto px-5 sm:px-8 max-w-6xl py-16">
+          <h2 className="font-display text-paper text-3xl sm:text-4xl mb-8">How it works</h2>
+          <ol className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {STEPS.map((s, i) => (
+              <li key={s.title} className="bg-canvas border border-stroke rounded-3xl p-6">
+                <p className="font-display text-accent text-3xl mb-3">{i + 1}</p>
+                <h3 className="font-display text-paper text-lg mb-2">{s.title}</h3>
+                <p className="text-paper-dim text-sm leading-relaxed">{s.desc}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-8">
+            <Link to="/builders/join" className="inline-flex items-center gap-2 text-accent font-semibold text-sm">
+              Create your builder account <FiArrowRight />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y grid lg:grid-cols-12 gap-10 items-start">
+        <div className="lg:col-span-5">
+          <span className="w-11 h-11 rounded-xl bg-accent/10 text-accent inline-flex items-center justify-center text-xl mb-4">
+            <FiImage aria-hidden />
+          </span>
+          <h2 className="font-display text-paper text-3xl sm:text-4xl mb-4">What your profile shows</h2>
+          <p className="text-paper-dim text-base leading-relaxed max-w-md">
+            Enough for a homeowner to know whether you are a fit, without a sales pitch.
+          </p>
+        </div>
+        <ul className="lg:col-span-6 lg:col-start-7 grid gap-3">
+          {PROFILE.map((item) => (
+            <li key={item} className="flex items-start gap-3 text-paper text-sm sm:text-base">
+              <FiCheckCircle className="text-accent mt-1 shrink-0" aria-hidden />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="bg-surface-1-solid border-y border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-6xl py-16 grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-5">
             <span className="w-11 h-11 rounded-xl bg-accent/10 text-accent inline-flex items-center justify-center text-xl mb-4">
-              <FiImage aria-hidden />
+              <FiShield aria-hidden />
             </span>
-            <h2 className="font-display text-paper text-3xl sm:text-4xl mb-4">What your profile shows</h2>
-            <p className="text-paper-dim text-base leading-relaxed max-w-md">
-              Enough for a homeowner to know whether you are a fit, without a sales pitch.
+            <h2 className="font-display text-paper text-3xl sm:text-4xl mb-4">The homeowner stays in control</h2>
+          </div>
+          <div className="lg:col-span-6 lg:col-start-7 text-paper-dim text-base leading-relaxed space-y-4">
+            <p>
+              ADUAtlas helps the homeowner find the right builder. It does not sell access to homeowner lists. Builders never browse homeowner accounts, and no builder sees a homeowner's name or contact details until that homeowner asks for an introduction.
+            </p>
+            <p>
+              That protects you as well. When an introduction reaches you, it comes from one homeowner who chose your company, not from a list that five other builders are calling at the same time.
             </p>
           </div>
-          <ul className="lg:col-span-6 lg:col-start-7 grid gap-3">
-            {PROFILE.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-paper text-sm sm:text-base">
-                <FiCheckCircle className="text-accent mt-1 shrink-0" aria-hidden />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
       <section id="get-listed" className="container mx-auto px-5 sm:px-8 max-w-6xl section-y grid lg:grid-cols-12 gap-10">
         <div className="lg:col-span-5">
-          <h2 className="font-display text-paper text-3xl sm:text-4xl mb-4">Get listed</h2>
+          <h2 className="font-display text-paper text-3xl sm:text-4xl mb-4">Prefer that we set it up?</h2>
           <p className="text-paper-dim text-base leading-relaxed max-w-md mb-4">
-            Tell us where you build and how to reach you. We set up the profile and send it to you to approve before it goes live.
+            Tell us where you build and how to reach you. We draft the profile and send it to you to approve before it goes live.
+          </p>
+          <p className="text-paper-dim text-sm mb-4">
+            Ready to do it yourself?{" "}
+            <Link to="/builders/join" className="text-accent font-medium">
+              Create your builder account
+            </Link>
+            .
           </p>
           <p className="text-paper-dim text-sm">
             Prefer email? Write to{" "}

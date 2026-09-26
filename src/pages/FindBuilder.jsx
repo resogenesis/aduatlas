@@ -77,11 +77,16 @@ const FindBuilder = () => {
       <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y max-w-3xl">
         <h2 className="font-display text-paper text-3xl mb-3">Are you a builder?</h2>
         <p className="text-paper-dim leading-relaxed mb-5">
-          ADUAtlas profiles are curated by our team. If you build ADUs and want homeowners who have done their homework to find you, tell us about your company.
+          If you build ADUs and want homeowners who have done their homework to find you, create a builder account and complete your company profile. ADUAtlas reviews it before it goes live.
         </p>
-        <a href="mailto:hello@aduatlas.com?subject=Builder%20profile" className="inline-flex items-center gap-2 text-accent font-medium">
-          Email us about a profile <FiArrowRight />
-        </a>
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+          <Link to="/builders/join" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors press">
+            Create your builder account <FiArrowRight />
+          </Link>
+          <a href="mailto:hello@aduatlas.com?subject=Builder%20profile" className="inline-flex items-center gap-2 text-accent font-medium text-sm">
+            Or email us about a profile
+          </a>
+        </div>
       </section>
     </div>
   );

@@ -5,9 +5,16 @@
 //   checkout.session.completed → set users.paid_at + paid_tier; when the
 //                                 session metadata carries a builder
 //                                 referral_code, also stamp
-//                                 users.referred_by_builder_id (first touch)
+//                                 users.referred_by_builder_id (first touch);
+//                                 then, when the buyer is attributed to a
+//                                 builder, record a package_purchased event
+//                                 (tier + amount) in referral_events (0006)
 //   charge.refunded            → clear users.paid_at (set refunded_at) so the
-//                                 "paid_at non-null AND not refunded" rule holds
+//                                 "paid_at non-null AND not refunded" rule holds;
+//                                 when the buyer is attributed to a builder,
+//                                 record a package_refunded event (tier +
+//                                 refunded amount) so the event log and the
+//                                 stats functions can net refunds out
 //
 // Idempotency: every event is recorded in a `stripe_events` table keyed by the
 // Stripe event.id (unique). If we've already processed an id, we skip — Stripe
@@ -77,21 +84,30 @@ const markEventProcessed = async (supabase, event) => {
 //       the lead row already holds the builder capture_lead resolved.
 // The result is written to the buyer's row once. The UPDATE is guarded by
 // "referred_by_builder_id is null", so a Stripe retry, a second purchase or an
-// upgrade never re-attributes anyone. Attribution only: no payout or
+// upgrade never re-attributes anyone. Note that on a database with 0006 the
+// users upsert above already ran the insert-time trigger
+// (inherit_referral_from_lead), which copies the lead's referrer onto a
+// brand-new row; when that happened this function finds the column set and
+// changes nothing, so the lead (the earlier touch) wins over a code that only
+// rode along in the checkout session. Attribution only: no payout or
 // commission logic. Every failure is logged and swallowed so the webhook
 // still acknowledges the payment.
 const REFERRAL_RE = /^[A-HJ-NP-Z2-9]{8}$/;
 
-// (a) session metadata code -> { builderId, code } or null.
+// (a) session metadata code -> { builderId, code } or null. Only an APPROVED,
+// active builder resolves (0006). On a database that has 0005 but not 0006
+// there is no profile_status column (Postgres 42703), so the lookup retries
+// on `active` alone, exactly as 0005 did.
 const resolveFromCode = async (supabase, rawCode) => {
   const code = typeof rawCode === "string" ? rawCode.trim().toUpperCase() : "";
   if (!code || !REFERRAL_RE.test(code)) return null;
-  const { data: builder, error } = await supabase
-    .from("builders")
-    .select("id")
-    .eq("referral_code", code)
-    .eq("active", true)
-    .maybeSingle();
+  const lookup = (approvedOnly) => {
+    let q = supabase.from("builders").select("id").eq("referral_code", code).eq("active", true);
+    if (approvedOnly) q = q.eq("profile_status", "approved");
+    return q.maybeSingle();
+  };
+  let { data: builder, error } = await lookup(true);
+  if (error?.code === "42703") ({ data: builder, error } = await lookup(false));
   if (error) {
     console.error("referral builder lookup error:", error.message);
     return null;
@@ -130,6 +146,80 @@ const attributeReferral = async (supabase, email, rawCode) => {
     if (error) console.error("referral attribution error:", error.message);
   } catch (err) {
     console.error("referral attribution threw:", err.message);
+  }
+};
+
+// package_purchased event (migration 0006). Runs AFTER attribution and reads
+// the builder back from the buyer's row, so the event lands on the builder
+// the attribution rules actually chose (first touch, never re-attributed),
+// not on whatever code happened to ride along in this session. Carries the
+// tier and what Stripe charged (amount_total, in cents, after any upgrade
+// credit). A buyer with no referring builder produces no event. Non-fatal:
+// a database without 0006 (missing table), or any other failure, is logged
+// and the webhook still acknowledges the payment. Counts only; no fee or
+// commission is computed here or anywhere.
+const recordPurchaseEvent = async (supabase, email, session) => {
+  if (!supabase || !email) return;
+  try {
+    const { data: buyer, error } = await supabase
+      .from("users")
+      .select("id, referred_by_builder_id")
+      .eq("email", email.toLowerCase())
+      .maybeSingle();
+    if (error) {
+      console.error("purchase event buyer lookup error:", error.message);
+      return;
+    }
+    if (!buyer?.referred_by_builder_id) return;
+    const amount = Number.isInteger(session.amount_total) ? session.amount_total : null;
+    const tier = typeof session.metadata?.tier === "string" && session.metadata.tier ? session.metadata.tier : null;
+    const { error: evErr } = await supabase.from("referral_events").insert({
+      builder_id: buyer.referred_by_builder_id,
+      kind: "package_purchased",
+      user_id: buyer.id,
+      tier,
+      amount_cents: amount,
+    });
+    if (evErr) console.error("package_purchased event error:", evErr.message);
+  } catch (err) {
+    console.error("package_purchased event threw:", err.message);
+  }
+};
+
+// package_refunded event (migration 0006). One event per attributed buyer the
+// refund touched, carrying the buyer's paid_tier and the amount Stripe
+// returned in this refund. Stripe sends charge.refunded with the cumulative
+// charge.amount_refunded; when the charge carries its refunds list the newest
+// refund's own amount is used so a second partial refund is not counted
+// twice, otherwise the cumulative figure is the best available number. A
+// buyer with no referring builder produces no event. Non-fatal, like
+// recordPurchaseEvent: a database without 0006 or any other failure is
+// logged and the refund still acknowledges. Nothing here claws anything
+// back; the event is a record.
+const refundAmountCents = (charge) => {
+  const latest = Array.isArray(charge.refunds?.data) ? charge.refunds.data[0] : null;
+  if (latest && Number.isInteger(latest.amount)) return latest.amount;
+  return Number.isInteger(charge.amount_refunded) ? charge.amount_refunded : null;
+};
+
+const recordRefundEvents = async (supabase, buyers, charge) => {
+  if (!supabase || !Array.isArray(buyers) || buyers.length === 0) return;
+  try {
+    const amount = refundAmountCents(charge);
+    const rows = buyers
+      .filter((b) => b?.id && b.referred_by_builder_id)
+      .map((b) => ({
+        builder_id: b.referred_by_builder_id,
+        kind: "package_refunded",
+        user_id: b.id,
+        tier: typeof b.paid_tier === "string" && b.paid_tier ? b.paid_tier : null,
+        amount_cents: amount,
+      }));
+    if (rows.length === 0) return;
+    const { error } = await supabase.from("referral_events").insert(rows);
+    if (error) console.error("package_refunded event error:", error.message);
+  } catch (err) {
+    console.error("package_refunded event threw:", err.message);
   }
 };
 
@@ -179,6 +269,7 @@ export default async function handler(req, res) {
           );
         if (error) console.error("supabase upsert error:", error.message);
         await attributeReferral(supabase, email, session.metadata?.referral_code);
+        await recordPurchaseEvent(supabase, email, session);
       }
     } else if (event.type === "charge.refunded") {
       // A refund (full or partial) revokes access: clear paid_at and stamp
@@ -189,14 +280,20 @@ export default async function handler(req, res) {
       const email = charge.billing_details?.email || charge.receipt_email;
 
       if (supabase && (customerId || email)) {
-        const patch = { paid_at: null, refunded_at: new Date().toISOString() };
-        let query = supabase.from("users").update(patch);
         // Prefer the stable stripe_customer_id; fall back to email.
-        query = customerId
-          ? query.eq("stripe_customer_id", customerId)
-          : query.eq("email", String(email).toLowerCase());
-        const { error } = await query;
+        const byBuyer = (q) =>
+          customerId ? q.eq("stripe_customer_id", customerId) : q.eq("email", String(email).toLowerCase());
+        const patch = { paid_at: null, refunded_at: new Date().toISOString() };
+        // Read paid_tier before the update so the event carries what was
+        // bought; the update leaves paid_tier alone but reading first keeps
+        // the two steps independent.
+        const { data: buyers, error: readErr } = await byBuyer(
+          supabase.from("users").select("id, referred_by_builder_id, paid_tier")
+        );
+        if (readErr) console.error("supabase refund buyer lookup error:", readErr.message);
+        const { error } = await byBuyer(supabase.from("users").update(patch));
         if (error) console.error("supabase refund update error:", error.message);
+        await recordRefundEvents(supabase, buyers, charge);
       }
     }
   } catch (err) {

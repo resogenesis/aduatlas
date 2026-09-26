@@ -49,10 +49,13 @@ export const currentUser = () => {
   }
 };
 
-// Where to send a user after auth based on their role + paid state.
+// Where to send a user after auth based on their role + paid state. A builder
+// (role "pro") lands in the builder portal, never in the homeowner app: the
+// portal shows that builder's own profile and aggregate referral counts only.
 export const routeForUser = (user) => {
   if (!user) return "/";
   if (user.role === "admin") return "/admin";
+  if (user.role === "pro") return "/builder";
   if (user.paid) return "/dashboard";
   return "/unlock";
 };

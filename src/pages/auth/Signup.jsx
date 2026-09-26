@@ -1,15 +1,40 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import AuthCard from "../../components/common/AuthCard";
 import { FormField, PrimaryButton } from "../../components/common/FormField";
 import { signup } from "../../stores/authStore";
 
-const Signup = () => {
+// One signup card, two audiences. /create-account creates a homeowner and
+// sends them to the plans. /builders/join (or ?role=pro) creates a builder,
+// which is a user with role "pro": the account lands in the builder portal
+// and never in the homeowner app. The role is clamped server-side to
+// homeowner|pro, so nothing here can mint an admin.
+const COPY = {
+  homeowner: {
+    title: "Start your ADU plan.",
+    subtitle: "One account for your course, worksheets, feasibility study, and builder introductions.",
+    button: "Create my account",
+    confirmed: "Check your email to confirm your account, then log in.",
+    next: "/unlock",
+  },
+  pro: {
+    title: "Create your builder account",
+    subtitle: "List your company in the ADUAtlas directory and get a referral link that tracks the homeowners you send our way.",
+    button: "Create my builder account",
+    confirmed: "Check your email to confirm your builder account, then log in to finish your company profile.",
+    next: "/builder/profile",
+  },
+};
+
+const Signup = ({ role: roleProp }) => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const role = roleProp === "pro" || searchParams.get("role") === "pro" ? "pro" : "homeowner";
+  const copy = COPY[role];
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
   const [notice, setNotice] = useState("");
 
   const handleSubmit = async (e) => {
@@ -17,39 +42,60 @@ const Signup = () => {
     setError("");
     setNotice("");
     // Real Supabase Auth when configured; mock otherwise. Email is the
-    // identity — display name derives from it in the auth store.
-    const res = await signup({ email, password, role: "homeowner" });
+    // identity; the display name derives from it in the auth store.
+    const res = await signup({ email, password, role });
     if (!res.ok) {
       setError(res.error);
       return;
     }
-    // Email-confirmation flow: no session yet — tell them to check their inbox.
+    // Email-confirmation flow: no session yet. After they confirm and log in,
+    // routeForUser sends a builder to /builder and a homeowner to the plans.
     if (res.needsConfirmation) {
-      setNotice("Check your email to confirm your account, then log in.");
+      setNotice(copy.confirmed);
       return;
     }
-    // Account created: choose a plan next (Phase 1 funnel).
-    navigate("/unlock", { replace: true });
+    // Homeowner: choose a plan next (Phase 1 funnel). Builder: complete the
+    // company profile so it can be submitted for review.
+    navigate(copy.next, { replace: true });
   };
 
   return (
     <AuthCard
-      title="Start your ADU plan."
-      subtitle="One account for your course, worksheets, feasibility study, and builder introductions."
+      title={copy.title}
+      subtitle={copy.subtitle}
       footer={
         <>
-          Already a member?{" "}
-          <Link to="/login" className="text-accent hover:text-paper transition-colors font-medium">
-            Log in
-          </Link>
+          <p>
+            Already a member?{" "}
+            <Link to="/login" className="text-accent hover:text-paper transition-colors font-medium">
+              Log in
+            </Link>
+          </p>
+          <p className="mt-2">
+            {role === "pro" ? (
+              <>
+                Planning an ADU for your own property?{" "}
+                <Link to="/create-account" className="text-accent hover:text-paper transition-colors font-medium">
+                  Create a homeowner account
+                </Link>
+              </>
+            ) : (
+              <>
+                Are you a builder?{" "}
+                <Link to="/builders/join" className="text-accent hover:text-paper transition-colors font-medium">
+                  Create a builder account
+                </Link>
+              </>
+            )}
+          </p>
         </>
       }
     >
       <form onSubmit={handleSubmit}>
         <FormField
-          label="Email"
+          label={role === "pro" ? "Work email" : "Email"}
           type="email"
-          placeholder="you@email.com"
+          placeholder={role === "pro" ? "you@company.com" : "you@email.com"}
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -75,9 +121,13 @@ const Signup = () => {
           </p>
         )}
 
-        <PrimaryButton type="submit">
-          Create my account
-        </PrimaryButton>
+        <PrimaryButton type="submit">{copy.button}</PrimaryButton>
+
+        {role === "pro" && (
+          <p className="mt-4 text-xs text-paper-dim leading-relaxed">
+            Your profile starts as a draft. ADUAtlas reviews it before it appears in the directory, and your referral link is generated on approval.
+          </p>
+        )}
       </form>
     </AuthCard>
   );

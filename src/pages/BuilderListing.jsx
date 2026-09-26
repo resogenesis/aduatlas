@@ -1,20 +1,30 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiBookmark, FiMapPin, FiSearch } from "react-icons/fi";
-import { APPROACH_LABELS, SPECIALTY_LABELS, fetchBuilders, fetchSaved, filterBuilders, parseAddress, publicUrl, suggestForProperty, toggleSaved } from "../lib/builders";
+import { FiArrowRight, FiAward, FiBookmark, FiMapPin, FiSearch } from "react-icons/fi";
+import { APPROACH_LABELS, BUILD_METHOD_LABELS, SPECIALTY_LABELS, TURNKEY_HELP, fetchBuilders, fetchSaved, filterBuilders, parseAddress, publicUrl, suggestForProperty, toggleSaved } from "../lib/builders";
 import { loadPacket } from "../stores/courseStore";
 import { hasReportTier } from "../stores/paymentStore";
 import { supabaseEnabled } from "../lib/supabase";
 
-// Builder directory for paid homeowners: search by state, city or ZIP, filter
-// by ADU type and build approach, save builders, and (Platinum+) see
-// suggestions ranked for the saved property.
+// Builder directory for paid homeowners. Filter order follows the 2026-09-24
+// call: State, then ADU type, then Turnkey, then the builder itself, with
+// Licensed state and Build method alongside. Platinum homeowners also see up
+// to five builders suggested for their property. The directory reads the
+// restricted builders_public view (src/lib/builders.js), so nothing here can
+// show a builder's contact name, street address, terms or referral code.
 
-const STATES = ["AZ", "CA", "CO", "FL", "GA", "MA", "NC", "NV", "NY", "OR", "TX", "UT", "WA"];
+const FALLBACK_STATES = ["AZ", "CA", "CO", "FL", "GA", "MA", "NC", "NV", "NY", "OR", "TX", "UT", "WA"];
+
+const uniqStates = (items, pick) => {
+  const set = new Set();
+  (items || []).forEach((b) => (pick(b) || []).forEach((s) => s && set.add(String(s).toUpperCase())));
+  return [...set].sort();
+};
 
 const Card = ({ b, saved, onSave }) => {
   const logo = publicUrl(b.logo_path);
   const photo = publicUrl((b.photos || [])[0]);
+  const licensed = b.licensed_states || [];
   return (
     <li className="bg-canvas border border-stroke rounded-3xl overflow-hidden flex flex-col lift">
       <Link to={`/builders/${b.slug}`} className="block aspect-[16/9] bg-surface-1-solid overflow-hidden">
@@ -33,12 +43,28 @@ const Card = ({ b, saved, onSave }) => {
           <FiMapPin className="shrink-0" /> {[...(b.cities || []).slice(0, 2), b.state].filter(Boolean).join(", ")}
         </p>
         <div className="flex flex-wrap gap-1.5 mb-4">
+          {b.turnkey && (
+            <span title={TURNKEY_HELP} className="px-2.5 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium">Turnkey</span>
+          )}
+          {licensed.length > 0 && (
+            <span className="px-2.5 py-1 rounded-full bg-surface-1-solid text-xs text-paper-dim inline-flex items-center gap-1">
+              <FiAward aria-hidden /> Licensed in {licensed.slice(0, 3).join(", ")}
+              {licensed.length > 3 ? ` and ${licensed.length - 3} more` : ""}
+            </span>
+          )}
           {(b.specialties || []).slice(0, 3).map((s) => (
             <span key={s} className="px-2.5 py-1 rounded-full bg-surface-1-solid text-xs text-paper-dim">
               {SPECIALTY_LABELS[s] || s}
             </span>
           ))}
-          <span className="px-2.5 py-1 rounded-full bg-surface-1-solid text-xs text-paper-dim">{APPROACH_LABELS[b.build_approach]}</span>
+          {(b.build_methods || []).slice(0, 2).map((m) => (
+            <span key={m} className="px-2.5 py-1 rounded-full bg-surface-1-solid text-xs text-paper-dim">
+              {BUILD_METHOD_LABELS?.[m] || m}
+            </span>
+          ))}
+          {(b.build_methods || []).length === 0 && APPROACH_LABELS[b.build_approach] && (
+            <span className="px-2.5 py-1 rounded-full bg-surface-1-solid text-xs text-paper-dim">{APPROACH_LABELS[b.build_approach]}</span>
+          )}
         </div>
         <Link to={`/builders/${b.slug}`} className="mt-auto inline-flex items-center gap-1 text-accent text-sm font-medium">
           View profile <FiArrowRight />
@@ -48,13 +74,17 @@ const Card = ({ b, saved, onSave }) => {
   );
 };
 
+const select = "px-4 py-3 bg-canvas border border-stroke rounded-xl text-paper";
+
 const BuilderListing = () => {
   const [items, setItems] = useState(null);
   const [saved, setSaved] = useState(new Set());
-  const [q, setQ] = useState("");
   const [state, setState] = useState("");
   const [specialty, setSpecialty] = useState("");
-  const [approach, setApproach] = useState("");
+  const [turnkeyOnly, setTurnkeyOnly] = useState(false);
+  const [q, setQ] = useState("");
+  const [licensedState, setLicensedState] = useState("");
+  const [buildMethod, setBuildMethod] = useState("");
   const [tab, setTab] = useState("all");
   const packet = loadPacket();
   const platinum = hasReportTier();
@@ -64,10 +94,27 @@ const BuilderListing = () => {
     fetchSaved().then(setSaved);
   }, []);
 
-  const filtered = useMemo(() => filterBuilders(items || [], { q, state, specialty, approach }), [items, q, state, specialty, approach]);
+  const filtered = useMemo(
+    () => filterBuilders(items || [], { q, state, specialty, turnkey: turnkeyOnly ? true : undefined, licensedState, buildMethod }),
+    [items, q, state, specialty, turnkeyOnly, licensedState, buildMethod],
+  );
   const savedList = useMemo(() => (items || []).filter((b) => saved.has(b.id)), [items, saved]);
+
+  // Filter options come from the builders that exist, so a homeowner never
+  // picks a state with nothing in it.
+  const stateOptions = useMemo(() => {
+    const s = uniqStates(items, (b) => [b.state, ...(b.service_states || [])]);
+    return s.length ? s : FALLBACK_STATES;
+  }, [items]);
+  const licensedOptions = useMemo(() => uniqStates(items, (b) => b.licensed_states), [items]);
+
+  // The packet has no turnkey question yet; when one lands it rides along here.
+  const wantsTurnkey = packet.turnkey === true || /^(yes|true|turnkey)$/i.test(String(packet.turnkey || ""));
   const addr = parseAddress(packet.address || "");
-  const suggested = useMemo(() => (platinum && items ? suggestForProperty(items, { ...addr, zip: addr.zip || packet.zip, aduType: packet.aduType }).slice(0, 3) : []), [items, platinum, addr, packet.zip, packet.aduType]);
+  const suggested = useMemo(
+    () => (platinum && items ? suggestForProperty(items, { ...addr, zip: addr.zip || packet.zip, aduType: packet.aduType, turnkey: wantsTurnkey || undefined }).slice(0, 5) : []),
+    [items, platinum, addr, packet.zip, packet.aduType, wantsTurnkey],
+  );
 
   const onSave = async (b) => {
     const isSaved = saved.has(b.id);
@@ -81,20 +128,21 @@ const BuilderListing = () => {
     });
   };
 
+  const filtersIdle = !q && !state && !specialty && !turnkeyOnly && !licensedState && !buildMethod;
   const list = tab === "saved" ? savedList : filtered;
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-6xl mx-auto">
       <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] mb-3">Builders</h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-8">
-        ADU builders organized by state and service area. Save the ones you like and request an introduction when your plan is ready.
+        ADU builders organized by state, ADU type and whether they take projects turnkey. Save the ones you like and request an introduction when your plan is ready.
       </p>
 
-      {platinum && suggested.length > 0 && tab === "all" && !q && !state && !specialty && (
+      {platinum && suggested.length > 0 && tab === "all" && filtersIdle && (
         <section className="mb-10">
           <h2 className="font-display text-paper text-xl mb-1">Suggested for {packet.address ? addr.city || "your property" : "your property"}</h2>
-          <p className="text-paper-dim text-sm mb-4">Ranked by service area and the ADU type in your project brief.</p>
-          <ul className="grid md:grid-cols-3 gap-5">
+          <p className="text-paper-dim text-sm mb-4">We rank up to five builders by service area, licensed state and the ADU type in your project brief.</p>
+          <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {suggested.map((b) => (
               <Card key={b.id} b={b} saved={saved.has(b.id)} onSave={onSave} />
             ))}
@@ -103,17 +151,15 @@ const BuilderListing = () => {
       )}
 
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        <label className="flex-1 min-w-[16rem] flex items-center gap-2 px-4 py-3 bg-canvas border border-stroke rounded-xl">
-          <FiSearch className="text-paper-dim" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="City, ZIP, or builder name" className="flex-1 bg-transparent text-paper focus:outline-none" aria-label="Search builders" />
-        </label>
-        <select value={state} onChange={(e) => setState(e.target.value)} className="px-4 py-3 bg-canvas border border-stroke rounded-xl text-paper" aria-label="State">
+        <select value={state} onChange={(e) => setState(e.target.value)} className={select} aria-label="State">
           <option value="">All states</option>
-          {STATES.map((s) => (
-            <option key={s}>{s}</option>
+          {stateOptions.map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
           ))}
         </select>
-        <select value={specialty} onChange={(e) => setSpecialty(e.target.value)} className="px-4 py-3 bg-canvas border border-stroke rounded-xl text-paper" aria-label="ADU type">
+        <select value={specialty} onChange={(e) => setSpecialty(e.target.value)} className={select} aria-label="ADU type">
           <option value="">All ADU types</option>
           {Object.entries(SPECIALTY_LABELS).map(([k, v]) => (
             <option key={k} value={k}>
@@ -121,12 +167,36 @@ const BuilderListing = () => {
             </option>
           ))}
         </select>
-        <select value={approach} onChange={(e) => setApproach(e.target.value)} className="px-4 py-3 bg-canvas border border-stroke rounded-xl text-paper" aria-label="Build approach">
-          <option value="">Custom or prefab</option>
-          <option value="custom">Custom builds</option>
-          <option value="prefab">Prefab</option>
+        <select value={turnkeyOnly ? "yes" : ""} onChange={(e) => setTurnkeyOnly(e.target.value === "yes")} className={select} aria-label="Turnkey" title={TURNKEY_HELP} aria-describedby="turnkey-filter-help">
+          <option value="">Turnkey or not</option>
+          <option value="yes">Turnkey only</option>
         </select>
-        <div className="flex rounded-xl border border-stroke overflow-hidden">
+        <span id="turnkey-filter-help" className="sr-only">
+          {TURNKEY_HELP}
+        </span>
+        <label className="flex-1 min-w-[16rem] flex items-center gap-2 px-4 py-3 bg-canvas border border-stroke rounded-xl">
+          <FiSearch className="text-paper-dim" />
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Builder name, city or ZIP" className="flex-1 bg-transparent text-paper focus:outline-none" aria-label="Search builders" />
+        </label>
+      </div>
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        <select value={licensedState} onChange={(e) => setLicensedState(e.target.value)} className={select} aria-label="Licensed state">
+          <option value="">Licensed anywhere</option>
+          {licensedOptions.map((s) => (
+            <option key={s} value={s}>
+              Licensed in {s}
+            </option>
+          ))}
+        </select>
+        <select value={buildMethod} onChange={(e) => setBuildMethod(e.target.value)} className={select} aria-label="Build method">
+          <option value="">Any build method</option>
+          {Object.entries(BUILD_METHOD_LABELS || {}).map(([k, v]) => (
+            <option key={k} value={k}>
+              {v}
+            </option>
+          ))}
+        </select>
+        <div className="ml-auto flex rounded-xl border border-stroke overflow-hidden">
           {["all", "saved"].map((t) => (
             <button key={t} type="button" onClick={() => setTab(t)} className={`px-4 py-3 text-sm font-medium ${tab === t ? "bg-accent text-accent-fg" : "text-paper-dim hover:text-paper"}`}>
               {t === "all" ? "All" : `Saved (${savedList.length})`}
