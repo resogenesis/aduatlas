@@ -1,0 +1,61 @@
+# ADUAtlas crawl policy.
+#
+# The public site is open, and so is an individual builder profile at
+# /builders/<company>: those pages are meant to be found (Phase 1 spec,
+# decision 2a). The paid homeowner app, the builder portal and the admin console
+# are not, and neither is the searchable directory behind them.
+#
+# The $ and / pairs below matter. A bare "Disallow: /course" would also block
+# the public /course-outline, a bare "/feasibility" would block
+# /feasibility-study, and a bare "/builder" would block every public builder
+# profile under /builders/. The directory rule is the sharpest case of this:
+# /builders is closed, /builders/<company> is open, and only the "$" keeps the
+# two apart.
+
+User-agent: *
+Allow: /
+
+# Paid homeowner app
+Disallow: /dashboard
+Disallow: /my-property
+Disallow: /study
+Disallow: /site-plan
+Disallow: /costs
+Disallow: /adu-options
+Disallow: /packet
+Disallow: /report
+Disallow: /utility-estimator
+Disallow: /settings
+Disallow: /support
+Disallow: /help
+Disallow: /course$
+Disallow: /course/
+Disallow: /feasibility$
+Disallow: /feasibility/
+
+# The searchable builder directory, which is paid and is never publicly
+# browsable (Phase 1 spec, decision 2a). The individual profiles BENEATH it are
+# public and indexable, so this rule has to stop at the directory itself:
+#   "/builders$"   matches the path /builders and nothing longer, because $ ends
+#                  the match at the end of the URL.
+#   "/builders/$"  the same page reached with a trailing slash. The $ is what
+#                  stops it: without it this would block every profile.
+#   "/builders?"   and "/builders/?" catch a query string on either form, which
+#                  "$" alone does not match. Neither can reach
+#                  /builders/<company>, which has a letter where these patterns
+#                  have a question mark.
+# There is deliberately NO "Disallow: /builders/" here. That one missing $ would
+# block every public profile, and api/sitemap.js exists to get them indexed.
+# /builders/join, the builder signup page, stays crawlable for the same reason.
+Disallow: /builders$
+Disallow: /builders/$
+Disallow: /builders?
+Disallow: /builders/?
+
+# Builder portal and admin console
+Disallow: /builder$
+Disallow: /builder/
+Disallow: /admin$
+Disallow: /admin/
+
+Sitemap: https://aduatlas.com/sitemap.xml

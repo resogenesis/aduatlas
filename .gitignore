@@ -36,3 +36,6 @@ supabase/.temp
 # Design originals (multi-MB PNGs). Web-ready copies live in src/assets.
 design/photos/
 design/mocks/
+
+# Local research data about third-party companies. The repo is public; this never goes in it.
+data/seed/

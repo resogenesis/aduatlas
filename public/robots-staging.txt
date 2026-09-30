@@ -1,0 +1,9 @@
+# ADUAtlas crawl policy for staging and preview deployments.
+#
+# vercel.json serves this file as /robots.txt on every host that is not
+# aduatlas.com or www.aduatlas.com, and sends "X-Robots-Tag: noindex, nofollow"
+# on those same hosts. Nothing on a non-production host is meant to be crawled or
+# indexed. Production keeps public/robots.txt.
+
+User-agent: *
+Disallow: /
