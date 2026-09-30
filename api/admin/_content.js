@@ -1,6 +1,6 @@
 // /api/admin/content/* — every content-management admin endpoint lives in
 // this module, dispatched by api/admin/[...action].js (list, versions, save-draft, publish,
-// rollback, upload-image) rather than one file each, to stay under the
+// rollback, revert-to-default, upload-image) rather than one file each, to stay under the
 // Hobby plan's 12-serverless-function cap. Dispatches on the path segment
 // after /content/ (req.query.action[0]) + HTTP method. Same URLs, same
 // request/response shapes as if each were its own file — see src/lib/adminApi.js.
@@ -39,7 +39,25 @@ const versions = async (req, res, ctx) => {
     .order("published_at", { ascending: false })
     .limit(3);
   if (error) return res.status(500).json({ error: error.message });
-  res.status(200).json({ versions: data || [] });
+  // A short plain-text preview of each version, so a restore can say which text
+  // it brings back. The value itself is unchanged.
+  res.status(200).json({ versions: (data || []).map((v) => ({ ...v, preview: previewOf(v.value) })) });
+};
+
+// The first words of a stored value: a text field's text, an image's alt text or
+// address, or the paragraphs, headings and list items of a blocks field.
+const previewOf = (value) => {
+  if (value == null) return "";
+  const parts = [];
+  const walk = (v) => {
+    if (parts.join(" ").length > 200) return;
+    if (typeof v === "string") parts.push(v);
+    else if (Array.isArray(v)) v.forEach(walk);
+    else if (v && typeof v === "object") ["text", "h", "p", "remember", "list", "alt", "url"].forEach((k) => v[k] !== undefined && walk(v[k]));
+  };
+  walk(value);
+  const s = parts.join(" ").replace(/\s+/g, " ").trim();
+  return s.length > 160 ? `${s.slice(0, 157)}...` : s;
 };
 
 // POST /api/admin/content/save-draft — upsert one field's draft_value.
@@ -151,6 +169,53 @@ const rollback = async (req, res, ctx) => {
   res.status(200).json({ ok: true });
 };
 
+// POST /api/admin/content/revert-to-default — { key }. Takes the key back to the
+// text written in the code (R3-10, the B09 mechanism).
+//
+// A published value overrides the code default for as long as it exists, and
+// the first publish of a key archives nothing (there was no earlier published
+// value), so before this route the first publish could never be undone and a
+// later correction to the code default never reached a learner whose key had
+// been published once. This clears BOTH the published value and the draft, which
+// is what "no row value" means to every reader: get_site_content() returns only
+// non-null published values, and api/course.js serves the authored chapter or
+// introduction when the published value is null. The row itself is kept, and
+// the value being removed is archived first, so the History list can restore it
+// exactly as rollback restores any other version.
+const revertToDefault = async (req, res, ctx) => {
+  const { key } = readBody(req);
+  if (!key || typeof key !== "string") return res.status(400).json({ error: "key required" });
+  if (!isAdminEditable(key)) return notEditable(res, key);
+
+  const { data: row, error: rowErr } = await ctx.svc
+    .from("site_content")
+    .select("draft_value, published_value")
+    .eq("key", key)
+    .maybeSingle();
+  if (rowErr) return res.status(500).json({ error: rowErr.message });
+  const hasPublished = row?.published_value !== null && row?.published_value !== undefined;
+  const hasDraft = row?.draft_value !== null && row?.draft_value !== undefined;
+  if (!row || (!hasPublished && !hasDraft)) return res.status(200).json({ ok: true, already_default: true, archived: false });
+
+  const now = new Date().toISOString();
+  if (hasPublished) {
+    const { error: archiveErr } = await ctx.svc.from("site_content_versions").insert({
+      key,
+      value: row.published_value,
+      published_at: now,
+      published_by: ctx.row.email,
+    });
+    // Nothing is cleared when the text being removed could not be kept.
+    if (archiveErr) return res.status(500).json({ error: `nothing was changed: the current text could not be archived first (${archiveErr.message})` });
+  }
+  const { error: updateErr } = await ctx.svc
+    .from("site_content")
+    .update({ draft_value: null, published_value: null, published_at: now, published_by: ctx.row.email })
+    .eq("key", key);
+  if (updateErr) return res.status(500).json({ error: updateErr.message });
+  res.status(200).json({ ok: true, already_default: false, archived: hasPublished, had_published: hasPublished, had_draft: hasDraft });
+};
+
 // POST /api/admin/content/upload-image — { key, dataUrl, filename? }.
 const uploadImage = async (req, res, ctx) => {
   const { key, dataUrl, filename } = readBody(req);
@@ -179,6 +244,7 @@ const ROUTES = {
   "save-draft": { POST: saveDraft },
   publish: { POST: publish },
   rollback: { POST: rollback },
+  "revert-to-default": { POST: revertToDefault },
   "upload-image": { POST: uploadImage },
 };
 
@@ -191,15 +257,25 @@ const ROUTES = {
 // if Vercel ever fixes/changes it), then fall back to parsing the action
 // straight out of the URL path, which is correct regardless of how the
 // rewrite names its query param.
+//
+// PATH FIRST (2026-09-26). api/admin/[...action].js now restores the full
+// original URL before this module runs (the deep-path routing fix found on
+// staging), so /content/<action> is always in req.url. After that fix the
+// catch-all query key holds the matched segment, "content", not the action, so
+// reading it first answered "not found" for every content action. The query key
+// remains only as a fallback, and it can never answer "content".
 const actionFromRequest = (req) => {
+  const pathname = (req.url || "").split("?")[0];
+  const segments = pathname.split("/").filter(Boolean);
+  const i = segments.indexOf("content");
+  if (i >= 0 && segments.length > i + 1) return segments[i + 1];
   const keys = Object.keys(req.query || {});
   const actionKey = keys.find((k) => /action$/i.test(k));
   if (actionKey) {
     const v = req.query[actionKey];
-    return Array.isArray(v) ? v[0] : v;
+    const a = Array.isArray(v) ? v[0] : v;
+    if (a && a !== "content") return a;
   }
-  const pathname = (req.url || "").split("?")[0];
-  const segments = pathname.split("/").filter(Boolean);
   return segments[segments.length - 1];
 };
 

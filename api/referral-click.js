@@ -4,16 +4,21 @@
 // The browser calls this once when it first stores a ?ref=<code> from a
 // referral link (src/lib/referral.js), with the code and its random browser
 // id. We validate both shapes and call log_referral_visit() with the service
-// client, which resolves the code to an APPROVED, active builder and records
-// one visit a day per (builder, browser). The RPC is executable by the
-// service role only (0006), so this endpoint is the single way in; the anon
-// key cannot call it through PostgREST and read the boolean back.
+// client, which resolves the code to a builder whose TRACKING IS ACTIVE
+// (approved, active and claimed by a builder account: migration 0007,
+// builder_tracking_active) and records one visit a day per (builder,
+// browser). A listing ADUAtlas seeded and nobody has claimed yet has a code
+// in the database but no link anywhere, and its code resolves to nothing
+// here. The RPC is executable by the service role only (0006), so this
+// endpoint is the single way in; the anon key cannot call it through
+// PostgREST and read the boolean back.
 //
 // The response is 204 with no body for every POST, whatever happened: a
-// malformed code, an unknown code, a database that has not applied 0006 yet
-// and a database error all look the same from outside, so this endpoint
-// cannot be used to check whether a code exists. Attribution only; nothing
-// here knows about commissions or payouts.
+// malformed code, an unknown or unclaimed code, a database that has not
+// applied 0006 yet and a database error all look the same from outside, so
+// this endpoint cannot be used to check whether a code exists or whether a
+// listing is claimed. Attribution only; nothing here knows about commissions
+// or payouts. No code change was needed for 0007: the rule lives in the RPC.
 //
 // POST /api/referral-click   { code: string, sid: string }
 //
