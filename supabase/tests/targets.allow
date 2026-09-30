@@ -1,0 +1,14 @@
+# supabase/tests/targets.allow
+#
+# The ONLY Supabase projects `run.sh --target` may run against. One per line:
+#
+#   <20-letter project ref>   <name>
+#
+# NON-PRODUCTION PROJECTS ONLY. run.sh refuses to run at all if this file ever
+# names the production project, and it refuses the production ref in a target
+# URL whether or not this file mentions it.
+#
+# Adding a ref here is a decision, not a convenience: a target run writes inside
+# transactions it rolls back, which still takes locks and fires triggers.
+
+sbhlskvedpuxtneoaijw   aduatlas-staging
