@@ -25,21 +25,21 @@ const PacketHub = () => {
       to: "/packet/pre-site-estimate",
       Icon: FiDollarSign,
       title: "1 · Pre-site estimate",
-      desc: "Utilities (distance, depth, fees, cost per foot) plus retaining walls, obstacles, foundation, and survey — with live totals.",
+      desc: "Utilities (distance, depth, fees, cost per foot) plus retaining walls, obstacles, foundation, and survey, with live totals.",
       key: "preSiteEstimate",
     },
     {
       to: "/packet/pre-site-verification",
       Icon: FiClipboard,
       title: "2 · Pre-site verification",
-      desc: "Eight steps — utility locate, connection charges, plumber estimates, city fees and timelines — that turn the study into verified numbers.",
+      desc: "Eight steps (utility locate, connection charges, plumber estimates, city fees and timelines) that turn the study into verified numbers.",
       key: "preSiteVerification",
     },
     {
       to: "/packet/builder-prep",
       Icon: FiFileText,
       title: "3 · Builder preparation",
-      desc: "The same project information and the same questions for every builder or GC — pre-filled from your project brief.",
+      desc: "The same project information and the same questions for every builder or GC, pre-filled from your project brief.",
       key: "builderPrep",
     },
     {
@@ -60,7 +60,7 @@ const PacketHub = () => {
       to: "/packet/total-cost",
       Icon: FiLayers,
       title: "6 · Total ADU project cost",
-      desc: "The final rollup — verified costs plus your selected quote, estimated vs. final, timelines and notes.",
+      desc: "The final rollup: verified costs plus your selected quote, estimated vs. final, timelines and notes.",
       key: "totalProjectCost",
     },
   ];
@@ -75,12 +75,12 @@ const PacketHub = () => {
           ? <>Everything for <span className="text-paper">{packet.address}</span> in one place.</>
           : "Every deliverable in one place."}{" "}
         Six planning worksheets take you from pre-site estimate to a complete, comparable project
-        cost. They save as you type — use Print / save PDF on any of them to build the packet you
+        cost. They save as you type. Use Print / save PDF on any of them to build the packet you
         hand to builders, suppliers, and city staff.
       </p>
       <p className="text-paper-dim text-sm mb-10">
         <Link to="/my-property" className="text-accent hover:text-paper transition-colors">
-          Keep your project brief current →
+          Keep your project brief current <FiArrowRight className="inline" />
         </Link>
       </p>
 
@@ -90,21 +90,21 @@ const PacketHub = () => {
           to="/report"
           Icon={FiFileText}
           title="Feasibility study"
-          desc="Your personalized report: public-record snapshot, buildable envelope, NAPE results, budget summary, and your verification checklist — printable."
+          desc="Your personalized report: public-record snapshot, buildable envelope, NAPE results, budget summary, and your verification checklist, all printable."
           status="Open"
         />
         <Card
           to="/feasibility"
           Icon={FiMap}
           title="Property diagram & feasibility"
-          desc="Your lot in 3D/2D/satellite: setbacks, buildable envelope, and the largest potential ADU footprint — plus the readiness checklist."
+          desc="Your lot in 3D/2D/satellite: setbacks, buildable envelope, and the largest potential ADU footprint, plus the readiness checklist."
           status="Open"
         />
         <Card
           to="/packet/ready-score"
           Icon={FiCheckCircle}
           title="ADU Ready Score (NAPE)"
-          desc="The official National ADU Property Evaluation: five weighted categories, 100 points, graded A–F — with automatic no-go detection."
+          desc="The official National ADU Property Evaluation: five weighted categories, 100 points, graded A–F, with automatic no-go detection."
           status={grade ? `Grade ${grade}` : "Not scored yet"}
           done={Boolean(grade)}
         />
@@ -134,22 +134,22 @@ const PacketHub = () => {
         </div>
         <div className="grid sm:grid-cols-2 gap-6 text-sm leading-relaxed">
           <div>
-            <p className="text-paper font-semibold mb-1">Call 811 before any digging — it's free.</p>
+            <p className="text-paper font-semibold mb-1">Call 811 before any digging. It's free.</p>
             <p className="text-paper-dim">
               811 is the national "call before you dig" number: one call (or a visit to{" "}
               <a href="https://811beforeyoudig.com" target="_blank" rel="noreferrer" className="text-accent hover:text-paper transition-colors">
                 811beforeyoudig.com
               </a>
               ) reaches your local one-call center, and utility companies come mark their lines at
-              no cost. Call at least two working days before digging — it's required before
+              no cost. Call at least two working days before digging. It's required before
               excavation.
             </p>
           </div>
           <div>
             <p className="text-paper font-semibold mb-1">Private lines need a private locator.</p>
             <p className="text-paper-dim">
-              811 marks public utilities up to the meter. Lines on your side of the meter — a sewer
-              run to the street, power to a shed, irrigation — are found by a professional private
+              811 marks public utilities up to the meter. Lines on your side of the meter (a sewer
+              run to the street, power to a shed, irrigation) are found by a professional private
               utility-locating service. Step 1 of the Pre-site Verification worksheet is exactly
               this: have the connection points marked, record the distances, and your estimates
               become real.

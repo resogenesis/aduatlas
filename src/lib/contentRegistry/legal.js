@@ -58,7 +58,7 @@ export const LEGAL_CONTENT = {
   // ── Section bodies (paragraphs joined with "\n\n") ──
   "legal.section.overview.body": {
     page: PAGE, label: "Section body: Overview", type: "text",
-    default: "ADUAtlas is a planning and decision-support service for homeowners considering an Accessory Dwelling Unit. We collect the minimum information needed to deliver a property snapshot, the ADU Course, and (when purchased) a feasibility study.\n\nWe are not a law firm, an engineering firm, an appraiser, or a permitting authority. Our reports are intended to make conversations with your city, builder, lender, and licensed professionals sharper, not to replace them.",
+    default: "ADUAtlas is a planning and decision-support service for homeowners considering an Accessory Dwelling Unit. We collect the minimum information needed to deliver the ADU Course and, when your package includes them, a feasibility study and a site plan.\n\nWe are not a law firm, an engineering firm, an appraiser, or a permitting authority. Our reports are intended to make conversations with your city, builder, lender, and licensed professionals sharper, not to replace them.",
   },
   "legal.section.collect.body": {
     page: PAGE, label: "Section body: What we collect (lines starting with \"- \" render as bullets; a leading **term** renders bold)", type: "text",
@@ -66,7 +66,7 @@ export const LEGAL_CONTENT = {
   },
   "legal.section.use.body": {
     page: PAGE, label: "Section body: How we use it (lines starting with \"- \" render as bullets)", type: "text",
-    default: "- Generate your property snapshot and, with Platinum, your feasibility study and site plan.\n- Deliver the ADU Course and track your progress through chapters.\n- Send transactional emails (receipts, password resets, course updates, study delivery).\n- Send product updates and tips if you opt in. You can unsubscribe at any time.\n- Improve the product through aggregated, anonymized usage analysis.\n\nWe do not sell your personal information. We do not share your individual property address with builders without your explicit consent.",
+    default: "- Prepare your feasibility study and your site plan in two versions, with Platinum and Concierge.\n- Deliver the ADU Course and track your progress through chapters.\n- Send transactional emails (receipts, password resets, course updates, study delivery).\n- Send product updates and tips if you opt in. You can unsubscribe at any time.\n- Improve the product through aggregated, anonymized usage analysis.\n\nWe do not sell your personal information. We do not share your individual property address with builders without your explicit consent.",
   },
   "legal.section.cookies.body": {
     page: PAGE, label: "Section body: Cookies and analytics", type: "text",
@@ -74,7 +74,7 @@ export const LEGAL_CONTENT = {
   },
   "legal.section.third-party.body": {
     page: PAGE, label: "Section body: Third-party services (lines starting with \"- \" render as bullets; a leading **term** renders bold)", type: "text",
-    default: "To run ADUAtlas, we rely on a small set of vendors:\n\n- **Stripe** processes payments. Stripe collects card and billing information directly under its own privacy policy.\n- **Supabase** hosts our database and authentication.\n- **Resend** delivers transactional and course emails.\n- **Public records and GIS data providers** for parcel, zoning, and permit data used in your snapshot and feasibility study.",
+    default: "To run ADUAtlas, we rely on a small set of vendors:\n\n- **Stripe** processes payments. Stripe collects card and billing information directly under its own privacy policy.\n- **Supabase** hosts our database and authentication.\n- **Resend** delivers transactional and course emails.\n- **Public records and GIS data providers** for parcel, zoning, and permit data used in your feasibility study and site plan.",
   },
   "legal.section.rights.body": {
     page: PAGE, label: "Section body: Your choices (lines starting with \"- \" render as bullets; a leading **term** renders bold)", type: "text",
@@ -86,7 +86,7 @@ export const LEGAL_CONTENT = {
   },
   "legal.section.refund.body": {
     page: PAGE, label: "Section body: Refund policy (a leading **term** on a paragraph renders bold)", type: "text",
-    default: "**All packages:** 7-day full refund, no questions asked. If ADUAtlas is not for you, email us within 7 days of purchase from the address associated with your account and we will refund in full and revoke access.\n\n**Feasibility study and site plan (Platinum and Concierge):** Refundable up to the point we begin compiling your study, typically within 24 hours of your property intake. Once compilation has started, the study and site plan are non-refundable because the work is bespoke to your parcel; the 7-day refund on the rest of the package still applies.\n\nRefunds are issued to the original payment method and typically appear within 5 to 10 business days, depending on your bank.",
+    default: "**All packages:** 48 hour full refund, no questions asked. If ADUAtlas is not for you, email hello@aduatlas.com within 48 hours of purchase from the address associated with your account and we will refund in full and revoke access.\n\n**Feasibility study and site plan (Platinum and Concierge):** This part of your package is custom work prepared for your parcel. It stays refundable until ADUAtlas has actually begun substantive work on it. We will tell you when that starts, and from that point the study and the site plan are non-refundable. The 48 hour refund on the rest of the package still applies.\n\nRefunds are issued to the original payment method and typically appear within 5 to 10 business days, depending on your bank.",
   },
 
   // ── Contact section (kept apart from the generic body pattern since the

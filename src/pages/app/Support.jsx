@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { FiSend } from "react-icons/fi";
-import { fetchMessages, fetchMyStudy, sendMessage } from "../../lib/studies";
+import { MESSAGE_KINDS, fetchMessages, fetchMyStudy, sendMessage } from "../../lib/studies";
 import { supabaseEnabled } from "../../lib/supabase";
 
 // Concierge support: portal messages plus consultation scheduling and usage.
-// Concierge only (route is gated). Consultation time is capped at 60 minutes.
+// Concierge only. The route gate explains that to a customer; the database is
+// the boundary (0024): a message here is written as kind 'support', which is
+// accepted only from an account holding a live Concierge entitlement, and this
+// page reads only that thread (a refund request lives on /settings).
+// Consultation time is capped at 60 minutes.
 const Support = () => {
   const [messages, setMessages] = useState([]);
   const [study, setStudy] = useState(null);
@@ -13,7 +17,7 @@ const Support = () => {
   const [error, setError] = useState("");
 
   const load = () => {
-    fetchMessages().then((r) => setMessages(r.ok ? r.messages : []));
+    fetchMessages(MESSAGE_KINDS.SUPPORT).then((r) => setMessages(r.ok ? r.messages : []));
     fetchMyStudy().then((r) => setStudy(r.ok ? r.study : null));
   };
   useEffect(() => {
@@ -26,10 +30,18 @@ const Support = () => {
     if (!body) return;
     setSending(true);
     setError("");
-    const r = await sendMessage(body);
+    const r = await sendMessage(body, MESSAGE_KINDS.SUPPORT);
     setSending(false);
     if (!r.ok) {
-      setError(r.error === "supabase-disabled" ? "Messaging is not connected in this environment." : `Could not send: ${r.error}`);
+      setError(
+        r.error === "supabase-disabled"
+          ? "Messaging is not connected in this environment."
+          : r.error === "not-entitled"
+            ? "Your message was not sent. Written support is part of Concierge, and we could not confirm Concierge on this account. Email hello@aduatlas.com and we will sort it out."
+            : r.error === "not-signed-in"
+              ? "Your message was not sent because you are signed out. Sign in and try again."
+              : `Could not send: ${r.error}`
+      );
       return;
     }
     setDraft("");

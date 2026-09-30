@@ -1,11 +1,38 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiMapPin } from "react-icons/fi";
-import { currentUser } from "../../stores/authStore";
+import { currentUser, hasServerSession } from "../../stores/authStore";
 import { courseProgress, loadPacket } from "../../stores/courseStore";
 import { getPaidTier, hasReportTier, hasTier, TIERS } from "../../stores/paymentStore";
 import { formatPrice, planById } from "../../lib/plans";
+import { useCheckoutQuote } from "../../lib/useCheckoutQuote";
 import { STUDY_STATUS, fetchMyStudy } from "../../lib/studies";
+import { supabase, supabaseEnabled } from "../../lib/supabase";
+
+// The plan QUALIFYING MONEY bought for this homeowner (locked decision 2r), which
+// is what the upgrade credit is computed from. It is a SERVER fact:
+// public.my_qualifying_paid_plan() takes no arguments, so nothing this browser
+// holds can change the answer, and it reaches only the caller's own row.
+//
+// The localStorage tier mirror cannot answer this. It records the tier HELD, and
+// a sponsored Golden (2p) holds Golden without having paid $79 for it, so quoting
+// from the mirror promised "$200" to a homeowner Stripe was about to charge $279.
+//
+// Anything that is not a clean answer resolves to null, which means no credit and
+// the full price — the same safe direction api/create-checkout.js takes for a
+// caller whose token does not verify. Duplicated in src/pages/Unlock.jsx rather
+// than shared through src/lib/plans.js, which must stay import-free because
+// api/create-checkout.js loads it inside a serverless function.
+const fetchQualifyingPaidPlan = async () => {
+  if (!supabaseEnabled || !(await hasServerSession())) return null;
+  try {
+    const { data, error } = await supabase.rpc("my_qualifying_paid_plan");
+    if (error) return null;
+    return planById(data)?.id || null;
+  } catch {
+    return null;
+  }
+};
 
 // Overview: the saved property at the center, then the plan, the study, the
 // course, and a next-steps list that reflects where this homeowner is.
@@ -13,11 +40,14 @@ const Dashboard = () => {
   const user = currentUser();
   const packet = loadPacket();
   const progress = courseProgress();
-  const plan = planById(getPaidTier());
+  const paidTier = getPaidTier();
+  const plan = planById(paidTier);
   const platinum = hasReportTier();
   const concierge = hasTier(TIERS.CONCIERGE);
   // undefined = loading (Platinum+ only); null = no study / not entitled.
   const [study, setStudy] = useState(() => (platinum ? undefined : null));
+  // undefined = not looked up yet; null = no money bought anything; else a plan id.
+  const [qualifying, setQualifying] = useState(() => (currentUser() ? undefined : null));
 
   useEffect(() => {
     if (!platinum) return undefined;
@@ -30,14 +60,62 @@ const Dashboard = () => {
     };
   }, [platinum]);
 
+  useEffect(() => {
+    let cancelled = false;
+    fetchQualifyingPaidPlan().then((p) => {
+      if (!cancelled) setQualifying(p);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const studyReady = study?.status === "ready";
+
+  // What the Platinum upgrade actually costs this buyer, derived from
+  // src/lib/plans.js so it cannot drift from what api/create-checkout.js charges.
+  // This used to render formatPrice(20000): a hard coded $200 that was right only
+  // for a Golden holder, because $200 is $279 less the $79 Golden credit. Anyone
+  // arriving here without a Golden purchase on record earns no credit and is
+  // charged the full $279, so the dashboard was quoting a price checkout would not
+  // honour. upgradeCreditCents is the same function the server uses to mint the
+  // coupon, so the two can only ever agree.
+  //
+  // It is now handed the QUALIFYING PAID PLAN and not the tier held (2r), because
+  // those are the same value for a buyer and different values for a sponsored
+  // homeowner, and it was the sponsored homeowner who was being quoted $200 and
+  // billed $279. While the server has not answered yet the price is UNKNOWN, and
+  // an unknown price is not printed at all (2b): the step reads "Upgrade" until
+  // there is a figure that checkout will honour.
+  //
+  // RC4a (T4-03): the figure is now checkout's own quote for this account
+  // (useCheckoutQuote), the computation that sets the charge, rather than the
+  // same inputs recombined here.
+  const upgradeQuote = useCheckoutQuote(platinum ? null : TIERS.REPORT);
+  const creditKnown = qualifying !== undefined;
+  const upgradeCents = upgradeQuote?.ok ? upgradeQuote.dueCents : null;
+
+  // The plan card's price. The tier HELD is the entitlement LEVEL; whether money
+  // bought it is the ORIGIN, and those are separate facts (2r). A sponsored or
+  // comped homeowner holds Golden or Platinum without paying its list price, so
+  // "$79" beside their plan read as a charge that never happened. The price is
+  // printed only when the server says qualifying money bought exactly the plan
+  // held (my_qualifying_paid_plan(), null for sponsored and comped access). While
+  // that answer is unknown, nothing is printed (2b).
+  const heldPrice = plan && creditKnown && qualifying === plan.id ? formatPrice(plan.priceCents) : null;
+
+  // The feasibility study and the site plan are Platinum deliverables. For a plan
+  // without them, the upgrade step stands in for both, as it already did for the
+  // study. T4-19 (RC4 rehearsal): a Golden account was still offered "Review your
+  // site plan: Open", which led straight to the Platinum paywall, as if the site
+  // plan were already theirs to open.
   const steps = [
     { key: "property", label: "Add your property details", done: Boolean(packet.address), to: "/my-property", cta: "Add details" },
     { key: "learn", label: "Start the course", done: progress > 0, to: "/course", cta: "Open the course" },
     platinum
       ? { key: "study", label: "Submit your property for the feasibility study", done: Boolean(study), to: "/study", cta: study ? "See status" : "Start" }
-      : { key: "upgrade", label: "Add the feasibility study and site plan", done: false, to: "/unlock?tier=report", cta: `Upgrade for ${formatPrice(20000)}` },
-    { key: "siteplan", label: "Review your site plan", done: studyReady, to: "/site-plan", cta: "Open" },
+      : { key: "upgrade", label: "Add the feasibility study and site plan", done: false, to: "/unlock?tier=report", cta: upgradeCents != null ? `Upgrade for ${formatPrice(upgradeCents)}` : "Upgrade" },
+    ...(platinum ? [{ key: "siteplan", label: "Review your site plan", done: studyReady, to: "/site-plan", cta: "Open" }] : []),
     { key: "builders", label: "Find builders who serve your area", done: false, to: "/builders", cta: "Browse" },
   ];
   const nextIndex = steps.findIndex((s) => !s.done);
@@ -62,7 +140,7 @@ const Dashboard = () => {
         <div className="bg-surface-1-solid border border-stroke rounded-3xl p-7 flex flex-col">
           <p className="text-paper-dim text-sm mb-1">Your plan</p>
           <p className="font-primary font-extrabold tracking-tight text-paper text-3xl mb-1">{plan ? plan.name : "None yet"}</p>
-          <p className="text-paper-dim text-sm mb-5">{plan ? `${formatPrice(plan.priceCents)} · ${plan.tagline}` : "Choose a plan to unlock the portal."}</p>
+          <p data-plan-line className="text-paper-dim text-sm mb-5">{plan ? (heldPrice ? `${heldPrice} · ${plan.tagline}` : plan.tagline) : "Choose a plan to unlock the portal."}</p>
           {plan && plan.id !== TIERS.CONCIERGE && (
             <Link to={`/unlock?tier=${plan.id === TIERS.ROADMAP ? TIERS.REPORT : TIERS.CONCIERGE}`} className="mt-auto inline-flex items-center gap-1 text-accent text-sm font-medium">
               Upgrade to {plan.id === TIERS.ROADMAP ? "Platinum" : "Concierge"} <FiArrowRight />

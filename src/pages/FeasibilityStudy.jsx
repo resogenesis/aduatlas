@@ -103,12 +103,13 @@ const FeasibilityStudy = () => (
         </p>
         <div className="font-display text-accent text-5xl sm:text-6xl mb-2">$279</div>
         <p className="text-paper-dim text-sm mb-7">
-          Includes the ADUAtlas Course, builder profile access, your personalized property drawing,
-          and six dynamic worksheets. Access lasts one year.
+          Platinum includes the ADUAtlas course, builder directory access, the feasibility study for
+          your property, the site plan in two versions (what could fit, and the arrangement you want),
+          the preparation worksheets, and the ADU Ready Score. Access lasts one year.
         </p>
         <Cta>Get your Feasibility Study</Cta>
         <p className="text-paper-dim/70 text-xs mt-4">
-          Already have Golden? Your $79 is credited, so the upgrade is $200.
+          Bought Golden already? Log in before you buy and the $79 you paid comes off, so the upgrade is $200. Access a city sponsors carries no credit.
         </p>
       </div>
     </section>

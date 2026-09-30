@@ -37,7 +37,7 @@ const CHAPTER_DEFAULTS = [
   {
     eyebrow: "Home",
     title: "Our goal is to simplify the process.",
-    body: "ADUAtlas helps homeowners explore ADU types, understand local regulations, and connect with local and national builders. We provide educational tools, planning resources, and a growing video library so homeowners can see real world examples, not just read about them.\n\nBuilding an ADU takes planning, budgeting, permits, zoning research, and design decisions. ADUAtlas helps simplify that process with realistic budget tools and feasibility studies that give builders what they need to quote accurately.\n\nWhether you're just starting your research or ready to move forward, ADUAtlas is designed to help you build smarter.",
+    body: "ADUAtlas helps homeowners explore ADU types, understand local regulations, and connect with local and national builders. We provide educational tools and planning resources written for homeowners rather than for the trade.\n\nBuilding an ADU takes planning, budgeting, permits, zoning research, and design decisions. ADUAtlas helps simplify that process with realistic budget tools and feasibility studies that give builders what they need to quote accurately.\n\nWhether you're just starting your research or ready to move forward, ADUAtlas is designed to help you build smarter.",
   },
 ];
 
@@ -80,6 +80,6 @@ export const ABOUT_CONTENT = {
   "about.closing.eyebrow": { page: PAGE, label: "Closing eyebrow", type: "text", default: "One promise" },
   "about.closing.heading": { page: PAGE, label: "Closing heading", type: "text", default: "Save you time. Reduce confusion. Help you make informed decisions." },
   "about.closing.body": { page: PAGE, label: "Closing tagline", type: "text", default: "To build or not to build, that is thy question." },
-  "about.closing.cta_primary": { page: PAGE, label: "Primary CTA button", type: "text", default: "Property Snapshot" },
+  "about.closing.cta_primary": { page: PAGE, label: "Primary CTA button", type: "text", default: "How ADUAtlas works" },
   "about.closing.cta_secondary": { page: PAGE, label: "Secondary CTA button", type: "text", default: "See plans" },
 };

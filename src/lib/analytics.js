@@ -5,6 +5,7 @@
 //   VITE_POSTHOG_HOST  (optional, defaults to https://us.i.posthog.com)
 
 import posthog from "posthog-js";
+import { onAccountScopeReset } from "../stores/accountScope";
 
 const key = import.meta.env.VITE_POSTHOG_KEY;
 const host = import.meta.env.VITE_POSTHOG_HOST || "https://us.i.posthog.com";
@@ -20,6 +21,16 @@ export const initAnalytics = () => {
     persistence: "localStorage",
   });
   initialized = true;
+  // Log out, or another account signing in (T4-01): the identity Unlock gave
+  // this browser (the buyer's email) is dropped, so the next person's events are
+  // never recorded under the previous person.
+  onAccountScopeReset(() => {
+    try {
+      posthog.reset();
+    } catch {
+      // analytics never blocks anything
+    }
+  });
 };
 
 // Funnel events. Always callable; silently no-op when unset.

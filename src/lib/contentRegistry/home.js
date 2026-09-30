@@ -18,7 +18,7 @@ const homeHero = {
   "home.hero.heading": t("Hero heading (\\n = line break)", "Your ADU\nStarts Here."),
   "home.hero.body": t("Hero paragraph", "Find out what you can build, what it may cost, and what to do next."),
   "home.hero.cta": t("Hero button", "See the packages"),
-  "home.hero.reassurance": t("Line under the hero button", "7-day full refund on every package"),
+  "home.hero.reassurance": t("Line under the hero button", "48 hour full refund on every package"),
   "home.hero.image": img("Hero photo", heroImg, "A modern wood-clad backyard ADU with sliding glass doors and a deck at golden hour"),
 };
 
@@ -97,10 +97,10 @@ const homePlans = {
   "home.plans.item.2.tagline": t("Plan 3 tagline", "Guidance + support"),
   "home.plans.item.2.bullet.0": t("Plan 3 bullet 1", "Everything in Platinum"),
   "home.plans.item.2.bullet.1": t("Plan 3 bullet 2", "Written support through the ADUAtlas portal"),
-  "home.plans.item.2.bullet.2": t("Plan 3 bullet 3", "Builder-match assistance"),
-  "home.plans.item.2.bullet.3": t("Plan 3 bullet 4", "60 minutes of private ADU consultation"),
+  "home.plans.item.2.bullet.2": t("Plan 3 bullet 3", "60 minutes of private ADU consultation"),
+  "home.plans.item.2.bullet.3": t("Plan 3 bullet 4", "What you already paid counts toward Concierge if you upgrade"),
   "home.plans.featured_label": t("Featured plan label", "Most popular"),
-  "home.plans.footnote": t("Plans footnote", "All plans include one year of access and a 7-day full refund."),
+  "home.plans.footnote": t("Plans footnote", "All plans include one year of access and a 48 hour full refund."),
 };
 
 // ── Builder teaser ────────────────────────────────────────────────────────

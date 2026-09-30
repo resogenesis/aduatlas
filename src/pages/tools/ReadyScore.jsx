@@ -56,7 +56,7 @@ const ReadyScore = () => {
       </h1>
       <p className="text-paper-dim text-base sm:text-lg max-w-2xl mb-8">
         The official NAPE scoring system from Module 7: five weighted categories, 100 possible
-        points, graded A–F. Answer each question honestly — resist the urge to answer the way you
+        points, graded A–F. Answer each question honestly. Resist the urge to answer the way you
         wish were true. A "No" is a flag to verify, not a final verdict; everything varies by
         property and municipality.
       </p>
@@ -136,7 +136,7 @@ const ReadyScore = () => {
 
           {gradeInfo && (
             <div className="bg-surface-1-solid rounded-2xl border border-stroke p-5 text-sm mb-4">
-              <p className="text-paper font-semibold mb-1">Grade {result.grade} — {gradeInfo.label}</p>
+              <p className="text-paper font-semibold mb-1">Grade {result.grade}: {gradeInfo.label}</p>
               <p className="text-paper-dim leading-relaxed">{gradeInfo.note}</p>
             </div>
           )}
@@ -152,7 +152,7 @@ const ReadyScore = () => {
                 ))}
               </ul>
               <p className="text-paper-dim/70 text-xs leading-relaxed mt-3">
-                A "No-Go" today does not always mean "No" forever — regulations change, utility
+                A "No-Go" today does not always mean "No" forever. Regulations change, utility
                 projects occur, and variances may be available. Verify your options with your local
                 planning department before giving up on the project.
               </p>

@@ -6,695 +6,198 @@
 // derived from the modules for navigation and progress math, so the gates and
 // dashboard keep working unchanged.
 //
-// INTEGRATION POINT (Supabase): replace localStorage with reads/writes against
-// `users.completed_chapters` (jsonb) and `users.builder_packet` (jsonb). Chapter
-// ids are stable strings ("m1c1", "m1quiz") so stored progress survives.
+// PERSISTENCE: localStorage is the synchronous copy every render reads, and the
+// signed-in user's row is the durable one. Chapter completions and quiz results
+// are mirrored to `users.completed_chapters` (jsonb) and the builder packet to
+// `users.builder_packet` (jsonb), both already covered by the column-level
+// UPDATE grant in 0001_init.sql. Chapter ids are stable strings ("m1c1",
+// "m1quiz") so stored progress survives. See "Progress persistence" below for
+// the column shape and the merge rules.
+//
+// THE COURSE TEXT IS NOT HERE (DEF-07). This file ships in the anonymously
+// served bundle, so it holds only the outline the public /course-outline page
+// already shows: ids, titles, module names and blurbs, and minutes. Chapter
+// bodies, quizzes (with their answer keys) and the course introduction live in
+// api/_course/content.js and are fetched one at a time from /api/course with
+// the session token, which answers only for a live course purchase or an admin.
+// See fetchCourseItem() and useCourseItem() below.
 
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
+import { onAccountScopeReset } from "./accountScope";
 
 const COMPLETED_KEY = "aduatlas.course.completed";
+const QUIZ_KEY = "aduatlas.course.quizzes";
 const PACKET_KEY = "aduatlas.packet";
 
 // ── Modules → chapters ───────────────────────────────────────────────────────
-// Module 1 is fully authored (content in courseContent.js). Modules 2–10 are
-// scaffolded from the course outline; their chapters arrive as each module's
-// script is finalized, so they render as "content coming" and don't count
-// toward progress until populated.
+// The outline only. Every chapter listed here has a body (or, for kind "quiz",
+// a quiz) on the server under the same id, so progress math can count them.
 export const modules = [
   {
     id: "m1",
     n: 1,
     title: "ADU Basics",
     blurb: "What an ADU is, the main types, and why homeowners build them.",
-    intro:
-      "Before comparing builders, selecting a design, or requesting estimates, it's important to understand what an ADU is, why it has become so popular, and how the industry has evolved. This module builds the foundation for the rest of the course.",
-    framework: "Learn → Verify → Review → Plan → Verify → Build",
     chapters: [
-      { id: "m1c1", n: 1, title: "What Is an ADU?", blurb: "The legal definition and what every ADU must include.", minutes: 4 },
-      { id: "m1c2", n: 2, title: "Common Names for an ADU", blurb: "Granny flat, casita, backyard cottage — one concept, many names.", minutes: 3 },
-      { id: "m1c3", n: 3, title: "Where Can an ADU Be Built?", blurb: "The property factors that decide what's possible.", minutes: 4 },
-      { id: "m1c4", n: 4, title: "Introduction to ADU Construction Options", blurb: "25+ construction methods and product types, introduced.", minutes: 5 },
-      { id: "m1c5", n: 5, title: "Tiny Home vs. ADU", blurb: "Why the words matter when you talk to your city.", minutes: 3 },
-      { id: "m1c6", n: 6, title: "Why Are ADUs So Popular?", blurb: "The forces driving the fastest-growing housing trend in America.", minutes: 5 },
-      { id: "m1c7", n: 7, title: "Seven Common ADU Misconceptions", blurb: "The myths that cost homeowners time and money.", minutes: 6 },
-      { id: "m1quiz", n: 8, kind: "quiz", title: "Module 1 Quiz", blurb: "Test your knowledge before moving on.", minutes: 5 },
+      { id: "m1c1", n: 1, title: "What Is an ADU?", minutes: 4 },
+      { id: "m1c2", n: 2, title: "Common Names for an ADU", minutes: 3 },
+      { id: "m1c3", n: 3, title: "Where Can an ADU Be Built?", minutes: 4 },
+      { id: "m1c4", n: 4, title: "Introduction to ADU Construction Options", minutes: 5 },
+      { id: "m1c5", n: 5, title: "Tiny Home vs. ADU", minutes: 3 },
+      { id: "m1c6", n: 6, title: "Why Are ADUs So Popular?", minutes: 5 },
+      { id: "m1c7", n: 7, title: "Seven Common ADU Misconceptions", minutes: 6 },
+      { id: "m1quiz", n: 8, kind: "quiz", title: "Module 1 Quiz", minutes: 5 },
     ],
   },
   {
-    "id": "m2",
-    "n": 2,
-    "title": "Understanding City & State ADU Regulations",
-    "blurb": "How state building codes and local zoning work together — and the key regulations to verify before you plan.",
-    "intro": "Understanding ADU regulations is one of the biggest challenges homeowners face. Many people begin by comparing ADU designs, builders, and prices before they understand what they are legally allowed to build — which leads to unrealistic expectations, unnecessary expenses, and costly delays. The question isn't simply “Can I build an ADU?” The better question is: “What can I legally build on my property?”",
-    "chapters": [
-      {
-        "id": "m2c1",
-        "n": 1,
-        "title": "Why ADU Regulations Matter",
-        "blurb": "The biggest mistake homeowners make is shopping for an ADU before knowing what they're legally allowed to build.",
-        "minutes": 5
-      },
-      {
-        "id": "m2c2",
-        "n": 2,
-        "title": "State Building Codes vs. Local Zoning",
-        "blurb": "The IRC sets minimum construction standards; your city decides what and where you can actually build.",
-        "minutes": 4
-      },
-      {
-        "id": "m2c3",
-        "n": 3,
-        "title": "The Most Common ADU Regulations",
-        "blurb": "Fifteen regulations to check — and why a maximum on paper isn't a promise for your lot.",
-        "minutes": 6
-      },
-      {
-        "id": "m2c4",
-        "n": 4,
-        "title": "Common Regulation Examples",
-        "blurb": "Typical ranges you may encounter — examples, not guarantees.",
-        "minutes": 5
-      },
-      {
-        "id": "m2c5",
-        "n": 5,
-        "title": "Why Homeowners Get Confused",
-        "blurb": "Why “Can I build an ADU?” has no simple yes-or-no answer.",
-        "minutes": 5
-      },
-      {
-        "id": "m2c6",
-        "n": 6,
-        "title": "Surveys, Permits, Timelines & Cost Estimates",
-        "blurb": "The planning phases, typical timelines, and what permitting really costs.",
-        "minutes": 6
-      },
-      {
-        "id": "m2c7",
-        "n": 7,
-        "title": "How Cities Guide Homeowners: A California Example",
-        "blurb": "What a typical city ADU process looks like — and why the information feels scattered.",
-        "minutes": 4
-      },
-      {
-        "id": "m2c8",
-        "n": 8,
-        "title": "The ADUAtlas Property Feasibility Study",
-        "blurb": "Bridging the gap between the regulations and your specific property.",
-        "minutes": 4
-      },
-      {
-        "id": "m2c9",
-        "n": 9,
-        "title": "Module Summary",
-        "blurb": "What you should now understand before moving on to the 10-step process.",
-        "minutes": 3
-      },
-      {
-        "id": "m2quiz",
-        "n": 10,
-        "kind": "quiz",
-        "title": "Module 2 Quiz",
-        "blurb": "Test your knowledge before moving on.",
-        "minutes": 5
-      }
-    ]
+    id: "m2",
+    n: 2,
+    title: "Understanding City & State ADU Regulations",
+    blurb: "How state building codes and local zoning work together, and the key regulations to verify before you plan.",
+    chapters: [
+      { id: "m2c1", n: 1, title: "Why ADU Regulations Matter", minutes: 5 },
+      { id: "m2c2", n: 2, title: "State Building Codes vs. Local Zoning", minutes: 4 },
+      { id: "m2c3", n: 3, title: "The Most Common ADU Regulations", minutes: 6 },
+      { id: "m2c4", n: 4, title: "Common Regulation Examples", minutes: 5 },
+      { id: "m2c5", n: 5, title: "Why Homeowners Get Confused", minutes: 5 },
+      { id: "m2c6", n: 6, title: "Surveys, Permits, Timelines & Cost Estimates", minutes: 6 },
+      { id: "m2c7", n: 7, title: "How Cities Guide Homeowners: A California Example", minutes: 4 },
+      { id: "m2c8", n: 8, title: "The ADUAtlas Property Feasibility Study", minutes: 4 },
+      { id: "m2c9", n: 9, title: "Module Summary", minutes: 3 },
+      { id: "m2quiz", n: 10, kind: "quiz", title: "Module 2 Quiz", minutes: 5 },
+    ],
   },
   {
-    "id": "m3",
-    "n": 3,
-    "title": "The ADUAtlas 10-Step Process",
-    "blurb": "A logical roadmap from education and planning to construction and occupancy — each step builds on the one before it.",
-    "intro": "One of the best ways to ensure success with any big project is to have all the facts and understand the process before you begin. Many people start by calling builders, ordering surveys, or looking at ADU designs before they understand what their property can support and how much it will cost. Imagine discovering that your pre-site costs are $30,000 higher than expected, or that the largest ADU you can legally build is too small for your intended use. This module provides a simple 10-step roadmap designed to help you avoid costly mistakes — every city and every project is different, but most successful ADU projects follow a similar path. Think of ADUAtlas as your blueprint for a successful build: follow the process, do the right things before you build, and you'll save time, stress, and money.",
-    "chapters": [
-      {
-        "id": "m3c1",
-        "n": 1,
-        "title": "Step 1 — Complete the ADUAtlas Course",
-        "blurb": "Education comes before money — understand the process before surveys, plans, or permits.",
-        "minutes": 3
-      },
-      {
-        "id": "m3c2",
-        "n": 2,
-        "title": "Step 2 — Complete the Property Feasibility Study",
-        "blurb": "Determine what you can legally build before deciding what you'd like to build.",
-        "minutes": 3
-      },
-      {
-        "id": "m3c3",
-        "n": 3,
-        "title": "Step 3 — Verify Your Local ADU Regulations",
-        "blurb": "Regulations vary by city, ZIP code, sometimes by address — and they change.",
-        "minutes": 3
-      },
-      {
-        "id": "m3c4",
-        "n": 4,
-        "title": "Step 4 — Establish a Realistic Budget",
-        "blurb": "Why move forward without a good estimate?",
-        "minutes": 3
-      },
-      {
-        "id": "m3c5",
-        "n": 5,
-        "title": "Step 5 — Select an ADU Type",
-        "blurb": "Over 1,000 options — and the cheapest isn't always the best deal, or even legal.",
-        "minutes": 3
-      },
-      {
-        "id": "m3c6",
-        "n": 6,
-        "title": "Step 6 — Determine Whether a Survey Is Required",
-        "blurb": "Some cities require one, some don't — and survey types differ widely.",
-        "minutes": 3
-      },
-      {
-        "id": "m3c7",
-        "n": 7,
-        "title": "Step 7 — Develop a Site Plan",
-        "blurb": "Design the whole space — patio, garden, parking — around the legal boundaries.",
-        "minutes": 4
-      },
-      {
-        "id": "m3c8",
-        "n": 8,
-        "title": "Step 8 — Select a Builder",
-        "blurb": "Compare experience, portfolio, references, warranty, and construction method.",
-        "minutes": 4
-      },
-      {
-        "id": "m3c9",
-        "n": 9,
-        "title": "Step 9 — Permits, Inspections & Approval",
-        "blurb": "Your city's permit application, fee schedule, and submittal checklists.",
-        "minutes": 3
-      },
-      {
-        "id": "m3c10",
-        "n": 10,
-        "title": "Step 10 — Construction, Final Inspection & Occupancy",
-        "blurb": "From site prep to Certificate of Occupancy.",
-        "minutes": 3
-      },
-      {
-        "id": "m3quiz",
-        "n": 11,
-        "kind": "quiz",
-        "title": "Module 3 Quiz",
-        "blurb": "Test your knowledge before moving on.",
-        "minutes": 5
-      }
-    ]
+    id: "m3",
+    n: 3,
+    title: "The ADUAtlas 10-Step Process",
+    blurb: "A logical roadmap from education and planning to construction and occupancy. Each step builds on the one before it.",
+    chapters: [
+      { id: "m3c1", n: 1, title: "Step 1: Complete the ADUAtlas Course", minutes: 3 },
+      { id: "m3c2", n: 2, title: "Step 2: Complete the Property Feasibility Study", minutes: 3 },
+      { id: "m3c3", n: 3, title: "Step 3: Verify Your Local ADU Regulations", minutes: 3 },
+      { id: "m3c4", n: 4, title: "Step 4: Establish a Realistic Budget", minutes: 3 },
+      { id: "m3c5", n: 5, title: "Step 5: Select an ADU Type", minutes: 3 },
+      { id: "m3c6", n: 6, title: "Step 6: Determine Whether a Survey Is Required", minutes: 3 },
+      { id: "m3c7", n: 7, title: "Step 7: Develop a Site Plan", minutes: 4 },
+      { id: "m3c8", n: 8, title: "Step 8: Select a Builder", minutes: 4 },
+      { id: "m3c9", n: 9, title: "Step 9: Permits, Inspections & Approval", minutes: 3 },
+      { id: "m3c10", n: 10, title: "Step 10: Construction, Final Inspection & Occupancy", minutes: 3 },
+      { id: "m3quiz", n: 11, kind: "quiz", title: "Module 3 Quiz", minutes: 5 },
+    ],
   },
   {
-    "id": "m4",
-    "n": 4,
-    "title": "The ADU Universe — 25+ Types & Construction Methods",
-    "blurb": "Organize the crowded ADU marketplace into a simple three-layer framework so you can compare your options with confidence.",
-    "intro": "Today's homeowners have more ADU choices than ever — hundreds of possible combinations of construction methods, styles, floor plans, and finishes. This module organizes what ADUAtlas calls the ADU Universe into a simple framework so you can understand your options and narrow them based on your property, budget, goals, and vision. Remember: building an ADU is a process, not a purchase.",
-    "tag": "Photos & videos",
-    "chapters": [
-      {
-        "id": "m4c1",
-        "n": 1,
-        "title": "Welcome to the ADU Universe",
-        "blurb": "Why there are so many ADU choices — and the framework that makes them manageable.",
-        "minutes": 4
-      },
-      {
-        "id": "m4c2",
-        "n": 2,
-        "title": "Understanding the ADU Universe",
-        "blurb": "Every ADU is a combination of three decisions — build method, style, and use.",
-        "minutes": 4
-      },
-      {
-        "id": "m4c3",
-        "n": 3,
-        "title": "Site-Built & Custom ADUs",
-        "blurb": "The traditional method that offers the greatest design flexibility.",
-        "minutes": 4
-      },
-      {
-        "id": "m4c4",
-        "n": 4,
-        "title": "Factory-Built ADUs",
-        "blurb": "A fast-growing category — and why the quoted price rarely tells the whole story.",
-        "minutes": 4
-      },
-      {
-        "id": "m4c5",
-        "n": 5,
-        "title": "Engineered Building Systems",
-        "blurb": "How panelized construction and SIPs differ — and when each makes sense.",
-        "minutes": 5
-      },
-      {
-        "id": "m4c6",
-        "n": 6,
-        "title": "Kit Homes & Cabin Packages",
-        "blurb": "A century-old option, reinvented — but read the fine print on what's included.",
-        "minutes": 4
-      },
-      {
-        "id": "m4c7",
-        "n": 7,
-        "title": "Tiny Living Options",
-        "blurb": "Tiny homes, park models, pods, and bunkies — and whether they legally qualify as ADUs.",
-        "minutes": 4
-      },
-      {
-        "id": "m4c8",
-        "n": 8,
-        "title": "Alternative Construction",
-        "blurb": "Container, dome, Quonset, and 3D-printed homes — innovative but require careful evaluation.",
-        "minutes": 5
-      },
-      {
-        "id": "m4c9",
-        "n": 9,
-        "title": "Architectural Styles & Exterior Design",
-        "blurb": "The personality of your ADU — a decision separate from how it's built.",
-        "minutes": 4
-      },
-      {
-        "id": "m4c10",
-        "n": 10,
-        "title": "Size, Floor Plans & Layouts",
-        "blurb": "A thoughtful floor plan built around intended use often beats extra square footage.",
-        "minutes": 4
-      },
-      {
-        "id": "m4c11",
-        "n": 11,
-        "title": "Comparing ADU Options",
-        "blurb": "Compare the complete project, not one feature — and ask 'best for my property?'",
-        "minutes": 5
-      },
-      {
-        "id": "m4c12",
-        "n": 12,
-        "title": "Understanding Pricing",
-        "blurb": "Why two similar ADUs can be priced $70K apart — and the terms behind the numbers.",
-        "minutes": 5
-      },
-      {
-        "id": "m4c13",
-        "n": 13,
-        "title": "How to Narrow Your ADU Options",
-        "blurb": "Start with your property, think long-term, and separate wants from needs.",
-        "minutes": 5
-      },
-      {
-        "id": "m4c14",
-        "n": 14,
-        "title": "Before You Contact a Builder",
-        "blurb": "Review what you've learned so your builder conversations are productive.",
-        "minutes": 4
-      },
-      {
-        "id": "m4quiz",
-        "n": 15,
-        "kind": "quiz",
-        "title": "Module 4 Quiz",
-        "blurb": "Test your knowledge before moving on.",
-        "minutes": 5
-      }
-    ]
+    id: "m4",
+    n: 4,
+    title: "The ADU Universe: 25+ Types & Construction Methods",
+    blurb: "Organize the crowded ADU marketplace into a simple three-layer framework so you can compare your options with confidence.",
+    tag: "Photos & videos",
+    chapters: [
+      { id: "m4c1", n: 1, title: "Welcome to the ADU Universe", minutes: 4 },
+      { id: "m4c2", n: 2, title: "Understanding the ADU Universe", minutes: 4 },
+      { id: "m4c3", n: 3, title: "Site-Built & Custom ADUs", minutes: 4 },
+      { id: "m4c4", n: 4, title: "Factory-Built ADUs", minutes: 4 },
+      { id: "m4c5", n: 5, title: "Engineered Building Systems", minutes: 5 },
+      { id: "m4c6", n: 6, title: "Kit Homes & Cabin Packages", minutes: 4 },
+      { id: "m4c7", n: 7, title: "Tiny Living Options", minutes: 4 },
+      { id: "m4c8", n: 8, title: "Alternative Construction", minutes: 5 },
+      { id: "m4c9", n: 9, title: "Architectural Styles & Exterior Design", minutes: 4 },
+      { id: "m4c10", n: 10, title: "Size, Floor Plans & Layouts", minutes: 4 },
+      { id: "m4c11", n: 11, title: "Comparing ADU Options", minutes: 5 },
+      { id: "m4c12", n: 12, title: "Understanding Pricing", minutes: 5 },
+      { id: "m4c13", n: 13, title: "How to Narrow Your ADU Options", minutes: 5 },
+      { id: "m4c14", n: 14, title: "Before You Contact a Builder", minutes: 4 },
+      { id: "m4quiz", n: 15, kind: "quiz", title: "Module 4 Quiz", minutes: 5 },
+    ],
   },
   {
-    "id": "m5",
-    "n": 5,
-    "title": "Pre-Site Preparation & Budgets",
-    "blurb": "The pre-site costs, foundations, timelines, and budget planning that turn an ADU price tag into a realistic total project cost.",
-    "intro": "Before you build an ADU, you need more than a floor plan and a builder—you need a plan. This module shows you how to evaluate your property, understand the factors that drive cost, and build a realistic preliminary budget before hiring anyone. The goal isn't to become a contractor; it's to become a well-prepared homeowner. Remember: building an ADU is a process, not a purchase.",
-    "tag": "Major value driver",
-    "chapters": [
-      {
-        "id": "m5c1",
-        "n": 1,
-        "title": "Why Pre-Site Planning Matters",
-        "blurb": "The structure is only one part of your total project cost.",
-        "minutes": 4
-      },
-      {
-        "id": "m5c2",
-        "n": 2,
-        "title": "Choosing the Best ADU Location",
-        "blurb": "The city determines where you can build; your property determines the cost.",
-        "minutes": 4
-      },
-      {
-        "id": "m5c3",
-        "n": 3,
-        "title": "Utility Planning",
-        "blurb": "Distance from existing utilities has a direct impact on cost.",
-        "minutes": 3
-      },
-      {
-        "id": "m5c4",
-        "n": 4,
-        "title": "Potential Site Preparation",
-        "blurb": "Some properties need extra work before construction can begin.",
-        "minutes": 4
-      },
-      {
-        "id": "m5c5",
-        "n": 5,
-        "title": "Foundations",
-        "blurb": "The stable base beneath your ADU and one of the first major costs.",
-        "minutes": 3
-      },
-      {
-        "id": "m5c6",
-        "n": 6,
-        "title": "Surveys, Permits & Inspections",
-        "blurb": "Meeting your city's requirements before construction begins.",
-        "minutes": 4
-      },
-      {
-        "id": "m5c7",
-        "n": 7,
-        "title": "Understanding Project Timelines",
-        "blurb": "Why every project timeline is different—and usually longer than expected.",
-        "minutes": 4
-      },
-      {
-        "id": "m5c8",
-        "n": 8,
-        "title": "Creating Your Preliminary Budget",
-        "blurb": "A complete budget covers far more than the ADU itself.",
-        "minutes": 3
-      },
-      {
-        "id": "m5c9",
-        "n": 9,
-        "title": "The ADUAtlas Property Feasibility Study",
-        "blurb": "Applying what you've learned to your specific property.",
-        "minutes": 3
-      },
-      {
-        "id": "m5quiz",
-        "n": 10,
-        "kind": "quiz",
-        "title": "Module 5 Quiz",
-        "blurb": "Test your knowledge before moving on.",
-        "minutes": 5
-      }
-    ]
+    id: "m5",
+    n: 5,
+    title: "Pre-Site Preparation & Budgets",
+    blurb: "The pre-site costs, foundations, timelines, and budget planning that turn an ADU price tag into a realistic total project cost.",
+    tag: "Major value driver",
+    chapters: [
+      { id: "m5c1", n: 1, title: "Why Pre-Site Planning Matters", minutes: 4 },
+      { id: "m5c2", n: 2, title: "Choosing the Best ADU Location", minutes: 4 },
+      { id: "m5c3", n: 3, title: "Utility Planning", minutes: 3 },
+      { id: "m5c4", n: 4, title: "Potential Site Preparation", minutes: 4 },
+      { id: "m5c5", n: 5, title: "Foundations", minutes: 3 },
+      { id: "m5c6", n: 6, title: "Surveys, Permits & Inspections", minutes: 4 },
+      { id: "m5c7", n: 7, title: "Understanding Project Timelines", minutes: 4 },
+      { id: "m5c8", n: 8, title: "Creating Your Preliminary Budget", minutes: 3 },
+      { id: "m5c9", n: 9, title: "The ADUAtlas Property Feasibility Study", minutes: 3 },
+      { id: "m5quiz", n: 10, kind: "quiz", title: "Module 5 Quiz", minutes: 5 },
+    ],
   },
   {
-    "id": "m6",
-    "n": 6,
-    "title": "ADU FAQ",
-    "blurb": "40 answers to the questions homeowners ask most throughout the ADU journey.",
-    "intro": "Think of this module as your ADU field guide: a reference collection of the questions homeowners ask throughout the process. Some answers are general, while others depend entirely on your property, local regulations, and goals. Return to it often as you move from research to planning, permitting, and construction.",
-    "chapters": [
-      {
-        "id": "m6c1",
-        "n": 1,
-        "title": "General: How ADUs Work",
-        "blurb": "The foundation questions every homeowner should start with.",
-        "minutes": 3
-      },
-      {
-        "id": "m6c2",
-        "n": 2,
-        "title": "Regulations & Zoning",
-        "blurb": "What's allowed, where it can go, and who decides.",
-        "minutes": 4
-      },
-      {
-        "id": "m6c3",
-        "n": 3,
-        "title": "Planning & Feasibility",
-        "blurb": "Understand your property before you commit money.",
-        "minutes": 4
-      },
-      {
-        "id": "m6c4",
-        "n": 4,
-        "title": "Budgets, Costs & Financing",
-        "blurb": "The full cost of an ADU is more than the sticker price.",
-        "minutes": 5
-      },
-      {
-        "id": "m6c5",
-        "n": 5,
-        "title": "Choosing, Builders & Construction",
-        "blurb": "Buying smart, comparing quotes, and what to expect on site.",
-        "minutes": 6
-      },
-      {
-        "id": "m6c6",
-        "n": 6,
-        "title": "About ADUAtlas & Living in an ADU",
-        "blurb": "What ADUAtlas does, and life once your ADU is built.",
-        "minutes": 5
-      },
-      {
-        "id": "m6quiz",
-        "n": 7,
-        "kind": "quiz",
-        "title": "Module 6 Quiz",
-        "blurb": "Test your knowledge before moving on.",
-        "minutes": 5
-      }
-    ]
+    id: "m6",
+    n: 6,
+    title: "ADU FAQ",
+    blurb: "40 answers to the questions homeowners ask most throughout the ADU journey.",
+    chapters: [
+      { id: "m6c1", n: 1, title: "General: How ADUs Work", minutes: 3 },
+      { id: "m6c2", n: 2, title: "Regulations & Zoning", minutes: 4 },
+      { id: "m6c3", n: 3, title: "Planning & Feasibility", minutes: 4 },
+      { id: "m6c4", n: 4, title: "Budgets, Costs & Financing", minutes: 5 },
+      { id: "m6c5", n: 5, title: "Choosing, Builders & Construction", minutes: 6 },
+      { id: "m6c6", n: 6, title: "About ADUAtlas & Living in an ADU", minutes: 5 },
+      { id: "m6quiz", n: 7, kind: "quiz", title: "Module 6 Quiz", minutes: 5 },
+    ],
   },
   {
-    "id": "m7",
-    "n": 7,
-    "title": "False Starts & NAPE",
-    "blurb": "Can I build an ADU? Identify no-go conditions, high-risk false starts, and budget killers — and score your property with NAPE.",
-    "intro": "Every homeowner wants to know whether an ADU can be built on their property. Unfortunately, many people spend thousands of dollars before discovering that zoning restrictions, utility limitations, easements, access issues, or site conditions make the project far more expensive than expected — or impossible to build. This module introduces the National ADU Property Evaluation (NAPE), an early screening tool designed to identify potential obstacles before significant financial commitments. It does not replace surveys, engineering, city approvals, or builder evaluations. Sometimes the result confirms you're on the right path; sometimes it identifies issues that require research; and sometimes it helps you avoid one of the most expensive mistakes of your life. Knowledge before construction is one of the most valuable investments you can make.",
-    "tag": "NAPE",
-    "chapters": [
-      {
-        "id": "m7c1",
-        "n": 1,
-        "title": "Can I Build an ADU?",
-        "blurb": "Yes, not yet, or no — and why obstacles aren't always permanent.",
-        "minutes": 5
-      },
-      {
-        "id": "m7c2",
-        "n": 2,
-        "title": "Why Projects Fail Before They Begin",
-        "blurb": "Owning a property doesn't automatically mean you can build on it.",
-        "minutes": 3
-      },
-      {
-        "id": "m7c3",
-        "n": 3,
-        "title": "What Is NAPE?",
-        "blurb": "A fast, nationwide Yes/No evaluation of a property's ADU potential.",
-        "minutes": 3
-      },
-      {
-        "id": "m7c4",
-        "n": 4,
-        "title": "Automatic No-Go Conditions",
-        "blurb": "The legal obstacles that stop projects — zoning, lot size, setbacks, easements.",
-        "minutes": 5
-      },
-      {
-        "id": "m7c5",
-        "n": 5,
-        "title": "High-Risk False Starts",
-        "blurb": "Slope, overlays, access, water service, septic — conditions that inflate costs.",
-        "minutes": 6
-      },
-      {
-        "id": "m7c6",
-        "n": 6,
-        "title": "Financial False Starts",
-        "blurb": "Legally buildable isn't the same as financially practical.",
-        "minutes": 4
-      },
-      {
-        "id": "m7c7",
-        "n": 7,
-        "title": "The NAPE Scoring System",
-        "blurb": "Five weighted categories, 100 possible points.",
-        "minutes": 4
-      },
-      {
-        "id": "m7c8",
-        "n": 8,
-        "title": "Understanding Your NAPE Score",
-        "blurb": "What grades A through F mean — and why No today isn't No forever.",
-        "minutes": 4
-      },
-      {
-        "id": "m7quiz",
-        "n": 9,
-        "kind": "quiz",
-        "title": "Module 7 Quiz",
-        "blurb": "Test your knowledge before moving on.",
-        "minutes": 5
-      }
-    ]
+    id: "m7",
+    n: 7,
+    title: "False Starts & NAPE",
+    blurb: "Can I build an ADU? Identify no-go conditions, high-risk false starts, and budget killers, and score your property with NAPE.",
+    tag: "NAPE",
+    chapters: [
+      { id: "m7c1", n: 1, title: "Can I Build an ADU?", minutes: 5 },
+      { id: "m7c2", n: 2, title: "Why Projects Fail Before They Begin", minutes: 3 },
+      { id: "m7c3", n: 3, title: "What Is NAPE?", minutes: 3 },
+      { id: "m7c4", n: 4, title: "Automatic No-Go Conditions", minutes: 5 },
+      { id: "m7c5", n: 5, title: "High-Risk False Starts", minutes: 6 },
+      { id: "m7c6", n: 6, title: "Financial False Starts", minutes: 4 },
+      { id: "m7c7", n: 7, title: "The NAPE Scoring System", minutes: 4 },
+      { id: "m7c8", n: 8, title: "Understanding Your NAPE Score", minutes: 4 },
+      { id: "m7quiz", n: 9, kind: "quiz", title: "Module 7 Quiz", minutes: 5 },
+    ],
   },
   {
-    "id": "m9",
-    "n": 8,
-    "title": "Your Feasibility Study and Site Plan",
-    "blurb": "Verify what you can build, and where, before spending money — inside the ADUAtlas Property Feasibility Study.",
-    "intro": "You've learned how detached ADUs work, how regulations shape your project, how to prepare your site, and how to build a preliminary budget. Now it's time to apply that knowledge to your specific property. This module walks through the ADUAtlas Property Feasibility Study — the packet that turns everything you've learned into a plan for your lot.",
-    "chapters": [
-      {
-        "id": "m9c1",
-        "n": 1,
-        "title": "Why Verify Before You Build",
-        "blurb": "Every property is different — guessing costs you money.",
-        "minutes": 4
-      },
-      {
-        "id": "m9c2",
-        "n": 2,
-        "title": "What the Study Includes",
-        "blurb": "One planning packet instead of a dozen scattered sources.",
-        "minutes": 3
-      },
-      {
-        "id": "m9c3",
-        "n": 3,
-        "title": "Your Visual Site Plan",
-        "blurb": "See your lot, your rules, and your options in one picture.",
-        "minutes": 3
-      },
-      {
-        "id": "m9c4",
-        "n": 4,
-        "title": "Interactive Planning Worksheets",
-        "blurb": "Four tools that turn information into a practical plan.",
-        "minutes": 3
-      },
-      {
-        "id": "m9c5",
-        "n": 5,
-        "title": "NAPE — National ADU Property Evaluation",
-        "blurb": "Score your property's detached ADU potential.",
-        "minutes": 3
-      },
-      {
-        "id": "m9c6",
-        "n": 6,
-        "title": "Budget, Timelines, Permits & Inspections",
-        "blurb": "Planning tools that reveal your total project, not just the structure.",
-        "minutes": 3
-      },
-      {
-        "id": "m9c7",
-        "n": 7,
-        "title": "How the Study Saves Time and Money",
-        "blurb": "Start the builder conversation informed, not empty-handed.",
-        "minutes": 5
-      },
-      {
-        "id": "m9quiz",
-        "n": 8,
-        "kind": "quiz",
-        "title": "Module 8 Quiz",
-        "blurb": "Test your knowledge before moving on.",
-        "minutes": 5
-      }
-    ]
+    id: "m9",
+    n: 8,
+    title: "Your Feasibility Study and Site Plan",
+    blurb: "Verify what you can build, and where, before spending money, inside the ADUAtlas Property Feasibility Study.",
+    chapters: [
+      { id: "m9c1", n: 1, title: "Why Verify Before You Build", minutes: 4 },
+      { id: "m9c2", n: 2, title: "What the Study Includes", minutes: 3 },
+      { id: "m9c3", n: 3, title: "Your Visual Site Plan", minutes: 3 },
+      { id: "m9c4", n: 4, title: "Interactive Planning Worksheets", minutes: 3 },
+      { id: "m9c5", n: 5, title: "NAPE: National ADU Property Evaluation", minutes: 3 },
+      { id: "m9c6", n: 6, title: "Budget, Timelines, Permits & Inspections", minutes: 3 },
+      { id: "m9c7", n: 7, title: "How the Study Saves Time and Money", minutes: 5 },
+      { id: "m9quiz", n: 8, kind: "quiz", title: "Module 8 Quiz", minutes: 5 },
+    ],
   },
   {
-    "id": "m10",
-    "n": 9,
-    "title": "From Vision to Reality",
-    "blurb": "Cedar Grove's lessons, the verification process, your real budget, and everything that carries your vision into a buildable plan.",
-    "intro": "Congratulations — you have completed the education. Building a detached ADU is not a simple transaction: there are property conditions, regulations, construction choices, utility requirements, pre-site expenses, and permitting procedures to consider. This final module moves you from education to verification: verify your utilities, refine your pre-site estimate, organize your total project budget, prepare for builder conversations, work with your city — and keep asking one final question: what else? Is there anything I am missing? The goal is not simply to build an ADU. The goal is to make the best decision for you, your property, your budget, and your vision. Remember the carpenter's rule: measure twice, cut once. For an ADU project, that means verify twice, build once.",
-    "chapters": [
-      {
-        "id": "m10c1",
-        "n": 1,
-        "title": "Lessons I Learned from Cedar Grove",
-        "blurb": "A real story about committing to a vision before understanding the property.",
-        "minutes": 5
-      },
-      {
-        "id": "m10c2",
-        "n": 2,
-        "title": "From Feasibility to Verification",
-        "blurb": "Verify the property, the regulations, the ADU, and the budget.",
-        "minutes": 5
-      },
-      {
-        "id": "m10c3",
-        "n": 3,
-        "title": "Verifying Utilities & Connection Points",
-        "blurb": "Markers aren't connection points — capacity, ownership, and fees to confirm.",
-        "minutes": 6
-      },
-      {
-        "id": "m10c4",
-        "n": 4,
-        "title": "Completing Your Pre-Site Estimate",
-        "blurb": "Every expense to consider — and why pre-site work can add 30–50% or more.",
-        "minutes": 6
-      },
-      {
-        "id": "m10c5",
-        "n": 5,
-        "title": "Building Your Realistic Total Budget",
-        "blurb": "Six steps: pre-site first, then what remains for the structure.",
-        "minutes": 5
-      },
-      {
-        "id": "m10c6",
-        "n": 6,
-        "title": "Preparing to Meet with Builders",
-        "blurb": "Your project folder, their questions, your questions, and comparing the same scope.",
-        "minutes": 6
-      },
-      {
-        "id": "m8c4",
-        "n": 7,
-        "title": "Questions for a Prefab, Modular, or Kit Supplier",
-        "blurb": "Know exactly what is included before you buy a factory-built ADU.",
-        "minutes": 6
-      },
-      {
-        "id": "m10c7",
-        "n": 8,
-        "title": "Working with Your City & Utility Providers",
-        "blurb": "Easements, planned infrastructure, and why the first No isn't always final.",
-        "minutes": 5
-      },
-      {
-        "id": "m10c8",
-        "n": 9,
-        "title": "Hiring a Builder or Being Your Own GC",
-        "blurb": "Two very different roles — choose the one that matches your capacity.",
-        "minutes": 4
-      },
-      {
-        "id": "m10c9",
-        "n": 10,
-        "title": "The ADUAtlas Promise & Your Next Steps",
-        "blurb": "One year of access, our information commitment, and your 10-step checklist.",
-        "minutes": 5
-      },
-      {
-        "id": "m10c10",
-        "n": 11,
-        "title": "Course Summary & Wrap-Up",
-        "blurb": "Everything you now understand — and the framework to carry forward.",
-        "minutes": 4
-      },
-      {
-        "id": "m10quiz",
-        "n": 12,
-        "kind": "quiz",
-        "title": "Module 9 Quiz",
-        "blurb": "Test your knowledge one final time.",
-        "minutes": 5
-      }
-    ]
+    id: "m10",
+    n: 9,
+    title: "From Vision to Reality",
+    blurb: "Cedar Grove's lessons, the verification process, your real budget, and everything that carries your vision into a buildable plan.",
+    chapters: [
+      { id: "m10c1", n: 1, title: "Lessons I Learned from Cedar Grove", minutes: 5 },
+      { id: "m10c2", n: 2, title: "From Feasibility to Verification", minutes: 5 },
+      { id: "m10c3", n: 3, title: "Verifying Utilities & Connection Points", minutes: 6 },
+      { id: "m10c4", n: 4, title: "Completing Your Pre-Site Estimate", minutes: 6 },
+      { id: "m10c5", n: 5, title: "Building Your Realistic Total Budget", minutes: 5 },
+      { id: "m10c6", n: 6, title: "Preparing to Meet with Builders", minutes: 6 },
+      { id: "m8c4", n: 7, title: "Questions for a Prefab, Modular, or Kit Supplier", minutes: 6 },
+      { id: "m10c7", n: 8, title: "Working with Your City & Utility Providers", minutes: 5 },
+      { id: "m10c8", n: 9, title: "Hiring a Builder or Being Your Own GC", minutes: 4 },
+      { id: "m10c9", n: 10, title: "The ADUAtlas Promise & Your Next Steps", minutes: 5 },
+      { id: "m10c10", n: 11, title: "Course Summary & Wrap-Up", minutes: 4 },
+      { id: "m10quiz", n: 12, kind: "quiz", title: "Module 9 Quiz", minutes: 5 },
+    ],
   },
 ];
 
@@ -712,6 +215,108 @@ export const chapters = modules.flatMap((m) =>
 export const chapterById = (id) => chapters.find((c) => c.id === id) || null;
 export const moduleById = (id) => modules.find((m) => m.id === id) || null;
 
+// ── Course text, from the server ────────────────────────────────────────────
+// One chapter body, one module quiz, or the course introduction ("intro"),
+// fetched from /api/course with the signed-in session's token. The server
+// decides who may read it; PaidGate only decides what the page shows.
+//
+// Resolves to { ok: true, data } or { ok: false, status, error }. status is
+// the HTTP status, or 0 when no request could be made (no Supabase, signed
+// out, network failure), so a page can tell "sign in again" from "not in your
+// plan" from "try again".
+//
+// Answers are cached per signed-in user for the life of the page, so going
+// back to a lesson does not refetch it. A reload starts clean.
+const itemCache = new Map();
+
+export const fetchCourseItem = async (id) => {
+  if (!id) return { ok: false, status: 0, error: "no-id" };
+  if (!supabase) return { ok: false, status: 0, error: "supabase-disabled" };
+  let session = null;
+  try {
+    const { data } = await supabase.auth.getSession();
+    session = data?.session || null;
+  } catch {
+    session = null;
+  }
+  const token = session?.access_token;
+  if (!token) return { ok: false, status: 401, error: "signed-out" };
+
+  const cacheKey = `${session.user?.id || ""}:${id}`;
+  if (itemCache.has(cacheKey)) return { ok: true, data: itemCache.get(cacheKey) };
+
+  try {
+    const r = await fetch(`/api/course?id=${encodeURIComponent(id)}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const body = await r.json().catch(() => null);
+    if (!r.ok) return { ok: false, status: r.status, error: body?.error || "request-failed" };
+    itemCache.set(cacheKey, body);
+    return { ok: true, data: body };
+  } catch {
+    return { ok: false, status: 0, error: "network" };
+  }
+};
+
+// React hook over fetchCourseItem. Returns
+//   { state: "loading" }
+//   { state: "ready", data }
+//   { state: "error", status, error, retry }
+// and starts over whenever id changes. Pass null to fetch nothing.
+export const useCourseItem = (id) => {
+  const [result, setResult] = useState({ id: null, attempt: 0, value: null });
+  const [attempt, setAttempt] = useState(0);
+
+  useEffect(() => {
+    if (!id) return undefined;
+    let live = true;
+    fetchCourseItem(id).then((value) => {
+      if (live) setResult({ id, attempt, value });
+    });
+    return () => {
+      live = false;
+    };
+  }, [id, attempt]);
+
+  const retry = () => setAttempt((n) => n + 1);
+  if (!id) return { state: "error", status: 0, error: "no-id", retry };
+  // Anything not answered for this exact id and attempt is still loading, so a
+  // previous lesson's text is never shown under the next lesson's title.
+  if (result.id !== id || result.attempt !== attempt || !result.value) return { state: "loading" };
+  if (result.value.ok) return { state: "ready", data: result.value.data };
+  return { state: "error", status: result.value.status, error: result.value.error, retry };
+};
+
+// ── Progress persistence ────────────────────────────────────────────────────
+// localStorage stays the SYNCHRONOUS source of truth, because CourseIndex,
+// CourseChapter and Dashboard all read progress during render. The signed-in
+// user's row is the DURABLE copy, and 0001_init.sql already granted the user
+// UPDATE on exactly the column it needs:
+//
+//   grant update (completed_chapters, builder_packet, knowledge_result)
+//     on public.users to authenticated;
+//
+// Until now nothing ever used that grant for course progress. The course is
+// sold with a year of access and the privacy policy tells the customer their
+// account holds their progress, so a cleared browser or a second device threw
+// away something they paid for. It is written now.
+//
+// THE COLUMN SHAPE. 0001 documented completed_chapters as ["c1","c2"]. Quiz
+// results ride the SAME column rather than a new one, so the existing grant
+// stays the whole permission story and no migration is needed:
+//
+//   { "v": 1,
+//     "chapters": ["m1c1", …],
+//     "quizzes": { "m1quiz": { "score": 4, "total": 5, "percent": 80, "at": "…" } } }
+//
+// A bare array is still read, because that is what the documented older shape
+// is, and it is upgraded to the object on the next write.
+//
+// NOTHING HERE BLOCKS THE LEARNER. Every server call is fire-and-forget inside
+// try/catch, debounced, and ignored on failure: marking a chapter complete is a
+// local write that returns immediately, and a network or RLS failure leaves the
+// local copy intact and retries on the next change.
+
 const readSet = (key) => {
   if (typeof window === "undefined") return new Set();
   try {
@@ -724,8 +329,102 @@ const readSet = (key) => {
 
 const writeSet = (key, set) => {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(key, JSON.stringify([...set]));
+  try {
+    window.localStorage.setItem(key, JSON.stringify([...set]));
+  } catch {
+    // Private mode / quota. The in-memory result of this call still stands and
+    // the server mirror below is what makes it durable.
+  }
 };
+
+const readQuizzes = () => {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = window.localStorage.getItem(QUIZ_KEY);
+    const parsed = raw ? JSON.parse(raw) : {};
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+};
+
+const writeQuizzes = (q) => {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(QUIZ_KEY, JSON.stringify(q));
+  } catch {
+    // See writeSet.
+  }
+};
+
+// What gets written to users.completed_chapters.
+const progressPayload = () => ({
+  v: 1,
+  chapters: [...getCompletedChapters()],
+  quizzes: readQuizzes(),
+});
+
+// Read either shape back. Returns null when the row holds nothing usable.
+const parseServerProgress = (value) => {
+  if (Array.isArray(value)) return { chapters: value.filter((c) => typeof c === "string"), quizzes: {} };
+  if (value && typeof value === "object") {
+    const chapters = Array.isArray(value.chapters) ? value.chapters.filter((c) => typeof c === "string") : [];
+    const quizzes = value.quizzes && typeof value.quizzes === "object" && !Array.isArray(value.quizzes) ? value.quizzes : {};
+    return { chapters, quizzes };
+  }
+  return null;
+};
+
+// Debounced mirror to the signed-in user's row. A burst of marks (finishing a
+// module, then its quiz) collapses into one write.
+let pushTimer = null;
+// True from a mark until a write of it has SUCCEEDED. A write that failed (a
+// flaky connection) leaves it set, so log out still sends the local copy, which
+// would otherwise be the only copy and be removed with the account's data.
+let progressDirty = false;
+const sendProgress = async (payload) => {
+  try {
+    const { data: sess } = await supabase.auth.getSession();
+    const authUser = sess?.session?.user;
+    if (!authUser) return; // Signed out: the local copy is all there is, by design.
+    const { error } = await supabase.from("users").update({ completed_chapters: payload }).eq("auth_user_id", authUser.id);
+    if (!error) progressDirty = false;
+  } catch {
+    // Never surfaced, never blocking. The next change retries.
+  }
+};
+const pushProgress = () => {
+  if (typeof window === "undefined" || !supabase) return;
+  if (pushTimer) clearTimeout(pushTimer);
+  const payload = progressPayload();
+  progressDirty = true;
+  pushTimer = window.setTimeout(() => {
+    pushTimer = null;
+    sendProgress(payload);
+  }, 400);
+};
+
+// Log out (T4-01): a mark made in the last 400 ms has not been sent yet. The
+// write is taken out of the timer so it can be sent under the session that made
+// it, before that session ends, and never under the next one.
+// Also a mark whose earlier write failed: the whole local copy is taken, before
+// accountScope removes it.
+export const takeUnsentProgress = () => {
+  const waiting = Boolean(pushTimer) || progressDirty;
+  if (pushTimer) clearTimeout(pushTimer);
+  pushTimer = null;
+  return waiting ? progressPayload() : null;
+};
+export const sendUnsentProgress = (payload) => (payload && supabase ? sendProgress(payload) : Promise.resolve());
+
+// Log out, or another account signing in: the lesson texts fetched for the
+// previous account and any write still waiting are dropped with its copy.
+onAccountScopeReset(() => {
+  if (pushTimer) clearTimeout(pushTimer);
+  pushTimer = null;
+  progressDirty = false;
+  itemCache.clear();
+});
 
 export const getCompletedChapters = () => readSet(COMPLETED_KEY);
 
@@ -733,12 +432,34 @@ export const markChapterComplete = (id) => {
   const s = getCompletedChapters();
   s.add(id);
   writeSet(COMPLETED_KEY, s);
+  pushProgress();
 };
 
 export const unmarkChapter = (id) => {
   const s = getCompletedChapters();
   s.delete(id);
   writeSet(COMPLETED_KEY, s);
+  pushProgress();
+};
+
+// ── Quiz results ────────────────────────────────────────────────────────────
+// ModuleQuiz scored into useState alone, so a score vanished on navigation and
+// was never part of the account. Results are keyed by the quiz chapter id
+// ("m1quiz"), the same stable id the chapter list uses.
+
+export const getQuizResult = (quizId) => (quizId ? readQuizzes()[quizId] || null : null);
+
+export const saveQuizResult = (quizId, { score, total }) => {
+  if (!quizId || !Number.isFinite(score) || !Number.isFinite(total) || total <= 0) return null;
+  const result = {
+    score,
+    total,
+    percent: Math.round((score / total) * 100),
+    at: new Date().toISOString(),
+  };
+  writeQuizzes({ ...readQuizzes(), [quizId]: result });
+  pushProgress();
+  return result;
 };
 
 export const courseProgress = () => {
@@ -796,7 +517,11 @@ const readPacket = () => {
 
 const writePacket = (p) => {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(PACKET_KEY, JSON.stringify(p));
+  try {
+    window.localStorage.setItem(PACKET_KEY, JSON.stringify(p));
+  } catch {
+    // See writeSet.
+  }
 };
 
 export const loadPacket = () => {
@@ -824,12 +549,46 @@ export const savePacket = (next) => writePacket(next);
 // Union for chapters and blank-fill for the packet, so a login/refresh NEVER
 // wipes progress made locally — it only ever adds what the server also knows.
 // Safe to call on every auth hydration.
+//
+// Union is deliberate and it has a known cost: a chapter un-marked on another
+// device is re-added on this one if this browser still holds it. The trade is
+// on purpose. A buyer can work through chapters before creating their account
+// (the /unlock flow), and losing that on first sign-in is a worse failure than
+// a checkbox that comes back. Because the merged result is pushed back below,
+// the two copies converge instead of drifting.
+//
+// Quiz results merge per quiz, most recent attempt winning, so neither side
+// loses a score it holds.
 export const mergeServerProgress = ({ completedChapters, builderPacket } = {}) => {
-  if (Array.isArray(completedChapters) && completedChapters.length) {
-    const s = getCompletedChapters();
-    completedChapters.forEach((id) => s.add(id));
-    writeSet(COMPLETED_KEY, s);
+  const server = parseServerProgress(completedChapters);
+  if (server) {
+    if (server.chapters.length) {
+      const s = getCompletedChapters();
+      server.chapters.forEach((id) => s.add(id));
+      writeSet(COMPLETED_KEY, s);
+    }
+    const local = readQuizzes();
+    const merged = { ...local };
+    let quizzesChanged = false;
+    for (const [id, remote] of Object.entries(server.quizzes)) {
+      if (!remote || typeof remote !== "object") continue;
+      const mine = merged[id];
+      if (!mine || String(remote.at || "") > String(mine.at || "")) {
+        merged[id] = remote;
+        quizzesChanged = true;
+      }
+    }
+    if (quizzesChanged) writeQuizzes(merged);
+
+    // Push the union back only when this browser knows something the row does
+    // not. That is what initialises the server copy for a learner who started
+    // before signing in, and it keeps a plain hydration from writing.
+    const before = JSON.stringify({ chapters: [...server.chapters].sort(), quizzes: server.quizzes });
+    const now = progressPayload();
+    const after = JSON.stringify({ chapters: [...now.chapters].sort(), quizzes: now.quizzes });
+    if (before !== after) pushProgress();
   }
+
   if (builderPacket && typeof builderPacket === "object") {
     const own = readPacket();
     const merged = { ...own };

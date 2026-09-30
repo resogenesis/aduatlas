@@ -16,7 +16,10 @@
 //             (see paragraphs() in content.js) separates <p> blocks.
 //   - image:  default is { src, alt } (src is the bundled asset import).
 //   - blocks: default is an array of { p } | { h, p } | { h, list } |
-//             { remember } objects (same shape as courseContent.js).
+//             { remember } objects. The paid course blocks (course.chapter.*
+//             and course.intro) are the exception: their text is held on the
+//             server (DEF-07), so their default is null and the entry carries
+//             an async loadDefault() instead. See ./course.js.
 import { HOME_CONTENT } from "./home";
 import { ABOUT_CONTENT } from "./about";
 import { HOW_TO_ADU_CONTENT } from "./howToAdu";

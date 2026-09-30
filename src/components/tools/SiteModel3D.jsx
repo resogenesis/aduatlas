@@ -6,11 +6,22 @@
 // setback outline, low-poly trees, soft shadows. Lazy-loaded (Canvas + three
 // are heavy) so the map/plan render instantly and 3D streams in on demand.
 //
+// SHADOWS (R3-04). This used drei's <SoftShadows>, which rewrites three's
+// shadowmap_pars_fragment chunk with a PCSS routine that samples the shadow map
+// as a packed RGBA texture (unpackRGBAToDepth(texture2D(shadowMap, uv))). Since
+// three r18x a PCF shadow map is a depth texture sampled through
+// sampler2DShadow, so that routine no longer compiles: every lit material failed
+// its shader, and with Shadows on (the default) the house, the ADU and the trees
+// were not drawn at all. three's own PCF filter now softens by the light's
+// shadow.radius (a Vogel-disk kernel), so the soft edge comes from there and no
+// shader is patched. "percentage" is PCFShadowMap: PCFSoftShadowMap is
+// deprecated in this three and would only log a warning and fall back to it.
+//
 // Coordinate mapping — model is in FEET (x=width, y=depth, origin front-left).
 // Three.js scene is centered on the lot: X=width, Z=depth, Y=height. 1 unit = 1 ft.
 
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Html, SoftShadows, Line } from "@react-three/drei";
+import { OrbitControls, Html, Line } from "@react-three/drei";
 
 const ACCENT = "#C6F24E";
 const HOME_COLOR = "#CBD5C0";
@@ -18,6 +29,7 @@ const LOT_COLOR = "#E8776B";
 const GROUND = "#14160F";
 const TABLE = "#0B0C08";
 
+const SHADOW_RADIUS = 6; // PCF kernel radius in shadow-map texels: a soft edge
 const HOME_HEIGHT = 18; // ft — ~1.5 story existing home
 const ADU_HEIGHT = 14; // ft — single-story detached ADU
 
@@ -100,7 +112,6 @@ function Scene({ model, showSetbacks, showDimensions, showShadows }) {
 
   return (
     <>
-      {showShadows && <SoftShadows size={28} samples={12} focus={0.6} />}
       <ambientLight intensity={0.55} />
       <hemisphereLight args={["#dfe6d8", "#20241a", 0.5]} />
       <directionalLight
@@ -109,6 +120,8 @@ function Scene({ model, showSetbacks, showDimensions, showShadows }) {
         castShadow={showShadows}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
+        shadow-radius={SHADOW_RADIUS}
+        shadow-bias={-0.0005}
         shadow-camera-left={-diag}
         shadow-camera-right={diag}
         shadow-camera-top={diag}
@@ -198,7 +211,7 @@ const SiteModel3D = ({ model, showSetbacks = true, showDimensions = true, showSh
   return (
     <div className="h-[440px] lg:h-[560px] w-full rounded-2xl overflow-hidden border border-stroke bg-canvas">
       <Canvas
-        shadows={showShadows}
+        shadows={showShadows ? "percentage" : false}
         dpr={[1, 2]}
         camera={{ position: [diag * 0.55, diag * 0.7, diag * 0.95], fov: 38, near: 1, far: diag * 6 }}
       >

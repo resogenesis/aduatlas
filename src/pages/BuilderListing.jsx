@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiAward, FiBookmark, FiMapPin, FiSearch } from "react-icons/fi";
-import { APPROACH_LABELS, BUILD_METHOD_LABELS, SPECIALTY_LABELS, TURNKEY_HELP, fetchBuilders, fetchSaved, filterBuilders, parseAddress, publicUrl, suggestForProperty, toggleSaved } from "../lib/builders";
+import { APPROACH_LABELS, BUILD_METHOD_LABELS, SPECIALTY_LABELS, TURNKEY_HELP, fetchBuilders, fetchSaved, filterBuilders, isApproachKnown, isClaimKnown, isClaimed, isVerified, parseAddress, publicUrl, suggestForProperty, toggleSaved } from "../lib/builders";
+import { VerifiedBadge } from "./BuilderProfile";
 import { loadPacket } from "../stores/courseStore";
 import { hasReportTier } from "../stores/paymentStore";
 import { supabaseEnabled } from "../lib/supabase";
@@ -9,9 +10,34 @@ import { supabaseEnabled } from "../lib/supabase";
 // Builder directory for paid homeowners. Filter order follows the 2026-09-24
 // call: State, then ADU type, then Turnkey, then the builder itself, with
 // Licensed state and Build method alongside. Platinum homeowners also see up
-// to five builders suggested for their property. The directory reads the
-// restricted builders_public view (src/lib/builders.js), so nothing here can
-// show a builder's contact name, street address, terms or referral code.
+// to five builders suggested for their property (the passive strip; "Match
+// Me" is Phase 2). The directory reads the restricted builders_public view
+// (src/lib/builders.js), so nothing here can show a builder's contact name,
+// street address, terms, claim code or referral code.
+//
+// THE FOUR LISTING STATES (decision 2e) are distinct on the card, not blurred:
+//
+//   verified               the "Verified on ADUAtlas" badge, the same component
+//                          the profile and the builder dashboard render. It
+//                          requires a claimed owner AND the business check.
+//   claimed, not verified   no badge and no note. The company took the listing
+//                          over; ADUAtlas has not finished checking it.
+//   unclaimed              a quiet "Unclaimed listing" note, because a card that
+//                          reads exactly like a claimed one implies the company
+//                          took part (decision 2a). The profile behind it says
+//                          the same thing at length.
+//   affiliate or partner    invisible here, deliberately. relationship_type is
+//                          in neither public view, so a commercial arrangement
+//                          can never read as verification on a homeowner surface.
+//
+// Contact details are not on the card at all. They live on the profile and only
+// for a claimed listing (decision 2d, migration 0010).
+//
+// Unknown means unknown. A missing field is never printed as an answer. The
+// Turnkey chip appears only when turnkey is exactly true, and the build
+// approach chip only when isApproachKnown(b), so a company that never stated
+// either one simply has no chip for it. A card with no Turnkey chip does not
+// mean the company said no.
 
 const FALLBACK_STATES = ["AZ", "CA", "CO", "FL", "GA", "MA", "NC", "NV", "NY", "OR", "TX", "UT", "WA"];
 
@@ -25,6 +51,11 @@ const Card = ({ b, saved, onSave }) => {
   const logo = publicUrl(b.logo_path);
   const photo = publicUrl((b.photos || [])[0]);
   const licensed = b.licensed_states || [];
+  // Only a row that states ownership gets a note. A record from a database
+  // without migration 0010 carries no `claimed` column, and saying nothing is
+  // the honest answer there: the one thing that must never happen is telling a
+  // homeowner a company failed to claim a listing it may in fact own.
+  const unclaimed = isClaimKnown(b) && !isClaimed(b);
   return (
     <li className="bg-canvas border border-stroke rounded-3xl overflow-hidden flex flex-col lift">
       <Link to={`/builders/${b.slug}`} className="block aspect-[16/9] bg-surface-1-solid overflow-hidden">
@@ -32,9 +63,22 @@ const Card = ({ b, saved, onSave }) => {
       </Link>
       <div className="p-5 flex-1 flex flex-col">
         <div className="flex items-start justify-between gap-3 mb-1">
-          <Link to={`/builders/${b.slug}`} className="font-display text-paper text-lg leading-tight hover:text-accent">
-            {b.name}
-          </Link>
+          <div className="min-w-0">
+            <Link to={`/builders/${b.slug}`} className="font-display text-paper text-lg leading-tight hover:text-accent">
+              {b.name}
+            </Link>
+            {isVerified(b) ? (
+              <div className="mt-1.5">
+                <VerifiedBadge />
+              </div>
+            ) : unclaimed ? (
+              <div className="mt-1.5">
+                <span title="ADUAtlas compiled this listing from public information. The company has not claimed its profile." className="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-1-solid border border-stroke text-paper-dim text-xs font-medium">
+                  Unclaimed listing
+                </span>
+              </div>
+            ) : null}
+          </div>
           <button type="button" onClick={() => onSave(b)} aria-pressed={saved} aria-label={saved ? "Remove from saved" : "Save builder"} className={`p-2 rounded-lg border transition ${saved ? "bg-accent text-accent-fg border-accent" : "border-stroke text-paper-dim hover:border-accent"}`}>
             <FiBookmark className={saved ? "fill-current" : ""} />
           </button>
@@ -43,7 +87,7 @@ const Card = ({ b, saved, onSave }) => {
           <FiMapPin className="shrink-0" /> {[...(b.cities || []).slice(0, 2), b.state].filter(Boolean).join(", ")}
         </p>
         <div className="flex flex-wrap gap-1.5 mb-4">
-          {b.turnkey && (
+          {b.turnkey === true && (
             <span title={TURNKEY_HELP} className="px-2.5 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium">Turnkey</span>
           )}
           {licensed.length > 0 && (
@@ -62,7 +106,7 @@ const Card = ({ b, saved, onSave }) => {
               {BUILD_METHOD_LABELS?.[m] || m}
             </span>
           ))}
-          {(b.build_methods || []).length === 0 && APPROACH_LABELS[b.build_approach] && (
+          {(b.build_methods || []).length === 0 && isApproachKnown(b) && APPROACH_LABELS[b.build_approach] && (
             <span className="px-2.5 py-1 rounded-full bg-surface-1-solid text-xs text-paper-dim">{APPROACH_LABELS[b.build_approach]}</span>
           )}
         </div>

@@ -77,6 +77,29 @@ body {
 
 html, body { overflow-x: hidden; }
 
+/* Every layout's <main> is a flex item (AppLayout, AdminLayout, GovLayout and
+   BuilderLayout put it beside the sidebar). A flex item's default min-width is
+   its min-content width, so one long unbreakable line or a wide table made the
+   whole page wider than a phone, and the overflow-x above then cut it off with
+   no way to scroll to it (the worksheets' cost columns, the admin tables). With
+   min-width 0 the page is the width of the screen and a wide table scrolls
+   inside its own overflow-x-auto wrapper. The layouts carry min-w-0 as well;
+   this rule is the net for any layout that does not. */
+main { min-width: 0; }
+
+/* iOS Safari zooms the page when a form field under 16px takes focus, and most
+   fields here are text-sm (14px). Below the desktop breakpoint every text field,
+   select and textarea is at least 16px, so focusing one never zooms. Unlayered,
+   so it wins over the text-xs and text-sm utilities; fields that are already
+   larger keep their size. */
+@media (max-width: 1023.98px) {
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="button"], [type="submit"], [type="reset"], [type="image"], [type="hidden"]):not(.text-base, .text-lg, .text-xl, .text-2xl, .text-3xl),
+  select:not(.text-base, .text-lg, .text-xl, .text-2xl, .text-3xl),
+  textarea:not(.text-base, .text-lg, .text-xl, .text-2xl, .text-3xl) {
+    font-size: 16px;
+  }
+}
+
 /* No italics anywhere on the site (Richard, 2026-09-20). */
 em, i, .italic { font-style: normal; }
 
@@ -175,7 +198,11 @@ em, i, .italic { font-style: normal; }
 /* Scroll-reveal — element observes IntersectionObserver and toggles
    data-reveal="on" to trigger the slide-in. */
 [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
-[data-reveal="on"] { opacity: 1; transform: translateY(0); }
+/* none, not translateY(0): any transform, even an identity one, makes the
+   element the containing block for position:fixed descendants, so a dialog
+   inside a revealed section would be sized and centred to the section instead
+   of the screen. */
+[data-reveal="on"] { opacity: 1; transform: none; }
 
 
 /* ── Public-site spacing system ─────────────────────────────────────────────
@@ -205,7 +232,13 @@ em, i, .italic { font-style: normal; }
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.page-enter { animation: page-enter 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+/* backwards, not both. With both, the last keyframe's transform stayed on
+   RootLayout's <main> after the animation ended, and a transformed ancestor is
+   the containing block for position:fixed: the builder profile's "Request
+   introduction" dialog (fixed inset-0) was sized to the whole page and opened
+   off-screen on a phone. backwards still holds the first keyframe until the
+   animation starts; when it ends, nothing is left on the element. */
+.page-enter { animation: page-enter 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
 
 .lift { transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.25s ease; }
 .lift:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -28px rgba(23, 32, 27, 0.35); }
@@ -227,4 +260,17 @@ em, i, .italic { font-style: normal; }
   .page-enter, .animate-fade-up, .animate-float-soft, .animate-pulse-soft { animation: none !important; }
   .lift, .lift:hover, .press, .press:active { transform: none; transition: none; }
   .acc { transition: none; }
+}
+
+/* T4-22 (RC4 rehearsal, carried from R3-30): touch targets. On a touch screen a
+   small control (an icon button, a text-xs or text-sm link standing on its own)
+   gets at least 44 px of hit area in each direction. Nothing changes on a
+   screen with a fine pointer, and the control looks the same everywhere. */
+@media (pointer: coarse) {
+  .tap-target {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    min-width: 44px;
+  }
 }

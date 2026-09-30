@@ -20,6 +20,15 @@
 // builder B's link while builder A's code is held still counts once for B,
 // and a second visit through the same link does not count again.
 //
+// Tracking activates on claim (migration 0007). The browser cannot tell a
+// claimed builder's code from an unclaimed one and does not try: it stores
+// and beacons any well-formed code, and the server decides. log_referral_visit,
+// capture_lead and the Stripe webhook resolve a code only to a builder that
+// is approved, active and claimed by a builder account; for anyone else the
+// code is a dead link and nothing is recorded or attributed. Unclaimed
+// listings are never handed a link, so a dead code in the wild is not
+// expected; if one arrives anyway it costs nothing and blocks nothing.
+//
 // Storage is best-effort: private windows and blocked storage just mean no
 // attribution, never an error the visitor can see.
 

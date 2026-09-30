@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { NavLink, Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
-import { FiBarChart2, FiUsers, FiShield, FiFileText, FiClipboard, FiTool, FiMenu, FiX, FiLogOut } from "react-icons/fi";
+import { FiBarChart2, FiUsers, FiShield, FiFileText, FiClipboard, FiTool, FiMapPin, FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import Logomark from "../components/brand/Logomark";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { currentUser, logout } from "../stores/authStore";
 
+// Amy's scope is the five things decision 2f names and it grows no further:
+// course content, builder information, regulatory resources, government entity
+// claims, and reviewing and publishing government submissions. The last three
+// live together on /admin/regulatory.
 const nav = [
   { to: "/admin", label: "Overview", Icon: FiBarChart2, end: true },
   { to: "/admin/studies", label: "Studies", Icon: FiClipboard },
   { to: "/admin/builders", label: "Builders", Icon: FiTool },
+  { to: "/admin/regulatory", label: "Rules and Resources", Icon: FiMapPin },
   { to: "/admin/content", label: "Content", Icon: FiFileText },
   { to: "/admin/users", label: "Users", Icon: FiUsers },
   { to: "/admin/admins", label: "Admins", Icon: FiShield },
@@ -60,6 +65,20 @@ const SidebarContents = ({ onLinkClick }) => {
             <p className="text-paper text-sm font-medium truncate">{user.username}</p>
             <p className="text-paper-dim text-xs truncate">{user.email}</p>
           </div>
+          {/* An admin account that also holds a government membership lands here
+              after signing in (staff comes first in routeForUser), so the way
+              into /gov sits with the account. Navigation only: /gov re-reads the
+              membership from the server. */}
+          {user.gov && (
+            <NavLink
+              to="/gov"
+              onClick={onLinkClick}
+              className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-paper-dim hover:text-paper hover:bg-surface-1-solid transition-colors"
+            >
+              <FiMapPin className="text-base shrink-0" />
+              Government portal
+            </NavLink>
+          )}
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-paper-dim hover:text-paper hover:bg-surface-1-solid transition-colors"
@@ -95,7 +114,10 @@ const AdminLayout = () => {
         </aside>
 
         {mobileOpen && (
-          <div className="lg:hidden fixed inset-0 z-30">
+          // T4-21 (RC4 rehearsal): above the sticky top bar (z-40), which used
+          // to cover the drawer's own logo row. The backdrop still closes it,
+          // including where the menu toggle sits.
+          <div className="lg:hidden fixed inset-0 z-50">
             <div className="absolute inset-0 bg-canvas/80 backdrop-blur-sm" onClick={close} />
             <aside className="absolute left-0 top-0 bottom-0 w-72 bg-canvas border-r border-stroke">
               <SidebarContents onLinkClick={close} />
@@ -103,7 +125,9 @@ const AdminLayout = () => {
           </div>
         )}
 
-        <main className="flex-1 lg:pl-64">
+        {/* min-w-0: a flex item defaults to its min-content width, so a wide table
+            used to push the whole console wider than a phone (index.css). */}
+        <main className="flex-1 min-w-0 lg:pl-64">
           <Outlet />
         </main>
       </div>

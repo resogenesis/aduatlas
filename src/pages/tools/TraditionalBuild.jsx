@@ -26,7 +26,7 @@ const TraditionalBuild = () => {
       <WorksheetBar savedAt={savedAt} />
       <WsHeader title="Traditional build comparison.">
         Enter each company name at the top, then record the quoted cost or information for each
-        category. Same categories for every company — so you compare the whole project, not the
+        category. Same categories for every company, so you compare the whole project, not the
         advertised price.
       </WsHeader>
 

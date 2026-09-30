@@ -26,7 +26,7 @@ const FAQ_DEFAULTS = [
   },
   {
     q: "Will your total ADU budget (pre-site, permits, structure) match your actual budget?",
-    a: "Do you have a realistic all in budget that includes an official survey, a pre-site plan for utilities, foundations, permits, excavating, plus the total ADU cost with setup, delivery, and timelines? Some builders can provide everything, and some do it well. Either way, it makes sense to know what to expect before collecting 3 quotes. Start with the $99 course to understand the process, learn about ADU types, and prep the right way. Then get the $399 feasibility study (your $99 is credited toward the $399 Report when you upgrade within 90 days). After the course and feasibility study you may change your mind, or find the ADU tiny home of your dreams.",
+    a: "Do you have a realistic all in budget that includes an official survey, a pre-site plan for utilities, foundations, permits, excavating, plus the total ADU cost with setup, delivery, and timelines? Some builders can provide everything, and some do it well. Either way, it makes sense to know what to expect before collecting 3 quotes. Start with Golden at $79 to understand the process, learn about ADU types, and prep the right way. Platinum at $279 adds a feasibility study for your property and the site plan in two versions: what could fit, and the arrangement you want. Your $79 is credited toward Platinum whenever you decide to upgrade. Concierge at $500 adds 60 minutes of consultation and written support through the ADUAtlas portal. After the course and feasibility study you may change your mind, or find the ADU tiny home of your dreams.",
   },
 ];
 
@@ -38,7 +38,7 @@ export const FAQ_CONTENT = {
   },
   "faq.hero.body": {
     page: PAGE, label: "Hero paragraph", type: "text",
-    default: "Many ADU projects fail because of the questions homeowners never knew to ask. Answer these honestly. If even one gives you pause, you have a real risk in your project, and you're not alone. The $99 course covers these and 20+ other common questions you need answered before contacting a builder or your city.",
+    default: "Many ADU projects fail because of the questions homeowners never knew to ask. Answer these honestly. If even one gives you pause, you have a real risk in your project, and you're not alone. The ADUAtlas course, included in every package starting with Golden at $79, covers these and 20+ other common questions you need answered before contacting a builder or your city.",
   },
   "faq.footer_note": {
     page: PAGE, label: "Disclaimer footer", type: "text",

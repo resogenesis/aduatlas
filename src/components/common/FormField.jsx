@@ -24,7 +24,7 @@ export const FormField = ({ label, type = "text", placeholder, required, hint, n
           <button
             type="button"
             onClick={() => setShow((v) => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-paper-dim hover:text-paper transition"
+            className="tap-target justify-center absolute right-1 top-1/2 -translate-y-1/2 px-2 text-paper-dim hover:text-paper transition"
             aria-label={show ? "Hide password" : "Show password"}
           >
             {show ? <FiEyeOff /> : <FiEye />}

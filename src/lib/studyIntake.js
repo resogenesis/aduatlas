@@ -1,7 +1,7 @@
 // Feasibility-study intake fields (Phase 1 scope §4). Shared by the homeowner
 // form (pages/app/Study.jsx) and the admin queue (pages/admin/AdminStudies.jsx).
 export const INTAKE_FIELDS = [
-  { key: "address", label: "Property address", placeholder: "123 Main St, Pasadena, CA 91103", type: "text" },
+  { key: "address", label: "Property address", placeholder: "Street address, city, state, ZIP", type: "text" },
   { key: "propertyType", label: "Existing property type", placeholder: "Single-family, duplex, ...", type: "text", short: true },
   { key: "stories", label: "Home stories", placeholder: "1 or 2", type: "text", short: true },
   { key: "lotInfo", label: "Lot information", placeholder: "Approximate size, shape, corner lot, dimensions if known", type: "textarea" },

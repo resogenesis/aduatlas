@@ -81,7 +81,7 @@ const BuilderPrep = () => {
       </ul>
 
       <h2 className="font-display text-paper text-2xl mb-1">Information to provide each builder or GC</h2>
-      <p className="text-paper-dim text-sm mb-4">Pre-filled from your project brief where available — edit anything that's changed.</p>
+      <p className="text-paper-dim text-sm mb-4">Pre-filled from your project brief where available. Edit anything that's changed.</p>
       <div className="space-y-3 mb-10">
         {PROVIDE.map((row) => (
           <div key={row.id} className="p-4 bg-surface-1-solid rounded-xl border border-stroke">
@@ -106,7 +106,7 @@ const BuilderPrep = () => {
       </div>
 
       <h2 className="font-display text-paper text-2xl mb-1">Questions to ask each builder or GC</h2>
-      <p className="text-paper-dim text-sm mb-4">Record each builder's response — written answers whenever possible.</p>
+      <p className="text-paper-dim text-sm mb-4">Record each builder's response, written answers whenever possible.</p>
       <div className="space-y-3 mb-8">
         {QUESTIONS.map((q, i) => (
           <div key={i} className="p-4 bg-surface-1-solid rounded-xl border border-stroke">
@@ -120,7 +120,7 @@ const BuilderPrep = () => {
         <p className="text-paper text-sm leading-relaxed">
           Give the same project information to each builder or GC and ask the same questions.
           Compare the total project cost, what is included, what is excluded, the proposed
-          timeline, and the builder's experience — not simply the advertised or initial price.
+          timeline, and the builder's experience, not simply the advertised or initial price.
         </p>
       </div>
 

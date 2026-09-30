@@ -7,9 +7,11 @@
 // Rectangles are { x, y, w, d } where (x, y) is the front-left corner, w spans
 // x (width), d spans y (depth).
 //
-// HONEST DATA BOUNDARY: this model is built from lot dimensions + setbacks the
-// homeowner entered (or that we ESTIMATED from public-record lot AREA). It is
-// NOT a surveyed parcel and NOT the municipal zoning code. So the model marks,
+// HONEST DATA BOUNDARY: this model is built ONLY from lot dimensions + setbacks
+// the homeowner entered (or that we ESTIMATED from public-record lot AREA).
+// There is no starting lot and there are no default dimensions: until all six
+// numbers are present, buildLotModel returns null. What it builds is still
+// NOT a surveyed parcel and NOT the municipal zoning code, so the model marks,
 // per value, whether it is `measured`, `estimated`, or `unknown` — the UI uses
 // those flags to decide what it may assert as fact vs. what it must label
 // "estimated" or gate behind zoning verification. We never emit a code-
@@ -19,6 +21,35 @@ const num = (v, fallback = 0) => {
   const n = Number(v);
   return Number.isFinite(n) && n >= 0 ? n : fallback;
 };
+
+// ── What the homeowner has actually told us ──────────────────────────────────
+// The model needs all six numbers. A blank field is NOT a zero and NOT a
+// default: nothing downstream may state a dimension, a footprint or a coverage
+// figure for a property whose owner has not given us the measurement. So the
+// inputs start empty, buildLotModel returns null until they are all filled,
+// and every consumer renders an empty state rather than an invented lot.
+export const LOT_INPUT_KEYS = ["lotWidth", "lotDepth", "front", "rear", "side", "houseDepth"];
+
+// Lot width and depth have to be positive for any of the geometry to mean
+// anything. The setbacks and the home depth may legitimately be zero.
+const POSITIVE_KEYS = ["lotWidth", "lotDepth"];
+
+const isBlank = (v) => {
+  if (v === "" || v === null || v === undefined) return true;
+  const n = Number(v);
+  if (!Number.isFinite(n) || n < 0) return true;
+  return false;
+};
+
+const entered = (input, key) => {
+  if (isBlank(input?.[key])) return false;
+  return POSITIVE_KEYS.includes(key) ? Number(input[key]) > 0 : true;
+};
+
+// Every field the homeowner still has to fill in before the model can be built.
+export const missingLotInput = (input) => LOT_INPUT_KEYS.filter((k) => !entered(input, k));
+
+export const hasCompleteLotInput = (input) => missingLotInput(input).length === 0;
 
 const rectArea = (r) => (r ? r.w * r.d : 0);
 
@@ -37,6 +68,10 @@ const PROVENANCE = {
 //   opts:  { dimsEstimated } — true when lot width/depth were derived from
 //          public-record AREA rather than entered/confirmed by the homeowner.
 export function buildLotModel(input, opts = {}) {
+  // No complete set of measurements, no model. Callers treat null as "the
+  // homeowner has not given us the dimensions yet" and show an empty state.
+  if (!hasCompleteLotInput(input)) return null;
+
   const lotWidth = num(input.lotWidth);
   const lotDepth = num(input.lotDepth);
   const front = num(input.front);
@@ -109,12 +144,14 @@ export function buildLotModel(input, opts = {}) {
   };
 }
 
-// Convenience: default lot for the manual-entry starting state.
-export const DEFAULT_LOT_INPUT = {
-  lotWidth: 50,
-  lotDepth: 120,
-  front: 20,
-  rear: 4,
-  side: 4,
-  houseDepth: 45,
+// The manual-entry starting state: empty, because we do not know anything about
+// this property until the homeowner tells us. Kept as strings so the number
+// inputs render blank rather than showing a 0 the homeowner never typed.
+export const EMPTY_LOT_INPUT = {
+  lotWidth: "",
+  lotDepth: "",
+  front: "",
+  rear: "",
+  side: "",
+  houseDepth: "",
 };

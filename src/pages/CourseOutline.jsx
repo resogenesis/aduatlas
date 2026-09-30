@@ -30,6 +30,7 @@ const ModuleRow = ({ m, i, open, onToggle }) => {
           <span>
             <span className="block font-display text-paper text-xl sm:text-2xl leading-tight mb-1.5">{m.title}</span>
             <span className="block text-paper-dim text-sm sm:text-base leading-relaxed">{desc}</span>
+            <span className="block sm:hidden text-paper-dim text-sm mt-1.5">{list.length} lessons · {minutes(m)} min</span>
           </span>
           <span className="hidden sm:block text-paper-dim text-sm text-right pt-1">
             {list.length} lessons
@@ -39,6 +40,10 @@ const ModuleRow = ({ m, i, open, onToggle }) => {
           <FiChevronDown className={`text-paper-dim mt-1.5 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
         </button>
         <div className="acc" data-open={open}>
+          {/* The row that collapses to 0fr must carry no padding of its own, or
+              its padding box keeps the panel open by that much. Padding lives on
+              the list inside. */}
+          <div>
           <ol className="pb-6 pl-12 sm:pl-16 grid sm:grid-cols-2 gap-x-8 gap-y-2" aria-hidden={!open}>
             {list.map((c) => (
               <li key={c.id} className="text-sm text-paper flex items-baseline gap-2">
@@ -50,6 +55,7 @@ const ModuleRow = ({ m, i, open, onToggle }) => {
               </li>
             ))}
           </ol>
+          </div>
         </div>
       </li>
     </AdminEditableSection>
@@ -95,7 +101,7 @@ const CourseOutline = () => {
       </AdminEditableSection>
 
       <AdminEditableSection keys={["courseoutline.modules.heading"]} label="Module list heading">
-        <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y max-w-6xl">
+        <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y">
           <h2 className="font-display text-paper text-3xl sm:text-4xl leading-[1.05] mb-8">{modulesHeading}</h2>
           <ol>
             {modules.map((m, i) => (
@@ -125,7 +131,7 @@ const CourseOutline = () => {
       </AdminEditableSection>
 
       <AdminEditableSection keys={["courseoutline.cta.heading", "courseoutline.cta.body", "courseoutline.cta.button"]} label="Closing call to action">
-        <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y max-w-6xl">
+        <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y">
           <div className="bg-forest-deep text-white rounded-3xl p-8 sm:p-12 grid lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8">
               <h2 className="font-display text-3xl sm:text-4xl leading-[1.05] mb-3">{ctaHeading}</h2>

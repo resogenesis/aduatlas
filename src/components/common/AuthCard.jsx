@@ -22,8 +22,14 @@ const AuthCard = ({ title, subtitle, children, footer }) => {
           {footer && <div className="mt-7 text-center text-sm text-paper-dim">{footer}</div>}
         </div>
 
+        {/* Real destinations: both documents live on /legal (Privacy first,
+            Terms at #terms). Opened in a new tab so reading the terms does not
+            discard a half-filled signup form. */}
         <p className="mt-5 text-center text-xs text-paper-dim/60">
-          By continuing, you agree to our <a href="#" className="hover:text-paper-dim underline-offset-2 hover:underline">Terms</a> and <a href="#" className="hover:text-paper-dim underline-offset-2 hover:underline">Privacy Policy</a>.
+          By continuing, you agree to our{" "}
+          <a href="/legal#terms" target="_blank" rel="noreferrer" className="hover:text-paper-dim underline-offset-2 hover:underline">Terms</a>{" "}
+          and{" "}
+          <a href="/legal" target="_blank" rel="noreferrer" className="hover:text-paper-dim underline-offset-2 hover:underline">Privacy Policy</a>.
         </p>
       </div>
     </section>

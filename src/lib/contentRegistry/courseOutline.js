@@ -17,7 +17,7 @@ export const COURSE_OUTLINE_CONTENT = {
   "courseoutline.include.0.label": t("Includes item 1", "Short written lessons, most under six minutes"),
   "courseoutline.include.1.label": t("Includes item 2", "A knowledge check at the end of every module"),
   "courseoutline.include.2.label": t("Includes item 3", "Progress saved to your account, on any device"),
-  "courseoutline.include.3.label": t("Includes item 4", "State and city resources in your portal"),
+  "courseoutline.include.3.label": t("Includes item 4", "How to look up and verify your own state and city rules"),
 
   "courseoutline.modules.heading": t("Module list heading", "What you'll learn."),
   "courseoutline.module.m1.desc": t("Module 1 description", "What an ADU is, the main types, why homeowners build them, and the misconceptions that cost time and money."),
@@ -31,6 +31,6 @@ export const COURSE_OUTLINE_CONTENT = {
   "courseoutline.module.m10.desc": t("Module 9 description", "Choosing an ADU, comparing builders, and moving forward with a plan instead of a guess."),
 
   "courseoutline.cta.heading": t("Closing heading", "Included with every plan."),
-  "courseoutline.cta.body": t("Closing paragraph", "Golden starts at $79 and includes the full course, state and city resources, and builder profiles. Platinum adds the preparation worksheets, the ADU Ready Score, a feasibility study, and a site plan in two versions for your property."),
+  "courseoutline.cta.body": t("Closing paragraph", "Golden starts at $79 and includes the full course, which teaches you how to find and verify your own state and city rules, plus builder profiles. Platinum adds the preparation worksheets, the ADU Ready Score, a feasibility study, and a site plan in two versions for your property."),
   "courseoutline.cta.button": t("Closing button", "See plans"),
 };

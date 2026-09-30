@@ -110,7 +110,7 @@ const FeasibilityCards = ({ model }) => {
         <Pending label="Sewer line" />
         <Pending label="Electrical" />
         <p className="text-paper-dim/70 text-[10px] leading-relaxed mt-1.5">
-          Utility locations come from your survey or municipal GIS — not yet wired in.
+          Utility locations come from your survey or municipal GIS, which is not yet wired in.
         </p>
       </Card>
     </div>

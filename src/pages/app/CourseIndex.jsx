@@ -139,7 +139,7 @@ const CourseIndex = () => {
 
       <p className="text-paper-dim text-xs leading-relaxed mt-8">
         {authored.length} of {modules.length} modules available now. The rest arrive as each
-        module's lessons are finalized — your progress is saved as you go.
+        module's lessons are finalized. Your progress is saved as you go.
       </p>
     </div>
   );

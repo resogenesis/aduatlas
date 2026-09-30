@@ -5,22 +5,29 @@ import WorksheetBar from "../../components/tools/WorksheetBar";
 import SitePlan2D from "../../components/tools/SitePlan2D";
 import { buildLotModel } from "../../components/tools/lotModel";
 import { loadPacket } from "../../stores/courseStore";
-import { loadLot, loadWorksheets, NAPE_CATEGORIES, NAPE_GRADES, scoreNape } from "../../stores/worksheetStore";
+import { loadLot, loadWorksheets, NAPE_CATEGORIES, NAPE_GRADES, scoreNape, useWorksheetsHydration } from "../../stores/worksheetStore";
 import { money } from "../../components/tools/worksheetKit";
 import { presiteTotal, tpcTotals, verificationTotal } from "./worksheetDefs";
 
 // Feasibility study report — assembled per the ADUAtlas Feasibility Study
-// Tool spec. Every value carries one of three statuses:
-//   verified  — from public records or a source the homeowner confirmed
+// Tool spec. Every value carries one of four statuses:
+//   record    — from the public-records lookup, named with its source above
+//   entered   — typed by the homeowner; nobody has checked it against a source
 //   estimated — derived (e.g. dimensions from lot area, largest-fit footprint)
 //   verify    — "Verification Required": data we cannot source yet; never
 //               assumed to be "no constraint"
+// None of them says "Verified" (R3-18). Elsewhere in the product that word means
+// checked against a source (the Rules pages' "Verified from source", decision
+// 2b), and nothing in this report has been checked that way: an address or a
+// lot size the homeowner typed is theirs, and a lookup result is what a
+// public-records provider returned.
 // CRITICAL REQUIREMENT (from the spec): this is a preliminary property
 // feasibility analysis based on available data — never an approval and never
 // a guarantee that an ADU fits.
 
 const STATUS = {
-  verified: { label: "Verified", cls: "text-accent border-accent/40 bg-accent/10" },
+  record: { label: "From public records", cls: "text-accent border-accent/40 bg-accent/10" },
+  entered: { label: "As entered by you", cls: "text-paper border-stroke bg-surface-1-solid" },
   estimated: { label: "Estimated", cls: "text-amber-700 border-amber-500/40 bg-amber-500/10" },
   verify: { label: "Verification required", cls: "text-paper-dim border-stroke bg-canvas" },
 };
@@ -38,7 +45,7 @@ const Row = ({ label, value, status, note }) => (
       {note && <p className="text-paper-dim/70 text-xs mt-0.5 leading-relaxed">{note}</p>}
     </div>
     <div className="flex items-center gap-3 shrink-0 text-right">
-      <span className="text-paper text-sm tabular-nums">{value ?? "—"}</span>
+      <span className="text-paper text-sm tabular-nums">{value ?? "-"}</span>
       <Badge status={status} />
     </div>
   </div>
@@ -82,32 +89,37 @@ const CONSTRAINTS = [
 
 const NEXT_STEPS = [
   "Review every section of this report and mark anything that requires verification",
-  "Verify utilities — locations, connection points, capacity, responsibility, and fees",
+  "Verify utilities: locations, connection points, capacity, responsibility, and fees",
   "Complete the Pre-Site Estimate Worksheet with every known, estimated, and unknown expense",
   "Obtain professional quotes for major site and utility costs",
   "Determine your total budget: pre-site + structure + construction + delivery + permits + professional fees + contingency",
-  "Confirm the city process — permits, plans, fees, inspections, and expected timelines",
+  "Confirm the city process: permits, plans, fees, inspections, and expected timelines",
   "Compare ADU options against your property, regulations, goals, timeline, and budget",
   "Interview builders with the same information and questions",
-  "Compare complete proposals — the same scope, not only the bottom-line price",
-  "Decide whether to move forward — only when you understand what you can build, where, and what it may cost",
+  "Compare complete proposals: the same scope, not only the bottom-line price",
+  "Decide whether to move forward, but only when you understand what you can build, where, and what it may cost",
 ];
 
 const RESULTS = {
   likely: { label: "Likely Feasible", tone: "bg-accent/10 border-accent/40 text-accent", Icon: FiCheckCircle,
-    note: "Based on available data and your NAPE answers, no major obstacle has been identified. This remains a preliminary analysis — complete the verification items below before spending significant money." },
+    note: "Based on available data and your NAPE answers, no major obstacle has been identified. This remains a preliminary analysis. Complete the verification items below before spending significant money." },
   possible: { label: "Possible with Verification", tone: "bg-amber-500/10 border-amber-500/40 text-amber-700", Icon: FiHelpCircle,
     note: "Key information is missing or several factors need research. Work through the verification items below with your city and utility providers before making major commitments." },
   nogo: { label: "Potential No-Go", tone: "bg-red-500/10 border-red-500/40 text-red-700", Icon: FiAlertTriangle,
-    note: "One or more automatic no-go conditions were identified in your NAPE evaluation. Verify each flagged condition with your local planning department — a No today is not always a No forever." },
+    note: "One or more automatic no-go conditions were identified in your NAPE evaluation. Verify each flagged condition with your local planning department. A No today is not always a No forever." },
 };
 
 const sqft = (n) => (n ? `${Math.round(n).toLocaleString()} sq ft` : null);
 
 const PropertyReport = () => {
+  // Re-read when the saved copy arrives from the server (R3-02): on a new device
+  // the first render has only what this browser held.
+  const { version } = useWorksheetsHydration();
   const packet = useMemo(() => loadPacket(), []);
-  const lot = useMemo(() => loadLot(), []);
-  const ws = useMemo(() => loadWorksheets(), []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- version is the re-read signal
+  const lot = useMemo(() => loadLot(), [version]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- version is the re-read signal
+  const ws = useMemo(() => loadWorksheets(), [version]);
 
   const lookup = lot?.lookup || null;
   const model = lot?.input ? buildLotModel(lot.input, { dimsEstimated: lot.dimsEstimated }) : null;
@@ -119,14 +131,14 @@ const PropertyReport = () => {
 
   // Missing-information list (spec §8) — assembled from what's actually absent.
   const missing = [];
-  if (!lookup) missing.push("Public-record snapshot — run the address lookup in the Feasibility tool");
-  if (!model) missing.push("Lot geometry — enter your dimensions and setbacks in the Feasibility tool");
-  if (model && lot?.dimsEstimated) missing.push("Lot dimensions are estimated from recorded area — confirm against your plat map or survey");
-  missing.push("Parcel number (APN), zoning district, and lot type — confirm with your county and city");
-  missing.push("Applicable ADU regulations — record your city's answers (section 04)");
-  missing.push("Easements, flood zones, and site constraints — confirm with city/county records (section 05)");
-  if (!nape.complete) missing.push("NAPE evaluation incomplete — answer all questions in the ADU Ready Score");
-  if (!verification) missing.push("Utility connection charges and city fees — Pre-Site Verification worksheet");
+  if (!lookup) missing.push("Public-record snapshot: run the address lookup in the Feasibility tool");
+  if (!model) missing.push("Lot geometry: enter your dimensions and setbacks in the Feasibility tool");
+  if (model && lot?.dimsEstimated) missing.push("Lot dimensions are estimated from recorded area. Confirm against your plat map or survey");
+  missing.push("Parcel number (APN), zoning district, and lot type: confirm with your county and city");
+  missing.push("Applicable ADU regulations: record your city's answers (section 04)");
+  missing.push("Easements, flood zones, and site constraints: confirm with city/county records (section 05)");
+  if (!nape.complete) missing.push("NAPE evaluation incomplete: answer all questions in the ADU Ready Score");
+  if (!verification) missing.push("Utility connection charges and city fees: Pre-Site Verification worksheet");
 
   const result = !nape.complete
     ? RESULTS.possible
@@ -162,39 +174,39 @@ const PropertyReport = () => {
         <p className="text-paper-dim text-sm leading-relaxed max-w-3xl">{result.note}</p>
       </div>
 
-      <Section number="01" title="Property identification" subtitle="A ZIP code can contain multiple jurisdictions — identify the property precisely.">
-        <Row label="Full property address" value={addr || null} status={addr ? "verified" : "verify"} note={!addr ? "Add your address in My Property or the Feasibility tool" : null} />
+      <Section number="01" title="Property identification" subtitle="A ZIP code can contain multiple jurisdictions. Identify the property precisely.">
+        <Row label="Full property address" value={addr || null} status={addr ? "entered" : "verify"} note={!addr ? "Add your address in My Property or the Feasibility tool" : null} />
         <Row label="Parcel number / APN" value={null} status="verify" note="Find it on your property-tax record or county assessor site" />
         <Row label="Zoning district" value={null} status="verify" note="Your city's zoning map or planning department" />
         <Row label="Lot type (standard, corner, flag, irregular)" value={null} status="verify" note="Corner and irregular lots can have different setback rules" />
       </Section>
 
       <Section number="02" title="Lot data" subtitle={lookup ? `Source: ${lookup.source}${lookup.fetchedAt ? ` · retrieved ${new Date(lookup.fetchedAt).toLocaleDateString()}` : ""}` : "Run the address lookup in the Feasibility tool to pull public records."}>
-        <Row label="Total lot square footage" value={sqft(lookup?.lotSize)} status={lookup?.lotSize ? "verified" : "verify"} />
+        <Row label="Total lot square footage" value={sqft(lookup?.lotSize)} status={lookup?.lotSize ? "record" : "verify"} />
         <Row
           label="Lot width × depth"
           value={model ? `${model.stats.lotDims.w} ft × ${model.stats.lotDims.d} ft` : null}
-          status={model ? (lot.dimsEstimated ? "estimated" : "verified") : "verify"}
-          note={lot?.dimsEstimated ? "Estimated from recorded lot area — adjust to your plat map in the Feasibility tool" : model ? "As entered by you in the Feasibility tool" : null}
+          status={model ? (lot.dimsEstimated ? "estimated" : "entered") : "verify"}
+          note={lot?.dimsEstimated ? "Estimated from recorded lot area. Adjust to your plat map in the Feasibility tool" : model ? "From the Feasibility tool. Confirm against your plat map or survey" : null}
         />
-        <Row label="Parcel boundary / lot shape" value={null} status="verify" note="Requires your plat map or county parcel polygon — irregular lots need the actual boundary, not average dimensions" />
+        <Row label="Parcel boundary / lot shape" value={null} status="verify" note="Requires your plat map or county parcel polygon. Irregular lots need the actual boundary, not average dimensions" />
         <Row label="Street frontage, alley, and north orientation" value={null} status="verify" />
       </Section>
 
       <Section number="03" title="Primary structure" subtitle="Footprint is distinct from total finished square footage.">
-        <Row label="Building size (finished)" value={sqft(lookup?.buildingSize)} status={lookup?.buildingSize ? "verified" : "verify"} />
-        <Row label="Year built" value={lookup?.yearBuilt || null} status={lookup?.yearBuilt ? "verified" : "verify"} />
-        <Row label="Property type" value={lookup?.propertyType || null} status={lookup?.propertyType ? "verified" : "verify"} />
+        <Row label="Building size (finished)" value={sqft(lookup?.buildingSize)} status={lookup?.buildingSize ? "record" : "verify"} />
+        <Row label="Year built" value={lookup?.yearBuilt || null} status={lookup?.yearBuilt ? "record" : "verify"} />
+        <Row label="Property type" value={lookup?.propertyType || null} status={lookup?.propertyType ? "record" : "verify"} />
         <Row
           label="Footprint placement on lot"
           value={model?.home ? `${model.home.w} ft × ${model.home.d} ft (front of buildable band)` : null}
           status={model?.home ? "estimated" : "verify"}
-          note="Placement assumes the home fills the front of the buildable band — measure distances from your home to every property line"
+          note="Placement assumes the home fills the front of the buildable band. Measure distances from your home to every property line"
         />
         <Row label="Stories, height, attached structures, driveway" value={null} status="verify" />
       </Section>
 
-      <Section number="04" title="Applicable ADU regulations" subtitle="Each regulation needs your city's current answer, its source, and effective date. Record them in the Pre-Site Verification worksheet — regulations vary by municipality and can change.">
+      <Section number="04" title="Applicable ADU regulations" subtitle="Each regulation needs your city's current answer, its source, and effective date. Record them in the Pre-Site Verification worksheet. Regulations vary by municipality and can change.">
         <div className="grid sm:grid-cols-2 gap-x-8">
           {REGULATIONS.map((r) => (
             <Row key={r} label={r} value={null} status="verify" />
@@ -207,7 +219,7 @@ const PropertyReport = () => {
         )}
       </Section>
 
-      <Section number="05" title="Property constraints" subtitle="Unavailable information is listed as Verification Required — never assumed to be no constraint.">
+      <Section number="05" title="Property constraints" subtitle="Unavailable information is listed as Verification Required, never assumed to be no constraint.">
         <div className="grid sm:grid-cols-2 gap-x-8">
           {CONSTRAINTS.map((c) => (
             <Row key={c} label={c} value={null} status="verify" />
@@ -220,7 +232,7 @@ const PropertyReport = () => {
         )}
       </Section>
 
-      <Section number="06" title="Buildable envelope" subtitle="Geometry from your entered dimensions and setbacks — a planning estimate, not a survey.">
+      <Section number="06" title="Buildable envelope" subtitle="Geometry from your entered dimensions and setbacks: a planning estimate, not a survey.">
         {model ? (
           <>
             <div className="mb-6">
@@ -230,17 +242,17 @@ const PropertyReport = () => {
             <Row label="Buildable area after setbacks" value={sqft(model.stats.buildableArea)} status="estimated" />
             <Row
               label="Maximum estimated ADU footprint"
-              value={model.adu ? `${model.adu.w} ft × ${model.adu.d} ft — ${sqft(model.stats.aduArea)}` : "Does not fit with current inputs"}
+              value={model.adu ? `${model.adu.w} ft × ${model.adu.d} ft (${sqft(model.stats.aduArea)})` : "Does not fit with current inputs"}
               status="estimated"
-              note="Largest single-story rectangle behind the home within your entered setbacks — before lot-coverage, FAR, separation, and easement limits are applied"
+              note="Largest single-story rectangle behind the home within your entered setbacks, before lot-coverage, FAR, separation, and easement limits are applied"
             />
             <Row label="Lot coverage with home + max ADU" value={`${Math.round(model.stats.coverage * 100)}%`} status="estimated" note="Compare to your city's maximum lot coverage" />
             <Row label="One-story vs. two-story potential" value={null} status="verify" note="Depends on your city's height and story limits" />
-            <Row label="Alternative placement options" value={null} status="verify" note="This model assumes rear-yard placement — corner and side placements depend on your parcel shape and access" />
+            <Row label="Alternative placement options" value={null} status="verify" note="This model assumes rear-yard placement. Corner and side placements depend on your parcel shape and access" />
           </>
         ) : (
           <div className="text-center py-8">
-            <p className="text-paper-dim text-sm mb-4">No lot geometry yet — set up your property in the Feasibility tool and it appears here.</p>
+            <p className="text-paper-dim text-sm mb-4">No lot geometry yet. Set up your property in the Feasibility tool and it appears here.</p>
             <Link to="/feasibility" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors">
               Open the Feasibility tool <FiArrowRight />
             </Link>
@@ -248,7 +260,7 @@ const PropertyReport = () => {
         )}
       </Section>
 
-      <Section number="07" title="NAPE evaluation" subtitle="The National ADU Property Evaluation — your Yes/No self-assessment.">
+      <Section number="07" title="NAPE evaluation" subtitle="The National ADU Property Evaluation, your Yes/No self-assessment.">
         {nape.answered > 0 ? (
           <>
             <div className="flex items-baseline gap-4 mb-4">
@@ -281,12 +293,12 @@ const PropertyReport = () => {
         )}
       </Section>
 
-      <Section number="08" title="Budget summary" subtitle="Pulled live from your worksheets — planning estimates, not quotes.">
-        <Row label="Pre-site estimate (Worksheet 1)" value={presite ? money(presite) : null} status={presite ? "estimated" : "verify"} note={!presite ? "Not started — complete the Pre-site Estimate worksheet" : null} />
-        <Row label="Verified pre-site summary (Worksheet 2)" value={verification ? money(verification) : null} status={verification ? "estimated" : "verify"} note={!verification ? "Record utility charges and city fees as you confirm them" : null} />
+      <Section number="08" title="Budget summary" subtitle="Pulled live from your worksheets: planning estimates, not quotes.">
+        <Row label="Pre-site estimate (Worksheet 1)" value={presite ? money(presite) : null} status={presite ? "estimated" : "verify"} note={!presite ? "Not started. Complete the Pre-site Estimate worksheet" : null} />
+        <Row label="Pre-site verification summary (Worksheet 2)" value={verification ? money(verification) : null} status={verification ? "estimated" : "verify"} note={!verification ? "Record utility charges and city fees as you confirm them" : null} />
         <Row label="Estimated total project (Worksheet 6)" value={totals.est ? money(totals.est) : null} status={totals.est ? "estimated" : "verify"} />
         <p className="text-paper-dim text-xs mt-4">
-          <Link to="/packet" className="text-accent hover:text-paper transition-colors">Open your worksheets →</Link>
+          <Link to="/packet" className="text-accent hover:text-paper transition-colors">Open your worksheets <FiArrowRight className="inline" /></Link>
         </p>
       </Section>
 
@@ -300,7 +312,7 @@ const PropertyReport = () => {
         </ul>
       </Section>
 
-      <Section number="10" title="Recommended next steps" subtitle="From the final module — verify twice, build once.">
+      <Section number="10" title="Recommended next steps" subtitle="From the final module: verify twice, build once.">
         <ol className="space-y-2.5">
           {NEXT_STEPS.map((s, i) => (
             <li key={i} className="flex items-start gap-3 text-paper-dim text-sm leading-relaxed">
@@ -314,9 +326,9 @@ const PropertyReport = () => {
         This is a preliminary property feasibility analysis based on available public data and
         published information at the time of generation. It does not state or imply that an ADU is
         approved or guaranteed to fit. Property data, public records, and local regulations can
-        contain errors or change — verify final project information with your city departments and
+        contain errors or change. Verify final project information with your city departments and
         qualified professionals. Not legal advice, engineering, appraisal, or a permit
-        determination. <Link to="/methodology" className="underline-offset-2 hover:underline transition">Read our methodology →</Link>
+        determination. <Link to="/methodology" className="underline-offset-2 hover:underline transition">Read our methodology <FiArrowRight className="inline" /></Link>
       </p>
     </div>
   );

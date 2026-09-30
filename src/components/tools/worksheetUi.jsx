@@ -42,6 +42,6 @@ export const GroupRow = ({ label, cols = 1 }) => (
 
 export const Disclaimer = ({ children }) => (
   <p className="text-paper-dim text-xs leading-relaxed mt-8">
-    {children || "Planning worksheet, not a quote. Fees, requirements, and timelines vary by municipality — verify with your city, utility providers, and licensed professionals, and replace estimates with written quotes as they arrive."}
+    {children || "Planning worksheet, not a quote. Fees, requirements, and timelines vary by municipality. Verify with your city, utility providers, and licensed professionals, and replace estimates with written quotes as they arrive."}
   </p>
 );

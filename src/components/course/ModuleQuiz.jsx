@@ -1,11 +1,27 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FiCheck, FiX, FiRefreshCw } from "react-icons/fi";
+import { getQuizResult, saveQuizResult } from "../../stores/courseStore";
 
-// Interactive end-of-module quiz. Reads a quiz definition (questions with a
-// correct-answer index) from courseContent. On submit it scores the answers,
-// reveals the correct choices, and calls onComplete so the module's quiz
-// "chapter" is marked done. Retake resets local state without un-completing.
-const ModuleQuiz = ({ quiz, onComplete, completed }) => {
+// Interactive end-of-module quiz. Renders a quiz definition (questions with a
+// correct-answer index) that CourseChapter fetched from /api/course; the quiz
+// text is not in the bundle (DEF-07). On submit it scores the answers, reveals
+// the correct choices, calls onComplete so the module's quiz "chapter" is
+// marked done, and SAVES the score. Retake resets the answers without
+// un-completing; a new submit replaces the saved score.
+//
+// The score used to live in useState alone, so it was gone the moment the
+// learner navigated away and it was never part of the account the privacy
+// policy describes. It is persisted now through courseStore, which mirrors it
+// to users.completed_chapters.
+//
+// quizId is the quiz chapter's stable id ("m1quiz"), the key the saved score
+// is stored under. The caller passes it; it is no longer recovered from a
+// bundled quiz map.
+const ModuleQuiz = ({ quiz, onComplete, completed, quizId }) => {
+  const id = quizId || null;
+  // A previously saved score, shown straight away so a learner who comes back
+  // sees what they scored instead of an empty quiz.
+  const saved = useMemo(() => getQuizResult(id), [id]);
   const [picked, setPicked] = useState({}); // qIndex → optionIndex
   const [submitted, setSubmitted] = useState(false);
 
@@ -18,6 +34,10 @@ const ModuleQuiz = ({ quiz, onComplete, completed }) => {
 
   const submit = () => {
     setSubmitted(true);
+    // Persisted before onComplete so the score and the completion land
+    // together. A failed server write is swallowed inside courseStore and never
+    // blocks the learner.
+    saveQuizResult(id, { score, total });
     onComplete?.();
   };
 
@@ -29,6 +49,19 @@ const ModuleQuiz = ({ quiz, onComplete, completed }) => {
   return (
     <div>
       <p className="text-paper-dim text-base leading-relaxed mb-8">{quiz.intro}</p>
+
+      {saved && !submitted && (
+        <div className="mb-8 bg-surface-1-solid border border-stroke rounded-2xl px-5 py-4">
+          <p className="text-paper-dim text-xs mb-1">Your last score, saved to your account</p>
+          <p className="text-paper text-sm">
+            <span className="font-semibold">
+              {saved.score} / {saved.total}
+            </span>
+            <span className="text-accent ml-2">{saved.percent}%</span>
+            <span className="text-paper-dim ml-2">on {new Date(saved.at).toLocaleDateString()}</span>
+          </p>
+        </div>
+      )}
 
       <ol className="space-y-8">
         {quiz.questions.map((q, i) => {

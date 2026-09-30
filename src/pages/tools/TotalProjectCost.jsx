@@ -39,7 +39,7 @@ const TotalProjectCost = () => {
             <tr className="bg-accent/10">
               <td className="px-4 py-4 font-display text-paper text-base">Estimated total project cost</td>
               <td className="px-3 py-4 text-right font-display text-accent text-lg tabular-nums">{money(estTotal)}</td>
-              <td className="px-3 py-4 text-right font-display text-accent text-lg tabular-nums">{finalTotal ? money(finalTotal) : "—"}</td>
+              <td className="px-3 py-4 text-right font-display text-accent text-lg tabular-nums">{finalTotal ? money(finalTotal) : "-"}</td>
               <td colSpan={2} />
             </tr>
             {["Selected Builder / Company", "Estimated Start Date", "Estimated Completion", "Notes"].map((r) => (

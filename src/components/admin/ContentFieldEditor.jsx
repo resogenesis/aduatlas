@@ -70,16 +70,32 @@ const VersionHistory = ({ contentKey, onRestored }) => {
         <div className="mt-2 rounded-lg border border-stroke bg-canvas p-3 space-y-2">
           {versions === null && <p className="text-xs text-paper-dim">Loading…</p>}
           {versions?.length === 0 && <p className="text-xs text-paper-dim">No prior published versions yet.</p>}
+          {/* T4-14 (RC4 rehearsal): a row showed only a time and an address, so
+              Amy could not see which text a version holds before restoring it,
+              and the time read as the version's own when it is the moment the
+              version was REPLACED (site_content_versions.published_at is written
+              when the value is archived, by whoever archived it). Each row now
+              shows the text it holds (the server's preview) and says what its
+              time and address are. When that version was first published is not
+              recorded, so it is not shown. */}
           {versions?.map((v) => (
-            <div key={v.id} className="flex items-center justify-between gap-3 text-xs">
-              <span className="text-paper-dim">
-                {new Date(v.published_at).toLocaleString()} {v.published_by ? `· ${v.published_by}` : ""}
-              </span>
+            <div key={v.id} className="flex items-start justify-between gap-3 text-xs" data-content-version>
+              <div className="min-w-0">
+                {v.preview && (
+                  <p className="text-paper break-words" data-version-preview>
+                    {v.preview}
+                  </p>
+                )}
+                <p className="text-paper-dim mt-0.5" data-version-replaced>
+                  Replaced {new Date(v.published_at).toLocaleString()}
+                  {v.published_by ? ` by ${v.published_by}` : ""}
+                </p>
+              </div>
               <button
                 type="button"
                 disabled={busyId === v.id}
                 onClick={() => restore(v.id)}
-                className="text-accent hover:underline disabled:opacity-50"
+                className="shrink-0 text-accent hover:underline disabled:opacity-50"
               >
                 Restore
               </button>

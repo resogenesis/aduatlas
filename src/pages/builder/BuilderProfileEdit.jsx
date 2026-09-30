@@ -1,13 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FiArrowLeft, FiCheckCircle } from "react-icons/fi";
-import { APPROACH_LABELS, BUILD_METHOD_LABELS, PROFILE_STATUS_LABELS, SERVICE_TYPE_LABELS, SPECIALTY_LABELS, TURNKEY_HELP, fetchMyBuilder, publicUrl, saveMyBuilder, submitMyBuilder } from "../../lib/builders";
+import { FiArrowLeft, FiCheckCircle, FiKey } from "react-icons/fi";
+import { APPROACH_LABELS, BUILD_METHOD_LABELS, PROFILE_STATUS_LABELS, RELATIONSHIP_LABELS, SERVICE_TYPE_LABELS, SPECIALTY_LABELS, TURNKEY_HELP, claimMyBuilder, fetchMyBuilder, isVerified, publicUrl, saveMyBuilder, submitMyBuilder } from "../../lib/builders";
 
 // The builder's own profile. Every field here is on the save_my_builder()
 // whitelist (migration 0006). Status, referral code, featured, pricing terms
 // and the admin audit are not editable from this page and are not sent.
 // A new profile is created as a draft; Submit for review moves it to pending;
 // ADUAtlas approves it. Editing an approved profile keeps it live.
+//
+// Two ways to get a profile (Phase 1 spec 5.2). ADUAtlas seeds the directory
+// from public information, so a builder may already be listed: the invitation
+// carries a claim code, and entering it here (ClaimCodePanel, claim_my_builder
+// in 0007) makes that row theirs. Otherwise the builder fills in the form and
+// saves a new draft. The relationship type (marketplace, affiliate, partner)
+// is set by ADUAtlas and shown read-only.
+//
+// Unknown means unknown. Turnkey and build approach are three-state here (Yes,
+// No, Not stated) and a new profile starts at Not stated, so the company gives
+// its own answer and ADUAtlas never invents one. Not stated saves null, and
+// every homeowner surface omits the attribute instead of printing a default.
 
 const US_STATES = [
   "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
@@ -31,9 +43,10 @@ const EMPTY = {
   service_states: [],
   specialties: [],
   service_types: [],
-  build_approach: "both",
+  // null is "the company never stated it" (migration 0008), not a No.
+  build_approach: null,
   build_methods: [],
-  turnkey: false,
+  turnkey: null,
   licensed_states: [],
   videos: "",
 };
@@ -48,7 +61,9 @@ const toForm = (b) => ({
   cities: csv(b?.cities),
   service_zips: csv(b?.service_zips),
   videos: (b?.videos || []).join("\n"),
-  turnkey: Boolean(b?.turnkey),
+  // Keep null as null; only a stored true or false becomes a Yes or a No.
+  turnkey: b?.turnkey == null ? null : Boolean(b.turnkey),
+  build_approach: b?.build_approach ?? null,
 });
 
 // Only whitelisted keys, normalised the way the RPC expects them.
@@ -69,9 +84,9 @@ const toPatch = (f) => ({
   service_states: stateList(f.service_states),
   specialties: f.specialties,
   service_types: f.service_types,
-  build_approach: f.build_approach,
+  build_approach: f.build_approach || null,
   build_methods: f.build_methods,
-  turnkey: Boolean(f.turnkey),
+  turnkey: f.turnkey == null ? null : Boolean(f.turnkey),
   licensed_states: stateList(f.licensed_states),
   videos: String(f.videos || "").split(/\n|,/).map((s) => s.trim()).filter(Boolean).slice(0, 2),
 });
@@ -86,6 +101,103 @@ const unwrap = (r) => {
 };
 
 const input = "mt-1 w-full bg-canvas border border-stroke rounded-xl px-4 py-3 text-paper text-sm focus:outline-none focus:border-accent";
+
+// ── Claiming ────────────────────────────────────────────────────────────────
+// A claim code is 8 characters from A-HJ-NP-Z2-9 (no 0/O/1/I), the same
+// alphabet as referral codes; the check constraint in 0007 enforces it.
+// Signup.jsx may park a code from ?claim= under PENDING_CLAIM_KEY so the panel
+// is prefilled after the email confirmation round trip; a successful claim
+// clears it.
+export const PENDING_CLAIM_KEY = "aduatlas.claim_code";
+const CLAIM_CODE_RE = /^[A-HJ-NP-Z2-9]{8}$/;
+const normalizeCode = (s) => String(s || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8);
+
+const readPendingClaim = () => {
+  try {
+    const v = window.localStorage.getItem(PENDING_CLAIM_KEY) || "";
+    return CLAIM_CODE_RE.test(v) ? v : "";
+  } catch {
+    return "";
+  }
+};
+const clearPendingClaim = () => {
+  try {
+    window.localStorage.removeItem(PENDING_CLAIM_KEY);
+  } catch {
+    // best effort only
+  }
+};
+
+const claimErrorText = (error) => {
+  if (error === "not-available") return "Claiming is not available right now. Try again in a minute.";
+  if (error === "supabase-disabled") return "The account service is not connected in this environment.";
+  if (/invalid or already used/i.test(error || "")) return "That claim code is not valid or has already been used. Check the invitation, or write to hello@aduatlas.com.";
+  return error ? `Could not claim the listing: ${error}` : "Could not claim the listing.";
+};
+
+// Shown to a builder account that owns no profile yet, on the dashboard and
+// here. `children` is the page's own "not listed yet?" line.
+export const ClaimCodePanel = ({ onClaimed, children }) => {
+  const [code, setCode] = useState(readPendingClaim);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+
+  const submit = async (e) => {
+    e.preventDefault();
+    setError("");
+    const c = normalizeCode(code);
+    if (!CLAIM_CODE_RE.test(c)) {
+      setError("A claim code is eight letters and numbers, as printed in our invitation.");
+      return;
+    }
+    setBusy(true);
+    const r = await claimMyBuilder(c);
+    setBusy(false);
+    const { builder, error: err } = unwrap(r);
+    if (err || !builder) {
+      setError(claimErrorText(err));
+      return;
+    }
+    clearPendingClaim();
+    onClaimed?.(builder);
+  };
+
+  return (
+    <section className="bg-surface-1-solid border border-stroke rounded-3xl p-7 sm:p-9 mb-6">
+      <p className="inline-flex items-center gap-2 text-paper-dim text-sm mb-3">
+        <FiKey aria-hidden /> Already listed on ADUAtlas?
+      </p>
+      <h2 className="font-display text-paper text-2xl sm:text-3xl leading-tight mb-3">Enter your claim code</h2>
+      <p className="text-paper-dim text-sm sm:text-base leading-relaxed mb-5 max-w-xl">
+        ADUAtlas lists builders from public information before they join. If we invited you, the invitation carries an eight character claim code. Enter it to take over your listing, and your referral link and your dashboard open with it.
+      </p>
+      <p className="text-paper-dim text-sm sm:text-base leading-relaxed mb-5 max-w-xl">
+        To be straight with you about the counts: for every listing we publish, claimed or not, ADUAtlas records the times the profile was opened and the times a homeowner asked for an introduction. Claiming is what gives you the dashboard to read them in, the referral link and the Verified badge. It does not start the recording.
+      </p>
+      <form onSubmit={submit} className="flex flex-col sm:flex-row gap-2 max-w-md">
+        <input
+          value={code}
+          onChange={(e) => setCode(normalizeCode(e.target.value))}
+          maxLength={8}
+          placeholder="ABCD2345"
+          aria-label="Claim code"
+          autoComplete="off"
+          spellCheck={false}
+          className="flex-1 bg-canvas border border-stroke rounded-xl px-4 py-3 text-paper font-mono text-base uppercase tracking-[0.2em] focus:outline-none focus:border-accent"
+        />
+        <button type="submit" disabled={busy} className="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-accent text-accent-fg text-sm font-semibold hover:bg-accent-dim disabled:opacity-60 whitespace-nowrap press">
+          {busy ? "Claiming…" : "Claim my listing"}
+        </button>
+      </form>
+      {error && (
+        <p role="alert" className="text-sm text-red-700 mt-3 max-w-xl">
+          {error}
+        </p>
+      )}
+      {children}
+    </section>
+  );
+};
 
 const Field = ({ label, hint, children }) => (
   <label className="block text-sm">
@@ -116,6 +228,41 @@ const Chips = ({ options, value, onChange, small }) => (
 
 const STATE_OPTIONS = Object.fromEntries(US_STATES.map((s) => [s, s]));
 
+// Yes, No, Not stated. A two-state switch forced every builder into a Yes or a
+// No, which made a blank field read as a No on the homeowner's screen. Not
+// stated saves null and the homeowner surfaces leave the attribute out.
+const TRI_OPTIONS = [
+  { value: true, label: "Yes" },
+  { value: false, label: "No" },
+  { value: null, label: "Not stated" },
+];
+
+const TriState = ({ label, hint, value, onChange }) => {
+  const current = value == null ? null : Boolean(value);
+  return (
+    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 bg-surface-1-solid border border-stroke rounded-2xl p-4">
+      <div>
+        <p className="text-paper text-sm font-medium">{label}</p>
+        {hint && <p className="text-paper-dim text-xs mt-1 leading-relaxed">{hint}</p>}
+      </div>
+      <div role="radiogroup" aria-label={label} className="shrink-0 flex rounded-xl border border-stroke overflow-hidden self-start">
+        {TRI_OPTIONS.map((o) => (
+          <button
+            key={String(o.value)}
+            type="button"
+            role="radio"
+            aria-checked={current === o.value}
+            onClick={() => onChange(o.value)}
+            className={`px-3 py-2 text-xs font-medium whitespace-nowrap transition ${current === o.value ? "bg-accent text-accent-fg" : "bg-canvas text-paper-dim hover:text-paper"}`}
+          >
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Section = ({ title, intro, children }) => (
   <section className="bg-canvas border border-stroke rounded-3xl p-6 sm:p-7 space-y-4">
     <div>
@@ -125,6 +272,8 @@ const Section = ({ title, intro, children }) => (
     {children}
   </section>
 );
+
+const chip = "inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-1-solid border border-stroke text-xs text-paper";
 
 const BuilderProfileEdit = () => {
   const [f, setF] = useState(EMPTY);
@@ -151,6 +300,13 @@ const BuilderProfileEdit = () => {
   }, []);
 
   const set = (k, v) => setF((p) => ({ ...p, [k]: v }));
+
+  const onClaimed = (builder) => {
+    setRow(builder);
+    setF(toForm(builder));
+    setError("");
+    setNotice("Listing claimed. Review the details below and save any changes.");
+  };
 
   const save = async (e) => {
     e?.preventDefault?.();
@@ -222,19 +378,21 @@ const BuilderProfileEdit = () => {
   const canSubmit = status === "draft";
   const logo = publicUrl(row?.logo_path);
   const photos = (row?.photos || []).map(publicUrl).filter(Boolean);
+  // relationship_type arrives with 0007; a row from an older database reads
+  // as marketplace, which is also the column default.
+  const relationship = row?.relationship_type || "marketplace";
+  const relationshipLabel = RELATIONSHIP_LABELS?.[relationship] || relationship;
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-4xl mx-auto">
-      {!isNew && (
-        <Link to="/builder" className="inline-flex items-center gap-1 text-sm text-paper-dim hover:text-paper mb-6">
-          <FiArrowLeft /> Dashboard
-        </Link>
-      )}
+      <Link to="/builder" className="tap-target inline-flex items-center gap-1 text-sm text-paper-dim hover:text-paper mb-6">
+        <FiArrowLeft /> Dashboard
+      </Link>
       <div className="mb-8">
         <h1 className="font-display text-paper text-4xl sm:text-5xl leading-[1.05] mb-3">{isNew ? "Set up your company profile" : "Your company profile"}</h1>
         <p className="text-paper-dim text-base max-w-2xl">
           {isNew
-            ? "This is what homeowners see in the directory. Fill in what you can now, save it as a draft, and submit it when it is ready for review."
+            ? "This is what homeowners see in the directory. Claim the listing ADUAtlas already created for you, or fill in the form, save it as a draft and submit it when it is ready for review."
             : status === "approved"
               ? "Your listing is live. Changes you save here appear in the directory right away."
               : status === "pending"
@@ -243,12 +401,27 @@ const BuilderProfileEdit = () => {
                   ? "Your listing is inactive. You can still update the profile; contact us to reactivate it."
                   : "Your profile is a draft. Homeowners will see it once you submit it and ADUAtlas approves it."}
         </p>
-        {status && (
-          <p className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-1-solid border border-stroke text-xs text-paper">
-            Status: {PROFILE_STATUS_LABELS?.[status] || status}
+        {row && (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {status && <p className={chip}>Status: {PROFILE_STATUS_LABELS?.[status] || status}</p>}
+            <p className={chip} title="Set by ADUAtlas. Write to us if it should change.">
+              Relationship: {relationshipLabel}
+            </p>
+            {isVerified(row) && <p className={chip}>Verified</p>}
+          </div>
+        )}
+        {relationship === "affiliate" && row?.external_tracking_url && (
+          <p className="text-paper-dim text-xs leading-relaxed mt-3 max-w-2xl">
+            Your partner tracking link: <span className="font-mono text-paper break-all">{row.external_tracking_url}</span>. ADUAtlas recorded it with you; write to us to change it.
           </p>
         )}
       </div>
+
+      {isNew && (
+        <ClaimCodePanel onClaimed={onClaimed}>
+          <p className="text-paper-dim text-sm mt-5">Not listed yet? Fill in the profile below and save it as a draft.</p>
+        </ClaimCodePanel>
+      )}
 
       <form onSubmit={save} className="space-y-6">
         <Section title="Company">
@@ -336,8 +509,9 @@ const BuilderProfileEdit = () => {
             <p className="text-paper text-xs font-medium">Services</p>
             <Chips options={SERVICE_TYPE_LABELS} value={f.service_types} onChange={(v) => set("service_types", v)} />
           </div>
-          <Field label="Build approach">
-            <select value={f.build_approach} onChange={(e) => set("build_approach", e.target.value)} className={input}>
+          <Field label="Build approach" hint="Leave this at Not stated if you would rather not answer. Your profile then leaves the line out instead of showing a guess.">
+            <select value={f.build_approach ?? ""} onChange={(e) => set("build_approach", e.target.value || null)} className={input}>
+              <option value="">Not stated</option>
               {Object.entries(APPROACH_LABELS).map(([k, v]) => (
                 <option key={k} value={k}>
                   {v}
@@ -345,22 +519,12 @@ const BuilderProfileEdit = () => {
               ))}
             </select>
           </Field>
-          <div className="flex items-start justify-between gap-4 bg-surface-1-solid border border-stroke rounded-2xl p-4">
-            <div>
-              <p className="text-paper text-sm font-medium">Turnkey</p>
-              <p className="text-paper-dim text-xs mt-1 leading-relaxed">{TURNKEY_HELP}</p>
-            </div>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={f.turnkey}
-              onClick={() => set("turnkey", !f.turnkey)}
-              className={`shrink-0 mt-1 w-12 h-7 rounded-full border transition relative ${f.turnkey ? "bg-accent border-accent" : "bg-canvas border-stroke"}`}
-            >
-              <span className={`absolute top-0.5 w-6 h-6 rounded-full bg-white shadow transition-all ${f.turnkey ? "left-[1.35rem]" : "left-0.5"}`} />
-              <span className="sr-only">{f.turnkey ? "Turnkey: yes" : "Turnkey: no"}</span>
-            </button>
-          </div>
+          <TriState
+            label="Turnkey"
+            hint={`${TURNKEY_HELP} Choose Not stated if you would rather not answer, and your profile leaves the line out.`}
+            value={f.turnkey}
+            onChange={(v) => set("turnkey", v)}
+          />
         </Section>
 
         <Section title="Media">

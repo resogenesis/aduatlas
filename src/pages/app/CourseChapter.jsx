@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { FiArrowLeft, FiArrowRight, FiCheck, FiCheckCircle, FiClock } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight, FiCheck, FiCheckCircle, FiClock, FiRefreshCw } from "react-icons/fi";
 import {
   chapters,
   chapterById,
@@ -8,32 +8,76 @@ import {
   getCompletedChapters,
   markChapterComplete,
   unmarkChapter,
+  useCourseItem,
 } from "../../stores/courseStore";
-import { MODULE_QUIZZES } from "../../stores/courseContent";
 import ModuleQuiz from "../../components/course/ModuleQuiz";
 import Sections from "../../components/course/Sections";
-import { useContentBlocks } from "../../lib/content";
 import { AdminEditableSection } from "../../lib/adminEditBridge";
 
 // Renders one chapter (or a module quiz) from the shared course structure.
-// Content sections come from courseContent, rendered by the shared Sections
-// component (also used by the course intro).
+// The title, minutes and order come from the outline in courseStore. The body
+// or quiz is fetched from /api/course with the session token when the page
+// opens, because the course text is not in the bundle (DEF-07). The server
+// applies any published admin edit before it answers.
+
+// What the page says while the lesson text is not in hand. Plain sentences,
+// and a refusal is never shown as a network fault.
+const LessonStatus = ({ item }) => {
+  if (item.state === "loading") {
+    return (
+      <p className="text-paper-dim text-base mb-14" role="status">
+        The lesson is loading.
+      </p>
+    );
+  }
+  if (item.status === 401) {
+    return (
+      <div className="mb-14 bg-surface-1-solid border border-stroke rounded-2xl px-5 py-4">
+        <p className="text-paper text-base mb-2">Your session has ended. Sign in again to open this lesson.</p>
+        <Link to="/login" className="text-accent text-sm">Sign in</Link>
+      </div>
+    );
+  }
+  if (item.status === 403) {
+    return (
+      <div className="mb-14 bg-surface-1-solid border border-stroke rounded-2xl px-5 py-4">
+        <p className="text-paper text-base mb-2">This lesson is part of the paid course. This account does not include it.</p>
+        <Link to="/pricing" className="text-accent text-sm">See plans</Link>
+      </div>
+    );
+  }
+  if (item.status === 404) {
+    return <p className="text-paper-dim text-base mb-14">We could not find this lesson.</p>;
+  }
+  return (
+    <div className="mb-14 bg-surface-1-solid border border-stroke rounded-2xl px-5 py-4">
+      <p className="text-paper text-base mb-3">This lesson did not load. Check your connection and try again.</p>
+      <button
+        type="button"
+        onClick={item.retry}
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-stroke text-paper-dim hover:text-paper hover:border-accent transition text-sm font-medium"
+      >
+        <FiRefreshCw /> Try again
+      </button>
+    </div>
+  );
+};
 
 const CourseChapter = () => {
   const { chapterId } = useParams();
   const navigate = useNavigate();
   const [completed, setCompleted] = useState(getCompletedChapters().has(chapterId));
-  // Called before the "chapter not found" early return below, per rules of
-  // hooks — harmless for an invalid chapterId, since it just falls back to [].
-  const sections = useContentBlocks(`course.chapter.${chapterId}`);
 
   const idx = chapters.findIndex((c) => c.id === chapterId);
   const chapter = chapterById(chapterId);
+  // Called before the "chapter not found" early return below, per rules of
+  // hooks. An unknown chapter id fetches nothing.
+  const item = useCourseItem(chapter ? chapterId : null);
   if (!chapter) {
     return (
       <div className="px-6 py-20 text-center">
         <p className="text-paper-dim mb-4">Chapter not found.</p>
-        <Link to="/course" className="text-accent">Back to course</Link>
+        <Link to="/course" className="tap-target text-accent">Back to course</Link>
       </div>
     );
   }
@@ -42,11 +86,20 @@ const CourseChapter = () => {
   const next = chapters[idx + 1];
   const prev = chapters[idx - 1];
   const isQuiz = chapter.kind === "quiz";
-  const quiz = isQuiz ? MODULE_QUIZZES[chapter.moduleId] : null;
+  const ready = item.state === "ready";
+  const quiz = isQuiz && ready && Array.isArray(item.data?.quiz?.questions) ? item.data.quiz : null;
+  const sections = !isQuiz && ready && Array.isArray(item.data?.sections) ? item.data.sections : null;
 
   // Position within the module's content chapters (quiz excluded from the count).
+  // A quiz has no position among them, so it is labelled as the module quiz
+  // rather than printed as lesson "0" (R3-26).
   const contentChapters = mod.chapters.filter((c) => c.kind !== "quiz");
   const contentPos = contentChapters.findIndex((c) => c.id === chapterId) + 1;
+  const positionLabel = isQuiz
+    ? "Module quiz"
+    : contentPos > 0
+      ? `Lesson ${contentPos} of ${contentChapters.length}`
+      : null;
 
   const complete = (goNext = true) => {
     markChapterComplete(chapterId);
@@ -62,7 +115,7 @@ const CourseChapter = () => {
 
   return (
     <div className="px-5 sm:px-8 lg:px-12 py-10 sm:py-14 max-w-3xl mx-auto">
-      <Link to="/course" className="inline-flex items-center gap-2 text-paper-dim hover:text-paper text-sm mb-8 transition-colors">
+      <Link to="/course" className="tap-target inline-flex items-center gap-2 text-paper-dim hover:text-paper text-sm mb-8 transition-colors">
         <FiArrowLeft /> Back to course
       </Link>
 
@@ -71,8 +124,12 @@ const CourseChapter = () => {
       </h1>
       <div className="flex items-center gap-2 text-paper-dim text-sm mb-12">
         <FiClock /> ~{chapter.minutes} min
-        <span aria-hidden>·</span>
-        <span>{contentPos}</span>
+        {positionLabel && (
+          <>
+            <span aria-hidden>·</span>
+            <span data-testid="chapter-position">{positionLabel}</span>
+          </>
+        )}
         {completed && (
           <>
             <span className="mx-1.5">·</span>
@@ -83,12 +140,16 @@ const CourseChapter = () => {
         )}
       </div>
 
-      {isQuiz && quiz ? (
-        <ModuleQuiz quiz={quiz} completed={completed} onComplete={() => complete(false)} />
-      ) : (
+      {quiz ? (
+        <ModuleQuiz key={chapterId} quiz={quiz} quizId={chapterId} completed={completed} onComplete={() => complete(false)} />
+      ) : sections ? (
         <AdminEditableSection keys={[`course.chapter.${chapterId}`]} label={chapter.title}>
           <Sections sections={sections} />
         </AdminEditableSection>
+      ) : (
+        // A ready answer without the expected shape is treated as not found
+        // rather than offered a retry that would return the same answer.
+        <LessonStatus item={ready ? { state: "error", status: 404 } : item} />
       )}
 
       {/* Footer actions */}

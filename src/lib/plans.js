@@ -61,13 +61,15 @@ export const PLANS = [
     priceCents: 50000,
     tagline: "Guidance + support",
     summary: "Everything in Platinum, plus a person to help you interpret your materials and take the next steps.",
-    // Written-support duration and exchange limits are unresolved; do not add
-    // a number to the portal line until Richard and Amy settle it.
+    // Concierge carries exactly two lines beyond Platinum (Richard and Amy
+    // call, 2026-09-24): 60 minutes of consultation in total, and written
+    // support through the portal. No message or exchange count is advertised
+    // at launch; usage is observed first and a limit set later only if one is
+    // needed, so the portal line is deliberate rather than a placeholder.
+    // "Match Me With Builders" is Phase 2 and is not sold here.
     bullets: [
       "Everything in Platinum",
       "Written support through the ADUAtlas portal",
-      "Personalized next-step guidance",
-      "Builder-match assistance",
       "60 minutes of private ADU consultation, as one call or two 30-minute calls",
     ],
   },
@@ -80,6 +82,22 @@ export const formatPrice = (cents) => `$${Math.round(cents / 100).toLocaleString
 // Upgrade credit: what a buyer already paid comes off the next plan up.
 // Golden -> Platinum credits $79 (pays $200); Platinum -> Concierge credits
 // $279 (pays $221); Golden -> Concierge credits $79. Same or lower rank: 0.
+//
+// ownedId IS "THE PLAN QUALIFYING MONEY BOUGHT" AND NOT "THE TIER HELD" (locked
+// decision 2r). The two are different facts and this function cannot tell them
+// apart: it is pure, it sees a plan id, and it prices it. Passing users.paid_tier
+// is what produced the defect 2r closes — 0014's redeem_partner_access() grants a
+// SPONSORED Golden by writing paid_tier and paid_at exactly as a purchase does,
+// so a city sponsoring a resident's education was buying them $79 off Platinum.
+// Callers get ownedId from public.qualifying_paid_plan() — through the
+// public.homeowner_upgrade_basis view on the server, through
+// my_qualifying_paid_plan() in the browser — which is null when no money bought
+// the entitlement. Never from paymentStore's localStorage tier mirror, which
+// records the tier held and is a UX hint by its own admission.
+//
+// This function stays PURE on purpose. The fix for the sponsored case belongs
+// upstream in what the caller resolves, which keeps the price list in one place
+// and keeps this arithmetic testable by reading it.
 export const upgradeCreditCents = (ownedId, targetId) => {
   const owned = planById(ownedId);
   const target = planById(targetId);

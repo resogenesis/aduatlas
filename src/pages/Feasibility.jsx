@@ -82,7 +82,7 @@ const Feasibility = () => {
     <div>
       <PageHeader
         title="Zoning & Legal Feasibility"
-        subtitle="Answer each question honestly — including the ones you're unsure about. Your score shows how build-ready your property is and exactly what's left to confirm."
+        subtitle="Answer each question honestly, including the ones you're unsure about. Your score shows how build-ready your property is and exactly what's left to confirm."
       />
 
       {/* The model gets a wide container so the 3D view / site plan has room. */}

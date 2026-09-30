@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
 import { captureLead } from "../../lib/supabase";
-import { FaXTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import Logomark from "../brand/Logomark";
 
 const sections = [
@@ -71,6 +70,9 @@ const Updates = () => {
   );
 };
 
+// No social row: the X, Instagram and LinkedIn buttons were href="#", so they
+// implied accounts nobody has confirmed exist and did nothing when clicked.
+// Add them back only with real profile URLs to point at.
 const Footer = () => (
   <footer className="bg-surface-1-solid border-t border-stroke pt-16 pb-8">
     <div className="container mx-auto px-5 sm:px-8">
@@ -83,25 +85,7 @@ const Footer = () => (
             Understand what can be built on your property, learn the process, and connect with the right builders before you commit.
           </p>
           <p className="text-paper text-sm font-semibold mb-2">ADU rules, costs, and tips, once a month.</p>
-          <div className="mb-6">
-            <Updates />
-          </div>
-          <div className="flex gap-2">
-            {[
-              { Icon: FaXTwitter, label: "X" },
-              { Icon: FaInstagram, label: "Instagram" },
-              { Icon: FaLinkedinIn, label: "LinkedIn" },
-            ].map(({ Icon, label }) => (
-              <a
-                key={label}
-                href="#"
-                aria-label={label}
-                className="w-9 h-9 flex items-center justify-center rounded-full border border-stroke text-paper-dim hover:text-accent-fg hover:bg-accent hover:border-accent transition-colors"
-              >
-                <Icon size={14} />
-              </a>
-            ))}
-          </div>
+          <Updates />
         </div>
 
         {sections.map((section) => (

@@ -19,7 +19,7 @@ export const METHODOLOGY_CONTENT = {
 
   // ── Confidence levels ──
   "methodology.levels.eyebrow": { page: PAGE, label: "Confidence levels eyebrow", type: "text", default: "The three labels" },
-  "methodology.levels.heading": { page: PAGE, label: "Confidence levels heading", type: "text", default: "What each chip means on your snapshot." },
+  "methodology.levels.heading": { page: PAGE, label: "Confidence levels heading", type: "text", default: "What each label means in your feasibility study." },
 
   "methodology.level.0.label": { page: PAGE, label: "Level 1 label", type: "text", default: "Verified" },
   "methodology.level.0.when": { page: PAGE, label: "Level 1 description", type: "text", default: "Pulled directly from an authoritative public source." },
@@ -42,7 +42,7 @@ export const METHODOLOGY_CONTENT = {
   // ── Path to verified ──
   "methodology.path.eyebrow": { page: PAGE, label: "Path-to-verified eyebrow", type: "text", default: "The path to verified" },
   "methodology.path.heading": { page: PAGE, label: "Path-to-verified heading", type: "text", default: "Every Estimated or Unknown row has a path to Verified." },
-  "methodology.path.body": { page: PAGE, label: "Path-to-verified paragraph", type: "text", default: "Click \"What raises this?\" on any row in your snapshot. We show you exactly what we'd do to verify it, and which paid tier delivers that verification. No hidden steps. No buying twice." },
+  "methodology.path.body": { page: PAGE, label: "Path-to-verified paragraph", type: "text", default: "Where a row reads Estimated or Unknown, the study says what it would take to verify it and which package delivers that verification. No hidden steps. No buying twice." },
   "methodology.path.example_label": { page: PAGE, label: "Example card label", type: "text", default: "Example" },
   "methodology.path.example_row": { page: PAGE, label: "Example card row text", type: "text", default: "Sewer access: Unknown" },
   "methodology.path.example_confidence": { page: PAGE, label: "Example card confidence badge", type: "text", default: "Low" },

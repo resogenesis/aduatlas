@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { FiArrowRight, FiLock } from "react-icons/fi";
 import { isPaid, hasTier, TIERS } from "../../stores/paymentStore";
-import { planById } from "../../lib/plans";
+import { formatPrice, planById } from "../../lib/plans";
+import { useCheckoutQuote } from "../../lib/useCheckoutQuote";
 import { currentUser } from "../../stores/authStore";
 
 // Three layers:
@@ -12,9 +13,11 @@ import { currentUser } from "../../stores/authStore";
 //    study, site plan, feasibility tools) AND the preparation worksheets with
 //    the ADU Ready Score (/packet/*) require Platinum or Concierge. A Golden
 //    buyer must NOT reach them (Richard and Amy call, 2026-09-24).
-// 3. Tier gate (requireTier="concierge"): written portal support.
-// Property-aware builder matching (Platinum+) will get its own gate when it
-// ships; the directory itself needs only a paid plan.
+// 3. Tier gate (requireTier="concierge"): written portal support and the
+//    60 minutes of consultation.
+// The builder directory itself needs only a paid plan. "Match Me With
+// Builders" is Phase 2, is not sold in Phase 1, and will get its own gate if
+// and when it ships.
 //
 // NOTE: getPaidTier() is a client-side UX hint. The server must re-verify
 // `users.paid_tier` before generating any report-tier deliverable.
@@ -45,7 +48,7 @@ const PayPaywall = ({ location, chapterName }) => (
         This is part of the <span className="">paid system.</span>
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-        Golden ($79) unlocks the full course with state and city resources, plus builder profiles. Platinum ($279) adds the preparation worksheets and ADU Ready Score, plus a feasibility study and a site plan in two versions prepared for your property. Concierge ($500) adds written support through the portal and 60 minutes of private consultation. 7 day full refund if it's not for you.
+        Golden ($79) unlocks the full course, which teaches you how to find and verify your own state and city rules, plus builder profiles. Platinum ($279) adds the preparation worksheets and ADU Ready Score, plus a feasibility study and a site plan in two versions prepared for your property. Concierge ($500) adds written support through the portal and 60 minutes of private consultation. 48 hour full refund if it's not for you.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
@@ -62,12 +65,27 @@ const PayPaywall = ({ location, chapterName }) => (
 
 // Shown when a buyer IS paid but holds a lower tier than the page needs: a
 // Golden buyer reaching the worksheets or a Platinum deliverable, or a
-// Platinum buyer reaching Concierge support. The $79 Golden purchase applies
-// as a credit toward Platinum (handled server-side at checkout), so that
-// upgrade costs $200.
+// Platinum buyer reaching Concierge support.
+//
+// THE PRICE (RC4a, T4-03). This used to say "Your $79 applies as a credit, so
+// the upgrade is $200" to everyone, and a sponsored Golden resident, whose $79
+// nobody paid, was then charged $279 at checkout. The figure now comes from
+// checkout's own quote for this account (useCheckoutQuote), so it is the amount
+// the charge will carry, and while there is no quote no figure is printed.
+const priceSentence = (quote, plan) => {
+  if (!quote?.ok) return "";
+  if (quote.creditCents > 0) {
+    const from = planById(quote.creditFrom)?.name || "your earlier plan";
+    return ` What you paid for ${from} comes off, so the upgrade is ${formatPrice(quote.dueCents)}.`;
+  }
+  return ` ${plan.name} is ${formatPrice(quote.dueCents)}.`;
+};
+
 const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
   const plan = planById(requireTier) || planById(TIERS.REPORT);
   const isConcierge = plan.id === TIERS.CONCIERGE;
+  const quote = useCheckoutQuote(plan.id);
+  const price = priceSentence(quote, plan);
   return (
   <section className="min-h-[80vh] bg-canvas py-20 sm:py-28">
     <div className="container mx-auto px-5 sm:px-8 max-w-2xl text-center">
@@ -79,8 +97,8 @@ const TierUpgradePaywall = ({ location, chapterName, requireTier }) => {
       </h1>
       <p className="text-paper-dim text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
         {isConcierge
-          ? "Concierge adds written support through the portal, personalized next-step guidance, builder-match assistance, and 60 minutes of private consultation. What you have already paid applies as a credit."
-          : "Golden includes the full course with state and city resources, plus builder profiles. The preparation worksheets, the ADU Ready Score, the feasibility study, and the site plan in two versions are part of Platinum. Your $79 applies as a credit, so the upgrade is $200."}
+          ? `Concierge adds written support through the ADUAtlas portal and 60 minutes of private consultation.${price}`
+          : `Golden includes the full course, which teaches you how to find and verify your own state and city rules, plus builder profiles. The preparation worksheets, the ADU Ready Score, the feasibility study, and the site plan in two versions are part of Platinum.${price}`}
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link

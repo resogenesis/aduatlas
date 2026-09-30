@@ -172,7 +172,7 @@ const ModularPrefabEstimate = () => {
       <WorksheetBar savedAt={savedAt} />
       <WsHeader title="Modular / prefab estimate.">
         Compare the complete installed project cost, identify missing work, and verify who is
-        responsible for every part of the project — manufacturer, GC, you, the city, or the
+        responsible for every part of the project: manufacturer, GC, you, the city, or the
         utility company.
       </WsHeader>
 
@@ -200,7 +200,7 @@ const ModularPrefabEstimate = () => {
         </div>
       </SectionCard>
 
-      <SectionCard n="4" title="City approval verification" blurb="Ask your building department — answers vary by municipality.">
+      <SectionCard n="4" title="City approval verification" blurb="Ask your building department. Answers vary by municipality.">
         <FieldRows rows={S4_CITY} d={d} set={set} prefix="s4" placeholder="City's answer" />
       </SectionCard>
 
@@ -292,7 +292,7 @@ const ModularPrefabEstimate = () => {
         </div>
       </SectionCard>
 
-      <SectionCard n="8" title="Responsibility verification" blurb="Identify the responsible party for every part of the project — in writing.">
+      <SectionCard n="8" title="Responsibility verification" blurb="Identify the responsible party for every part of the project, in writing.">
         <div className="space-y-2">
           {S8_RESPONSIBILITY.map((r) => (
             <div key={r} className="grid sm:grid-cols-[1.4fr_10rem_1fr] gap-2 sm:items-center p-3 bg-canvas/50 rounded-xl border border-stroke/60">

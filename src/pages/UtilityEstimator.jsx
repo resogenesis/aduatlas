@@ -36,7 +36,7 @@ const UtilityEstimator = () => {
     <div>
       <PageHeader
         title="Utility & Site-Prep Estimator"
-        subtitle="Ballpark the costs a structural quote leaves out. Adjust each rate and quantity to your property — the total updates live."
+        subtitle="Ballpark the costs a structural quote leaves out. Adjust each rate and quantity to your property. The total updates live."
       />
 
       <section className="container mx-auto px-5 sm:px-8 max-w-6xl section-y max-w-3xl">
@@ -106,7 +106,7 @@ const UtilityEstimator = () => {
 
         <p className="text-paper-dim text-xs leading-relaxed mt-5">
           Planning estimate only, not a quote. This is the site-prep and utility slice that sits
-          <span className="font-semibold"> on top of</span> a builder's structural price — the gap that surprises most homeowners.
+          <span className="font-semibold"> on top of</span> a builder's structural price, the gap that surprises most homeowners.
           Add it to your structural cost for a realistic all-in budget.
         </p>
       </section>
