@@ -1,4 +1,5 @@
 import Hero from "../components/home/Hero";
+import RulesLookup from "../components/home/RulesLookup";
 import Stages from "../components/home/Stages";
 import Problems from "../components/home/Problems";
 import Possible from "../components/home/Possible";
@@ -7,11 +8,12 @@ import BuilderTeaser from "../components/home/BuilderTeaser";
 import Mission from "../components/home/Mission";
 import ClosingCta from "../components/home/ClosingCta";
 
-// Phase 1 homepage: hero with one button to the packages, stages, problems,
+// Phase 1 homepage: hero with one button to the packages, free rules lookup, stages, problems,
 // what is possible, plans, builder access, mission, closing package CTA.
 const Home = () => (
   <div className="w-full">
     <Hero />
+    <RulesLookup />
     <Stages />
     <Problems />
     <Possible />

@@ -599,6 +599,33 @@ export const fetchStateCoverage = async (stateCode) => {
 export const holdsRecords = (coverage) =>
   Number(coverage?.topics_verified || 0) + Number(coverage?.topics_source_silent || 0) + Number(coverage?.resources_published || 0) > 0;
 
+// Places in one state worth sending a homeowner to from the homepage lookup: below state level,
+// with a slug, and holding at least one published record (same test as the rules index). The
+// coverage view is read in full (paginated); names and slugs are then fetched only for those
+// ids, in batches, so a large state never hits the 1000-row read cap.
+export const fetchLookupPlaces = async (stateCode) => {
+  if (!supabase) return { ok: false, error: DISABLED.error, places: [] };
+  const coverage = await fetchStateCoverage(stateCode);
+  if (!coverage.ok) return { ok: false, error: coverage.error, places: [] };
+  const ids = coverage.coverage
+    .filter((row) => !["state", "federal_district"].includes(row.jurisdiction_type) && holdsRecords(row))
+    .map((row) => row.jurisdiction_id);
+  const rows = [];
+  for (let i = 0; i < ids.length; i += 200) {
+    const { data, error } = await supabase
+      .from("jurisdictions_public")
+      .select("id, name, official_name, slug, jurisdiction_type")
+      .in("id", ids.slice(i, i + 200));
+    if (error) return { ok: false, error: error.message, places: [] };
+    rows.push(...(data || []));
+  }
+  const places = rows
+    .filter((row) => row.slug)
+    .map((row) => ({ id: row.id, name: row.official_name || row.name, slug: row.slug, type: row.jurisdiction_type }))
+    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+  return { ok: true, places };
+};
+
 // Every jurisdiction nationwide that holds at least one published record, for the
 // rules index. Counted from the coverage view, so the index can only claim what a
 // published row backs.

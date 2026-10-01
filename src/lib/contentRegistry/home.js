@@ -125,6 +125,14 @@ const homeMission = {
   "home.mission.image": img("Mission background photo", missionImg, "Aerial view of a tree-lined neighborhood at dusk with porch lights on"),
 };
 
+// ── Free rules lookup (under the hero; the hero keeps its one package button) ─
+export const homeRulesLookup = {
+  "home.rules.heading": t("Rules lookup heading", "Look up your city's ADU rules, free"),
+  "home.rules.body": t("Rules lookup paragraph", "See what your state, county and city publish about ADUs, with the official source beside every rule."),
+  "home.rules.button": t("Rules lookup button", "See the rules"),
+  "home.rules.note": t("Rules lookup note", "These are the general rules for your area. Whether your property can build an ADU depends on your parcel, which our packages help you check."),
+};
+
 // ── Closing CTA band ──────────────────────────────────────────────────────
 const homeCta = {
   "home.cta.heading": t("Closing heading", "Your property has potential."),
@@ -134,6 +142,7 @@ const homeCta = {
 
 export const HOME_CONTENT = {
   ...homeHero,
+  ...homeRulesLookup,
   ...homeStages,
   ...homeProblems,
   ...homePossible,
