@@ -111,16 +111,27 @@ export const stampPurchase = async (ctx, rowId, tier) => {
 // log: a Playwright fill() error quotes the value it was typing in its call
 // log, and run.mjs prints and stores e.message and e.stack, so any failure
 // here is replaced by a fixed sentence (as 430 and 853 do).
+//
+// Every field is found INSIDE the sign-in form (the form holding the password
+// field). The footer's newsletter form is on /login too, and is in the page
+// before the lazily loaded sign-in form: a bare "input[type=email]" filled the
+// footer's field whenever it was the first one there, the sign-in form's email
+// stayed empty, the browser's required check silently refused the submit, and
+// the check failed as "did not leave /login" (860 rule 9, RC4B and RC4C).
+export const loginForm = (page) => page.locator("form").filter({ has: page.locator("input[type=password]") }).first();
+
 export const signIn = async (page, ctx, email, password) => {
   await page.goto(`${ctx.base}/login`, { waitUntil: "networkidle" });
+  const form = loginForm(page);
   try {
-    await page.fill("input[type=email]", email);
-    await page.fill("input[type=password]", password);
+    await form.waitFor({ state: "visible", timeout: 30000 });
+    await form.locator("input[type=email]").fill(email);
+    await form.locator("input[type=password]").fill(password);
   } catch {
     throw new Error("the sign-in form on /login could not be filled (details withheld)");
   }
   try {
-    await Promise.all([page.waitForURL((u) => !u.pathname.startsWith("/login"), { timeout: 30000 }), page.click("button[type=submit]")]);
+    await Promise.all([page.waitForURL((u) => !u.pathname.startsWith("/login"), { timeout: 30000 }), form.locator("button[type=submit]").click()]);
   } catch {
     throw new Error("sign-in through /login did not leave the page within 30 s (details withheld)");
   }

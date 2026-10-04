@@ -60,7 +60,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { DESKTOP, makeHomeowner, readServerCopy, seedWorksheets, signIn, stampPurchase, svcHeaders } from "./702_worksheet_first_open.mjs";
+import { DESKTOP, loginForm, makeHomeowner, readServerCopy, seedWorksheets, signIn, stampPurchase, svcHeaders } from "./702_worksheet_first_open.mjs";
 
 export const meta = {
   name: "860 a shared browser never shows or saves one account's data under another",
@@ -258,16 +258,31 @@ const signInAs = async (page, ctx, acct) => {
 // Sign in on the /login page this document is already showing (no page.goto).
 // Typed values never reach an error: a failure is a fixed sentence.
 const signInHere = async (page, acct) => {
+  // Inside the sign-in form only (see loginForm in 702): the footer's
+  // newsletter field is on this page too, and is there first while the
+  // sign-in form is still loading after the header link's navigation.
+  const form = loginForm(page);
   try {
-    await page.fill("input[type=email]", acct.email);
-    await page.fill("input[type=password]", acct.password);
+    await form.waitFor({ state: "visible", timeout: 30000 });
+    await form.locator("input[type=email]").fill(acct.email);
+    await form.locator("input[type=password]").fill(acct.password);
   } catch {
     throw new Error("the sign-in form could not be filled in this document (details withheld)");
   }
-  try {
-    await Promise.all([page.waitForURL((u) => !u.pathname.startsWith("/login"), { timeout: 30000 }), page.click("button[type=submit]")]);
-  } catch {
-    throw new Error("sign-in in this document did not leave /login within 30 s (details withheld)");
+  // Supabase allows 150 token requests per 5 minutes per IP, and this check
+  // signs in many times, so a run straight after another one can meet that
+  // limit here. Like signInAs, wait it out and press Sign in again (the form
+  // keeps its values), and say so if it never clears.
+  for (let attempt = 0; ; attempt += 1) {
+    try {
+      await Promise.all([page.waitForURL((u) => !u.pathname.startsWith("/login"), { timeout: 30000 }), form.locator("button[type=submit]").click()]);
+      return;
+    } catch {
+      const limited = await page.getByText(/too many attempts|rate limit/i).count().catch(() => 0);
+      if (!limited) throw new Error("sign-in in this document did not leave /login within 30 s, with no rate-limit message on the page (details withheld)");
+      if (attempt >= 2) throw new Error("sign-in in this document was rate limited three times (details withheld)");
+      await sleep(65000);
+    }
   }
 };
 
