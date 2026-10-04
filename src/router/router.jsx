@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import NotFound from "../pages/NotFound";
 import RootLayout from "../layout/RootLayout";
 import AppLayout from "../layout/AppLayout";
 import BuilderLayout, { BuilderRedirect } from "../layout/BuilderLayout";
@@ -201,6 +202,11 @@ const router = createBrowserRouter([
       // of identity. It lives in the public tree for that reason, not by
       // oversight.
       { path: "reset-password", element: <ResetPassword /> },
+      // Any address no other route claims, inside the public layout so the
+      // header and footer stay. A "*" child ranks below every specific route in
+      // every tree, so it never shadows the app, builder, government or admin
+      // portals.
+      { path: "*", element: <NotFound /> },
     ],
   },
 
