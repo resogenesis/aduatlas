@@ -39,17 +39,11 @@ const BASE = (opt("base") || "").replace(/\/+$/, "");
 const DATA = home(opt("data", "~/Projects/adurules/data/ca"));
 const ONLY = (opt("only") || "").split(",").map((s) => s.trim()).filter(Boolean);
 const OUT = home(opt("out"));
+// A prebuilt plan (for example from worksheet-to-plan.mjs) instead of the adurules corpus.
+const PLAN = home(opt("plan"));
 const APPLY = flag("apply");
 const PRODUCTION_HOSTS = ["aduatlas.com", "www.aduatlas.com", "aduatlas.vercel.app"];
 
-if (!BASE) {
-  console.error("--base is required");
-  process.exit(2);
-}
-if (PRODUCTION_HOSTS.includes(new URL(BASE).host) && !flag("production")) {
-  console.error(`${BASE} is production. Pass --production as well, and only with Richard's approval.`);
-  process.exit(2);
-}
 
 export const CONFLICT_QUALIFIER = "State law overrides local rules here; the city's published code may be out of date.";
 
@@ -181,7 +175,7 @@ const topLevelClauses = (c) => {
   if (cur.trim()) out.push(cur.trim());
   return out.filter(Boolean);
 };
-const citeFits = (cites) => {
+export const citeFits = (cites) => {
   const clauses = [...new Set(cites.flatMap((c) => topLevelClauses(plain(c))))];
   const all = clauses.join("; ");
   if (all.length <= 300) return { cite: all || null, full: null };
@@ -226,8 +220,15 @@ const adminNoteFor = (j, parts, ordinance, extraCites, fullText = null) => {
   return note;
 };
 
+// adurules names carry the state ("Oakland, CA"); ADUAtlas shows the state
+// beside the name already, so the record is "Oakland" / "City of Oakland".
+const OFFICIAL_NAMES = { "san-francisco": "City and County of San Francisco" };
+const displayName = (j) => String(j.jurisdiction).replace(/,\s*[A-Z]{2}$/, "").trim();
+const officialName = (j) => OFFICIAL_NAMES[j.slug] || `City of ${displayName(j)}`;
+
 export const planJurisdiction = (j) => {
   const isState = j.level === "state";
+  const name = isState ? "California" : displayName(j);
   const map = isState ? STATE_TOPICS : CITY_TOPICS;
   const byTopic = new Map();
   const unmapped = [];
@@ -313,17 +314,17 @@ export const planJurisdiction = (j) => {
   // The ADU page itself has no fact of its own; it was read during the same
   // recheck, so it carries the jurisdiction's latest check date.
   const lastChecked = Object.values(j.fields).map((f) => f.verified).filter(Boolean).sort().at(-1) || null;
-  if (j.official_adu_page) addResource("official_adu_page", j.official_adu_page, isState ? "HCD Accessory Dwelling Units page" : `${j.jurisdiction} ADU page`, { source: j.official_adu_page, verified: lastChecked });
-  if (j.ordinance_url) addResource("ordinance", j.ordinance_url, isState ? "Gov. Code §§ 66310-66342" : `${j.jurisdiction} ADU ordinance`, ordinance);
+  if (j.official_adu_page) addResource("official_adu_page", j.official_adu_page, isState ? "HCD Accessory Dwelling Units page" : `${name} ADU page`, { source: j.official_adu_page, verified: lastChecked });
+  if (j.ordinance_url) addResource("ordinance", j.ordinance_url, isState ? "Gov. Code §§ 66310-66342" : `${name} ADU ordinance`, ordinance);
   if (!isState) {
     for (const [key, type] of Object.entries(CITY_RESOURCES)) {
       const f = j.fields[key];
       if (!f) continue;
       const url = firstUrl(f.value) || null;
-      addResource(type, url, type === "fee_schedule" ? `${j.jurisdiction} fee schedule` : `${j.jurisdiction} permit portal`, f);
+      addResource(type, url, type === "fee_schedule" ? `${name} fee schedule` : `${name} permit portal`, f);
     }
   }
-  return { slug: j.slug, name: j.jurisdiction, level: j.level, provisions, resources, unmapped, problems, warnings };
+  return { slug: j.slug, name, official_name: isState ? null : officialName(j), level: j.level, state_code: j.state || "CA", change_note: "Imported from adurules (October 2026 recheck)", provisions, resources, unmapped, problems, warnings };
 };
 
 // ── API ──────────────────────────────────────────────────────────────────────
@@ -363,7 +364,15 @@ const api = (token) => async (action, { method = "GET", body, query = "" } = {})
 };
 
 const run = async () => {
-  const plans = readJurisdictions().map(planJurisdiction);
+  if (!BASE) {
+    console.error("--base is required");
+    process.exit(2);
+  }
+  if (PRODUCTION_HOSTS.includes(new URL(BASE).host) && !flag("production")) {
+    console.error(`${BASE} is production. Pass --production as well, and only with Richard's approval.`);
+    process.exit(2);
+  }
+  const plans = PLAN ? JSON.parse(fs.readFileSync(PLAN, "utf8")) : readJurisdictions().map(planJurisdiction);
   const report = { base: BASE, apply: APPLY, jurisdictions: [] };
   let problems = 0;
   for (const p of plans) {
@@ -382,19 +391,28 @@ const run = async () => {
     process.exit(1);
   }
   const call = api(await signIn());
-  const list = await call("jurisdictions", { query: "?state=CA" });
-  if (!list.ok) throw new Error(`could not list California jurisdictions: HTTP ${list.status} ${list.json.error || ""}`);
-  const items = list.json.items || [];
-  const state = items.find((x) => x.jurisdiction_type === "state" && x.state_code === "CA") || items.find((x) => x.slug === "california");
-  if (!state) throw new Error("California is not in this database");
+  // Each plan names its state; the state's record and its jurisdictions are read once per state.
+  const byState = new Map();
+  const stateScope = async (code) => {
+    if (byState.has(code)) return byState.get(code);
+    const list = await call("jurisdictions", { query: `?state=${code}` });
+    if (!list.ok) throw new Error(`could not list ${code} jurisdictions: HTTP ${list.status} ${list.json.error || ""}`);
+    const items = list.json.items || [];
+    const state = items.find((x) => x.jurisdiction_type === "state" && x.state_code === code);
+    if (!state) throw new Error(`the state ${code} is not in this database`);
+    byState.set(code, { items, state });
+    return byState.get(code);
+  };
   for (const p of plans) {
+    const code = p.state_code || "CA";
+    const { items, state } = await stateScope(code);
     const out = { slug: p.slug, created: 0, updated: 0, skipped: [], errors: [] };
     report.jurisdictions.push(out);
     let jur = p.level === "state" ? state : items.find((x) => x.slug === p.slug && x.parent_id === state.id) || items.find((x) => x.slug === p.slug);
     if (!jur) {
       const made = await call("jurisdiction-save", {
         method: "POST",
-        body: { jurisdiction: { jurisdiction_type: "municipality", parent_id: state.id, name: p.name, official_name: `City of ${p.name}`, slug: p.slug, state_code: "CA" } },
+        body: { jurisdiction: { jurisdiction_type: "municipality", parent_id: state.id, name: p.name, official_name: p.official_name, slug: p.slug, state_code: code } },
       });
       if (!made.ok) {
         out.errors.push(`jurisdiction: HTTP ${made.status} ${made.json.error || ""}`);
@@ -403,6 +421,15 @@ const run = async () => {
       }
       jur = made.json.jurisdiction;
       out.jurisdiction_created = true;
+    } else if (p.level !== "state" && (jur.name !== p.name || jur.official_name !== p.official_name)) {
+      // Correct a name an earlier run of this importer wrote. Publish state is
+      // not sent, so the record keeps whatever it has.
+      const fixed = await call("jurisdiction-save", {
+        method: "POST",
+        body: { jurisdiction: { id: jur.id, jurisdiction_type: jur.jurisdiction_type, parent_id: jur.parent_id, name: p.name, official_name: p.official_name, slug: jur.slug, state_code: code } },
+      });
+      if (fixed.ok) out.renamed = `${jur.name} -> ${p.name}`;
+      else out.errors.push(`rename: HTTP ${fixed.status} ${fixed.json.error || ""}`);
     }
     const detail = await call("jurisdiction", { query: `?id=${jur.id}` });
     const existing = detail.json.provisions || [];
@@ -418,12 +445,14 @@ const run = async () => {
         out.skipped.push(`${prov.topic_key}: an open record not from ADUAtlas research exists; left untouched`);
         continue;
       }
-      const r = await call("provision-save", { method: "POST", body: { provision: { ...prov, id: draft?.id, jurisdiction_id: jur.id, change_note: "Imported from adurules (October 2026 recheck)" } } });
+      const r = await call("provision-save", { method: "POST", body: { provision: { ...prov, id: draft?.id, jurisdiction_id: jur.id, change_note: p.change_note || "Imported by the rules importer" } } });
       if (r.ok) draft ? out.updated++ : out.created++;
       else out.errors.push(`${prov.topic_key}: HTTP ${r.status} ${r.json.error || ""}`);
     }
     for (const res of p.resources) {
-      const same = existingRes.find((e) => e.resource_type === res.resource_type && !["superseded", "retracted", "rejected"].includes(e.review_status));
+      // Same kind AND same link: a city can list two resources of one kind
+      // (two "other" links), and the second must not overwrite the first.
+      const same = existingRes.find((e) => e.resource_type === res.resource_type && (e.url || "") === (res.url || "") && !["superseded", "retracted", "rejected"].includes(e.review_status));
       if (same && same.review_status === "published") {
         out.skipped.push(`resource ${res.resource_type}: a published link exists; left untouched`);
         continue;
@@ -436,7 +465,7 @@ const run = async () => {
       if (r.ok) same ? out.updated++ : out.created++;
       else out.errors.push(`resource ${res.resource_type}: HTTP ${r.status} ${r.json.error || ""}`);
     }
-    console.log(`${p.slug.padEnd(14)} created ${out.created}, updated ${out.updated}, skipped ${out.skipped.length}, errors ${out.errors.length}`);
+    console.log(`${p.slug.padEnd(14)} created ${out.created}, updated ${out.updated}, skipped ${out.skipped.length}, errors ${out.errors.length}${out.renamed ? `, renamed ${out.renamed}` : ""}`);
     for (const e of out.errors) console.log(`   ! ${e}`);
   }
   if (OUT) fs.writeFileSync(OUT.replace(/\.json$/, ".result.json"), JSON.stringify(report, null, 1));
