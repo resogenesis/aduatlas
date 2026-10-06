@@ -558,11 +558,12 @@ export const ProvisionCard = ({ provision, jurisdictionName, levelText }) => {
 
   return (
     <li
+      id={pick(provision, ["id"]) ? `rule-${pick(provision, ["id"])}` : undefined}
       data-record="provision"
       data-provision-id={pick(provision, ["id"]) || undefined}
       data-field-state={pick(provision, ["field_state"]) || "unknown"}
       data-verification-status={verification || "unknown"}
-      className={`bg-canvas border rounded-2xl p-5 ${superseded ? "border-dashed border-stroke" : disputed ? "border-amber-500/40" : "border-stroke"}`}
+      className={`scroll-mt-24 bg-canvas border rounded-2xl p-5 ${superseded ? "border-dashed border-stroke" : disputed ? "border-amber-500/40" : "border-stroke"}`}
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <h4 className="text-paper font-semibold text-base">{topicLabelOf(provision)}</h4>
@@ -968,6 +969,94 @@ const LevelSection = ({ jurisdiction, provisions, resources, topics, entity, isT
       )}
 
       <GovernmentEntityCard entity={entity} jurisdictionName={name} />
+    </section>
+  );
+};
+
+// ── At a glance ─────────────────────────────────────────────────────────────
+// The six questions a homeowner asks first, answered ONLY from the published
+// rules on this page, word for word. It is a view, never a second content layer:
+// nothing here is written, summarised or inferred, so a rule changes in one
+// place. Each level answers for itself, labelled, side by side, exactly as in
+// the level sections below (2m: nothing merged, nothing inherited). A question
+// no level has answered says so. Every answer links to its full rule and source.
+const GLANCE = [
+  ["adu_allowed", "Can I build an ADU?"],
+  ["number_allowed", "How many?"],
+  ["max_size", "Maximum size"],
+  ["height_limit", "Maximum height"],
+  ["owner_occupancy_required", "Owner occupancy"],
+  ["short_term_rental_allowed", "Short-term rental"],
+];
+
+const glanceRows = (chain) =>
+  GLANCE.map(([topic, question]) => ({
+    topic,
+    question,
+    answers: chain
+      .map((level) => {
+        const provision = (level.provisions || []).find((p) => isShowable(p) && !isSuperseded(p) && topicKeyOf(p) === topic);
+        return provision ? { level, provision } : null;
+      })
+      .filter(Boolean)
+      // the place itself first, then the governments above it
+      .sort((a, b) => Number(b.level.isTarget) - Number(a.level.isTarget)),
+  }));
+
+const AtAGlance = ({ chain, name }) => {
+  const rows = glanceRows(chain);
+  if (!rows.some((row) => row.answers.length)) return null;
+  return (
+    <section aria-label="At a glance" data-at-a-glance className="bg-surface-1-solid border border-stroke rounded-3xl p-6 sm:p-8">
+      <h2 className="font-display text-paper text-2xl">At a glance</h2>
+      <p className="text-paper-dim text-sm leading-relaxed mt-2 mb-5">
+        Taken word for word from the published rules below, with the government each one comes from. These are rules for all of {name}, not a determination about your parcel.
+      </p>
+      <dl className="grid gap-4">
+        {rows.map((row) => (
+          <div key={row.topic} data-glance-topic={row.topic} className="grid sm:grid-cols-[12rem_1fr] gap-x-6 gap-y-1 border-t border-stroke pt-4">
+            <dt className="text-paper font-semibold text-sm">{row.question}</dt>
+            <dd className="grid gap-3 min-w-0">
+              {row.answers.length === 0 ? (
+                <p className="text-paper-dim text-sm">No published rule yet.</p>
+              ) : (
+                row.answers.map(({ level, provision }) => {
+                  const state = fieldStateOf(provision);
+                  const status = statusFor(state, verificationStatusOf(provision));
+                  const value = state === "verified" ? valueOf(provision) : "";
+                  const id = pick(provision, ["id"]);
+                  return (
+                    <div key={id || idOf(level.jurisdiction)} className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <span className="text-paper-dim text-xs uppercase tracking-wide">{placeNameOf(level.jurisdiction) || nameOf(level.jurisdiction)}</span>
+                        {status.chips.map((kind) => (
+                          <StatusChip key={kind} kind={kind} />
+                        ))}
+                      </div>
+                      {value ? (
+                        <p className="text-paper text-sm leading-relaxed whitespace-pre-line line-clamp-3 break-words">{value}</p>
+                      ) : (
+                        <p className="text-paper-dim text-sm">{state === "not_stated" ? "The source does not address this." : "No value recorded."}</p>
+                      )}
+                      {id && (
+                        <a href={`#rule-${id}`} className="tap-target text-accent text-xs font-medium inline-flex items-center gap-1 mt-1">
+                          Full rule and source <FiArrowRight aria-hidden />
+                        </a>
+                      )}
+                    </div>
+                  );
+                })
+              )}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mt-6 pt-5 border-t border-stroke">
+        <Link to="/feasibility" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors press">
+          Check my property <FiArrowRight aria-hidden />
+        </Link>
+        <p className="text-paper-dim text-xs leading-relaxed">See what these rules mean for one address: zoning, lot size, setbacks and what could stop the project.</p>
+      </div>
     </section>
   );
 };
@@ -1385,6 +1474,7 @@ const RulesJurisdiction = () => {
       </section>
 
       <section className="container mx-auto px-5 sm:px-8 max-w-5xl py-10 sm:py-14 grid gap-6">
+        <AtAGlance chain={chain} name={placeNameOf(target) || name} />
         {anythingHeld && <ScopeNotice where={`${name} and the governments above it`} />}
         {anythingHeld && <ThreeStateLegend />}
 
