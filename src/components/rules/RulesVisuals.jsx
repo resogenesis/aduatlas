@@ -5,9 +5,9 @@
 // says "see the rule". A picture must never state something ADUAtlas has not
 // verified.
 //
-// Photos are Pexels stock (free license, self-hosted under /images/rules,
-// credits in public/images/rules/credits.json). They are labelled as
-// illustrative wherever they appear, so nobody reads one as the place itself.
+// Photos are Pexels stock (free license, no attribution required; self-hosted
+// under /images/rules, credits kept in public/images/rules/credits.json).
+// No on-page caption (Richard, 2026-10-07); the alt text describes the photo.
 
 const stroke = "stroke-current";
 
@@ -165,7 +165,6 @@ export const IllustrativePhoto = ({ name, className = "" }) => {
   return (
     <figure className={`overflow-hidden rounded-3xl border border-stroke ${className}`} data-illustrative-photo={name}>
       <img src={p.src} alt={p.alt} loading="lazy" decoding="async" className="w-full h-48 sm:h-64 object-cover" />
-      <figcaption className="text-paper-dim text-[11px] px-4 py-2 bg-canvas">Illustrative photo, not of this place. {p.credit}</figcaption>
     </figure>
   );
 };
