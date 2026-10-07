@@ -535,7 +535,7 @@ const SupplierLine = ({ item, small = false }) => {
 // One sourced rule. Everything a reader needs to check it themselves is on the
 // card: which government, the value or the absence of one, who checked it, the
 // source and its type, who supplied it, and the dates.
-export const ProvisionCard = ({ provision, jurisdictionName, levelText }) => {
+export const ProvisionCard = ({ provision, jurisdictionName, levelText, comparisons = [] }) => {
   const state = fieldStateOf(provision);
   const verification = verificationStatusOf(provision);
   const status = statusFor(state, verification);
@@ -597,6 +597,22 @@ export const ProvisionCard = ({ provision, jurisdictionName, levelText }) => {
           {disputed ? ` Confirm with ${jurisdictionName} before you rely on it.` : ""}
         </p>
       )}
+
+      {/* The same question at the levels above, side by side and labelled:
+          only where it compares, never the whole state code on a city page. */}
+      {comparisons.map((c) => (
+        <div key={c.key} data-comparison className="mt-3 rounded-xl border border-stroke bg-surface-1-solid px-3 py-2">
+          <p className="text-paper-dim text-xs">
+            <span className="font-medium text-paper">{c.levelName} law on this: </span>
+            {c.text || "the source does not address this."}
+          </p>
+          {c.href && (
+            <a href={c.href} className="tap-target text-accent text-xs font-medium inline-flex items-center gap-1">
+              Read the {c.levelName} rule <FiArrowRight aria-hidden />
+            </a>
+          )}
+        </div>
+      ))}
 
       {superseded && (
         <p className="text-paper text-xs mt-3 inline-flex items-start gap-1.5">
@@ -938,7 +954,72 @@ const groupRules = (rows) =>
     .map(([key, title]) => ({ key, title, rows: rows.filter((p) => sectionOf(topicKeyOf(p)) === key).sort((a, b) => orderOf(topicKeyOf(a)) - orderOf(topicKeyOf(b))) }))
     .filter((group) => group.rows.length);
 
-const LevelSection = ({ jurisdiction, provisions, resources, topics, entity, isTarget }) => {
+// The rules of one government, under homeowner headings with a jump menu.
+// Shared by the city and state pages so both read the same way.
+export const GroupedRules = ({ rows, idPrefix, name, label, comparisonsFor = () => [] }) => {
+  const groups = groupRules(rows);
+  return (
+    <>
+      {groups.length > 1 && (
+        <nav aria-label={`Jump to a section of ${name}'s rules`} className="flex flex-wrap gap-2 mb-5">
+          {groups.map((group) => (
+            <a key={group.key} href={`#${idPrefix}-${group.key}`} className="tap-target text-xs font-medium text-paper border border-stroke rounded-full px-3 py-1 hover:border-accent">
+              {group.title}
+            </a>
+          ))}
+        </nav>
+      )}
+      <div className="grid gap-8">
+        {groups.map((group) => (
+          <div key={group.key} id={`${idPrefix}-${group.key}`} className="scroll-mt-24" data-rule-group={group.key}>
+            <h4 className="font-display text-paper text-xl mb-3">{group.title}</h4>
+            <ul className="grid gap-4">
+              {group.rows.map((provision, index) => (
+                <ProvisionCard
+                  key={pick(provision, ["id"]) || `${topicKeyOf(provision)}-${index}`}
+                  provision={provision}
+                  jurisdictionName={name}
+                  levelText={label}
+                  comparisons={comparisonsFor(provision)}
+                />
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
+
+// On a city or county page, a government above it gets a link, not its whole
+// rule book: its rules appear here only where they compare (the cards and the
+// comparison line on each rule), and in full on its own page.
+const AboveLevelLink = ({ level, placeName }) => {
+  const name = placeNameOf(level.jurisdiction) || nameOf(level.jurisdiction) || "This government";
+  const code = String(stateCodeOf(level.jurisdiction) || "").toLowerCase();
+  const isState = levelOf(level.jurisdiction) === "state";
+  const href = isState && code ? `/rules/${code}` : code && pick(level.jurisdiction, ["slug"]) ? `/rules/${code}/${pick(level.jurisdiction, ["slug"])}` : null;
+  const count = (level.provisions || []).filter((p) => isShowable(p) && !isSuperseded(p)).length;
+  return (
+    <section aria-label={`${name} rules`} data-above-level={levelOf(level.jurisdiction) || "level"} className="bg-canvas border border-stroke rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+      <div>
+        <h3 className="font-display text-paper text-xl">{isState ? `${name} state law also applies` : `${name} rules also apply`}</h3>
+        <p className="text-paper-dim text-sm leading-relaxed mt-1 max-w-2xl">
+          {count > 0
+            ? `${name} sets rules every ${isState ? "city and town" : "place"} in it must follow. Where they answer the same question as ${placeName}'s rules, they are shown beside them above. The full set is on its own page.`
+            : `ADUAtlas has no published ${name} rules yet.`}
+        </p>
+      </div>
+      {href && count > 0 && (
+        <Link to={href} className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-stroke text-paper font-medium text-sm hover:border-accent transition press shrink-0">
+          See {name}'s ADU rules <FiArrowRight aria-hidden />
+        </Link>
+      )}
+    </section>
+  );
+};
+
+const LevelSection = ({ jurisdiction, provisions, resources, topics, entity, isTarget, compareLevels = [] }) => {
   const name = nameOf(jurisdiction) || "This jurisdiction";
   const label = levelLabel(jurisdiction);
   const rows = (provisions || []).filter(isShowable);
@@ -968,34 +1049,27 @@ const LevelSection = ({ jurisdiction, provisions, resources, topics, entity, isT
       ) : (
         <>
           {current.length > 0 ? (
-            <>
-              {groupRules(current).length > 1 && (
-                <nav aria-label={`Jump to a section of ${name}'s rules`} className="flex flex-wrap gap-2 mb-5">
-                  {groupRules(current).map((group) => (
-                    <a key={group.key} href={`#${slugId(jurisdiction)}-${group.key}`} className="tap-target text-xs font-medium text-paper border border-stroke rounded-full px-3 py-1 hover:border-accent">
-                      {group.title}
-                    </a>
-                  ))}
-                </nav>
-              )}
-              <div className="grid gap-8">
-                {groupRules(current).map((group) => (
-                  <div key={group.key} id={`${slugId(jurisdiction)}-${group.key}`} className="scroll-mt-24" data-rule-group={group.key}>
-                    <h4 className="font-display text-paper text-xl mb-3">{group.title}</h4>
-                    <ul className="grid gap-4">
-                      {group.rows.map((provision, index) => (
-                        <ProvisionCard
-                          key={pick(provision, ["id"]) || `${topicKeyOf(provision)}-${index}`}
-                          provision={provision}
-                          jurisdictionName={name}
-                          levelText={label}
-                        />
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </>
+            <GroupedRules
+              rows={current}
+              idPrefix={slugId(jurisdiction)}
+              name={name}
+              label={label}
+              comparisonsFor={(provision) =>
+                compareLevels
+                  .map((level) => {
+                    const other = ruleFor(level, topicKeyOf(provision));
+                    if (!other) return null;
+                    const verified = fieldStateOf(other) === "verified";
+                    return {
+                      key: `${idOf(level.jurisdiction)}-${topicKeyOf(provision)}`,
+                      levelName: placeNameOf(level.jurisdiction) || nameOf(level.jurisdiction),
+                      text: verified ? firstLineOf(valueOf(other)).short : "",
+                      href: ruleHref(level, other),
+                    };
+                  })
+                  .filter(Boolean)
+              }
+            />
           ) : (
             <p className="text-paper-dim text-sm leading-relaxed">No current rules are recorded for {name}. The links and the superseded records below are what we hold.</p>
           )}
@@ -1061,6 +1135,19 @@ const firstLineOf = (text) => {
   return { short, more: lines.length > used };
 };
 
+// Where a rule card lives. The place's own rules are on this page; a state's
+// rules live on the state page and a county's on its own page, because a city
+// page shows the governments above it only where it compares them.
+const ruleHref = (level, provision) => {
+  const id = pick(provision, ["id"]);
+  if (!id) return null;
+  if (level.isTarget) return `#rule-${id}`;
+  const code = String(stateCodeOf(level.jurisdiction) || "").toLowerCase();
+  if (levelOf(level.jurisdiction) === "state" && code) return `/rules/${code}#rule-${id}`;
+  const slug = pick(level.jurisdiction, ["slug"]);
+  return code && slug ? `/rules/${code}/${slug}#rule-${id}` : null;
+};
+
 const ruleFor = (level, topic) => (level?.provisions || []).find((p) => isShowable(p) && !isSuperseded(p) && topicKeyOf(p) === topic) || null;
 
 const glanceRows = (chain) => {
@@ -1078,7 +1165,7 @@ const GlanceAnswer = ({ level, provision, lead }) => {
   const state = fieldStateOf(provision);
   const status = statusFor(state, verificationStatusOf(provision));
   const { short, more } = state === "verified" ? firstLineOf(valueOf(provision)) : { short: "", more: false };
-  const id = pick(provision, ["id"]);
+  const href = ruleHref(level, provision);
   return (
     <div className={lead ? "" : "mt-3 pt-3 border-t border-stroke"}>
       <div className="flex flex-wrap items-center gap-2">
@@ -1092,8 +1179,8 @@ const GlanceAnswer = ({ level, provision, lead }) => {
       ) : (
         <p className="text-paper-dim text-sm mt-1">{state === "not_stated" ? "The source does not address this." : "No value recorded."}</p>
       )}
-      {id && (
-        <a href={`#rule-${id}`} className="tap-target text-accent text-xs font-medium inline-flex items-center gap-1 mt-1">
+      {href && (
+        <a href={href} className="tap-target text-accent text-xs font-medium inline-flex items-center gap-1 mt-1">
           {more ? "Conditions apply: full rule" : "Full rule and source"} <FiArrowRight aria-hidden />
         </a>
       )}
@@ -1615,17 +1702,24 @@ const RulesJurisdiction = () => {
         {/* One block per level, in geographic order, each one its own sourced
             answer. Nothing is merged, nothing is inherited, nothing is
             inferred from containment. */}
-        {chain.map((level) => (
-          <LevelSection
-            key={level.id}
-            jurisdiction={level.jurisdiction}
-            provisions={level.provisions}
-            resources={level.resources}
-            topics={level.topics}
-            entity={level.entity}
-            isTarget={level.isTarget}
-          />
-        ))}
+        {/* The place's own rules first; the governments above it follow as
+            links (they appear in full on their own pages). */}
+        {(levelOf(target) === "state" ? chain : [...chain].sort((x, y) => Number(y.isTarget) - Number(x.isTarget))).map((level) =>
+          level.isTarget || levelOf(target) === "state" ? (
+            <LevelSection
+              key={level.id}
+              jurisdiction={level.jurisdiction}
+              provisions={level.provisions}
+              resources={level.resources}
+              topics={level.topics}
+              entity={level.entity}
+              isTarget={level.isTarget}
+              compareLevels={level.isTarget ? chain.filter((other) => !other.isTarget) : []}
+            />
+          ) : (
+            <AboveLevelLink key={level.id} level={level} placeName={placeNameOf(target) || name} />
+          ),
+        )}
 
         <ConflictNotice conflicts={conflicts} />
 

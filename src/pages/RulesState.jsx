@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { FiArrowLeft, FiArrowRight, FiExternalLink, FiSearch } from "react-icons/fi";
 import {
   ENTITY_STATE,
@@ -16,7 +16,7 @@ import {
   ConceptsApartNotice,
   GovernmentEntityCard,
   NotResearchedNotice,
-  ProvisionCard,
+  GroupedRules,
   ResourceList,
   ScopeNotice,
   ThreeStateLegend,
@@ -176,6 +176,18 @@ const RulesState = () => {
   const EMPTY = { status: "loading", stateRow: null, provisions: [], resources: [], entity: null, jurisdictions: [], topics: [], coverage: null };
   const view = !code ? { key: code, ...EMPTY, status: "unknown-state" } : loaded && loaded.key === code ? loaded : { key: code, ...EMPTY };
   const { status, stateRow, provisions, resources, entity, jurisdictions, topics, coverage } = view;
+  // A city page links to one of these rules as /rules/<st>#rule-<id>. The
+  // rules arrive after the first paint, so the browser's own jump to the hash
+  // finds nothing: once they are here, scroll to the rule and open its detail.
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (status !== "ready" || !hash || !hash.startsWith("#rule-")) return;
+    const el = document.getElementById(hash.slice(1));
+    if (!el) return;
+    el.scrollIntoView({ block: "start" });
+    const details = el.querySelector("details");
+    if (details) details.open = true;
+  }, [status, hash, provisions.length]);
 
   useEffect(() => {
     if (!code) return undefined;
@@ -410,16 +422,7 @@ const RulesState = () => {
           {hasStateContent ? (
             <>
               {provisions.length > 0 ? (
-                <ul className="grid gap-4">
-                  {provisions.map((provision, index) => (
-                    <ProvisionCard
-                      key={pick(provision, ["id"]) || `state-${index}`}
-                      provision={provision}
-                      jurisdictionName={officialName}
-                      levelText="State"
-                    />
-                  ))}
-                </ul>
+                <GroupedRules rows={provisions} idPrefix={`state-${code || "rules"}`} name={officialName} label="State" />
               ) : (
                 <p className="text-paper-dim text-sm leading-relaxed">No state-level rules are recorded yet. The official links below are what we hold for {name}.</p>
               )}

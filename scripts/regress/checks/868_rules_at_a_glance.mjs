@@ -15,6 +15,7 @@ export const meta = {
     "every Full rule and source link points at a rule card on the page",
     "Check my property leads to /feasibility",
     "a city with nothing published shows no At a glance block",
+    "a city page shows the state only where it compares: no full state section, a link to the state page, a comparison line on the city's rules, and state links that land on a rule card on the state page",
   ],
 };
 
@@ -39,19 +40,39 @@ export default async function (ctx) {
       }
     } else {
       const topics = await page.locator("[data-glance-topic]").evaluateAll((els) => els.map((e) => e.getAttribute("data-glance-topic")));
-      const pairs = await block.locator("a[href^='#rule-']").evaluateAll((as) =>
+      const pairs = await block.locator("a[href*='#rule-']").evaluateAll((as) =>
         as.map((a) => {
-          const id = a.getAttribute("href").slice(1);
+          const id = a.getAttribute("href").split("#")[1];
           const shown = a.parentElement.querySelector("p")?.textContent || "";
           const card = document.getElementById(id);
           return { id, shown, card: Boolean(card), cardText: card ? card.textContent : "", draft: card ? /draft/i.test(card.getAttribute("data-review-status") || "") : false };
         }),
       );
-      const mismatched = pairs.filter((p) => p.card && !p.cardText.replace(/\s+/g, " ").includes(p.shown.replace(/\s+/g, " ").trim().slice(0, 60)));
+      // Same-page answers are compared with their card here; a state answer's
+      // card lives on the state page and is checked in rule 5.
+      const local = pairs.filter((p) => p.card);
+      const mismatched = local.filter((p) => !p.cardText.replace(/\s+/g, " ").includes(p.shown.replace(/\s+/g, " ").trim().slice(0, 60)));
       add(0, topics.length === 8 && pairs.length > 0 && mismatched.length === 0, `topics ${topics.join(", ")}; answers ${pairs.length}; not matching their rule card: ${mismatched.length}`);
-      add(1, pairs.every((p) => p.card), `links ${pairs.length}, missing targets ${pairs.filter((p) => !p.card).length}`);
+      const hrefs = await block.locator("a[href*='#rule-']").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
+      const samePage = hrefs.filter((h) => h.startsWith("#"));
+      const missing = samePage.filter((h) => !pairs.find((p) => `#${p.id}` === h && p.card));
+      add(1, samePage.length > 0 && missing.length === 0 && hrefs.every((h) => h.startsWith("#rule-") || /^\/rules\/[a-z]{2}(\/[a-z0-9-]+)?#rule-/.test(h)), `links ${hrefs.length} (${samePage.length} on this page), missing targets ${missing.length}`);
       const cta = await block.locator("a", { hasText: "Check my property" }).first().getAttribute("href").catch(() => null);
       add(2, cta === "/feasibility", `Check my property -> ${cta}`);
+    }
+    // 5. the state only where it compares
+    if ((await block.count()) > 0) {
+      const stateSections = await page.locator("[data-level='state']").count();
+      const aboveLink = await page.locator("[data-above-level='state'] a[href='/rules/az']").count();
+      const comparisons = await page.locator("[data-level='target'] [data-comparison]").count();
+      const stateHref = (await block.locator("a[href^='/rules/az#rule-']").first().getAttribute("href").catch(() => null)) || "";
+      let landed = false;
+      if (stateHref) {
+        await page.goto(`${ctx.base}${stateHref}`, { waitUntil: "networkidle" });
+        await page.locator(`#${stateHref.split("#")[1]}`).first().waitFor({ timeout: 20000 }).catch(() => {});
+        landed = (await page.locator(`#${stateHref.split("#")[1]}`).count()) === 1 && (await page.locator(`#${stateHref.split("#")[1]} details[open]`).count()) === 1;
+      }
+      add(4, stateSections === 0 && aboveLink === 1 && comparisons > 0 && landed, `full state sections ${stateSections}; link to the state page ${aboveLink}; comparison lines ${comparisons}; state link ${stateHref || "none"} lands on an open rule card: ${landed}`);
     }
     await page.goto(`${ctx.base}/rules/ca/oakland`, { waitUntil: "networkidle" });
     await page.locator("h1").first().waitFor({ timeout: 20000 }).catch(() => {});
