@@ -629,21 +629,9 @@ export const ProvisionCard = ({ provision, jurisdictionName, levelText, comparis
         {jurisdictionName}
       </p>
 
-      {/* The legal detail, one click down: everything stays (source, section,
-          supplier, dates, notes), it just no longer fills the page for a
-          homeowner who wants the answer. The check date stays visible on the
-          toggle, because it is the trust signal. */}
-      <details className="group mt-3" data-provision-details>
-        <summary className="tap-target cursor-pointer list-none inline-flex items-center gap-1.5 text-accent text-xs font-medium">
-          <FiChevronDown aria-hidden className="transition-transform group-open:rotate-180" />
-          Source and details
-          {datesOf(provision).checked && <span className="text-paper-dim font-normal">· checked {datesOf(provision).checked}</span>}
-        </summary>
-      {notes && <p className="text-paper-dim text-sm leading-relaxed mt-2">{notes}</p>}
-
-      {/* SOURCE, and separately WHO SUPPLIED IT. Different statements (2m, 2t):
-          reading a government website is not the government taking part in
-          ADUAtlas, and a government account is not ADUAtlas research. */}
+      {/* SOURCE, and separately WHO SUPPLIED IT, stay on screen: every rule
+          says where it comes from and who compiled it (2m, 2t), right next to
+          the answer. Only the finer detail folds away. */}
       <div className="mt-3 pt-3 border-t border-stroke space-y-1.5">
         {state === "not_researched" ? (
           <p className="text-paper-dim text-xs">Nothing has been checked yet, so there is no source to link.</p>
@@ -660,6 +648,19 @@ export const ProvisionCard = ({ provision, jurisdictionName, levelText, comparis
         ) : (
           <p className="text-paper-dim text-xs">Source: not recorded. Treat this as unverified until we can link it.</p>
         )}
+        {state !== "not_researched" && <SupplierLine item={supplier} />}
+      </div>
+
+      {/* The finer legal detail, one click down: the section, the source type,
+          every date and the notes. The check date stays on the toggle. */}
+      <details className="group mt-2" data-provision-details>
+        <summary className="tap-target cursor-pointer list-none inline-flex items-center gap-1.5 text-accent text-xs font-medium">
+          <FiChevronDown aria-hidden className="transition-transform group-open:rotate-180" />
+          More details
+          {datesOf(provision).checked && <span className="text-paper-dim font-normal">· checked {datesOf(provision).checked}</span>}
+        </summary>
+      {notes && <p className="text-paper-dim text-sm leading-relaxed mt-2">{notes}</p>}
+      <div className="mt-2 space-y-1.5">
         {state !== "not_researched" && citation && (
           <p className="text-paper-dim text-xs" data-provision-field="citation">
             Citation: {citation}
@@ -667,7 +668,6 @@ export const ProvisionCard = ({ provision, jurisdictionName, levelText, comparis
           </p>
         )}
         {state !== "not_researched" && sourceType && <p className="text-paper-dim text-xs">Source type: {sourceType}.</p>}
-        {state !== "not_researched" && <SupplierLine item={supplier} />}
       </div>
 
       <DateFacts provision={provision} verification={verification} />

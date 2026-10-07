@@ -156,7 +156,11 @@ export default async function (ctx) {
       await page.goto(`${ctx.base}/rules/az`, { waitUntil: "networkidle" });
       const jur = page.locator('a[href^="/rules/az/"]').first();
       if (await jur.count()) {
+        const target = await jur.getAttribute("href");
         await jur.click();
+        // An in-app navigation: wait for the city page itself, or the state
+        // page's breadcrumb is what gets measured.
+        await page.waitForURL((u) => u.pathname === target, { timeout: 20000 }).catch(() => {});
         await page.waitForLoadState("networkidle");
         note("breadcrumb ADU rules", await measure(page, page.locator('nav[aria-label="Where this is"] a').first()));
         note("Report a correction", await measure(page, page.getByRole("link", { name: "Report a correction" })));

@@ -388,7 +388,7 @@ const RulesState = () => {
       <section className="bg-surface-1-solid border-b border-stroke">
         <div className="container mx-auto px-5 sm:px-8 max-w-5xl py-12 sm:py-16">
           <nav aria-label="Where this is" className="flex items-center gap-2 text-xs text-paper-dim mb-4">
-            <Link to="/rules" className="hover:text-paper">ADU rules</Link>
+            <Link to="/rules" className="tap-target hover:text-paper">ADU rules</Link>
             <span aria-hidden>/</span>
             <span className="text-paper">{name}</span>
           </nav>
