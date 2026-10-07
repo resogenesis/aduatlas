@@ -156,15 +156,23 @@ export const HeightPicture = ({ height }) => (
 const PHOTOS = {
   "garden-cottage": { src: "/images/rules/garden-cottage.jpg", alt: "A small white cottage in a green garden, the kind of building an ADU can be", credit: "Photo: hugoteconecta / Pexels" },
 
+  phoenix: { src: "/images/rules/phoenix.webp", alt: "Aerial view of downtown Phoenix with the mountains behind it", credit: "", position: "50% 15%" },
   "desert-casita": { src: "/images/rules/desert-casita.jpg", alt: "A small adobe house in a dry desert landscape", credit: "Photo: Strange Happenings / Pexels" },
 };
+
+// A place's own header photo, by "<state code>/<slug>". Anything not listed
+// uses the state's default photo.
+const PLACE_PHOTOS = { "AZ/phoenix": "phoenix" };
+const photoFor = (stateCode, slug) => PLACE_PHOTOS[`${stateCode}/${slug}`] || (stateCode === "AZ" ? "desert-casita" : "garden-cottage");
 
 export const IllustrativePhoto = ({ name, className = "" }) => {
   const p = PHOTOS[name];
   if (!p) return null;
   return (
     <figure className={`overflow-hidden rounded-3xl border border-stroke ${className}`} data-illustrative-photo={name}>
-      <img src={p.src} alt={p.alt} loading="lazy" decoding="async" className="w-full h-48 sm:h-64 object-cover" />
+      <img src={p.src} alt={p.alt} loading="lazy" decoding="async" className="w-full h-48 sm:h-64 object-cover" style={p.position ? { objectPosition: p.position } : undefined} />
     </figure>
   );
 };
+
+export const PlacePhoto = ({ stateCode, slug, className = "" }) => <IllustrativePhoto name={photoFor(stateCode, slug)} className={className} />;

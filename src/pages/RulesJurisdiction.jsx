@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FiAlertTriangle, FiArrowLeft, FiArrowRight, FiArrowUp, FiCalendar, FiCheckCircle, FiChevronDown, FiClock, FiExternalLink, FiHelpCircle, FiHome, FiInfo, FiLayers, FiMaximize2, FiMove, FiSearch, FiTruck, FiUser } from "react-icons/fi";
-import { AduTypes, HeightPicture, IllustrativePhoto, LotPlan } from "../components/rules/RulesVisuals";
+import { AduTypes, HeightPicture, LotPlan, PlacePhoto } from "../components/rules/RulesVisuals";
 import * as regulatory from "../lib/regulatory";
 import {
   ENTITY_STATE,
@@ -1691,7 +1691,7 @@ const RulesJurisdiction = () => {
       </section>
 
       <section className="container mx-auto px-5 sm:px-8 max-w-5xl py-10 sm:py-14 grid gap-6">
-        {anythingHeld && <IllustrativePhoto name={code === "AZ" ? "desert-casita" : "garden-cottage"} />}
+        {anythingHeld && <PlacePhoto stateCode={code} slug={pick(target, ["slug"])} />}
         <AtAGlance chain={chain} name={placeNameOf(target) || name} />
         {anythingHeld && <PictureIt chain={chain} />}
         {anythingHeld && <ScopeNotice where={`${name} and the governments above it`} />}
