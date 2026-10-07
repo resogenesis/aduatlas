@@ -1,9 +1,9 @@
-// "At a glance" on a city rules page (Richard, 2026-10-06): the six first
+// "At a glance" on a city rules page (Richard, 2026-10-06; cards 2026-10-07): the eight first
 // questions answered ONLY from the published rules on the page, word for word,
 // each level labelled, each answer linked to its full rule, with "Check my
 // property". Needs a published city with published rules on the target: on
 // staging that is Phoenix, AZ (published for the staging preview).
-//   1. the block renders six questions, and every answer it shows is the text of
+//   1. the block renders eight question cards, and every answer it shows is the text of
 //      a published rule on the same page (no summary, no draft)
 //   2. every "Full rule and source" link points at a rule card that exists
 //   3. "Check my property" leads to the property check (/feasibility)
@@ -11,7 +11,7 @@
 export const meta = {
   name: "868 At a glance shows only published rules, word for word, and links each to its source",
   rules: [
-    "the block shows the six questions and every answer is the text of a published rule on the same page",
+    "the block shows the eight question cards and every answer is the text of a published rule on the same page",
     "every Full rule and source link points at a rule card on the page",
     "Check my property leads to /feasibility",
     "a city with nothing published shows no At a glance block",
@@ -48,7 +48,7 @@ export default async function (ctx) {
         }),
       );
       const mismatched = pairs.filter((p) => p.card && !p.cardText.replace(/\s+/g, " ").includes(p.shown.replace(/\s+/g, " ").trim().slice(0, 60)));
-      add(0, topics.length === 6 && pairs.length > 0 && mismatched.length === 0, `topics ${topics.join(", ")}; answers ${pairs.length}; not matching their rule card: ${mismatched.length}`);
+      add(0, topics.length === 8 && pairs.length > 0 && mismatched.length === 0, `topics ${topics.join(", ")}; answers ${pairs.length}; not matching their rule card: ${mismatched.length}`);
       add(1, pairs.every((p) => p.card), `links ${pairs.length}, missing targets ${pairs.filter((p) => !p.card).length}`);
       const cta = await block.locator("a", { hasText: "Check my property" }).first().getAttribute("href").catch(() => null);
       add(2, cta === "/feasibility", `Check my property -> ${cta}`);
