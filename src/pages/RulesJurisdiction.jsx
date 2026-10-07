@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { FiAlertTriangle, FiArrowLeft, FiArrowRight, FiCheckCircle, FiClock, FiExternalLink, FiHelpCircle, FiInfo, FiSearch } from "react-icons/fi";
+import { FiAlertTriangle, FiArrowLeft, FiArrowRight, FiArrowUp, FiCalendar, FiCheckCircle, FiChevronDown, FiClock, FiExternalLink, FiHelpCircle, FiHome, FiInfo, FiLayers, FiMaximize2, FiMove, FiSearch, FiTruck, FiUser } from "react-icons/fi";
+import { AduTypes, HeightPicture, IllustrativePhoto, LotPlan } from "../components/rules/RulesVisuals";
 import * as regulatory from "../lib/regulatory";
 import {
   ENTITY_STATE,
@@ -597,8 +598,6 @@ export const ProvisionCard = ({ provision, jurisdictionName, levelText }) => {
         </p>
       )}
 
-      {notes && <p className="text-paper-dim text-sm leading-relaxed mt-2">{notes}</p>}
-
       {superseded && (
         <p className="text-paper text-xs mt-3 inline-flex items-start gap-1.5">
           <FiAlertTriangle className="mt-0.5 shrink-0" aria-hidden />
@@ -613,6 +612,18 @@ export const ProvisionCard = ({ provision, jurisdictionName, levelText }) => {
         {levelText ? `${levelText} requirement · ` : ""}
         {jurisdictionName}
       </p>
+
+      {/* The legal detail, one click down: everything stays (source, section,
+          supplier, dates, notes), it just no longer fills the page for a
+          homeowner who wants the answer. The check date stays visible on the
+          toggle, because it is the trust signal. */}
+      <details className="group mt-3" data-provision-details>
+        <summary className="tap-target cursor-pointer list-none inline-flex items-center gap-1.5 text-accent text-xs font-medium">
+          <FiChevronDown aria-hidden className="transition-transform group-open:rotate-180" />
+          Source and details
+          {datesOf(provision).checked && <span className="text-paper-dim font-normal">· checked {datesOf(provision).checked}</span>}
+        </summary>
+      {notes && <p className="text-paper-dim text-sm leading-relaxed mt-2">{notes}</p>}
 
       {/* SOURCE, and separately WHO SUPPLIED IT. Different statements (2m, 2t):
           reading a government website is not the government taking part in
@@ -644,6 +655,7 @@ export const ProvisionCard = ({ provision, jurisdictionName, levelText }) => {
       </div>
 
       <DateFacts provision={provision} verification={verification} />
+      </details>
     </li>
   );
 };
@@ -901,6 +913,31 @@ export const NotResearchedNotice = ({ name, scope = "jurisdiction", note = "", c
 // One level of government, as its own answer. The heading names the government
 // and the level, the rules under it are that government's rules, and nothing
 // from another level is mixed in (2m).
+// The rule topics in their 0012 categories, in reading order, with a homeowner's
+// heading for each. A topic missing here falls into "Other rules".
+const SECTIONS = [
+  ["eligibility", "Can I build one?", ["adu_allowed", "detached_allowed", "attached_allowed", "conversion_allowed", "jadu_allowed", "number_allowed", "zoning_districts"]],
+  ["size", "Size", ["max_size", "max_size_share", "min_size", "min_lot_size", "max_lot_coverage"]],
+  ["siting", "Placement and height", ["height_limit", "stories_allowed", "setback_front", "setback_side", "setback_rear", "separation_required"]],
+  ["parking", "Parking", ["parking_required", "parking_exemptions"]],
+  ["occupancy", "Living in it and renting it", ["owner_occupancy_required", "short_term_rental_allowed", "separate_sale_allowed", "deed_restriction_required"]],
+  ["process", "Permits and design", ["permit_type", "review_timeline", "design_standards_apply", "preapproved_plans", "utility_connection", "fire_sprinklers_required"]],
+  ["fees", "Fees", ["permit_fees", "impact_fees"]],
+];
+const slugId = (jurisdiction) => `rules-${String(idOf(jurisdiction) || "level").slice(0, 8)}`;
+const sectionOf = (topic) => SECTIONS.find(([, , topics]) => topics.includes(topic))?.[0] || "other";
+const orderOf = (topic) => {
+  for (const [, , topics] of SECTIONS) {
+    const i = topics.indexOf(topic);
+    if (i >= 0) return i;
+  }
+  return 99;
+};
+const groupRules = (rows) =>
+  [...SECTIONS, ["other", "Other rules", []]]
+    .map(([key, title]) => ({ key, title, rows: rows.filter((p) => sectionOf(topicKeyOf(p)) === key).sort((a, b) => orderOf(topicKeyOf(a)) - orderOf(topicKeyOf(b))) }))
+    .filter((group) => group.rows.length);
+
 const LevelSection = ({ jurisdiction, provisions, resources, topics, entity, isTarget }) => {
   const name = nameOf(jurisdiction) || "This jurisdiction";
   const label = levelLabel(jurisdiction);
@@ -931,16 +968,34 @@ const LevelSection = ({ jurisdiction, provisions, resources, topics, entity, isT
       ) : (
         <>
           {current.length > 0 ? (
-            <ul className="grid gap-4">
-              {current.map((provision, index) => (
-                <ProvisionCard
-                  key={pick(provision, ["id"]) || `${topicKeyOf(provision)}-${index}`}
-                  provision={provision}
-                  jurisdictionName={name}
-                  levelText={label}
-                />
-              ))}
-            </ul>
+            <>
+              {groupRules(current).length > 1 && (
+                <nav aria-label={`Jump to a section of ${name}'s rules`} className="flex flex-wrap gap-2 mb-5">
+                  {groupRules(current).map((group) => (
+                    <a key={group.key} href={`#${slugId(jurisdiction)}-${group.key}`} className="tap-target text-xs font-medium text-paper border border-stroke rounded-full px-3 py-1 hover:border-accent">
+                      {group.title}
+                    </a>
+                  ))}
+                </nav>
+              )}
+              <div className="grid gap-8">
+                {groupRules(current).map((group) => (
+                  <div key={group.key} id={`${slugId(jurisdiction)}-${group.key}`} className="scroll-mt-24" data-rule-group={group.key}>
+                    <h4 className="font-display text-paper text-xl mb-3">{group.title}</h4>
+                    <ul className="grid gap-4">
+                      {group.rows.map((provision, index) => (
+                        <ProvisionCard
+                          key={pick(provision, ["id"]) || `${topicKeyOf(provision)}-${index}`}
+                          provision={provision}
+                          jurisdictionName={name}
+                          levelText={label}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </>
           ) : (
             <p className="text-paper-dim text-sm leading-relaxed">No current rules are recorded for {name}. The links and the superseded records below are what we hold.</p>
           )}
@@ -974,88 +1029,163 @@ const LevelSection = ({ jurisdiction, provisions, resources, topics, entity, isT
 };
 
 // ── At a glance ─────────────────────────────────────────────────────────────
-// The six questions a homeowner asks first, answered ONLY from the published
-// rules on this page, word for word. It is a view, never a second content layer:
-// nothing here is written, summarised or inferred, so a rule changes in one
-// place. Each level answers for itself, labelled, side by side, exactly as in
-// the level sections below (2m: nothing merged, nothing inherited). A question
-// no level has answered says so. Every answer links to its full rule and source.
+// The first questions a homeowner asks, as cards, answered ONLY from the
+// published rules on this page. A card shows the rule's own words, trimmed to
+// its first line (never rewritten), says when more conditions follow, and
+// links to the full rule. It is a view, never a second content layer, so a rule
+// changes in one place. The place's own rule leads; the state's rule for the
+// same question is shown beneath it, labelled, because both apply and neither
+// is merged into the other (2m).
 const GLANCE = [
-  ["adu_allowed", "Can I build an ADU?"],
-  ["number_allowed", "How many?"],
-  ["max_size", "Maximum size"],
-  ["height_limit", "Maximum height"],
-  ["owner_occupancy_required", "Owner occupancy"],
-  ["short_term_rental_allowed", "Short-term rental"],
+  ["adu_allowed", "Can I build an ADU?", FiHome],
+  ["number_allowed", "How many?", FiLayers],
+  ["max_size", "Maximum size", FiMaximize2],
+  ["height_limit", "Maximum height", FiArrowUp],
+  ["setback_side", "Side setback", FiMove],
+  ["parking_required", "Parking", FiTruck],
+  ["owner_occupancy_required", "Owner occupancy", FiUser],
+  ["short_term_rental_allowed", "Short-term rental", FiCalendar],
 ];
 
-const glanceRows = (chain) =>
-  GLANCE.map(([topic, question]) => ({
+// A published rule's first line, word for word. A first line that only names
+// a part ("Detached ADU:") takes the next line with it.
+const firstLineOf = (text) => {
+  const lines = String(text || "").split("\n").map((l) => l.trim()).filter(Boolean);
+  if (!lines.length) return { short: "", more: false };
+  let used = 1;
+  let short = lines[0];
+  if (/:$/.test(short) && lines[1]) {
+    short = `${short} ${lines[1]}`;
+    used = 2;
+  }
+  return { short, more: lines.length > used };
+};
+
+const ruleFor = (level, topic) => (level?.provisions || []).find((p) => isShowable(p) && !isSuperseded(p) && topicKeyOf(p) === topic) || null;
+
+const glanceRows = (chain) => {
+  const target = chain.find((level) => level.isTarget);
+  const others = chain.filter((level) => !level.isTarget);
+  return GLANCE.map(([topic, question, Icon]) => ({
     topic,
     question,
-    answers: chain
-      .map((level) => {
-        const provision = (level.provisions || []).find((p) => isShowable(p) && !isSuperseded(p) && topicKeyOf(p) === topic);
-        return provision ? { level, provision } : null;
-      })
-      .filter(Boolean)
-      // the place itself first, then the governments above it
-      .sort((a, b) => Number(b.level.isTarget) - Number(a.level.isTarget)),
+    Icon,
+    answers: [target, ...others].filter(Boolean).map((level) => ({ level, provision: ruleFor(level, topic) })).filter((a) => a.provision),
   }));
+};
+
+const GlanceAnswer = ({ level, provision, lead }) => {
+  const state = fieldStateOf(provision);
+  const status = statusFor(state, verificationStatusOf(provision));
+  const { short, more } = state === "verified" ? firstLineOf(valueOf(provision)) : { short: "", more: false };
+  const id = pick(provision, ["id"]);
+  return (
+    <div className={lead ? "" : "mt-3 pt-3 border-t border-stroke"}>
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-paper-dim text-[11px] uppercase tracking-wide">{placeNameOf(level.jurisdiction) || nameOf(level.jurisdiction)}</span>
+        {status.chips.map((kind) => (
+          <StatusChip key={kind} kind={kind} />
+        ))}
+      </div>
+      {short ? (
+        <p className={`mt-1 break-words ${lead ? "text-paper text-base font-semibold leading-snug line-clamp-3" : "text-paper-dim text-sm leading-snug line-clamp-2"}`}>{short}</p>
+      ) : (
+        <p className="text-paper-dim text-sm mt-1">{state === "not_stated" ? "The source does not address this." : "No value recorded."}</p>
+      )}
+      {id && (
+        <a href={`#rule-${id}`} className="tap-target text-accent text-xs font-medium inline-flex items-center gap-1 mt-1">
+          {more ? "Conditions apply: full rule" : "Full rule and source"} <FiArrowRight aria-hidden />
+        </a>
+      )}
+    </div>
+  );
+};
 
 const AtAGlance = ({ chain, name }) => {
   const rows = glanceRows(chain);
   if (!rows.some((row) => row.answers.length)) return null;
   return (
-    <section aria-label="At a glance" data-at-a-glance className="bg-surface-1-solid border border-stroke rounded-3xl p-6 sm:p-8">
-      <h2 className="font-display text-paper text-2xl">At a glance</h2>
-      <p className="text-paper-dim text-sm leading-relaxed mt-2 mb-5">
-        Taken word for word from the published rules below, with the government each one comes from. These are rules for all of {name}, not a determination about your parcel.
-      </p>
-      <dl className="grid gap-4">
-        {rows.map((row) => (
-          <div key={row.topic} data-glance-topic={row.topic} className="grid sm:grid-cols-[12rem_1fr] gap-x-6 gap-y-1 border-t border-stroke pt-4">
-            <dt className="text-paper font-semibold text-sm">{row.question}</dt>
-            <dd className="grid gap-3 min-w-0">
-              {row.answers.length === 0 ? (
+    <section aria-label="At a glance" data-at-a-glance className="grid gap-5">
+      <div>
+        <h2 className="font-display text-paper text-3xl">At a glance</h2>
+        <p className="text-paper-dim text-sm leading-relaxed mt-2 max-w-3xl">
+          Taken word for word from the published rules below, with the government each one comes from. These are rules for all of {name}, not a determination about your parcel.
+        </p>
+      </div>
+      <dl className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {rows.map(({ topic, question, Icon, answers }) => (
+          <div key={topic} data-glance-topic={topic} className="bg-surface-1-solid border border-stroke rounded-2xl p-5 flex flex-col min-w-0">
+            <dt className="flex items-center gap-2 text-paper-dim text-sm font-medium mb-3">
+              <Icon aria-hidden className="text-accent shrink-0" size={18} />
+              {question}
+            </dt>
+            <dd className="min-w-0">
+              {answers.length === 0 ? (
                 <p className="text-paper-dim text-sm">No published rule yet.</p>
               ) : (
-                row.answers.map(({ level, provision }) => {
-                  const state = fieldStateOf(provision);
-                  const status = statusFor(state, verificationStatusOf(provision));
-                  const value = state === "verified" ? valueOf(provision) : "";
-                  const id = pick(provision, ["id"]);
-                  return (
-                    <div key={id || idOf(level.jurisdiction)} className="min-w-0">
-                      <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <span className="text-paper-dim text-xs uppercase tracking-wide">{placeNameOf(level.jurisdiction) || nameOf(level.jurisdiction)}</span>
-                        {status.chips.map((kind) => (
-                          <StatusChip key={kind} kind={kind} />
-                        ))}
-                      </div>
-                      {value ? (
-                        <p className="text-paper text-sm leading-relaxed whitespace-pre-line line-clamp-3 break-words">{value}</p>
-                      ) : (
-                        <p className="text-paper-dim text-sm">{state === "not_stated" ? "The source does not address this." : "No value recorded."}</p>
-                      )}
-                      {id && (
-                        <a href={`#rule-${id}`} className="tap-target text-accent text-xs font-medium inline-flex items-center gap-1 mt-1">
-                          Full rule and source <FiArrowRight aria-hidden />
-                        </a>
-                      )}
-                    </div>
-                  );
-                })
+                answers.map((a, i) => <GlanceAnswer key={pick(a.provision, ["id"]) || i} {...a} lead={i === 0} />)
               )}
             </dd>
           </div>
         ))}
       </dl>
-      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mt-6 pt-5 border-t border-stroke">
-        <Link to="/feasibility" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors press">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 bg-canvas border border-stroke rounded-2xl p-5">
+        <Link to="/feasibility" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-accent text-accent-fg font-semibold text-sm hover:bg-accent-dim transition-colors press">
           Check my property <FiArrowRight aria-hidden />
         </Link>
-        <p className="text-paper-dim text-xs leading-relaxed">See what these rules mean for one address: zoning, lot size, setbacks and what could stop the project.</p>
+        <p className="text-paper-dim text-sm leading-relaxed">See what these rules mean for one address: zoning, lot size, setbacks and what could stop the project.</p>
+      </div>
+    </section>
+  );
+};
+
+// ── Picture it ──────────────────────────────────────────────────────────────
+// Drawings that explain the shape of the rules. A number appears in a drawing
+// only when the published rule records one as a typed value; otherwise the
+// drawing says "see the rule".
+const typedNumber = (provision) => {
+  if (!provision || fieldStateOf(provision) !== "verified") return null;
+  const n = provision.value_numeric;
+  if (n === null || n === undefined || n === "") return null;
+  return `${Number(n).toLocaleString("en-US")} ${provision.value_unit || ""}`.trim();
+};
+
+const PictureIt = ({ chain }) => {
+  const target = chain.find((level) => level.isTarget);
+  if (!target) return null;
+  const lead = (topic) => ruleFor(target, topic) || chain.map((level) => ruleFor(level, topic)).find(Boolean) || null;
+  const label = (topic) => typedNumber(lead(topic)) || "see the rule";
+  const typeAnswer = (topic) => {
+    const p = ruleFor(target, topic);
+    if (!p || fieldStateOf(p) !== "verified") return null;
+    const { short } = firstLineOf(valueOf(p));
+    return short.length <= 90 ? `Here: ${short}` : "Here: see the rule";
+  };
+  return (
+    <section aria-label="Picture it" data-picture-it className="grid gap-5">
+      <div>
+        <h2 className="font-display text-paper text-3xl">Picture it</h2>
+        <p className="text-paper-dim text-sm leading-relaxed mt-2 max-w-3xl">
+          Simple drawings of what the rules describe. They show a number only where the published rule records one; the rules below are always the authority.
+        </p>
+      </div>
+      <AduTypes
+        allowed={{
+          attached: typeAnswer("attached_allowed"),
+          detached: typeAnswer("detached_allowed"),
+          conversion: typeAnswer("conversion_allowed"),
+          jadu: typeAnswer("jadu_allowed"),
+        }}
+      />
+      <div className="grid lg:grid-cols-2 gap-4">
+        <figure className="bg-canvas border border-stroke rounded-2xl p-5 grid justify-items-center gap-3">
+          <LotPlan side={label("setback_side")} rear={label("setback_rear")} front={label("setback_front")} />
+          <figcaption className="text-paper-dim text-xs leading-relaxed text-center">Setbacks are measured from the property lines to the building.</figcaption>
+        </figure>
+        <figure className="bg-canvas border border-stroke rounded-2xl p-5 grid justify-items-center gap-3">
+          <HeightPicture height={label("height_limit")} />
+          <figcaption className="text-paper-dim text-xs leading-relaxed text-center">A height limit is measured from the ground to the top of the building, as the code defines it.</figcaption>
+        </figure>
       </div>
     </section>
   );
@@ -1474,7 +1604,9 @@ const RulesJurisdiction = () => {
       </section>
 
       <section className="container mx-auto px-5 sm:px-8 max-w-5xl py-10 sm:py-14 grid gap-6">
+        {anythingHeld && <IllustrativePhoto name={code === "AZ" ? "desert-casita" : "garden-cottage"} />}
         <AtAGlance chain={chain} name={placeNameOf(target) || name} />
+        {anythingHeld && <PictureIt chain={chain} />}
         {anythingHeld && <ScopeNotice where={`${name} and the governments above it`} />}
         {anythingHeld && <ThreeStateLegend />}
 
