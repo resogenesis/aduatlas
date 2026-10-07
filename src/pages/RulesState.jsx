@@ -12,7 +12,10 @@ import {
   fetchTopicCoverage,
   holdsRecords,
 } from "../lib/regulatory";
+import { IllustrativePhoto } from "../components/rules/RulesVisuals";
 import {
+  AtAGlance,
+  PictureIt,
   ConceptsApartNotice,
   GovernmentEntityCard,
   NotResearchedNotice,
@@ -406,6 +409,11 @@ const RulesState = () => {
       </section>
 
       <section className="container mx-auto px-5 sm:px-8 max-w-5xl py-10 sm:py-14 grid gap-6">
+        {/* The same opening as a city page: the answers first, then pictures,
+            then the full rules. Built from this state's published rules only. */}
+        {provisions.length > 0 && <IllustrativePhoto name={code === "AZ" ? "desert-casita" : "garden-cottage"} />}
+        {provisions.length > 0 && <AtAGlance chain={[{ id: "state", isTarget: true, jurisdiction: stateRow, provisions }]} name={name} />}
+        {provisions.length > 0 && <PictureIt chain={[{ id: "state", isTarget: true, jurisdiction: stateRow, provisions }]} />}
         {hasStateContent && <ScopeNotice where={name} />}
         {hasStateContent && <ThreeStateLegend />}
 

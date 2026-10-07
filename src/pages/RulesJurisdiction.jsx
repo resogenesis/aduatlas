@@ -1188,7 +1188,7 @@ const GlanceAnswer = ({ level, provision, lead }) => {
   );
 };
 
-const AtAGlance = ({ chain, name }) => {
+export const AtAGlance = ({ chain, name }) => {
   const rows = glanceRows(chain);
   if (!rows.some((row) => row.answers.length)) return null;
   return (
@@ -1237,7 +1237,7 @@ const typedNumber = (provision) => {
   return `${Number(n).toLocaleString("en-US")} ${provision.value_unit || ""}`.trim();
 };
 
-const PictureIt = ({ chain }) => {
+export const PictureIt = ({ chain }) => {
   const target = chain.find((level) => level.isTarget);
   if (!target) return null;
   const lead = (topic) => ruleFor(target, topic) || chain.map((level) => ruleFor(level, topic)).find(Boolean) || null;
